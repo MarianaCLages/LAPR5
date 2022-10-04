@@ -6,30 +6,15 @@
 # To run your pipeline on a Windows machine, create a self-hosted Windows runner.
 # For instructions on setting up a Windows runner, see https://support.atlassian.com/bitbucket-cloud/docs/set-up-runners-for-windows/
 
-image: mcr.microsoft.com/dotnet/core/sdk:5.0
-
-pipelines:
+image: mcr.microsoft.com/dotnet/core/sdk:3.1pipelines:
   default:
-    - parallel:
-        - step:
-            name: Build and Test
-            caches:
-              - dotnetcore
-            script:
-              - REPORTS_PATH=./test-reports/build_${BITBUCKET_BUILD_NUMBER}
-              - dotnet restore
-              - dotnet build --no-restore --configuration Release
-              - dotnet test --no-build --configuration Release --test-adapter-path:. --logger:"junit;LogFilePath=$REPORTS_PATH/junit.xml"
-        - step:
-            name: Lint the code
-            caches:
-              - dotnetcore
-            script:
-              - export SOLUTION_NAME= LAPR5_SEM_PI_S5_LEI_G56
-              - export REPORTS_PATH=linter-reports
-              - dotnet new tool-manifest
-              - dotnet tool install JetBrains.ReSharper.GlobalTools
-              - dotnet tool restore
-              - dotnet jb inspectcode ${SOLUTION_NAME}.sln --output="${REPORTS_PATH}/jb-${BITBUCKET_BUILD_NUMBER}.xml"
-            artifacts:
-              - linter-reports/**
+    - step:
+        name: Build
+        caches:
+          - dotnetcore
+        script: 
+          - export SOLUTION_NAME= LAPR5_SEM_PI_S5_LEI_G56        
+          - export CONFIGURATION=Release
+          - dotnet restore SOLUTION_NAME.sln
+          - dotnet build --no-restore $SOLUTION_NAME.sln --configuration $CONFIGURATION
+          - dotnet test --no-build $SOLUTION_NAME.sln
