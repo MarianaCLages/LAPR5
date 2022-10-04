@@ -14,7 +14,7 @@ pipelines:
         caches:
           - dotnetcore
         script: 
-          - export SOLUTION_NAME= LAPR5_SEM_PI_S5_LEI_G56        
+          - export SOLUTION_NAME= DDDNetCore.csproj        
           - export CONFIGURATION=Release
           - dotnet restore SOLUTION_NAME.sln
           - dotnet build --no-restore $SOLUTION_NAME.sln --configuration $CONFIGURATION
