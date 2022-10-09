@@ -310,7 +310,8 @@ tmp/*
 *.vpp
 # idea folder
 /.idea/
-
+/Docs/SprintB/2001/US2001SDWarehouseEmployeeImports.vpp.vbak
+/Docs/SprintB/2001/US2001SSDWarehouseEmployeeImports.vpp.vbak
 *.lst
 
 *.o
@@ -318,6 +319,3 @@ tmp/*
 # Vscode
 
 .vscode
-
-GestArm/.vscode
-GestArm/obj

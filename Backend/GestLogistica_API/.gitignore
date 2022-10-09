@@ -319,5 +319,5 @@ tmp/*
 
 .vscode
 
-GestArm/.vscode
-GestArm/obj
+GestLogistica/.vscode
+GestLogistica/obj

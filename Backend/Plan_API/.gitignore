@@ -279,8 +279,6 @@ classes
 
 # Android studio 3.1+ serialized cache file
 
-
-
 ### JetBrains Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
@@ -316,8 +314,8 @@ tmp/*
 *.o
 
 # Vscode
-
 .vscode
 
-GestArm/.vscode
-GestArm/obj
+#Plan_API
+Plan/obj
+Plan/.vscode
