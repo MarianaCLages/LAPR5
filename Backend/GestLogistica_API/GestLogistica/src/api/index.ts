@@ -1,12 +1,14 @@
 import { Router } from 'express';
-import post from './routes/postRoute';
-import comentario from './routes/comentarioRoute';
+import auth from './routes/userRoute';
+import user from './routes/userRoute';
+import role from './routes/roleRoute';
 
 export default () => {
-    const app = Router();
+	const app = Router();
 
-    post(app);
-    comentario(app);
-
-    return app;
-};
+	auth(app);
+	user(app);
+	role(app);
+	
+	return app
+}

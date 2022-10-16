@@ -3,8 +3,7 @@
     "target": "es2017",
     "lib": [
       "es2017",
-      "esnext.asynciterable",
-      "dom"
+      "esnext.asynciterable"
     ],
     "typeRoots": [
       "./node_modules/@types",
@@ -21,7 +20,7 @@
     "outDir": "./build",
     "allowJs": true,
     "noEmit": false,
-    "esModuleInterop": false
+    "esModuleInterop": true
   },
   "include": [
     "./src/**/*", "index.js"
