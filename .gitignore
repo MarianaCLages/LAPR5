@@ -321,3 +321,5 @@ tmp/*
 
 GestArm/.vscode
 GestArm/obj
+
+.fake

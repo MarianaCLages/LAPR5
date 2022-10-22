@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
+using System;
+
 namespace DDDSample1.Controllers
 {
     [Route("api/[controller]")]
@@ -25,6 +27,7 @@ namespace DDDSample1.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            Console.WriteLine("ya");
         }
 
         // PUT api/values/5

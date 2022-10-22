@@ -29,13 +29,14 @@ namespace DDDSample1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DDDSample1DbContext>(opt =>
-                opt.UseInMemoryDatabase("DDDSample1DB")
-                .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>());
-
+             services.AddDbContext<DDDSample1DbContext>(opt =>
+                opt.UseMySql(
+                        connectionString: @"server=vsgate-s1.dei.isep.ipp.pt;user=root;port=10138;password=9COOmklCr/hw;database=mysql",
+                        new MySqlServerVersion(new Version(10, 4, 17)))
+                    .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>()
+                   );
             ConfigureMyServices(services);
             
-
             services.AddControllers().AddNewtonsoftJson();
         }
 
