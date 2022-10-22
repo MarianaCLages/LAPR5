@@ -321,5 +321,9 @@ tmp/*
 
 GestArm/.vscode
 GestArm/obj
+<<<<<<< HEAD
 
 .fake
+=======
+Backend/GestLogistica_API/GestLogistica/.idea
+>>>>>>> refs/remotes/origin/master
