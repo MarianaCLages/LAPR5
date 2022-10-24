@@ -30,8 +30,7 @@ namespace DDDSample1
         public void ConfigureServices(IServiceCollection services)
         {
              services.AddDbContext<DDDSample1DbContext>(opt =>
-                opt.UseMySql(
-                        connectionString: @"server=vsgate-s1.dei.isep.ipp.pt;user=root;port=10138;password=9COOmklCr/hw;database=mysql",
+                opt.UseMySql(Configuration.GetConnectionString("Default"),
                         new MySqlServerVersion(new Version(10, 4, 17)))
                     .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>()
                    );
