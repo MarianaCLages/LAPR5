@@ -13,6 +13,7 @@ namespace GestArm.Domain.Armazem
         public DesignacaoArmazem(String designacao)
         {
 
+            checkDesignacao(designacao);
             this.Designacao = designacao;
         }
 
