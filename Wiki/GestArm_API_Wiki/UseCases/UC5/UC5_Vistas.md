@@ -12,6 +12,10 @@
 		- [Vista de Processos](#vista-de-processos)
 		- [Vista de Implementação](#vista-de-implementação)
 		- [Vista Física](#vista-física)
+   - [Nível 3 (MDR)](#nível-3-mdr)
+		- [Vista Lógica](#vista-lógica-2)
+		- [Vista de Processos](#vista-de-processos-1)
+		- [Vista de Implementação](#vista-de-implementação-1)
 	- [Lista de Funcionalidades](Planeamento.md)
 ## Introduction
 Será adotada a combinação de dois modelos de representação arquitetural: C4 e 4+1.
@@ -42,36 +46,116 @@ Para modelar/representar visualmente, tanto o que foi implementado como as ideia
 # Nível 1
 ## Vista Lógica
 
-![Nivel1-VL](Artifacts/VL_N1.svg)
+![Nivel1-VL](VL_N1.svg)
 
 ### Vista de Cenários
 
-![Nivel1-VC](Artifacts/VC_N1.svg)
+![Nivel1-VC](VC_N1.svg)
+
+## Vista Processo
+
+### Alternativa 1
+
+![Nivel2-VP](VP_N1_alt1.svg)
+
+### Alternativa 2
+
+![Nivel2-VP](VP_N1_alt2.svg)
+
+### Alternativa 3
+
+![Nivel2-VP](VP_N1_alt3.svg)
+
+### Alternativa 4
+
+![Nivel2-VP](VP_N1_alt4.svg)
+
+### Alternativa 5
+
+![Nivel2-VP](VP_N1_alt5.svg)
 
 # Nível 2
 ## Vista Lógica
 
 ### Alternativa 1
 
-![Nivel2-VL](Artifacts/VL_N2_alt1.svg)
+![Nivel2-VL](VL_N2_alt1.svg)
 
 ### Alternativa 2
 
-![Nivel2-VL](Artifacts/VL_N2_alt2.svg)
+![Nivel2-VL](VL_N2_alt2.svg)
 
 ### Alternativa 3
 
-![Nivel2-VL](Artifacts/VL_N2_alt3.svg)
+![Nivel2-VL](VL_N2_alt3.svg)
 
 ### Alternativa 4 (2.5)
 
 
-![Nivel2-VL](Artifacts/VL_N2.5.svg)
+![Nivel2-VL](VL_N2.5.svg)
 
 ## Vista de Implementação
-![Nivel2-VI](Artifacts/VI_N2.svg)
+![Nivel2-VI](VI_N2.svg)
+
+## Vista Processo
+
+### Alternativa 1
+
+![Nivel2-VP](VP_N2_alt1.svg)
+
+### Alternativa 2
+
+![Nivel2-VP](VP_N2_alt2.svg)
+
+### Alternativa 3
+
+![Nivel2-VP](VP_N2_alt3.svg)
+
+### Alternativa 4
+
+![Nivel2-VP](VP_N2_alt4.svg)
+
+### Alternativa 5
+
+![Nivel2-VP](VP_N2_alt5.svg)
 
 ## Vista Física
 
 ### Alternativa 1
-![N2-VF](Artifacts/VF_N2.svg)
+![N2-VF](VF_N2_alt1.svg)
+
+
+## Nível 3 (MDR)
+
+## Vista Lógica
+
+### Alternativa 1
+![Nivel3-VL](VL_N3_alt1.svg)
+
+### Alternativa 2
+![Nivel3-VL](VL_N3_alt2.svg)
+
+## Vista Processo
+
+### Alternativa 1
+
+![Nivel2-VP](VP_N3_alt1.svg)
+
+### Alternativa 2
+
+![Nivel2-VP](VP_N3_alt2.svg)
+
+### Alternativa 3
+
+![Nivel2-VP](VP_N3_alt3.svg)
+
+### Alternativa 4
+
+![Nivel2-VP](VP_N3_alt4.svg)
+
+### Alternativa 5
+
+![Nivel2-VP](VP_N3_alt5.svg)
+
+## Vista de Implementação
+![Nivel3-VI](VI_N3.svg)
