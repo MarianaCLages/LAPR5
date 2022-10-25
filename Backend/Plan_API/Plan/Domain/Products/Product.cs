@@ -1,8 +1,8 @@
 using System;
-using DDDSample1.Domain.Shared;
-using DDDSample1.Domain.Categories;
+using GestArm.Domain.Shared;
+using GestArm.Domain.Categories;
 
-namespace DDDSample1.Domain.Products
+namespace GestArm.Domain.Products
 {
     public class Product : Entity<ProductId>, IAggregateRoot
     {

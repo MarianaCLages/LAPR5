@@ -1,4 +1,4 @@
-using DDDSample1.Domain.Shared;
+using GestArm.Domain.Shared;
 
 
 namespace GestArm.Domain.Armazem

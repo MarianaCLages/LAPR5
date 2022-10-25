@@ -1,6 +1,6 @@
-using DDDSample1.Domain.Shared;
+using GestArm.Domain.Shared;
 
-namespace DDDSample1.Domain.Products
+namespace GestArm.Domain.Products
 {
     public interface IProductRepository: IRepository<Product,ProductId>
     {

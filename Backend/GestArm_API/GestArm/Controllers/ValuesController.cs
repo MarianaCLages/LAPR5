@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using System;
 
-namespace DDDSample1.Controllers
+namespace GestArm.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

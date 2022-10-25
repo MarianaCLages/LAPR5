@@ -1,5 +1,5 @@
 using System;
-using DDDSample1.Domain.Shared;
+using GestArm.Domain.Shared;
 using Newtonsoft.Json;
 
 namespace GestArm.Domain.Armazem

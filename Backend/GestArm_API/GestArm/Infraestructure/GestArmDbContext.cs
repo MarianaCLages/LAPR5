@@ -1,13 +1,16 @@
 using Microsoft.EntityFrameworkCore;
-using DDDSample1.Domain.Categories;
-using DDDSample1.Domain.Products;
-using DDDSample1.Domain.Families;
-using DDDSample1.Infrastructure.Categories;
-using DDDSample1.Infrastructure.Products;
+using GestArm.Domain.Categories;
+using GestArm.Domain.Products;
+using GestArm.Domain.Families;
+using GestArm.Domain.Encomendas;
+using GestArm.Infrastructure.Categories;
+using GestArm.Infrastructure.Products;
+using GestArm.Infrastructure.Encomendas;
 
-namespace DDDSample1.Infrastructure
+
+namespace GestArm.Infrastructure
 {
-    public class DDDSample1DbContext : DbContext
+    public class GestArmDbContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
 
@@ -15,7 +18,9 @@ namespace DDDSample1.Infrastructure
 
         public DbSet<Family> Families { get; set; }
 
-        public DDDSample1DbContext(DbContextOptions options) : base(options)
+        public DbSet<Encomenda> Encomendas { get; set; }
+
+        public GestArmDbContext(DbContextOptions options) : base(options)
         {
 
         }
@@ -25,6 +30,7 @@ namespace DDDSample1.Infrastructure
             modelBuilder.ApplyConfiguration(new CategoryEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ProductEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new FamilyEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EncomendaEntityTypeConfiguration());
         }
     }
 }

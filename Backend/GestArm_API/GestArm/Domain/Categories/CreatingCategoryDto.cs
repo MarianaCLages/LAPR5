@@ -1,4 +1,4 @@
-namespace DDDSample1.Domain.Categories
+namespace GestArm.Domain.Categories
 {
     public class CreatingCategoryDto
     {

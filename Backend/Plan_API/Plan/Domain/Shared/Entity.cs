@@ -1,4 +1,4 @@
-namespace DDDSample1.Domain.Shared
+namespace GestArm.Domain.Shared
 {
     /// <summary>
     /// Base class for entities.

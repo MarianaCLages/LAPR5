@@ -1,7 +1,7 @@
-using DDDSample1.Domain.Shared;
+using GestArm.Domain.Shared;
 
 
-namespace DDDSample1.Domain.Families
+namespace GestArm.Domain.Families
 {
     public interface IFamilyRepository:IRepository<Family,FamilyId>
     {

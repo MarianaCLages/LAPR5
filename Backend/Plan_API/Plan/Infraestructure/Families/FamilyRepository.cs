@@ -1,12 +1,12 @@
-using DDDSample1.Domain.Families;
-using DDDSample1.Infrastructure.Shared;
+using GestArm.Domain.Families;
+using GestArm.Infrastructure.Shared;
 
-namespace DDDSample1.Infrastructure.Families
+namespace GestArm.Infrastructure.Families
 {
     public class FamilyRepository : BaseRepository<Family, FamilyId>, IFamilyRepository
     {
       
-        public FamilyRepository(DDDSample1DbContext context):base(context.Families)
+        public FamilyRepository(GestArmDbContext context):base(context.Families)
         {
             
         }

@@ -5,17 +5,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using DDDSample1.Infrastructure;
-using DDDSample1.Infrastructure.Categories;
-using DDDSample1.Infrastructure.Products;
-using DDDSample1.Infrastructure.Families;
-using DDDSample1.Infrastructure.Shared;
-using DDDSample1.Domain.Shared;
-using DDDSample1.Domain.Categories;
-using DDDSample1.Domain.Products;
-using DDDSample1.Domain.Families;
+using GestArm.Infrastructure;
+using GestArm.Infrastructure.Categories;
+using GestArm.Infrastructure.Products;
+using GestArm.Infrastructure.Families;
+using GestArm.Infrastructure.Shared;
+using GestArm.Domain.Shared;
+using GestArm.Domain.Categories;
+using GestArm.Domain.Products;
+using GestArm.Domain.Families;
 
-namespace DDDSample1
+namespace GestArm
 {
     public class Startup
     {
@@ -29,7 +29,7 @@ namespace DDDSample1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-             services.AddDbContext<DDDSample1DbContext>(opt =>
+             services.AddDbContext<GestArmDbContext>(opt =>
                 opt.UseMySql(Configuration.GetConnectionString("Default"),
                         new MySqlServerVersion(new Version(10, 4, 17)))
                     .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>()

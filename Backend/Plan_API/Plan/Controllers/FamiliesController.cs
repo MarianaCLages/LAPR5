@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
-using DDDSample1.Domain.Shared;
-using DDDSample1.Domain.Families;
+using GestArm.Domain.Shared;
+using GestArm.Domain.Families;
 
-namespace DDDSample1.Controllers
+namespace GestArm.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

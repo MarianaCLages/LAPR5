@@ -1,13 +1,13 @@
 using System.Threading.Tasks;
-using DDDSample1.Domain.Shared;
+using GestArm.Domain.Shared;
 
-namespace DDDSample1.Infrastructure
+namespace GestArm.Infrastructure
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DDDSample1DbContext _context;
+        private readonly GestArmDbContext _context;
 
-        public UnitOfWork(DDDSample1DbContext context)
+        public UnitOfWork(GestArmDbContext context)
         {
             this._context = context;
         }

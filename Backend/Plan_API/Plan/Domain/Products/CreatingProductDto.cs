@@ -1,6 +1,6 @@
-using DDDSample1.Domain.Categories;
+using GestArm.Domain.Categories;
 
-namespace DDDSample1.Domain.Products
+namespace GestArm.Domain.Products
 {
     public class CreatingProductDto
     {

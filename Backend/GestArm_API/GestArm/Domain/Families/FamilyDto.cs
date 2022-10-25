@@ -1,7 +1,7 @@
 using System;
 
 
-namespace DDDSample1.Domain.Families
+namespace GestArm.Domain.Families
 {
     public class FamilyDto
     {

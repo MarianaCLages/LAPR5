@@ -1,7 +1,7 @@
 
-using DDDSample1.Domain.Shared;
+using GestArm.Domain.Shared;
 
-namespace DDDSample1.Domain.Categories
+namespace GestArm.Domain.Categories
 {
     public interface ICategoryRepository: IRepository<Category, CategoryId>
     {

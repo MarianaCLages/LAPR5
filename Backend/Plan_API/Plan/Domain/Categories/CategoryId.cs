@@ -1,8 +1,8 @@
 using System;
-using DDDSample1.Domain.Shared;
+using GestArm.Domain.Shared;
 using Newtonsoft.Json;
 
-namespace DDDSample1.Domain.Categories
+namespace GestArm.Domain.Categories
 {
     public class CategoryId : EntityId
     {
