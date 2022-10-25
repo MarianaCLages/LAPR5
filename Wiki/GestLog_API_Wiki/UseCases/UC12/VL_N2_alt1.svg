@@ -30,10 +30,10 @@
       ><path d="M0 0 L0 49 L184 49 L184 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath9"
-      ><path d="M-65 -15 L130 -15 L130 30 L-65 30 L-65 -15 Z"
+      ><path d="M-121 -15 L242 -15 L242 30 L-121 30 L-121 -15 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath10"
-      ><path d="M-121 -15 L242 -15 L242 30 L-121 30 L-121 -15 Z"
+      ><path d="M-65 -15 L130 -15 L130 30 L-65 30 L-65 -15 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath11"
       ><path d="M0 0 L104 0 L104 164 L0 164 L0 0 Z"
@@ -147,13 +147,13 @@
     ><g fill-opacity="1" text-rendering="geometricPrecision" stroke="black" stroke-linecap="butt" transform="translate(287,124)" stroke-miterlimit="0" stroke-opacity="1" fill="black" font-weight="bold" font-family="sans-serif" stroke-linejoin="round" font-size="11px" image-rendering="optimizeQuality"
     ><circle fill="none" r="9.5" clip-path="url(#clipPath5)" cx="9.5" cy="9.5"
     /></g
-    ><g font-size="11px" transform="translate(265,156)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
-    ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath9)" stroke="none"
-      >Log_API</text
-    ></g
     ><g font-size="11px" transform="translate(2,432)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
-    ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath10)" stroke="none"
+    ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath9)" stroke="none"
       >GestorLogistica_UI</text
+    ></g
+    ><g font-size="11px" transform="translate(265,156)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
+    ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath10)" stroke="none"
+      >Log_API</text
     ></g
     ><g stroke-linecap="butt" font-size="11px" transform="translate(13,303)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
     ><line y2="50" fill="none" x1="50" clip-path="url(#clipPath12)" x2="50" y1="110"
@@ -171,7 +171,7 @@
     /></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"
-      >Visual Paradigm Standard(Miguel Jordão(Instituto Superior de Engenharia do Porto))</text
+      >Visual Paradigm Standard(MiguelJordão(1201487)(Instituto Superior de Engenharia do Porto))</text
     ></g
   ></g
 ></svg

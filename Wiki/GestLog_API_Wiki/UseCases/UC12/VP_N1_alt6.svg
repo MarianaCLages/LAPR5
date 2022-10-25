@@ -27,28 +27,28 @@
       ><path d="M-7 -7 L19 -7 L19 235 L-7 235 L-7 -7 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath8"
-      ><path d="M-7 -7 L541 -7 L541 97 L-7 97 L-7 -7 Z"
-      /></clipPath
-      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath9"
-      ><path d="M0 0 L0 4 L530 4 L530 0 Z"
-      /></clipPath
-      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath10"
       ><path d="M-7 -7 L541 -7 L541 80 L-7 80 L-7 -7 Z"
       /></clipPath
-      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath11"
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath9"
       ><path d="M0 0 L0 15 L251 15 L251 0 Z"
       /></clipPath
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath10"
+      ><path d="M0 0 L0 4 L530 4 L530 0 Z"
+      /></clipPath
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath11"
+      ><path d="M-7 -7 L541 -7 L541 97 L-7 97 L-7 -7 Z"
+      /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath12"
-      ><path d="M-98 -15 L196 -15 L196 30 L-98 30 L-98 -15 Z"
+      ><path d="M-141 -30 L282 -30 L282 60 L-141 60 L-141 -30 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath13"
-      ><path d="M-141 -30 L282 -30 L282 60 L-141 60 L-141 -30 Z"
+      ><path d="M-98 -15 L196 -15 L196 30 L-98 30 L-98 -15 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath14"
       ><path d="M0 0 L578 0 L578 104 L0 104 L0 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath15"
-      ><path d="M402 29 L402 44 L172 44 L172 29 ZM406 86 L406 101 L167 101 L167 86 ZM95 0 L95 7 L0 7 L0 104 L578 104 L578 0 Z"
+      ><path d="M406 28 L406 43 L165 43 L165 28 ZM406 86 L406 101 L167 101 L167 86 ZM95 0 L95 7 L0 7 L0 104 L578 104 L578 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath16"
       ><path d="M406 30 L406 45 L167 45 L167 30 ZM0 0 L0 104 L195 104 L195 97 L377 97 L377 104 L578 104 L578 0 Z"
@@ -75,7 +75,7 @@
       ><path d="M-239 -15 L478 -15 L478 30 L-239 30 L-239 -15 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath24"
-      ><path d="M-230 -15 L460 -15 L460 30 L-230 30 L-230 -15 Z"
+      ><path d="M-241 -15 L482 -15 L482 30 L-241 30 L-241 -15 Z"
       /></clipPath
     ></defs
     ><g fill="white" text-rendering="geometricPrecision" fill-opacity="1" stroke-opacity="1" stroke="white"
@@ -126,22 +126,22 @@
     ><rect fill="none" x="0" width="8" height="224" y="0" clip-path="url(#clipPath7)"
     /></g
     ><g fill-opacity="1" text-rendering="geometricPrecision" stroke="black" stroke-linecap="butt" transform="translate(27,260)" stroke-miterlimit="0" stroke-opacity="1" fill="black" stroke-dasharray="5,2" font-family="sans-serif" stroke-linejoin="bevel" font-size="11px" image-rendering="optimizeQuality"
-    ><line y2="68" fill="none" x1="0" clip-path="url(#clipPath10)" x2="529" y1="68"
+    ><line y2="68" fill="none" x1="0" clip-path="url(#clipPath8)" x2="529" y1="68"
     /></g
     ><g font-size="11px" transform="translate(55,265)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
-    ><rect x="9" width="233" height="17" y="-1" clip-path="url(#clipPath11)" stroke="none"
-      /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath11)" stroke="none"
+    ><rect x="9" width="233" height="17" y="-1" clip-path="url(#clipPath9)" stroke="none"
+      /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath9)" stroke="none"
       >[Caso a operação seja concluída com sucesso]</text
     ></g
-    ><g font-size="11px" transform="translate(2,37)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
-    ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath12)" stroke="none"
-      >GestorLogística</text
-    ></g
     ><g font-size="11px" transform="translate(463,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
-    ><text x="25" xml:space="preserve" y="12" clip-path="url(#clipPath13)" stroke="none"
+    ><text x="25" xml:space="preserve" y="12" clip-path="url(#clipPath12)" stroke="none"
       >&lt;&lt;Context (C4)&gt;&gt;</text
-      ><text x="48" xml:space="preserve" y="27" clip-path="url(#clipPath13)" stroke="none"
+      ><text x="48" xml:space="preserve" y="27" clip-path="url(#clipPath12)" stroke="none"
       >: System</text
+    ></g
+    ><g font-size="11px" transform="translate(2,37)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
+    ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath13)" stroke="none"
+      >GestorLogística</text
     ></g
     ><g stroke-linecap="butt" font-size="11px" transform="translate(5,45)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
     ><line y2="50" fill="none" x1="50" clip-path="url(#clipPath15)" x2="524" y1="50"
@@ -188,10 +188,10 @@
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath23)" stroke="none"
       >1.1: Pede os dados para alterar um percurso</text
     ></g
-    ><g font-size="11px" transform="translate(177,74)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
-    ><rect x="0" width="230" height="15" y="0" clip-path="url(#clipPath24)" stroke="none"
+    ><g font-size="11px" transform="translate(170,73)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
+    ><rect x="0" width="241" height="15" y="0" clip-path="url(#clipPath24)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath24)" stroke="none"
-      >1: Quero editar o percurso entre 2 camiões</text
+      >1: Quero eliminar o percurso entre 2 camiões</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"
