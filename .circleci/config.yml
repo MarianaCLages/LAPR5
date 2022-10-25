@@ -33,7 +33,6 @@ jobs:
     # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
     docker:
        - image: circleci/node:10.15
-       - image: circleci/mongo:latest
     steps:
       - checkout
       - run:
@@ -43,7 +42,6 @@ jobs:
            echo "$PWD"
            npm innit --yes
            npm install --save
-           npm update --save
 
       - save_cache:
           key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
