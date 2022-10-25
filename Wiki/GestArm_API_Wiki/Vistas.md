@@ -1,3 +1,6 @@
+### 
+
+
 ## Contents
 - [Views](#views)
 	- [Introduction](#introduction)
@@ -9,12 +12,11 @@
 		- [Vista de Processos](#vista-de-processos)
 		- [Vista de Implementação](#vista-de-implementação)
 		- [Vista Física](#vista-física)
-	- [Nível 3 (MDR)](#nível-3-mdr)
+   - [Nível 3 (MDR)](#nível-3-mdr)
 		- [Vista Lógica](#vista-lógica-2)
 		- [Vista de Processos](#vista-de-processos-1)
 		- [Vista de Implementação](#vista-de-implementação-1)
 	- [Lista de Funcionalidades](Planeamento.md)
-
 ## Introduction
 Será adotada a combinação de dois modelos de representação arquitetural: C4 e 4+1.
 
@@ -39,41 +41,55 @@ Pode-se dizer que estes dois modelos se expandem ao longo de eixos distintos, se
 
 Para modelar/representar visualmente, tanto o que foi implementado como as ideias e alternativas consideradas, recorre-se à Unified Modeling Language (UML) [[UML-2020]](References.md#UML-2020) [[UMLDiagrams-2020]](References.md#UMLDiagrams-2020).
 
-## Views:
+# Views:
 
-## Nível 1
-### Vista Lógica
+# Nível 1
+## Vista Lógica
 
-![Nivel1-VL](docs/ProjetoGeral/Arquitetura/Nivel1/Nivel1-VistaLogica.svg)
+![Nivel1-VL](GeralGestArm_API_Docs/VL_N1.svg)
 
 ### Vista de Cenários
 
-![Nivel1-VC](docs/ProjetoGeral/Arquitetura/Nivel1/Nivel1-VistaDeCenario.svg)
+![Nivel1-VC](GeralGestArm_API_Docs/VC_N1.svg)
 
-## Nível 2
-### Vista Lógica
+# Nível 2
+## Vista Lógica
 
-![Nivel2-VL](docs/ProjetoGeral/Arquitetura/Nivel2/Nivel2-VistaLogica.svg)
+### Alternativa 1
 
-### Vista de Processos
+![Nivel2-VL](GeralGestArm_API_Docs/VL_N2_alt1.svg)
 
-![Nivel2-VP](docs/1191430/UC12/Nivel2-VistaDeProcesso.svg)
+### Alternativa 2
 
-### Vista de Implementação
-![Nivel2-VI](docs/ProjetoGeral/Arquitetura/Nivel2/Nivel2-VistaImplementacao.svg)
+![Nivel2-VL](GeralGestArm_API_Docs/VL_N2_alt2.svg)
 
-### Vista Física
-![N2-VL](docs/ProjetoGeral/Arquitetura/Nivel2/Nivel2-VistaFisica.svg)
+### Alternativa 3
+
+![Nivel2-VL](GeralGestArm_API_Docs/VL_N2_alt3.svg)
+
+### Alternativa 4 (2.5)
+
+
+![Nivel2-VL](GeralGestArm_API_Docs/VL_N2.5.svg)
+
+## Vista de Implementação
+![Nivel2-VI](GeralGestArm_API_Docs/VI_N2.svg)
+
+## Vista Física
+
+### Alternativa 1
+![N2-VF](GeralGestArm_API_Docs/VF_N2_alt1.svg)
+
 
 ## Nível 3 (MDR)
 
-### Vista Lógica
+## Vista Lógica
 
-![Nivel3-VL](docs/ProjetoGeral/Arquitetura/Nivel3/Nivel3-VistaLogica.svg)
+### Alternativa 1
+![Nivel3-VL](GeralGestArm_API_Docs/VL_N3_alt1.svg)
 
-### Vista de Processos
+### Alternativa 2
+![Nivel3-VL](GeralGestArm_API_Docs/VL_N3_alt2.svg)
 
-![Nivel3-VP](docs/1191430/UC12/Nivel3-VistaProcesso.svg)
-
-### Vista de Implementação
-![Nivel3-VI](docs/ProjetoGeral/Arquitetura/Nivel3/Nivel3-VistaImplementacao.svg)
+## Vista de Implementação
+![Nivel3-VI](GeralGestArm_API_Docs/VI_N3.svg)
