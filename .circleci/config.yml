@@ -46,9 +46,9 @@ jobs:
            npm update --save
 
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
           paths:
-            - ./node_modules
+            - Backend/GestLogistica_API/GestLogistica/node_modules
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Build
