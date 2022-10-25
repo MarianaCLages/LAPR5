@@ -321,9 +321,7 @@ tmp/*
 
 GestArm/.vscode
 GestArm/obj
-<<<<<<< HEAD
-
-.fake
-=======
 Backend/GestLogistica_API/GestLogistica/.idea
->>>>>>> refs/remotes/origin/master
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
