@@ -19,5 +19,14 @@ A distribuição de requisitos/funcionalidades ao longo do período de desenvolv
 
 | Requisito/Funcionalidade | Sprint A                                         | Sprint B                                                    | Sprint C                                                |
 |:-------------------------|:-------------------------------------------------|:------------------------------------------------------------|:--------------------------------------------------------|
-| Domain Model | **[All](SprintA/1200601)** |  |  |
-| Overall Artifcats (all Use cases diagrams) | **[All](SprintA/1200601)** |  |  |
+| Vista Lógica (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
+| Vista Física (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
+| Vista Implementação (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
+| Vista Cenários (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
+| Preparação da pipeline | **[1201487](SprintA/1200601)** |  |  |
+| Criação Armazém | **[1200601](SprintA/1200601)** |  |  |
+| Listar Armazém | **[1201346](SprintA/1200601)** |  |  |
+| Editar Armazém (eliminar também) | **[1200902](SprintA/1200601)** |  |  |
+| Criação Entrega | **[1200920](SprintA/1200601)** |  |  |
+| Listar Entrega | **[1201487](SprintA/1200601)** |  |  |
+| Editar Entrega (eliminar também) | **[1200601](SprintA/1200601)** |  |  |

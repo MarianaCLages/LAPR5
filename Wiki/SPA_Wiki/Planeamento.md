@@ -19,5 +19,3 @@ A distribuição de requisitos/funcionalidades ao longo do período de desenvolv
 
 | Requisito/Funcionalidade | Sprint A                                         | Sprint B                                                    | Sprint C                                                |
 |:-------------------------|:-------------------------------------------------|:------------------------------------------------------------|:--------------------------------------------------------|
-| Domain Model | **[All](SprintA/1200601)** |  |  |
-| Overall Artifcats (all Use cases diagrams) | **[All](SprintA/1200601)** |  |  |
