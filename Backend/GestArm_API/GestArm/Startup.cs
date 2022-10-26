@@ -9,11 +9,13 @@ using GestArm.Infrastructure;
 using GestArm.Infrastructure.Categories;
 using GestArm.Infrastructure.Products;
 using GestArm.Infrastructure.Families;
+using GestArm.Infrastructure.Encomendas;
 using GestArm.Infrastructure.Shared;
 using GestArm.Domain.Shared;
 using GestArm.Domain.Categories;
 using GestArm.Domain.Products;
 using GestArm.Domain.Families;
+using GestArm.Domain.Encomendas;
 
 namespace GestArm
 {
@@ -76,6 +78,9 @@ namespace GestArm
 
             services.AddTransient<IFamilyRepository,FamilyRepository>();
             services.AddTransient<FamilyService>();
+
+            services.AddTransient<IEncomendasService,IEncomendasRepository>();
+            services.AddTransient<IEncomendasService>();
         }
     }
 }
