@@ -39,5 +39,20 @@ namespace GestArm.Domain.Encomendas
             return new EncomendaDto(encomenda.Id, encomenda.DataEntrega.ToString(), encomenda.MassaEntrega, encomenda.TempoCarga, encomenda.TempoDescarga, encomenda.ArmazemId);
         }
 
+        public async Task<bool> RemoveAsync(EncomendaId id)
+        {
+            var encomenda = _repository.GetByIdAsync(id);
+
+            if (encomenda != null)
+            {
+                await _repository.RemoveAsync(id);
+                return true;
+            }
+            else
+            {
+                throw new EntregaNotFoundException("Não existe uma encomenda com esse ID!");
+            }
+        }
+
     }
 }

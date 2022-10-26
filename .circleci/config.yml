@@ -32,8 +32,7 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
     docker:
-       - image: circleci/node:10.15
-       - image: circleci/mongo:latest
+       - image: cimg/node:current
     steps:
       - checkout
       - run:
@@ -43,12 +42,11 @@ jobs:
            echo "$PWD"
            npm innit --yes
            npm install --save
-           npm update --save
 
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
           paths:
-            - ./node_modules
+            - Backend/GestLogistica_API/GestLogistica/node_modules
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Build

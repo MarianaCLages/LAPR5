@@ -43,6 +43,15 @@ namespace DDDNetCore.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = encomenda.Id }, encomenda);
         }
-        
+
+        //DELETE: api/Encomenda
+        [HttpDelete]
+        public async Task<ActionResult<bool>> DeleteAsync(EncomendaDto encomendaDto)
+        {
+            var encomenda = await _service.RemoveAsync(encomendaDto.Id);
+
+            return true;
+        }
+
     }
 }

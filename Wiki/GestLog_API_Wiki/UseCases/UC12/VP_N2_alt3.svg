@@ -168,16 +168,16 @@
       /><line y2="36" fill="none" x1="30" clip-path="url(#clipPath4)" x2="39" y1="25"
       /><line y2="16" fill="none" x1="21" clip-path="url(#clipPath4)" x2="39" y1="16"
     /></g
-    ><g fill-opacity="1" text-rendering="geometricPrecision" stroke="black" stroke-linecap="butt" transform="translate(14,441)" stroke-miterlimit="0" stroke-opacity="1" fill="black" font-weight="bold" font-family="sans-serif" stroke-linejoin="round" font-size="11px" image-rendering="optimizeQuality"
+    ><g fill-opacity="1" text-rendering="geometricPrecision" stroke="black" stroke-linecap="butt" transform="translate(14,440)" stroke-miterlimit="0" stroke-opacity="1" fill="black" font-weight="bold" font-family="sans-serif" stroke-linejoin="round" font-size="11px" image-rendering="optimizeQuality"
     ><rect fill="none" x="0" width="817" height="218" y="0" clip-path="url(#clipPath6)"
     /></g
-    ><g font-size="11px" transform="translate(14,441)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" font-weight="bold" stroke-opacity="1"
+    ><g font-size="11px" transform="translate(14,440)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" font-weight="bold" stroke-opacity="1"
     ><path d="M22 0 L22 9 L16 17 L0 17 L0 0 Z" stroke="none" clip-path="url(#clipPath6)"
     /></g
-    ><g fill-opacity="1" text-rendering="geometricPrecision" stroke="black" stroke-linecap="butt" transform="translate(14,441)" stroke-miterlimit="0" stroke-opacity="1" fill="black" font-weight="bold" font-family="sans-serif" stroke-linejoin="round" font-size="11px" image-rendering="optimizeQuality"
+    ><g fill-opacity="1" text-rendering="geometricPrecision" stroke="black" stroke-linecap="butt" transform="translate(14,440)" stroke-miterlimit="0" stroke-opacity="1" fill="black" font-weight="bold" font-family="sans-serif" stroke-linejoin="round" font-size="11px" image-rendering="optimizeQuality"
     ><path fill="none" d="M22 0 L22 9 L16 17 L0 17 L0 0 Z" clip-path="url(#clipPath6)"
     /></g
-    ><g font-size="11px" transform="translate(14,441)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
+    ><g font-size="11px" transform="translate(14,440)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="5" xml:space="preserve" y="12" clip-path="url(#clipPath7)" stroke="none"
       >alt</text
     ></g
@@ -333,7 +333,7 @@
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"
-      >Visual Paradigm Standard(Miguel Jordão(Instituto Superior de Engenharia do Porto))</text
+      >Visual Paradigm Standard(MiguelJordão(1201487)(Instituto Superior de Engenharia do Porto))</text
     ></g
   ></g
 ></svg

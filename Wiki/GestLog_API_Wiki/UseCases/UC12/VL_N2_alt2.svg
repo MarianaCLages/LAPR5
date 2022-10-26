@@ -9,10 +9,10 @@
       ><path d="M-7 -7 L996 -7 L996 355 L-7 355 L-7 -7 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath2"
-      ><path d="M0 0 L0 296 L985 296 L985 0 Z"
+      ><path d="M0 0 L0 344 L961 344 L961 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath3"
-      ><path d="M0 0 L0 344 L961 344 L961 0 Z"
+      ><path d="M0 0 L0 296 L985 296 L985 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath4"
       ><path d="M-7 -7 L23 -7 L23 23 L-7 23 L-7 -7 Z"
@@ -24,22 +24,22 @@
       ><path d="M-7 -7 L195 -7 L195 108 L-7 108 L-7 -7 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath7"
-      ><path d="M0 0 L0 49 L184 49 L184 0 Z"
-      /></clipPath
-      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath8"
       ><path d="M0 0 L0 97 L160 97 L160 0 Z"
       /></clipPath
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath8"
+      ><path d="M0 0 L0 49 L184 49 L184 0 Z"
+      /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath9"
-      ><path d="M-68 -15 L136 -15 L136 30 L-68 30 L-68 -15 Z"
+      ><path d="M-121 -15 L242 -15 L242 30 L-121 30 L-121 -15 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath10"
-      ><path d="M-65 -15 L130 -15 L130 30 L-65 30 L-65 -15 Z"
-      /></clipPath
-      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath11"
       ><path d="M-70 -15 L140 -15 L140 30 L-70 30 L-70 -15 Z"
       /></clipPath
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath11"
+      ><path d="M-65 -15 L130 -15 L130 30 L-65 30 L-65 -15 Z"
+      /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath12"
-      ><path d="M-121 -15 L242 -15 L242 30 L-121 30 L-121 -15 Z"
+      ><path d="M-68 -15 L136 -15 L136 30 L-68 30 L-68 -15 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath13"
       ><path d="M0 0 L104 0 L104 164 L0 164 L0 0 Z"
@@ -105,11 +105,11 @@
       /><line stroke-linecap="square" clip-path="url(#clipPath1)" fill="none" x1="969" x2="969" y1="18" y2="21" stroke-linejoin="miter" stroke-miterlimit="10"
     /></g
     ><g font-size="11px" transform="translate(29,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
-    ><text x="439" xml:space="preserve" y="15" clip-path="url(#clipPath3)" stroke="none"
+    ><text x="439" xml:space="preserve" y="15" clip-path="url(#clipPath2)" stroke="none"
       >&lt;&lt;component&gt;&gt;</text
-      ><text x="435" xml:space="preserve" y="30" clip-path="url(#clipPath3)" stroke="none"
+      ><text x="435" xml:space="preserve" y="30" clip-path="url(#clipPath2)" stroke="none"
       >&lt;&lt;Context (C4)&gt;&gt;</text
-      ><text x="455" xml:space="preserve" y="45" clip-path="url(#clipPath3)" font-weight="bold" stroke="none"
+      ><text x="455" xml:space="preserve" y="45" clip-path="url(#clipPath2)" font-weight="bold" stroke="none"
       >EletricGo</text
     ></g
     ><g font-size="11px" transform="translate(57,340)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" stroke-opacity="1"
@@ -139,11 +139,11 @@
       /><line stroke-linecap="square" clip-path="url(#clipPath6)" fill="none" x1="168" x2="168" y1="18" y2="21" stroke-linejoin="miter" stroke-miterlimit="10"
     /></g
     ><g font-size="11px" transform="translate(53,183)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
-    ><text x="39" xml:space="preserve" y="15" clip-path="url(#clipPath8)" stroke="none"
+    ><text x="39" xml:space="preserve" y="15" clip-path="url(#clipPath7)" stroke="none"
       >&lt;&lt;component&gt;&gt;</text
-      ><text x="31" xml:space="preserve" y="30" clip-path="url(#clipPath8)" stroke="none"
+      ><text x="31" xml:space="preserve" y="30" clip-path="url(#clipPath7)" stroke="none"
       >&lt;&lt;Container (C4)&gt;&gt;</text
-      ><text x="56" xml:space="preserve" y="45" clip-path="url(#clipPath8)" font-weight="bold" stroke="none"
+      ><text x="56" xml:space="preserve" y="45" clip-path="url(#clipPath7)" font-weight="bold" stroke="none"
       >Frontend</text
     ></g
     ><g font-size="11px" transform="translate(762,86)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
@@ -161,11 +161,11 @@
       /><line stroke-linecap="square" clip-path="url(#clipPath6)" fill="none" x1="168" x2="168" y1="18" y2="21" stroke-linejoin="miter" stroke-miterlimit="10"
     /></g
     ><g font-size="11px" transform="translate(762,86)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
-    ><text x="39" xml:space="preserve" y="15" clip-path="url(#clipPath8)" stroke="none"
+    ><text x="39" xml:space="preserve" y="15" clip-path="url(#clipPath7)" stroke="none"
       >&lt;&lt;component&gt;&gt;</text
-      ><text x="31" xml:space="preserve" y="30" clip-path="url(#clipPath8)" stroke="none"
+      ><text x="31" xml:space="preserve" y="30" clip-path="url(#clipPath7)" stroke="none"
       >&lt;&lt;Container (C4)&gt;&gt;</text
-      ><text x="26" xml:space="preserve" y="45" clip-path="url(#clipPath8)" font-weight="bold" stroke="none"
+      ><text x="26" xml:space="preserve" y="45" clip-path="url(#clipPath7)" font-weight="bold" stroke="none"
       >MasterDataLogistica</text
     ></g
     ><g font-size="11px" transform="translate(407,86)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
@@ -183,11 +183,11 @@
       /><line stroke-linecap="square" clip-path="url(#clipPath6)" fill="none" x1="168" x2="168" y1="18" y2="21" stroke-linejoin="miter" stroke-miterlimit="10"
     /></g
     ><g font-size="11px" transform="translate(407,86)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
-    ><text x="39" xml:space="preserve" y="15" clip-path="url(#clipPath8)" stroke="none"
+    ><text x="39" xml:space="preserve" y="15" clip-path="url(#clipPath7)" stroke="none"
       >&lt;&lt;component&gt;&gt;</text
-      ><text x="31" xml:space="preserve" y="30" clip-path="url(#clipPath8)" stroke="none"
+      ><text x="31" xml:space="preserve" y="30" clip-path="url(#clipPath7)" stroke="none"
       >&lt;&lt;Container (C4)&gt;&gt;</text
-      ><text x="66" xml:space="preserve" y="45" clip-path="url(#clipPath8)" font-weight="bold" stroke="none"
+      ><text x="66" xml:space="preserve" y="45" clip-path="url(#clipPath7)" font-weight="bold" stroke="none"
       >Auth</text
     ></g
     ><g font-size="11px" transform="translate(295,124)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
@@ -208,21 +208,21 @@
     ><g stroke-linecap="butt" font-size="11px" transform="translate(499,340)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1" stroke-miterlimit="0"
     ><rect fill="none" x="0" width="12" height="12" y="0" clip-path="url(#clipPath4)"
     /></g
-    ><g font-size="11px" transform="translate(471,432)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
+    ><g font-size="11px" transform="translate(2,432)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath9)" stroke="none"
-      >SSO_API</text
-    ></g
-    ><g font-size="11px" transform="translate(653,154)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
-    ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath10)" stroke="none"
-      >Log_APi</text
+      >GestorLogistica_UI</text
     ></g
     ><g font-size="11px" transform="translate(270,152)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
-    ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath11)" stroke="none"
+    ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath10)" stroke="none"
       >Auth_API</text
     ></g
-    ><g font-size="11px" transform="translate(2,432)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
+    ><g font-size="11px" transform="translate(653,154)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
+    ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath11)" stroke="none"
+      >Log_APi</text
+    ></g
+    ><g font-size="11px" transform="translate(471,432)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath12)" stroke="none"
-      >GestorLogistica_UI</text
+      >SSO_API</text
     ></g
     ><g stroke-linecap="butt" font-size="11px" transform="translate(13,303)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
     ><line y2="50" fill="none" x1="50" clip-path="url(#clipPath14)" x2="50" y1="110"
@@ -254,7 +254,7 @@
     /></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"
-      >Visual Paradigm Standard(Miguel Jordão(Instituto Superior de Engenharia do Porto))</text
+      >Visual Paradigm Standard(MiguelJordão(1201487)(Instituto Superior de Engenharia do Porto))</text
     ></g
   ></g
 ></svg
