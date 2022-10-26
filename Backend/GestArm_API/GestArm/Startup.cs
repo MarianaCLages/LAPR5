@@ -79,8 +79,9 @@ namespace GestArm
             services.AddTransient<IFamilyRepository,FamilyRepository>();
             services.AddTransient<FamilyService>();
 
-            services.AddTransient<IEncomendasService,IEncomendasRepository>();
-            services.AddTransient<IEncomendasService>();
+            //services.AddTransient<IEncomendasService,IEncomendasRepository>();
+            //services.AddTransient<IEncomendasService>();
+
         }
     }
 }

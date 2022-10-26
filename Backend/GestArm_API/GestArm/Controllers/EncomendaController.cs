@@ -50,8 +50,8 @@ namespace DDDNetCore.Controllers
         {
             var encomenda = await _service.RemoveAsync(encomendaDto.Id);
 
-            return CreatedAtAction(nameof(GetById), new { id = encomenda.Id }, encomenda);
+            return true;
         }
-        
+
     }
 }
