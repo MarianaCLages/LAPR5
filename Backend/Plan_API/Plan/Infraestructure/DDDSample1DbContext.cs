@@ -4,6 +4,8 @@ using GestArm.Domain.Products;
 using GestArm.Domain.Families;
 using GestArm.Infrastructure.Categories;
 using GestArm.Infrastructure.Products;
+using GestArm.Infrastructure.Armazens;
+using GestArm.Domain.Armazens;
 
 namespace GestArm.Infrastructure
 {
@@ -15,6 +17,8 @@ namespace GestArm.Infrastructure
 
         public DbSet<Family> Families { get; set; }
 
+        public DbSet<Armazem> Armazens { get; set; }
+
         public GestArmDbContext(DbContextOptions options) : base(options)
         {
 
@@ -25,6 +29,7 @@ namespace GestArm.Infrastructure
             modelBuilder.ApplyConfiguration(new CategoryEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ProductEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new FamilyEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ArmazemEntityTypeConfiguration());
         }
     }
 }
