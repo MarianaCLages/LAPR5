@@ -1,13 +1,7 @@
-using System;
-
-
-
 namespace GestArm.Domain.Armazens
 {
-
-    public class ArmazemDTO
+    public class CreatingArmazemDto
     {
-
 
         public ArmazemId Id { get; set; }
 
@@ -33,9 +27,10 @@ namespace GestArm.Domain.Armazens
 
         public String Pais { get; private set; }
 
-        public ArmazemDTO(ArmazemId id, String latitudeGrau, String latitudeMinuto, String latitudeSegundo, String longitudeGrau, String longitudeMinuto, String longitudeSegundo, String designacao, String rua, String numeroPorta, String codigoPostal, String cidade, String pais)
+
+
+        public CreatingArmazemDto(string latitudeGrau, string latitudeMinuto, string latitudeSegundo, string longitudeGrau, string longitudeMinuto, string longitudeSegundo, String designacao, String rua, String numeroPorta, String codigoPostal, String cidade, String pais)
         {
-            Id = id;
             LatitudeGrau = latitudeGrau;
             LatitudeMinuto = latitudeMinuto;
             LatitudeSegundo = latitudeSegundo;
