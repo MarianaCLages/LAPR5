@@ -325,3 +325,4 @@ Backend/GestLogistica_API/GestLogistica/.idea
 .vs/ProjectSettings.json
 .vs/slnx.sqlite
 .vs/VSWorkspaceState.json
+Backend/GestArm_API/GestArm/Migrations/

@@ -6,6 +6,7 @@
 
 | Sprint | Funcionalidade                   |
 |--------|----------------------------------|
-| **A**  |  |
-| **A**  |  |
+| **A**  | UC2 - Listar Armazém |
+| **A**  | UC7 - Criar Camião |
+| **A**  | UC11 - Listar Percurso |
 

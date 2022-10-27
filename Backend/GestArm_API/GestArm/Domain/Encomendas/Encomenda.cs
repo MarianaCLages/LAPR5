@@ -7,24 +7,24 @@ namespace GestArm.Domain.Encomendas
 {
     public class Encomenda : Entity<EncomendaId>, IAggregateRoot
     {
-        public EncomendaId Id { get; private set; }
-        public DateTime DataEntrega { get; private set; }
+        public DataEntrega DataEntrega { get; private set; }
 
-        public float MassaEntrega { get; private set; }
+        public MassaEntrega MassaEntrega { get; private set; }
 
         public String ArmazemId { get; private set; }
 
-        public double TempoCarga { get; private set; }
+        public TempoEncomenda TempoCarga { get; private set; }
 
-        public double TempoDescarga { get; private set; }
+        public TempoEncomenda TempoDescarga { get; private set; }
 
         public Encomenda()
         {
         }
 
-        public Encomenda(EncomendaId id, DateTime dataEntrega, float massaEntrega, double tempoCarga, double tempoDescarga, string armazemId)
+        public Encomenda(DataEntrega dataEntrega, MassaEntrega massaEntrega, TempoEncomenda tempoCarga,
+            TempoEncomenda tempoDescarga, string armazemId)
         {
-            Id = id;
+            Id = new EncomendaId(Guid.NewGuid());
             DataEntrega = dataEntrega;
             MassaEntrega = massaEntrega;
             TempoCarga = tempoCarga;
@@ -32,26 +32,29 @@ namespace GestArm.Domain.Encomendas
             ArmazemId = armazemId;
         }
 
-        public void ChangeDataEntrega(DateTime dataEntrega)
+        public void ChangeDataEntrega(DataEntrega dataEntrega)
         {
             DataEntrega = dataEntrega;
         }
 
-        public void ChangeMassaEntrega(float massaEntrega)
+        public void ChangeMassaEntrega(MassaEntrega massaEntrega)
         {
             MassaEntrega = massaEntrega;
         }
 
-        public void ChangeTempoCarga(double tempoCarga)
+        public void ChangeTempoCarga(TempoEncomenda tempoCarga)
         {
             TempoCarga = tempoCarga;
         }
 
-        public void ChangeTempoDescarga(double tempoDescarga)
+        public void ChangeTempoDescarga(TempoEncomenda tempoDescarga)
         {
             TempoDescarga = tempoDescarga;
         }
 
+        public void ChangeArmazemId(string armazemId)
+        {
+            ArmazemId = armazemId;
+        }
     }
-
 }

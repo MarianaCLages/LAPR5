@@ -2,7 +2,7 @@ using System;
 using GestArm.Domain.Shared;
 using Newtonsoft.Json;
 
-namespace GestArm.Domain.Armazem
+namespace GestArm.Domain.Armazens
 {
     public class ArmazemId : EntityId
     {

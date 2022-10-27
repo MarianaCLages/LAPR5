@@ -2,7 +2,7 @@ using System;
 using GestArm.Domain.Shared;
 
 
-namespace GestArm.Domain.Armazem
+namespace GestArm.Domain.Armazens
 {
 
     public class CoordenadasArmazem : ValueObject
@@ -17,7 +17,7 @@ namespace GestArm.Domain.Armazem
 
         public CoordenadasArmazem(int graus, int minutos, int segundos)
         {
-
+            
             checkGraus(graus);
             checkMinutos(minutos);
             checkSegundos(segundos);

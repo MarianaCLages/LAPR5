@@ -2,11 +2,12 @@ using Microsoft.EntityFrameworkCore;
 using GestArm.Domain.Categories;
 using GestArm.Domain.Products;
 using GestArm.Domain.Families;
+using GestArm.Domain.Armazens;
 using GestArm.Domain.Encomendas;
 using GestArm.Infrastructure.Categories;
 using GestArm.Infrastructure.Products;
 using GestArm.Infrastructure.Encomendas;
-
+using GestArm.Infrastructure.Armazens;
 
 namespace GestArm.Infrastructure
 {
@@ -20,6 +21,8 @@ namespace GestArm.Infrastructure
 
         public DbSet<Encomenda> Encomendas { get; set; }
 
+        public DbSet<Armazem> Armazens { get; set; }
+
         public GestArmDbContext(DbContextOptions options) : base(options)
         {
 
@@ -27,10 +30,14 @@ namespace GestArm.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+                        
+
+
             modelBuilder.ApplyConfiguration(new CategoryEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ProductEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new FamilyEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EncomendaEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ArmazemEntityTypeConfiguration());
         }
     }
 }

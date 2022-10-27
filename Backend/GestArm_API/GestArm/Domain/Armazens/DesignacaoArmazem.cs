@@ -2,15 +2,15 @@ using System;
 using GestArm.Domain.Shared;
 
 
-namespace GestArm.Domain.Armazem
+namespace GestArm.Domain.Armazens
 {
 
     public class DesignacaoArmazem : ValueObject
     {
 
-        public String Designacao { get; private set; }
+        public string Designacao { get; private set; }
 
-        public DesignacaoArmazem(String designacao)
+        public DesignacaoArmazem(string designacao)
         {
 
             checkDesignacao(designacao);
@@ -18,7 +18,7 @@ namespace GestArm.Domain.Armazem
         }
 
 
-        private void checkDesignacao(String designacao)
+        private void checkDesignacao(string designacao)
         {
 
             if (designacao == null)

@@ -2,7 +2,7 @@ using System;
 using GestArm.Domain.Shared;
 
 
-namespace GestArm.Domain.Armazem
+namespace GestArm.Domain.Armazens
 {
 
     public class EnderecoArmazem : ValueObject

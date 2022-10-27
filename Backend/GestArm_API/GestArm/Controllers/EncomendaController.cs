@@ -1,12 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using GestArm.Domain.Encomendas;
-using System.Collections.Generic;
-using System;
-using System.Threading.Tasks;
-using GestArm.Domain.Shared;
-
-
-
 
 namespace DDDNetCore.Controllers
 {
@@ -52,6 +45,14 @@ namespace DDDNetCore.Controllers
 
             return true;
         }
+        
+        //GET: api/Encomenda
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetAllAsync()
+        {
+            var encomendas = await _service.GetAllAsync();
 
+            return encomendas.ToList();
+        }
     }
 }
