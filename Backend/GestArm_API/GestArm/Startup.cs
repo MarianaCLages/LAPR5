@@ -84,8 +84,8 @@ namespace GestArm
             services.AddTransient<IArmazemRepository, ArmazemRepository>();
             services.AddTransient<IArmazemService>();
 
-            //services.AddTransient<IEncomendasService,IEncomendasRepository>();
-            //services.AddTransient<IEncomendasService>();
+            services.AddTransient<IEncomendasRepository,EncomendasRepository>();
+            services.AddTransient<IEncomendasService,EncomendasService>();
 
         }
     }

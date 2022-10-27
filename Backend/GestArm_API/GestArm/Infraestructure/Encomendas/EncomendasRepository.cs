@@ -1,54 +1,43 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GestArm.Domain.Encomendas;
 using GestArm.Infrastructure.Shared;
-using GestArm.Infrastructure;
-
 
 namespace GestArm.Infrastructure.Encomendas
 {
     public class EncomendasRepository : BaseRepository<Encomenda, EncomendaId>, IEncomendasRepository
     {
+        //db context
+        private readonly GestArmDbContext _context;
+
         public EncomendasRepository(GestArmDbContext context) : base(context.Encomendas)
         {
-            //implementar mais tarde
-            Task<Encomenda> GetByIdAsync(EncomendaId id)
-            {
-                throw new NotImplementedException();
-            }
+            _context = context;
+        }
 
-            Task<List<Encomenda>> GetAllAsync()
-            {
-                throw new NotImplementedException();
-            }
+        public Task<Encomenda> UpdateAsync(Encomenda encomenda)
+        {
+            throw new NotImplementedException();
+        }
 
-            Task<Encomenda> AddAsync(Encomenda encomenda)
-            {
-                throw new NotImplementedException();
-            }
+        public Task<Encomenda> RemoveAsync(EncomendaId id)
+        {
+            throw new NotImplementedException();
+        }
 
-            Task<Encomenda> UpdateAsync(Encomenda encomenda)
-            {
-                throw new NotImplementedException();
-            }
+        public Task<bool> ExistsAsync(EncomendaId id)
+        {
+            throw new NotImplementedException();
+        }
 
-            Task<Encomenda> RemoveAsync(EncomendaId id)
-            {
-                throw new NotImplementedException();
-            }
+        public Task<int> GetCountAsync()
+        {
+            throw new NotImplementedException();
+        }
 
-            Task<bool> ExistsAsync(EncomendaId id)
-            {
-                throw new NotImplementedException();
-            }
-
-            Task<int> GetCountAsync()
-            {
-                throw new NotImplementedException();
-            }
-
+        public async Task<Encomenda> AddAsync(Encomenda encomenda)
+        {
+            _context.Encomendas.Add(encomenda);
+            await _context.SaveChangesAsync();
+            return encomenda;
         }
     }
 }

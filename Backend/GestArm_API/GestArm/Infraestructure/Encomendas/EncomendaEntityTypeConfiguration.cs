@@ -9,18 +9,23 @@ using GestArm.Infrastructure.Shared;
 
 namespace GestArm.Infrastructure.Encomendas
 {
-    internal class EncomendaEntityTypeConfiguration: IEntityTypeConfiguration<Encomenda>
+    internal class EncomendaEntityTypeConfiguration : IEntityTypeConfiguration<Encomenda>
     {
         public void Configure(EntityTypeBuilder<Encomenda> builder)
         {
-            builder.ToTable("Encomenda");
-            builder.HasKey(e => e.Id);
-            builder.Property(e => e.Id).HasColumnName("Id");
-            builder.Property(e => e.DataEntrega).HasColumnName("DataEntrega");
-            builder.Property(e => e.MassaEntrega).HasColumnName("MassaEntrega");
-            builder.Property(e => e.TempoCarga).HasColumnName("TempoCarga");
-            builder.Property(e => e.TempoDescarga).HasColumnName("TempoDescarga");
-            builder.Property(e => e.ArmazemId).HasColumnName("ArmazemId");
+            builder.ToTable("Encomenda")
+                .HasKey(e => e.Id);
+            //mapeia cada value object
+            //data de entrega
+            builder.OwnsOne(e => e.DataEntrega).Property(x => x.Data).HasColumnName("DataEntrega").IsRequired();
+            //massa de entrega
+            builder.OwnsOne(e => e.MassaEntrega).Property(x => x.Massa).HasColumnName("MassaEntrega").IsRequired();
+            //tempo de carga
+            builder.OwnsOne(e => e.TempoCarga).Property(x => x.Minutos).HasColumnName("TempoCarga").IsRequired();
+            //tempo de descarga
+            builder.OwnsOne(e => e.TempoDescarga).Property(x => x.Minutos).HasColumnName("TempoDescarga").IsRequired();
+            //Id do Armazem
+            builder.Property<string>("ArmazemId").IsRequired();
         }
     }
 }

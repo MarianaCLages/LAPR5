@@ -6,24 +6,20 @@ using GestArm.Domain.Shared;
 
 namespace GestArm.Domain.Encomendas
 {
-    public interface IEncomendasRepository: IRepository<Encomenda,EncomendaId>
+    public interface IEncomendasRepository : IRepository<Encomenda, EncomendaId>
     {
-        Task<Encomenda> GetByIdAsync(EncomendaId id){throw new NotImplementedException();}
+        Task<Encomenda> GetByIdAsync(EncomendaId id);
 
-        Task<List<Encomenda>> GetAllAsync(){throw new NotImplementedException();}
+        Task<List<Encomenda>> GetAllAsync();
 
-        Task<List<Encomenda>> GetAllAsync(int page, int size){throw new NotImplementedException();}
+        Task<Encomenda> AddAsync(Encomenda encomenda);
 
-        Task<Encomenda> AddAsync(Encomenda encomenda){throw new NotImplementedException();}
+        Task<Encomenda> UpdateAsync(Encomenda encomenda);
 
-        Task<Encomenda> UpdateAsync(Encomenda encomenda){throw new NotImplementedException();}
+        Task<Encomenda> RemoveAsync(EncomendaId id);
 
-        Task<Encomenda> RemoveAsync(EncomendaId id){throw new NotImplementedException();}
+        Task<bool> ExistsAsync(EncomendaId id);
 
-        Task<bool> ExistsAsync(EncomendaId id){throw new NotImplementedException();}
-
-        Task<int> GetCountAsync(){throw new NotImplementedException();}
-
-        
+        Task<int> GetCountAsync();
     }
 }
