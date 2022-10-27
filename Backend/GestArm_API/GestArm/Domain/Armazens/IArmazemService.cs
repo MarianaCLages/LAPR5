@@ -26,6 +26,16 @@ namespace GestArm.Domain.Armazens
             return new ArmazemDTO(armazem.Id, armazem.Latitude.Graus.ToString(), armazem.Latitude.Minutos.ToString(), armazem.Latitude.Segundos.ToString(), armazem.Longitude.Graus.ToString(), armazem.Longitude.Minutos.ToString(), armazem.Longitude.Segundos.ToString(), armazem.Designacao.ToString(), armazem.Endereco.Rua,armazem.Endereco.NumeroPorta.ToString(),armazem.Endereco.CodigoPostal,armazem.Endereco.Cidade,armazem.Endereco.Pais);
         }
 
+        public async Task<List<ArmazemDTO>> GetAllAsync()
+        {
+            var list = await this._repository.GetAllAsync();
+            
+            List<ArmazemDTO> listDto = list.ConvertAll<ArmazemDTO>(arm => 
+                new ArmazemDTO(arm.Id, arm.Latitude.Graus.ToString(), arm.Latitude.Minutos.ToString(), arm.Latitude.Segundos.ToString(), arm.Longitude.Graus.ToString(), arm.Longitude.Minutos.ToString(), arm.Longitude.Segundos.ToString(), arm.Designacao.ToString(), arm.Endereco.Rua,arm.Endereco.NumeroPorta.ToString(),arm.Endereco.CodigoPostal,arm.Endereco.Cidade,arm.Endereco.Pais));
+        
+            return listDto;
+        }
+
 
         public async Task<ArmazemDTO> AddAsync(CreatingArmazemDto dto)
         {

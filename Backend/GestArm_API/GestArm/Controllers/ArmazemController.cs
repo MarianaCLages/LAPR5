@@ -35,6 +35,13 @@ namespace DDDNetCore.Controllers
             return armazem;
         }
 
+        // GET: api/Armazens
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ArmazemDTO>>> GetAll()
+        {
+            return await _service.GetAllAsync();
+        }
+
         //POST: api/Armazem
         [HttpPost]
         public async Task<ActionResult<ArmazemDTO>> AddAsync(CreatingArmazemDto dto)
