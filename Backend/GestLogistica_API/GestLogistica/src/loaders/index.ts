@@ -21,9 +21,20 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/roleSchema',
   };
 
+  const caminhoSchema = {
+    // compare with the approach followed in repos and services
+    name: 'caminhoSchema',
+    schema: '../persistence/schemas/caminhoSchema',
+  };
+
   const roleController = {
     name: config.controllers.role.name,
     path: config.controllers.role.path
+  }
+
+  const caminhoController = {
+    name: config.controllers.caminho.name,
+    path: config.controllers.caminho.path
   }
 
   const roleRepo = {
@@ -41,21 +52,35 @@ export default async ({ expressApp }) => {
     path: config.services.role.path
   }
 
+  const caminhoRepo = {
+    name: config.repos.caminho.name,
+    path: config.repos.caminho.path
+  }
+
+  const caminhoService = {
+    name: config.services.caminho.name,
+    path: config.services.caminho.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
       userSchema,
-      roleSchema
+      roleSchema,
+      caminhoSchema
     ],
     controllers: [
-      roleController
+      roleController,
+      caminhoController
     ],
     repos: [
       roleRepo,
-      userRepo
+      userRepo,
+      caminhoRepo
     ],
     services: [
-      roleService
+      roleService,
+      caminhoService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
