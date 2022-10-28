@@ -15,8 +15,8 @@ import { CaminhoTmpCarregamento } from "../caminho/caminhoTmpCarregamento";
 import ICaminhoDTO from "../../dto/caminho/ICaminhoDTO";
 
 interface CaminhoProps {
-  armazemPartidaId: CaminhoArmazemChegadaId;
-  armazemChegadaId: CaminhoArmazemPartidaId;
+  armazemChegadaId: CaminhoArmazemChegadaId;
+  armazemPartidaId: CaminhoArmazemPartidaId;
   distancia: CaminhoDistancia;
   energia: CaminhoEnergia;
   tempo: CaminhoTempo;
@@ -24,8 +24,6 @@ interface CaminhoProps {
 }
 
 export class Caminho extends AggregateRoot<CaminhoProps> {
-  caminho: Result<CaminhoArmazemChegadaId>;
-
   get id(): UniqueEntityID {
     return this._id;
   }
@@ -82,7 +80,6 @@ export class Caminho extends AggregateRoot<CaminhoProps> {
     this.props.tmpCarregamento = value;
   }
 
-
   private constructor(props: CaminhoProps, id?: UniqueEntityID) {
     super(props, id);
   }
@@ -91,31 +88,43 @@ export class Caminho extends AggregateRoot<CaminhoProps> {
     caminhoDTO: ICaminhoDTO,
     id?: UniqueEntityID
   ): Result<Caminho> {
-
-       const guardedProps = [
-      { argument: caminhoDTO.armazemPartidaId, argumentName: 'armazemPartidaId' },
-      { argument: caminhoDTO.armazemChegadaId, argumentName: 'armazemChegadaId' },
-      { argument: caminhoDTO.energia, argumentName: 'energia' },
-      { argument: caminhoDTO.distancia, argumentName: 'distancia'},
-      { argument: caminhoDTO.tempo, argumentName: 'tempo' },
-      { argument: caminhoDTO.tmpCarregamento, argumentName: 'tmpCarregamento' }
+    const guardedProps = [
+      {
+        argument: caminhoDTO.armazemPartidaId,
+        argumentName: "armazemPartidaId",
+      },
+      {
+        argument: caminhoDTO.armazemChegadaId,
+        argumentName: "armazemChegadaId",
+      },
+      { argument: caminhoDTO.energia, argumentName: "energia" },
+      { argument: caminhoDTO.distancia, argumentName: "distancia" },
+      { argument: caminhoDTO.tempo, argumentName: "tempo" },
+      { argument: caminhoDTO.tmpCarregamento, argumentName: "tmpCarregamento" },
     ];
 
     const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
 
     if (!guardResult.succeeded) {
-      return Result.fail<Caminho>(guardResult.message)
-    }     
-    else {
+      return Result.fail<Caminho>(guardResult.message);
+    } else {
       const caminho = new Caminho(
         {
-            armazemChegadaId: new CaminhoArmazemChegadaId({value: caminhoDTO.armazemChegadaId}),
-            armazemPartidaId: new CaminhoArmazemPartidaId({value: caminhoDTO.armazemPartidaId}),
-            distancia: new CaminhoDistancia({value: caminhoDTO.distancia}),
-            energia: new CaminhoEnergia({value: caminhoDTO.energia}),
-            tempo: new CaminhoTempo({value: caminhoDTO.tempo}),
-            tmpCarregamento: new CaminhoTmpCarregamento({value: caminhoDTO.tmpCarregamento}),
-        }, id,);
+          armazemChegadaId: new CaminhoArmazemChegadaId({
+            value: caminhoDTO.armazemChegadaId,
+          }),
+          armazemPartidaId: new CaminhoArmazemPartidaId({
+            value: caminhoDTO.armazemPartidaId,
+          }),
+          distancia: new CaminhoDistancia({ value: caminhoDTO.distancia }),
+          energia: new CaminhoEnergia({ value: caminhoDTO.energia }),
+          tempo: new CaminhoTempo({ value: caminhoDTO.tempo }),
+          tmpCarregamento: new CaminhoTmpCarregamento({
+            value: caminhoDTO.tmpCarregamento,
+          }),
+        },
+        id
+      );
 
       return Result.ok<Caminho>(caminho);
     }

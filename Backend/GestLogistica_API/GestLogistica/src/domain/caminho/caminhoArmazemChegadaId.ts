@@ -1,3 +1,4 @@
+
 import { ValueObject } from "../../core/domain/ValueObject";
 import { Result } from "../../core/logic/Result";
 import { Guard } from "../../core/logic/Guard";
@@ -24,7 +25,7 @@ export class CaminhoArmazemChegadaId extends ValueObject<caminhoArmazemChegadaId
     if (!guardResult.succeeded) {
       return Result.fail<CaminhoArmazemChegadaId>(guardResult.message);
     } else {
-      return Result.ok<CaminhoArmazemChegadaId>(new CaminhoArmazemChegadaId({ value: caminhoArmazemChegadaId }))
+      return Result.ok<CaminhoArmazemChegadaId>(new CaminhoArmazemChegadaId({ value: caminhoArmazemChegadaId.toString() }))
     }
   }
 }
