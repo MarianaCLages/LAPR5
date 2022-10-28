@@ -11,21 +11,21 @@ namespace GestArm.Domain.Armazens
 
         public ArmazemId Id { get; set; }
 
-        public string LatitudeGrau { get; private set; }
+        public int LatitudeGrau { get; private set; }
 
-        public string LatitudeSegundo { get; private set; }
+        public int LatitudeSegundo { get; private set; }
 
-        public string LatitudeMinuto { get; private set; }
+        public int LatitudeMinuto { get; private set; }
 
-        public string LongitudeGrau { get; private set; }
-        public string LongitudeSegundo { get; private set; }
-        public string LongitudeMinuto { get; private set; }
+        public int LongitudeGrau { get; private set; }
+        public int LongitudeSegundo { get; private set; }
+        public int LongitudeMinuto { get; private set; }
 
         public string Designacao { get; private set; }
 
         public String Rua { get; private set; }
 
-        public String NumeroPorta { get; private set; }
+        public int NumeroPorta { get; private set; }
 
         public String CodigoPostal { get; private set; }
 
@@ -33,7 +33,7 @@ namespace GestArm.Domain.Armazens
 
         public String Pais { get; private set; }
 
-        public ArmazemDTO(ArmazemId id, String latitudeGrau, String latitudeMinuto, String latitudeSegundo, String longitudeGrau, String longitudeMinuto, String longitudeSegundo, String designacao, String rua, String numeroPorta, String codigoPostal, String cidade, String pais)
+        public ArmazemDTO(ArmazemId id, int latitudeGrau, int latitudeMinuto, int latitudeSegundo, int longitudeGrau, int longitudeMinuto, int longitudeSegundo, String designacao, String rua, int numeroPorta, String codigoPostal, String cidade, String pais)
         {
             Id = id;
             LatitudeGrau = latitudeGrau;

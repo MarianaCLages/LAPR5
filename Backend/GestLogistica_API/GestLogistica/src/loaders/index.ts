@@ -47,14 +47,14 @@ export default async ({ expressApp }) => {
     path: config.repos.user.path
   }
 
-  const roleService = {
-    name: config.services.role.name,
-    path: config.services.role.path
-  }
-
   const caminhoRepo = {
     name: config.repos.caminho.name,
     path: config.repos.caminho.path
+  }
+
+  const roleService = {
+    name: config.services.role.name,
+    path: config.services.role.path
   }
 
   const caminhoService = {

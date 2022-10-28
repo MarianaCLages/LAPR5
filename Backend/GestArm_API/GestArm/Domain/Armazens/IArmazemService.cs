@@ -23,7 +23,7 @@ namespace GestArm.Domain.Armazens
                 return null;
             }
 
-            return new ArmazemDTO(armazem.Id, armazem.Latitude.Graus.ToString(), armazem.Latitude.Minutos.ToString(), armazem.Latitude.Segundos.ToString(), armazem.Longitude.Graus.ToString(), armazem.Longitude.Minutos.ToString(), armazem.Longitude.Segundos.ToString(), armazem.Designacao.ToString(), armazem.Endereco.Rua,armazem.Endereco.NumeroPorta.ToString(),armazem.Endereco.CodigoPostal,armazem.Endereco.Cidade,armazem.Endereco.Pais);
+            return new ArmazemDTO(armazem.Id, armazem.Latitude.Graus, armazem.Latitude.Minutos, armazem.Latitude.Segundos, armazem.Longitude.Graus, armazem.Longitude.Minutos, armazem.Longitude.Segundos, armazem.Designacao.ToString(), armazem.Endereco.Rua,armazem.Endereco.NumeroPorta,armazem.Endereco.CodigoPostal,armazem.Endereco.Cidade,armazem.Endereco.Pais);
         }
 
         public async Task<List<ArmazemDTO>> GetAllAsync()
@@ -31,7 +31,7 @@ namespace GestArm.Domain.Armazens
             var list = await this._repository.GetAllAsync();
             
             List<ArmazemDTO> listDto = list.ConvertAll<ArmazemDTO>(arm => 
-                new ArmazemDTO(arm.Id, arm.Latitude.Graus.ToString(), arm.Latitude.Minutos.ToString(), arm.Latitude.Segundos.ToString(), arm.Longitude.Graus.ToString(), arm.Longitude.Minutos.ToString(), arm.Longitude.Segundos.ToString(), arm.Designacao.ToString(), arm.Endereco.Rua,arm.Endereco.NumeroPorta.ToString(),arm.Endereco.CodigoPostal,arm.Endereco.Cidade,arm.Endereco.Pais));
+                new ArmazemDTO(arm.Id, arm.Latitude.Graus, arm.Latitude.Minutos, arm.Latitude.Segundos, arm.Longitude.Graus, arm.Longitude.Minutos, arm.Longitude.Segundos, arm.Designacao.ToString(), arm.Endereco.Rua,arm.Endereco.NumeroPorta,arm.Endereco.CodigoPostal,arm.Endereco.Cidade,arm.Endereco.Pais));
         
             return listDto;
         }
@@ -39,11 +39,11 @@ namespace GestArm.Domain.Armazens
 
         public async Task<ArmazemDTO> AddAsync(CreatingArmazemDto dto)
         {
-            var armazem = new Armazem(new ArmazemId(Guid.NewGuid()), new CoordenadasArmazem( Int16.Parse(dto.LatitudeGrau),Int16.Parse(dto.LatitudeMinuto),Int16.Parse(dto.LatitudeSegundo)), new CoordenadasArmazem(Int16.Parse(dto.LongitudeGrau),Int16.Parse(dto.LongitudeMinuto),Int16.Parse(dto.LongitudeSegundo)), new DesignacaoArmazem( dto.Designacao),new EnderecoArmazem(dto.Rua,Int16.Parse(dto.NumeroPorta),dto.CodigoPostal,dto.Cidade,dto.Pais));
+            var armazem = new Armazem(new ArmazemId(Guid.NewGuid()), new CoordenadasArmazem( dto.LatitudeGrau,dto.LatitudeMinuto,dto.LatitudeSegundo), new CoordenadasArmazem(dto.LongitudeGrau,dto.LongitudeMinuto,dto.LongitudeSegundo), new DesignacaoArmazem( dto.Designacao),new EnderecoArmazem(dto.Rua,dto.NumeroPorta,dto.CodigoPostal,dto.Cidade,dto.Pais));
 
             await _repository.AddAsync(armazem);
 
-            return new ArmazemDTO(armazem.Id, armazem.Latitude.Graus.ToString(), armazem.Latitude.Minutos.ToString(), armazem.Latitude.Segundos.ToString(), armazem.Longitude.Graus.ToString(), armazem.Longitude.Minutos.ToString(), armazem.Longitude.Segundos.ToString(), armazem.Designacao.ToString(), armazem.Endereco.Rua,armazem.Endereco.NumeroPorta.ToString(),armazem.Endereco.CodigoPostal,armazem.Endereco.Cidade,armazem.Endereco.Pais);
+            return new ArmazemDTO(armazem.Id, armazem.Latitude.Graus, armazem.Latitude.Minutos, armazem.Latitude.Segundos, armazem.Longitude.Graus, armazem.Longitude.Minutos, armazem.Longitude.Segundos, armazem.Designacao.ToString(), armazem.Endereco.Rua,armazem.Endereco.NumeroPorta,armazem.Endereco.CodigoPostal,armazem.Endereco.Cidade,armazem.Endereco.Pais);
         }
 
         public async Task<bool> RemoveAsync(ArmazemId id)

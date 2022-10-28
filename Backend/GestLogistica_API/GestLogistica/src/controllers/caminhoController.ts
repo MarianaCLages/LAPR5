@@ -7,18 +7,30 @@ import ICaminhoService from "../services/IServices/ICaminhoService";
 import ICaminhoDTO from "../dto/caminho/ICaminhoDTO";
 
 import { Result } from "../core/logic/Result";
+import { BaseController } from "../core/infra/BaseController";
+import { ParamsDictionary } from "express-serve-static-core";
+import { ParsedQs } from "qs";
 
 @Service()
 export default class caminhoController
+  extends BaseController
   implements
-    ICaminhoController /* TODO: extends ../core/infra/BaseController */ {
+  ICaminhoController  {
+  protected executeImpl(): Promise<any> {
+    throw new Error("Method not implemented.");
+  }
   constructor(
-    @Inject(config.services.role.name) private roleServiceInstance: ICaminhoService
-  ) {}
+    @Inject(config.services.caminho.name) private caminhoServiceInstance: ICaminhoService
+  ) {
+    super();
+  }
+  updateCaminho(req: Request, res: Response, next: NextFunction) {
+    throw new Error("Method not implemented.");
+  }
 
   public async createCaminho(req: Request, res: Response, next: NextFunction) {
     try {
-      const caminhoOrError = (await this.roleServiceInstance.createCaminho(
+      const caminhoOrError = (await this.caminhoServiceInstance.createCaminho(
         req.body as ICaminhoDTO
       )) as Result<ICaminhoDTO>;
 

@@ -45,6 +45,10 @@ export default {
     role: {
       name: "RoleController",
       path: "../controllers/roleController"
+    },
+    caminho: {
+      name: "CaminhoController",
+      path: "../controllers/caminhoController"
     }
   },
 
@@ -56,6 +60,10 @@ export default {
     user: {
       name: "UserRepo",
       path: "../repos/userRepo"
+    },
+    caminho: {
+      name: "CaminhoRepo",
+      path: "../repos/caminhoRepo"
     }
   },
 
@@ -63,6 +71,10 @@ export default {
     role: {
       name: "RoleService",
       path: "../services/roleService"
+    },
+    caminho: {
+      name: "CaminhoService",
+      path: "../services/caminhoService"
     }
   },
 };
