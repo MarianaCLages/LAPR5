@@ -30,7 +30,7 @@ namespace GestArm.Domain.Armazens
         private void checkGraus(int graus)
         {
 
-            if (graus < -180 && graus > 180)
+            if (graus < -180 && graus < 180)
             {
                 throw new BusinessRuleValidationException("Graus da Coordenada deve estar entre os valores 180 e -180");
             }
@@ -39,7 +39,7 @@ namespace GestArm.Domain.Armazens
         private void checkMinutos(int minutos)
         {
 
-            if (minutos < 0 && minutos > 60)
+            if (minutos >= 0 && minutos <= 60)
             {
                 throw new BusinessRuleValidationException("Minutos da coordenadas deve estar entre os valores 0 e 60");
             }
@@ -48,7 +48,7 @@ namespace GestArm.Domain.Armazens
         private void checkSegundos(int segundos)
         {
 
-            if (segundos < 0 && segundos > 60)
+            if (segundos >= 0 && segundos <= 60)
             {
                 throw new BusinessRuleValidationException("Segundos da coordenada deve estar entre os valores 0 e 60");
             }

@@ -27,13 +27,13 @@ namespace GestArm.Infrastructure.Armazens
             builder.OwnsOne(e => e.Endereco).Property(e => e.Cidade).HasColumnName("Cidade");
             builder.OwnsOne(e => e.Endereco).Property(e => e.Pais).HasColumnName("Pais");
 
-            builder.OwnsOne(e => e.Latitude).Property(e => e.Graus).HasColumnName("Graus");
-            builder.OwnsOne(e => e.Latitude).Property(e => e.Minutos).HasColumnName("Minutos");
-            builder.OwnsOne(e => e.Latitude).Property(e => e.Segundos).HasColumnName("Segundos");
+            builder.OwnsOne(e => e.Latitude).Property(e => e.Graus).HasColumnName("LatitudeGraus");
+            builder.OwnsOne(e => e.Latitude).Property(e => e.Minutos).HasColumnName("LatitudeMinutos");
+            builder.OwnsOne(e => e.Latitude).Property(e => e.Segundos).HasColumnName("LatitudeSegundos");
 
-            builder.OwnsOne(e => e.Longitude).Property(e => e.Segundos).HasColumnName("Segundos");
-            builder.OwnsOne(e => e.Longitude).Property(e => e.Minutos).HasColumnName("Minutos");
-            builder.OwnsOne(e => e.Longitude).Property(e => e.Graus).HasColumnName("Graus");
+            builder.OwnsOne(e => e.Longitude).Property(e => e.Segundos).HasColumnName("LongitudeSegundos");
+            builder.OwnsOne(e => e.Longitude).Property(e => e.Minutos).HasColumnName("LongitudeMinutos");
+            builder.OwnsOne(e => e.Longitude).Property(e => e.Graus).HasColumnName("LongitudeGraus");
 
 
         }

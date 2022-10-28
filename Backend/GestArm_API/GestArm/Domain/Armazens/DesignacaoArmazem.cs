@@ -26,7 +26,7 @@ namespace GestArm.Domain.Armazens
                 throw new BusinessRuleValidationException("A designação não pode estar vazia.");
             }
 
-            if (designacao.Length > 50)
+            if (designacao.Length <= 50)
             {
                 throw new BusinessRuleValidationException("A designação excede o número de caracteres.");
             }

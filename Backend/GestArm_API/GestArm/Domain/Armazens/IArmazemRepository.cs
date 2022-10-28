@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GestArm.Domain.Shared;
+using GestArm.Infrastructure;
 
 namespace GestArm.Domain.Armazens
 {
     public interface IArmazemRepository : IRepository<Armazem, ArmazemId>
     {
-        Task<Armazem> GetByIdAsync(ArmazemId id) { throw new NotImplementedException(); }
 
-        Task<List<Armazem>> GetAllAsync() { throw new NotImplementedException(); }
 
-        Task<List<Armazem>> GetAllAsync(int page, int size) { throw new NotImplementedException(); }
+        Task<Armazem> GetByIdAsync(ArmazemId id); 
 
-        Task<Armazem> AddAsync(Armazem armazem) { throw new NotImplementedException(); }
+        Task<List<Armazem>> GetAllAsync(); 
 
-        Task<Armazem> UpdateAsync(Armazem armazem) { throw new NotImplementedException(); }
+        Task<List<Armazem>> GetAllAsync(int page, int size); 
 
-        Task<Armazem> RemoveAsync(ArmazemId id) { throw new NotImplementedException(); }
+        Task<Armazem> AddAsync(Armazem armazem);
+        Task<Armazem> UpdateAsync(Armazem armazem); 
 
-        Task<bool> ExistsAsync(ArmazemId id) { throw new NotImplementedException(); }
+        Task<Armazem> RemoveAsync(ArmazemId id); 
 
-        Task<int> GetCountAsync() { throw new NotImplementedException(); }
+        Task<bool> ExistsAsync(ArmazemId id); 
+
+        Task<int> GetCountAsync(); 
     }
-
 }
+
