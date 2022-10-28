@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 const CaminhoSchema = new mongoose.Schema(
   {
-   domainId: { 
+    domainId: {
       type: String,
       unique: true
     },
@@ -22,22 +22,22 @@ const CaminhoSchema = new mongoose.Schema(
 
     energia: {
       type: String,
-      lowercase: true,  
+      lowercase: true,
       unique: true,
       index: true,
     },
 
     distancia: {
-        type: Number, 
-      },
+      type: Number,
+    },
 
-      tempo: {
-        type: String,
-      },
+    tempo: {
+      type: String,
+    },
 
-      tmpCarregamento: {
-        type: String,
-      },
+    tmpCarregamento: {
+      type: String,
+    },
   },
   {
     timestamps: true
