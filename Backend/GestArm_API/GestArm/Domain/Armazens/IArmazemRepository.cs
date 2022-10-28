@@ -8,6 +8,8 @@ public interface IArmazemRepository : IRepository<Armazem, ArmazemId>
 
     Task<List<Armazem>> GetAllAsync();
 
+    Task<Armazem> GetByDesignacaoAsync(DesignacaoArmazem designacao);
+
     Task<List<Armazem>> GetAllAsync(int page, int size);
 
     Task<Armazem> AddAsync(Armazem armazem);

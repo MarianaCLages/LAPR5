@@ -6,7 +6,7 @@ O grupo de trabalho é constituído pelo estudantes identificados na tabela segu
 
 ### Sprint A
 | Aluno Nr.                      | Nome do Aluno  |
-|--------------------------------|----------------|
+| ------------------------------ | -------------- |
 | **[1200601](SprintA/1200601)** | Tiago Ferreira |
 | **[1200902](SprintA/1200902)** | Mariana Lages  |
 | **[1200920](SprintA/1200920)** | Eduardo Sousa  |
@@ -17,16 +17,16 @@ O grupo de trabalho é constituído pelo estudantes identificados na tabela segu
 
 A distribuição de requisitos/funcionalidades ao longo do período de desenvolvimento do projeto pelos elementos do grupo de trabalho realizou-se conforme descrito na tabela seguinte.
 
-| Requisito/Funcionalidade | Sprint A                                         | Sprint B                                                    | Sprint C                                                |
-|:-------------------------|:-------------------------------------------------|:------------------------------------------------------------|:--------------------------------------------------------|
-| Vista Lógica (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
-| Vista Física (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
-| Vista Implementação (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
-| Vista Cenários (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
-| Preparação da pipeline | **[1201487](SprintA/1200601)** |  |  |
-| Criação Armazém | **[1200601](SprintA/1200601)** |  |  |
-| Listar Armazém | **[1201346](SprintA/1200601)** |  |  |
-| Editar Armazém (eliminar também) | **[1200902](SprintA/1200601)** |  |  |
-| Criação Entrega | **[1200920](SprintA/1200601)** |  |  |
-| Listar Entrega | **[1201487](SprintA/1200601)** |  |  |
-| Editar Entrega (eliminar também) | **[1200601](SprintA/1200601)** |  |  |
+| Requisito/Funcionalidade              | Sprint A                       | Sprint B | Sprint C |
+| :------------------------------------ | :----------------------------- | :------- | :------- |
+| Vista Lógica (Todos os níveis)        | **[1201487](SprintA/1200601)** |          |          |
+| Vista Física (Todos os níveis)        | **[1201487](SprintA/1200601)** |          |          |
+| Vista Implementação (Todos os níveis) | **[1201487](SprintA/1200601)** |          |          |
+| Vista Cenários (Todos os níveis)      | **[1201487](SprintA/1200601)** |          |          |
+| Preparação da pipeline                | **[1201487](SprintA/1200601)** |          |          |
+| Criação Armazém                       | **[1200601](SprintA/1200601)** |          |          |
+| Listar Armazém                        | **[1201346](SprintA/1200601)** |          |          |
+| Editar Armazém (eliminar também)      | **[1200902](SprintA/1200601)** |          |          |
+| Criação Entrega                       | **[1200920](SprintA/1200601)** |          |          |
+| Listar Entrega                        | **[1201487](SprintA/1200601)** |          |          |
+| Editar Entrega (eliminar também)      | **[1200601](SprintA/1200601)** |          |          |
