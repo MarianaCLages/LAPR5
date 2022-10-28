@@ -1,9 +1,6 @@
-using System.Threading.Tasks;
+namespace GestArm.Domain.Shared;
 
-namespace GestArm.Domain.Shared
+public interface IUnitOfWork
 {
-    public interface IUnitOfWork
-    {
-        Task<int> CommitAsync();
-    }
+    Task<int> CommitAsync();
 }

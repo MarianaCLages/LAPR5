@@ -1,30 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GestArm.Domain.Shared;
-using GestArm.Infrastructure;
 
-namespace GestArm.Domain.Armazens
+namespace GestArm.Domain.Armazens;
+
+public interface IArmazemRepository : IRepository<Armazem, ArmazemId>
 {
-    public interface IArmazemRepository : IRepository<Armazem, ArmazemId>
-    {
+    Task<Armazem> GetByIdAsync(ArmazemId id);
 
+    Task<List<Armazem>> GetAllAsync();
 
-        Task<Armazem> GetByIdAsync(ArmazemId id); 
+    Task<List<Armazem>> GetAllAsync(int page, int size);
 
-        Task<List<Armazem>> GetAllAsync(); 
+    Task<Armazem> AddAsync(Armazem armazem);
+    Task<Armazem> UpdateAsync(Armazem armazem);
 
-        Task<List<Armazem>> GetAllAsync(int page, int size); 
+    Task<Armazem> RemoveAsync(ArmazemId id);
 
-        Task<Armazem> AddAsync(Armazem armazem);
-        Task<Armazem> UpdateAsync(Armazem armazem); 
+    Task<bool> ExistsAsync(ArmazemId id);
 
-        Task<Armazem> RemoveAsync(ArmazemId id); 
-
-        Task<bool> ExistsAsync(ArmazemId id); 
-
-        Task<int> GetCountAsync(); 
-    }
+    Task<int> GetCountAsync();
 }
-

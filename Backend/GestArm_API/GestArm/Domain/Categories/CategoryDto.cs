@@ -1,11 +1,8 @@
-using System;
+namespace GestArm.Domain.Categories;
 
-namespace GestArm.Domain.Categories
+public class CategoryDto
 {
-    public class CategoryDto
-    {
-        public Guid Id { get; set; }
+    public Guid Id { get; set; }
 
-        public string Description { get; set; }
-    }
+    public string Description { get; set; }
 }

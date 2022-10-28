@@ -4,21 +4,18 @@ namespace GestArm.Domain.Encomendas;
 
 public class TempoEncomenda : ValueObject
 {
-    public int Minutos { get; }
-
     public TempoEncomenda(int minutos)
     {
         IsValid();
-        this.Minutos = minutos;
+        Minutos = minutos;
     }
+
+    public int Minutos { get; }
 
     //verifica se os minutos são válidos
     private void IsValid()
     {
-        if (Minutos < 0)
-        {
-            throw new BusinessRuleValidationException("O tempo de entrega não pode ser negativo");
-        }
+        if (Minutos < 0) throw new BusinessRuleValidationException("O tempo de entrega não pode ser negativo");
     }
 
 

@@ -1,35 +1,35 @@
 using GestArm.Domain.Shared;
 
-namespace GestArm.Domain.Families
+namespace GestArm.Domain.Families;
+
+public class Family : Entity<FamilyId>, IAggregateRoot
 {
-    public class Family : Entity<FamilyId>, IAggregateRoot
+    private Family()
     {
+        Active = true;
+    }
 
-        public string Description { get;  private set; }
+    public Family(string code, string description)
+    {
+        Id = new FamilyId(code);
+        Description = description;
+        Active = true;
+    }
 
-        public bool Active{ get;  private set; }
+    public string Description { get; private set; }
 
-        private Family()
-        {
-            this.Active = true;
-        }
+    public bool Active { get; private set; }
 
-        public Family(string code, string description)
-        {
-            this.Id = new FamilyId(code);
-            this.Description = description;
-            this.Active = true;
-        }
+    public void ChangeDescription(string description)
+    {
+        if (!Active)
+            throw new BusinessRuleValidationException(
+                "It is not possible to change the description to an inactive family.");
+        Description = description;
+    }
 
-        public void ChangeDescription(string description)
-        {
-            if (!this.Active)
-                throw new BusinessRuleValidationException("It is not possible to change the description to an inactive family.");
-            this.Description = description;
-        }
-        public void MarkAsInative()
-        {
-            this.Active = false;
-        }
+    public void MarkAsInative()
+    {
+        Active = false;
     }
 }

@@ -1,13 +1,11 @@
-namespace GestArm.Domain.Categories
+namespace GestArm.Domain.Categories;
+
+public class CreatingCategoryDto
 {
-    public class CreatingCategoryDto
+    public CreatingCategoryDto(string description)
     {
-        public string Description { get; set; }
-
-
-        public CreatingCategoryDto(string description)
-        {
-            this.Description = description;
-        }
+        Description = description;
     }
+
+    public string Description { get; set; }
 }

@@ -1,34 +1,35 @@
-using System;
 using GestArm.Domain.Shared;
 using Newtonsoft.Json;
 
-namespace GestArm.Domain.Categories
+namespace GestArm.Domain.Categories;
+
+public class CategoryId : EntityId
 {
-    public class CategoryId : EntityId
+    [JsonConstructor]
+    public CategoryId(Guid value) : base(value)
     {
-        [JsonConstructor]
-        public CategoryId(Guid value) : base(value)
-        {
-        }
+    }
 
-        public CategoryId(String value) : base(value)
-        {
-        }
+    public CategoryId(string value) : base(value)
+    {
+    }
 
-        override
-        protected  Object createFromString(String text){
-            return new Guid(text);
-        }
+    override
+        protected object createFromString(string text)
+    {
+        return new Guid(text);
+    }
 
-        override
-        public String AsString(){
-            Guid obj = (Guid) base.ObjValue;
-            return obj.ToString();
-        }
-        
-       
-        public Guid AsGuid(){
-            return (Guid) base.ObjValue;
-        }
+    override
+        public string AsString()
+    {
+        var obj = (Guid)ObjValue;
+        return obj.ToString();
+    }
+
+
+    public Guid AsGuid()
+    {
+        return (Guid)ObjValue;
     }
 }

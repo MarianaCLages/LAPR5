@@ -1,23 +1,22 @@
-using System;
 using GestArm.Domain.Shared;
 
-namespace GestArm.Domain.Families
+namespace GestArm.Domain.Families;
+
+public class FamilyId : EntityId
 {
-    public class FamilyId : EntityId
+    public FamilyId(string value) : base(value)
     {
+    }
 
-        public FamilyId(String value):base(value)
-        {
+    override
+        protected object createFromString(string text)
+    {
+        return text;
+    }
 
-        }
-
-        override
-        protected  Object createFromString(String text){
-            return text;
-        }
-        override
-        public String AsString(){
-            return (String) base.Value;
-        }
+    override
+        public string AsString()
+    {
+        return Value;
     }
 }

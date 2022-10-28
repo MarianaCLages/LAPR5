@@ -1,121 +1,100 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System;
-using System.Threading.Tasks;
-using GestArm.Domain.Shared;
-using GestArm.Domain.Categories;
 using GestArm.Domain.Products;
+using GestArm.Domain.Shared;
+using Microsoft.AspNetCore.Mvc;
 
+namespace GestArm.Controllers;
 
-namespace GestArm.Controllers
+[Route("api/[controller]")]
+[ApiController]
+public class ProductsController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+    private readonly ProductService _service;
+
+    public ProductsController(ProductService service)
     {
-        private readonly ProductService _service;
+        _service = service;
+    }
 
-        public ProductsController(ProductService service)
+    // GET: api/Products
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAll()
+    {
+        return await _service.GetAllAsync();
+    }
+
+    // GET: api/Products/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ProductDto>> GetGetById(Guid id)
+    {
+        var prod = await _service.GetByIdAsync(new ProductId(id));
+
+        if (prod == null) return NotFound();
+
+        return prod;
+    }
+
+    // POST: api/Products
+    [HttpPost]
+    public async Task<ActionResult<ProductDto>> Create(CreatingProductDto dto)
+    {
+        try
         {
-            _service = service;
+            var prod = await _service.AddAsync(dto);
+
+            return CreatedAtAction(nameof(GetGetById), new { id = prod.Id }, prod);
         }
-
-        // GET: api/Products
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAll()
+        catch (BusinessRuleValidationException ex)
         {
-            return await _service.GetAllAsync();
+            return BadRequest(new { ex.Message });
         }
+    }
 
-        // GET: api/Products/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ProductDto>> GetGetById(Guid id)
+
+    // PUT: api/Products/5
+    [HttpPut("{id}")]
+    public async Task<ActionResult<ProductDto>> Update(Guid id, ProductDto dto)
+    {
+        if (id != dto.Id) return BadRequest();
+
+        try
         {
-            var prod = await _service.GetByIdAsync(new ProductId(id));
+            var prod = await _service.UpdateAsync(dto);
 
-            if (prod == null)
-            {
-                return NotFound();
-            }
-
-            return prod;
+            if (prod == null) return NotFound();
+            return Ok(prod);
         }
-
-        // POST: api/Products
-        [HttpPost]
-        public async Task<ActionResult<ProductDto>> Create(CreatingProductDto dto)
+        catch (BusinessRuleValidationException ex)
         {
-            try
-            {
-                var prod = await _service.AddAsync(dto);
-
-                return CreatedAtAction(nameof(GetGetById), new { id = prod.Id }, prod);
-            }
-            catch(BusinessRuleValidationException ex)
-            {
-                return BadRequest(new {Message = ex.Message});
-            }
+            return BadRequest(new { ex.Message });
         }
+    }
 
-        
-        // PUT: api/Products/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult<ProductDto>> Update(Guid id, ProductDto dto)
+    // Inactivate: api/Products/5
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<ProductDto>> SoftDelete(Guid id)
+    {
+        var prod = await _service.InactivateAsync(new ProductId(id));
+
+        if (prod == null) return NotFound();
+
+        return Ok(prod);
+    }
+
+    // DELETE: api/Products/5
+    [HttpDelete("{id}/hard")]
+    public async Task<ActionResult<ProductDto>> HardDelete(Guid id)
+    {
+        try
         {
-            if (id != dto.Id)
-            {
-                return BadRequest();
-            }
+            var prod = await _service.DeleteAsync(new ProductId(id));
 
-            try
-            {
-                var prod = await _service.UpdateAsync(dto);
-                
-                if (prod == null)
-                {
-                    return NotFound();
-                }
-                return Ok(prod);
-            }
-            catch(BusinessRuleValidationException ex)
-            {
-                return BadRequest(new {Message = ex.Message});
-            }
-        }
-
-        // Inactivate: api/Products/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ProductDto>> SoftDelete(Guid id)
-        {
-            var prod = await _service.InactivateAsync(new ProductId(id));
-
-            if (prod == null)
-            {
-                return NotFound();
-            }
+            if (prod == null) return NotFound();
 
             return Ok(prod);
         }
-        
-        // DELETE: api/Products/5
-        [HttpDelete("{id}/hard")]
-        public async Task<ActionResult<ProductDto>> HardDelete(Guid id)
+        catch (BusinessRuleValidationException ex)
         {
-            try
-            {
-                var prod = await _service.DeleteAsync(new ProductId(id));
-
-                if (prod == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(prod);
-            }
-            catch(BusinessRuleValidationException ex)
-            {
-               return BadRequest(new {Message = ex.Message});
-            }
+            return BadRequest(new { ex.Message });
         }
     }
 }

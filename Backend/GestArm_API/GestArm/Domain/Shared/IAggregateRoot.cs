@@ -1,7 +1,5 @@
-namespace GestArm.Domain.Shared
+namespace GestArm.Domain.Shared;
+
+public interface IAggregateRoot
 {
-    public interface IAggregateRoot
-    {
-        
-    }
 }

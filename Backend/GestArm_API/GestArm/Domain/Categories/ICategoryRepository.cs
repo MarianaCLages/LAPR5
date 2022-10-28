@@ -1,9 +1,7 @@
-
 using GestArm.Domain.Shared;
 
-namespace GestArm.Domain.Categories
+namespace GestArm.Domain.Categories;
+
+public interface ICategoryRepository : IRepository<Category, CategoryId>
 {
-    public interface ICategoryRepository: IRepository<Category, CategoryId>
-    {
-    }
 }

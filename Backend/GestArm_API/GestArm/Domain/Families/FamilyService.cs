@@ -1,94 +1,91 @@
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using GestArm.Domain.Shared;
 
-namespace GestArm.Domain.Families
+namespace GestArm.Domain.Families;
+
+public class FamilyService
 {
-    public class FamilyService
+    private readonly IFamilyRepository _repo;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public FamilyService(IUnitOfWork unitOfWork, IFamilyRepository repo)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IFamilyRepository _repo;
+        _unitOfWork = unitOfWork;
+        _repo = repo;
+    }
 
-        public FamilyService(IUnitOfWork unitOfWork, IFamilyRepository repo)
-        {
-            this._unitOfWork = unitOfWork;
-            this._repo = repo;
-        }
+    public async Task<List<FamilyDto>> GetAllAsync()
+    {
+        var list = await _repo.GetAllAsync();
 
-        public async Task<List<FamilyDto>> GetAllAsync()
-        {
-            var list = await this._repo.GetAllAsync();
-            
-            List<FamilyDto> listDto = list.ConvertAll<FamilyDto>(fam => new FamilyDto{Id = fam.Id.AsString(), Description = fam.Description});
+        var listDto = list.ConvertAll(fam => new FamilyDto { Id = fam.Id.AsString(), Description = fam.Description });
 
-            return listDto;
-        }
+        return listDto;
+    }
 
-        public async Task<FamilyDto> GetByIdAsync(FamilyId id)
-        {
-            var fam = await this._repo.GetByIdAsync(id);
-            
-            if(fam == null)
-                return null;
+    public async Task<FamilyDto> GetByIdAsync(FamilyId id)
+    {
+        var fam = await _repo.GetByIdAsync(id);
 
-            return new FamilyDto{Id = fam.Id.AsString(), Description = fam.Description};
-        }
+        if (fam == null)
+            return null;
 
-        public async Task<FamilyDto> AddAsync(FamilyDto dto)
-        {
-            var family = new Family(dto.Id, dto.Description);
+        return new FamilyDto { Id = fam.Id.AsString(), Description = fam.Description };
+    }
 
-            await this._repo.AddAsync(family);
+    public async Task<FamilyDto> AddAsync(FamilyDto dto)
+    {
+        var family = new Family(dto.Id, dto.Description);
 
-            await this._unitOfWork.CommitAsync();
+        await _repo.AddAsync(family);
 
-            return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
-        }
+        await _unitOfWork.CommitAsync();
 
-        public async Task<FamilyDto> UpdateAsync(FamilyDto dto)
-        {
-            var family = await this._repo.GetByIdAsync(new FamilyId(dto.Id)); 
+        return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
+    }
 
-            if (family == null)
-                return null;   
+    public async Task<FamilyDto> UpdateAsync(FamilyDto dto)
+    {
+        var family = await _repo.GetByIdAsync(new FamilyId(dto.Id));
 
-            // change all field
-            family.ChangeDescription(dto.Description);
-            
-            await this._unitOfWork.CommitAsync();
+        if (family == null)
+            return null;
 
-            return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
-        }
+        // change all field
+        family.ChangeDescription(dto.Description);
 
-        public async Task<FamilyDto> InactivateAsync(FamilyId id)
-        {
-            var family = await this._repo.GetByIdAsync(id); 
+        await _unitOfWork.CommitAsync();
 
-            if (family == null)
-                return null;   
+        return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
+    }
 
-            // change all fields
-            family.MarkAsInative();
-            
-            await this._unitOfWork.CommitAsync();
+    public async Task<FamilyDto> InactivateAsync(FamilyId id)
+    {
+        var family = await _repo.GetByIdAsync(id);
 
-            return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
-        }
+        if (family == null)
+            return null;
 
-         public async Task<FamilyDto> DeleteAsync(FamilyId id)
-        {
-            var family = await this._repo.GetByIdAsync(id); 
+        // change all fields
+        family.MarkAsInative();
 
-            if (family == null)
-                return null;   
+        await _unitOfWork.CommitAsync();
 
-            if (family.Active)
-                throw new BusinessRuleValidationException("It is not possible to delete an active family.");
-            
-            this._repo.Remove(family);
-            await this._unitOfWork.CommitAsync();
+        return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
+    }
 
-            return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
-        }
+    public async Task<FamilyDto> DeleteAsync(FamilyId id)
+    {
+        var family = await _repo.GetByIdAsync(id);
+
+        if (family == null)
+            return null;
+
+        if (family.Active)
+            throw new BusinessRuleValidationException("It is not possible to delete an active family.");
+
+        _repo.Remove(family);
+        await _unitOfWork.CommitAsync();
+
+        return new FamilyDto { Id = family.Id.AsString(), Description = family.Description };
     }
 }

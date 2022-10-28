@@ -326,3 +326,10 @@ Backend/GestLogistica_API/GestLogistica/.idea
 .vs/slnx.sqlite
 .vs/VSWorkspaceState.json
 Backend/GestArm_API/GestArm/Migrations/
+Backend/GestArm_API/GestArm/.idea/
+Backend/GestArm_API/GestArmTestes/.vs/ProjectSettings.json
+Backend/GestArm_API/GestArmTestes/.vs/slnx.sqlite
+Backend/GestArm_API/GestArmTestes/.vs/VSWorkspaceState.json
+Backend/GestArm_API/GestArmTestes/.vs/GestArmTestes/v16/.suo
+Backend/GestArm_API/GestArmTestes/obj/
+Backend/GestArm_API/GestArmTestes/.idea/

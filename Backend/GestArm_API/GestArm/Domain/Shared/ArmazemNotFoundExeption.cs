@@ -1,19 +1,15 @@
-using System;
+namespace GestArm.Domain.Shared;
 
-namespace GestArm.Domain.Shared
+public class ArmazemNotFoundExeption : Exception
 {
-    public class ArmazemNotFoundExeption : Exception
+    public ArmazemNotFoundExeption(string message) : base(message)
     {
-        public string Details { get; }
-
-        public ArmazemNotFoundExeption(string message) : base(message)
-        {
-            
-        }
-
-        public ArmazemNotFoundExeption(string message, string details) : base(message)
-        {
-            this.Details = details;
-        }
     }
+
+    public ArmazemNotFoundExeption(string message, string details) : base(message)
+    {
+        Details = details;
+    }
+
+    public string Details { get; }
 }

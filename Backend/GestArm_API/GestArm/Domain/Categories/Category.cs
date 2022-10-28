@@ -1,36 +1,35 @@
-using System;
 using GestArm.Domain.Shared;
 
-namespace GestArm.Domain.Categories
+namespace GestArm.Domain.Categories;
+
+public class Category : Entity<CategoryId>, IAggregateRoot
 {
-    public class Category : Entity<CategoryId>, IAggregateRoot
+    private Category()
     {
-     
-        public string Description { get;  private set; }
+        Active = true;
+    }
 
-        public bool Active{ get;  private set; }
+    public Category(string description)
+    {
+        Id = new CategoryId(Guid.NewGuid());
+        Description = description;
+        Active = true;
+    }
 
-        private Category()
-        {
-            this.Active = true;
-        }
+    public string Description { get; private set; }
 
-        public Category(string description)
-        {
-            this.Id = new CategoryId(Guid.NewGuid());
-            this.Description = description;
-            this.Active = true;
-        }
+    public bool Active { get; private set; }
 
-        public void ChangeDescription(string description)
-        {
-            if (!this.Active)
-                throw new BusinessRuleValidationException("It is not possible to change the description to an inactive category.");
-            this.Description = description;
-        }
-        public void MarkAsInative()
-        {
-            this.Active = false;
-        }
+    public void ChangeDescription(string description)
+    {
+        if (!Active)
+            throw new BusinessRuleValidationException(
+                "It is not possible to change the description to an inactive category.");
+        Description = description;
+    }
+
+    public void MarkAsInative()
+    {
+        Active = false;
     }
 }

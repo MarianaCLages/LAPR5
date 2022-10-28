@@ -1,19 +1,15 @@
-using System;
+namespace GestArm.Domain.Shared;
 
-namespace GestArm.Domain.Shared
+public class BusinessRuleValidationException : Exception
 {
-    public class BusinessRuleValidationException : Exception
+    public BusinessRuleValidationException(string message) : base(message)
     {
-        public string Details { get; }
-
-        public BusinessRuleValidationException(string message) : base(message)
-        {
-            
-        }
-
-        public BusinessRuleValidationException(string message, string details) : base(message)
-        {
-            this.Details = details;
-        }
     }
+
+    public BusinessRuleValidationException(string message, string details) : base(message)
+    {
+        Details = details;
+    }
+
+    public string Details { get; }
 }

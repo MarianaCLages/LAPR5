@@ -1,108 +1,105 @@
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using GestArm.Domain.Shared;
 using GestArm.Domain.Categories;
+using GestArm.Domain.Shared;
 
-namespace GestArm.Domain.Products
+namespace GestArm.Domain.Products;
+
+public class ProductService
 {
-    public class ProductService
+    private readonly IProductRepository _repo;
+
+    private readonly ICategoryRepository _repoCat;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public ProductService(IUnitOfWork unitOfWork, IProductRepository repo, ICategoryRepository repoCategories)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IProductRepository _repo;
+        _unitOfWork = unitOfWork;
+        _repo = repo;
+        _repoCat = repoCategories;
+    }
 
-        private readonly ICategoryRepository _repoCat;
+    public async Task<List<ProductDto>> GetAllAsync()
+    {
+        var list = await _repo.GetAllAsync();
 
-        public ProductService(IUnitOfWork unitOfWork, IProductRepository repo, ICategoryRepository repoCategories)
-        {
-            this._unitOfWork = unitOfWork;
-            this._repo = repo;
-            this._repoCat = repoCategories;
-        }
+        var listDto = list.ConvertAll(prod =>
+            new ProductDto(prod.Id.AsGuid(), prod.Description, prod.CategoryId));
 
-        public async Task<List<ProductDto>> GetAllAsync()
-        {
-            var list = await this._repo.GetAllAsync();
-            
-            List<ProductDto> listDto = list.ConvertAll<ProductDto>(prod => 
-                new ProductDto(prod.Id.AsGuid(),prod.Description,prod.CategoryId));
+        return listDto;
+    }
 
-            return listDto;
-        }
+    public async Task<ProductDto> GetByIdAsync(ProductId id)
+    {
+        var prod = await _repo.GetByIdAsync(id);
 
-        public async Task<ProductDto> GetByIdAsync(ProductId id)
-        {
-            var prod = await this._repo.GetByIdAsync(id);
-            
-            if(prod == null)
-                return null;
+        if (prod == null)
+            return null;
 
-            return new ProductDto(prod.Id.AsGuid(),prod.Description,prod.CategoryId);
-        }
+        return new ProductDto(prod.Id.AsGuid(), prod.Description, prod.CategoryId);
+    }
 
-        public async Task<ProductDto> AddAsync(CreatingProductDto dto)
-        {
-            await checkCategoryIdAsync(dto.CategoryId);
-            var product = new Product(dto.Description,dto.CategoryId);
+    public async Task<ProductDto> AddAsync(CreatingProductDto dto)
+    {
+        await checkCategoryIdAsync(dto.CategoryId);
+        var product = new Product(dto.Description, dto.CategoryId);
 
-            await this._repo.AddAsync(product);
+        await _repo.AddAsync(product);
 
-            await this._unitOfWork.CommitAsync();
+        await _unitOfWork.CommitAsync();
 
-            return new ProductDto(product.Id.AsGuid(),product.Description,product.CategoryId);
-        }
+        return new ProductDto(product.Id.AsGuid(), product.Description, product.CategoryId);
+    }
 
-        public async Task<ProductDto> UpdateAsync(ProductDto dto)
-        {
-            await checkCategoryIdAsync(dto.CategoryId);
-            var product = await this._repo.GetByIdAsync(new ProductId(dto.Id)); 
+    public async Task<ProductDto> UpdateAsync(ProductDto dto)
+    {
+        await checkCategoryIdAsync(dto.CategoryId);
+        var product = await _repo.GetByIdAsync(new ProductId(dto.Id));
 
-            if (product == null)
-                return null;   
+        if (product == null)
+            return null;
 
-            // change all fields
-            product.ChangeDescription(dto.Description);
-            product.ChangeCategoryId(dto.CategoryId);
-            
-            await this._unitOfWork.CommitAsync();
+        // change all fields
+        product.ChangeDescription(dto.Description);
+        product.ChangeCategoryId(dto.CategoryId);
 
-            return new ProductDto(product.Id.AsGuid(),product.Description,product.CategoryId);
-        }
+        await _unitOfWork.CommitAsync();
 
-        public async Task<ProductDto> InactivateAsync(ProductId id)
-        {
-            var product = await this._repo.GetByIdAsync(id); 
+        return new ProductDto(product.Id.AsGuid(), product.Description, product.CategoryId);
+    }
 
-            if (product == null)
-                return null;   
+    public async Task<ProductDto> InactivateAsync(ProductId id)
+    {
+        var product = await _repo.GetByIdAsync(id);
 
-            product.MarkAsInative();
-            
-            await this._unitOfWork.CommitAsync();
+        if (product == null)
+            return null;
 
-            return new ProductDto(product.Id.AsGuid(),product.Description,product.CategoryId);
-        }
+        product.MarkAsInative();
 
-        public async Task<ProductDto> DeleteAsync(ProductId id)
-        {
-            var product = await this._repo.GetByIdAsync(id); 
+        await _unitOfWork.CommitAsync();
 
-            if (product == null)
-                return null;   
+        return new ProductDto(product.Id.AsGuid(), product.Description, product.CategoryId);
+    }
 
-            if (product.Active)
-                throw new BusinessRuleValidationException("It is not possible to delete an active product.");
-            
-            this._repo.Remove(product);
-            await this._unitOfWork.CommitAsync();
+    public async Task<ProductDto> DeleteAsync(ProductId id)
+    {
+        var product = await _repo.GetByIdAsync(id);
 
-            return new ProductDto(product.Id.AsGuid(),product.Description,product.CategoryId);
-        }
+        if (product == null)
+            return null;
 
-        private async Task checkCategoryIdAsync(CategoryId categoryId)
-        {
-           var category = await _repoCat.GetByIdAsync(categoryId);
-           if (category == null)
-                throw new BusinessRuleValidationException("Invalid Category Id.");
-        }
+        if (product.Active)
+            throw new BusinessRuleValidationException("It is not possible to delete an active product.");
+
+        _repo.Remove(product);
+        await _unitOfWork.CommitAsync();
+
+        return new ProductDto(product.Id.AsGuid(), product.Description, product.CategoryId);
+    }
+
+    private async Task checkCategoryIdAsync(CategoryId categoryId)
+    {
+        var category = await _repoCat.GetByIdAsync(categoryId);
+        if (category == null)
+            throw new BusinessRuleValidationException("Invalid Category Id.");
     }
 }

@@ -1,12 +1,8 @@
-using System;
+namespace GestArm.Domain.Families;
 
-
-namespace GestArm.Domain.Families
+public class FamilyDto
 {
-    public class FamilyDto
-    {
-        public String Id { get; set; }
+    public string Id { get; set; }
 
-        public string Description { get; set; }
-    }
+    public string Description { get; set; }
 }

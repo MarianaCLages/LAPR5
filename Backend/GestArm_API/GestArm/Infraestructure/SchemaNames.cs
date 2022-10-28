@@ -1,7 +1,6 @@
-namespace GestArm.Infrastructure
+namespace GestArm.Infrastructure;
+
+internal class SchemaNames
 {
-    internal class SchemaNames
-    {
-        internal const string GestArm = "ddd";
-    }
+    internal const string GestArm = "ddd";
 }

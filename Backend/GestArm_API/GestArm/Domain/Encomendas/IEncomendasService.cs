@@ -1,5 +1,4 @@
-﻿
-namespace GestArm.Domain.Encomendas;
+﻿namespace GestArm.Domain.Encomendas;
 
 public interface IEncomendasService
 {

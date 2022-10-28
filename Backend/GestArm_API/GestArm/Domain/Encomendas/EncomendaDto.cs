@@ -1,24 +1,22 @@
-namespace GestArm.Domain.Encomendas
+namespace GestArm.Domain.Encomendas;
+
+public class EncomendaDto
 {
-    public class EncomendaDto
+    public EncomendaDto(EncomendaId id, string dataEntrega, double massaEntrega, double tempoCarga,
+        double tempoDescarga, string armazemId)
     {
-        public EncomendaId Id { get; set; }
-        public String DataEntrega { get; set; }
-        public double MassaEntrega { get; set; }
-        public double TempoCarga { get; set; }
-        public double TempoDescarga { get; set; }
-        public String ArmazemId { get; set; }
-
-
-        public EncomendaDto(EncomendaId id, String dataEntrega, double massaEntrega, double tempoCarga,
-            double tempoDescarga, String armazemId)
-        {
-            Id = id;
-            DataEntrega = dataEntrega;
-            MassaEntrega = massaEntrega;
-            TempoCarga = tempoCarga;
-            TempoDescarga = tempoDescarga;
-            ArmazemId = armazemId;
-        }
+        Id = id;
+        DataEntrega = dataEntrega;
+        MassaEntrega = massaEntrega;
+        TempoCarga = tempoCarga;
+        TempoDescarga = tempoDescarga;
+        ArmazemId = armazemId;
     }
+
+    public EncomendaId Id { get; set; }
+    public string DataEntrega { get; set; }
+    public double MassaEntrega { get; set; }
+    public double TempoCarga { get; set; }
+    public double TempoDescarga { get; set; }
+    public string ArmazemId { get; set; }
 }

@@ -1,94 +1,91 @@
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using GestArm.Domain.Shared;
 
-namespace GestArm.Domain.Categories
+namespace GestArm.Domain.Categories;
+
+public class CategoryService
 {
-    public class CategoryService
+    private readonly ICategoryRepository _repo;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public CategoryService(IUnitOfWork unitOfWork, ICategoryRepository repo)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ICategoryRepository _repo;
+        _unitOfWork = unitOfWork;
+        _repo = repo;
+    }
 
-        public CategoryService(IUnitOfWork unitOfWork, ICategoryRepository repo)
-        {
-            this._unitOfWork = unitOfWork;
-            this._repo = repo;
-        }
+    public async Task<List<CategoryDto>> GetAllAsync()
+    {
+        var list = await _repo.GetAllAsync();
 
-        public async Task<List<CategoryDto>> GetAllAsync()
-        {
-            var list = await this._repo.GetAllAsync();
-            
-            List<CategoryDto> listDto = list.ConvertAll<CategoryDto>(cat => new CategoryDto{Id = cat.Id.AsGuid(), Description = cat.Description});
+        var listDto = list.ConvertAll(cat => new CategoryDto { Id = cat.Id.AsGuid(), Description = cat.Description });
 
-            return listDto;
-        }
+        return listDto;
+    }
 
-        public async Task<CategoryDto> GetByIdAsync(CategoryId id)
-        {
-            var cat = await this._repo.GetByIdAsync(id);
-            
-            if(cat == null)
-                return null;
+    public async Task<CategoryDto> GetByIdAsync(CategoryId id)
+    {
+        var cat = await _repo.GetByIdAsync(id);
 
-            return new CategoryDto{Id = cat.Id.AsGuid(), Description = cat.Description};
-        }
+        if (cat == null)
+            return null;
 
-        public async Task<CategoryDto> AddAsync(CreatingCategoryDto dto)
-        {
-            var category = new Category(dto.Description);
+        return new CategoryDto { Id = cat.Id.AsGuid(), Description = cat.Description };
+    }
 
-            await this._repo.AddAsync(category);
+    public async Task<CategoryDto> AddAsync(CreatingCategoryDto dto)
+    {
+        var category = new Category(dto.Description);
 
-            await this._unitOfWork.CommitAsync();
+        await _repo.AddAsync(category);
 
-            return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
-        }
+        await _unitOfWork.CommitAsync();
 
-        public async Task<CategoryDto> UpdateAsync(CategoryDto dto)
-        {
-            var category = await this._repo.GetByIdAsync(new CategoryId(dto.Id)); 
+        return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
+    }
 
-            if (category == null)
-                return null;   
+    public async Task<CategoryDto> UpdateAsync(CategoryDto dto)
+    {
+        var category = await _repo.GetByIdAsync(new CategoryId(dto.Id));
 
-            // change all field
-            category.ChangeDescription(dto.Description);
-            
-            await this._unitOfWork.CommitAsync();
+        if (category == null)
+            return null;
 
-            return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
-        }
+        // change all field
+        category.ChangeDescription(dto.Description);
 
-        public async Task<CategoryDto> InactivateAsync(CategoryId id)
-        {
-            var category = await this._repo.GetByIdAsync(id); 
+        await _unitOfWork.CommitAsync();
 
-            if (category == null)
-                return null;   
+        return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
+    }
 
-            // change all fields
-            category.MarkAsInative();
-            
-            await this._unitOfWork.CommitAsync();
+    public async Task<CategoryDto> InactivateAsync(CategoryId id)
+    {
+        var category = await _repo.GetByIdAsync(id);
 
-            return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
-        }
+        if (category == null)
+            return null;
 
-         public async Task<CategoryDto> DeleteAsync(CategoryId id)
-        {
-            var category = await this._repo.GetByIdAsync(id); 
+        // change all fields
+        category.MarkAsInative();
 
-            if (category == null)
-                return null;   
+        await _unitOfWork.CommitAsync();
 
-            if (category.Active)
-                throw new BusinessRuleValidationException("It is not possible to delete an active category.");
-            
-            this._repo.Remove(category);
-            await this._unitOfWork.CommitAsync();
+        return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
+    }
 
-            return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
-        }
+    public async Task<CategoryDto> DeleteAsync(CategoryId id)
+    {
+        var category = await _repo.GetByIdAsync(id);
+
+        if (category == null)
+            return null;
+
+        if (category.Active)
+            throw new BusinessRuleValidationException("It is not possible to delete an active category.");
+
+        _repo.Remove(category);
+        await _unitOfWork.CommitAsync();
+
+        return new CategoryDto { Id = category.Id.AsGuid(), Description = category.Description };
     }
 }

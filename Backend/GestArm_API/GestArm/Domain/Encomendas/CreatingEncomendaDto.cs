@@ -1,26 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace GestArm.Domain.Encomendas;
 
-namespace GestArm.Domain.Encomendas
+public class CreatingEncomendaDto
 {
-    public class CreatingEncomendaDto
+    public CreatingEncomendaDto(string dataEntrega, float massaEntrega, int tempoCarga, int tempoDescarga,
+        string armazemId)
     {
-        public String DataEntrega { get; }
-        public float MassaEntrega { get; }
-        public int TempoCarga { get; }
-        public int TempoDescarga { get; }
-        public String ArmazemId { get; }
-
-        public CreatingEncomendaDto(String dataEntrega, float massaEntrega, int tempoCarga, int tempoDescarga,
-            String armazemId)
-        {
-            DataEntrega = dataEntrega;
-            MassaEntrega = massaEntrega;
-            TempoCarga = tempoCarga;
-            TempoDescarga = tempoDescarga;
-            ArmazemId = armazemId;
-        }
+        DataEntrega = dataEntrega;
+        MassaEntrega = massaEntrega;
+        TempoCarga = tempoCarga;
+        TempoDescarga = tempoDescarga;
+        ArmazemId = armazemId;
     }
+
+    public string DataEntrega { get; }
+    public float MassaEntrega { get; }
+    public int TempoCarga { get; }
+    public int TempoDescarga { get; }
+    public string ArmazemId { get; }
 }

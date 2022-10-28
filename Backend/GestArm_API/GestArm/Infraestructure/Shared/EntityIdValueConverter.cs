@@ -1,17 +1,18 @@
-using System;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using GestArm.Domain.Shared;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GestArm.Infrastructure.Shared
+namespace GestArm.Infrastructure.Shared;
+
+public class EntityIdValueConverter<TTypedIdValue> : ValueConverter<TTypedIdValue, string>
+    where TTypedIdValue : EntityId
 {
-    public class EntityIdValueConverter<TTypedIdValue> : ValueConverter<TTypedIdValue, String>
-        where TTypedIdValue : EntityId
+    public EntityIdValueConverter(ConverterMappingHints mappingHints = null)
+        : base(id => id.Value, value => Create(value), mappingHints)
     {
-        public EntityIdValueConverter(ConverterMappingHints mappingHints = null) 
-            : base(id => id.Value, value => Create(value), mappingHints)
-        {
-        }
+    }
 
-        private static TTypedIdValue Create(String id) => Activator.CreateInstance(typeof(TTypedIdValue), id) as TTypedIdValue;
+    private static TTypedIdValue Create(string id)
+    {
+        return Activator.CreateInstance(typeof(TTypedIdValue), id) as TTypedIdValue;
     }
 }

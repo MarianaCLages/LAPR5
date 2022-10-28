@@ -1,60 +1,56 @@
-using System;
 using GestArm.Domain.Shared;
-using GestArm.Domain.Categories;
-using GestArm.Domain.Encomendas;
 
-namespace GestArm.Domain.Encomendas
+namespace GestArm.Domain.Encomendas;
+
+public class Encomenda : Entity<EncomendaId>, IAggregateRoot
 {
-    public class Encomenda : Entity<EncomendaId>, IAggregateRoot
+    public Encomenda()
     {
-        public DataEntrega DataEntrega { get; private set; }
+    }
 
-        public MassaEntrega MassaEntrega { get; private set; }
+    public Encomenda(DataEntrega dataEntrega, MassaEntrega massaEntrega, TempoEncomenda tempoCarga,
+        TempoEncomenda tempoDescarga, string armazemId)
+    {
+        Id = new EncomendaId(Guid.NewGuid());
+        DataEntrega = dataEntrega;
+        MassaEntrega = massaEntrega;
+        TempoCarga = tempoCarga;
+        TempoDescarga = tempoDescarga;
+        ArmazemId = armazemId;
+    }
 
-        public String ArmazemId { get; private set; }
+    public DataEntrega DataEntrega { get; private set; }
 
-        public TempoEncomenda TempoCarga { get; private set; }
+    public MassaEntrega MassaEntrega { get; private set; }
 
-        public TempoEncomenda TempoDescarga { get; private set; }
+    public string ArmazemId { get; private set; }
 
-        public Encomenda()
-        {
-        }
+    public TempoEncomenda TempoCarga { get; private set; }
 
-        public Encomenda(DataEntrega dataEntrega, MassaEntrega massaEntrega, TempoEncomenda tempoCarga,
-            TempoEncomenda tempoDescarga, string armazemId)
-        {
-            Id = new EncomendaId(Guid.NewGuid());
-            DataEntrega = dataEntrega;
-            MassaEntrega = massaEntrega;
-            TempoCarga = tempoCarga;
-            TempoDescarga = tempoDescarga;
-            ArmazemId = armazemId;
-        }
+    public TempoEncomenda TempoDescarga { get; private set; }
 
-        public void ChangeDataEntrega(DataEntrega dataEntrega)
-        {
-            DataEntrega = dataEntrega;
-        }
+    public void ChangeDataEntrega(DataEntrega dataEntrega)
+    {
+        DataEntrega = dataEntrega;
+    }
 
-        public void ChangeMassaEntrega(MassaEntrega massaEntrega)
-        {
-            MassaEntrega = massaEntrega;
-        }
+    public void ChangeMassaEntrega(MassaEntrega massaEntrega)
+    {
+        MassaEntrega = massaEntrega;
+    }
 
-        public void ChangeTempoCarga(TempoEncomenda tempoCarga)
-        {
-            TempoCarga = tempoCarga;
-        }
+    public void ChangeTempoCarga(TempoEncomenda tempoCarga)
+    {
+        TempoCarga = tempoCarga;
+    }
 
-        public void ChangeTempoDescarga(TempoEncomenda tempoDescarga)
-        {
-            TempoDescarga = tempoDescarga;
-        }
+    public void ChangeTempoDescarga(TempoEncomenda tempoDescarga)
+    {
+        TempoDescarga = tempoDescarga;
+    }
 
-        public void ChangeArmazemId(string armazemId)
-        {
-            ArmazemId = armazemId;
-        }
+    public void ChangeArmazemId(string armazemId)
+    {
+        ArmazemId = armazemId;
     }
 }

@@ -1,8 +1,7 @@
 using GestArm.Domain.Shared;
 
-namespace GestArm.Domain.Products
+namespace GestArm.Domain.Products;
+
+public interface IProductRepository : IRepository<Product, ProductId>
 {
-    public interface IProductRepository: IRepository<Product,ProductId>
-    {
-    }
 }

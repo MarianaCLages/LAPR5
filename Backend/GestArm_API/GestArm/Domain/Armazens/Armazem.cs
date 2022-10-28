@@ -1,35 +1,29 @@
-using System;
 using GestArm.Domain.Shared;
-using GestArm.Domain.Armazens;
 
-namespace GestArm.Domain.Armazens
+namespace GestArm.Domain.Armazens;
+
+public class Armazem : Entity<ArmazemId>, IAggregateRoot
 {
-    public class Armazem : Entity<ArmazemId>, IAggregateRoot
+    public Armazem()
     {
-
-        public ArmazemId Id { get; private set; }
-        public CoordenadasArmazem Latitude { get; private set; }
-
-        public CoordenadasArmazem Longitude { get; private set; }
-
-        public DesignacaoArmazem Designacao { get; private set; }
-
-        public EnderecoArmazem Endereco { get; private set; }
-
-        public Armazem()
-        {
-        }
-
-        public Armazem(ArmazemId id, CoordenadasArmazem latitude, CoordenadasArmazem longitude, DesignacaoArmazem designacao, EnderecoArmazem endereco)
-        {
-            Id = id;
-            Latitude = latitude;
-            Longitude = longitude;
-            Designacao = designacao;
-            Endereco = endereco;
-        }
-
-
     }
 
+    public Armazem(ArmazemId id, CoordenadasArmazem latitude, CoordenadasArmazem longitude,
+        DesignacaoArmazem designacao, EnderecoArmazem endereco)
+    {
+        Id = id;
+        Latitude = latitude;
+        Longitude = longitude;
+        Designacao = designacao;
+        Endereco = endereco;
+    }
+
+    public ArmazemId Id { get; }
+    public CoordenadasArmazem Latitude { get; }
+
+    public CoordenadasArmazem Longitude { get; }
+
+    public DesignacaoArmazem Designacao { get; }
+
+    public EnderecoArmazem Endereco { get; }
 }

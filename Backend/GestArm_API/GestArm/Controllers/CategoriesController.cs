@@ -1,112 +1,93 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System;
-using System.Threading.Tasks;
-using GestArm.Domain.Shared;
 using GestArm.Domain.Categories;
+using GestArm.Domain.Shared;
+using Microsoft.AspNetCore.Mvc;
 
-namespace GestArm.Controllers
+namespace GestArm.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class CategoriesController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CategoriesController : ControllerBase
+    private readonly CategoryService _service;
+
+    public CategoriesController(CategoryService service)
     {
-        private readonly CategoryService _service;
+        _service = service;
+    }
 
-        public CategoriesController(CategoryService service)
+    // GET: api/Categories
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAll()
+    {
+        return await _service.GetAllAsync();
+    }
+
+    // GET: api/Categories/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<CategoryDto>> GetGetById(Guid id)
+    {
+        var cat = await _service.GetByIdAsync(new CategoryId(id));
+
+        if (cat == null) return NotFound();
+
+        return cat;
+    }
+
+    // POST: api/Categories
+    [HttpPost]
+    public async Task<ActionResult<CategoryDto>> Create(CreatingCategoryDto dto)
+    {
+        var cat = await _service.AddAsync(dto);
+
+        return CreatedAtAction(nameof(GetGetById), new { id = cat.Id }, cat);
+    }
+
+
+    // PUT: api/Categories/5
+    [HttpPut("{id}")]
+    public async Task<ActionResult<CategoryDto>> Update(Guid id, CategoryDto dto)
+    {
+        if (id != dto.Id) return BadRequest();
+
+        try
         {
-            _service = service;
+            var cat = await _service.UpdateAsync(dto);
+
+            if (cat == null) return NotFound();
+            return Ok(cat);
         }
-
-        // GET: api/Categories
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAll()
+        catch (BusinessRuleValidationException ex)
         {
-            return await _service.GetAllAsync();
+            return BadRequest(new { ex.Message });
         }
+    }
 
-        // GET: api/Categories/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CategoryDto>> GetGetById(Guid id)
+    // Inactivate: api/Categories/5
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<CategoryDto>> SoftDelete(Guid id)
+    {
+        var cat = await _service.InactivateAsync(new CategoryId(id));
+
+        if (cat == null) return NotFound();
+
+        return Ok(cat);
+    }
+
+    // DELETE: api/Categories/5
+    [HttpDelete("{id}/hard")]
+    public async Task<ActionResult<CategoryDto>> HardDelete(Guid id)
+    {
+        try
         {
-            var cat = await _service.GetByIdAsync(new CategoryId(id));
+            var cat = await _service.DeleteAsync(new CategoryId(id));
 
-            if (cat == null)
-            {
-                return NotFound();
-            }
-
-            return cat;
-        }
-
-        // POST: api/Categories
-        [HttpPost]
-        public async Task<ActionResult<CategoryDto>> Create(CreatingCategoryDto dto)
-        {
-            var cat = await _service.AddAsync(dto);
-
-            return CreatedAtAction(nameof(GetGetById), new { id = cat.Id }, cat);
-        }
-
-        
-        // PUT: api/Categories/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult<CategoryDto>> Update(Guid id, CategoryDto dto)
-        {
-            if (id != dto.Id)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                var cat = await _service.UpdateAsync(dto);
-                
-                if (cat == null)
-                {
-                    return NotFound();
-                }
-                return Ok(cat);
-            }
-            catch(BusinessRuleValidationException ex)
-            {
-                return BadRequest(new {Message = ex.Message});
-            }
-        }
-
-        // Inactivate: api/Categories/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<CategoryDto>> SoftDelete(Guid id)
-        {
-            var cat = await _service.InactivateAsync(new CategoryId(id));
-
-            if (cat == null)
-            {
-                return NotFound();
-            }
+            if (cat == null) return NotFound();
 
             return Ok(cat);
         }
-        
-        // DELETE: api/Categories/5
-        [HttpDelete("{id}/hard")]
-        public async Task<ActionResult<CategoryDto>> HardDelete(Guid id)
+        catch (BusinessRuleValidationException ex)
         {
-            try
-            {
-                var cat = await _service.DeleteAsync(new CategoryId(id));
-
-                if (cat == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(cat);
-            }
-            catch(BusinessRuleValidationException ex)
-            {
-               return BadRequest(new {Message = ex.Message});
-            }
+            return BadRequest(new { ex.Message });
         }
     }
 }

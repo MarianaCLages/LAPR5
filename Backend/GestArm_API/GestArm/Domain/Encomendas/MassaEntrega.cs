@@ -4,18 +4,18 @@ namespace GestArm.Domain.Encomendas;
 
 public class MassaEntrega : ValueObject
 {
-    public double Massa { get; }
-
     public MassaEntrega(double massa)
     {
-        this.Massa = massa;
+        Massa = massa;
     }
+
+    public double Massa { get; }
 
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Massa;
     }
-    
+
     //devolver em tipo primitivo
     public double ToDouble()
     {
