@@ -10,7 +10,7 @@ import { CaminhoMap } from "../mappers/CaminhoMap";
 @Service()
 export default class CaminhoService implements ICaminhoService {
   constructor(
-    @Inject(config.repos.role.name) private caminhoRepo: ICaminhoRepo
+    @Inject(config.repos.caminho.name) private caminhoRepo: ICaminhoRepo
   ) {}
 
   public async getCaminho(caminhoDTO: ICaminhoDTO): Promise<Result<ICaminhoDTO>> {
