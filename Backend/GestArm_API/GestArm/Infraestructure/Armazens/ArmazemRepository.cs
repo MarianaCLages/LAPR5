@@ -12,17 +12,24 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
         _context = context;
     }
 
-
-    //implementar mais tarde
     public Task<Armazem> GetByIdAsync(ArmazemId id)
     {
-        throw new NotImplementedException();
+        Armazem armazem = _context.Armazens.Where(a => a.Id == id).FirstOrDefault();
+        return Task.FromResult(armazem);
+    }
+
+    public Task<Armazem> GetByDesignacaoAsync(DesignacaoArmazem designacao)
+    {
+        Armazem armazem = _context.Armazens.Where(a => a.Designacao.Equals(designacao)).FirstOrDefault();
+        return Task.FromResult(armazem);
     }
 
     public Task<List<Armazem>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        List<Armazem> armazens = _context.Armazens.ToList();
+        return Task.FromResult(armazens);
     }
+
 
     public async Task<Armazem> AddAsync(Armazem armazem)
     {

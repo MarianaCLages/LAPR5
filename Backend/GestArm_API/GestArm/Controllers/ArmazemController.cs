@@ -15,10 +15,22 @@ public class ArmazemController : ControllerBase
     }
 
     // GET: api/Armazem/id
-    [HttpGet("{id}")]
+    [HttpGet("{id:guid}")]
     public async Task<ActionResult<ArmazemDTO>> GetById(Guid id)
     {
         var armazem = await _service.GetByIdAsync(new ArmazemId(id));
+
+        if (armazem == null) return NotFound();
+
+        return armazem;
+    }
+
+
+    // Get: api/Armazem/designacao=designacao
+    [HttpGet("{designacao:alpha}")]
+    public async Task<ActionResult<ArmazemDTO>> GetByDesignacao(string designacao)
+    {
+        var armazem = await _service.GetByDesignacaoAsync(new DesignacaoArmazem(designacao));
 
         if (armazem == null) return NotFound();
 
