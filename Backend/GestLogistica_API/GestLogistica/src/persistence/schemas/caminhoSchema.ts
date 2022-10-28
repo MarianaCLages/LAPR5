@@ -22,9 +22,6 @@ const CaminhoSchema = new mongoose.Schema(
 
     energia: {
       type: String,
-      lowercase: true,
-      unique: true,
-      index: true,
     },
 
     distancia: {

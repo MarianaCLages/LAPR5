@@ -42,6 +42,7 @@ export default class CaminhoRepo implements ICaminhoRepo {
 
     try {
       if (caminhoDocument === null ) {
+
         const rawRole: any = CaminhoMap.toPersistence(caminho);
 
         const caminhoCreated = await this.caminhoSchema.create(rawRole);
@@ -51,6 +52,7 @@ export default class CaminhoRepo implements ICaminhoRepo {
         
         caminhoDocument.id = caminho.id.toString();
 
+        //TODO: implementar o resto das atualizações
         await caminhoDocument.save();
 
         return caminho;

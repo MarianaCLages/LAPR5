@@ -7,12 +7,18 @@ import IRoleService from '../services/IServices/IRoleService';
 import IRoleDTO from '../dto/IRoleDTO';
 
 import { Result } from "../core/logic/Result";
+import { BaseController } from '../core/infra/BaseController';
 
 @Service()
-export default class RoleController implements IRoleController /* TODO: extends ../core/infra/BaseController */ {
+export default class RoleController extends BaseController implements IRoleController /* TODO: extends ../core/infra/BaseController */ {
+  protected executeImpl(): Promise<any> {
+    throw new Error('Method not implemented.');
+  }
   constructor(
       @Inject(config.services.role.name) private roleServiceInstance : IRoleService
-  ) {}
+  ) {
+    super();
+  }
 
   public async createRole(req: Request, res: Response, next: NextFunction) {
     try {

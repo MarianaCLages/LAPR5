@@ -8,8 +8,6 @@ import ICaminhoDTO from "../dto/caminho/ICaminhoDTO";
 
 import { Result } from "../core/logic/Result";
 import { BaseController } from "../core/infra/BaseController";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
 
 @Service()
 export default class caminhoController
@@ -29,13 +27,11 @@ export default class caminhoController
   }
 
   public async createCaminho(req: Request, res: Response, next: NextFunction) {
-    try {
-      const caminhoOrError = (await this.caminhoServiceInstance.createCaminho(
-        req.body as ICaminhoDTO
-      )) as Result<ICaminhoDTO>;
-
+    try { 
+      const caminhoOrError = await this.caminhoServiceInstance.createCaminho(req.body as ICaminhoDTO) as Result<ICaminhoDTO>;
+    
       if (caminhoOrError.isFailure) {
-        return res.status(402).send();
+        return res.status(400).send();
       }
 
       const caminhoDTO = caminhoOrError.getValue();
