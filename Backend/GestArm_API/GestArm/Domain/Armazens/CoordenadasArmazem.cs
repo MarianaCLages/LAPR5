@@ -30,7 +30,7 @@ namespace GestArm.Domain.Armazens
         private void checkGraus(int graus)
         {
 
-            if (graus < -180 && graus < 180)
+            if (graus >= -180 && graus <= 180)
             {
                 throw new BusinessRuleValidationException("Graus da Coordenada deve estar entre os valores 180 e -180");
             }
