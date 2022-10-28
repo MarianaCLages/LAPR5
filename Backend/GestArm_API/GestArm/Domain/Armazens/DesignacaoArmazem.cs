@@ -10,7 +10,7 @@ public class DesignacaoArmazem : ValueObject
         Designacao = designacao;
     }
 
-    public string Designacao { get; }
+    public string Designacao {get;}
 
 
     private void checkDesignacao(string designacao)
