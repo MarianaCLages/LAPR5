@@ -7,6 +7,8 @@ import { Result } from "../core/logic/Result";
 import ICaminhoDTO from "../dto/caminho/ICaminhoDTO";
 import { CaminhoMap } from "../mappers/CaminhoMap";
 
+import { CaminhoArmazemChegadaId } from "../domain/caminho/caminhoArmazemChegadaId";
+
 @Service()
 export default class CaminhoService implements ICaminhoService {
   constructor(
@@ -30,13 +32,13 @@ export default class CaminhoService implements ICaminhoService {
 
   public async createCaminho(caminhoDTO: ICaminhoDTO): Promise<Result<ICaminhoDTO>> {
     try {
-      const roleOrError = await Caminho.create(caminhoDTO);
+      const caminhoOrError = await Caminho.create(caminhoDTO);
 
-      if (roleOrError.isFailure) {
-        return Result.fail<ICaminhoDTO>(roleOrError.errorValue());
+      if (caminhoOrError.isFailure) {
+        return Result.fail<ICaminhoDTO>(caminhoOrError.errorValue());
       }
 
-      const caminhoResult = roleOrError.getValue();
+      const caminhoResult = caminhoOrError.getValue();
 
       await this.caminhoRepo.save(caminhoResult);
 

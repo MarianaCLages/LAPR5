@@ -12,9 +12,12 @@ import { UniqueEntityID } from "../core/domain/UniqueEntityID";
 
 export class CaminhoMap extends Mapper<Role> {
   public static toDTO(caminho: Caminho): ICaminhoDTO {
+
+   //TODO: PERCEBER PORQUE QUE O ARMAZEMCHEGADAID ESTÁ SEMPRE UNDIFINED (se for um erro estúpido mato-me)
+
     return {
       id: caminho.id.toString(),
-      armazemChegadaId: caminho.caminhoArmazemChegadaId.toString(),
+      armazemChegadaId: caminho.caminhoArmazemPartidaId.toString(),
       armazemPartidaId: caminho.caminhoArmazemPartidaId.toString(),
       energia: caminho.caminhoEnergia.toString(),
       tempo: caminho.caminhoTempo.toString(),
@@ -34,14 +37,17 @@ export class CaminhoMap extends Mapper<Role> {
   }
 
   public static toPersistence(caminho: Caminho): any {
+
+    //TODO: PERCEBER PORQUE QUE O ARMAZEMCHEGADAID ESTÁ SEMPRE UNDIFINED (se for um erro estúpido mato-me)
+
     return {
-        id: caminho.id.toString(),
-        armazemChegadaId: caminho.caminhoArmazemChegadaId.toString(),
-        armazemPartidaId: caminho.caminhoArmazemPartidaId.toString(),
-        energia: caminho.caminhoEnergia.toString(),
-        tempo: caminho.caminhoTempo.toString(),
-        distancia: caminho.caminhoDistancia.toString(),
-        tmpCarregamento: caminho.caminhoTmpCarregamento.toString(),
+        id: caminho.id,
+        armazemChegadaId: caminho.caminhoArmazemPartidaId,
+        armazemPartidaId: caminho.caminhoArmazemPartidaId,
+        energia: caminho.caminhoEnergia,
+        tempo: caminho.caminhoTempo,
+        distancia: caminho.caminhoDistancia,
+        tmpCarregamento: caminho.caminhoTmpCarregamento,
     };
   }
 }
