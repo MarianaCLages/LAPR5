@@ -1,6 +1,6 @@
 using GestArm.Domain.Encomendas;
 using Microsoft.AspNetCore.Mvc;
-
+using GestArm.Domain.Shared;
 namespace GestArm.Controllers;
 
 [ApiController]
@@ -23,6 +23,30 @@ public class EncomendaController : ControllerBase
         if (encomenda == null) return NotFound();
 
         return encomenda;
+    }
+
+    // PUT: api/Encomenda/id
+    [HttpPut("{id}")]
+    public async Task<ActionResult<EncomendaDto>> Update(EncomendaDto encomendaDto)
+    {
+        var encomenda = await _service.GetByIdAsync(encomendaDto.Id);
+
+        if (encomenda == null) return NotFound();
+
+
+        try
+        {
+            var cat = await _service.UpdateAsync(encomendaDto);
+
+            if (cat == null) return NotFound();
+            return Ok(cat);
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+
+
     }
 
     //POST: api/Encomenda

@@ -31,6 +31,22 @@ public class EncomendasService : IEncomendasService
             encomenda.TempoCarga.ToDouble(), encomenda.TempoDescarga.ToDouble(), encomenda.ArmazemId);
     }
 
+    public async Task<EncomendaDto> UpdateAsync(EncomendaDto dto)
+    {
+
+        var encomenda = await _repository.GetByIdAsync(dto.Id);
+
+        encomenda.ChangeDataEntrega(new DataEntrega(DateTime.Parse(dto.DataEntrega)));
+        encomenda.ChangeTempoCarga(new TempoEncomenda((int) dto.TempoCarga));
+        encomenda.ChangeTempoDescarga(new TempoEncomenda((int) dto.TempoDescarga));
+        encomenda.ChangeMassaEntrega(new MassaEntrega(dto.MassaEntrega));
+
+        await _repository.UpdateAsync(encomenda);
+
+        return new EncomendaDto(encomenda.Id, encomenda.DataEntrega.ToString(), encomenda.MassaEntrega.ToDouble(),
+            encomenda.TempoCarga.ToDouble(), encomenda.TempoDescarga.ToDouble(), encomenda.ArmazemId);
+    }
+
     public async Task<bool> RemoveAsync(EncomendaId id)
     {
         var encomenda = _repository.GetByIdAsync(id);
