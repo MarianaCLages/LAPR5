@@ -26,7 +26,7 @@ public class ArmazemController : ControllerBase
         return armazem;
     }
     
-    // Get: api/Armazem/designacao=designacao
+    // GET: api/Armazem/designacao?designacao=designacao
     [HttpGet("{designacao:alpha}")]
     public async Task<ActionResult<ArmazemDTO>> GetByDesignacao(string designacao)
     {
