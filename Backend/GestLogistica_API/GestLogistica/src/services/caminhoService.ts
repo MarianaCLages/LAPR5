@@ -8,12 +8,18 @@ import ICaminhoDTO from "../dto/caminho/ICaminhoDTO";
 import { CaminhoMap } from "../mappers/CaminhoMap";
 import ICriarCaminhoDTO from "../dto/caminho/ICriarCaminhoDTO";
 import { CaminhoId } from "../domain/caminho/caminhoId";
+import https = require('https');
+import fetch = require('node-fetch');
 
 @Service()
 export default class CaminhoService implements ICaminhoService {
   constructor(
     @Inject(config.repos.caminho.name) private caminhoRepo: ICaminhoRepo
   ) {}
+
+  httpsAgent = new https.Agent({
+    rejectUnauthorized: false,
+  });
 
   public async getCaminho(caminhoDTO: ICaminhoDTO): Promise<Result<ICaminhoDTO>> {
     try {
@@ -32,6 +38,9 @@ export default class CaminhoService implements ICaminhoService {
 
   public async createCaminho(caminhoDTO:ICriarCaminhoDTO): Promise<Result<ICaminhoDTO>> {
     try {
+
+      await this.verificarArmazemId(caminhoDTO.armazemChegadaId, caminhoDTO.armazemPartidaId);
+
       const caminhoOrError = await Caminho.create(caminhoDTO);
 
       if (caminhoOrError.isFailure) {
@@ -51,6 +60,9 @@ export default class CaminhoService implements ICaminhoService {
 
   public async updateCaminho(caminhoDTO: ICaminhoDTO): Promise<Result<ICaminhoDTO>> {
     try {
+
+      await this.verificarArmazemId(caminhoDTO.armazemChegadaId, caminhoDTO.armazemPartidaId);
+
       const caminho = await this.caminhoRepo.findByDomainId(caminhoDTO.id);
 
       if (caminho === null) {
@@ -82,6 +94,34 @@ export default class CaminhoService implements ICaminhoService {
       }
     } catch (e) {
       throw e;
+    }
+  }
+
+  private async verificarArmazemId(armazemChegada: string, armazemPartida : string) {
+    const responseChegada = await fetch("https://localhost:5001/api/Armazem/search/".concat(armazemChegada), {
+      method: 'GET',
+      agent: this.httpsAgent,
+
+    });
+    const dataChegada = await responseChegada.json();
+
+    console.log(dataChegada);
+
+    if(dataChegada == null) {
+      return Result.fail<ICaminhoDTO>("Armazem de chegada não foi encontrado!");
+    }
+
+    const responsePartida = await fetch("https://localhost:5001/api/Armazem/search/".concat(armazemPartida), {
+      method: 'GET',
+      agent: this.httpsAgent,
+
+    });
+    const dataPartida = await responsePartida.json();
+
+    console.log(dataPartida);
+
+    if(dataPartida == null) {
+      return Result.fail<ICaminhoDTO>("Armazem de partida não foi encontrado!");
     }
   }
 
