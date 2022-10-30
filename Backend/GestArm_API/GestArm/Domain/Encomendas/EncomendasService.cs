@@ -57,4 +57,39 @@ public class EncomendasService : IEncomendasService
 
         return Task.FromResult(listaEncomendasDto);
     }
+    
+    public async Task<List<EncomendaDto>> GetByArmazemIdAsync(string armazemId)
+    {
+        var encomendas = await _repository.GetByArmazemIdAsync(armazemId);
+
+        var listaEncomendasDto = new List<EncomendaDto>();
+        foreach (var encomenda in encomendas)
+        {
+            var encomendaDto = new EncomendaDto(encomenda.Id, encomenda.DataEntrega.ToString(),
+                encomenda.MassaEntrega.ToDouble(),
+                encomenda.TempoCarga.ToDouble(), encomenda.TempoDescarga.ToDouble(), encomenda.ArmazemId);
+
+            listaEncomendasDto.Add(encomendaDto);
+        }
+
+        return listaEncomendasDto;
+    }
+    
+    public async Task<List<EncomendaDto>> GetByDataEntregaAysnc(DateTime data)
+    {
+        var encomendas = await _repository.GetByDataEntregaAysnc(data);
+
+        var listaEncomendasDto = new List<EncomendaDto>();
+        foreach (var encomenda in encomendas)
+        {
+            var encomendaDto = new EncomendaDto(encomenda.Id, encomenda.DataEntrega.ToString(),
+                encomenda.MassaEntrega.ToDouble(),
+                encomenda.TempoCarga.ToDouble(), encomenda.TempoDescarga.ToDouble(), encomenda.ArmazemId);
+
+            listaEncomendasDto.Add(encomendaDto);
+        }
+
+        return listaEncomendasDto;
+    }
+    
 }
