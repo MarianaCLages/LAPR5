@@ -52,4 +52,9 @@ public class EncomendasRepository : BaseRepository<Encomenda, EncomendaId>, IEnc
         return  await _context.Encomendas.Where(u => u.DataEntrega.Data.Equals(date)).ToListAsync();
     }
     
+    public async Task<List<Encomenda>> GetByFiltragemAsync(string armazemId,DateTime data)
+    {
+        return  await _context.Encomendas.Where(u => u.DataEntrega.Data.Equals(data) && u.ArmazemId.Equals(armazemId)).ToListAsync();
+    }
+    
 }
