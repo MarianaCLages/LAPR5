@@ -1,7 +1,7 @@
 using GestArm.Domain.Encomendas;
 using GestArm.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
-using GestArm.Domain.Shared;
+
 namespace GestArm.Controllers;
 
 [ApiController]
@@ -9,7 +9,7 @@ namespace GestArm.Controllers;
 public class EncomendaController : ControllerBase
 {
     private readonly IEncomendasService _service;
-    private ILogger<Encomenda> _loggerEncomendas;
+    //private ILogger<Encomenda> _loggerEncomendas;
 
     public EncomendaController(IEncomendasService service)
     {
@@ -25,30 +25,6 @@ public class EncomendaController : ControllerBase
         if (encomenda == null) return NotFound();
 
         return encomenda;
-    }
-
-    // PUT: api/Encomenda/id
-    [HttpPut("{id}")]
-    public async Task<ActionResult<EncomendaDto>> Update(Guid id,CreatingEncomendaDto encomendaDto)
-    {
-        var encomenda = await _service.GetByIdAsync(new EncomendaId(id));
-
-        if (encomenda == null) return NotFound();
-
-
-        try
-        {
-            var cat = await _service.UpdateAsync(new EncomendaId(id),encomendaDto);
-
-            if (cat == null) return NotFound();
-            return Ok(cat);
-        }
-        catch (BusinessRuleValidationException ex)
-        {
-            return BadRequest(new { ex.Message });
-        }
-
-
     }
 
     //POST: api/Encomenda
@@ -108,7 +84,7 @@ public class EncomendaController : ControllerBase
 
         if (encomendas?.Any() != true)
         {
-            _loggerEncomendas.LogInformation("Nenhuma encomenda foi encontrada com o id de armazém dado");
+            //_loggerEncomendas.LogInformation("Nenhuma encomenda foi encontrada com o id de armazém dado");
             return NotFound();
         }
 
