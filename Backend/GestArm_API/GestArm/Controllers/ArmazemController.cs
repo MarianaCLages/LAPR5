@@ -25,8 +25,7 @@ public class ArmazemController : ControllerBase
 
         return armazem;
     }
-
-
+    
     // Get: api/Armazem/designacao=designacao
     [HttpGet("{designacao:alpha}")]
     public async Task<ActionResult<ArmazemDTO>> GetByDesignacao(string designacao)
@@ -63,7 +62,6 @@ public class ArmazemController : ControllerBase
     }
     
     
-
     //DELETE: api/Armazem
     [HttpDelete]
     public async Task<ActionResult<bool>> DeleteAsync(ArmazemDTO armazemDTO)

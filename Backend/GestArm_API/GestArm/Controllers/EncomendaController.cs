@@ -1,4 +1,5 @@
 using GestArm.Domain.Encomendas;
+using GestArm.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestArm.Controllers;
@@ -8,6 +9,7 @@ namespace GestArm.Controllers;
 public class EncomendaController : ControllerBase
 {
     private readonly IEncomendasService _service;
+    private ILogger<Encomenda> _loggerEncomendas;
 
     public EncomendaController(IEncomendasService service)
     {
@@ -29,9 +31,16 @@ public class EncomendaController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<EncomendaDto>> AddAsync(CreatingEncomendaDto dto)
     {
-        var encomenda = await _service.AddAsync(dto);
+        try
+        {
+            var encomenda = await _service.AddAsync(dto);
 
-        return CreatedAtAction(nameof(GetById), new { id = encomenda.Id }, encomenda);
+            return CreatedAtAction(nameof(GetById), new { id = encomenda.Id }, encomenda);
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new {Message = ex.Message});
+        }
     }
 
     //DELETE: api/Encomenda
@@ -51,4 +60,36 @@ public class EncomendaController : ControllerBase
 
         return encomendas.ToList();
     }
+    
+    // GET: api/Encomenda/armazemId=armazemId
+    [Route("~/api/[controller]/{armazemId:alpha}", Name = "GetEncomendaPorIdDeArmazem")]
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByArmazemIdAysnc(string armazemId)
+    {
+        var encomendas = await _service.GetByArmazemIdAsync(armazemId);
+
+        if (encomendas?.Any() != true) return NotFound();
+
+        return encomendas;
+    }
+    
+    
+    
+    // GET: api/Encomenda/dataEntrega=dataEntrega
+    [Route("~/api/[controller]/{data:datetime}", Name = "GetEncomendaPorData")]
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByDataDeEntregaAysnc(DateTime data)
+    {
+        var encomendas = await _service.GetByDataEntregaAysnc(data);
+
+        if (encomendas?.Any() != true)
+        {
+            _loggerEncomendas.LogInformation("Nenhuma encomenda foi encontrada com o id de armazém dado");
+            return NotFound();
+        }
+
+        return encomendas;
+    }
+    
+    
 }
