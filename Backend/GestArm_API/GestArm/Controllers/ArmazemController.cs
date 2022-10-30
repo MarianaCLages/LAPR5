@@ -57,8 +57,6 @@ public class ArmazemController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ArmazemDTO>> AddAsync(CreatingArmazemDto dto)
     {
-
-
         try
         {
             var armazemCheck = await _service.GetByAlphaNumIdAsync(new AlphaId(dto.AlphaNumId));
@@ -78,5 +76,17 @@ public class ArmazemController : ControllerBase
         }
 
     }
+    // GET: api/Armazem/search/armazemId
+    [HttpGet]
+    [Route("~/api/[controller]/search/{armazemId}", Name = "GetArmazemPorIDEspecifico")]
+    public async Task<ActionResult<ArmazemDTO>> GetByArmazemIdAsync(string armazemId)
+    {
+        var armazem = await _service.GetByArmazemIdAsync(armazemId);
 
+        if (armazem == null) return NotFound("Não foi encontrado um armazem com esse ID!");
+
+        return armazem;
+    }
+    
+    
 }
