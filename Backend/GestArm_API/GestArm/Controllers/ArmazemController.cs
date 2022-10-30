@@ -16,7 +16,7 @@ public class ArmazemController : ControllerBase
     }
 
     // GET: api/Armazem/id
-    [HttpGet("{id:guid}")]
+    [HttpGet("{id}")]
     public async Task<ActionResult<ArmazemDTO>> GetById(Guid id)
     {
         var armazem = await _service.GetByIdAsync(new ArmazemId(id));
@@ -43,7 +43,16 @@ public class ArmazemController : ControllerBase
     {
         return await _service.GetAllAsync();
     }
+    
+    //DELETE: api/Armazem
+    [HttpDelete]
+    public async Task<ActionResult<bool>> DeleteAsync(ArmazemDTO armazemDTO)
+    {
+        var armazem = await _service.RemoveAsync(armazemDTO.Id);
 
+        return true;
+    }
+    
     //POST: api/Armazem
     [HttpPost]
     public async Task<ActionResult<ArmazemDTO>> AddAsync(CreatingArmazemDto dto)
@@ -61,13 +70,4 @@ public class ArmazemController : ControllerBase
         
     }
     
-    
-    //DELETE: api/Armazem
-    [HttpDelete]
-    public async Task<ActionResult<bool>> DeleteAsync(ArmazemDTO armazemDTO)
-    {
-        var armazem = await _service.RemoveAsync(armazemDTO.Id);
-
-        return true;
-    }
 }
