@@ -68,7 +68,7 @@ public class EncomendaController : ControllerBase
     {
         var encomendas = await _service.GetByArmazemIdAsync(armazemId);
 
-        if (encomendas?.Any() != true) return NotFound();
+        if (encomendas?.Any() != true) return NotFound("Não foi encontrado nenhuma encomenda que tenha esse id de armazém associado");
 
         return encomendas;
     }
@@ -85,11 +85,26 @@ public class EncomendaController : ControllerBase
         if (encomendas?.Any() != true)
         {
             //_loggerEncomendas.LogInformation("Nenhuma encomenda foi encontrada com o id de armazém dado");
-            return NotFound();
+            return NotFound("Não foi encontrado nenhuma encomenda que tenha uma entrega nesse dia");
         }
 
         return encomendas;
     }
     
+    // GET: api/Encomenda/dataEntrega=dataEntrega
+    [Route("~/api/[controller]/{armazemId:alpha}/{data:datetime}", Name = "GetByFiltragem")]
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByFiltragemAysnc(string armazemId,DateTime data)
+    {
+        var encomendas = await _service.GetByFiltragemAysnc(armazemId,data);
+
+        if (encomendas?.Any() != true)
+        {
+            //_loggerEncomendas.LogInformation("Nenhuma encomenda foi encontrada com o id de armazém dado");
+            return NotFound("Não foi encontrado nenhuma encomenda que tenha uma entrega nesse dia ou um com um id de armazém associado");
+        }
+
+        return encomendas;
+    }
     
 }
