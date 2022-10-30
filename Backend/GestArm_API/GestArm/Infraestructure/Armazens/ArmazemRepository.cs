@@ -1,5 +1,6 @@
 using GestArm.Domain.Armazens;
 using GestArm.Infrastructure.Shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestArm.Infrastructure.Armazens;
 
@@ -69,4 +70,10 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
     {
         throw new NotImplementedException();
     }
+    
+    public async Task<Armazem> GetByArmazemIdAsync(AlphaId armazemId)
+    {
+        return await _context.Armazens.Where(r => r.AlphaNumId.Equals(armazemId)).FirstOrDefaultAsync();
+    }
+    
 }

@@ -22,4 +22,8 @@ public interface IArmazemRepository : IRepository<Armazem, ArmazemId>
     Task<bool> ExistsAsync(ArmazemId id);
 
     Task<int> GetCountAsync();
+    
+    Task<Armazem> GetByArmazemIdAsync(AlphaId armazemId);
+    
+    
 }
