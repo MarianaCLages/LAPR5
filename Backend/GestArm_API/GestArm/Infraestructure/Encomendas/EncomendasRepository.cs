@@ -1,5 +1,6 @@
 using GestArm.Domain.Encomendas;
 using GestArm.Infrastructure.Shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestArm.Infrastructure.Encomendas;
 
@@ -39,4 +40,14 @@ public class EncomendasRepository : BaseRepository<Encomenda, EncomendaId>, IEnc
         await _context.SaveChangesAsync();
         return encomenda;
     }
+    public async Task<List<Encomenda>> GetByArmazemIdAsync(string armazemId)
+    {
+        return  await _context.Encomendas.Where(u => u.ArmazemId.Equals(armazemId)).ToListAsync();
+    }
+    
+    public async Task<List<Encomenda>> GetByDataEntregaAysnc(DateTime date)
+    {
+        return  await _context.Encomendas.Where(u => u.DataEntrega.Data.Equals(date)).ToListAsync();
+    }
+    
 }

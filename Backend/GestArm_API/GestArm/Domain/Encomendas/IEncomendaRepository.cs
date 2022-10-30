@@ -5,7 +5,11 @@ namespace GestArm.Domain.Encomendas;
 public interface IEncomendasRepository : IRepository<Encomenda, EncomendaId>
 {
     Task<Encomenda> GetByIdAsync(EncomendaId id);
-
+    
+    Task<List<Encomenda>> GetByArmazemIdAsync(string armazemId);
+    
+    Task<List<Encomenda>> GetByDataEntregaAysnc(DateTime armazemId);
+    
     Task<List<Encomenda>> GetAllAsync();
 
     Task<Encomenda> AddAsync(Encomenda encomenda);
