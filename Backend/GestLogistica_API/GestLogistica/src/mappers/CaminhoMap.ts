@@ -17,12 +17,12 @@ export class CaminhoMap extends Mapper<Role> {
 
     return {
       id: caminho.id.toString(),
-      armazemChegadaId: caminho.caminhoArmazemPartidaId.toString(),
-      armazemPartidaId: caminho.caminhoArmazemPartidaId.toString(),
-      energia: caminho.caminhoEnergia.toString(),
-      tempo: caminho.caminhoTempo.toString(),
-      distancia: caminho.caminhoDistancia.toString(),
-      tmpCarregamento: caminho.caminhoTmpCarregamento.toString(),
+      armazemChegadaId: caminho.caminhoChegadaId.value,
+      armazemPartidaId: caminho.caminhoArmazemPartidaId.value,
+      energia: caminho.caminhoEnergia.value,
+      tempo: caminho.caminhoTempo.value,
+      distancia: caminho.caminhoDistancia.value,
+      tmpCarregamento: caminho.caminhoTmpCarregamento.value,
     } as ICaminhoDTO;
   }
 
@@ -42,7 +42,7 @@ export class CaminhoMap extends Mapper<Role> {
 
     return {
         id: caminho.id,
-        armazemChegadaId: caminho.caminhoArmazemPartidaId,
+        armazemChegadaId: caminho.caminhoChegadaId,
         armazemPartidaId: caminho.caminhoArmazemPartidaId,
         energia: caminho.caminhoEnergia,
         tempo: caminho.caminhoTempo,
