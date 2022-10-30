@@ -108,4 +108,21 @@ public class EncomendasService : IEncomendasService
         return listaEncomendasDto;
     }
     
+    public async Task<List<EncomendaDto>> GetByFiltragemAysnc(string armazemId,DateTime data)
+    {
+        var encomendas = await _repository.GetByFiltragemAsync(armazemId,data);
+
+        var listaEncomendasDto = new List<EncomendaDto>();
+        foreach (var encomenda in encomendas)
+        {
+            var encomendaDto = new EncomendaDto(encomenda.Id, encomenda.DataEntrega.ToString(),
+                encomenda.MassaEntrega.ToDouble(),
+                encomenda.TempoCarga.ToDouble(), encomenda.TempoDescarga.ToDouble(), encomenda.ArmazemId);
+
+            listaEncomendasDto.Add(encomendaDto);
+        }
+
+        return listaEncomendasDto;
+    }
+    
 }

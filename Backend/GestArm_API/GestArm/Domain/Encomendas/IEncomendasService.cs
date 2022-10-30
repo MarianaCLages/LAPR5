@@ -2,6 +2,9 @@
 
 public interface IEncomendasService
 {
+
+    Task<List<EncomendaDto>> GetByFiltragemAysnc(string armazemId,DateTime data);
+
     Task<EncomendaDto> GetByIdAsync(EncomendaId id);
     
     Task<List<EncomendaDto>> GetByArmazemIdAsync(string armazemId);
