@@ -6,8 +6,8 @@ import ICaminhoService from "./IServices/ICaminhoService";
 import { Result } from "../core/logic/Result";
 import ICaminhoDTO from "../dto/caminho/ICaminhoDTO";
 import { CaminhoMap } from "../mappers/CaminhoMap";
-
-import { CaminhoArmazemChegadaId } from "../domain/caminho/caminhoArmazemChegadaId";
+import ICriarCaminhoDTO from "../dto/caminho/ICriarCaminhoDTO";
+import { CaminhoId } from "../domain/caminho/caminhoId";
 
 @Service()
 export default class CaminhoService implements ICaminhoService {
@@ -30,7 +30,7 @@ export default class CaminhoService implements ICaminhoService {
     }
   }
 
-  public async createCaminho(caminhoDTO: ICaminhoDTO): Promise<Result<ICaminhoDTO>> {
+  public async createCaminho(caminhoDTO:ICriarCaminhoDTO): Promise<Result<ICaminhoDTO>> {
     try {
       const caminhoOrError = await Caminho.create(caminhoDTO);
 
@@ -54,7 +54,7 @@ export default class CaminhoService implements ICaminhoService {
       const caminho = await this.caminhoRepo.findByDomainId(caminhoDTO.id);
 
       if (caminho === null) {
-        return Result.fail<ICaminhoDTO>("Caminho não foi encontrado!");
+        return Result.fail<ICaminhoDTO>("Caminho não foi encontrado! O id especificado não existe");
       } else {
 
         await this.caminhoRepo.save(caminho);
@@ -66,4 +66,23 @@ export default class CaminhoService implements ICaminhoService {
       throw e;
     }
   }
+
+  public async apagaCaminho(caminhoId : CaminhoId): Promise<Result<ICaminhoDTO>> {
+    try {
+      const caminho = await this.caminhoRepo.findByDomainId(caminhoId);
+
+      if (caminho === null) {
+        return Result.fail<ICaminhoDTO>("Caminho não foi encontrado! O id especificado não existe");
+      } else {
+
+        await this.caminhoRepo.delete(caminho);
+
+        const caminhoDTOResult = CaminhoMap.toDTO(caminho) as ICaminhoDTO;
+        return Result.ok<ICaminhoDTO>(caminhoDTOResult);
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
 }

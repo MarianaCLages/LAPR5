@@ -1,7 +1,5 @@
 import { Service, Inject } from 'typedi';
 
-import IRoleRepo from "../services/IRepos/IRoleRepo";
-
 import { Caminho } from "../domain/caminho/caminho";
 import { CaminhoId } from "../domain/caminho/caminhoId";
 
@@ -9,7 +7,6 @@ import { Document, FilterQuery, Model } from 'mongoose';
 import { ICaminhoPersistence } from '../dataschema/ICaminhoPersistence';
 import { CaminhoMap } from '../mappers/CaminhoMap';
 import ICaminhoRepo from '../services/IRepos/ICaminhoRepo';
-import { CaminhoArmazemChegadaId } from '../domain/caminho/caminhoArmazemChegadaId';
 
 @Service()
 export default class CaminhoRepo implements ICaminhoRepo {
@@ -52,7 +49,13 @@ export default class CaminhoRepo implements ICaminhoRepo {
         
         caminhoDocument.id = caminho.id.toString();
 
-        //TODO: implementar o resto das atualizações
+        caminhoDocument.armazemChegadaId = caminho.caminhoArmazemPartidaId.value;
+        caminhoDocument.armazemPartidaId = caminho.caminhoArmazemPartidaId.value;
+        caminhoDocument.distancia = caminho.caminhoDistancia.value;
+        caminhoDocument.energia = caminho.caminhoEnergia.value;
+        caminhoDocument.tmpCarregamento = caminho.caminhoTmpCarregamento.value;
+        caminhoDocument.tempo = caminho.caminhoTempo.value;
+
         await caminhoDocument.save();
 
         return caminho;
@@ -72,4 +75,10 @@ export default class CaminhoRepo implements ICaminhoRepo {
     else
       return null;
   }
+
+  public async delete (caminhoId: CaminhoId) {
+    const query = { idCaminho: caminhoId};
+    await this.caminhoSchema.deleteMany(query as FilterQuery<ICaminhoPersistence & Document>);
+  }
+
 }
