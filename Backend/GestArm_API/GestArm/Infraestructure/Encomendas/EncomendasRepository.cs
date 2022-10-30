@@ -14,9 +14,11 @@ public class EncomendasRepository : BaseRepository<Encomenda, EncomendaId>, IEnc
         _context = context;
     }
 
-    public Task<Encomenda> UpdateAsync(Encomenda encomenda)
+    public async Task<Encomenda> UpdateAsync(Encomenda encomenda)
     {
-        throw new NotImplementedException();
+        _context.Encomendas.Update(encomenda);
+        await _context.SaveChangesAsync();
+        return encomenda;
     }
 
     public Task<Encomenda> RemoveAsync(EncomendaId id)

@@ -10,5 +10,7 @@ public interface IEncomendasService
     
     Task<EncomendaDto> AddAsync(CreatingEncomendaDto dto);
     Task<bool> RemoveAsync(EncomendaId id);
+
+    Task<EncomendaDto> UpdateAsync(EncomendaId id,CreatingEncomendaDto dto);
     Task<List<EncomendaDto>> GetAllAsync();
 }
