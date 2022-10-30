@@ -11,13 +11,11 @@ const CaminhoSchema = new mongoose.Schema(
     armazemPartidaId: {
       type: String,
       required: [true, 'Por favor selecione o id do armazém de partida'],
-      index: true,
     },
 
     armazemChegadaId: {
       type: String,
       required: [true, 'Por favor selecione o id do armazém de chegada'],
-      index: true,
     },
 
     energia: {
