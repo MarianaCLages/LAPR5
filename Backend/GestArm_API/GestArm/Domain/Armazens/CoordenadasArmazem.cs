@@ -7,7 +7,7 @@ public class CoordenadasArmazem : ValueObject
     public CoordenadasArmazem(int graus, int minutos, int segundos)
     {
         checkGraus(graus);
-        //checkMinutos(minutos);
+        checkMinutos(minutos);
         checkSegundos(segundos);
 
         Graus = graus;
