@@ -27,16 +27,16 @@ public class EncomendaController : ControllerBase
 
     // PUT: api/Encomenda/id
     [HttpPut("{id}")]
-    public async Task<ActionResult<EncomendaDto>> Update(EncomendaDto encomendaDto)
+    public async Task<ActionResult<EncomendaDto>> Update(Guid id,CreatingEncomendaDto encomendaDto)
     {
-        var encomenda = await _service.GetByIdAsync(encomendaDto.Id);
+        var encomenda = await _service.GetByIdAsync(new EncomendaId(id));
 
         if (encomenda == null) return NotFound();
 
 
         try
         {
-            var cat = await _service.UpdateAsync(encomendaDto);
+            var cat = await _service.UpdateAsync(new EncomendaId(id),encomendaDto);
 
             if (cat == null) return NotFound();
             return Ok(cat);
