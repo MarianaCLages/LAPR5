@@ -15,7 +15,7 @@ public class AlphaId : ValueObject
     private void checkAlphaId()
     {
 
-        if (AlphaNumId.Length > 3)
+        if (AlphaNumId.Length != 3)
             throw new BusinessRuleValidationException("O AlphaId excede o número de caracteres.");
 
     }
