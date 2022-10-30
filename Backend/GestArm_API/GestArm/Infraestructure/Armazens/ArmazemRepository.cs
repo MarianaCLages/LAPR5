@@ -33,6 +33,7 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
 
     public async Task<Armazem> AddAsync(Armazem armazem)
     {
+        
         _context.Armazens.Add(armazem);
         await _context.SaveChangesAsync();
         return armazem;

@@ -11,6 +11,7 @@ internal class ArmazemEntityTypeConfiguration : IEntityTypeConfiguration<Armazem
         builder.ToTable("Armazem");
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id).HasColumnName("Id");
+        builder.OwnsOne(e => e.AlphaNumId).Property(e => e.AlphaNumId).HasColumnName("AlphaNumId");
         builder.OwnsOne(e => e.Designacao).Property(e => e.Designacao).HasColumnName("Designacao");
         //builder.Property(e => e.Endereco).HasColumnName("Endereco");
         builder.OwnsOne(e => e.Endereco).Property(e => e.Rua).HasColumnName("Rua");

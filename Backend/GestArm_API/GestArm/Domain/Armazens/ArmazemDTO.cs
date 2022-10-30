@@ -4,9 +4,10 @@ public class ArmazemDTO
 {
     public ArmazemDTO(ArmazemId id, int latitudeGrau, int latitudeMinuto, int latitudeSegundo, int longitudeGrau,
         int longitudeMinuto, int longitudeSegundo, string designacao, string rua, int numeroPorta, string codigoPostal,
-        string cidade, string pais)
+        string cidade, string pais, string alphaNumId)
     {
         Id = id;
+        AlphaNumId = alphaNumId;
         LatitudeGrau = latitudeGrau;
         LatitudeMinuto = latitudeMinuto;
         LatitudeSegundo = latitudeSegundo;
@@ -35,6 +36,8 @@ public class ArmazemDTO
     public int LongitudeMinuto { get; }
 
     public string Designacao { get; }
+
+    public string AlphaNumId { get; }
 
     public string Rua { get; }
 

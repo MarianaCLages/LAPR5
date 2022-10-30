@@ -9,9 +9,10 @@ public class Armazem : Entity<ArmazemId>, IAggregateRoot
     }
 
     public Armazem(ArmazemId id, CoordenadasArmazem latitude, CoordenadasArmazem longitude,
-        DesignacaoArmazem designacao, EnderecoArmazem endereco)
+        DesignacaoArmazem designacao, EnderecoArmazem endereco,AlphaId alphaNumId)
     {
         Id = id;
+        AlphaNumId = alphaNumId;
         Latitude = latitude;
         Longitude = longitude;
         Designacao = designacao;
@@ -19,6 +20,8 @@ public class Armazem : Entity<ArmazemId>, IAggregateRoot
     }
 
     public ArmazemId Id { get; }
+
+    public AlphaId AlphaNumId { get; }
     public CoordenadasArmazem Latitude { get; }
 
     public CoordenadasArmazem Longitude { get; }
