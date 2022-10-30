@@ -20,7 +20,7 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
 
     public Task<Armazem> GetByAlphaNumIdAsync(AlphaId id)
     {
-        Armazem armazem = _context.Armazens.Where(a => a.AlphaNumId.Equals(id.AlphaNumId)).FirstOrDefault();
+        Armazem armazem = _context.Armazens.Where(a => a.AlphaNumId == id).FirstOrDefault();
         return Task.FromResult(armazem);
     }
 
