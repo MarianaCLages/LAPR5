@@ -59,6 +59,7 @@ public class ArmazemController : ControllerBase
     {
         try
         {
+            System.Diagnostics.Debug.WriteLine("VALOR DA LONGITUDE TESTE" + dto.LongitudeGrau+ "" + dto.LongitudeMinuto + "" + dto.LongitudeSegundo+ "\n\n\n\n");
             var armazem = await _service.AddAsync(dto);
 
             return CreatedAtAction(nameof(GetById), new { id = armazem.Id }, armazem);
