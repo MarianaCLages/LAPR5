@@ -18,15 +18,15 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
         return Task.FromResult(armazem);
     }
 
-    public Task<Armazem> GetByAlphaNumIdAsync(AlphaId id)
+    public Task<Armazem> GetByAlphaNumIdAsync(AlphaId AlphaNumId)
     {
-        Armazem armazem = _context.Armazens.Where(a => a.AlphaNumId == id).FirstOrDefault();
+        Armazem armazem = _context.Armazens.Where(a => a.AlphaNumId.Equals(AlphaNumId)).FirstOrDefault();
         return Task.FromResult(armazem);
     }
 
     public Task<Armazem> GetByDesignacaoAsync(DesignacaoArmazem designacao)
     {
-        Armazem armazem = _context.Armazens.Where(a => a.Designacao.Equals(designacao)).FirstOrDefault();
+        Armazem armazem = _context.Armazens.AsEnumerable().FirstOrDefault(a => a.Designacao.Equals(designacao));
         return Task.FromResult(armazem);
     }
 
