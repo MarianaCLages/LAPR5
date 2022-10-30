@@ -30,9 +30,22 @@ export default (app: Router) => {
     celebrate({
       body: Joi.object({
         id: Joi.string().required(),
-        name: Joi.string().required()
+        armazemChegadaId: Joi.string().required(),
+        armazemPartidaId: Joi.string().required(),
+        distancia: Joi.number().required(),
+        energia: Joi.string().required(),
+        tempo: Joi.string().required(),
+        tmpCarregamento: Joi.string().required(),
       }),
     }),
     (req, res, next) => ctrl.updateCaminho(req, res, next) );
+
+  route.delete('',
+    celebrate({
+      body: Joi.object({
+        id: Joi.string().required(),
+      }),
+    }),
+    (req, res, next) => ctrl.apagaCaminho(req, res, next) );
 
 };
