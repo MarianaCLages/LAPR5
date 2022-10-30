@@ -1,4 +1,5 @@
 using GestArm.Domain.Armazens;
+using GestArm.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DDDNetCore.Controllers;
@@ -48,10 +49,20 @@ public class ArmazemController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ArmazemDTO>> AddAsync(CreatingArmazemDto dto)
     {
-        var armazem = await _service.AddAsync(dto);
+        try
+        {
+            var armazem = await _service.AddAsync(dto);
 
-        return CreatedAtAction(nameof(GetById), new { id = armazem.Id }, armazem);
+            return CreatedAtAction(nameof(GetById), new { id = armazem.Id }, armazem);
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new {Message = ex.Message});
+        }
+        
     }
+    
+    
 
     //DELETE: api/Armazem
     [HttpDelete]
