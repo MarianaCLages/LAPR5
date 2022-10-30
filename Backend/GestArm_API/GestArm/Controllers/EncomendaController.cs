@@ -22,7 +22,7 @@ public class EncomendaController : ControllerBase
     {
         var encomenda = await _service.GetByIdAsync(new EncomendaId(id));
 
-        if (encomenda == null) return NotFound();
+        if (encomenda == null) return NotFound("Não existe nenhuma encomenda com esse ID!");
 
         return encomenda;
     }
@@ -92,6 +92,7 @@ public class EncomendaController : ControllerBase
     }
     
     // GET: api/Encomenda/dataEntrega=dataEntrega
+    [Route("~/api/[controller]/filtragem", Name = "GetByFiltragemViaQueryString")]
     [Route("~/api/[controller]/{armazemId:alpha}/{data:datetime}", Name = "GetByFiltragem")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByFiltragemAysnc(string armazemId,DateTime data)
