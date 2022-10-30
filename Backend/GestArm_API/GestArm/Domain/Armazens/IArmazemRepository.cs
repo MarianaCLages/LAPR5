@@ -15,6 +15,8 @@ public interface IArmazemRepository : IRepository<Armazem, ArmazemId>
     Task<Armazem> AddAsync(Armazem armazem);
     Task<Armazem> UpdateAsync(Armazem armazem);
 
+    Task<Armazem> GetByAlphaNumIdAsync(AlphaId id);
+
     Task<Armazem> RemoveAsync(ArmazemId id);
 
     Task<bool> ExistsAsync(ArmazemId id);

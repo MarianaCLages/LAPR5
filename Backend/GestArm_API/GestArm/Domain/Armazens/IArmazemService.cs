@@ -23,6 +23,18 @@ public class IArmazemService
             armazem.Endereco.CodigoPostal, armazem.Endereco.Cidade, armazem.Endereco.Pais,armazem.AlphaNumId.ToString());
     }
 
+    public async Task<ArmazemDTO> GetByAlphaNumIdAsync(AlphaId id){
+
+        var armazem = await _repository.GetByAlphaNumIdAsync(id);
+
+        if (armazem == null) return null;
+
+        return new ArmazemDTO(armazem.Id, armazem.Latitude.Graus, armazem.Latitude.Minutos, armazem.Latitude.Segundos,
+            armazem.Longitude.Graus, armazem.Longitude.Minutos, armazem.Longitude.Segundos,
+            armazem.Designacao.ToString(), armazem.Endereco.Rua, armazem.Endereco.NumeroPorta,
+            armazem.Endereco.CodigoPostal, armazem.Endereco.Cidade, armazem.Endereco.Pais,armazem.AlphaNumId.ToString());
+
+    }
     public async Task<ArmazemDTO> GetByDesignacaoAsync(DesignacaoArmazem designacao)
     {
         var armazem = await _repository.GetByDesignacaoAsync(designacao);

@@ -18,6 +18,12 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
         return Task.FromResult(armazem);
     }
 
+    public Task<Armazem> GetByAlphaNumIdAsync(AlphaId id)
+    {
+        Armazem armazem = _context.Armazens.Where(a => a.AlphaNumId.Equals(id)).FirstOrDefault();
+        return Task.FromResult(armazem);
+    }
+
     public Task<Armazem> GetByDesignacaoAsync(DesignacaoArmazem designacao)
     {
         Armazem armazem = _context.Armazens.Where(a => a.Designacao.Equals(designacao)).FirstOrDefault();
@@ -33,7 +39,7 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
 
     public async Task<Armazem> AddAsync(Armazem armazem)
     {
-        
+
         _context.Armazens.Add(armazem);
         await _context.SaveChangesAsync();
         return armazem;

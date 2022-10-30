@@ -25,7 +25,7 @@ public class ArmazemController : ControllerBase
 
         return armazem;
     }
-    
+
     // GET: api/Armazem/designacao?designacao=designacao
     [HttpGet("{designacao:alpha}")]
     public async Task<ActionResult<ArmazemDTO>> GetByDesignacao(string designacao)
@@ -43,7 +43,7 @@ public class ArmazemController : ControllerBase
     {
         return await _service.GetAllAsync();
     }
-    
+
     //DELETE: api/Armazem
     [HttpDelete]
     public async Task<ActionResult<bool>> DeleteAsync(ArmazemDTO armazemDTO)
@@ -52,22 +52,31 @@ public class ArmazemController : ControllerBase
 
         return true;
     }
-    
+
     //POST: api/Armazem
     [HttpPost]
     public async Task<ActionResult<ArmazemDTO>> AddAsync(CreatingArmazemDto dto)
     {
+
+
         try
         {
+            var armazemCheck = await _service.GetByAlphaNumIdAsync(new AlphaId(dto.AlphaNumId));
+
+            if (armazemCheck != null)
+            {
+                throw new BusinessRuleValidationException("Armazem com esse AlphaNumeric ID já existe!");
+            }
+
             var armazem = await _service.AddAsync(dto);
 
             return CreatedAtAction(nameof(GetById), new { id = armazem.Id }, armazem);
         }
         catch (BusinessRuleValidationException ex)
         {
-            return BadRequest(new {Message = ex.Message});
+            return BadRequest(new { Message = ex.Message });
         }
-        
+
     }
-    
+
 }
