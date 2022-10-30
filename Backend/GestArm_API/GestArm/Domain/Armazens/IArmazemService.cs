@@ -89,4 +89,17 @@ public class IArmazemService
 
         throw new ArmazemNotFoundExeption("Não existe nenhum Armazem com esse ID!");
     }
+    
+    public async Task<ArmazemDTO> GetByArmazemIdAsync(string armazemId)
+    {
+        var armazem = await _repository.GetByArmazemIdAsync(new AlphaId(armazemId));
+
+        if (armazem == null) return null;
+
+        return new ArmazemDTO(armazem.Id, armazem.Latitude.Graus, armazem.Latitude.Minutos, armazem.Latitude.Segundos,
+            armazem.Longitude.Graus, armazem.Longitude.Minutos, armazem.Longitude.Segundos,
+            armazem.Designacao.ToString(), armazem.Endereco.Rua, armazem.Endereco.NumeroPorta,
+            armazem.Endereco.CodigoPostal, armazem.Endereco.Cidade, armazem.Endereco.Pais,armazem.AlphaNumId.ToString());
+    }
+    
 }
