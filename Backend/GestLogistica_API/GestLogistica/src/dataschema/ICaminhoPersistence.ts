@@ -2,8 +2,8 @@ export interface ICaminhoPersistence {
     caminhoId: string;
     armazemPartidaId: string;
     armazemChegadaId: string;
-    energia: string;
-    tempo: string;
+    energia: number;
+    tempo: number;
     distancia: number;
-    tmpCarregamento: string;
+    tmpCarregamento: number;
   }

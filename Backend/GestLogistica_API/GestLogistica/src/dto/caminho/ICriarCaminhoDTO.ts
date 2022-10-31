@@ -1,9 +1,8 @@
-
-export default interface ICaminhoDTO {
-  armazemPartidaId: string;
-  armazemChegadaId: string;
-  energia: string;
-  distancia: number;
-  tempo: string;
-  tmpCarregamento: string
+export default interface ICriarCaminhoDTO {
+    armazemPartidaId: string;
+    armazemChegadaId: string;
+    energia: number;
+    distancia: number;
+    tempo: number;
+    tmpCarregamento: number
 }

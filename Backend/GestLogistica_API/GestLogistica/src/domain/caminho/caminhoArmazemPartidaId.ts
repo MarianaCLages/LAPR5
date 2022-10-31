@@ -21,7 +21,7 @@ export class CaminhoArmazemPartidaId extends ValueObject<caminhoArmazemPartidaId
   }
 
   public static create (caminhoArmazemPartidaId: string): Result<CaminhoArmazemPartidaId> {
-    const guardResult = Guard.againstNullOrUndefined(caminhoArmazemPartidaId, 'Tempo que demora a percorrer o caminho');
+    const guardResult = Guard.againstNullOrUndefined(caminhoArmazemPartidaId, 'Armazem de partida');
     if (!guardResult.succeeded) {
       return Result.fail<CaminhoArmazemPartidaId>(guardResult.message);
     } else {
