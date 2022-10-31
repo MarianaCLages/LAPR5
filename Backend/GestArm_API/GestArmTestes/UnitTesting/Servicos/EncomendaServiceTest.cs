@@ -3,7 +3,6 @@ namespace Servicos;
 using System;
 using System.Collections.Generic;
 using GestArm.Domain.Encomendas;
-using GestArm.Domain.Shared;
 using Moq;
 using Xunit;
 using Newtonsoft.Json;
@@ -14,8 +13,6 @@ public class EncomendaServiceTest
     private readonly EncomendasService _service;
     private readonly Mock<IEncomendasRepository> _repositoryMock = new Mock<IEncomendasRepository>();
     
-    private readonly Mock<IUnitOfWork> _unitOfWorkMock = new Mock<IUnitOfWork>();
-
     public EncomendaServiceTest()
     {
         _service = new EncomendasService(_repositoryMock.Object);
@@ -27,23 +24,111 @@ public class EncomendaServiceTest
         var list = new List<Encomenda>();
 
         Encomenda en = new Encomenda(new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
-       list.Add(en);
+        list.Add(en);
         
         _repositoryMock.Setup(x => x.GetAllAsync()).ReturnsAsync(list);
 
-        List<EncomendaDto> resultDTO = list.ConvertAll<EncomendaDto>(encomenda => convertToDto(encomenda));
-        var result = _service.GetAllAsync();
+        List<EncomendaDto> resultDTO = list.ConvertAll<EncomendaDto>(encomenda => EncomendaDtoParser.convertToDto(encomenda));
+        var result = _service.GetAllAsync().Result;
         
-        var obj1Str = JsonConvert.SerializeObject(result);
-        var obj2Str = JsonConvert.SerializeObject(resultDTO);
+        var obj1StrExpected = JsonConvert.SerializeObject(result);
+        var obj2StrActual = JsonConvert.SerializeObject(resultDTO);
         
-        Assert.Equal(obj2Str,obj2Str);
+        Assert.Equal(obj2StrActual,obj1StrExpected);
     }
-
-    private EncomendaDto convertToDto(Encomenda encomenda)
+    
+    [Fact]
+    public void GetByArmazemIdAsync()
     {
-        return new EncomendaDto(encomenda.Id, encomenda.DataEntrega.ToString(), encomenda.MassaEntrega.Massa, encomenda.TempoCarga.Minutos,
-            encomenda.TempoDescarga.Minutos, encomenda.ArmazemId);
+        var list = new List<Encomenda>();
+
+        Encomenda en = new Encomenda(new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
+        list.Add(en);
+        
+        _repositoryMock.Setup(x => x.GetByArmazemIdAsync("A12")).ReturnsAsync(list);
+
+        List<EncomendaDto> resultDTO = list.ConvertAll<EncomendaDto>(encomenda => EncomendaDtoParser.convertToDto(encomenda));
+        var result = _service.GetByArmazemIdAsync("A12").Result;
+        
+        var obj1StrExpected = JsonConvert.SerializeObject(result);
+        var obj2StrActual = JsonConvert.SerializeObject(resultDTO);
+        
+        Assert.Equal(obj2StrActual,obj1StrExpected);
+    }
+    
+    [Fact]
+    public void GetByDataEntregaAysnc()
+    {
+        var list = new List<Encomenda>();
+
+        Encomenda en = new Encomenda(new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
+        list.Add(en);
+        
+        _repositoryMock.Setup(x => x.GetByDataEntregaAysnc(DateTime.Parse("2022-12-27"))).ReturnsAsync(list);
+
+        List<EncomendaDto> resultDTO = list.ConvertAll<EncomendaDto>(encomenda => EncomendaDtoParser.convertToDto(encomenda));
+        var result = _service.GetByDataEntregaAysnc(DateTime.Parse("2022-12-27")).Result;
+        
+        var obj1StrExpected = JsonConvert.SerializeObject(result);
+        var obj2StrActual = JsonConvert.SerializeObject(resultDTO);
+        
+        Assert.Equal(obj2StrActual,obj1StrExpected);
+    }
+    
+    [Fact]
+    public void GetByFiltragemAysnc()
+    {
+        var list = new List<Encomenda>();
+
+        Encomenda en = new Encomenda(new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
+        list.Add(en);
+        
+        _repositoryMock.Setup(x => x.GetByFiltragemAsync("A12",DateTime.Parse("2022-12-27"))).ReturnsAsync(list);
+
+        List<EncomendaDto> resultDTO = list.ConvertAll<EncomendaDto>(encomenda => EncomendaDtoParser.convertToDto(encomenda));
+        var result = _service.GetByFiltragemAysnc("A12",DateTime.Parse("2022-12-27")).Result;
+        
+        var obj1StrExpected = JsonConvert.SerializeObject(result);
+        var obj2StrActual = JsonConvert.SerializeObject(resultDTO);
+        
+        Assert.Equal(obj2StrActual,obj1StrExpected);
+    }
+    
+    [Fact]
+    public void GetByIdAsync()
+    {
+        var list = new List<Encomenda>();
+
+        Encomenda en = new Encomenda(new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
+        list.Add(en);
+        
+        _repositoryMock.Setup(x => x.GetByIdAsync(en.Id)).ReturnsAsync(en);
+
+        List<EncomendaDto> resultDTO = list.ConvertAll<EncomendaDto>(encomenda => EncomendaDtoParser.convertToDto(encomenda));
+        var result = _service.GetByIdAsync(en.Id).Result;
+        
+        var obj1StrExpected = JsonConvert.SerializeObject(result);
+        var obj2StrActual = JsonConvert.SerializeObject(resultDTO.First());
+        
+        Assert.Equal(obj2StrActual,obj1StrExpected);
+    }
+    
+    [Fact]
+    public void AddAsync()
+    {
+       //TODO : Add a encomenda
+    }
+    
+    [Fact]
+    public void UpdateAsync()
+    {
+        //TODO : Update a encomenda
+    }
+    
+    [Fact]
+    public void RemoveAsync()
+    {
+        //TODO : Remove a encomenda
     }
     
 }
