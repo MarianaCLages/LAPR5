@@ -127,18 +127,6 @@ Para modelar/representar visualmente, tanto o que foi implementado como as ideia
 
 ![Nivel3-VP](N3_VP_alt3.svg)
 
-### Alternativa 4
-
-![Nivel3-VP](N3_VP_alt4.svg)
-
-### Alternativa 5
-
-![Nivel3-VP](N3_VP_alt5.svg)
-
-### Alternativa 6
-
-![Nivel3-VP](N3_VP_alt6.svg)
-
 
 ## Vista de Implementação
 ![Nivel3-VI](N3_VI.svg)
