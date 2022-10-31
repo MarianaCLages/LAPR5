@@ -8,7 +8,7 @@
     "heroku-postbuild": "npm run build",
     "start": "nodemon",
     "inspect": "nodemon --inspect src/app.ts",
-    "test": "mocha -r ts-node/register **/*.test.ts",
+    "test": "mocha -r ts-node/register tests/**/*.ts",
     "lint": "npm run lint:js ",
     "lint:eslint": "eslint --ignore-path .gitignore --ext .ts",
     "lint:js": "npm run lint:eslint src/",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/santiq/bulletproof-nodejs.git"
+    "url": "git+https://bitbucket.org/ColdSunday/lei21-22-s5-3dj-56.git"
   },
   "keywords": [
     "boilerplay",
@@ -28,8 +28,8 @@
     "node",
     "express"
   ],
-  "author": "Santiago Quinteros",
-  "license": "ISC",
+  "author": "LAPR5_S5_SEM_PI",
+  "license": "MIT",
   "dependencies": {
     "acorn": "^7.4.1",
     "acorn-jsx": "^5.3.2",
@@ -55,7 +55,6 @@
     "mailgun-js": "^0.6.9",
     "method-override": "^3.0.0",
     "mime": "^3.0.0",
-    "mocha": "^9.2.2",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.38",
     "mongoose": "^6.1.0",
@@ -84,6 +83,7 @@
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.4.1",
     "jest": "^27.5.1",
+    "mocha": "^10.1.0",
     "prettier": "^1.19.1",
     "ts-jest": "^27.1.5",
     "ts-node": "^10.9.1",
