@@ -1,7 +1,7 @@
 {
-  "name": "bulletproof-nodejs",
+  "name": "lapr5_s5_sem_pi",
   "version": "1.0.0",
-  "description": "Bulletproof node.js",
+  "description": "lapr5_s5_sem_pi bulletproof node.js",
   "main": "src/app.ts",
   "scripts": {
     "build": "tsc",
