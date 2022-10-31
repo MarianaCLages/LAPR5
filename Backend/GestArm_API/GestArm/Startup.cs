@@ -70,7 +70,7 @@ public class Startup
         services.AddTransient<FamilyService>();
 
         services.AddTransient<IArmazemRepository, ArmazemRepository>();
-        services.AddTransient<IArmazemService>();
+        services.AddTransient<IArmazemService, ArmazemService>();
 
         services.AddTransient<IEncomendasRepository, EncomendasRepository>();
         services.AddTransient<IEncomendasService, EncomendasService>();
