@@ -19,11 +19,13 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
         return Task.FromResult(armazem);
     }
 
+    /*
     public Task<Armazem> GetByAlphaNumIdAsync(AlphaId alphaNumId)
     {
         Armazem armazem = _context.Armazens.AsEnumerable().FirstOrDefault(a => a.AlphaNumId.Equals(alphaNumId));
         return Task.FromResult(armazem);
     }
+    */
 
     public Task<Armazem> GetByDesignacaoAsync(DesignacaoArmazem designacao)
     {
