@@ -321,3 +321,12 @@ tmp/*
 
 GestArm/.vscode
 GestArm/obj
+
+GestArmTestes/UnitTesting/Dominio/bin
+GestArmTestes/UnitTesting/Dominio/obj
+
+GestArmTestes/UnitTesting/Controladores/bin
+GestArmTestes/UnitTesting/Controladores/obj
+
+GestArmTestes/UnitTesting/Servicos/bin
+GestArmTestes/UnitTesting/Servicos/obj

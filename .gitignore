@@ -333,4 +333,16 @@ Backend/GestArm_API/GestArmTestes/.vs/VSWorkspaceState.json
 Backend/GestArm_API/GestArmTestes/.vs/GestArmTestes/v16/.suo
 Backend/GestArm_API/GestArmTestes/obj/
 Backend/GestArm_API/GestArmTestes/.idea/
+
+
+Backend/GestArm_API/GestArmTestes/UnitTesting/Dominio/bin
+Backend/GestArm_API/GestArmTestes/UnitTesting/Dominio/obj
+
+Backend/GestArm_API/GestArmTestes/UnitTesting/Controladores/bin
+Backend/GestArm_API/GestArmTestes/UnitTesting/Controladores/obj
+
+Backend/GestArm_API/GestArmTestes/UnitTesting/Servicos/bin
+Backend/GestArm_API/GestArmTestes/UnitTesting/Servicos/obj
+
+
 .fake

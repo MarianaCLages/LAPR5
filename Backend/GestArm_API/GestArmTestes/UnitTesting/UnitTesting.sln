@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicos", "Servicos\Servicos.csproj", "{7282BCB4-1F2B-472B-87FC-C2B118303D2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controladores", "Controladores\Controladores.csproj", "{D441A4B5-A602-429F-804C-84ED9A31F227}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{8BE8CF3D-C68C-46E4-AAA3-BB7DD059C632}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{7282BCB4-1F2B-472B-87FC-C2B118303D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7282BCB4-1F2B-472B-87FC-C2B118303D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7282BCB4-1F2B-472B-87FC-C2B118303D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D441A4B5-A602-429F-804C-84ED9A31F227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D441A4B5-A602-429F-804C-84ED9A31F227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D441A4B5-A602-429F-804C-84ED9A31F227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D441A4B5-A602-429F-804C-84ED9A31F227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE8CF3D-C68C-46E4-AAA3-BB7DD059C632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE8CF3D-C68C-46E4-AAA3-BB7DD059C632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE8CF3D-C68C-46E4-AAA3-BB7DD059C632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE8CF3D-C68C-46E4-AAA3-BB7DD059C632}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

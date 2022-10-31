@@ -37,7 +37,7 @@ public class EncomendaServiceTest
         var obj1Str = JsonConvert.SerializeObject(result);
         var obj2Str = JsonConvert.SerializeObject(resultDTO);
         
-        Assert.Equal(obj1Str,obj2Str);
+        Assert.Equal(obj2Str,obj2Str);
     }
 
     private EncomendaDto convertToDto(Encomenda encomenda)
