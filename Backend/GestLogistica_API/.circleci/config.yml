@@ -2,42 +2,35 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build-and-test-NODE:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
+  build-and-test-GestLog_API:
     docker:
-       - image: circleci/node:10.15
-       - image: circleci/mongo:latest
+       - image: cimg/node:current
     steps:
       - checkout
       - run:
-          working_directory: GestLogistica
+          working_directory: Backend/GestLogistica_API/GestLogistica
           name: install-npm
           command:  |
-           echo "$PWD"
            npm innit --yes
            npm install --save
-           npm update --save
-
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
           paths:
-            - ./node_modules
+            - Backend/GestLogistica_API/GestLogistica/node_modules
       - run:
-          working_directory: GestLogistica
+          working_directory: Backend/GestLogistica_API/GestLogistica
           name : Build
           command: |
-            echo "$PWD"
             npm run build
-  
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+      - run:
+         working_directory: Backend/GestLogistica_API/GestLogistica
+         name : Test
+         command: |
+          npm run test
+
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  development:
     jobs:
-      - build-and-test-NODE
+      - build-and-test-GestArm_API
+      - build-and-test-GestLog_API
