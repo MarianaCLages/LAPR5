@@ -59,7 +59,7 @@ public class ArmazemController : ControllerBase
     {
         try
         {
-            var armazemCheck = await _service.GetByAlphaNumIdAsync(new AlphaId(dto.AlphaNumId));
+            var armazemCheck = await _service.GetByArmazemIdAsync(dto.AlphaNumId);
 
             if (armazemCheck != null)
             {
