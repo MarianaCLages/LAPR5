@@ -1,84 +1,83 @@
-import { Service, Inject } from 'typedi';
+import {Inject, Service} from 'typedi';
 
-import { Caminho } from "../domain/caminho/caminho";
-import { CaminhoId } from "../domain/caminho/caminhoId";
+import {Caminho} from "../domain/caminho/caminho";
+import {CaminhoId} from "../domain/caminho/caminhoId";
 
-import { Document, FilterQuery, Model } from 'mongoose';
-import { ICaminhoPersistence } from '../dataschema/ICaminhoPersistence';
-import { CaminhoMap } from '../mappers/CaminhoMap';
+import {Document, FilterQuery, Model, models} from 'mongoose';
+import {ICaminhoPersistence} from '../dataschema/ICaminhoPersistence';
+import {CaminhoMap} from '../mappers/CaminhoMap';
 import ICaminhoRepo from '../services/IRepos/ICaminhoRepo';
+import {Result} from "../core/logic/Result";
 
 @Service()
 export default class CaminhoRepo implements ICaminhoRepo {
-  private models: any;
+    async;
+    private models: any;
 
-  constructor(
-    @Inject('caminhoSchema') private caminhoSchema : Model<ICaminhoPersistence & Document>,
-  ) {}
-
-  private createBaseQuery (): any {
-    return {
-      where: {},
+    constructor(
+        @Inject('caminhoSchema') private caminhoSchema: Model<ICaminhoPersistence & Document>,
+    ) {
     }
-  }
 
-  public async exists(caminho: Caminho): Promise<boolean> {
-    
-    const idX = caminho.id instanceof CaminhoId ? (<CaminhoId>caminho.id).toValue() : caminho.id;
+    public async exists(caminho: Caminho): Promise<boolean> {
 
-    const query = { domainId: idX}; 
-    const roleDocument = await this.caminhoSchema.findOne( query as FilterQuery<ICaminhoPersistence & Document>);
+        const idX = caminho.id instanceof CaminhoId ? (caminho.id).toValue() : caminho.id;
 
-    return !!roleDocument === true;
-  }
+        const query = {domainId: idX};
+        const roleDocument = await this.caminhoSchema.findOne(query as FilterQuery<ICaminhoPersistence & Document>);
 
-  public async save (caminho: Caminho): Promise<Caminho> {
-    const query = { domainId: caminho.id.toString()}; 
+        return !!roleDocument === true;
+    }
 
-    const caminhoDocument = await this.caminhoSchema.findOne( query );
+    public async save(caminho: Caminho): Promise<Caminho> {
 
-    try {
-      if (caminhoDocument === null ) {
-
-        const rawRole: any = CaminhoMap.toPersistence(caminho);
-
-        const caminhoCreated = await this.caminhoSchema.create(rawRole);
-
-        return CaminhoMap.toDomain(caminhoCreated);
-      } else {
-        
-        caminhoDocument.id = caminho.id.toString();
-
-        caminhoDocument.armazemChegadaId = caminho.caminhoArmazemPartidaId.value;
-        caminhoDocument.armazemPartidaId = caminho.caminhoArmazemPartidaId.value;
-        caminhoDocument.distancia = caminho.caminhoDistancia.value;
-        caminhoDocument.energia = caminho.caminhoEnergia.value;
-        caminhoDocument.tmpCarregamento = caminho.caminhoTmpCarregamento.value;
-        caminhoDocument.tempo = caminho.caminhoTempo.value;
-
-        await caminhoDocument.save();
+        await models.Caminho.create(CaminhoMap.toPersistence(caminho));
 
         return caminho;
-      }
-    } catch (err) {
-      throw err;
+
     }
-  }
 
-  public async findByDomainId (caminhoId: CaminhoId | string): Promise<Caminho> {
-    const query = { domainId: caminhoId};
-    const roleRecord = await this.caminhoSchema.findOne( query as FilterQuery<ICaminhoPersistence & Document> );
+    public async findByDomainId(caminhoId: CaminhoId | string): Promise<Caminho> {
+        const query = {domainId: caminhoId};
+        const roleRecord = await this.caminhoSchema.findOne(query as FilterQuery<ICaminhoPersistence & Document>);
 
-    if( roleRecord != null) {
-      return CaminhoMap.toDomain(roleRecord);
+        if (roleRecord != null) {
+            return CaminhoMap.toDomain(roleRecord);
+        } else
+            return null;
     }
-    else
-      return null;
-  }
 
-  public async delete (caminhoId: CaminhoId) {
-    const query = { idCaminho: caminhoId};
-    await this.caminhoSchema.deleteMany(query as FilterQuery<ICaminhoPersistence & Document>);
-  }
+    public async delete(caminhoId: CaminhoId) {
+        const query = {idCaminho: caminhoId};
+        await this.caminhoSchema.deleteMany(query as FilterQuery<ICaminhoPersistence & Document>);
+    }
+
+    public async update(caminho: Caminho): Promise<Result<Caminho>> {
+
+        const query = {domainId: caminho.id.toString()};
+
+        const caminhoDocument = await this.caminhoSchema.findOne(query);
+
+        try {
+            if (caminhoDocument === null) {
+                const rawCaminho: any = CaminhoMap.toPersistence(caminho);
+
+                const caminhoCreated = await this.caminhoSchema.create(rawCaminho);
+
+                return Result.ok<Caminho>(CaminhoMap.toDomain(caminhoCreated));
+            } else {
+
+                return Result.ok<Caminho>(caminho);
+            }
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    private createBaseQuery(): any {
+        return {
+            where: {},
+        }
+    }
 
 }

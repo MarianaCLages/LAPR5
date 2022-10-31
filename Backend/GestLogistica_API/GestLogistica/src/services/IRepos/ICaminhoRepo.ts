@@ -1,13 +1,20 @@
-import { Repo } from "../../core/infra/Repo";
-import { Caminho } from "../../domain/caminho/caminho";
-import { CaminhoId } from "../../domain/caminho/caminhoId";
+import {Repo} from "../../core/infra/Repo";
+import {Caminho} from "../../domain/caminho/caminho";
+import {CaminhoId} from "../../domain/caminho/caminhoId";
+import {Result} from "../../core/logic/Result";
 
 export default interface ICaminhoRepo extends Repo<Caminho> {
-  save(caminho: Caminho): Promise<Caminho>;
-  findByDomainId (caminhoId: CaminhoId | string): Promise<Caminho>;
-  delete(caminhoId: CaminhoId);
+    //removeByRoleIds (roles: RoleId[]): Promise<any>
+    async
 
-  //findByIds (rolesIds: RoleId[]): Promise<Role[]>;
-  //saveCollection (roles: Role[]): Promise<Role[]>;
-  //removeByRoleIds (roles: RoleId[]): Promise<any>
+    save(caminho: Caminho): Promise<Caminho>;
+
+    findByDomainId(caminhoId: CaminhoId | string): Promise<Caminho>;
+
+    //findByIds (rolesIds: RoleId[]): Promise<Role[]>;
+    //saveCollection (roles: Role[]): Promise<Role[]>;
+
+    delete(caminhoId: CaminhoId);
+
+    update(caminho: Caminho): Promise<Result<Caminho>>;
 }
