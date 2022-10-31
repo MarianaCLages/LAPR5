@@ -13,16 +13,15 @@ import {UniqueEntityID} from "../core/domain/UniqueEntityID";
 export class CaminhoMap extends Mapper<Role> {
     public static toDTO(caminho: Caminho): ICaminhoDTO {
 
-        //TODO: PERCEBER PORQUE QUE O ARMAZEMCHEGADAID ESTÁ SEMPRE UNDIFINED (se for um erro estúpido mato-me)
 
         return {
             id: caminho.id.toString(),
             armazemChegadaId: caminho.caminhoChegadaId.toString().toString(),
             armazemPartidaId: caminho.caminhoArmazemPartidaId.toString().toString(),
-            energia: caminho.caminhoEnergia.toString().toString().toString(),
-            tempo: caminho.caminhoTempo.toString().toString().toString(),
+            energia: caminho.caminhoEnergia.value,
+            tempo: caminho.caminhoTempo.value,
             distancia: caminho.caminhoDistancia.value,
-            tmpCarregamento: caminho.caminhoTmpCarregamento.toString().toString(),
+            tmpCarregamento: caminho.caminhoTmpCarregamento.value,
         };
     }
 

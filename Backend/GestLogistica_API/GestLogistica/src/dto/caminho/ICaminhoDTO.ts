@@ -3,9 +3,9 @@ export default interface ICaminhoDTO {
     id: string;
     armazemPartidaId: string;
     armazemChegadaId: string;
-    energia: string;
+    energia: number;
     distancia: number;
-    tempo: string;
-    tmpCarregamento: string
+    tempo: number;
+    tmpCarregamento: number
   }
   

@@ -5,26 +5,28 @@ import ICaminhoRepo from "../services/IRepos/ICaminhoRepo";
 import ICaminhoService from "./IServices/ICaminhoService";
 import {Result} from "../core/logic/Result";
 import ICaminhoDTO from "../dto/caminho/ICaminhoDTO";
-import { CaminhoMap } from "../mappers/CaminhoMap";
+import {CaminhoMap} from "../mappers/CaminhoMap";
 import ICriarCaminhoDTO from "../dto/caminho/ICriarCaminhoDTO";
-import { CaminhoId } from "../domain/caminho/caminhoId";
+import {CaminhoId} from "../domain/caminho/caminhoId";
+import IArmazemRepo from "../services/IRepos/IArmazemRepo";
 import https = require('https');
 import fetch = require('node-fetch');
 
 @Service()
 export default class CaminhoService implements ICaminhoService {
+    httpsAgent = new https.Agent({
+        rejectUnauthorized: false,
+    });
+
     constructor(
-        @Inject(config.repos.caminho.name) private caminhoRepo: ICaminhoRepo
+        @Inject(config.repos.caminho.name) private caminhoRepo: ICaminhoRepo,
+        @Inject(config.repos.armazem.name) private armazemRepo: IArmazemRepo
     ) {
     }
 
-  httpsAgent = new https.Agent({
-    rejectUnauthorized: false,
-  });
-
-  public async getCaminho(caminhoDTO: ICaminhoDTO): Promise<Result<ICaminhoDTO>> {
-    try {
-      const caminho = await this.caminhoRepo.findByDomainId(caminhoDTO.id);
+    public async getCaminho(caminhoDTO: ICaminhoDTO): Promise<Result<ICaminhoDTO>> {
+        try {
+            const caminho = await this.caminhoRepo.findByDomainId(caminhoDTO.id);
 
             if (caminho === null) {
                 return Result.fail<ICaminhoDTO>("Caminho não foi encontrado!");
@@ -37,9 +39,25 @@ export default class CaminhoService implements ICaminhoService {
         }
     }
 
-    public async createCaminho(caminhoDTO: ICaminhoDTO): Promise<Result<ICaminhoDTO>> {
+    public async createCaminho(caminhoDTO: ICriarCaminhoDTO): Promise<Result<ICaminhoDTO>> {
         try {
+
+            //check if armazem exists
+            const armazemChegada = caminhoDTO.armazemChegadaId;
+            const armazemPartida = caminhoDTO.armazemPartidaId;
+
+            const armazemChegadaResult = await this.armazemRepo.exists(armazemChegada);
+            const armazemPartidaResult = await this.armazemRepo.exists(armazemPartida);
+
+            if (armazemChegadaResult === false) {
+                return Result.fail<ICaminhoDTO>("Armazem de chegada não foi encontrado!");
+            }
+
+            if (armazemPartidaResult === false) {
+                return Result.fail<ICaminhoDTO>("Armazem de partida não foi encontrado!");
+            }
             const caminhoOrError = Caminho.create(caminhoDTO);
+
 
             if (caminhoOrError.isFailure) {
                 return Result.fail<ICaminhoDTO>(caminhoOrError.errorValue());
@@ -58,19 +76,21 @@ export default class CaminhoService implements ICaminhoService {
 
     public async updateCaminho(caminhoDTO: ICaminhoDTO): Promise<Result<ICaminhoDTO>> {
 
-        const caminho = Caminho.create(caminhoDTO, new CaminhoId(caminhoDTO.id));
+        /*  const caminho = Caminho.create(caminhoDTO, new CaminhoId(caminhoDTO.id));
 
-        const caminhoUpdatedOrError = await this.caminhoRepo.update(caminho.getValue());
+          const caminhoUpdatedOrError = await this.caminhoRepo.update(caminho.getValue());
 
-        if (caminhoUpdatedOrError.isFailure) {
-            return Result.fail<ICaminhoDTO>(caminhoUpdatedOrError.errorValue());
-        }
+          if (caminhoUpdatedOrError.isFailure) {
+              return Result.fail<ICaminhoDTO>(caminhoUpdatedOrError.errorValue());
+          }
 
-        const caminhoUpdated = caminhoUpdatedOrError.getValue();
+          const caminhoUpdated = caminhoUpdatedOrError.getValue();
 
-        const caminhoDTOResult = CaminhoMap.toDTO(caminhoUpdated);
+          const caminhoDTOResult = CaminhoMap.toDTO(caminhoUpdated);
 
-        return Result.ok<ICaminhoDTO>(caminhoDTOResult);
+          return Result.ok<ICaminhoDTO>(caminhoDTOResult);*/
+        //TODO: Implementar
+        return Result.fail("Not implemented");
     }
 
     public async apagaCaminho(caminhoId: CaminhoId): Promise<Result<ICaminhoDTO>> {
@@ -91,32 +111,32 @@ export default class CaminhoService implements ICaminhoService {
         }
     }
 
-  private async verificarArmazemId(armazemChegada: string, armazemPartida : string) {
-    const responseChegada = await fetch("https://localhost:5001/api/Armazem/search/".concat(armazemChegada), {
-      method: 'GET',
-      agent: this.httpsAgent,
+    private async verificarArmazemId(armazemChegada: string, armazemPartida: string) {
+        const responseChegada = await fetch("https://localhost:5001/api/Armazem/search/".concat(armazemChegada), {
+            method: 'GET',
+            agent: this.httpsAgent,
 
-    });
-    const dataChegada = await responseChegada.json();
+        });
+        const dataChegada = await responseChegada.json();
 
-    console.log(dataChegada);
+        console.log(dataChegada);
 
-    if(dataChegada == null) {
-      return Result.fail<ICaminhoDTO>("Armazem de chegada não foi encontrado!");
+        if (dataChegada == null) {
+            return Result.fail<ICaminhoDTO>("Armazem de chegada não foi encontrado!");
+        }
+
+        const responsePartida = await fetch("https://localhost:5001/api/Armazem/search/".concat(armazemPartida), {
+            method: 'GET',
+            agent: this.httpsAgent,
+
+        });
+        const dataPartida = await responsePartida.json();
+
+        console.log(dataPartida);
+
+        if (dataPartida == null) {
+            return Result.fail<ICaminhoDTO>("Armazem de partida não foi encontrado!");
+        }
     }
-
-    const responsePartida = await fetch("https://localhost:5001/api/Armazem/search/".concat(armazemPartida), {
-      method: 'GET',
-      agent: this.httpsAgent,
-
-    });
-    const dataPartida = await responsePartida.json();
-
-    console.log(dataPartida);
-
-    if(dataPartida == null) {
-      return Result.fail<ICaminhoDTO>("Armazem de partida não foi encontrado!");
-    }
-  }
 
 }

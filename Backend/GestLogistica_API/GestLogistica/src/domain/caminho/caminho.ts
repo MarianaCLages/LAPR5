@@ -10,6 +10,7 @@ import {Guard} from "../../core/logic/Guard";
 import ICaminhoDTO from "../../dto/caminho/ICaminhoDTO";
 import {Result} from "../../core/logic/Result";
 import {UniqueEntityID} from "../../core/domain/UniqueEntityID";
+import ICriarCaminhoDTO from "../../dto/caminho/ICriarCaminhoDTO";
 
 interface CaminhoProps {
     armazemChegadaId: CaminhoArmazemChegadaId;
@@ -81,7 +82,7 @@ export class Caminho extends AggregateRoot<CaminhoProps> {
         this.props.armazemChegadaId = value;
     }
 
-    public static create(caminhoDTO: ICaminhoDTO, id?: UniqueEntityID): Result<Caminho> {
+    public static create(caminhoDTO: ICriarCaminhoDTO, id?: UniqueEntityID): Result<Caminho> {
         const guardedProps = [
             {argument: caminhoDTO.armazemPartidaId, argumentName: "armazemPartidaId",},
             {argument: caminhoDTO.armazemChegadaId, argumentName: "armazemChegadaId",},

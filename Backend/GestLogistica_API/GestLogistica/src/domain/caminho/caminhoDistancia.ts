@@ -20,7 +20,7 @@ export class CaminhoDistancia extends ValueObject<caminhoDistanciaProps> {
   }
 
   public static create (caminhoDistancia: number): Result<CaminhoDistancia> {
-    const guardResult = Guard.againstNullOrUndefined(caminhoDistancia, 'Tempo que demora a percorrer o caminho');
+    const guardResult = Guard.againstNullOrUndefined(caminhoDistancia, 'Distancia entre os armazens');
     if (!guardResult.succeeded) {
       return Result.fail<CaminhoDistancia>(guardResult.message);
     } else {
