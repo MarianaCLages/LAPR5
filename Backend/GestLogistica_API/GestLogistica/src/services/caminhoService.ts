@@ -35,6 +35,7 @@ export default class CaminhoService implements ICaminhoService {
                 return Result.ok<ICaminhoDTO>(caminhoDTOResult);
             }
         } catch (e) {
+            console.log(e.message);
             throw e;
         }
     }
@@ -70,6 +71,7 @@ export default class CaminhoService implements ICaminhoService {
             const caminhoDTOResult = CaminhoMap.toDTO(caminhoResult);
             return Result.ok<ICaminhoDTO>(caminhoDTOResult);
         } catch (e) {
+            console.log(e.message);
             throw e;
         }
     }

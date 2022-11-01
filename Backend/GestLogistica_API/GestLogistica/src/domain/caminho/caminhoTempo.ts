@@ -16,7 +16,10 @@ export class CaminhoTempo extends ValueObject<caminhoTempoProps> {
     }
 
     public static create(caminhoTempo: number): Result<CaminhoTempo> {
-        const guardResult = Guard.againstNullOrUndefined(caminhoTempo, 'Tempo que demora a percorrer o caminho');
+        const guardResult = Guard.combine([
+            Guard.againstNullOrUndefined(caminhoTempo, 'caminhoTempo'),
+            Guard.inRange(caminhoTempo, 1, Infinity, 'caminhoTempo')
+        ]);
         if (!guardResult.succeeded) {
             return Result.fail<CaminhoTempo>(guardResult.message);
         } else {

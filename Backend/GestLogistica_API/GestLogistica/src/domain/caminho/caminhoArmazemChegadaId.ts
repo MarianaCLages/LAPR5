@@ -1,6 +1,6 @@
 import {ValueObject} from "../../core/domain/ValueObject";
 import {Result} from "../../core/logic/Result";
-import {Guard} from "../../core/logic/Guard";
+import config from "../../../config";
 
 interface caminhoArmazemChegadaId {
     value: string;
@@ -16,12 +16,11 @@ export class CaminhoArmazemChegadaId extends ValueObject<caminhoArmazemChegadaId
     }
 
     public static create(caminhoArmazemChegadaId: string): Result<CaminhoArmazemChegadaId> {
-        const guardResult = Guard.againstNullOrUndefined(caminhoArmazemChegadaId, 'Armazem de chegada');
-        if (!guardResult.succeeded) {
-            return Result.fail<CaminhoArmazemChegadaId>(guardResult.message);
-        } else {
-            return Result.ok<CaminhoArmazemChegadaId>(new CaminhoArmazemChegadaId({value: caminhoArmazemChegadaId.toString()}))
+        const numberOfCharacters = config.armazenIDNumberOfCharacters;
+        if (!caminhoArmazemChegadaId || caminhoArmazemChegadaId.length !== numberOfCharacters) {
+            return Result.fail<CaminhoArmazemChegadaId>('caminhoArmazemChegadaId must be a string with ' + numberOfCharacters + ' characters');
         }
+        return Result.ok<CaminhoArmazemChegadaId>(new CaminhoArmazemChegadaId({value: caminhoArmazemChegadaId}))
     }
 
     public toString(): String {

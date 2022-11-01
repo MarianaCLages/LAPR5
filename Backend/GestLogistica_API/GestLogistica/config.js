@@ -82,5 +82,6 @@ export default {
         }
     },
 
-    amazemAPIAdress: "https://localhost:5001/api/Armazem/search/"
+    amazemAPIAdress: "https://localhost:5001/api/Armazem/search/",
+    armazenIDNumberOfCharacters: 3
 };

@@ -21,7 +21,7 @@ export default class AmazemAPIGetter implements IArmazemRepo {
         });
         const valid = responseChegada.status === 200;
         if (!valid) {
-            console.log("Armazem não existe!");
+            console.debug("Armazem " + armazemId + " não existe!");
             return false;
         }
 

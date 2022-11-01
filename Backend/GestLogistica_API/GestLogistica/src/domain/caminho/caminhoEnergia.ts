@@ -16,7 +16,10 @@ export class CaminhoEnergia extends ValueObject<CaminhoEnergiaProps> {
     }
 
     public static create(caminhoEnergia: number): Result<CaminhoEnergia> {
-        const guardResult = Guard.againstNullOrUndefined(caminhoEnergia, 'Energia que vai gastar durante a viagem toda');
+        const guardResult = Guard.combine([
+            Guard.againstNullOrUndefined(caminhoEnergia, 'caminhoEnergia'),
+            Guard.inRange(caminhoEnergia, 1, Infinity, 'caminhoEnergia')
+        ]);
         if (!guardResult.succeeded) {
             return Result.fail<CaminhoEnergia>(guardResult.message);
         } else {
