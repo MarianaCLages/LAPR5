@@ -15,11 +15,11 @@ public class CoordenadasArmazem : ValueObject
         Segundos = segundos;
     }
 
-    public int Graus { get; }
+    public int Graus { get; set; }
 
-    public int Minutos { get; }
+    public int Minutos { get; set; }
 
-    public int Segundos { get; }
+    public int Segundos { get; set; }
 
     private void checkGraus(int graus)
     {

@@ -26,7 +26,35 @@ public class Armazem : Entity<ArmazemId>, IAggregateRoot
 
     public CoordenadasArmazem Longitude { get; }
 
-    public DesignacaoArmazem Designacao { get; }
+    public DesignacaoArmazem Designacao { get; set; }
 
     public EnderecoArmazem Endereco { get; }
+    
+    public void ChangeDesignacao(string novaDesignacao)
+    {
+        Designacao = new DesignacaoArmazem(novaDesignacao);
+    }
+    
+    public void ChangeLatitude(int newLatitudeGrau, int newLatitudeMinuto, int newLatitudeSegundo)
+    {
+        Latitude.Graus = newLatitudeGrau;
+        Latitude.Minutos = newLatitudeMinuto;
+        Latitude.Segundos = newLatitudeSegundo;
+    }
+    
+    public void ChangeLongitude(int newLongitudeGrau, int newLongitudeMinuto, int newLongitudeSegundo)
+    {
+        Latitude.Graus = newLongitudeGrau;
+        Latitude.Minutos = newLongitudeMinuto;
+        Latitude.Segundos = newLongitudeSegundo;
+    }
+    
+    public void ChangeEndereco(string newEnderecoRua, int newEnderecoNumeroPorta, string newEnderecoCodigoPostal, string newEnderecoCidade, string newEnderecoPais)
+    {
+        Endereco.Rua = newEnderecoRua;
+        Endereco.NumeroPorta = newEnderecoNumeroPorta;
+        Endereco.CodigoPostal = newEnderecoCodigoPostal;
+        Endereco.Cidade = newEnderecoCidade;
+        Endereco.Pais = newEnderecoPais;
+    }
 }

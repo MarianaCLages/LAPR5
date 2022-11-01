@@ -2,7 +2,7 @@ namespace GestArm.Domain.Armazens;
 
 public class ArmazemDTO
 {
-    public ArmazemDTO(ArmazemId id, int latitudeGrau, int latitudeMinuto, int latitudeSegundo, int longitudeGrau,
+    public ArmazemDTO(Guid id, int latitudeGrau, int latitudeMinuto, int latitudeSegundo, int longitudeGrau,
         int longitudeMinuto, int longitudeSegundo, string designacao, string rua, int numeroPorta, string codigoPostal,
         string cidade, string pais, string alphaNumId)
     {
@@ -23,7 +23,7 @@ public class ArmazemDTO
     }
 
 
-    public ArmazemId Id { get; set; }
+    public Guid Id { get; set; }
 
     public int LatitudeGrau { get; }
 

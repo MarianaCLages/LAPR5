@@ -13,15 +13,15 @@ public class EnderecoArmazem : ValueObject
         Pais = pais;
     }
 
-    public string Rua { get; }
+    public string Rua { get; set; }
 
-    public int NumeroPorta { get; }
+    public int NumeroPorta { get; set; }
 
-    public string CodigoPostal { get; }
+    public string CodigoPostal { get; set; }
 
-    public string Cidade { get; }
+    public string Cidade { get; set; }
 
-    public string Pais { get; }
+    public string Pais { get; set; }
 
 
     protected override IEnumerable<object> GetEqualityComponents()
