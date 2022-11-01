@@ -10,7 +10,7 @@ import {Role} from "../domain/role";
 
 import {UniqueEntityID} from "../core/domain/UniqueEntityID";
 
-export class CaminhoMap extends Mapper<Role> {
+export class CaminhoMap extends Mapper<Caminho> {
     public static toDTO(caminho: Caminho): ICaminhoDTO {
 
 
@@ -28,7 +28,7 @@ export class CaminhoMap extends Mapper<Role> {
     public static toDomain(
         caminho: any | Model<ICaminhoPersistence & Document>
     ): Caminho {
-        const roleOrError = Caminho.create(caminho, new UniqueEntityID(caminho.caminhoId));
+        const roleOrError = Caminho.create(caminho, caminho.caminhoId);
 
         roleOrError.isFailure ? console.log(roleOrError.error) : "";
 
