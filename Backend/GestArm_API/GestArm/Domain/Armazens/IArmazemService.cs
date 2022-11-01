@@ -12,7 +12,9 @@ public interface IArmazemService
 
     Task<ArmazemDTO> AddAsync(CreatingArmazemDto dto);
 
-    Task<bool> RemoveAsync(ArmazemId id);
+    Task<ArmazemDTO> UpdateAsync(ArmazemDTO dto);
+
+    Task<bool> DeleteAsync(ArmazemId id);
 
     Task<ArmazemDTO> GetByArmazemIdAsync(string armazemId);
 }
