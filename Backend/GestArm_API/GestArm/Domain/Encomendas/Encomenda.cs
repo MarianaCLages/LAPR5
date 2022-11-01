@@ -6,17 +6,20 @@ public class Encomenda : Entity<EncomendaId>, IAggregateRoot
 {
     public Encomenda()
     {
+        
     }
 
-    public Encomenda(DataEntrega dataEntrega, MassaEntrega massaEntrega, TempoEncomenda tempoCarga,
+    public Encomenda(EncomendaDomainId encomendaDomainId, DataEntrega dataEntrega, MassaEntrega massaEntrega,
+        TempoEncomenda tempoCarga,
         TempoEncomenda tempoDescarga, string armazemId)
     {
-        Id = new EncomendaId(Guid.NewGuid());
+        Id = new EncomendaId(Guid.NewGuid().ToString());
         DataEntrega = dataEntrega;
         MassaEntrega = massaEntrega;
         TempoCarga = tempoCarga;
         TempoDescarga = tempoDescarga;
         ArmazemId = armazemId;
+        EncomendaDomainId = encomendaDomainId;
     }
 
     public DataEntrega DataEntrega { get; private set; }
@@ -28,6 +31,8 @@ public class Encomenda : Entity<EncomendaId>, IAggregateRoot
     public TempoEncomenda TempoCarga { get; private set; }
 
     public TempoEncomenda TempoDescarga { get; private set; }
+
+    public EncomendaDomainId EncomendaDomainId { get; }
 
     public void ChangeDataEntrega(DataEntrega dataEntrega)
     {

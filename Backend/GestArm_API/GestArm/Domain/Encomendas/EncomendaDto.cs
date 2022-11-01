@@ -2,10 +2,12 @@ namespace GestArm.Domain.Encomendas;
 
 public class EncomendaDto
 {
-    public EncomendaDto(EncomendaId id, string dataEntrega, double massaEntrega, double tempoCarga,
+    public EncomendaDto(EncomendaId id, string identificador, string dataEntrega, double massaEntrega,
+        double tempoCarga,
         double tempoDescarga, string armazemId)
     {
         Id = id;
+        Identificador = identificador;
         DataEntrega = dataEntrega;
         MassaEntrega = massaEntrega;
         TempoCarga = tempoCarga;
@@ -14,6 +16,7 @@ public class EncomendaDto
     }
 
     public EncomendaId Id { get; set; }
+    public String Identificador { get; set; }
     public string DataEntrega { get; set; }
     public double MassaEntrega { get; set; }
     public double TempoCarga { get; set; }

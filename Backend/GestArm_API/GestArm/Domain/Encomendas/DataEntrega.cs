@@ -27,8 +27,13 @@ public class DataEntrega : ValueObject
     }
 
     //ToString
+    public string ToString(string type)
+    {
+        return Data.ToString(type);
+    }
+
     public override string ToString()
     {
-        return Data.ToString(CultureInfo.CurrentCulture);
+        return Data.ToString(CultureInfo.InvariantCulture);
     }
 }

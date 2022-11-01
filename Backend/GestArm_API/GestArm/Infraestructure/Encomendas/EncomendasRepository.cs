@@ -36,25 +36,32 @@ public class EncomendasRepository : BaseRepository<Encomenda, EncomendaId>, IEnc
         throw new NotImplementedException();
     }
 
+    public async Task<string> GestNextIdAsync(DateTime data)
+    {
+        var nextId = (_context.Encomendas.Where(var => var.DataEntrega.Data.Equals(data.Date))).ToList().Count + 1;
+        return nextId.ToString();
+    }
+
     public async Task<Encomenda> AddAsync(Encomenda encomenda)
     {
         _context.Encomendas.Add(encomenda);
         await _context.SaveChangesAsync();
         return encomenda;
     }
+
     public async Task<List<Encomenda>> GetByArmazemIdAsync(string armazemId)
     {
-        return  await _context.Encomendas.Where(u => u.ArmazemId.Equals(armazemId)).ToListAsync();
+        return await _context.Encomendas.Where(u => u.ArmazemId.Equals(armazemId)).ToListAsync();
     }
-    
+
     public async Task<List<Encomenda>> GetByDataEntregaAysnc(DateTime date)
     {
-        return  await _context.Encomendas.Where(u => u.DataEntrega.Data.Equals(date)).ToListAsync();
+        return await _context.Encomendas.Where(u => u.DataEntrega.Data.Equals(date)).ToListAsync();
     }
-    
-    public async Task<List<Encomenda>> GetByFiltragemAsync(string armazemId,DateTime data)
+
+    public async Task<List<Encomenda>> GetByFiltragemAsync(string armazemId, DateTime data)
     {
-        return  await _context.Encomendas.Where(u => u.DataEntrega.Data.Equals(data) && u.ArmazemId.Equals(armazemId)).ToListAsync();
+        return await _context.Encomendas.Where(u => u.DataEntrega.Data.Equals(data) && u.ArmazemId.Equals(armazemId))
+            .ToListAsync();
     }
-    
 }
