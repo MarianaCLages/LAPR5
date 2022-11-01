@@ -44,15 +44,6 @@ public class ArmazemController : ControllerBase
         return await _service.GetAllAsync();
     }
 
-    //DELETE: api/Armazem
-    [HttpDelete]
-    public async Task<ActionResult<bool>> DeleteAsync(ArmazemDTO armazemDTO)
-    {
-        var armazem = await _service.RemoveAsync(armazemDTO.Id);
-
-        return true;
-    }
-
     //POST: api/Armazem
     [HttpPost]
     public async Task<ActionResult<ArmazemDTO>> AddAsync(CreatingArmazemDto dto)
@@ -87,6 +78,42 @@ public class ArmazemController : ControllerBase
 
         return armazem;
     }
+
+    // PUT: api/Armazem/atualizar/id
+    [Route("~/api/[controller]/{id:guid}", Name = "UpdateArmazem")]
+    [HttpPut]
+    public async Task<ActionResult<ArmazemDTO>> Update(Guid id, ArmazemDTO dto)
+    {
+        if (id != dto.Id) return BadRequest();
+        
+        try
+        {
+            var arm = await _service.UpdateAsync(dto);
+
+            if (arm == null) return NotFound("Não foi possível encontrar o armazém introduzido!");
+            return Ok(arm);
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+    }
     
-    
+    // DELETE: api/Armazem/id
+    [HttpDelete("{id}/hard")]
+    public async Task<ActionResult<ArmazemDTO>> HardDelete(Guid id)
+    {
+        try
+        {
+            var arm = await _service.DeleteAsync(new ArmazemId(id));
+
+            if (arm == null) return NotFound("Não foi possível encontrar o armazém introduzido!");
+
+            return Ok(arm);
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+    }
 }
