@@ -1,11 +1,8 @@
-namespace Servicos;
-
-using System;
-using System.Collections.Generic;
 using GestArm.Domain.Encomendas;
 using Moq;
-using Xunit;
 using Newtonsoft.Json;
+
+namespace Servicos;
 
 public class EncomendaServiceTest
 {
@@ -34,11 +31,11 @@ public class EncomendaServiceTest
         var obj1StrExpected = JsonConvert.SerializeObject(result);
         var obj2StrActual = JsonConvert.SerializeObject(resultDTO);
         
-        Assert.Equal(obj2StrActual,obj1StrExpected);
+        Assert.Equal(obj1StrExpected,obj2StrActual);
     }
     
     [Fact]
-    public void GetByArmazemIdAsync()
+    public void GetByArmazemIdAsyncTest()
     {
         var list = new List<Encomenda>();
 
@@ -53,11 +50,11 @@ public class EncomendaServiceTest
         var obj1StrExpected = JsonConvert.SerializeObject(result);
         var obj2StrActual = JsonConvert.SerializeObject(resultDTO);
         
-        Assert.Equal(obj2StrActual,obj1StrExpected);
+        Assert.Equal(obj1StrExpected,obj2StrActual);
     }
     
     [Fact]
-    public void GetByDataEntregaAysnc()
+    public void GetByDataEntregaAysncTest()
     {
         var list = new List<Encomenda>();
 
@@ -72,11 +69,11 @@ public class EncomendaServiceTest
         var obj1StrExpected = JsonConvert.SerializeObject(result);
         var obj2StrActual = JsonConvert.SerializeObject(resultDTO);
         
-        Assert.Equal(obj2StrActual,obj1StrExpected);
+        Assert.Equal(obj1StrExpected,obj2StrActual);
     }
     
     [Fact]
-    public void GetByFiltragemAysnc()
+    public void GetByFiltragemAysncTest()
     {
         var list = new List<Encomenda>();
 
@@ -91,11 +88,11 @@ public class EncomendaServiceTest
         var obj1StrExpected = JsonConvert.SerializeObject(result);
         var obj2StrActual = JsonConvert.SerializeObject(resultDTO);
         
-        Assert.Equal(obj2StrActual,obj1StrExpected);
+        Assert.Equal(obj1StrExpected,obj2StrActual);
     }
     
     [Fact]
-    public void GetByIdAsync()
+    public void GetByIdAsyncTest()
     {
         var list = new List<Encomenda>();
 
@@ -110,23 +107,23 @@ public class EncomendaServiceTest
         var obj1StrExpected = JsonConvert.SerializeObject(result);
         var obj2StrActual = JsonConvert.SerializeObject(resultDTO.First());
         
-        Assert.Equal(obj2StrActual,obj1StrExpected);
+        Assert.Equal(obj1StrExpected,obj2StrActual);
     }
     
     [Fact]
-    public void AddAsync()
+    public void AddAsyncTest()
     {
        //TODO : Add a encomenda
     }
     
     [Fact]
-    public void UpdateAsync()
+    public void UpdateAsyncTest()
     {
         //TODO : Update a encomenda
     }
     
     [Fact]
-    public void RemoveAsync()
+    public void RemoveAsyncTest()
     {
         //TODO : Remove a encomenda
     }

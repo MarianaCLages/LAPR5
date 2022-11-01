@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using GestArm.Domain.Armazens;
-using GestArm.Domain.Encomendas;
+﻿using GestArm.Domain.Armazens;
 using GestArm.Domain.Shared;
 using Moq;
-using Xunit;
 using Newtonsoft.Json;
+
 namespace Servicos;
 
 public class ArmazemServiceTest
@@ -21,7 +18,7 @@ public class ArmazemServiceTest
     }
     
     [Fact]
-    public void GetAllAsyncTest()
+    public void GetAllAsyncTestTest()
     {
         var list = new List<Armazem>();
 
@@ -42,11 +39,11 @@ public class ArmazemServiceTest
         var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());
         var obj2StrActual = JsonConvert.SerializeObject(resultDTO.ToString());
         
-        Assert.Equal(obj2StrActual,obj1StrExpected);
+        Assert.Equal(obj1StrExpected,obj2StrActual);
     }
     
     [Fact]
-    public void GetByIdAsync()
+    public void GetByIdAsyncTest()
     {
         var list = new List<Armazem>();
 
@@ -67,11 +64,11 @@ public class ArmazemServiceTest
         var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());
         var obj2StrActual = JsonConvert.SerializeObject(resultDTO.First().ToString());
         
-        Assert.Equal(obj2StrActual,obj1StrExpected);
+        Assert.Equal(obj1StrExpected,obj2StrActual);
     }
     
     [Fact]
-    public void GetByAlphaNumIdAsync()
+    public void GetByAlphaNumIdAsyncTest()
     {
         var list = new List<Armazem>();
 
@@ -92,11 +89,11 @@ public class ArmazemServiceTest
         var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());
         var obj2StrActual = JsonConvert.SerializeObject(resultDTO.First().ToString());
         
-        Assert.Equal(obj2StrActual,obj1StrExpected);
+        Assert.Equal(obj1StrExpected,obj2StrActual);
     }
     
     [Fact]
-    public void GetByDesignacaoAsync()
+    public void GetByDesignacaoAsyncTest()
     {
         var list = new List<Armazem>();
 
@@ -117,11 +114,11 @@ public class ArmazemServiceTest
         var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());
         var obj2StrActual = JsonConvert.SerializeObject(resultDTO.First().ToString());
         
-        Assert.Equal(obj2StrActual,obj1StrExpected);
+        Assert.Equal(obj1StrExpected,obj2StrActual);
     }
     
     [Fact]
-    public void GetByArmazemIdAsync()
+    public void GetByArmazemIdAsyncTest()
     {
         var list = new List<Armazem>();
 
@@ -142,17 +139,17 @@ public class ArmazemServiceTest
         var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());
         var obj2StrActual = JsonConvert.SerializeObject(resultDTO.First().ToString());
         
-        Assert.Equal(obj2StrActual,obj1StrExpected);
+        Assert.Equal(obj1StrExpected,obj2StrActual);
     }
     
     [Fact]
-    public void AddAsync()
+    public void AddAsyncTest()
     {
         //TODO : Implementar este teste
     }
     
     [Fact]
-    public void RemoveAsync()
+    public void RemoveAsyncTest()
     {
         //TODO : Implementar este teste
     }
