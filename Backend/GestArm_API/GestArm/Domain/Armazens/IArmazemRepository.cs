@@ -13,18 +13,19 @@ public interface IArmazemRepository : IRepository<Armazem, ArmazemId>
     Task<List<Armazem>> GetAllAsync(int page, int size);
 
     Task<Armazem> AddAsync(Armazem armazem);
+    
     Task<Armazem> UpdateAsync(Armazem armazem);
 
     
     //Task<Armazem> GetByAlphaNumIdAsync(AlphaId id);
 
-    Task<Armazem> RemoveAsync(ArmazemId id);
+    Task<bool> RemoveAsync(Armazem armazem);
 
     Task<bool> ExistsAsync(ArmazemId id);
 
     Task<int> GetCountAsync();
     
     Task<Armazem> GetByArmazemIdAsync(AlphaId armazemId);
-    
-    
+
+
 }

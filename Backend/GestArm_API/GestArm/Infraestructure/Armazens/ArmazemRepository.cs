@@ -53,9 +53,11 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
         throw new NotImplementedException();
     }
 
-    public Task<Armazem> RemoveAsync(ArmazemId id)
+    public async Task<bool> RemoveAsync(Armazem armazem)
     {
-        throw new NotImplementedException();
+        _context.Armazens.Remove(armazem);
+        await _context.SaveChangesAsync();
+        return true;
     }
 
     public Task<bool> ExistsAsync(ArmazemId id)
