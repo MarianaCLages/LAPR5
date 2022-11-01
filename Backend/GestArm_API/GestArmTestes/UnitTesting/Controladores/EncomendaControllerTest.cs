@@ -24,7 +24,7 @@ public class EncomendaControllerTest
     {
         var listDto = new List<EncomendaDto>();
 
-        Encomenda en = new Encomenda(new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
+        Encomenda en = new Encomenda(new EncomendaDomainId("2","221227"),new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
 
         EncomendaDto encomendaDto = EncomendaDtoParser.convertToDto(en);
         
@@ -48,7 +48,7 @@ public class EncomendaControllerTest
     {
         var listDto = new List<EncomendaDto>();
 
-        Encomenda en = new Encomenda(new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
+        Encomenda en = new Encomenda(new EncomendaDomainId("3","221227"),new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
 
         EncomendaDto encomendaDto = EncomendaDtoParser.convertToDto(en);
         
@@ -71,7 +71,7 @@ public class EncomendaControllerTest
     {
         var listDto = new List<EncomendaDto>();
 
-        Encomenda en = new Encomenda(new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
+        Encomenda en = new Encomenda(new EncomendaDomainId("4","221227"),new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
 
         EncomendaDto encomendaDto = EncomendaDtoParser.convertToDto(en);
         
@@ -94,7 +94,7 @@ public class EncomendaControllerTest
     {
         var listDto = new List<EncomendaDto>();
 
-        Encomenda en = new Encomenda(new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
+        Encomenda en = new Encomenda(new EncomendaDomainId("5","221227"),new DataEntrega(DateTime.Parse("2022-12-27")) , new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120),"A12");
 
         EncomendaDto encomendaDto = EncomendaDtoParser.convertToDto(en);
         
