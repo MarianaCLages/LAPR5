@@ -10,6 +10,7 @@ import {Guard} from "../../core/logic/Guard";
 import {Result} from "../../core/logic/Result";
 import {UniqueEntityID} from "../../core/domain/UniqueEntityID";
 import ICriarCaminhoDTO from "../../dto/caminho/ICriarCaminhoDTO";
+import ICaminhoDTO from "../../dto/caminho/ICaminhoDTO";
 
 interface CaminhoProps {
     armazemChegadaId: CaminhoArmazemChegadaId;
@@ -144,6 +145,34 @@ export class Caminho extends AggregateRoot<CaminhoProps> {
                 return Result.fail<Caminho>(err.toString());
             }
 
+        }
+    }
+
+    public static createWithId(caminhoDTO: ICaminhoDTO): Result<Caminho> {
+        const guardedProps = [
+            {argument: caminhoDTO.armazemPartidaId, argumentName: "armazemPartidaId",},
+            {argument: caminhoDTO.armazemChegadaId, argumentName: "armazemChegadaId",},
+            {argument: caminhoDTO.energia, argumentName: "energia"},
+            {argument: caminhoDTO.distancia, argumentName: "distancia"},
+            {argument: caminhoDTO.tempo, argumentName: "tempo"},
+            {argument: caminhoDTO.tmpCarregamento, argumentName: "tmpCarregamento"},
+        ];
+
+        const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
+
+        if (!guardResult.succeeded) {
+            return Result.fail<Caminho>(guardResult.message);
+        } else {
+            const caminho = new Caminho({
+                armazemChegadaId: new CaminhoArmazemChegadaId({value: caminhoDTO.armazemChegadaId,}),
+                armazemPartidaId: new CaminhoArmazemPartidaId({value: caminhoDTO.armazemPartidaId,}),
+                distancia: new CaminhoDistancia({value: caminhoDTO.distancia}),
+                energia: new CaminhoEnergia({value: caminhoDTO.energia}),
+                tempo: new CaminhoTempo({value: caminhoDTO.tempo}),
+                tmpCarregamento: new CaminhoTmpCarregamento({value: caminhoDTO.tmpCarregamento,}),
+            }, new UniqueEntityID(caminhoDTO.id));
+
+            return Result.ok<Caminho>(caminho);
         }
     }
 }
