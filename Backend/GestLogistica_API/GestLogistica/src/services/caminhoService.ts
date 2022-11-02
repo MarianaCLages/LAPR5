@@ -9,12 +9,15 @@ import {CaminhoMap} from "../mappers/CaminhoMap";
 import ICriarCaminhoDTO from "../dto/caminho/ICriarCaminhoDTO";
 import {CaminhoId} from "../domain/caminho/caminhoId";
 import IArmazemRepo from "../services/IRepos/IArmazemRepo";
-import {CaminhoEnergia} from "../domain/caminho/caminhoEnergia";
-import {CaminhoTempo} from "../domain/caminho/caminhoTempo";
-import {CaminhoTmpCarregamento} from "../domain/caminho/caminhoTmpCarregamento";
-import {CaminhoArmazemChegadaId} from "../domain/caminho/caminhoArmazemChegadaId";
-import {CaminhoArmazemPartidaId} from "../domain/caminho/caminhoArmazemPartidaId";
 import https = require("https");
+import { CaminhoEnergia } from "../domain/caminho/caminhoEnergia";
+import { CaminhoTempo } from "../domain/caminho/caminhoTempo";
+import { CaminhoTmpCarregamento } from "../domain/caminho/caminhoTmpCarregamento";
+import { CaminhoArmazemChegadaId } from "../domain/caminho/caminhoArmazemChegadaId";
+import { CaminhoArmazemPartidaId } from "../domain/caminho/caminhoArmazemPartidaId";
+import { CaminhoDistancia } from "../domain/caminho/caminhoDistancia";
+import ICaminhoIdDto from "../dto/caminho/ICaminhoIdDto";
+
 
 @Service()
 export default class CaminhoService implements ICaminhoService {
@@ -105,8 +108,9 @@ export default class CaminhoService implements ICaminhoService {
         caminho.caminhoEnergia = CaminhoEnergia.create(caminhoDTO.energia).getValue();
         caminho.caminhoTempo = CaminhoTempo.create(caminhoDTO.tempo).getValue();
         caminho.caminhoTmpCarregamento = CaminhoTmpCarregamento.create(caminhoDTO.tmpCarregamento).getValue();
+        caminho.caminhoDistancia = CaminhoDistancia.create(caminhoDTO.distancia).getValue();
         caminho.caminhoChegadaId = CaminhoArmazemChegadaId.create(caminhoDTO.armazemChegadaId).getValue();
-        caminho.caminhoArmazemPartidaId = CaminhoArmazemPartidaId.create(caminhoDTO.armazemChegadaId).getValue();
+        caminho.caminhoArmazemPartidaId = CaminhoArmazemPartidaId.create(caminhoDTO.armazemPartidaId).getValue();
 
         const caminhoUpdatedOrError = await this.caminhoRepo.update(caminho);
         const caminhoDTOResult = CaminhoMap.toDTO(caminhoUpdatedOrError.getValue());
@@ -122,15 +126,13 @@ export default class CaminhoService implements ICaminhoService {
         return caminhosDTO;
     }
 
-    public async apagaCaminho(caminhoId: CaminhoId): Promise<Result<ICaminhoDTO>> {
-        try {
-            const caminho = await this.caminhoRepo.findByDomainId(caminhoId);
-
+  public async apagaCaminho(caminhoId: ICaminhoIdDto): Promise<Result<ICaminhoDTO>> {
+    try {
+      const caminho = await this.caminhoRepo.findByDomainId(caminhoId.id);
             if (caminho === null) {
                 return Result.fail<ICaminhoDTO>("Caminho não foi encontrado! O id especificado não existe");
             } else {
-
-                await this.caminhoRepo.delete(caminhoId);
+                await this.caminhoRepo.delete(caminho);
 
                 const caminhoDTOResult = CaminhoMap.toDTO(caminho) as ICaminhoDTO;
                 return Result.ok<ICaminhoDTO>(caminhoDTOResult);

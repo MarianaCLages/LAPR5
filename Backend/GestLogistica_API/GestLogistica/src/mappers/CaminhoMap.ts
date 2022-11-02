@@ -28,7 +28,7 @@ export class CaminhoMap extends Mapper<Caminho> {
     public static toDomain(
         caminho: any | Model<ICaminhoPersistence & Document>
     ): Caminho {
-        const roleOrError = Caminho.create(caminho, caminho.caminhoId);
+        const roleOrError = Caminho.createWithId(caminho);
 
         roleOrError.isFailure ? console.log(roleOrError.error) : "";
 
