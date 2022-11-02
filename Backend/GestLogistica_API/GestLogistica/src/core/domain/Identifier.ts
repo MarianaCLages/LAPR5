@@ -1,6 +1,6 @@
 
 export class Identifier<T> {
-  constructor(private value: T) {
+  constructor(public value: T) {
     this.value = value;
   }
 

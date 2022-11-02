@@ -31,7 +31,7 @@ export class Caminho extends AggregateRoot<CaminhoProps> {
     }
 
     get caminhoId(): CaminhoId {
-        return new CaminhoId(this.caminhoId.toValue());
+        return new CaminhoId(this.id.toValue());
     }
 
     get caminhoArmazemPartidaId(): CaminhoArmazemPartidaId {
@@ -163,16 +163,49 @@ export class Caminho extends AggregateRoot<CaminhoProps> {
         if (!guardResult.succeeded) {
             return Result.fail<Caminho>(guardResult.message);
         } else {
-            const caminho = new Caminho({
-                armazemChegadaId: new CaminhoArmazemChegadaId({value: caminhoDTO.armazemChegadaId,}),
-                armazemPartidaId: new CaminhoArmazemPartidaId({value: caminhoDTO.armazemPartidaId,}),
-                distancia: new CaminhoDistancia({value: caminhoDTO.distancia}),
-                energia: new CaminhoEnergia({value: caminhoDTO.energia}),
-                tempo: new CaminhoTempo({value: caminhoDTO.tempo}),
-                tmpCarregamento: new CaminhoTmpCarregamento({value: caminhoDTO.tmpCarregamento,}),
-            }, new UniqueEntityID(caminhoDTO.id));
-
-            return Result.ok<Caminho>(caminho);
+            try {
+                const _armazemChegadaId = CaminhoArmazemChegadaId.create(caminhoDTO.armazemChegadaId);
+                const _armazemPartidaId = CaminhoArmazemPartidaId.create(caminhoDTO.armazemPartidaId);
+                const _distancia = CaminhoDistancia.create(caminhoDTO.distancia);
+                const _energia = CaminhoEnergia.create(caminhoDTO.energia);
+                const _tempo = CaminhoTempo.create(caminhoDTO.tempo);
+                const _tmpCarregamento = CaminhoTmpCarregamento.create(caminhoDTO.tmpCarregamento);
+                if (_armazemChegadaId.isFailure || _armazemPartidaId.isFailure || _distancia.isFailure || _energia.isFailure || _tempo.isFailure || _tmpCarregamento.isFailure) {
+                    //adds to the message the errors of each value object if they exist
+                    let message = "Não foi possviel criar o caminho: \n";
+                    if (_armazemChegadaId.isFailure) {
+                        message += _armazemChegadaId.errorValue() + "\n";
+                    }
+                    if (_armazemPartidaId.isFailure) {
+                        message += _armazemPartidaId.errorValue() + "\n";
+                    }
+                    if (_distancia.isFailure) {
+                        message += _distancia.errorValue() + "\n";
+                    }
+                    if (_energia.isFailure) {
+                        message += _energia.errorValue() + "\n";
+                    }
+                    if (_tempo.isFailure) {
+                        message += _tempo.errorValue() + "\n";
+                    }
+                    if (_tmpCarregamento.isFailure) {
+                        message += _tmpCarregamento.errorValue() + "\n";
+                    }
+                    return Result.fail<Caminho>(message);
+                }
+                const caminho = new Caminho({
+                    armazemChegadaId: _armazemChegadaId.getValue(),
+                    armazemPartidaId: _armazemPartidaId.getValue(),
+                    distancia: _distancia.getValue(),
+                    energia: _energia.getValue(),
+                    tempo: _tempo.getValue(),
+                    tmpCarregamento: _tmpCarregamento.getValue(),
+                }, new UniqueEntityID(caminhoDTO.id));
+                return Result.ok<Caminho>(caminho);
+            } catch (err) {
+                console.debug(err);
+                return Result.fail<Caminho>(err.toString());
+            }
         }
     }
 }
