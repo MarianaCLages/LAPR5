@@ -57,7 +57,7 @@
     "mime": "^3.0.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.38",
-    "mongoose": "^6.7.0",
+    "mongoose": "^6.7.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "pac-proxy-agent": "^5.0.0",

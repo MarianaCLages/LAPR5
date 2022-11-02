@@ -54,6 +54,10 @@ export default {
             name: "CamiaoController",
             path: "../controllers/camiaoController"
         },
+        empacotamento: {
+            name: "ArmazemRepo",
+            path: "../repos/AmazemAPIGetter"
+        }
     },
 
     repos: {
@@ -76,6 +80,10 @@ export default {
         armazem: {
             name: "ArmazemRepo",
             path: "../repos/AmazemAPIGetter"
+        },
+        empacotamento: {
+            name: "ArmazemRepo",
+            path: "../repos/AmazemAPIGetter"
         }
     },
 
@@ -92,6 +100,10 @@ export default {
             name: "CamiaoService",
             path: "../services/camiaoService"
         },
+        empacotamento: {
+            name: "CamiaoService",
+            path: "../repos/AmazemAPIGetter"
+        }
     },
 
     amazemAPIAdress: "https://localhost:5001/api/armazem/search/",
