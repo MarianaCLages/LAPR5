@@ -9,6 +9,11 @@ import { CamiaoMap } from "../mappers/CamiaoMap";
 import { Result } from "../core/logic/Result";
 import ICamiaoRepo from "./IRepos/ICamiaoRepo";
 import { ICriarCamiaoDTO } from "../dto/camiao/ICriarCamiaoDTO";
+import { CapacidadeCarga } from "../domain/camiao/capacidadeCarga";
+import { CargaMaxima } from "../domain/camiao/cargaMaxima";
+import { MatriculaCamiao } from "../domain/camiao/matriculaCamiao";
+import { Tara } from "../domain/camiao/tara";
+import { TempoCarregamento } from "../domain/camiao/tempoCarregamento";
 
 @Service()
 export default class CamiaoService implements ICamiaoService {
@@ -17,6 +22,7 @@ export default class CamiaoService implements ICamiaoService {
     ) {}
 
     public async createCamiao(camiaoDTO: ICriarCamiaoDTO): Promise<Result<ICamiaoDTO>> {
+        
         try {
             const camiaoOrError = await Camiao.create(camiaoDTO);
             if (camiaoOrError.isFailure) {
@@ -37,6 +43,23 @@ export default class CamiaoService implements ICamiaoService {
     }
 
     public async updateCamiao(camiaoDTO: ICamiaoDTO): Promise<Result<ICamiaoDTO>> {
-        throw new Error("Method not implemented.");
+
+        const camiao = await this.camiaoRepo.findByDomainId(camiaoDTO.caractCamiao);
+
+        if (camiao === null) {
+            return Result.fail<ICamiaoDTO>("Camiao não existe");
+        }
+
+        camiao.capacidadeCarga = CapacidadeCarga.create(camiaoDTO.capacidadeCarga).getValue();
+        camiao.cargaMax = CargaMaxima.create(camiaoDTO.cargaMax).getValue();
+        camiao.matriculaCamiao = MatriculaCamiao.create(camiaoDTO.matriculaCamiao).getValue();
+        camiao.tara = Tara.create(camiaoDTO.tara).getValue();
+        camiao.tempoCarregamento = TempoCarregamento.create(camiaoDTO.tempoCarregamento).getValue();
+
+        const camiaoUpdateError = await this.camiaoRepo.update(camiao);
+        const camiaoDTOResult = CamiaoMap.toDTO(camiaoUpdateError.getValue());
+
+        return Result.ok<ICamiaoDTO>(camiaoDTOResult);
+
     }
 }

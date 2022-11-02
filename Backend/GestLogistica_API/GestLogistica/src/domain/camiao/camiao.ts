@@ -35,24 +35,48 @@ export class Camiao extends AggregateRoot<CamiaoProps> {
         return this.matriculaCamiao;
     }
 
+    set matriculaCamiao(value: MatriculaCamiao){
+        this.matriculaCamiao = value;
+    }
+
     get tara (): Tara {
         return this.tara;
+    }
+
+    set tara(value: Tara){
+        this.tara = value;
     }
 
     get capacidadeCarga (): CapacidadeCarga {
         return this.capacidadeCarga;
     }
 
+    set capacidadeCarga (value: CapacidadeCarga){
+        this.capacidadeCarga = value;
+    }
+
     get cargaMax (): CargaMaxima {
         return this.cargaMax;
+    }
+
+    set cargaMax (value: CargaMaxima){
+        this.cargaMax = value;
     }
 
     get cargaTotal (): CargaTotal {
         return this.cargaTotal;
     }
 
+    set cargaTotal (value: CargaTotal){
+        this.cargaTotal = value;
+    }
+
     get tempoCarregamento (): TempoCarregamento {
         return this.tempoCarregamento;
+    }
+
+    set tempoCarregamento (value: TempoCarregamento){
+        this.tempoCarregamento = value;
     }
 
     private constructor (props: CamiaoProps, id?: UniqueEntityID) {

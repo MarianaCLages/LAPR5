@@ -1,17 +1,19 @@
 import { Document, FilterQuery, Model } from 'mongoose';
 import { Service, Inject } from 'typedi';
+import { Result } from '../core/logic/Result';
 import { ICamiaoPersistence } from '../dataschema/ICamiaoPersistence';
 import { Camiao } from '../domain/camiao/camiao';
 import { CaractCamiao } from '../domain/camiao/caractCamiao';
 import { CamiaoMap } from '../mappers/CamiaoMap';
 import ICamiaoRepo from '../services/IRepos/ICamiaoRepo';
 
+
 @Service()
 export default class camiaoRepo implements ICamiaoRepo {
-    private models:any;
+    private models: any;
     constructor(
         @Inject('camiaoSchema') private camiaoSchema: Model<ICamiaoPersistence & Document>,
-    ) { } 
+    ) { }
 
     private createBaseQuery(): any {
         return {
@@ -19,12 +21,22 @@ export default class camiaoRepo implements ICamiaoRepo {
         }
     }
 
-    public async exists (camiao:Camiao): Promise<boolean> {
+    public async exists(camiao: Camiao): Promise<boolean> {
         const idX = camiao.caractCamiao instanceof CaractCamiao ? (<CaractCamiao>camiao.caractCamiao).value : camiao.caractCamiao;
         const query = { domainId: idX };
         const camiaoDocument = await this.camiaoSchema.findOne(query as FilterQuery<ICamiaoPersistence & Document>);
-        
+
         return !!camiaoDocument === true;
+    }
+
+    public async findByDomainId(caractCamiao: CaractCamiao | string): Promise<Camiao> {
+        const query = { domainId: caractCamiao };
+        const roleRecord = await this.camiaoSchema.findOne(query as FilterQuery<ICamiaoPersistence & Document>);
+
+        if (roleRecord != null) {
+            return CamiaoMap.toDomain(roleRecord);
+        } else
+            return null;
     }
 
     public async save(camiao: Camiao): Promise<Camiao> {
@@ -37,6 +49,38 @@ export default class camiaoRepo implements ICamiaoRepo {
                 return CamiaoMap.toDomain(camiaoCreated);
             } else {
                 camiaoDocument.id = camiao.id.toString();
+            }
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    public async update(camiao: Camiao): Promise<Result<Camiao>> {
+
+        const query = { domainId: CaractCamiao.toString() };
+
+        const camiaoDocument = await this.camiaoSchema.findOne(query);
+
+        try {
+            if (camiaoDocument != null) {
+                const rawUser = CamiaoMap.toPersistence(camiao);
+
+                const camiaoCreated = await this.camiaoSchema.create(rawUser);
+
+                return Result.ok(CamiaoMap.toDomain(camiaoCreated));
+            }
+            else {
+                camiaoDocument.matriculaCamiao = camiao.matriculaCamiao.value;
+                camiaoDocument.capacidadeCarga = camiao.capacidadeCarga.value;
+                camiaoDocument.cargaTotal = camiao.cargaTotal.value;
+                camiaoDocument.cargaMaxima = camiao.cargaMax.value;
+                camiaoDocument.tara = camiao.tara.value;
+                camiaoDocument.tempoCarregamento = camiao.tempoCarregamento.value;
+
+                await camiaoDocument.save();
+
+                return Result.ok(camiao);
+
             }
         } catch (err) {
             throw err;
