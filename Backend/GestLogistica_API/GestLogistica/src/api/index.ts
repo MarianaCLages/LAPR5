@@ -4,6 +4,7 @@ import user from './routes/userRoute';
 import role from './routes/roleRoute';
 import caminho from './routes/caminhoRoute';
 import camiao from './routes/camiaoRoute';
+import empacotamento from './routes/empacotamentoRoute';
 
 export default () => {
 	const app = Router();
@@ -13,6 +14,7 @@ export default () => {
 	role(app);
 	caminho(app);
 	camiao(app);
+	empacotamento(app);
 	
 	return app
 }
