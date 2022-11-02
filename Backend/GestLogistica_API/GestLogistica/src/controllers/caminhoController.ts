@@ -85,5 +85,4 @@ export default class caminhoController
         throw new Error("Method not implemented.");
     }
 
-
 }
