@@ -41,6 +41,18 @@ export default class camiaoController
     }
 
     public async updateCamiao(req: Request, res: Response, next: NextFunction) {
-        throw new Error("Method not implemented.");
+        
+        try{
+            const camiaoOrError = await this.camiaoServiceInstance.updateCamiao(req.body as ICamiaoDTO);
+
+            if (camiaoOrError.isFailure) {
+                return res.status(400).send("O camiao especificado nao foi encontrado!");
+            }
+
+            const camiaoDTO = camiaoOrError.getValue();
+            return res.json(camiaoDTO).status(200);
+        }catch(e){
+            return next(e);
+        }
     }
 }
