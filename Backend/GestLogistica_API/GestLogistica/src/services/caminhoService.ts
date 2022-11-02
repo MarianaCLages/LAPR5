@@ -116,6 +116,12 @@ export default class CaminhoService implements ICaminhoService {
         return Result.ok<ICaminhoDTO>(caminhoDTOResult);
     }
 
+    public async getAllCaminhos() {
+        const caminhos = await this.caminhoRepo.getAllCaminhos();
+        const caminhosDTO = caminhos.map(caminho => CaminhoMap.toDTO(caminho));
+        return caminhosDTO;
+    }
+
     public async apagaCaminho(caminhoId: CaminhoId): Promise<Result<ICaminhoDTO>> {
         try {
             const caminho = await this.caminhoRepo.findByDomainId(caminhoId);

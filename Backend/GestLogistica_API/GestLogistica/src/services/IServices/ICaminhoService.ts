@@ -8,4 +8,5 @@ export default interface ICaminhoService  {
   updateCaminho(caminhoDTO: ICaminhoDTO): Promise<Result<ICaminhoDTO>>;
   getCaminho (caminhoDTO: ICaminhoDTO): Promise<Result<ICaminhoDTO>>;
   apagaCaminho(caminhoId : CaminhoId): Promise<Result<ICaminhoDTO>>;
+  getAllCaminhos();
 }
