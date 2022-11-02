@@ -20,8 +20,13 @@ export default class AmazemAPIGetter implements IArmazemRepo {
             agent: this.httpsAgent,
         });
         const valid = responseChegada.status === 200;
-        if (!valid) {
+
+        if (!valid && responseChegada.message == config.errorNotFoundArmazem) {
             console.debug("Armazem " + armazemId + " não existe!");
+            return false;
+        }
+        if (!valid) {
+            console.debug("Não foi possível verificar se o armazem " + armazemId + " existe!");
             return false;
         }
 

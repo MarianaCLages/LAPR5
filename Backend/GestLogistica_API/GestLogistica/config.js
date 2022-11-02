@@ -82,6 +82,7 @@ export default {
         }
     },
 
-    amazemAPIAdress: "https://localhost:5001/api/Armazem/search/",
-    armazenIDNumberOfCharacters: 3
+    amazemAPIAdress: "https://localhost:5001/api/armazem/search/",
+    armazenIDNumberOfCharacters: 3,
+    errorNotFoundArmazem: "Não foi encontrado um armazem com esse ID!"
 };

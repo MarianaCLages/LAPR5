@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controladores", "Controlado
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{8BE8CF3D-C68C-46E4-AAA3-BB7DD059C632}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDNetCore", "..\..\GestArm\DDDNetCore.csproj", "{E7A85F84-0188-479B-BF4A-3073CD2E5DE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,5 +36,9 @@ Global
 		{748E6057-C6B5-4B42-97A0-5E2161497B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{748E6057-C6B5-4B42-97A0-5E2161497B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{748E6057-C6B5-4B42-97A0-5E2161497B83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A85F84-0188-479B-BF4A-3073CD2E5DE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A85F84-0188-479B-BF4A-3073CD2E5DE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A85F84-0188-479B-BF4A-3073CD2E5DE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A85F84-0188-479B-BF4A-3073CD2E5DE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

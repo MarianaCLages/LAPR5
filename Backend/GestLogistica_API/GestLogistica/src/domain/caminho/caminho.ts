@@ -7,7 +7,6 @@ import {CaminhoId} from "./caminhoId";
 import {CaminhoTempo} from "./caminhoTempo";
 import {CaminhoTmpCarregamento} from "./caminhoTmpCarregamento";
 import {Guard} from "../../core/logic/Guard";
-import ICaminhoDTO from "../../dto/caminho/ICaminhoDTO";
 import {Result} from "../../core/logic/Result";
 import {UniqueEntityID} from "../../core/domain/UniqueEntityID";
 import ICriarCaminhoDTO from "../../dto/caminho/ICriarCaminhoDTO";
@@ -46,6 +45,10 @@ export class Caminho extends AggregateRoot<CaminhoProps> {
         return this.props.armazemChegadaId;
     }
 
+    set caminhoChegadaId(value: CaminhoArmazemChegadaId) {
+        this.props.armazemChegadaId = value;
+    }
+
     get caminhoDistancia(): CaminhoDistancia {
         return this.props.distancia;
     }
@@ -78,11 +81,6 @@ export class Caminho extends AggregateRoot<CaminhoProps> {
         this.props.tmpCarregamento = value;
     }
 
-    set caminhoChegadaId(value: CaminhoArmazemChegadaId) {
-        this.props.armazemChegadaId = value;
-    }
-
-
     public static create(caminhoDTO: ICriarCaminhoDTO, id?: UniqueEntityID): Result<Caminho> {
         const guardedProps = [
             {argument: caminhoDTO.armazemPartidaId, argumentName: "armazemPartidaId",},
@@ -94,20 +92,58 @@ export class Caminho extends AggregateRoot<CaminhoProps> {
         ];
 
         const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
+        //caminho chega e partida não podem ser iguais
+        if (caminhoDTO.armazemPartidaId === caminhoDTO.armazemChegadaId) {
+            return Result.fail<Caminho>("Caminho partida e chegada não podem ser iguais");
+        }
 
         if (!guardResult.succeeded) {
             return Result.fail<Caminho>(guardResult.message);
         } else {
-            const caminho = new Caminho({
-                armazemChegadaId: new CaminhoArmazemChegadaId({value: caminhoDTO.armazemChegadaId,}),
-                armazemPartidaId: new CaminhoArmazemPartidaId({value: caminhoDTO.armazemPartidaId,}),
-                distancia: new CaminhoDistancia({value: caminhoDTO.distancia}),
-                energia: new CaminhoEnergia({value: caminhoDTO.energia}),
-                tempo: new CaminhoTempo({value: caminhoDTO.tempo}),
-                tmpCarregamento: new CaminhoTmpCarregamento({value: caminhoDTO.tmpCarregamento,}),
-            }, id);
+            try {
+                const _armazemChegadaId = CaminhoArmazemChegadaId.create(caminhoDTO.armazemChegadaId);
+                const _armazemPartidaId = CaminhoArmazemPartidaId.create(caminhoDTO.armazemPartidaId);
+                const _distancia = CaminhoDistancia.create(caminhoDTO.distancia);
+                const _energia = CaminhoEnergia.create(caminhoDTO.energia);
+                const _tempo = CaminhoTempo.create(caminhoDTO.tempo);
+                const _tmpCarregamento = CaminhoTmpCarregamento.create(caminhoDTO.tmpCarregamento);
+                if (_armazemChegadaId.isFailure || _armazemPartidaId.isFailure || _distancia.isFailure || _energia.isFailure || _tempo.isFailure || _tmpCarregamento.isFailure) {
+                    //adds to the message the errors of each value object if they exist
+                    let message = "Não foi possviel criar o caminho: \n";
+                    if (_armazemChegadaId.isFailure) {
+                        message += _armazemChegadaId.errorValue() + "\n";
+                    }
+                    if (_armazemPartidaId.isFailure) {
+                        message += _armazemPartidaId.errorValue() + "\n";
+                    }
+                    if (_distancia.isFailure) {
+                        message += _distancia.errorValue() + "\n";
+                    }
+                    if (_energia.isFailure) {
+                        message += _energia.errorValue() + "\n";
+                    }
+                    if (_tempo.isFailure) {
+                        message += _tempo.errorValue() + "\n";
+                    }
+                    if (_tmpCarregamento.isFailure) {
+                        message += _tmpCarregamento.errorValue() + "\n";
+                    }
+                    return Result.fail<Caminho>(message);
+                }
+                const caminho = new Caminho({
+                    armazemChegadaId: _armazemChegadaId.getValue(),
+                    armazemPartidaId: _armazemPartidaId.getValue(),
+                    distancia: _distancia.getValue(),
+                    energia: _energia.getValue(),
+                    tempo: _tempo.getValue(),
+                    tmpCarregamento: _tmpCarregamento.getValue(),
+                }, id);
+                return Result.ok<Caminho>(caminho);
+            } catch (err) {
+                console.debug(err);
+                return Result.fail<Caminho>(err.toString());
+            }
 
-            return Result.ok<Caminho>(caminho);
         }
     }
 }
