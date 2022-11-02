@@ -11,6 +11,8 @@ public class Armazem : Entity<ArmazemId>, IAggregateRoot
     public Armazem(ArmazemId id, CoordenadasArmazem latitude, CoordenadasArmazem longitude,
         DesignacaoArmazem designacao, EnderecoArmazem endereco,AlphaId alphaNumId)
     {
+        checkId(id);
+
         Id = id;
         AlphaNumId = alphaNumId;
         Latitude = latitude;
@@ -57,4 +59,14 @@ public class Armazem : Entity<ArmazemId>, IAggregateRoot
         Endereco.Cidade = newEnderecoCidade;
         Endereco.Pais = newEnderecoPais;
     }
+
+    private void checkId(ArmazemId id){
+
+        if(id == null){
+            throw new NullReferenceException("Id do armazem não pode ser nulo");
+        }
+    }
+
+
+
 }
