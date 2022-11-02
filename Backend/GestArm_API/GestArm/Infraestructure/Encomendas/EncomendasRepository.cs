@@ -38,7 +38,7 @@ public class EncomendasRepository : BaseRepository<Encomenda, EncomendaId>, IEnc
 
     public async Task<string> GestNextIdAsync(DateTime data)
     {
-        var nextId = (_context.Encomendas.Where(var => var.DataEntrega.Data.Equals(data.Date))).ToList().Count + 1;
+        var nextId = _context.Encomendas.Where(var => var.DataEntrega.Data.Equals(data.Date)).ToList().Count + 1;
         return nextId.ToString();
     }
 

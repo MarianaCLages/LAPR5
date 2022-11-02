@@ -16,7 +16,7 @@ public class EncomendaDto
     }
 
     public EncomendaId Id { get; set; }
-    public String Identificador { get; set; }
+    public string Identificador { get; set; }
     public string DataEntrega { get; set; }
     public double MassaEntrega { get; set; }
     public double TempoCarga { get; set; }

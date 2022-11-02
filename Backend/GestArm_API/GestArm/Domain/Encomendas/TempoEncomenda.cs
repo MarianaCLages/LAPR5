@@ -6,16 +6,16 @@ public class TempoEncomenda : ValueObject
 {
     public TempoEncomenda(int minutos)
     {
-        IsValid();
+        IsValid(minutos);
         Minutos = minutos;
     }
 
     public int Minutos { get; }
 
     //verifica se os minutos são válidos
-    private void IsValid()
+    private void IsValid(int minutos)   
     {
-        if (Minutos < 0) throw new BusinessRuleValidationException("O tempo de entrega não pode ser negativo");
+        if (minutos < 0) throw new BusinessRuleValidationException("O tempo de entrega não pode ser negativo");
     }
 
 

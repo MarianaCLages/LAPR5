@@ -12,7 +12,7 @@ public interface IEncomendasRepository : IRepository<Encomenda, EncomendaId>
 
     Task<List<Encomenda>> GetAllAsync();
 
-    Task<String> GestNextIdAsync(DateTime dataEntrega);
+    Task<string> GestNextIdAsync(DateTime dataEntrega);
 
     Task<Encomenda> AddAsync(Encomenda encomenda);
 

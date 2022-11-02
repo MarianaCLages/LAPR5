@@ -6,7 +6,10 @@ namespace GestArm.Domain.Encomendas;
 public class EncomendaDomainId : ValueObject
 
 {
-    private string _id { get; }
+    public EncomendaDomainId(string id)
+    {
+        _id = id;
+    }
 
     public EncomendaDomainId(string number, string date)
     {
@@ -14,6 +17,8 @@ public class EncomendaDomainId : ValueObject
         sb.Append(date).Append("/").Append(number);
         _id = sb.ToString();
     }
+
+    public string _id { get; }
 
 
     public override string ToString()

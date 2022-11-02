@@ -8,7 +8,6 @@ public class ArmazemId : EntityId
     [JsonConstructor]
     public ArmazemId(Guid value) : base(value)
     {
-
     }
 
     public ArmazemId(string value) : base(value)

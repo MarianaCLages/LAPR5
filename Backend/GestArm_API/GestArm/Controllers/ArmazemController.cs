@@ -53,9 +53,7 @@ public class ArmazemController : ControllerBase
             var armazemCheck = await _service.GetByArmazemIdAsync(dto.AlphaNumId);
 
             if (armazemCheck != null)
-            {
                 throw new BusinessRuleValidationException("Armazem com esse AlphaNumeric ID já existe!");
-            }
 
             var armazem = await _service.AddAsync(dto);
 
@@ -63,10 +61,10 @@ public class ArmazemController : ControllerBase
         }
         catch (BusinessRuleValidationException ex)
         {
-            return BadRequest(new { Message = ex.Message });
+            return BadRequest(new { ex.Message });
         }
-
     }
+
     // GET: api/Armazem/search/armazemId
     [HttpGet]
     [Route("~/api/[controller]/search/{armazemId}", Name = "GetArmazemPorIDEspecifico")]
@@ -85,7 +83,7 @@ public class ArmazemController : ControllerBase
     public async Task<ActionResult<ArmazemDTO>> Update(Guid id, ArmazemDTO dto)
     {
         if (id != dto.Id) return BadRequest();
-        
+
         try
         {
             var arm = await _service.UpdateAsync(dto);
@@ -98,7 +96,7 @@ public class ArmazemController : ControllerBase
             return BadRequest(new { ex.Message });
         }
     }
-    
+
     // DELETE: api/Armazem/id
     [HttpDelete("{id}/hard")]
     public async Task<ActionResult<ArmazemDTO>> HardDelete(Guid id)

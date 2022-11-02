@@ -26,22 +26,19 @@ public class EncomendasService : IEncomendasService
 
     public async Task<EncomendaDto> AddAsync(CreatingEncomendaDto dto)
     {
-
         var verifiy = _repositoryArmazem.GetByArmazemIdAsync(new AlphaId(dto.ArmazemId));
-        
+
         if (verifiy.Result == null)
-        {
             throw new BusinessRuleValidationException("Não existe nenhum armazém com esse ID especificado!");
-        }
-        
+
         var nextId = _repository.GestNextIdAsync(DateTime.Parse(dto.DataEntrega));
-        
+
         var encomenda = new Encomenda(
             new EncomendaDomainId(nextId.Result, new DataEntrega(DateTime.Parse(dto.DataEntrega)).ToString("yyMMdd")),
-            new DataEntrega(DateTime.Parse(dto.DataEntrega)),new MassaEntrega(dto.MassaEntrega),
+            new DataEntrega(DateTime.Parse(dto.DataEntrega)), new MassaEntrega(dto.MassaEntrega),
             new TempoEncomenda(dto.TempoCarga), new TempoEncomenda(dto.TempoDescarga),
             dto.ArmazemId);
-        
+
         await _repository.AddAsync(encomenda);
 
         return new EncomendaDto(encomenda.Id, encomenda.EncomendaDomainId.ToString(), encomenda.DataEntrega.ToString(),

@@ -4,7 +4,7 @@ public class CreatingArmazemDto
 {
     public CreatingArmazemDto(int latitudeGrau, int latitudeMinuto, int latitudeSegundo, int longitudeGrau,
         int longitudeMinuto, int longitudeSegundo, string designacao, string rua, int numeroPorta, string codigoPostal,
-        string cidade, string pais,string alphaNumId)
+        string cidade, string pais, string alphaNumId)
 
     {
         LatitudeGrau = latitudeGrau;
@@ -22,7 +22,7 @@ public class CreatingArmazemDto
         AlphaNumId = alphaNumId;
     }
 
-    public string AlphaNumId {get; }
+    public string AlphaNumId { get; }
     public int LatitudeGrau { get; }
 
     public int LatitudeSegundo { get; }

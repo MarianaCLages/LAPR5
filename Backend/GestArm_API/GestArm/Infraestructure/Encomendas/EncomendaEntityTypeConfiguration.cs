@@ -11,6 +11,9 @@ internal class EncomendaEntityTypeConfiguration : IEntityTypeConfiguration<Encom
         builder.ToTable("Encomenda")
             .HasKey(e => e.Id);
         //mapeia cada value object
+        //id de dominio
+        builder.OwnsOne(e => e.EncomendaDomainId).Property(x => x._id).HasColumnName("EncomendaDomainId")
+            .IsRequired();
         //data de entrega
         builder.OwnsOne(e => e.DataEntrega).Property(x => x.Data).HasColumnName("DataEntrega").IsRequired();
         //massa de entrega
@@ -19,6 +22,7 @@ internal class EncomendaEntityTypeConfiguration : IEntityTypeConfiguration<Encom
         builder.OwnsOne(e => e.TempoCarga).Property(x => x.Minutos).HasColumnName("TempoCarga").IsRequired();
         //tempo de descarga
         builder.OwnsOne(e => e.TempoDescarga).Property(x => x.Minutos).HasColumnName("TempoDescarga").IsRequired();
+
         //Id do Armazem
         builder.Property<string>("ArmazemId").IsRequired();
     }

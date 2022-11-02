@@ -1,5 +1,5 @@
-using GestArm.Domain.Shared;
 using System.Text.RegularExpressions;
+using GestArm.Domain.Shared;
 
 namespace GestArm.Domain.Armazens;
 
@@ -15,14 +15,12 @@ public class AlphaId : ValueObject
 
     private void checkAlphaId(string alphaNumId)
     {
-        Regex rg = new Regex(@"^[a-zA-Z0-9\s,]*$");
+        var rg = new Regex(@"^[a-zA-Z0-9\s,]*$");
 
         if (alphaNumId.Length != 3)
             throw new BusinessRuleValidationException("O AlphaId excede o número de caracteres.");
-        else if (!rg.IsMatch(alphaNumId))
-        {
+        if (!rg.IsMatch(alphaNumId))
             throw new BusinessRuleValidationException("O AlphaId apresenta caracteres não suportados.");
-        }
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

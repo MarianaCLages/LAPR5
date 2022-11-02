@@ -15,7 +15,7 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
 
     public Task<Armazem> GetByIdAsync(ArmazemId id)
     {
-        Armazem armazem = _context.Armazens.Where(a => a.Id == id).FirstOrDefault();
+        var armazem = _context.Armazens.Where(a => a.Id == id).FirstOrDefault();
         return Task.FromResult(armazem);
     }
 
@@ -29,20 +29,19 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
 
     public Task<Armazem> GetByDesignacaoAsync(DesignacaoArmazem designacao)
     {
-        Armazem armazem = _context.Armazens.Where(a => a.Designacao.Equals(designacao)).FirstOrDefault();
+        var armazem = _context.Armazens.Where(a => a.Designacao.Equals(designacao)).FirstOrDefault();
         return Task.FromResult(armazem);
     }
 
     public Task<List<Armazem>> GetAllAsync()
     {
-        List<Armazem> armazens = _context.Armazens.ToList();
+        var armazens = _context.Armazens.ToList();
         return Task.FromResult(armazens);
     }
 
 
     public async Task<Armazem> AddAsync(Armazem armazem)
     {
-
         _context.Armazens.Add(armazem);
         await _context.SaveChangesAsync();
         return armazem;
@@ -74,10 +73,10 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
     {
         throw new NotImplementedException();
     }
-    
+
     public async Task<Armazem> GetByArmazemIdAsync(AlphaId armazemId)
     {
-        return await _context.Armazens.Where(r => r.AlphaNumId.AlphaNumId.Equals(armazemId.AlphaNumId)).FirstOrDefaultAsync();
+        return await _context.Armazens.Where(r => r.AlphaNumId.AlphaNumId.Equals(armazemId.AlphaNumId))
+            .FirstOrDefaultAsync();
     }
-    
 }

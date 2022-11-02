@@ -6,7 +6,15 @@ public class MassaEntrega : ValueObject
 {
     public MassaEntrega(double massa)
     {
+        //check if massa is valid
+        isValid(massa);
         Massa = massa;
+    }
+
+    private void isValid(double massa)
+    {
+        if (massa <= 0)
+            throw new BusinessRuleValidationException("Massa tem que ser maior que 0");
     }
 
     public double Massa { get; }
