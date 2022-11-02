@@ -28,55 +28,55 @@ export class Camiao extends AggregateRoot<CamiaoProps> {
     }
 
     get caractCamiao (): CaractCamiao {
-        return this.caractCamiao;
+        return this.props.caractCamiao;
     }
 
     get matriculaCamiao(): MatriculaCamiao{
-        return this.matriculaCamiao;
+        return this.props.matriculaCamiao;
     }
 
     set matriculaCamiao(value: MatriculaCamiao){
-        this.matriculaCamiao = value;
+        this.props.matriculaCamiao = value;
     }
 
     get tara (): Tara {
-        return this.tara;
+        return this.props.tara;
     }
 
     set tara(value: Tara){
-        this.tara = value;
+        this.props.tara = value;
     }
 
     get capacidadeCarga (): CapacidadeCarga {
-        return this.capacidadeCarga;
+        return this.props.capacidadeCarga;
     }
 
     set capacidadeCarga (value: CapacidadeCarga){
-        this.capacidadeCarga = value;
+        this.props.capacidadeCarga = value;
     }
 
     get cargaMax (): CargaMaxima {
-        return this.cargaMax;
+        return this.props.cargaMax;
     }
 
     set cargaMax (value: CargaMaxima){
-        this.cargaMax = value;
+        this.props.cargaMax = value;
     }
 
     get cargaTotal (): CargaTotal {
-        return this.cargaTotal;
+        return this.props.cargaTotal;
     }
 
     set cargaTotal (value: CargaTotal){
-        this.cargaTotal = value;
+        this.props.cargaTotal = value;
     }
 
     get tempoCarregamento (): TempoCarregamento {
-        return this.tempoCarregamento;
+        return this.props.tempoCarregamento;
     }
 
     set tempoCarregamento (value: TempoCarregamento){
-        this.tempoCarregamento = value;
+        this.props.tempoCarregamento = value;
     }
 
     private constructor (props: CamiaoProps, id?: UniqueEntityID) {
