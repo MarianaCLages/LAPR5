@@ -1,14 +1,16 @@
-using GestArm.Domain.Shared;
+using System.Diagnostics.CodeAnalysis;
 using GestArm.Domain.Armazens;
+using GestArm.Domain.Shared;
 
 namespace Dominio;
 
+[SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
 public class ArmazemTest
 {
     [Fact]
     public void CreateValidArmazemTest()
     {
-        Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+        var arm = new Armazem(new ArmazemId(Guid.NewGuid()),
             new CoordenadasArmazem(10, 20, 30),
             new CoordenadasArmazem(10, 30, 40),
             new DesignacaoArmazem("Designação teste"),
@@ -21,43 +23,43 @@ public class ArmazemTest
     [Fact]
     public void CreateArmazemWithInvalidArmazemIdTest()
     {
-        Assert.Throws<NullReferenceException>((() =>
+        Assert.Throws<NullReferenceException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(null),
+            new Armazem(new ArmazemId(null),
                 new CoordenadasArmazem(10, 20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
                 new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
-        }));
+        });
     }
 
     [Fact]
     public void CreateArmazemWithInvalidArmazemIdStringVaziaTest()
     {
-        Assert.Throws<FormatException>((() =>
+        Assert.Throws<FormatException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(""),
+            new Armazem(new ArmazemId(""),
                 new CoordenadasArmazem(10, 20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
                 new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
-        }));
+        });
     }
 
     [Fact]
     public void CreateArmazemWithInvalidLatitudeGrausTest()
     {
-        Assert.Throws<BusinessRuleValidationException>((() =>
+        Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(-190, 20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
                 new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
-        }));
+        });
     }
 
     [Fact]
@@ -65,7 +67,7 @@ public class ArmazemTest
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(10, -20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
@@ -79,7 +81,7 @@ public class ArmazemTest
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(10, 20, -30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
@@ -93,7 +95,7 @@ public class ArmazemTest
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(10, 20, 30),
                 new CoordenadasArmazem(-190, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
@@ -105,57 +107,57 @@ public class ArmazemTest
     [Fact]
     public void CreateArmazemWithInvalidLongitudeMinutosTest()
     {
-        Assert.Throws<BusinessRuleValidationException>((() =>
+        Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(10, 20, 30),
                 new CoordenadasArmazem(10, -30, 40),
                 new DesignacaoArmazem("Designação teste"),
                 new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
-        }));
+        });
     }
 
     [Fact]
     public void CreateArmazemWithInvalidLongitudeSegundosTest()
     {
-        Assert.Throws<BusinessRuleValidationException>((() =>
+        Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(10, 20, 30),
                 new CoordenadasArmazem(10, 30, -40),
                 new DesignacaoArmazem("Designação teste"),
                 new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
-        }));
+        });
     }
 
     [Fact]
     public void CreateArmazemWithInvalidDesignacaoArmazemTest()
     {
-        Assert.Throws<BusinessRuleValidationException>((() =>
+        Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(10, 20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem(null),
                 new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
-        }));
+        });
     }
 
     [Fact]
     public void CreateArmazemWithInvalidDesignacaoEndereçoRuaTest()
     {
-        Assert.Throws<BusinessRuleValidationException>((() =>
+        Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(-10, 20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
                 new EnderecoArmazem("", 1, "4000-300", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
-        }));
+        });
     }
 
     [Fact]
@@ -163,7 +165,7 @@ public class ArmazemTest
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(-10, 20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
@@ -175,29 +177,29 @@ public class ArmazemTest
     [Fact]
     public void CreateArmazemWithInvalidDesignacaoEndereçoCodigoPostalTest()
     {
-        Assert.Throws<BusinessRuleValidationException>((() =>
+        Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(-10, 20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
                 new EnderecoArmazem("Rua das flores", 1, "", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
-        }));
+        });
     }
 
     [Fact]
     public void CreateArmazemWithInvalidDesignacaoEndereçoCidadeTest()
     {
-        Assert.Throws<BusinessRuleValidationException>((() =>
+        Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(-10, 20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
                 new EnderecoArmazem("Rua das flores", 1, "4000-300", null, "Pourtougal"),
                 new AlphaId("A12"));
-        }));
+        });
     }
 
     [Fact]
@@ -205,7 +207,7 @@ public class ArmazemTest
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(-10, 20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
@@ -219,7 +221,7 @@ public class ArmazemTest
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+            new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(-10, 20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
