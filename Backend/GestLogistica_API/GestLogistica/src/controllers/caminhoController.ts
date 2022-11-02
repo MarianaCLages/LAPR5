@@ -7,7 +7,7 @@ import ICaminhoService from "../services/IServices/ICaminhoService";
 import ICriarCaminhoDTO from "../dto/caminho/ICriarCaminhoDTO";
 import ICaminhoDTO from "../dto/caminho/ICaminhoDTO";
 import {BaseController} from "../core/infra/BaseController";
-import {CaminhoId} from "../domain/caminho/caminhoId";
+import ICaminhoIdDto from "../dto/caminho/ICaminhoIdDto";
 
 @Service()
 export default class caminhoController
@@ -69,7 +69,7 @@ export default class caminhoController
 
     public async apagaCaminho(req: Request, res: Response, next: NextFunction) {
         try {
-            const caminhoOrError = await this.caminhoServiceInstance.apagaCaminho(req.body as CaminhoId);
+            const caminhoOrError = await this.caminhoServiceInstance.apagaCaminho(req.body as ICaminhoIdDto);
 
             if (caminhoOrError.isFailure) {
                 return res.status(400).send("O caminho especificado nao foi encontrado!");
