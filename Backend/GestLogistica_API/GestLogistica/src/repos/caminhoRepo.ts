@@ -50,6 +50,7 @@ export default class CaminhoRepo implements ICaminhoRepo {
     public async delete(caminhoId: CaminhoId) {
         const query = {idCaminho: caminhoId};
         await this.caminhoSchema.deleteMany(query as FilterQuery<ICaminhoPersistence & Document>);
+        return true;
     }
 
     public async update(caminho: Caminho): Promise<Result<Caminho>> {
@@ -60,14 +61,22 @@ export default class CaminhoRepo implements ICaminhoRepo {
 
         try {
             if (caminhoDocument === null) {
-                const rawCaminho: any = CaminhoMap.toPersistence(caminho);
+                const rawUser: any = CaminhoMap.toPersistence(caminho);
 
-                const caminhoCreated = await this.caminhoSchema.create(rawCaminho);
+                const caminhoCreated = await this.caminhoSchema.create(rawUser);
 
-                return Result.ok<Caminho>(CaminhoMap.toDomain(caminhoCreated));
+                return Result.ok(CaminhoMap.toDomain(caminhoCreated));
             } else {
+                caminhoDocument.tmpCarregamento = caminho.caminhoTmpCarregamento.value;
+                caminhoDocument.energia = caminho.caminhoEnergia.value;
+                caminhoDocument.distancia = caminho.caminhoDistancia.value;
+                caminhoDocument.armazemPartidaId = caminho.caminhoArmazemPartidaId.value;
+                caminhoDocument.armazemChegadaId = caminho.caminhoChegadaId.value;
 
-                return Result.ok<Caminho>(caminho);
+                await caminhoDocument.save();
+
+                return Result.ok(caminho);
+
             }
         } catch (err) {
             throw err;

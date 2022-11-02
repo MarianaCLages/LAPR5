@@ -77,7 +77,7 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
     
     public async Task<Armazem> GetByArmazemIdAsync(AlphaId armazemId)
     {
-        return await _context.Armazens.Where(r => r.AlphaNumId.Equals(armazemId)).FirstOrDefaultAsync();
+        return await _context.Armazens.Where(r => r.AlphaNumId.AlphaNumId.Equals(armazemId.AlphaNumId)).FirstOrDefaultAsync();
     }
     
 }

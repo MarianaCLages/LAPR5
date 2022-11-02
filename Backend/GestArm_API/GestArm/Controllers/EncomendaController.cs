@@ -63,6 +63,7 @@ public class EncomendaController : ControllerBase
 
     // GET: api/Encomenda/armazemId=armazemId
     [Route("~/api/[controller]/{armazemId:alpha}", Name = "GetEncomendaPorIdDeArmazem")]
+    [Route("~/api/[controller]/armazemId/{armazemId}", Name = "GetByArmazemID")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByArmazemIdAysnc(string armazemId)
     {

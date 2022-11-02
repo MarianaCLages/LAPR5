@@ -11,14 +11,18 @@ public class AlphaId : ValueObject
         AlphaNumId = alphaNumId;
     }
 
-    public string AlphaNumId { get; }
+    public string AlphaNumId { get; set; }
 
     private void checkAlphaId(string alphaNumId)
     {
         Regex rg = new Regex(@"^[a-zA-Z0-9\s,]*$");
 
-        if (alphaNumId.Length != 3 && !rg.IsMatch(alphaNumId))
+        if (alphaNumId.Length != 3)
             throw new BusinessRuleValidationException("O AlphaId excede o número de caracteres.");
+        else if (!rg.IsMatch(alphaNumId))
+        {
+            throw new BusinessRuleValidationException("O AlphaId apresenta caracteres não suportados.");
+        }
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

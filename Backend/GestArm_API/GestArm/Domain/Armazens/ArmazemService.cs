@@ -96,8 +96,8 @@ public class ArmazemService : IArmazemService
 
         return new ArmazemDTO(armazem.Id.AsGuid(), armazem.Latitude.Graus, armazem.Latitude.Minutos, armazem.Latitude.Segundos,
             armazem.Longitude.Graus, armazem.Longitude.Minutos, armazem.Longitude.Segundos,
-            armazem.Designacao.ToString(), armazem.Endereco.Rua, armazem.Endereco.NumeroPorta,
-            armazem.Endereco.CodigoPostal, armazem.Endereco.Cidade, armazem.Endereco.Pais,armazem.AlphaNumId.ToString());
+            armazem.Designacao.Designacao, armazem.Endereco.Rua, armazem.Endereco.NumeroPorta,
+            armazem.Endereco.CodigoPostal, armazem.Endereco.Cidade, armazem.Endereco.Pais,armazem.AlphaNumId.AlphaNumId);
     }
     
     public async Task<bool> DeleteAsync(ArmazemId id)

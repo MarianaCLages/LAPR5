@@ -78,9 +78,10 @@ export class Caminho extends AggregateRoot<CaminhoProps> {
         this.props.tmpCarregamento = value;
     }
 
-    set caminhoArmazemChegadaId(value: CaminhoArmazemChegadaId) {
+    set caminhoChegadaId(value: CaminhoArmazemChegadaId) {
         this.props.armazemChegadaId = value;
     }
+
 
     public static create(caminhoDTO: ICriarCaminhoDTO, id?: UniqueEntityID): Result<Caminho> {
         const guardedProps = [

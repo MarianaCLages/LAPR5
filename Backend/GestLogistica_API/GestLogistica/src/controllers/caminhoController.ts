@@ -57,8 +57,7 @@ export default class caminhoController
                 return res.status(400).send("O caminho especificado nao foi encontrado!");
             }
 
-            const caminhoDTO = caminhoOrError.getValue();
-            return res.json(caminhoDTO).status(200);
+            return res.json().status(200);
         } catch (e) {
             return next(e);
         }
