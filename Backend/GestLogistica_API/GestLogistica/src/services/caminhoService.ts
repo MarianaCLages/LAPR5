@@ -132,7 +132,7 @@ export default class CaminhoService implements ICaminhoService {
             if (caminho === null) {
                 return Result.fail<ICaminhoDTO>("Caminho não foi encontrado! O id especificado não existe");
             } else {
-                await this.caminhoRepo.delete(caminho);
+                await this.caminhoRepo.delete(caminho.id);
 
                 const caminhoDTOResult = CaminhoMap.toDTO(caminho) as ICaminhoDTO;
                 return Result.ok<ICaminhoDTO>(caminhoDTOResult);
