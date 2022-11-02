@@ -34,6 +34,24 @@ export default class caminhoController
         }
     }
 
+    public async getAllCaminhos(req: Request, res: Response, next: NextFunction) {
+        try {
+            const caminhoOrError = await this.caminhoServiceInstance.getAllCaminhos();
+
+            if (caminhoOrError.isFailure) {
+                return res.json(caminhoOrError.error).status(400);
+            }
+
+            const caminhosDTO = caminhoOrError.getValue();
+            return res.json(caminhosDTO).status(200);
+
+        } catch (e) {
+            return next(e);
+        }
+    }
+
+
+
     public async updateCaminho(req: Request, res: Response, next: NextFunction) {
         try {
             const caminhoOrError = await this.caminhoServiceInstance.updateCaminho(req.body as ICaminhoDTO);
