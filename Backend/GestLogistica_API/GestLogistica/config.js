@@ -49,7 +49,11 @@ export default {
         caminho: {
             name: "CaminhoController",
             path: "../controllers/caminhoController"
-        }
+        },
+        camiao: {
+            name: "CamiaoController",
+            path: "../controllers/camiaoController"
+        },
     },
 
     repos: {
@@ -65,6 +69,10 @@ export default {
             name: "CaminhoRepo",
             path: "../repos/caminhoRepo"
         },
+        camiao: {
+            name: "CamiaoRepo",
+            path: "../repos/camiaoRepo"
+        },
         armazem: {
             name: "ArmazemRepo",
             path: "../repos/AmazemAPIGetter"
@@ -79,7 +87,11 @@ export default {
         caminho: {
             name: "CaminhoService",
             path: "../services/caminhoService"
-        }
+        },
+        camiao: {
+            name: "CamiaoService",
+            path: "../services/camiaoService"
+        },
     },
 
     amazemAPIAdress: "https://localhost:5001/api/armazem/search/",
