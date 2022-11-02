@@ -1,26 +1,21 @@
-import { Request, Response, NextFunction } from "express";
-import { Inject, Service } from "typedi";
+import {NextFunction, Request, Response} from "express";
+import {Inject, Service} from "typedi";
 import config from "../../config";
 
 import ICamiaoController from "./IControllers/ICamiaoController";
 import ICamiaoService from "../services/IServices/ICamiaoService";
 import {ICamiaoDTO} from "../dto/camiao/ICamiaoDTO";
 
-import { Result } from "../core/logic/Result";
-import { BaseController } from "../core/infra/BaseController";
+import {Result} from "../core/logic/Result";
+import {BaseController} from "../core/infra/BaseController";
 
 @Service()
-export default class camiaoController 
- extends BaseController
- implements
- ICamiaoController {
-    protected executeImpl(): Promise<any> {
-        throw new Error("Method not implemented.");
-    }
-
-    constructor (
+export default class camiaoController
+    extends BaseController
+    implements ICamiaoController {
+    constructor(
         @Inject(config.services.camiao.name) private camiaoServiceInstance: ICamiaoService
-) {
+    ) {
         super();
 
     }
@@ -34,7 +29,7 @@ export default class camiaoController
             }
 
             const camiaoDTO = camiaoOrError.getValue();
-            return res.json(camiaoDTO).status(201);
+            return res.json(camiaoDTO).status(201).send();
         } catch (e) {
             return next(e);
         }
@@ -54,5 +49,9 @@ export default class camiaoController
         }catch(e){
             return next(e);
         }
+    }
+
+    protected executeImpl(): Promise<any> {
+        throw new Error("Method not implemented.");
     }
 }

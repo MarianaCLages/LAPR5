@@ -27,7 +27,7 @@ export class CaminhoDistancia extends ValueObject<caminhoDistanciaProps> {
         }
     }
 
-    public toString(): Number {
+    public toString(): number {
         return this.props.value;
     }
 }

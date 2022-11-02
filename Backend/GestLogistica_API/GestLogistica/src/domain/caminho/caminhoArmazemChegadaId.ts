@@ -23,7 +23,7 @@ export class CaminhoArmazemChegadaId extends ValueObject<caminhoArmazemChegadaId
         return Result.ok<CaminhoArmazemChegadaId>(new CaminhoArmazemChegadaId({value: caminhoArmazemChegadaId}))
     }
 
-    public toString(): String {
+    public toString(): string {
         return this.props.value;
     }
 }

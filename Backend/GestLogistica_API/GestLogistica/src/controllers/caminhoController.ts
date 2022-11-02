@@ -24,11 +24,11 @@ export default class caminhoController
             const caminhoOrError = await this.caminhoServiceInstance.createCaminho(req.body as ICriarCaminhoDTO);
 
             if (caminhoOrError.isFailure) {
-                return res.json(caminhoOrError.error).status(400);
+                return res.status(400).json(caminhoOrError.error).send();
             }
 
             const caminhoDTO = caminhoOrError.getValue();
-            return res.json(caminhoDTO).status(201);
+            return res.status(201).json(caminhoDTO).send();
         } catch (e) {
             return next(e);
         }

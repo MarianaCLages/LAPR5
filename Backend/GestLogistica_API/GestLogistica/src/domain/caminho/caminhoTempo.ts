@@ -27,7 +27,7 @@ export class CaminhoTempo extends ValueObject<caminhoTempoProps> {
         }
     }
 
-    public toString(): String {
+    public toString(): string {
         return this.props.value.toString();
     }
 }

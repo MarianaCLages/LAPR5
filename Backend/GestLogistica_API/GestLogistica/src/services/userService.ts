@@ -33,6 +33,7 @@ export default class UserService implements IUserService{
 
   public async SignUp(userDTO: IUserDTO): Promise<Result<{ userDTO: IUserDTO, token: string }>> {
     try {
+
       const userDocument = await this.userRepo.findByEmail( userDTO.email );
       const found = !!userDocument;
   

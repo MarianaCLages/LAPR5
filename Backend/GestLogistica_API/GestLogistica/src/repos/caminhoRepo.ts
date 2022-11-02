@@ -63,8 +63,8 @@ export default class CaminhoRepo implements ICaminhoRepo {
     }
 
     public async delete(caminhoId: CaminhoId) {
-        const query = {id: caminhoId};
-        await this.caminhoSchema.deleteOne(query as FilterQuery<ICaminhoPersistence & Document>);
+        const query = {idCaminho: caminhoId};
+        this.caminhoSchema.deleteMany(query as FilterQuery<ICaminhoPersistence & Document>);
         return true;
     }
 
