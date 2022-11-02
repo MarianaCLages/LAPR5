@@ -52,7 +52,7 @@ public class ArmazemTest
         Assert.Throws<BusinessRuleValidationException>((() =>
         {
             Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
-                new CoordenadasArmazem(-10, 20, 30),
+                new CoordenadasArmazem(-190, 20, 30),
                 new CoordenadasArmazem(10, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
                 new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
@@ -95,7 +95,7 @@ public class ArmazemTest
         {
             Armazem arm = new Armazem(new ArmazemId(Guid.NewGuid()),
                 new CoordenadasArmazem(10, 20, 30),
-                new CoordenadasArmazem(-10, 30, 40),
+                new CoordenadasArmazem(-190, 30, 40),
                 new DesignacaoArmazem("Designação teste"),
                 new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
