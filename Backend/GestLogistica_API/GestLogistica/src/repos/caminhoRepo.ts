@@ -8,6 +8,7 @@ import {ICaminhoPersistence} from '../dataschema/ICaminhoPersistence';
 import {CaminhoMap} from '../mappers/CaminhoMap';
 import ICaminhoRepo from '../services/IRepos/ICaminhoRepo';
 import {Result} from "../core/logic/Result";
+import { Mapper } from '../core/infra/Mapper';
 
 @Service()
 export default class CaminhoRepo implements ICaminhoRepo {
@@ -45,6 +46,19 @@ export default class CaminhoRepo implements ICaminhoRepo {
             return CaminhoMap.toDomain(roleRecord);
         } else
             return null;
+    }
+
+    public async getAllCaminhos(): Promise<Result<Array<Caminho>>> {
+        var lista = new Array<Caminho>; 
+        (await this.caminhoSchema.find({})).forEach(
+            caminho =>
+            lista.push(CaminhoMap.toDomain(caminho))
+        )
+
+        if(lista !=null){
+        return Result.ok();
+        } else
+        return null;
     }
 
     public async delete(caminhoId: CaminhoId) {

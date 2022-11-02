@@ -11,6 +11,8 @@ export default interface ICaminhoRepo extends Repo<Caminho> {
 
     findByDomainId(caminhoId: CaminhoId | string): Promise<Caminho>;
 
+    getAllCaminhos();
+
     //findByIds (rolesIds: RoleId[]): Promise<Role[]>;
     //saveCollection (roles: Role[]): Promise<Role[]>;
 
