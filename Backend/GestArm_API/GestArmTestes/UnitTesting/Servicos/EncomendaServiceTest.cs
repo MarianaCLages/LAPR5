@@ -1,3 +1,4 @@
+using GestArm.Domain.Armazens;
 using GestArm.Domain.Encomendas;
 using Moq;
 using Newtonsoft.Json;
@@ -7,11 +8,13 @@ namespace Servicos;
 public class EncomendaServiceTest
 {
     private readonly EncomendasService _service;
+    
     private readonly Mock<IEncomendasRepository> _repositoryMock = new Mock<IEncomendasRepository>();
+    private readonly Mock<IArmazemRepository> _repositoryArmazemMock = new Mock<IArmazemRepository>();
 
     public EncomendaServiceTest()
     {
-        _service = new EncomendasService(_repositoryMock.Object);
+        _service = new EncomendasService(_repositoryMock.Object,_repositoryArmazemMock.Object);
     }
 
     [Fact]
