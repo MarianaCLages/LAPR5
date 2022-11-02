@@ -16,7 +16,7 @@ export default interface ICaminhoRepo extends Repo<Caminho> {
     //findByIds (rolesIds: RoleId[]): Promise<Role[]>;
     //saveCollection (roles: Role[]): Promise<Role[]>;
 
-    delete(caminhoId: CaminhoId): Promise<boolean>;
+    delete(caminhoId: Caminho): Promise<boolean>;
 
     update(caminho: Caminho): Promise<Result<Caminho>>;
 }

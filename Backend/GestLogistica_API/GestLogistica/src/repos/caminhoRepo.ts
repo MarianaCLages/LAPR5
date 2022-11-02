@@ -39,7 +39,7 @@ export default class CaminhoRepo implements ICaminhoRepo {
     }
 
     public async findByDomainId(caminhoId: CaminhoId | string): Promise<Caminho> {
-        const query = {domainId: caminhoId};
+        const query = {id: caminhoId};
         const roleRecord = await this.caminhoSchema.findOne(query as FilterQuery<ICaminhoPersistence & Document>);
 
         if (roleRecord != null) {
@@ -47,6 +47,7 @@ export default class CaminhoRepo implements ICaminhoRepo {
         } else
             return null;
     }
+
 
     public async getAllCaminhos(): Promise<Result<Array<Caminho>>> {
         var lista = new Array<Caminho>; 
@@ -61,15 +62,15 @@ export default class CaminhoRepo implements ICaminhoRepo {
         return null;
     }
 
-    public async delete(caminhoId: CaminhoId) {
-        const query = {idCaminho: caminhoId};
+    public async delete(caminho: Caminho) {
+        const query = {id: caminho.caminhoId.toString()};
         await this.caminhoSchema.deleteMany(query as FilterQuery<ICaminhoPersistence & Document>);
         return true;
     }
 
     public async update(caminho: Caminho): Promise<Result<Caminho>> {
 
-        const query = {domainId: caminho.id.toString()};
+        const query = {id: caminho.id.toString()};
 
         const caminhoDocument = await this.caminhoSchema.findOne(query);
 
@@ -86,6 +87,7 @@ export default class CaminhoRepo implements ICaminhoRepo {
                 caminhoDocument.distancia = caminho.caminhoDistancia.value;
                 caminhoDocument.armazemPartidaId = caminho.caminhoArmazemPartidaId.value;
                 caminhoDocument.armazemChegadaId = caminho.caminhoChegadaId.value;
+                caminhoDocument.tempo = caminho.caminhoTempo.value;
 
                 await caminhoDocument.save();
 
