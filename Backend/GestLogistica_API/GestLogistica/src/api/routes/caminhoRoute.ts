@@ -48,4 +48,6 @@ export default (app: Router) => {
         }),
         (req, res, next) => ctrl.apagaCaminho(req, res, next));
 
+    route.get('', (req, res, next) => ctrl.getAllCaminhos(req, res, next));
+
 };
