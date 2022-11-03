@@ -10,44 +10,37 @@ const CamiaoSchema = new mongoose.Schema(
 
         caractCamiao: {
             type: String,
-            required: true,
-            index: true
+            required: true
         },
 
         matriculaCamiao: {
             type: String,
-            required: true,
-            index: true
+            required: true
         },
 
         tara: {
             type: String,
-            required: [true, 'Por favor selecione a tara do camião'],
-            index: true
+            required: [true, 'Por favor selecione a tara do camião']
         },
 
         capacidadeCarga: {
             type: String,
-            required: [true, 'Por favor selecione a capacidade de carga do camião'],
-            index: true
+            required: [true, 'Por favor selecione a capacidade de carga do camião']
         },
 
         cargaMaxima: {
             type: String,
-            required: [true, 'Por favor selecione a carga máxima do camião'],
-            index: true
+            required: [true, 'Por favor selecione a carga máxima do camião']
         },
 
         cargaTotal: {
             type: String,
-            required: [true, 'Por favor selecione a carga total do camião'],
-            index: true
+            required: [true, 'Por favor selecione a carga total do camião']
         },
 
         tempoCarregamento: {
             type: String,
-            required: [true, 'Por favor selecione o tempo de carregamento do camião'],
-            index: true
+            required: [true, 'Por favor selecione o tempo de carregamento do camião']
         },
     },
         {
