@@ -19,11 +19,11 @@ export default (app: Router) => {
             body: Joi.object({
                 caractCamiao: Joi.string().required(),
                 matriculaCamiao: Joi.string().required(),
-                capacidadeCarga: Joi.string().required(),
-                cargaMax: Joi.string().required(),
-                cargaTotal: Joi.string().required(),
-                tara: Joi.string().required(),
-                tempoCarregamento: Joi.string().required(),
+                capacidadeCarga: Joi.number().required(),
+                cargaMax: Joi.number().required(),
+                cargaTotal: Joi.number().required(),
+                tara: Joi.number().required(),
+                tempoCarregamento: Joi.number().required(),
             })
         }),
         (req, res, next) => ctrl.createCamiao(req, res, next) );
