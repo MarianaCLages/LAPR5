@@ -13,12 +13,14 @@ export class CamiaoMap extends Mapper<Camiao> {
     public static toDTO(camiao: Camiao): ICamiaoDTO {
         return {
             id: camiao.id.toString(),
+            caractCamiao: camiao.caractCamiao.toString(),
+            matriculaCamiao: camiao.matriculaCamiao.toString(),
             tara: camiao.tara.toString(),
             capacidadeCarga: camiao.capacidadeCarga.toString(),
             cargaMax: camiao.cargaMax.toString(),
             cargaTotal: camiao.cargaTotal.toString(),
             tempoCarregamento: camiao.tempoCarregamento.toString(),
-        } as ICamiaoDTO;
+        };
     }
 
     public static toDomain(
