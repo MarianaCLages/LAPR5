@@ -57,7 +57,7 @@ public class ArmazemController : ControllerBase
 
             var armazem = await _service.AddAsync(dto);
 
-            return CreatedAtAction(nameof(GetById), new { id = armazem.Id }, armazem);
+            return armazem;
         }
         catch (BusinessRuleValidationException ex)
         {
