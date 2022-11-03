@@ -80,7 +80,7 @@ public class ArmazemController : ControllerBase
     // PUT: api/Armazem/atualizar/id
     [Route("~/api/[controller]/{id:guid}", Name = "UpdateArmazem")]
     [HttpPut]
-    public async Task<ActionResult<ArmazemDTO>> Update(Guid id, ArmazemDTO dto)
+    public async Task<ActionResult<ArmazemDTO>> UpdateAsync(Guid id, ArmazemDTO dto)
     {
         if (id != dto.Id) return BadRequest();
 
@@ -98,8 +98,9 @@ public class ArmazemController : ControllerBase
     }
 
     // DELETE: api/Armazem/id
-    [HttpDelete("{id}/hard")]
-    public async Task<ActionResult<ArmazemDTO>> HardDelete(Guid id)
+    [Route("~/api/[controller]/{id:guid}", Name = "DeleteArmazem")]
+    [HttpDelete]
+    public async Task<ActionResult<ArmazemDTO>> DeleteAsync(Guid id)
     {
         try
         {
