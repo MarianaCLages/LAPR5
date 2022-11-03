@@ -112,19 +112,13 @@ public class ArmazemService : IArmazemService
 
     public async Task<bool> DeleteAsync(ArmazemId id)
     {
-        /*
         var armazem = await _repository.GetByIdAsync(id);
 
         if (armazem == null)
-            return null;
-        
+            return false;
+
         _repository.Remove(armazem);
 
-        return new ArmazemDTO(armazem.Id.AsGuid(), armazem.Latitude.Graus, armazem.Latitude.Minutos, armazem.Latitude.Segundos,
-            armazem.Longitude.Graus, armazem.Longitude.Minutos, armazem.Longitude.Segundos,
-            armazem.Designacao.ToString(), armazem.Endereco.Rua, armazem.Endereco.NumeroPorta,
-            armazem.Endereco.CodigoPostal, armazem.Endereco.Cidade, armazem.Endereco.Pais,armazem.AlphaNumId.ToString());
-            */
         return true;
     }
 }
