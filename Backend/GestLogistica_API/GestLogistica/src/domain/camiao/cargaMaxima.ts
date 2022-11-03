@@ -3,11 +3,11 @@ import { Result } from "../../core/logic/Result";
 import { Guard } from "../../core/logic/Guard";
 
 interface CargaMaximaProps {
-    value: string;
+    value: number;
   }
   
   export class CargaMaxima extends ValueObject<CargaMaximaProps> {
-    get value (): string {
+    get value (): number {
       return this.props.value;
     }
     
@@ -15,7 +15,7 @@ interface CargaMaximaProps {
       super(props);
     }
   
-    public static create (cargaMax: string): Result<CargaMaxima> {
+    public static create (cargaMax: number): Result<CargaMaxima> {
       const guardResult = Guard.againstNullOrUndefined(cargaMax, 'cargaMax');
       if (!guardResult.succeeded) {
         return Result.fail<CargaMaxima>(guardResult.message);

@@ -3,11 +3,11 @@ import { Result } from "../../core/logic/Result";
 import { Guard } from "../../core/logic/Guard";
 
 interface TempoCarregamentoProps {
-    value: string;
+    value: number;
   }
   
   export class TempoCarregamento extends ValueObject<TempoCarregamentoProps> {
-    get value (): string {
+    get value (): number {
       return this.props.value;
     }
     
@@ -15,7 +15,7 @@ interface TempoCarregamentoProps {
       super(props);
     }
   
-    public static create (tempoCarregamento: string): Result<TempoCarregamento> {
+    public static create (tempoCarregamento: number): Result<TempoCarregamento> {
       const guardResult = Guard.againstNullOrUndefined(tempoCarregamento, 'tempoCarregamento');
       if (!guardResult.succeeded) {
         return Result.fail<TempoCarregamento>(guardResult.message);

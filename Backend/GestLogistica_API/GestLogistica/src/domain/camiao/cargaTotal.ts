@@ -3,11 +3,11 @@ import { Result } from "../../core/logic/Result";
 import { Guard } from "../../core/logic/Guard";
 
 interface cargaTotalProps {
-    value: string;
+    value: number;
 }
 
 export class CargaTotal extends ValueObject<cargaTotalProps> {
-    get value(): string {
+    get value(): number {
         return this.props.value;
     }
 
@@ -15,7 +15,7 @@ export class CargaTotal extends ValueObject<cargaTotalProps> {
         super(props);
     }
 
-    public static create(cargaTotal: string): Result<CargaTotal> {
+    public static create(cargaTotal: number): Result<CargaTotal> {
         const guardResult = Guard.againstNullOrUndefined(cargaTotal, 'cargaTotal');
         if (!guardResult.succeeded) {
             return Result.fail<CargaTotal>(guardResult.message);
