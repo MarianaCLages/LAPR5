@@ -6,11 +6,11 @@ const CamiaoSchema = new mongoose.Schema(
         domainId: {type: String, required: true},
         caractCamiao: String,
         matriculaCamiao: String,
-        tara: String,
-        capacidadeCarga: String,
-        cargaMax: String,
-        cargaTotal: String,
-        tempoCarregamento: String
+        tara: Number,
+        capacidadeCarga: Number,
+        cargaMax: Number,
+        cargaTotal: Number,
+        tempoCarregamento: Number
 
     },
 );
