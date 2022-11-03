@@ -51,7 +51,7 @@ export default class camiaoRepo implements ICamiaoRepo {
                 camiaoDocument.id = camiao.id.toString();
             }
         } catch (err) {
-            throw err;
+            console.debug(err.message + " " + err.stack);
         }
     }
 
