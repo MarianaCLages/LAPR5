@@ -109,7 +109,33 @@ public class ArmazemControllerTest
     [Fact]
     public void AddAsyncTest()
     {
-        //TODO: implementar este teste
+
+        var arm = new Armazem(new ArmazemId(Guid.NewGuid()),
+        new CoordenadasArmazem(12, 13, 14),
+        new CoordenadasArmazem(15, 12, 13),
+        new DesignacaoArmazem("Designação teste"),
+        new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
+        new AlphaId("A12"));
+
+        var armDto = ArmazemDtoParser.convertToDto(arm);
+
+        CreatingArmazemDto createDTO = new CreatingArmazemDto(12, 13, 14, 15, 12, 13, "Designação teste",
+        "Rua das flores", 1, "4000-300", "Pourto", "Pourtougal", "A12");
+
+
+        _ServiceMock.Setup(x => x.AddAsync(createDTO)).ReturnsAsync(armDto);
+        var result = _controller.AddAsync(createDTO).Result;
+
+        var objExpected = armDto;
+        var objActual = result.Value;
+
+        var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
+        var obj2StrActual = JsonConvert.SerializeObject(objActual);
+
+        Console.WriteLine(obj1StrExpected);
+        Console.WriteLine(obj2StrActual);
+
+        Assert.Equal(obj1StrExpected, obj2StrActual);
     }
 
     [Fact]
