@@ -4,21 +4,27 @@ import {CaminhoId} from "../../domain/caminho/caminhoId";
 import {Result} from "../../core/logic/Result";
 import { Empacotamento } from "../../domain/empacotamento/empacotamento";
 import { EmpId } from "../../domain/empacotamento/empId";
+import IEmpacotamentoDTO from "../../dto/empacotamento/IEmpacotamentoDTO";
+import { EmpEntregaRef } from "../../domain/empacotamento/empEntregaRef";
+import { EmpCamiaoRef } from "../../domain/empacotamento/empCamiaoRef";
 
-export default interface IEmpacotamentoRepo extends Repo<Empacotamento> {
+export default interface IPacoteRepo extends Repo<Empacotamento> {
   //removeByRoleIds (roles: RoleId[]): Promise<any>
   async
 
   save(empacotamento: Empacotamento): Promise<Empacotamento>;
 
-  findByDomainId(empacotamentoId: EmpId | string): Promise<Empacotamento>;
+  findByDomainId(empId: EmpId | string): Promise<Empacotamento>;
 
   getAllEmpacotamentos() : Promise<Result<Array<Empacotamento>>>;
 
   //findByIds (rolesIds: RoleId[]): Promise<Role[]>;
   //saveCollection (roles: Role[]): Promise<Role[]>;
 
-  delete(empacotamentoId: EmpId): Promise<boolean>;
+  delete(empId: EmpId): Promise<boolean>;
 
   update(empacotamento: Empacotamento): Promise<Result<Empacotamento>>;
+
+  getByCamiaoAsync(entregaId: EmpCamiaoRef | string) : Promise<Result<Array<Empacotamento>>>;
+  getByEntregaAsync(entregaId: EmpEntregaRef | string): Promise<Result<Array<Empacotamento>>>;
 }

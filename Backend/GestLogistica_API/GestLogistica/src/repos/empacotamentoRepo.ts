@@ -2,15 +2,18 @@ import { Document, FilterQuery, Model } from "mongoose";
 import { Service, Inject } from "typedi";
 import { Result } from "../core/logic/Result";
 import { CaractCamiao } from "../domain/camiao/caractCamiao";
-import IEmpacotamentoRepo from "../services/IRepos/IEmpacotamentoRepo";
+import IPacoteRepo from "../services/IRepos/IPacoteRepo";
 import { EmpId } from "../domain/empacotamento/empId";
 import { Empacotamento } from "../domain/empacotamento/empacotamento";
 import { IEmpacotamentoPersistance } from "../dataschema/IEmpacotamentoPersistance";
 import { EmpacotamentoMap } from "../mappers/EmpacotamentoMap";
 import { ICaminhoPersistence } from "../dataschema/ICaminhoPersistence";
+import IEmpacotamentoDTO from "../dto/empacotamento/IEmpacotamentoDTO";
+import { EmpEntregaRef } from "../domain/empacotamento/empEntregaRef";
+import { EmpCamiaoRef } from "../domain/empacotamento/empCamiaoRef";
 
 @Service()
-export default class empacotamentoRepo implements IEmpacotamentoRepo {
+export default class EmpacotamentoRepo implements IPacoteRepo {
   async;
   private models: any;
 
@@ -25,7 +28,7 @@ export default class empacotamentoRepo implements IEmpacotamentoRepo {
     };
   }
 
-   public async exists(emp: Empacotamento): Promise<boolean> {
+  public async exists(emp: Empacotamento): Promise<boolean> {
     const idX = emp.empId instanceof EmpId ? (<EmpId>emp.empId).value : emp.empId;
     const query = { id: idX };
     const empDocument = await this.empacotamentoSchema.findOne(query as FilterQuery<IEmpacotamentoPersistance & Document>);
@@ -59,14 +62,47 @@ export default class empacotamentoRepo implements IEmpacotamentoRepo {
     }
   }
 
+  public async getByEntregaAsync(entregaId: EmpEntregaRef | string): Promise<Result<Array<Empacotamento>>> {
+    const idX = entregaId instanceof EmpId ? (<EmpId>entregaId).value : entregaId;
+
+    const query = { empEntregaRef: idX };
+
+    var lista = new Array<Empacotamento>;
+    (await this.empacotamentoSchema.find(query)).forEach(
+      emp =>
+        lista.push(EmpacotamentoMap.toDomain(emp))
+    );
+    if (lista != null) {
+      return Result.ok(lista);
+    } else
+      return null;
+  }
+
+  public async getByCamiaoAsync(entregaId: EmpCamiaoRef | string): Promise<Result<Array<Empacotamento>>> {
+    const idX = entregaId instanceof EmpId ? (<EmpId>entregaId).value : entregaId;
+
+    const query = { empCamiaoRef: idX };
+
+    var lista = new Array<Empacotamento>;
+    (await this.empacotamentoSchema.find(query)).forEach(
+      emp =>
+        lista.push(EmpacotamentoMap.toDomain(emp))
+    );
+    if (lista != null) {
+      return Result.ok(lista);
+    } else
+      return null;
+
+  }
+
   public async update(empacotamento: Empacotamento): Promise<Result<Empacotamento>> {
 
-    const query = { id: CaractCamiao.toString() };
+    const query = { id: empacotamento.id.toString() };
 
     const camiaoDocument = await this.empacotamentoSchema.findOne(query as FilterQuery<IEmpacotamentoPersistance & Document>);
 
     try {
-      if (camiaoDocument != null) {
+      if (camiaoDocument == null) {
         const rawEmpacotamento = EmpacotamentoMap.toPersistence(empacotamento);
 
         const empacotamentoCreated = await this.empacotamentoSchema.create(rawEmpacotamento);
@@ -93,13 +129,13 @@ export default class empacotamentoRepo implements IEmpacotamentoRepo {
         lista.push(EmpacotamentoMap.toDomain(emp))
     );
     if (lista != null) {
-      return Result.ok();
+      return Result.ok(lista);
     } else
       return null;
   }
 
   public async delete(empId: EmpId) {
-    const query = {id: empId};
+    const query = { id: empId };
     await this.empacotamentoSchema.deleteOne(query as FilterQuery<ICaminhoPersistence & Document>);
     return true;
   }
