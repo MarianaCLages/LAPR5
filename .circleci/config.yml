@@ -50,7 +50,10 @@ jobs:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Coverage
           command: |
-            npm run coverage        
+            npm run coverage     
+      - store_artifacts:
+          path: ./coverage
+   
 
 workflows:
   development:
