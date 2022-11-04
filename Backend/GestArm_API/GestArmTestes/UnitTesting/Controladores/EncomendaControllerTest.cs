@@ -105,7 +105,7 @@ public class EncomendaControllerTest
         listDto.Add(encomendaDto);
 
         _ServiceMock.Setup(x => x.GetByFiltragemAysnc(en.ArmazemId, en.DataEntrega.Data)).ReturnsAsync(listDto);
-        var result = _controller.GetByFiltragemAysnc(en.ArmazemId, en.DataEntrega.Data).Result;
+        var result = _controller.GetByFiltragemAysnc(en.ArmazemId, en.DataEntrega.Data.ToString()).Result;
 
         var objExpected = result.Value.First();
         var objActual = listDto.First();
