@@ -44,9 +44,9 @@ public class ArmazemService : IArmazemService
         var listDto = list.ConvertAll(arm =>
             new ArmazemDTO(arm.Id.AsGuid(), arm.Latitude.Graus, arm.Latitude.Minutos, arm.Latitude.Segundos,
                 arm.Longitude.Graus,
-                arm.Longitude.Minutos, arm.Longitude.Segundos, arm.Designacao.ToString(), arm.Endereco.Rua,
+                arm.Longitude.Minutos, arm.Longitude.Segundos, arm.Designacao.Designacao, arm.Endereco.Rua,
                 arm.Endereco.NumeroPorta, arm.Endereco.CodigoPostal, arm.Endereco.Cidade, arm.Endereco.Pais,
-                arm.AlphaNumId.ToString()));
+                arm.AlphaNumId.AlphaNumId));
 
         return listDto;
     }

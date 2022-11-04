@@ -105,6 +105,16 @@ public class EncomendasService : IEncomendasService
             encomenda.TempoCarga.ToDouble(), encomenda.TempoDescarga.ToDouble(), encomenda.ArmazemId)).ToList();
     }
 
+    public async Task<List<EncomendaDto>> GetByFiltragemAsyncQuery(string armazemId, string data)
+    {
+        var encomendas = await _repository.GetByFiltragemAsyncQuery(armazemId, data);
+
+        return encomendas.Select(encomenda => new EncomendaDto(encomenda.Id, encomenda.EncomendaDomainId.ToString(),
+            encomenda.DataEntrega.ToString(),
+            encomenda.MassaEntrega.ToDouble(),
+            encomenda.TempoCarga.ToDouble(), encomenda.TempoDescarga.ToDouble(), encomenda.ArmazemId)).ToList();
+    }
+    
     public async Task<List<EncomendaDto>> GetByFiltragemAysnc(string armazemId, DateTime data)
     {
         var encomendas = await _repository.GetByFiltragemAsync(armazemId, data);
