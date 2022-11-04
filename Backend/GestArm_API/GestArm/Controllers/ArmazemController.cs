@@ -41,7 +41,12 @@ public class ArmazemController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ArmazemDTO>>> GetAll()
     {
-        return await _service.GetAllAsync();
+        var armazens = await _service.GetAllAsync();
+
+        if (armazens == null) return NotFound("Não foi encontrado nenhum armazém!");
+
+        return armazens;
+        
     }
 
     //POST: api/Armazem
