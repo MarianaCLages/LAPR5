@@ -6,4 +6,5 @@ export default interface ICamiaoController  {
     getCamiaoByCaract(req: Request, res: Response, next: NextFunction);
     getCamiaoByMatricula(req: Request, res: Response, next: NextFunction);
     updateCamiao(req: Request, res: Response, next: NextFunction);
+    deleteCamiao(req: Request, res: Response, next: NextFunction);
 }

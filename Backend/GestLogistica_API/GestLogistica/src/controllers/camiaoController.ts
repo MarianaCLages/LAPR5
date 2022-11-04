@@ -101,6 +101,21 @@ export default class camiaoController
         }
     }
 
+    public async deleteCamiao(req: Request, res: Response, next: NextFunction){
+        try{
+            const camiaoOrError = await this.camiaoServiceInstance.deleteCamiao(req.body as ICamiaoDTO);
+
+            if (camiaoOrError.isFailure) {
+                return res.status(400).send("O camiao especificado nao foi encontrado!");
+            }
+
+
+            return res.json().status(200);
+        }catch(e){
+            return next(e);
+        }
+    }
+
     protected executeImpl(): Promise<any> {
         throw new Error("Method not implemented.");
     }
