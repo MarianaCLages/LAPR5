@@ -113,5 +113,6 @@ export default {
     amazemAPIAdress: "https://localhost:5001/api/armazem/search/",
     encomendaAPIAdress: "https://localhost:5001/api/encomenda/search/",
     armazenIDNumberOfCharacters: 3,
-    errorNotFoundArmazem: "Não foi encontrado um armazem com esse ID!"
+    errorNotFoundArmazem: "Não foi encontrado um armazem com esse ID!",
+    errorNotFoundEncomenda: "Não foi encontrado nenhuma encomenda!"
 };

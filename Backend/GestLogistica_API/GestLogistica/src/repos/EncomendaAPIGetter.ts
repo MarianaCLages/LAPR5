@@ -25,7 +25,7 @@ export default class EncomendaAPIGetter implements IEncomendaRepo {
     });
     const valid = responseChegada.status === 200;
 
-    if (!valid && responseChegada.message == config.errorNotFoundArmazem) {
+    if (!valid && responseChegada.message == config.errorNotFoundEncomenda) {
       console.debug("Encomenda " + encomendaId + " não existe!");
       return false;
     }
