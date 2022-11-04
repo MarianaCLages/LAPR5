@@ -1,6 +1,6 @@
 
 export interface ICamiaoDTO {
-    id: string;
+    domainId: string;
     caractCamiao: string;
     matriculaCamiao : string;
     capacidadeCarga : number;

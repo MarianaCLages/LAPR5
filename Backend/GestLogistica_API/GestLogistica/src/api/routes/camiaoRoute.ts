@@ -27,6 +27,20 @@ export default (app: Router) => {
             })
         }),
         (req, res, next) => ctrl.createCamiao(req, res, next) );
+    route.put('',
+        celebrate({
+            body: Joi.object({
+                domainId: Joi.string().required(),
+                caractCamiao: Joi.string().required(),
+                matriculaCamiao: Joi.string().required(),
+                capacidadeCarga: Joi.number().required(),
+                cargaMax: Joi.number().required(),
+                cargaTotal: Joi.number().required(),
+                tara: Joi.number().required(),
+                tempoCarregamento: Joi.number().required(),
+            })
+        }),
+        (req, res, next) => ctrl.updateCamiao(req, res, next));
 
     route.get('/all',
         celebrate({
