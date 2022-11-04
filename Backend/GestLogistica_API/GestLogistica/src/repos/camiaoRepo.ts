@@ -28,16 +28,17 @@ export default class camiaoRepo implements ICamiaoRepo {
 
         return !!camiaoDocument === true;
     }
-    
-        public async findByDomainId(caractCamiao: CaractCamiao | string): Promise<Camiao> {
-            const query = { domainId: caractCamiao };
-            const roleRecord = await this.camiaoSchema.findOne(query as FilterQuery<ICamiaoPersistence & Document>);
-    
-            if (roleRecord != null) {
-                return CamiaoMap.toDomain(roleRecord);
-            } else
-                return null;
-        }
+
+    public async findByDomainId(id: string): Promise<Camiao> {
+
+        const query = { domainId: id };
+        const roleRecord = await this.camiaoSchema.findOne(query as FilterQuery<ICamiaoPersistence & Document>);
+
+        if (roleRecord != null) {
+            return CamiaoMap.toDomain(roleRecord);
+        } else
+            return null;
+    }
     
 
     public async findByCaractCamiao(caractCam: CaractCamiao | string): Promise<Camiao> {
@@ -70,12 +71,12 @@ export default class camiaoRepo implements ICamiaoRepo {
 
     public async update(camiao: Camiao): Promise<Result<Camiao>> {
 
-        const query = { domainId: CaractCamiao.toString() };
+        const query = { domainId: camiao.id.toString() };
 
         const camiaoDocument = await this.camiaoSchema.findOne(query);
 
         try {
-            if (camiaoDocument != null) {
+            if (camiaoDocument == null) {
                 const rawUser = CamiaoMap.toPersistence(camiao);
 
                 const camiaoCreated = await this.camiaoSchema.create(rawUser);
@@ -97,6 +98,20 @@ export default class camiaoRepo implements ICamiaoRepo {
             }
         } catch (err) {
             throw err;
+        }
+    }
+
+    public async getAllCamioes() : Promise<Result<Array<Camiao>>> {
+        var lista = new Array<Camiao>;
+
+        (await this.camiaoSchema.find({})).forEach(
+            cam => lista.push(CamiaoMap.toDomain(cam))
+        );
+
+        if (lista != null) {
+            return Result.ok(lista);
+        } else {
+            return null;
         }
     }
 }
