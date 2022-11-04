@@ -17,7 +17,7 @@ export class EmpCamiaoRef extends ValueObject<empCamiao> {
 
   public static create(empCamiao: string): Result<EmpCamiaoRef> {
     if (!empCamiao) {
-      return Result.fail<EmpCamiaoRef>('Matricula do camiao tem de ser uma string!');
+      return Result.fail<EmpCamiaoRef>('Erro na criação da identificação do camião');
     }
     return Result.ok<EmpCamiaoRef>(new EmpCamiaoRef({value: empCamiao}))
   }
