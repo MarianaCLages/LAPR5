@@ -14,6 +14,7 @@ import {CargaMaxima} from "../domain/camiao/cargaMaxima";
 import {MatriculaCamiao} from "../domain/camiao/matriculaCamiao";
 import {Tara} from "../domain/camiao/tara";
 import {TempoCarregamento} from "../domain/camiao/tempoCarregamento";
+import ICamiaoCaractDTO from "../dto/camiao/ICamiaoCaractDTO";
 
 @Service()
 export default class CamiaoService implements ICamiaoService {
@@ -39,15 +40,15 @@ export default class CamiaoService implements ICamiaoService {
         }
     }
 
-    public async getCamiao(camiaoDTO: ICamiaoDTO): Promise<Result<ICamiaoDTO>> {
+    public async getByCaract(caract: ICamiaoCaractDTO): Promise<Result<Array<ICamiaoDTO>>> {
         try {
-            const camiao = await this.camiaoRepo.findByDomainId(camiaoDTO.domainId);
+            const camiao = await this.camiaoRepo.getByCaractAsync(caract.caractCamiao);
 
             if (camiao === null) {
-                return Result.fail<ICamiaoDTO>("Camião não encontrado!");
+                return Result.fail("Camião não encontrado!");
             } else {
-                const camiaoDTOResult = CamiaoMap.toDTO(camiao);
-                return Result.ok<ICamiaoDTO>(camiaoDTOResult);
+                const camioesDTO = camiao.getValue().map(cam => CamiaoMap.toDTO(cam));
+                return Result.ok(camioesDTO);
             }
         } catch (e) {
             throw e;
@@ -63,7 +64,7 @@ export default class CamiaoService implements ICamiaoService {
 
     public async updateCamiao(camiaoDTO: ICamiaoDTO): Promise<Result<ICamiaoDTO>> {
 
-        const camiao = await this.camiaoRepo.findByDomainId(camiaoDTO.domainId);
+        const camiao = await this.camiaoRepo.findByCaractCamiao(camiaoDTO.caractCamiao);
 
         if (camiao === null) {
             return Result.fail<ICamiaoDTO>("Camiao não existe");
