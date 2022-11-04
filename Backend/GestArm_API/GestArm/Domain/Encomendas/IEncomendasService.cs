@@ -15,4 +15,6 @@ public interface IEncomendasService
 
     Task<EncomendaDto> UpdateAsync(EncomendaId id, CreatingEncomendaDto dto);
     Task<List<EncomendaDto>> GetAllAsync();
+
+    Task<EncomendaDto> GetEncomendaByDomainIdAsync(string nextID, string data);
 }

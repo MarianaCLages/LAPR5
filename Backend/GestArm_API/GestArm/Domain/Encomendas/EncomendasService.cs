@@ -114,4 +114,19 @@ public class EncomendasService : IEncomendasService
             encomenda.MassaEntrega.ToDouble(),
             encomenda.TempoCarga.ToDouble(), encomenda.TempoDescarga.ToDouble(), encomenda.ArmazemId)).ToList();
     }
+
+    public async Task<EncomendaDto> GetEncomendaByDomainIdAsync(string data, string next)
+    {
+
+        data = data.Replace("-","");
+        
+        var sum = data + '/' + next;
+        
+        var encomenda =
+            await _repository.GetEncomendaByDomainIdAsync(sum);
+
+        return new EncomendaDto(encomenda.Id, encomenda.EncomendaDomainId.ToString(), encomenda.DataEntrega.ToString(),
+            encomenda.MassaEntrega.ToDouble(),
+            encomenda.TempoCarga.ToDouble(), encomenda.TempoDescarga.ToDouble(), encomenda.ArmazemId);
+    }
 }
