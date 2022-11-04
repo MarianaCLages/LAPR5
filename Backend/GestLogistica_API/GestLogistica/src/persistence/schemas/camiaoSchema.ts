@@ -3,9 +3,9 @@ import mongoose from 'mongoose';
 
 const CamiaoSchema = new mongoose.Schema(
     {
-        domainId: {type: String, required: true},
+        domainId: {type: String, required: true, unique: true},
         caractCamiao: String,
-        matriculaCamiao: String,
+        matriculaCamiao: {type: String, required: true, unique: true},
         tara: Number,
         capacidadeCarga: Number,
         cargaMax: Number,
