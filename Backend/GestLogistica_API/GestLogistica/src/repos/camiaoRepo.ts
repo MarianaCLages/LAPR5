@@ -7,7 +7,7 @@ import { CaractCamiao } from '../domain/camiao/caractCamiao';
 import { CamiaoMap } from '../mappers/CamiaoMap';
 import ICamiaoRepo from '../services/IRepos/ICamiaoRepo';
 import {MatriculaCamiao} from "../domain/camiao/matriculaCamiao";
-
+import { UniqueEntityID } from "../core/domain/UniqueEntityID";
 
 @Service()
 export default class camiaoRepo implements ICamiaoRepo {
@@ -146,5 +146,12 @@ export default class camiaoRepo implements ICamiaoRepo {
         } else {
             return null;
         }
+    }
+
+    public async deleteCamiao(domain: UniqueEntityID | string){
+        const query = { domainId: domain };
+        await this.camiaoSchema.deleteMany(query as FilterQuery<ICamiaoPersistence & Document>);
+
+        return true;
     }
 }

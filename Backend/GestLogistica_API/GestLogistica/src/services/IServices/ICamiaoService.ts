@@ -10,4 +10,5 @@ export default interface ICamiaoService {
     getAllCamioes() : Promise<Result<Array<ICamiaoDTO>>>;
     getByCaract(caract: ICamiaoCaractDTO): Promise<Result<Array<ICamiaoDTO>>>;
     getByMatricula(matricula: ICamiaoMatriculaDTO): Promise<Result<Array<ICamiaoDTO>>>;
+    deleteCamiao(camiaoId: ICamiaoDTO): Promise<Result<ICamiaoDTO>>;
 }

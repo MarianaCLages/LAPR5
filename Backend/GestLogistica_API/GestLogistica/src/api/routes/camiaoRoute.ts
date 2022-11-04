@@ -26,7 +26,7 @@ export default (app: Router) => {
                 tempoCarregamento: Joi.number().required(),
             })
         }),
-        (req, res, next) => ctrl.createCamiao(req, res, next) );
+        (req, res, next) => ctrl.createCamiao(req, res, next));
     route.put('',
         celebrate({
             body: Joi.object({
@@ -56,6 +56,14 @@ export default (app: Router) => {
             }),
         }),
         (req, res, next) => ctrl.getCamiaoByCaract(req, res, next));
+
+    route.delete('',
+        celebrate({
+            body: Joi.object({
+                domainId: Joi.string().required(),
+            }),
+        }),
+        (req, res, next) => ctrl.deleteCamiao(req, res, next));
 
     route.get('/matricula',
         celebrate({

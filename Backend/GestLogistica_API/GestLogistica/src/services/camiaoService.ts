@@ -1,19 +1,19 @@
-import {Inject, Service} from "typedi";
+import { Inject, Service } from "typedi";
 import config from "../../config";
 
 import ICamiaoService from "../services/IServices/ICamiaoService";
-import {ICamiaoDTO} from "../dto/camiao/ICamiaoDTO";
-import {Camiao} from "../domain/camiao/camiao";
-import {CamiaoMap} from "../mappers/CamiaoMap";
+import { ICamiaoDTO } from "../dto/camiao/ICamiaoDTO";
+import { Camiao } from "../domain/camiao/camiao";
+import { CamiaoMap } from "../mappers/CamiaoMap";
 
-import {Result} from "../core/logic/Result";
+import { Result } from "../core/logic/Result";
 import ICamiaoRepo from "./IRepos/ICamiaoRepo";
-import {ICriarCamiaoDTO} from "../dto/camiao/ICriarCamiaoDTO";
-import {CapacidadeCarga} from "../domain/camiao/capacidadeCarga";
-import {CargaMaxima} from "../domain/camiao/cargaMaxima";
-import {MatriculaCamiao} from "../domain/camiao/matriculaCamiao";
-import {Tara} from "../domain/camiao/tara";
-import {TempoCarregamento} from "../domain/camiao/tempoCarregamento";
+import { ICriarCamiaoDTO } from "../dto/camiao/ICriarCamiaoDTO";
+import { CapacidadeCarga } from "../domain/camiao/capacidadeCarga";
+import { CargaMaxima } from "../domain/camiao/cargaMaxima";
+import { MatriculaCamiao } from "../domain/camiao/matriculaCamiao";
+import { Tara } from "../domain/camiao/tara";
+import { TempoCarregamento } from "../domain/camiao/tempoCarregamento";
 import ICamiaoCaractDTO from "../dto/camiao/ICamiaoCaractDTO";
 import ICamiaoMatriculaDTO from "../dto/camiao/ICamiaoMatriculaDTO";
 
@@ -23,6 +23,7 @@ export default class CamiaoService implements ICamiaoService {
         @Inject(config.repos.camiao.name) private camiaoRepo: ICamiaoRepo
     ) {
     }
+
 
     public async createCamiao(camiaoDTO: ICriarCamiaoDTO): Promise<Result<ICamiaoDTO>> {
 
@@ -71,7 +72,7 @@ export default class CamiaoService implements ICamiaoService {
         }
     }
 
-    public async getAllCamioes() : Promise<Result<Array<ICamiaoDTO>>> {
+    public async getAllCamioes(): Promise<Result<Array<ICamiaoDTO>>> {
         const camioes = await this.camiaoRepo.getAllCamioes();
 
         const camioesDTO = camioes.getValue().map(cam => CamiaoMap.toDTO(cam));
@@ -98,4 +99,23 @@ export default class CamiaoService implements ICamiaoService {
         return Result.ok<ICamiaoDTO>(camiaoDTOResult);
 
     }
+
+    public async deleteCamiao(dto: ICamiaoDTO): Promise<Result<ICamiaoDTO>> {
+        try {
+            const camiao = await this.camiaoRepo.findByDomainId(dto.domainId);
+
+            if (camiao === null) {
+                return Result.fail<ICamiaoDTO>("Camiao não existe");
+            }
+
+
+            await this.camiaoRepo.deleteCamiao(dto.domainId);
+            const camiaoDTOResult = CamiaoMap.toDTO(camiao) as ICamiaoDTO;
+
+            return Result.ok<ICamiaoDTO>(camiaoDTOResult);
+        } catch (e) {
+            throw e;
+        }
+    }
+
 }
