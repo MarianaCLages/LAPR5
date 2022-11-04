@@ -6,6 +6,7 @@ import { Camiao } from '../domain/camiao/camiao';
 import { CaractCamiao } from '../domain/camiao/caractCamiao';
 import { CamiaoMap } from '../mappers/CamiaoMap';
 import ICamiaoRepo from '../services/IRepos/ICamiaoRepo';
+import {MatriculaCamiao} from "../domain/camiao/matriculaCamiao";
 
 
 @Service()
@@ -117,6 +118,22 @@ export default class camiaoRepo implements ICamiaoRepo {
 
     public async getByCaractAsync(caract: CaractCamiao | string): Promise<Result<Array<Camiao>>> {
         const query = { caractCamiao : caract};
+
+        var lista = new Array<Camiao>;
+
+        (await this.camiaoSchema.find(query)).forEach(
+            cam => lista.push(CamiaoMap.toDomain(cam))
+        );
+
+        if (lista != null) {
+            return Result.ok(lista);
+        } else {
+            return null;
+        }
+    }
+
+    public async getByMatriculaAsync(matricula: MatriculaCamiao | string): Promise<Result<Array<Camiao>>> {
+        const query = { matriculaCamiao : matricula};
 
         var lista = new Array<Camiao>;
 
