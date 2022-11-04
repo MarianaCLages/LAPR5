@@ -99,4 +99,18 @@ export default class camiaoRepo implements ICamiaoRepo {
             throw err;
         }
     }
+
+    public async getAllCamioes() : Promise<Result<Array<Camiao>>> {
+        var lista = new Array<Camiao>;
+
+        (await this.camiaoSchema.find({})).forEach(
+            cam => lista.push(CamiaoMap.toDomain(cam))
+        );
+
+        if (lista != null) {
+            return Result.ok(lista);
+        } else {
+            return null;
+        }
+    }
 }
