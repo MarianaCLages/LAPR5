@@ -1,3 +1,4 @@
+using System.Data;
 using GestArm.Domain.Encomendas;
 using GestArm.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
@@ -105,4 +106,29 @@ public class EncomendaController : ControllerBase
 
         return encomendas;
     }
+    
+    // GET: api/Armazem/search/armazemId
+    [HttpGet]
+    [Route("~/api/[controller]/search/{encomendaId}", Name = "GetEncomendaPorArmazem")]
+    public async Task<ActionResult<EncomendaDto>> GetByArmazemIdAsync(string encomendaId)
+    {
+        var armazem = await _service.GetByIdAsync(new EncomendaId(encomendaId));
+
+        if (armazem == null) return NotFound("Não foi encontrado um armazem com esse ID!");
+
+        return armazem;
+    }
+    
+    // GET: api/Armazem/search/armazemId
+    [HttpGet]
+    [Route("~/api/[controller]/search/{data}/{nextID}", Name = "GetEncomendaPorEncomendaDomainID")]
+    public async Task<ActionResult<EncomendaDto>> GetByEncomendaDomainIDAsync(string nextID, string data)
+    {
+        var armazem = await _service.GetEncomendaByDomainIdAsync(data,nextID);
+
+        if (armazem == null) return NotFound("Não foi encontrado um armazem com esse ID!");
+
+        return armazem;
+    }
+    
 }
