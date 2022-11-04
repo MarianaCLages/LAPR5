@@ -54,9 +54,9 @@ export default {
             name: "CamiaoController",
             path: "../controllers/camiaoController"
         },
-        empacotamento: {
-            name: "ArmazemRepo",
-            path: "../repos/AmazemAPIGetter"
+        pacote: {
+            name: "PacoteController",
+            path: "../controllers/pacoteController"
         }
     },
 
@@ -81,10 +81,14 @@ export default {
             name: "ArmazemRepo",
             path: "../repos/AmazemAPIGetter"
         },
-        empacotamento: {
-            name: "ArmazemRepo",
-            path: "../repos/AmazemAPIGetter"
-        }
+        pacote: {
+            name: "EmpacotamentoRepo",
+            path: "../repos/empacotamentoRepo"
+        },
+        entrega: {
+            name: "EncomendaAPIGetter",
+            path: "../repos/EncomendaAPIGetter"
+        },
     },
 
     services: {
@@ -100,13 +104,14 @@ export default {
             name: "CamiaoService",
             path: "../services/camiaoService"
         },
-        empacotamento: {
-            name: "CamiaoService",
-            path: "../repos/AmazemAPIGetter"
+        pacote: {
+            name: "PacoteService",
+            path: "../services/pacoteService"
         }
     },
 
     amazemAPIAdress: "https://localhost:5001/api/armazem/search/",
+    encomendaAPIAdress: "https://localhost:5001/api/encomenda/search/",
     armazenIDNumberOfCharacters: 3,
     errorNotFoundArmazem: "Não foi encontrado um armazem com esse ID!"
 };
