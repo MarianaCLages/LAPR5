@@ -18,7 +18,7 @@ public interface IEncomendasRepository : IRepository<Encomenda, EncomendaId>
 
     Task<Encomenda> UpdateAsync(Encomenda encomenda);
 
-    Task<Encomenda> RemoveAsync(EncomendaId id);
+    Task<bool> RemoveAsync(Encomenda encomenda);
 
     Task<bool> ExistsAsync(EncomendaId id);
 

@@ -21,9 +21,11 @@ public class EncomendasRepository : BaseRepository<Encomenda, EncomendaId>, IEnc
         return encomenda;
     }
 
-    public Task<Encomenda> RemoveAsync(EncomendaId id)
+    public async Task<bool> RemoveAsync(Encomenda encomenda)
     {
-        throw new NotImplementedException();
+        _context.Encomendas.Remove(encomenda);
+        await _context.SaveChangesAsync();
+        return true;
     }
 
     public Task<bool> ExistsAsync(EncomendaId id)

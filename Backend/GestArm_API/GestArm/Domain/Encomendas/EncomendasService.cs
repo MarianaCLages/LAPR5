@@ -62,17 +62,14 @@ public class EncomendasService : IEncomendasService
             encomenda.MassaEntrega.ToDouble(),
             encomenda.TempoCarga.ToDouble(), encomenda.TempoDescarga.ToDouble(), encomenda.ArmazemId);
     }
-
     public async Task<bool> RemoveAsync(EncomendaId id)
     {
-        var encomenda = _repository.GetByIdAsync(id);
+        var encomenda = await _repository.GetByIdAsync(id);
 
-        if (encomenda.IsCanceled || encomenda.IsFaulted) return false;
+        await _repository.RemoveAsync(encomenda);
 
-        await _repository.RemoveAsync(id);
         return true;
     }
-
     public Task<List<EncomendaDto>> GetAllAsync()
     {
         var encomendas = _repository.GetAllAsync();
@@ -114,7 +111,7 @@ public class EncomendasService : IEncomendasService
             encomenda.MassaEntrega.ToDouble(),
             encomenda.TempoCarga.ToDouble(), encomenda.TempoDescarga.ToDouble(), encomenda.ArmazemId)).ToList();
     }
-    
+
     public async Task<List<EncomendaDto>> GetByFiltragemAysnc(string armazemId, DateTime data)
     {
         var encomendas = await _repository.GetByFiltragemAsync(armazemId, data);
@@ -128,10 +125,10 @@ public class EncomendasService : IEncomendasService
     public async Task<EncomendaDto> GetEncomendaByDomainIdAsync(string data, string next)
     {
 
-        data = data.Replace("-","");
-        
+        data = data.Replace("-", "");
+
         var sum = data + '/' + next;
-        
+
         var encomenda =
             await _repository.GetEncomendaByDomainIdAsync(sum);
 

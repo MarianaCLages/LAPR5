@@ -60,13 +60,14 @@ public class EncomendaController : ControllerBase
         }
     }
 
-    //DELETE: api/Encomenda
+    //DELETE: api/Encomenda/id
+    [Route("~/api/[controller]/{id:guid}", Name = "DeleteEntrega")]
     [HttpDelete]
-    public async Task<ActionResult<bool>> DeleteAsync(EncomendaDto encomendaDto)
+    public async Task<ActionResult<bool>> DeleteAsync(Guid id)
     {
         try
         {
-            var encomenda = await _service.RemoveAsync(encomendaDto.Id);
+            var encomenda = await _service.RemoveAsync(new EncomendaId(id));
 
             if (encomenda == false)
                 throw new BusinessRuleValidationException("Não foi encontrado nenhuma Encomenda com esse ID!");
