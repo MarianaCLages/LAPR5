@@ -51,15 +51,6 @@ export default class camiaoRepo implements ICamiaoRepo {
             return null;
     }
 
-    public async findByMatriculaCamiao(matriculaCamiao: string): Promise<Result<Camiao>> {
-        const query = { matriculaCamiao: matriculaCamiao };
-        const camiaoRecord = await this.camiaoSchema.findOne(query as FilterQuery<ICamiaoPersistence & Document>);
-        if (camiaoRecord != null) {
-            return Result.ok<Camiao>(CamiaoMap.toDomain(camiaoRecord));
-        } else
-            return Result.fail<Camiao>("Camiao não encontrado");
-    }
-
 
     public async save(camiao: Camiao): Promise<Camiao> {
         const query = { domainId: camiao.id.toString() };
