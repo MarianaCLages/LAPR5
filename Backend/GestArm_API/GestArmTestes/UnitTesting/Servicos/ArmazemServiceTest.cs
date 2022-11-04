@@ -106,13 +106,13 @@ public class ArmazemServiceTest
 
         list.Add(arm);
 
-        _repositoryMock.Setup(x => x.GetByDesignacaoAsync(arm.Designacao)).ReturnsAsync(arm);
+        _repositoryMock.Setup(x => x.GetByDesignacaoAsync(arm.Designacao)).ReturnsAsync(list);
 
         var resultDTO = list.ConvertAll(arn => ArmazemDtoParser.convertToDto(arn));
-        var result = _service.GetByDesignacaoAsync(arm.Designacao).Result;
+        var result = _service.GetByDesignacaoAsync(arm.Designacao.Designacao).Result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());
-        var obj2StrActual = JsonConvert.SerializeObject(resultDTO.First().ToString());
+        var obj2StrActual = JsonConvert.SerializeObject(resultDTO.ToString());
 
         Assert.Equal(obj1StrExpected, obj2StrActual);
     }
