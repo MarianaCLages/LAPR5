@@ -6,7 +6,7 @@ public interface IArmazemService
 
     //Task<ArmazemDTO> GetByAlphaNumIdAsync(AlphaId id);
 
-    Task<ArmazemDTO> GetByDesignacaoAsync(DesignacaoArmazem designacao);
+    Task<List<ArmazemDTO>> GetByDesignacaoAsync(string designacao);
 
     Task<List<ArmazemDTO>> GetAllAsync();
 
