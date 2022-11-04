@@ -40,7 +40,25 @@ export default class CamiaoService implements ICamiaoService {
     }
 
     public async getCamiao(camiaoDTO: ICamiaoDTO): Promise<Result<ICamiaoDTO>> {
-        throw new Error("Method not implemented.");
+        try {
+            const camiao = await this.camiaoRepo.findByDomainId(camiaoDTO.id);
+
+            if (camiao === null) {
+                return Result.fail<ICamiaoDTO>("Camião não encontrado!");
+            } else {
+                const camiaoDTOResult = CamiaoMap.toDTO(camiao);
+                return Result.ok<ICamiaoDTO>(camiaoDTOResult);
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    public async getAllCamioes() : Promise<Result<Array<ICamiaoDTO>>> {
+        const camioes = await this.camiaoRepo.getAllCamioes();
+
+        const camioesDTO = camioes.getValue().map(cam => CamiaoMap.toDTO(cam));
+        return Result.ok(camioesDTO);
     }
 
     public async updateCamiao(camiaoDTO: ICamiaoDTO): Promise<Result<ICamiaoDTO>> {
