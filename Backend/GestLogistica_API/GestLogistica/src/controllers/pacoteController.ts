@@ -109,7 +109,7 @@ export default class PacoteController
       const caminhoOrError = await this.pacoteServiceInstance.updateEmpacotamento(req.body as IEmpacotamentoDTO);
 
       if (caminhoOrError.isFailure) {
-        return res.status(400).send("O pacote especificado nao foi encontrado!");
+        return res.status(400).send(caminhoOrError.errorValue());
       }
 
       const caminhoDTO = caminhoOrError.getValue();
