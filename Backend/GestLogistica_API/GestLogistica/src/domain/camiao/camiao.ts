@@ -98,7 +98,7 @@ export class Camiao extends AggregateRoot<CamiaoProps> {
 
         const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
 
-        if (!guardResult.succeeded) {
+        if (!guardResult.succeeded || !RegExp('^[A-Z]{2}-[0-9]{2}-[A-Z]{2}$').test(camiaoDTO.matriculaCamiao)) {
             return Result.fail<Camiao>(guardResult.message)
         }     
         else {
