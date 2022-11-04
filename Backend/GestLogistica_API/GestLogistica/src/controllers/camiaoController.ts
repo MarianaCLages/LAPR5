@@ -35,6 +35,40 @@ export default class camiaoController
         }
     }
 
+    public async getAllCamioes(req: Request, res: Response, next: NextFunction) {
+        try {
+            const camiaoOrError = await this.camiaoServiceInstance.getAllCamioes();
+
+            if (camiaoOrError.isFailure) {
+                return res.json(camiaoOrError.error).status(400);
+            }
+
+            const camioesDTO = camiaoOrError.getValue();
+            return res.json(camioesDTO).status(200);
+
+        } catch (e) {
+            return next(e);
+        }
+    }
+
+    /*
+    public async getCamiaoById(req: Request, res: Response, next: NextFunction) {
+        try {
+            const camiaoOrError = await this.camiaoServiceInstance.getCamiao(req.body as ICamiaoIdDTO);
+            
+            if (camiaoOrError.isFailure) {
+                return res.status(400).json(camiaoOrError.error).send();
+            }
+            
+            const camiaoDTO = camiaoOrError.getValue();
+            return res.status(200).json(camiaoDTO).send();
+            
+        } catch (e) {
+            return next(e);
+        }
+    }
+     */
+
     public async updateCamiao(req: Request, res: Response, next: NextFunction) {
         
         try{
