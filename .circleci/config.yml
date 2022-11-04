@@ -52,7 +52,7 @@ jobs:
           command: |
             npm run coverage     
       - store_artifacts:
-          path: ./coverage
+          path: Backend/GestLogistica_API/GestLogistica/coverage
    
 
 workflows:
