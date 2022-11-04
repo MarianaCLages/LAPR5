@@ -39,7 +39,7 @@ export default class camiaoRepo implements ICamiaoRepo {
         } else
             return null;
     }
-    
+
 
     public async findByCaractCamiao(caractCam: CaractCamiao | string): Promise<Camiao> {
 
@@ -105,6 +105,22 @@ export default class camiaoRepo implements ICamiaoRepo {
         var lista = new Array<Camiao>;
 
         (await this.camiaoSchema.find({})).forEach(
+            cam => lista.push(CamiaoMap.toDomain(cam))
+        );
+
+        if (lista != null) {
+            return Result.ok(lista);
+        } else {
+            return null;
+        }
+    }
+
+    public async getByCaractAsync(caract: CaractCamiao | string): Promise<Result<Array<Camiao>>> {
+        const query = { caractCamiao : caract};
+
+        var lista = new Array<Camiao>;
+
+        (await this.camiaoSchema.find(query)).forEach(
             cam => lista.push(CamiaoMap.toDomain(cam))
         );
 

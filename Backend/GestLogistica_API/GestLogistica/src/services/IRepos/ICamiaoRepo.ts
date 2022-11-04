@@ -9,4 +9,5 @@ export default interface ICamiaoRepo extends Repo<Camiao> {
     update(camiao: Camiao): Promise<Result<Camiao>>;
     findByCaractCamiao(caractCam: string): Promise<Camiao>;
     getAllCamioes() : Promise<Result<Array<Camiao>>>;
+    getByCaractAsync(caract: CaractCamiao | string): Promise<Result<Array<Camiao>>>;
 }
