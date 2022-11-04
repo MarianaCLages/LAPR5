@@ -28,7 +28,7 @@ public class EncomendasService : IEncomendasService
     {
         var verifiy = _repositoryArmazem.GetByArmazemIdAsync(new AlphaId(dto.ArmazemId));
 
-        if (verifiy.Result == null)
+        if (verifiy == null)
             throw new BusinessRuleValidationException("Não existe nenhum armazém com esse ID especificado!");
 
         var nextId = _repository.GestNextIdAsync(DateTime.Parse(dto.DataEntrega));

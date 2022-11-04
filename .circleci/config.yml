@@ -19,6 +19,7 @@ jobs:
           command: |
             dotnet build
             dotnet test
+        
 
   build-and-test-GestLog_API:
     docker:
@@ -45,6 +46,14 @@ jobs:
          name : Test
          command: |
           npm run test
+      - run:
+          working_directory: Backend/GestLogistica_API/GestLogistica
+          name : Coverage
+          command: |
+            npm run coverage     
+      - store_artifacts:
+          path: Backend/GestLogistica_API/GestLogistica/coverage
+   
 
 workflows:
   development:

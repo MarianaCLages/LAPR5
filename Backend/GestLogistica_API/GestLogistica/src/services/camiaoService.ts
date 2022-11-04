@@ -14,6 +14,7 @@ import {CargaMaxima} from "../domain/camiao/cargaMaxima";
 import {MatriculaCamiao} from "../domain/camiao/matriculaCamiao";
 import {Tara} from "../domain/camiao/tara";
 import {TempoCarregamento} from "../domain/camiao/tempoCarregamento";
+import ICamiaoCaractDTO from "../dto/camiao/ICamiaoCaractDTO";
 
 @Service()
 export default class CamiaoService implements ICamiaoService {
@@ -25,11 +26,6 @@ export default class CamiaoService implements ICamiaoService {
     public async createCamiao(camiaoDTO: ICriarCamiaoDTO): Promise<Result<ICamiaoDTO>> {
 
         try {
-            // not allow duplicate matriculaCamiao
-            const camiao = await this.camiaoRepo.findByMatriculaCamiao(camiaoDTO.matriculaCamiao);
-            if (camiao !== null) {
-                return Result.fail<ICamiaoDTO>("Matricula Camiao já existe");
-            }
             const camiaoOrError = await Camiao.create(camiaoDTO);
             if (camiaoOrError.isFailure) {
                 return Result.fail<ICamiaoDTO>(camiaoOrError.errorValue());
@@ -44,8 +40,26 @@ export default class CamiaoService implements ICamiaoService {
         }
     }
 
-    public async getCamiao(camiaoDTO: ICamiaoDTO): Promise<Result<ICamiaoDTO>> {
-        throw new Error("Method not implemented.");
+    public async getByCaract(caract: ICamiaoCaractDTO): Promise<Result<Array<ICamiaoDTO>>> {
+        try {
+            const camiao = await this.camiaoRepo.getByCaractAsync(caract.caractCamiao);
+
+            if (camiao === null) {
+                return Result.fail("Camião não encontrado!");
+            } else {
+                const camioesDTO = camiao.getValue().map(cam => CamiaoMap.toDTO(cam));
+                return Result.ok(camioesDTO);
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    public async getAllCamioes() : Promise<Result<Array<ICamiaoDTO>>> {
+        const camioes = await this.camiaoRepo.getAllCamioes();
+
+        const camioesDTO = camioes.getValue().map(cam => CamiaoMap.toDTO(cam));
+        return Result.ok(camioesDTO);
     }
 
     public async updateCamiao(camiaoDTO: ICamiaoDTO): Promise<Result<ICamiaoDTO>> {

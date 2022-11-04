@@ -12,14 +12,14 @@ import {UniqueEntityID} from "../core/domain/UniqueEntityID";
 export class CamiaoMap extends Mapper<Camiao> {
     public static toDTO(camiao: Camiao): ICamiaoDTO {
         return {
-            id: camiao.id.toString(),
+            domainId: camiao.id.toString(),
             caractCamiao: camiao.caractCamiao.value,
             matriculaCamiao: camiao.matriculaCamiao.value,
             tara: camiao.tara.value,
             capacidadeCarga: camiao.capacidadeCarga.value,
             cargaMax: camiao.cargaMax.value,
             cargaTotal: camiao.cargaTotal.value,
-            tempoCarregamento: camiao.tempoCarregamento.value,
+            tempoCarregamento: camiao.tempoCarregamento.value
         };
     }
 

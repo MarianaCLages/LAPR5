@@ -5,6 +5,7 @@ import config from "../../config";
 import ICamiaoController from "./IControllers/ICamiaoController";
 import ICamiaoService from "../services/IServices/ICamiaoService";
 import {ICamiaoDTO} from "../dto/camiao/ICamiaoDTO";
+import ICamiaoCaractDTO from "../dto/camiao/ICamiaoCaractDTO";
 
 import {Result} from "../core/logic/Result";
 import {BaseController} from "../core/infra/BaseController";
@@ -35,6 +36,38 @@ export default class camiaoController
         }
     }
 
+    public async getAllCamioes(req: Request, res: Response, next: NextFunction) {
+        try {
+            const camiaoOrError = await this.camiaoServiceInstance.getAllCamioes();
+
+            if (camiaoOrError.isFailure) {
+                return res.json(camiaoOrError.error).status(400);
+            }
+
+            const camioesDTO = camiaoOrError.getValue();
+            return res.json(camioesDTO).status(200);
+
+        } catch (e) {
+            return next(e);
+        }
+    }
+
+    public async getCamiaoByCaract(req: Request, res: Response, next: NextFunction) {
+        try {
+            const camiaoOrError = await this.camiaoServiceInstance.getByCaract(req.body as ICamiaoCaractDTO);
+
+            if (camiaoOrError.isFailure) {
+                return res.status(400).json(camiaoOrError.error).send();
+            }
+
+            const camiaoDTO = camiaoOrError.getValue();
+            return res.status(200).json(camiaoDTO).send();
+
+        } catch (e) {
+            return next(e);
+        }
+    }
+
     public async updateCamiao(req: Request, res: Response, next: NextFunction) {
         
         try{
@@ -47,7 +80,7 @@ export default class camiaoController
             const camiaoDTO = camiaoOrError.getValue();
             return res.json(camiaoDTO).status(200);
         }catch(e){
-            return next(e);
+            throw e;
         }
     }
 

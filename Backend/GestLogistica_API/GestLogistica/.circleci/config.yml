@@ -29,6 +29,12 @@ jobs:
          command: |
           npm run test
 
+      - run:
+          working_directory: Backend/GestLogistica_API/GestLogistica
+          name : Coverage
+          command: |
+            npm run coverage
+            
 workflows:
   development:
     jobs:
