@@ -15,38 +15,71 @@ public class ArmazemController : ControllerBase
         _service = service;
     }
 
-    // GET: api/Armazem/id
-    [HttpGet("{id}")]
+    // GET: api/Armazem/id?id=X
+    [HttpGet("id")]
     public async Task<ActionResult<ArmazemDTO>> GetById(Guid id)
     {
-        var armazem = await _service.GetByIdAsync(new ArmazemId(id));
+        try
+        {
+            var armazem = await _service.GetByIdAsync(new ArmazemId(id));
 
-        if (armazem == null) return NotFound();
+            if (armazem == null) return NotFound("Não foi encontrado nenhum armazém com esse ID!");
 
-        return armazem;
+            return armazem;
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Não foi encontrado nenhum armazém com esse ID!");
+        }
+        
     }
 
     // GET: api/Armazem/designacao?designacao=designacao
-    [HttpGet("{designacao:alpha}")]
-    public async Task<ActionResult<ArmazemDTO>> GetByDesignacao(string designacao)
+    [HttpGet("designacao")]
+    public async Task<ActionResult<IEnumerable<ArmazemDTO>>> GetByDesignacao(string designacao)
     {
-        var armazem = await _service.GetByDesignacaoAsync(new DesignacaoArmazem(designacao));
+        try
+        {
+            var armazem = await _service.GetByDesignacaoAsync(designacao);
 
-        if (armazem == null) return NotFound();
+            if (armazem == null) return NotFound("Não foi encontrado nenhum armazém com essa designaçao");
 
-        return armazem;
+            return armazem;
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception e)
+        {
+            return NotFound("Não foi encontrado nenhum armazém com essa designaçao!");
+        }
     }
 
-    // GET: api/Armazens
+    // GET: api/Armazem
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ArmazemDTO>>> GetAll()
     {
-        var armazens = await _service.GetAllAsync();
+        try
+        {
+            var armazens = await _service.GetAllAsync();
 
-        if (armazens == null) return NotFound("Não foi encontrado nenhum armazém!");
+            if (armazens == null) return NotFound("Não foi encontrado nenhum armazém!");
 
-        return armazens;
-        
+            return armazens;
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Não foi encontrado nenhum armazém!");
+        }
     }
 
     //POST: api/Armazem
@@ -71,26 +104,62 @@ public class ArmazemController : ControllerBase
     }
 
     // GET: api/Armazem/search/armazemId
+    //MÉTODO DO REPOSITORIO ARMAZEM NO NODE
     [HttpGet]
     [Route("~/api/[controller]/search/{armazemId}", Name = "GetArmazemPorIDEspecifico")]
     public async Task<ActionResult<ArmazemDTO>> GetByArmazemIdAsync(string armazemId)
     {
-        var armazem = await _service.GetByArmazemIdAsync(armazemId);
-
-        if (armazem == null) return NotFound("Não foi encontrado um armazem com esse ID!");
-
-        return armazem;
-    }
-
-    // PUT: api/Armazem/atualizar/id
-    [Route("~/api/[controller]/{id:guid}", Name = "UpdateArmazem")]
-    [HttpPut]
-    public async Task<ActionResult<ArmazemDTO>> UpdateAsync(Guid id, ArmazemDTO dto)
-    {
-        if (id != dto.Id) return BadRequest();
-
         try
         {
+            var armazem = await _service.GetByArmazemIdAsync(armazemId);
+
+            if (armazem == null) return NotFound("Não foi encontrado um armazem com esse Alpha numérico ID!");
+
+            return armazem;
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Não foi encontrado um armazem com esse Alpha numérico ID!");
+        }
+    }
+    
+    [HttpGet ("porAlphaId")]
+    public async Task<ActionResult<ArmazemDTO>> GetByArmazemIdQueryAsync(string armazemId)
+    {
+        try
+        {
+            var armazem = await _service.GetByArmazemIdAsync(armazemId);
+
+            if (armazem == null) return NotFound("Não foi encontrado um armazem com esse Alpha numérico ID!");
+
+            return armazem;
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Não foi encontrado um armazem com esse Alpha numérico ID!");
+        }
+    }
+
+    // PUT: api/Armazem
+    [Route("~/api/[controller]", Name = "UpdateArmazem")]
+    [HttpPut]
+    public async Task<ActionResult<ArmazemDTO>> UpdateAsync(ArmazemDTO dto)
+    {
+        try
+        {
+            var armazemCheck = await _service.GetByArmazemIdAsync(dto.AlphaNumId);
+
+            if (armazemCheck.Id != dto.Id)
+                throw new BusinessRuleValidationException("Armazem com esse AlphaNumeric ID já existe!");
+            
             var arm = await _service.UpdateAsync(dto);
 
             if (arm == null) return NotFound("Não foi possível encontrar o armazém introduzido!");
@@ -105,15 +174,15 @@ public class ArmazemController : ControllerBase
     // DELETE: api/Armazem/id
     [Route("~/api/[controller]/{id:guid}", Name = "DeleteArmazem")]
     [HttpDelete]
-    public async Task<ActionResult<ArmazemDTO>> DeleteAsync(Guid id)
+    public async Task<ActionResult<bool>> DeleteAsync(Guid id)
     {
         try
         {
             var arm = await _service.DeleteAsync(new ArmazemId(id));
 
-            if (arm == null) return NotFound("Não foi possível encontrar o armazém introduzido!");
+            if (arm == false) return NotFound("Não foi possível encontrar o armazém introduzido!");
 
-            return Ok(arm);
+            return Ok();
         }
         catch (BusinessRuleValidationException ex)
         {
