@@ -49,4 +49,12 @@ export default (app: Router) => {
         }),
         (req, res, next) => ctrl.getAllCamioes(req, res, next));
 
+    route.get('',
+        celebrate({
+            body: Joi.object({
+                caractCamiao: Joi.string().required(),
+            }),
+        }),
+        (req, res, next) => ctrl.getCamiaoByCaract(req, res, next));
+
 }
