@@ -65,13 +65,12 @@ public class EncomendaController : ControllerBase
     [HttpPut]
     public async Task<ActionResult<EncomendaDto>> Update(Guid id, CreatingEncomendaDto dto)
     {
-        var encomenda = await _service.GetByIdAsync(new EncomendaId(id));
-
-        if (encomenda == null) return NotFound();
-
-
         try
         {
+            var encomenda = await _service.GetByIdAsync(new EncomendaId(id));
+
+            if (encomenda == null) return NotFound();
+            
             var cat = await _service.UpdateAsync(new EncomendaId(id),dto);
 
             if (cat == null) return NotFound();
