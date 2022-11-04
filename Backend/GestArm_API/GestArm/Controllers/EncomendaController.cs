@@ -60,6 +60,30 @@ public class EncomendaController : ControllerBase
         }
     }
 
+    // PUT: api/Encomenda/id
+    [Route("~/api/[controller]/{id:guid}", Name = "UpdateEncomenda")]
+    [HttpPut]
+    public async Task<ActionResult<EncomendaDto>> Update(Guid id, CreatingEncomendaDto dto)
+    {
+        var encomenda = await _service.GetByIdAsync(new EncomendaId(id));
+
+        if (encomenda == null) return NotFound();
+
+
+        try
+        {
+            var cat = await _service.UpdateAsync(new EncomendaId(id),dto);
+
+            if (cat == null) return NotFound();
+            return Ok(cat);
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+
+
+    }
     //DELETE: api/Encomenda/id
     [Route("~/api/[controller]/{id:guid}", Name = "DeleteEntrega")]
     [HttpDelete]
@@ -92,10 +116,10 @@ public class EncomendaController : ControllerBase
 
         return encomendas.ToList();
     }
-    
+
     // GET: api/Encomenda/dataEntrega=dataEntrega
     [Route("~/api/[controller]/porData", Name = "GetEncomendaPorData")]
-    [HttpGet ("porData")]
+    [HttpGet("porData")]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByDataDeEntregaAysnc(DateTime data)
     {
         var encomendas = await _service.GetByDataEntregaAysnc(data);
@@ -121,7 +145,7 @@ public class EncomendaController : ControllerBase
 
         return encomendas;
     }
-    
+
     //MÉTODO UTILIZADO PELO REPOSITÓRIO EM NODE
     // GET: api/Armazem/search/armazemId
     [HttpGet]
@@ -134,23 +158,23 @@ public class EncomendaController : ControllerBase
 
         return armazem;
     }
-    
+
     ////MÉTODO UTILIZADO PELO REPOSITÓRIO EM NODE
     // GET: api/Armazem/search/{data}/{nextID} (Os dois juntos vão fazer o DOMAIN ID da entrega)
     [HttpGet]
     [Route("~/api/[controller]/search/{data}/{nextID}", Name = "GetEncomendaPorEncomendaDomainID")]
     public async Task<ActionResult<EncomendaDto>> GetByEncomendaDomainIDAsync(string nextID, string data)
     {
-        var armazem = await _service.GetEncomendaByDomainIdAsync(data,nextID);
+        var armazem = await _service.GetEncomendaByDomainIdAsync(data, nextID);
 
         if (armazem == null) return NotFound("Não foi encontrado um armazem com esse ID!");
 
         return armazem;
     }
-    
+
     //GET : api/Armazem/filtro?armazemId=X&data=Y
     [Route("~/api/[controller]/filtro", Name = "GetByArmazemFiltroID")]
-    [HttpGet ("{filtro}")]
+    [HttpGet("{filtro}")]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByFiltragemQuery(string armazemId, DateTime data)
     {
         var encomendas = await _service.GetByFiltragemAysnc(armazemId, data);
@@ -162,10 +186,10 @@ public class EncomendaController : ControllerBase
 
         return encomendas;
     }
-    
+
     // GET: api/Encomenda/porArmazemID?armazemId=armazemId
     [Route("~/api/[controller]/porArmazemID", Name = "GetByArmazemID")]
-    [HttpGet ("{porArmazemID}")]
+    [HttpGet("{porArmazemID}")]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByArmazemIdAysnc(string armazemId)
     {
         var encomendas = await _service.GetByArmazemIdAsync(armazemId);
@@ -175,5 +199,5 @@ public class EncomendaController : ControllerBase
 
         return encomendas;
     }
-    
+
 }
