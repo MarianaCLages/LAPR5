@@ -28,4 +28,11 @@ export default (app: Router) => {
         }),
         (req, res, next) => ctrl.createCamiao(req, res, next) );
 
+    route.get('/all',
+        celebrate({
+            body: Joi.object({
+            }),
+        }),
+        (req, res, next) => ctrl.getAllCamioes(req, res, next));
+
 }
