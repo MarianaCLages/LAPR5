@@ -25,6 +25,11 @@ export default class CamiaoService implements ICamiaoService {
     public async createCamiao(camiaoDTO: ICriarCamiaoDTO): Promise<Result<ICamiaoDTO>> {
 
         try {
+            // not allow duplicate matriculaCamiao
+            const camiao = await this.camiaoRepo.findByMatriculaCamiao(camiaoDTO.matriculaCamiao);
+            if (camiao !== null) {
+                return Result.fail<ICamiaoDTO>("Matricula Camiao já existe");
+            }
             const camiaoOrError = await Camiao.create(camiaoDTO);
             if (camiaoOrError.isFailure) {
                 return Result.fail<ICamiaoDTO>(camiaoOrError.errorValue());
