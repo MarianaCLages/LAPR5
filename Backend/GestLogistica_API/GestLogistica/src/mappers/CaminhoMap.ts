@@ -6,10 +6,6 @@ import {ICaminhoPersistence} from "../dataschema/ICaminhoPersistence";
 import ICaminhoDTO from "../dto/caminho/ICaminhoDTO";
 import {Caminho} from "../domain/caminho/caminho";
 
-import {Role} from "../domain/role";
-
-import {UniqueEntityID} from "../core/domain/UniqueEntityID";
-
 export class CaminhoMap extends Mapper<Caminho> {
     public static toDTO(caminho: Caminho): ICaminhoDTO {
 

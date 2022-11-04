@@ -125,5 +125,41 @@ describe('CaminhoController Test', () => {
         }
     );
 
+    it('should return an valid json when failed', async () => {
+        // Arrange
+
+        //mock the service
+        const caminhoService = {
+
+            createCaminho: sinon.stub().returns(Promise.resolve(Result.fail<ICaminhoDTO>("Erro")))
+        };
+
+        const caminhoController = require('../../../src/controllers/caminhoController').default;
+        const caminhoControllerInstance = new caminhoController(caminhoService);
+        const req = {
+            body: {
+                "armazemChegadaId": "MJ7",
+                "armazemPartidaId": "231",
+                "distancia": 448654,
+                "energia": 654,
+                "tempo": 7865,
+                "tmpCarregamento": 9865
+            }
+        }
+        const res = {
+            status: sinon.stub().returnsThis(),
+            json: sinon.spy()
+        }
+        const next = sinon.spy();
+
+        // Act
+        await caminhoControllerInstance.createCaminho(req, res, next);
+
+        // Assert
+        sinon.assert.calledWithExactly(res.json, sinon.match({
+            "message": "Erro"
+        }));
+    });
 });
+
 
