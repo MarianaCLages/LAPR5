@@ -3,7 +3,7 @@ import config from "../../config";
 import {Result} from "../core/logic/Result";
 import IArmazemRepo from "../services/IRepos/IArmazemRepo";
 import https = require("https");
-import IEmpacotamentoService from "../services/IServices/IEmpacotamentoService";
+import IPacoteService from "./IServices/IPacoteService";
 import IEmpacotamentoRepo from "../repos/empacotamentoRepo";
 import ICriarEmpacotamentoDTO from "../dto/empacotamento/ICriarEmpacotamentoDTO";
 import IEmpacotamentoDTO from "../dto/empacotamento/IEmpacotamentoDTO";
@@ -12,17 +12,57 @@ import { EmpacotamentoMap } from "../mappers/EmpacotamentoMap";
 import { EmpEntregaRef } from "../domain/empacotamento/empEntregaRef";
 import { EmpCamiaoRef } from "../domain/empacotamento/empCamiaoRef";
 import IEmpacotamentoIdDTO from "../dto/empacotamento/IEmpacotamentoIdDTO";
+import IEncomendaRepo from "./IRepos/IEncomendaRepo";
+import ICamiaoRepo from "./IRepos/ICamiaoRepo";
+import camiaoRepo from "../repos/camiaoRepo";
+import { CaractCamiao } from "../domain/camiao/caractCamiao";
+import ICaminhoIdDto from "../dto/caminho/ICaminhoIdDto";
+import IEmpacotamentoEntregaDTO from "../dto/empacotamento/IEmpacotamentoEntregaDTO";
+import IEmpacotamentoCamiaoDTO from "../dto/empacotamento/IEmpacotamentoCamiaoDTO";
 
 
 @Service()
-export default class EmpacotamentoService implements IEmpacotamentoService {
+export default class PacoteService implements IPacoteService {
   httpsAgent = new https.Agent({
     rejectUnauthorized: false
   });
 
   constructor(
-    @Inject(config.repos.empacotamento.name) private empacotamentoRepo: IEmpacotamentoRepo,
+    @Inject(config.repos.pacote.name) private empacotamentoRepo: IEmpacotamentoRepo,
+    @Inject(config.repos.entrega.name) private encomendaRepo: IEncomendaRepo,
+    @Inject(config.repos.camiao.name) private camiaoRepo: ICamiaoRepo
     ) {
+  }
+
+  public async getByEntregaS(entregaId : IEmpacotamentoEntregaDTO): Promise<Result<Array<IEmpacotamentoDTO>>> {
+    try {
+      const empacotamento = await this.empacotamentoRepo.getByEntregaAsync(entregaId.empEntregaRef);
+
+      if (empacotamento === null) {
+        return Result.fail("Nenhum empacotamento não foi encontrado!");
+      } else {
+        const caminhosDTO = empacotamento.getValue().map(emp => EmpacotamentoMap.toDTO(emp));
+        return Result.ok(caminhosDTO);
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  public async getByCamiaoAsync(entregaId : IEmpacotamentoCamiaoDTO): Promise<Result<Array<IEmpacotamentoDTO>>> {
+    try {
+      const empacotamento = await this.empacotamentoRepo.getByCamiaoAsync(entregaId.empCamiaoRef);
+
+      if (empacotamento === null) {
+        return Result.fail("Nenhum empacotamento foi encontrado!");
+      } else {
+
+        const caminhosDTO = empacotamento.getValue().map(emp => EmpacotamentoMap.toDTO(emp));
+        return Result.ok(caminhosDTO);
+      }
+    } catch (e) {
+      throw e;
+    }
   }
 
   public async getEmpacotamento(empacotamentoDTO: IEmpacotamentoDTO): Promise<Result<IEmpacotamentoDTO>> {
@@ -42,8 +82,10 @@ export default class EmpacotamentoService implements IEmpacotamentoService {
 
   public async createEmpacotamento(empacotamentoDTO: ICriarEmpacotamentoDTO): Promise<Result<IEmpacotamentoDTO>> {
     try {
-      const empacotamentoOrError = Empacotamento.create(empacotamentoDTO);
 
+      await this.verificaParametros(empacotamentoDTO.empEntregaRef, empacotamentoDTO.empCamiaoRef);
+
+      const empacotamentoOrError = Empacotamento.create(empacotamentoDTO);
 
       if (empacotamentoOrError.isFailure) {
         return Result.fail<IEmpacotamentoDTO>(empacotamentoOrError.errorValue());
@@ -66,11 +108,13 @@ export default class EmpacotamentoService implements IEmpacotamentoService {
 
   public async updateEmpacotamento(empacotamentoDTO: IEmpacotamentoDTO): Promise<Result<IEmpacotamentoDTO>> {
 
+    await this.verificaParametros(empacotamentoDTO.empEntregaRef, empacotamentoDTO.empCamiaoRef);
+
     const empacotamento = await this.empacotamentoRepo.findByDomainId(empacotamentoDTO.id);
 
     if (empacotamento === null) return Result.fail<IEmpacotamentoDTO>("O empacotamento não foi encontrado!");
 
-    empacotamento.empArmazemId = EmpEntregaRef.create(empacotamentoDTO.empEntregaRef).getValue();
+    empacotamento.empEntregaRef = EmpEntregaRef.create(empacotamentoDTO.empEntregaRef).getValue();
     empacotamento.empCamiaoRef = EmpCamiaoRef.create(empacotamentoDTO.empCamiaoRef).getValue();
 
     const empacotamentoUpdatedOrError = await this.empacotamentoRepo.update(empacotamento);
@@ -81,10 +125,11 @@ export default class EmpacotamentoService implements IEmpacotamentoService {
     return Result.ok<IEmpacotamentoDTO>(empacotamentoDTOResult);
   }
 
-  public async getAllEmpacotamentos() {
+  public async getAllEmpacotamentos() : Promise<Result<Array<IEmpacotamentoDTO>>>  {
     const empacotamentos = await this.empacotamentoRepo.getAllEmpacotamentos();
+
     const caminhosDTO = empacotamentos.getValue().map(emp => EmpacotamentoMap.toDTO(emp));
-    return caminhosDTO;
+    return Result.ok(caminhosDTO);
   }
 
   public async apagaEmpacotamento(empId: IEmpacotamentoIdDTO): Promise<Result<IEmpacotamentoDTO>> {
@@ -100,6 +145,45 @@ export default class EmpacotamentoService implements IEmpacotamentoService {
       }
     } catch (e) {
       throw e;
+    }
+  }
+
+  private async verificaEncomenda(encomendaId : string) : Promise<Result<boolean>> {
+
+
+    const encomendaChegadaResult = await this.encomendaRepo.exists(encomendaId);
+
+    if (encomendaChegadaResult === false) {
+      return Result.fail<boolean>("Encomenda não foi encontrado!");
+    }
+
+    return Result.ok<boolean>(true);
+
+  }
+
+  private async verificarCamiao(camiaoId : string) : Promise<Result<boolean>> {
+
+    const camiao = await this.camiaoRepo.findByDomainId(CaractCamiao.create(camiaoId).getValue());
+
+    if(camiao == null){
+      return Result.fail<boolean>("Camiao não foi encontrado!");
+    }
+
+    return Result.ok<boolean>(true);
+
+  }
+
+  private async verificaParametros(empEntregaRef : string , empCamiaoRef : string ){
+    const verificarEncomenda = await this.verificaEncomenda(empEntregaRef);
+
+    if(verificarEncomenda.isFailure){
+      return Result.fail<IEmpacotamentoDTO>("Encomenda não foi encontrado! O id especificado não existe");
+    }
+
+    const verificarCamiao = await this.verificarCamiao(empCamiaoRef);
+
+    if(verificarCamiao.isFailure){
+      return Result.fail<IEmpacotamentoDTO>("Camiao não foi encontrado! A matricula especificada não existe");
     }
   }
 
