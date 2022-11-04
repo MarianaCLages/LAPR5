@@ -64,4 +64,11 @@ public class EncomendasRepository : BaseRepository<Encomenda, EncomendaId>, IEnc
         return await _context.Encomendas.Where(u => u.DataEntrega.Data.Equals(data) && u.ArmazemId.Equals(armazemId))
             .ToListAsync();
     }
+
+    public async Task<Encomenda> GetEncomendaByDomainIdAsync(string id)
+    {
+        return await _context.Encomendas.Where(u => u.EncomendaDomainId._id.Equals(id))
+            .FirstOrDefaultAsync();
+    }
+    
 }

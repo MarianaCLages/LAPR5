@@ -25,4 +25,6 @@ public interface IEncomendasRepository : IRepository<Encomenda, EncomendaId>
     Task<int> GetCountAsync();
 
     Task<List<Encomenda>> GetByFiltragemAsync(string armazemId, DateTime data);
+
+    Task<Encomenda> GetEncomendaByDomainIdAsync(string id);
 }
