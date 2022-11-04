@@ -12,13 +12,7 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
     {
         _context = context;
     }
-
-    public Task<Armazem> GetByIdAsync(ArmazemId id)
-    {
-        var armazem = _context.Armazens.Where(a => a.Id == id).FirstOrDefault();
-        return Task.FromResult(armazem);
-    }
-
+    
     /*
     public Task<Armazem> GetByAlphaNumIdAsync(AlphaId alphaNumId)
     {
@@ -27,10 +21,11 @@ public class ArmazemRepository : BaseRepository<Armazem, ArmazemId>, IArmazemRep
     }
     */
 
-    public Task<Armazem> GetByDesignacaoAsync(DesignacaoArmazem designacao)
+    public async Task<List<Armazem>> GetByDesignacaoAsync(DesignacaoArmazem designacao)
     {
-        var armazem = _context.Armazens.Where(a => a.Designacao.Equals(designacao)).FirstOrDefault();
-        return Task.FromResult(armazem);
+        return await _context.Armazens.Where(r => r.Designacao.Designacao.Equals(designacao.Designacao))
+            .ToListAsync();
+        
     }
 
     public Task<List<Armazem>> GetAllAsync()
