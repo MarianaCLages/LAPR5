@@ -54,9 +54,9 @@ export default async ({ expressApp }) => {
     path: config.controllers.camiao.path
   };
 
-  const empacotamentoController = {
-    name: config.controllers.empacotamento.name,
-    path: config.controllers.empacotamento.path
+  const pacoteController = {
+    name: config.controllers.pacote.name,
+    path: config.controllers.pacote.path
   };
 
   const roleRepo = {
@@ -79,9 +79,9 @@ export default async ({ expressApp }) => {
     path: config.repos.camiao.path
   };
 
-  const empacotamentoRepo = {
-    name: config.repos.empacotamento.name,
-    path: config.repos.empacotamento.path
+  const pacoteRepo = {
+    name: config.repos.pacote.name,
+    path: config.repos.pacote.path
   };
 
   const roleService = {
@@ -99,14 +99,19 @@ export default async ({ expressApp }) => {
     path: config.services.camiao.path
   };
 
-  const empacotamentoService= {
-    name: config.repos.empacotamento.name,
-    path: config.repos.empacotamento.path
+  const pacoteService= {
+    name: config.services.pacote.name,
+    path: config.services.pacote.path
   };
 
   const armazemRepo = {
     name: config.repos.armazem.name,
     path: config.repos.armazem.path
+  };
+
+  const entregaRepo = {
+    name: config.repos.entrega.name,
+    path: config.repos.entrega.path
   };
 
   await dependencyInjectorLoader({
@@ -122,7 +127,7 @@ export default async ({ expressApp }) => {
       roleController,
       caminhoController,
       camiaoController,
-      empacotamentoController
+      pacoteController
     ],
     repos: [
       roleRepo,
@@ -130,13 +135,14 @@ export default async ({ expressApp }) => {
       caminhoRepo,
       armazemRepo,
       camiaoRepo,
-      empacotamentoRepo
+      pacoteRepo,
+      entregaRepo
     ],
     services: [
       roleService,
       caminhoService,
       camiaoService,
-      empacotamentoService
+      pacoteService
     ]
   });
   Logger.info("✌️ Schemas, Controllers, Repositories, Services, etc. loaded");
