@@ -121,6 +121,7 @@ public class EncomendaController : ControllerBase
         return encomendas;
     }
     
+    //MÉTODO UTILIZADO PELO REPOSITÓRIO EM NODE
     // GET: api/Armazem/search/armazemId
     [HttpGet]
     [Route("~/api/[controller]/search/{encomendaId}", Name = "GetEncomendaPorArmazem")]
@@ -133,7 +134,8 @@ public class EncomendaController : ControllerBase
         return armazem;
     }
     
-    // GET: api/Armazem/search/armazemId
+    ////MÉTODO UTILIZADO PELO REPOSITÓRIO EM NODE
+    // GET: api/Armazem/search/{data}/{nextID} (Os dois juntos vão fazer o DOMAIN ID da entrega)
     [HttpGet]
     [Route("~/api/[controller]/search/{data}/{nextID}", Name = "GetEncomendaPorEncomendaDomainID")]
     public async Task<ActionResult<EncomendaDto>> GetByEncomendaDomainIDAsync(string nextID, string data)
@@ -145,6 +147,7 @@ public class EncomendaController : ControllerBase
         return armazem;
     }
     
+    //GET : api/Armazem/filtro?armazemId=X&data=Y
     [Route("~/api/[controller]/filtro", Name = "GetByArmazemFiltroID")]
     [HttpGet ("{filtro}")]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByFiltragemQuery(string armazemId, DateTime data)
@@ -159,7 +162,7 @@ public class EncomendaController : ControllerBase
         return encomendas;
     }
     
-    // GET: api/Encomenda/armazemId=armazemId
+    // GET: api/Encomenda/porArmazemID?armazemId=armazemId
     [Route("~/api/[controller]/porArmazemID", Name = "GetByArmazemID")]
     [HttpGet ("{porArmazemID}")]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByArmazemIdAysnc(string armazemId)
