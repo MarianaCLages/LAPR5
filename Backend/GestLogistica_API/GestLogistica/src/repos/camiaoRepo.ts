@@ -28,9 +28,21 @@ export default class camiaoRepo implements ICamiaoRepo {
 
         return !!camiaoDocument === true;
     }
+    /*
+        public async findByDomainId(caractCamiao: CaractCamiao | string): Promise<Camiao> {
+            const query = { domainId: caractCamiao };
+            const roleRecord = await this.camiaoSchema.findOne(query as FilterQuery<ICamiaoPersistence & Document>);
+    
+            if (roleRecord != null) {
+                return CamiaoMap.toDomain(roleRecord);
+            } else
+                return null;
+        }
+    */
 
-    public async findByDomainId(caractCamiao: CaractCamiao | string): Promise<Camiao> {
-        const query = { domainId: caractCamiao };
+    public async findByCaractCamiao(caractCam: CaractCamiao | string): Promise<Camiao> {
+
+        const query = { caractCamiao: caractCam };
         const roleRecord = await this.camiaoSchema.findOne(query as FilterQuery<ICamiaoPersistence & Document>);
 
         if (roleRecord != null) {
