@@ -38,7 +38,7 @@ export class Empacotamento extends AggregateRoot<EmpacotamentoProps> {
     this.props.empCamiaoRef = value;
   }
 
-  set empArmazemId(value: EmpEntregaRef) {
+  set empEntregaRef(value: EmpEntregaRef) {
     this.props.empEntregaRef = value;
   }
 
@@ -63,7 +63,7 @@ export class Empacotamento extends AggregateRoot<EmpacotamentoProps> {
 
         if (_empEntregaRef.isFailure || _empCamiaoRef.isFailure) {
           //adds to the message the errors of each value object if they exist
-          let message = "Não foi possviel criar o caminho: \n";
+          let message = "Não foi possviel criar o pacote: \n";
           if (_empEntregaRef.isFailure) {
             message += _empEntregaRef.errorValue() + "\n";
           }
