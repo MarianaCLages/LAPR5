@@ -11,7 +11,7 @@ O grupo de trabalho é constituído pelo estudantes identificados na tabela segu
 | **[1200902](SprintA/1200902)** | Mariana Lages  |
 | **[1200920](SprintA/1200920)** | Eduardo Sousa  |
 | **[1201487](SprintA/1201487)** | Miguel Jordão  |
-| **[1201346](SprintA/1201487)** | Ines Ribeiro   |
+| **[1201346](SprintA/1201487)** | Inês Ribeiro   |
 
 # 2. Distribuição de Funcionalidades ###
 
@@ -19,14 +19,17 @@ A distribuição de requisitos/funcionalidades ao longo do período de desenvolv
 
 | Requisito/Funcionalidade | Sprint A                                         | Sprint B                                                    | Sprint C                                                |
 |:-------------------------|:-------------------------------------------------|:------------------------------------------------------------|:--------------------------------------------------------|
-| Vista Lógica (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
-| Vista Física (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
-| Vista Implementação (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
-| Vista Cenários (Todos os níveis) | **[1201487](SprintA/1200601)** |  |  |
-| Preparação da pipeline | **[1201487](SprintA/1200601)** |  |  |
-| Criação Caminho | **[1200920](SprintA/1200601)** |  |  |
-| Listar Caminho | **[1201487](SprintA/1200601)** |  |  |
-| Editar Caminho (eliminar também) | **[1201487](SprintA/1200601)** |  |  |
-| Criação Camião | **[1201346](SprintA/1200601)** |  |  |
-| Listar Camião | **[1201487](SprintA/1200601)** |  |  |
+| Vista Lógica (Todos os níveis) | **[1201487](SprintA/1201487)** |  |  |
+| Vista Física (Todos os níveis) | **[1201487](SprintA/1201487)** |  |  |
+| Vista Implementação (Todos os níveis) | **[1201487](SprintA/1201487)** |  |  |
+| Vista Cenários (Todos os níveis) | **[1201487](SprintA/1201487)** |  |  |
+| Preparação da pipeline | **[1201487](SprintA/1201487)** |  |  |
+| Criação Caminho | **[1200920](SprintA/1200920)** |  |  |
+| Listar Caminho | **[1201346](SprintA/1201346)** |  |  |
+| Editar Caminho (eliminar também) | **[1201487](SprintA/1201487)** |  |  |
+| Criação Camião | **[1201346](SprintA/1201346)** |  |  |
+| Listar Camião | **[1200902](SprintA/1200902)** |  |  |
 | Editar Camião (eliminar também) | **[1200601](SprintA/1200601)** |  |  |
+| Criação Empacotamento | **[1201487](SprintA/1201487)** |  |  |
+| Listar Empacotamento | **[1201487](SprintA/1200920)** |  |  |
+| Editar Empacotamento (eliminar também) | **[1201487](SprintA/1201487)** |  |  |
