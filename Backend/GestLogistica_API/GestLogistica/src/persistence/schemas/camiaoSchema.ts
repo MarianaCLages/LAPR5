@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 const CamiaoSchema = new mongoose.Schema(
     {
         domainId: {type: String, required: true, unique: true},
-        caractCamiao: String,
+        caractCamiao: {type: String, required: true, unique: true},
         matriculaCamiao: {type: String, required: true, unique: true},
         tara: Number,
         capacidadeCarga: Number,
