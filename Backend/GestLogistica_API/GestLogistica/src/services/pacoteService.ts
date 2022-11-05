@@ -181,17 +181,17 @@ export default class PacoteService implements IPacoteService {
 
   }
 
-  private async verificaParametros(empEntregaRef: string, empCamiaoRef: string) {
+  private async verificaParametros(empEntregaRef: string, empCamiaoRef: string) : Promise<Result<boolean>>{
     const verificarEncomenda = await this.verificaEncomenda(empEntregaRef);
 
     if (verificarEncomenda.isFailure) {
-      return Result.fail<IEmpacotamentoDTO>("Encomenda não foi encontrado! O id especificado não existe");
+      return Result.fail<boolean>("Encomenda não foi encontrado! O id especificado não existe");
     }
 
     const verificarCamiao = await this.verificarCamiao(empCamiaoRef);
 
     if (verificarCamiao.isFailure) {
-      return Result.fail<IEmpacotamentoDTO>("Camiao não foi encontrado! A matricula especificada não existe");
+      return Result.fail<boolean>("Camiao não foi encontrado! A matricula especificada não existe");
     }
 
     return Result.ok<boolean>(true);

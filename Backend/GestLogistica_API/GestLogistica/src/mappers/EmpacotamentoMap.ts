@@ -8,8 +8,6 @@ import { IEmpacotamentoPersistance } from "../dataschema/IEmpacotamentoPersistan
 
 export class EmpacotamentoMap extends Mapper<Empacotamento> {
   public static toDTO(empacotamento: Empacotamento): IEmpacotamentoDTO {
-
-
     return {
       id: empacotamento.id.toString(),
       empEntregaRef: empacotamento.empEntregaRef.value,
