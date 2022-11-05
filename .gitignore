@@ -363,4 +363,6 @@ Backend/GestArm_API/GestArmTestes/UnitTesting/Dominio/TestResults
 Backend/GestArm_API/GestArmTestes/IntegrationTesting/obj
 Backend/GestArm_API/GestArmTestes/IntegrationTesting/bin
 Backend/GestArm_API/GestArmTestes/IntegrationTesting/.idea
+
+Backend/GestArm_API/GestArmTestes/IntegrationTests
 Backend/GestArm_API/GestArmTestes/IntegrationTesting/*user

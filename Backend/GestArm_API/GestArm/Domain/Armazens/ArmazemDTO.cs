@@ -23,7 +23,7 @@ public class ArmazemDTO
     }
 
 
-    public Guid Id { get; }
+    public Guid Id { get; set; }
 
     public int LatitudeGrau { get; }
 
