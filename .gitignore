@@ -359,3 +359,7 @@ Backend/GestLogistica_API/GestLogistica/.nyc_output
 Backend/GestArm_API/GestArmTestes/UnitTesting/Servicos/TestResults
 Backend/GestArm_API/GestArmTestes/UnitTesting/Controladores/TestResults
 Backend/GestArm_API/GestArmTestes/UnitTesting/Dominio/TestResults
+
+Backend/GestArm_API/GestArmTestes/IntegrationTesting/obj
+Backend/GestArm_API/GestArmTestes/IntegrationTesting/bin
+Backend/GestArm_API/GestArmTestes/IntegrationTesting/.idea

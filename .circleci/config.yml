@@ -15,7 +15,13 @@ jobs:
             dotnet build
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
-          name: Test
+          name: Unit Testing
+          command: |
+            dotnet build
+            dotnet test
+      - run:
+          working_directory: Backend/GestArm_API/GestArmTestes/IntegrationTesting
+          name: Integration Testing
           command: |
             dotnet build
             dotnet test
