@@ -66,8 +66,8 @@ export default class CaminhoRepo implements ICaminhoRepo {
         }
     }
 
-    public async getByArmazemPartidaId(armazemId: CaminhoArmazemPartidaId | string): Promise<Result<Array<Caminho>>> {
-        const query = {armazemPartidaId: armazemId};
+    public async getByArmazemPartidaId(armazemPartidaId: CaminhoArmazemPartidaId | string): Promise<Result<Array<Caminho>>> {
+        const query = {armazemPartidaId: armazemPartidaId};
         
         var lista = new Array<Caminho>;
         (await this.caminhoSchema.find(query)).forEach(
@@ -82,8 +82,8 @@ export default class CaminhoRepo implements ICaminhoRepo {
         }
     }
 
-    public async getByArmazemChegadaId(armazemId: CaminhoArmazemChegadaId | string): Promise<Result<Array<Caminho>>> {
-        const query = {armazemChegadaId: armazemId};
+    public async getByArmazemChegadaId(armazemChegadaId: CaminhoArmazemChegadaId | string): Promise<Result<Array<Caminho>>> {
+        const query = {armazemChegadaId: armazemChegadaId};
 
         var lista = new Array<Caminho>;
         (await this.caminhoSchema.find(query)).forEach(

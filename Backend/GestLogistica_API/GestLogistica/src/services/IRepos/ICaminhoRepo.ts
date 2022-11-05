@@ -15,9 +15,9 @@ export default interface ICaminhoRepo extends Repo<Caminho> {
 
     getAllCaminhos();
 
-    getByArmazemPartidaId(armazemId: CaminhoArmazemPartidaId | string): Promise<Result<Array<Caminho>>>;
+    getByArmazemPartidaId(armazemPartidaId: CaminhoArmazemPartidaId | string): Promise<Result<Array<Caminho>>>;
 
-    getByArmazemChegadaId(armazemId: CaminhoArmazemChegadaId | string): Promise<Result<Array<Caminho>>>;
+    getByArmazemChegadaId(armazemChegadaId: CaminhoArmazemChegadaId | string): Promise<Result<Array<Caminho>>>;
 
 
     save(caminho: Caminho): Promise<Caminho>;
