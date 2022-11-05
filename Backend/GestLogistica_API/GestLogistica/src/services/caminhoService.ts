@@ -7,7 +7,6 @@ import {Result} from "../core/logic/Result";
 import ICaminhoDTO from "../dto/caminho/ICaminhoDTO";
 import {CaminhoMap} from "../mappers/CaminhoMap";
 import ICriarCaminhoDTO from "../dto/caminho/ICriarCaminhoDTO";
-import {CaminhoId} from "../domain/caminho/caminhoId";
 import IArmazemRepo from "../services/IRepos/IArmazemRepo";
 import https = require("https");
 import { CaminhoEnergia } from "../domain/caminho/caminhoEnergia";
@@ -17,6 +16,8 @@ import { CaminhoArmazemChegadaId } from "../domain/caminho/caminhoArmazemChegada
 import { CaminhoArmazemPartidaId } from "../domain/caminho/caminhoArmazemPartidaId";
 import { CaminhoDistancia } from "../domain/caminho/caminhoDistancia";
 import ICaminhoIdDto from "../dto/caminho/ICaminhoIdDto";
+import ICaminhoArmazemPartidaId from "../dto/caminho/ICaminhoArmazemPartidaIdDTO";
+import ICaminhoArmazemChegadaId from "../dto/caminho/ICaminhoArmazemChegadaIdDTO";
 
 
 @Service()
@@ -120,10 +121,43 @@ export default class CaminhoService implements ICaminhoService {
         return Result.ok<ICaminhoDTO>(caminhoDTOResult);
     }
 
-    public async getAllCaminhos() {
+    public async getAllCaminhos(): Promise<Result<Array<ICaminhoDTO>>> {
         const caminhos = await this.caminhoRepo.getAllCaminhos();
-        const caminhosDTO = caminhos.map(caminho => CaminhoMap.toDTO(caminho));
-        return caminhosDTO;
+
+        const caminhosDTO = caminhos.getValue().map(caminho => CaminhoMap.toDTO(caminho));
+        return Result.ok(caminhosDTO);
+    }
+
+    public async getByArmazemPartidaId(armazemId: ICaminhoArmazemPartidaId): Promise<Result<Array<ICaminhoDTO>>> {
+        try {
+            const caminhos = await this.caminhoRepo.getByArmazemPartidaId(armazemId.caminhoArmazemPartidaId)
+
+            if(caminhos === null) {
+                return Result.fail("Caminhos não foram encontrados!");
+            } else {
+                const caminhosDTO = caminhos.getValue().map(caminho => CaminhoMap.toDTO(caminho));
+                return Result.ok(caminhosDTO);
+            }
+        }
+        catch (e) {
+            throw e;
+        }
+    }
+
+    public async getByArmazemChegadaId(armazemId: ICaminhoArmazemChegadaId): Promise<Result<Array<ICaminhoDTO>>> {
+        try {
+            const caminhos = await this.caminhoRepo.getByArmazemChegadaId(armazemId.caminhoArmazemChegadaId)
+
+            if(caminhos === null) {
+                return Result.fail("Caminhos não foram encontrados!");
+            } else {
+                const caminhosDTO = caminhos.getValue().map(caminho => CaminhoMap.toDTO(caminho));
+                return Result.ok(caminhosDTO);
+            }
+        }
+        catch (e) {
+            throw e;
+        }
     }
 
   public async apagaCaminho(caminhoId: ICaminhoIdDto): Promise<Result<ICaminhoDTO>> {
