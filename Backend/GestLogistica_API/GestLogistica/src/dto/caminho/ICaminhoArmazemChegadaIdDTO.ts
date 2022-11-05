@@ -1,3 +1,3 @@
 export default interface ICaminhoArmazemChegadaIdDTO {
-    caminhoArmazemChegadaId: string
+    armazemChegadaId: string
 }
