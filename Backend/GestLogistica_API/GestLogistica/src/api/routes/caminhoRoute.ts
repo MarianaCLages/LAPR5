@@ -50,4 +50,20 @@ export default (app: Router) => {
 
     route.get('/allCaminhos', (req, res, next) => ctrl.getAllCaminhos(req, res, next));
 
+    route.get('/armazemChegada',
+        celebrate({
+            body: Joi.object({
+                armazemChegadaId: Joi.string().required(),
+            }),
+        }),
+        (req, res, next) => ctrl.getByArmazemChegadaId(req, res, next));
+
+    route.get('/armazemPartida',
+        celebrate({
+            body: Joi.object({
+                armazemPartidaId: Joi.string().required(),
+            }),
+        }),
+        (req, res, next) => ctrl.getByArmazemPartidaId(req, res, next));
+
 };
