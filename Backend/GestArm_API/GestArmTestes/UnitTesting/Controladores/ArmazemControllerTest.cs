@@ -65,11 +65,11 @@ public class ArmazemControllerTest
 
         listDto.Add(armDto);
 
-        _ServiceMock.Setup(x => x.GetByDesignacaoAsync(arm.Designacao)).ReturnsAsync(armDto);
+        _ServiceMock.Setup(x => x.GetByDesignacaoAsync(arm.Designacao.Designacao)).ReturnsAsync(listDto);
         var result = _controller.GetByDesignacao(arm.Designacao.Designacao).Result;
 
         var objExpected = result.Value;
-        var objActual = listDto.First();
+        var objActual = listDto;
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
