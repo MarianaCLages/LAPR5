@@ -2,7 +2,6 @@ import {Result} from '../../../src/core/logic/Result';
 import ICaminhoDTO from "../../../src/dto/caminho/ICaminhoDTO";
 import {Caminho} from "../../../src/domain/caminho/caminho";
 import CaminhoService from "../../../src/services/caminhoService";
-import {UniqueEntityID} from "../../../src/core/domain/UniqueEntityID";
 
 const sinon = require('sinon');
 
@@ -32,7 +31,23 @@ describe('Caminho Service test', () => {
             delete: sinon.stub().returns(Promise.resolve(true)),
             update: sinon.stub().returns(Promise.resolve(Result.ok<ICaminhoDTO>())),
             exists: sinon.stub().returns(Promise.resolve(true)),
-            async: sinon.stub().returns(Promise.resolve(true))
+            async: sinon.stub().returns(Promise.resolve(true)),
+            getByArmazemPartidaId: sinon.stub().returns(Promise.resolve(Caminho.create({
+                armazemChegadaId: "MJ7",
+                armazemPartidaId: "231",
+                distancia: 448654,
+                energia: 654,
+                tempo: 7865,
+                tmpCarregamento: 9865
+            }).getValue())),
+            getByArmazemChegadaId: sinon.stub().returns(Promise.resolve(Caminho.create({
+                armazemChegadaId: "MJ7",
+                armazemPartidaId: "231",
+                distancia: 448654,
+                energia: 654,
+                tempo: 7865,
+                tmpCarregamento: 9865
+            }).getValue()))
         }
 
         //mocks armazemRepository
@@ -78,7 +93,23 @@ describe('Caminho Service test', () => {
             delete: sinon.stub().returns(Promise.resolve(true)),
             update: sinon.stub().returns(Promise.resolve(Result.ok<ICaminhoDTO>())),
             exists: sinon.stub().returns(Promise.resolve(true)),
-            async: sinon.stub().returns(Promise.resolve(true))
+            async: sinon.stub().returns(Promise.resolve(true)),
+            getByArmazemPartidaId: sinon.stub().returns(Promise.resolve(Caminho.create({
+                armazemChegadaId: "MJ7",
+                armazemPartidaId: "231",
+                distancia: 448654,
+                energia: 654,
+                tempo: 7865,
+                tmpCarregamento: 9865
+            }).getValue())),
+            getByArmazemChegadaId: sinon.stub().returns(Promise.resolve(Caminho.create({
+                armazemChegadaId: "MJ7",
+                armazemPartidaId: "231",
+                distancia: 448654,
+                energia: 654,
+                tempo: 7865,
+                tmpCarregamento: 9865
+            }).getValue()))
         }
 
         //mocks armazemRepository
@@ -124,7 +155,23 @@ describe('Caminho Service test', () => {
             delete: sinon.stub().returns(Promise.resolve(true)),
             update: sinon.stub().returns(Promise.resolve(Result.ok<ICaminhoDTO>())),
             exists: sinon.stub().returns(Promise.resolve(true)),
-            async: sinon.stub().returns(Promise.resolve(true))
+            async: sinon.stub().returns(Promise.resolve(true)),
+            getByArmazemPartidaId: sinon.stub().returns(Promise.resolve(Caminho.create({
+                armazemChegadaId: "MJ7",
+                armazemPartidaId: "231",
+                distancia: 448654,
+                energia: 654,
+                tempo: 7865,
+                tmpCarregamento: 9865
+            }).getValue())),
+            getByArmazemChegadaId: sinon.stub().returns(Promise.resolve(Caminho.create({
+                armazemChegadaId: "MJ7",
+                armazemPartidaId: "231",
+                distancia: 448654,
+                energia: 654,
+                tempo: 7865,
+                tmpCarregamento: 9865
+            }).getValue()))
         }
 
         //mocks armazemRepository
@@ -170,7 +217,23 @@ describe('Caminho Service test', () => {
             delete: sinon.stub().returns(Promise.resolve(true)),
             update: sinon.stub().returns(Promise.resolve(Result.ok<ICaminhoDTO>())),
             exists: sinon.stub().returns(Promise.resolve(true)),
-            async: sinon.stub().returns(Promise.resolve(true))
+            async: sinon.stub().returns(Promise.resolve(true)),
+            getByArmazemPartidaId: sinon.stub().returns(Promise.resolve(Caminho.create({
+                armazemChegadaId: "MJ7",
+                armazemPartidaId: "231",
+                distancia: 448654,
+                energia: 654,
+                tempo: 7865,
+                tmpCarregamento: 9865
+            }).getValue())),
+            getByArmazemChegadaId: sinon.stub().returns(Promise.resolve(Caminho.create({
+                armazemChegadaId: "MJ7",
+                armazemPartidaId: "231",
+                distancia: 448654,
+                energia: 654,
+                tempo: 7865,
+                tmpCarregamento: 9865
+            }).getValue()))
         }
 
         //mocks armazemRepository
@@ -215,8 +278,25 @@ describe('Caminho Service test', () => {
             delete: sinon.stub().returns(Promise.resolve(true)),
             update: sinon.stub().returns(Promise.resolve(Result.ok<ICaminhoDTO>())),
             exists: sinon.stub().returns(Promise.resolve(true)),
-            async: sinon.stub().returns(Promise.resolve(true))
+            async: sinon.stub().returns(Promise.resolve(true)),
+            getByArmazemPartidaId: sinon.stub().returns(Promise.resolve(Caminho.create({
+                armazemChegadaId: "MJ7",
+                armazemPartidaId: "231",
+                distancia: 448654,
+                energia: 654,
+                tempo: 7865,
+                tmpCarregamento: 9865
+            }).getValue())),
+            getByArmazemChegadaId: sinon.stub().returns(Promise.resolve(Caminho.create({
+                armazemChegadaId: "MJ7",
+                armazemPartidaId: "231",
+                distancia: 448654,
+                energia: 654,
+                tempo: 7865,
+                tmpCarregamento: 9865
+            }).getValue()))
         }
+
 
         //mocks armazemRepository
         const armazemRepository = {
@@ -380,4 +460,5 @@ describe('Caminho Service test', () => {
     });*/
 
 
-});
+})
+;
