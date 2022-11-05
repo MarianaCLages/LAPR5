@@ -27,7 +27,7 @@ export default class camiaoController
             const camiaoOrError = await this.camiaoServiceInstance.createCamiao(req.body as ICamiaoDTO) as Result<ICamiaoDTO>;
 
             if (camiaoOrError.isFailure) {
-                return res.status(400).send();
+                return res.status(400).json(camiaoOrError.error).send();
             }
 
             const camiaoDTO = camiaoOrError.getValue();
@@ -86,8 +86,8 @@ export default class camiaoController
     }
 
     public async updateCamiao(req: Request, res: Response, next: NextFunction) {
-        
-        try{
+
+        try {
             const camiaoOrError = await this.camiaoServiceInstance.updateCamiao(req.body as ICamiaoDTO);
 
             if (camiaoOrError.isFailure) {
@@ -96,13 +96,13 @@ export default class camiaoController
 
             const camiaoDTO = camiaoOrError.getValue();
             return res.json(camiaoDTO).status(200);
-        }catch(e){
+        } catch (e) {
             throw e;
         }
     }
 
-    public async deleteCamiao(req: Request, res: Response, next: NextFunction){
-        try{
+    public async deleteCamiao(req: Request, res: Response, next: NextFunction) {
+        try {
             const camiaoOrError = await this.camiaoServiceInstance.deleteCamiao(req.body as ICamiaoDTO);
 
             if (camiaoOrError.isFailure) {
@@ -111,7 +111,7 @@ export default class camiaoController
 
 
             return res.json().status(200);
-        }catch(e){
+        } catch (e) {
             return next(e);
         }
     }
