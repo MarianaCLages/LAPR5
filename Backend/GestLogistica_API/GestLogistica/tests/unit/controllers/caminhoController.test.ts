@@ -92,6 +92,7 @@ describe('CaminhoController Test', () => {
 
             const caminhoController = require('../../../src/controllers/caminhoController').default;
             const caminhoControllerInstance = new caminhoController(caminhoService);
+
             const req = {
                 body: {
                     "armazemChegadaId": "MJ7",

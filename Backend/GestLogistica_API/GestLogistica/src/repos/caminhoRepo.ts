@@ -8,9 +8,8 @@ import {ICaminhoPersistence} from '../dataschema/ICaminhoPersistence';
 import {CaminhoMap} from '../mappers/CaminhoMap';
 import ICaminhoRepo from '../services/IRepos/ICaminhoRepo';
 import {Result} from "../core/logic/Result";
-import { Mapper } from '../core/infra/Mapper';
-import { CaminhoArmazemPartidaId } from '../domain/caminho/caminhoArmazemPartidaId';
-import { CaminhoArmazemChegadaId } from '../domain/caminho/caminhoArmazemChegadaId';
+import {CaminhoArmazemPartidaId} from '../domain/caminho/caminhoArmazemPartidaId';
+import ICaminhoArmazemChegadaId from "../dto/caminho/ICaminhoArmazemChegadaIdDTO";
 
 @Service()
 export default class CaminhoRepo implements ICaminhoRepo {
@@ -53,51 +52,51 @@ export default class CaminhoRepo implements ICaminhoRepo {
 
 
     public async getAllCaminhos(): Promise<Result<Array<Caminho>>> {
-        var lista = new Array<Caminho>; 
+        var lista = new Array<Caminho>;
         (await this.caminhoSchema.find({})).forEach(
             caminho =>
-            lista.push(CaminhoMap.toDomain(caminho))
+                lista.push(CaminhoMap.toDomain(caminho))
         )
 
-        if(lista !=null){
-        return Result.ok(lista);
+        if (lista != null) {
+            return Result.ok(lista);
         } else {
-        return null;
+            return null;
         }
     }
 
     public async getByArmazemPartidaId(armazemId: CaminhoArmazemPartidaId | string): Promise<Result<Array<Caminho>>> {
         const query = {armazemPartidaId: armazemId};
-        
+
         var lista = new Array<Caminho>;
         (await this.caminhoSchema.find(query)).forEach(
             caminho =>
-            lista.push(CaminhoMap.toDomain(caminho))
+                lista.push(CaminhoMap.toDomain(caminho))
         )
 
-        if(lista !=null){
+        if (lista != null) {
             return Result.ok(lista);
         } else {
             return null;
         }
     }
 
-    public async getByArmazemChegadaId(armazemId: CaminhoArmazemChegadaId | string): Promise<Result<Array<Caminho>>> {
-        const query = {armazemChegadaId: armazemId};
+    public async getByArmazemChegadaId(armazemId: ICaminhoArmazemChegadaId): Promise<Result<Array<Caminho>>> {
+        const id = armazemId.armazemChegadaId;
+        const query = {"armazemChegadaId": id};
 
-        var lista = new Array<Caminho>;
+        const lista = new Array<Caminho>;
         (await this.caminhoSchema.find(query)).forEach(
             caminho =>
-            lista.push(CaminhoMap.toDomain(caminho))
+                lista.push(CaminhoMap.toDomain(caminho))
         )
 
-        if(lista !=null){
+        if (lista != null) {
             return Result.ok(lista);
         } else {
             return null;
         }
     }
-    
 
 
     public async delete(caminhoId: CaminhoId) {

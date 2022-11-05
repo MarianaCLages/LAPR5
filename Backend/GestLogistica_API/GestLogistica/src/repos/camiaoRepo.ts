@@ -67,6 +67,7 @@ export default class camiaoRepo implements ICamiaoRepo {
             }
         } catch (err) {
             console.debug(err.message + " " + err.stack);
+            throw new Error("Erro ao criar camiao, verifique os dados repetidos");
         }
     }
 
