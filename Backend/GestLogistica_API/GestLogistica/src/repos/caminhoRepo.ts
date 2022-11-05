@@ -9,6 +9,8 @@ import {CaminhoMap} from '../mappers/CaminhoMap';
 import ICaminhoRepo from '../services/IRepos/ICaminhoRepo';
 import {Result} from "../core/logic/Result";
 import { Mapper } from '../core/infra/Mapper';
+import { CaminhoArmazemPartidaId } from '../domain/caminho/caminhoArmazemPartidaId';
+import { CaminhoArmazemChegadaId } from '../domain/caminho/caminhoArmazemChegadaId';
 
 @Service()
 export default class CaminhoRepo implements ICaminhoRepo {
@@ -44,8 +46,9 @@ export default class CaminhoRepo implements ICaminhoRepo {
 
         if (roleRecord != null) {
             return CaminhoMap.toDomain(roleRecord);
-        } else
+        } else {
             return null;
+        }
     }
 
 
@@ -57,10 +60,45 @@ export default class CaminhoRepo implements ICaminhoRepo {
         )
 
         if(lista !=null){
-        return Result.ok();
-        } else
+        return Result.ok(lista);
+        } else {
         return null;
+        }
     }
+
+    public async getByArmazemPartidaId(armazemId: CaminhoArmazemPartidaId | string): Promise<Result<Array<Caminho>>> {
+        const query = {armazemPartidaId: armazemId};
+        
+        var lista = new Array<Caminho>;
+        (await this.caminhoSchema.find(query)).forEach(
+            caminho =>
+            lista.push(CaminhoMap.toDomain(caminho))
+        )
+
+        if(lista !=null){
+            return Result.ok(lista);
+        } else {
+            return null;
+        }
+    }
+
+    public async getByArmazemChegadaId(armazemId: CaminhoArmazemChegadaId | string): Promise<Result<Array<Caminho>>> {
+        const query = {armazemChegadaId: armazemId};
+
+        var lista = new Array<Caminho>;
+        (await this.caminhoSchema.find(query)).forEach(
+            caminho =>
+            lista.push(CaminhoMap.toDomain(caminho))
+        )
+
+        if(lista !=null){
+            return Result.ok(lista);
+        } else {
+            return null;
+        }
+    }
+    
+
 
     public async delete(caminhoId: CaminhoId) {
         const query = {idCaminho: caminhoId};
