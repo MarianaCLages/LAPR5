@@ -355,3 +355,7 @@ Backend/GestLogistica_API/GestLogistica/.nyc_output/processinfo/a7460a5b-a1e9-41
 Backend/GestLogistica_API/GestLogistica/.nyc_output/processinfo/index.json
 
 Backend/GestLogistica_API/GestLogistica/.nyc_output
+
+Backend/GestArm_API/GestArmTestes/UnitTesting/Servicos/TestResults
+Backend/GestArm_API/GestArmTestes/UnitTesting/Controladores/TestResults
+Backend/GestArm_API/GestArmTestes/UnitTesting/Dominio/TestResults

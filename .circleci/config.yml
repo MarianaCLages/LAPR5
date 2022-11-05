@@ -19,8 +19,13 @@ jobs:
           command: |
             dotnet build
             dotnet test
+      - run:
+          working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
+          name: Generate XUnit Coverage
+          command: |
+            dotnet build
+            dotnet dotnet test --collect:"XPlat Code Coverage"
         
-
   build-and-test-GestLog_API:
     docker:
        - image: cimg/node:current
