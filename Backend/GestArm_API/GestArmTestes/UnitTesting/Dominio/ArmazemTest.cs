@@ -7,8 +7,13 @@ namespace Dominio;
 [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
 public class ArmazemTest
 {
+    
+    /*
+     * Creates a valid Armazem
+     */
+    
     [Fact]
-    public void CreateValidArmazemTest()
+    public void CreateValidArmazemTest_ShouldCreateAValidArmazem()
     {
         var arm = new Armazem(new ArmazemId(Guid.NewGuid()),
             new CoordenadasArmazem(10, 20, 30),
@@ -19,9 +24,13 @@ public class ArmazemTest
 
         Assert.NotNull(arm);
     }
+    
+    /*
+     * Creates an invalid armazem throwing an null reference exception
+     */
 
     [Fact]
-    public void CreateArmazemWithInvalidArmazemIdTest()
+    public void CreateArmazemWithInvalidArmazemIdTest_ShouldThrowsANullReferenceException()
     {
         Assert.Throws<NullReferenceException>(() =>
         {
@@ -33,9 +42,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+    * Creates an invalid armazem throwing an format exception
+    */
 
     [Fact]
-    public void CreateArmazemWithInvalidArmazemIdStringVaziaTest()
+    public void CreateArmazemWithInvalidArmazemIdStringVaziaTest_ShouldThrowsAFormatException()
     {
         Assert.Throws<FormatException>(() =>
         {
@@ -47,9 +60,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+    * Creates an invalid armazem throwing an BusinessRuleValidationException
+    */
 
     [Fact]
-    public void CreateArmazemWithInvalidLatitudeGrausTest()
+    public void CreateArmazemWithInvalidLatitudeGrausTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -61,9 +78,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidLatitudeMinutosTest()
+    public void CreateArmazemWithInvalidLatitudeMinutosTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -75,9 +96,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidLatitudeSegundosTest()
+    public void CreateArmazemWithInvalidLatitudeSegundosTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -89,9 +114,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidLongitudeGrausTest()
+    public void CreateArmazemWithInvalidLongitudeGrausTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -103,9 +132,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidLongitudeMinutosTest()
+    public void CreateArmazemWithInvalidLongitudeMinutosTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -117,9 +150,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidLongitudeSegundosTest()
+    public void CreateArmazemWithInvalidLongitudeSegundosTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -131,9 +168,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoArmazemTest()
+    public void CreateArmazemWithInvalidDesignacaoArmazemTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -145,9 +186,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoEndereçoRuaTest()
+    public void CreateArmazemWithInvalidDesignacaoEndereçoRuaTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -159,9 +204,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoEndereçoNumeroPortaTest()
+    public void CreateArmazemWithInvalidDesignacaoEndereçoNumeroPortaTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -173,9 +222,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoEndereçoCodigoPostalTest()
+    public void CreateArmazemWithInvalidDesignacaoEndereçoCodigoPostalTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -187,9 +240,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoEndereçoCidadeTest()
+    public void CreateArmazemWithInvalidDesignacaoEndereçoCidadeTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -201,9 +258,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoEndereçoPaisTest()
+    public void CreateArmazemWithInvalidDesignacaoEndereçoPaisTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
@@ -215,9 +276,13 @@ public class ArmazemTest
                 new AlphaId("A12"));
         });
     }
+    
+    /*
+   * Creates an invalid armazem throwing an BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateArmazemWithInvalidAlphaIdTest()
+    public void CreateArmazemWithInvalidAlphaIdTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {

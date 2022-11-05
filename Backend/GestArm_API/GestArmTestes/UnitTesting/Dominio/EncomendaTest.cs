@@ -5,8 +5,12 @@ namespace Dominio;
 
 public class EncomendaTest
 {
+    /*
+   * Creates a valid encomenda
+   */
+
     [Fact]
-    public void CreateValidEncomendaTest()
+    public void CreateValidEncomendaTest_ShouldCreateAValidEncomenda()
     {
         var dataTeste = DateTime.Today.Add(TimeSpan.FromDays(5));
         var dataFormato = dataTeste.ToString("yyMMdd");
@@ -16,8 +20,12 @@ public class EncomendaTest
         Assert.NotNull(en);
     }
 
+    /*
+  * Creates an invalid encomenda throwing a Format Exception
+  */
+
     [Fact]
-    public void CreateEncomendaWithInvalidDataEntregaTest()
+    public void CreateEncomendaWithInvalidDataEntregaTest_ShouldThrowAFormatException()
     {
         Assert.Throws<FormatException>(() => new Encomenda(new EncomendaDomainId("5", "220505"),
             new DataEntrega(DateTime.Parse("")),
@@ -25,8 +33,26 @@ public class EncomendaTest
             new TempoEncomenda(120), new TempoEncomenda(120), "A12"));
     }
 
+    /*
+ * Creates an invalid encomenda throwing a NullReferenceException
+ */
+
     [Fact]
-    public void CreateEncomendaWithInvalidDataEntregaBussinessInvalidationTest()
+    public void CreateEncomendaWithInvalidDataEntregaTest_ShouldThrowAnArgumentNullException()
+    {
+        Assert.Throws<ArgumentNullException>(() => new Encomenda(new EncomendaDomainId("5", "220505"),
+            new DataEntrega(DateTime.Parse(null)),
+            new MassaEntrega(10),
+            new TempoEncomenda(120), new TempoEncomenda(120), "A12"));
+    }
+
+    /*
+* Creates an invalid encomenda throwing a BusinessRuleValidationException
+*/
+
+    [Fact]
+    public void
+        CreateEncomendaWithInvalidDataEntregaBussinessInvalidationTest_ShouldThrowABusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() => new Encomenda(new EncomendaDomainId("5", "220505"),
             new DataEntrega(DateTime.Now.Subtract(TimeSpan.FromDays(1))),
@@ -34,32 +60,48 @@ public class EncomendaTest
             new TempoEncomenda(120), new TempoEncomenda(120), "A12"));
     }
 
+    /*
+    *Creates an invalid encomenda throwing a BusinessRuleValidationException
+    */
+    
     [Fact]
-    public void CreateEncomendaWithInvalidMassaEntregaTest()
+    public void CreateEncomendaWithInvalidMassaEntregaTest_ShouldThrowABusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() => new Encomenda(new EncomendaDomainId("5", "220505"),
             new DataEntrega(DateTime.Now.Add(TimeSpan.FromDays(1))), new MassaEntrega(-10),
             new TempoEncomenda(120), new TempoEncomenda(120), "A12"));
     }
+    
+    /*
+   *Creates an invalid encomenda throwing a BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateEncomendaWithInvalidTempoCargaTest()
+    public void CreateEncomendaWithInvalidTempoCargaTest_ShouldThrowABusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() => new Encomenda(new EncomendaDomainId("5", "220505"),
             new DataEntrega(DateTime.Now.Add(TimeSpan.FromDays(1))), new MassaEntrega(10),
             new TempoEncomenda(-10), new TempoEncomenda(120), "A12"));
     }
+    
+    /*
+   *Creates an invalid encomenda throwing a BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateEncomendaWithInvalidTempoDescargaTest()
+    public void CreateEncomendaWithInvalidTempoDescargaTest_ShouldThrowABusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() => new Encomenda(new EncomendaDomainId("5", "220505"),
             new DataEntrega(DateTime.Now.Add(TimeSpan.FromDays(1))), new MassaEntrega(10),
             new TempoEncomenda(120), new TempoEncomenda(-10), "A12"));
     }
+    
+    /*
+   *Creates an invalid encomenda throwing a BusinessRuleValidationException
+   */
 
     [Fact]
-    public void CreateEncomendaWithInvalidArmazemIDTest()
+    public void CreateEncomendaWithInvalidArmazemIDTest_ShouldThrowABusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() => new Encomenda(new EncomendaDomainId("5", "220505"),
             new DataEntrega(DateTime.Now.Add(TimeSpan.FromDays(1))), new MassaEntrega(-10),
