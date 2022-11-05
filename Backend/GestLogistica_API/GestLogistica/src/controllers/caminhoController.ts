@@ -8,6 +8,8 @@ import ICriarCaminhoDTO from "../dto/caminho/ICriarCaminhoDTO";
 import ICaminhoDTO from "../dto/caminho/ICaminhoDTO";
 import {BaseController} from "../core/infra/BaseController";
 import ICaminhoIdDto from "../dto/caminho/ICaminhoIdDto";
+import ICaminhoArmazemPartidaIdDTO from "../dto/caminho/ICaminhoArmazemPartidaIdDTO";
+import ICaminhoArmazemChegadaIdDTO from "../dto/caminho/ICaminhoArmazemChegadaIdDTO";
 
 @Service()
 export default class caminhoController
@@ -39,11 +41,43 @@ export default class caminhoController
             const caminhoOrError = await this.caminhoServiceInstance.getAllCaminhos();
 
             if (caminhoOrError.isFailure) {
-                return res.json(caminhoOrError.error).status(400);
+                return res.status(400).json(caminhoOrError.error).send();
             }
 
             const caminhosDTO = caminhoOrError.getValue();
-            return res.json(caminhosDTO).status(200);
+            return res.status(200).json(caminhosDTO).send();
+
+        } catch (e) {
+            return next(e);
+        }
+    }
+
+    public async getByArmazemPartidaId(req: Request, res: Response, next: NextFunction) {
+        try {
+            const caminhoOrError = await this.caminhoServiceInstance.getByArmazemPartidaId(req.body as ICaminhoArmazemPartidaIdDTO);
+
+            if (caminhoOrError.isFailure) {
+                return res.status(400).json(caminhoOrError.error).send();
+            }
+
+            const caminhoDTO = caminhoOrError.getValue();
+            return res.status(200).json(caminhoDTO).send();
+
+        } catch (e) {
+            return next(e);
+        }
+    }
+
+    public async getByArmazemChegadaId(req: Request, res: Response, next: NextFunction) {
+        try {
+            const caminhoOrError = await this.caminhoServiceInstance.getByArmazemChegadaId(req.body as ICaminhoArmazemChegadaIdDTO);
+
+            if (caminhoOrError.isFailure) {
+                return res.status(400).json(caminhoOrError.error).send();
+            }
+            
+            const caminhoDTO = caminhoOrError.getValue();
+            return res.status(200).json(caminhoDTO).send();
 
         } catch (e) {
             return next(e);
@@ -61,7 +95,7 @@ export default class caminhoController
             }
 
             const caminhoDTO = caminhoOrError.getValue();
-            return res.json(caminhoDTO).status(200);
+            return res.status(200).json(caminhoDTO).send();
         } catch (e) {
             return next(e);
         }
@@ -75,7 +109,7 @@ export default class caminhoController
                 return res.status(400).send("O caminho especificado nao foi encontrado!");
             }
 
-            return res.json().status(200);
+            return res.status(200).send("Caminho apagado com sucesso!");
         } catch (e) {
             return next(e);
         }
