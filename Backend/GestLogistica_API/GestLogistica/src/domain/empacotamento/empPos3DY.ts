@@ -16,7 +16,7 @@ export class EmpPos3DY extends ValueObject<empPos3DX> {
   }
 
   public static create(empPos3DY: number): Result<EmpPos3DY> {
-    if (!empPos3DY || (empPos3DY < 0 && empPos3DY > 21)) {
+    if (!empPos3DY || (empPos3DY < 0 || empPos3DY > 21)) {
       return Result.fail<EmpPos3DY>('Posição Y do empacotamento está errada! (Tem de estar compreendida entre 0-20)');
     }
     return Result.ok<EmpPos3DY>(new EmpPos3DY({value: empPos3DY}))
