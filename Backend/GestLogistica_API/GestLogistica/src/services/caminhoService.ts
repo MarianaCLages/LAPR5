@@ -146,7 +146,7 @@ export default class CaminhoService implements ICaminhoService {
 
     public async getByArmazemChegadaId(armazemId: ICaminhoArmazemChegadaId): Promise<Result<Array<ICaminhoDTO>>> {
         try {
-            const caminhos = await this.caminhoRepo.getByArmazemChegadaId(armazemId.caminhoArmazemChegadaId)
+            const caminhos = await this.caminhoRepo.getByArmazemChegadaId(armazemId)
 
             if(caminhos === null) {
                 return Result.fail("Caminhos não foram encontrados!");

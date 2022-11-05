@@ -2,8 +2,7 @@ import {Repo} from "../../core/infra/Repo";
 import {Caminho} from "../../domain/caminho/caminho";
 import {CaminhoId} from "../../domain/caminho/caminhoId";
 import {Result} from "../../core/logic/Result";
-import { CaminhoArmazemChegadaId } from "../../domain/caminho/caminhoArmazemChegadaId";
-import { CaminhoArmazemPartidaId } from "../../domain/caminho/caminhoArmazemPartidaId";
+import ICaminhoArmazemChegadaId from "../../dto/caminho/ICaminhoArmazemChegadaIdDTO";
 
 export default interface ICaminhoRepo extends Repo<Caminho> {
     //removeByRoleIds (roles: RoleId[]): Promise<any>
@@ -15,9 +14,9 @@ export default interface ICaminhoRepo extends Repo<Caminho> {
 
     getAllCaminhos();
 
-    getByArmazemPartidaId(armazemId: CaminhoArmazemPartidaId | string): Promise<Result<Array<Caminho>>>;
+    getByArmazemPartidaId(string): Promise<Result<Array<Caminho>>>;
 
-    getByArmazemChegadaId(armazemId: CaminhoArmazemChegadaId | string): Promise<Result<Array<Caminho>>>;
+    getByArmazemChegadaId(ICaminhoArmazemChegadaId): Promise<Result<Array<Caminho>>>;
 
 
     save(caminho: Caminho): Promise<Caminho>;
