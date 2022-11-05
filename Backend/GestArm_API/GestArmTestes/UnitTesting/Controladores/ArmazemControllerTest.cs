@@ -125,7 +125,7 @@ public class ArmazemControllerTest
      */
     
     [Fact]
-    public void GetByArmazemDomainId_ShouldReturnAnArmazemByDomainID()
+    public void GetByArmazemDomainIdTest_ShouldReturnAnArmazemByDomainID()
     {
         
         //ARRANGE

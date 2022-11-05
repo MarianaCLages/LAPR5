@@ -20,7 +20,7 @@ public class EncomendaControllerTest
      */
     
     [Fact]
-    public void GetByIdEncomenda_ShouldReturnAnEncomenda()
+    public void GetByIdEncomendaTest_ShouldReturnAnEncomenda()
     {
         //ARRANGE
         var en = new Encomenda(new EncomendaDomainId("2", "221227"), new DataEntrega(DateTime.Parse("2022-12-27")),

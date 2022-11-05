@@ -19,7 +19,7 @@ public class ArmazemServiceTest
      */
 
     [Fact]
-    public void GetAllAsyncTestTest_ShouldGetAllArmazens()
+    public void GetAllAsyncTest_ShouldGetAllArmazens()
     {
         //ARRANGE
         var list = new List<Armazem>();
