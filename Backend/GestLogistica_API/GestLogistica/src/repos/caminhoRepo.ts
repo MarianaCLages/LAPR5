@@ -1,14 +1,14 @@
-import {Inject, Service} from 'typedi';
+import { Inject, Service } from 'typedi';
 
-import {Caminho} from "../domain/caminho/caminho";
-import {CaminhoId} from "../domain/caminho/caminhoId";
+import { Caminho } from "../domain/caminho/caminho";
+import { CaminhoId } from "../domain/caminho/caminhoId";
 
-import {Document, FilterQuery, Model, models} from 'mongoose';
-import {ICaminhoPersistence} from '../dataschema/ICaminhoPersistence';
-import {CaminhoMap} from '../mappers/CaminhoMap';
+import { Document, FilterQuery, Model, models } from 'mongoose';
+import { ICaminhoPersistence } from '../dataschema/ICaminhoPersistence';
+import { CaminhoMap } from '../mappers/CaminhoMap';
 import ICaminhoRepo from '../services/IRepos/ICaminhoRepo';
-import {Result} from "../core/logic/Result";
-import {CaminhoArmazemPartidaId} from '../domain/caminho/caminhoArmazemPartidaId';
+import { Result } from "../core/logic/Result";
+import { CaminhoArmazemPartidaId } from '../domain/caminho/caminhoArmazemPartidaId';
 import ICaminhoArmazemChegadaId from "../dto/caminho/ICaminhoArmazemChegadaIdDTO";
 
 @Service()
@@ -25,7 +25,7 @@ export default class CaminhoRepo implements ICaminhoRepo {
 
         const idX = caminho.id instanceof CaminhoId ? (caminho.id).toValue() : caminho.id;
 
-        const query = {domainId: idX};
+        const query = { domainId: idX };
         const roleDocument = await this.caminhoSchema.findOne(query as FilterQuery<ICaminhoPersistence & Document>);
 
         return !!roleDocument === true;
@@ -40,7 +40,7 @@ export default class CaminhoRepo implements ICaminhoRepo {
     }
 
     public async findByDomainId(caminhoId: CaminhoId | string): Promise<Caminho> {
-        const query = {id: caminhoId};
+        const query = { id: caminhoId };
         const roleRecord = await this.caminhoSchema.findOne(query as FilterQuery<ICaminhoPersistence & Document>);
 
         if (roleRecord != null) {
@@ -65,8 +65,8 @@ export default class CaminhoRepo implements ICaminhoRepo {
         }
     }
 
-    public async getByArmazemPartidaId(armazemId: CaminhoArmazemPartidaId | string): Promise<Result<Array<Caminho>>> {
-        const query = {armazemPartidaId: armazemId};
+    public async getByArmazemPartidaId(armazemPartidaId: CaminhoArmazemPartidaId | string): Promise<Result<Array<Caminho>>> {
+        const query = { armazemPartidaId: armazemPartidaId };
 
         var lista = new Array<Caminho>;
         (await this.caminhoSchema.find(query)).forEach(
@@ -81,9 +81,8 @@ export default class CaminhoRepo implements ICaminhoRepo {
         }
     }
 
-    public async getByArmazemChegadaId(armazemId: ICaminhoArmazemChegadaId): Promise<Result<Array<Caminho>>> {
-        const id = armazemId.armazemChegadaId;
-        const query = {"armazemChegadaId": id};
+    public async getByArmazemChegadaId(armazemChegadaId: ICaminhoArmazemChegadaId | string): Promise<Result<Array<Caminho>>> {
+        const query = { armazemChegadaId: armazemChegadaId };
 
         const lista = new Array<Caminho>;
         (await this.caminhoSchema.find(query)).forEach(
@@ -100,14 +99,14 @@ export default class CaminhoRepo implements ICaminhoRepo {
 
 
     public async delete(caminhoId: CaminhoId) {
-        const query = {idCaminho: caminhoId};
+        const query = { idCaminho: caminhoId };
         this.caminhoSchema.deleteMany(query as FilterQuery<ICaminhoPersistence & Document>);
         return true;
     }
 
     public async update(caminho: Caminho): Promise<Result<Caminho>> {
 
-        const query = {id: caminho.id.toString()};
+        const query = { id: caminho.id.toString() };
 
         const caminhoDocument = await this.caminhoSchema.findOne(query);
 

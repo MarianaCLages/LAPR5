@@ -1,8 +1,8 @@
-import {Repo} from "../../core/infra/Repo";
 import {Caminho} from "../../domain/caminho/caminho";
 import {CaminhoId} from "../../domain/caminho/caminhoId";
-import {Result} from "../../core/logic/Result";
 import ICaminhoArmazemChegadaId from "../../dto/caminho/ICaminhoArmazemChegadaIdDTO";
+import {Repo} from "../../core/infra/Repo";
+import {Result} from "../../core/logic/Result";
 
 export default interface ICaminhoRepo extends Repo<Caminho> {
     //removeByRoleIds (roles: RoleId[]): Promise<any>

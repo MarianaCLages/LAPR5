@@ -128,9 +128,9 @@ export default class CaminhoService implements ICaminhoService {
         return Result.ok(caminhosDTO);
     }
 
-    public async getByArmazemPartidaId(armazemId: ICaminhoArmazemPartidaId): Promise<Result<Array<ICaminhoDTO>>> {
+    public async getByArmazemPartidaId(armazemPartidaId: ICaminhoArmazemPartidaId): Promise<Result<Array<ICaminhoDTO>>> {
         try {
-            const caminhos = await this.caminhoRepo.getByArmazemPartidaId(armazemId.caminhoArmazemPartidaId)
+            const caminhos = await this.caminhoRepo.getByArmazemPartidaId(armazemPartidaId.armazemPartidaId)
 
             if(caminhos === null) {
                 return Result.fail("Caminhos não foram encontrados!");
@@ -144,9 +144,9 @@ export default class CaminhoService implements ICaminhoService {
         }
     }
 
-    public async getByArmazemChegadaId(armazemId: ICaminhoArmazemChegadaId): Promise<Result<Array<ICaminhoDTO>>> {
+    public async getByArmazemChegadaId(armazemChegadaId: ICaminhoArmazemChegadaId): Promise<Result<Array<ICaminhoDTO>>> {
         try {
-            const caminhos = await this.caminhoRepo.getByArmazemChegadaId(armazemId)
+            const caminhos = await this.caminhoRepo.getByArmazemChegadaId(armazemChegadaId.armazemChegadaId)
 
             if(caminhos === null) {
                 return Result.fail("Caminhos não foram encontrados!");
