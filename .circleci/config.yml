@@ -53,11 +53,6 @@ jobs:
           command: |
             npm run build
       - run:
-         working_directory: Backend/GestLogistica_API/GestLogistica
-         name : Test
-         command: |
-          npm run test
-      - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Coverage
           command: |
