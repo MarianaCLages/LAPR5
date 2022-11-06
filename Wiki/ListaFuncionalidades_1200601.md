@@ -3,7 +3,7 @@
 
 ### Índice das Funcionalidades Desenvolvidas ###
 
-| Sprint | Funcionalidade                   |
-|--------|----------------------------------|
-| **A**  | |
-| **A**  | |
+| Sprint | Funcionalidade |
+| ------ | -------------- |
+| **A**  |                |
+| **A**  |                |

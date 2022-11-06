@@ -2,6 +2,7 @@
 
 
 ## Contents
+- [Decisões de Arquitetura tomadas](#decisões-de-arquitetura-tomadas)
 - [Views:](#views)
 	- [Nível 1](#nível-1)
 		- [Vista Lógica](#vista-lógica)
@@ -11,7 +12,6 @@
 		- [Vista Lógica](#vista-lógica-1)
 		- [Vista de Implementação](#vista-de-implementação)
 		- [Vista Processo](#vista-processo-1)
-		- [Vista Física](#vista-física)
 	- [Nível 3 (MDR)](#nível-3-mdr)
 		- [Vista Lógica](#vista-lógica-2)
 		- [Vista Processo](#vista-processo-2)
@@ -41,6 +41,11 @@ Pode-se dizer que estes dois modelos se expandem ao longo de eixos distintos, se
 
 Para modelar/representar visualmente, tanto o que foi implementado como as ideias e alternativas consideradas, recorre-se à Unified Modeling Language (UML) [[UML-2020]](References.md#UML-2020) [[UMLDiagrams-2020]](References.md#UMLDiagrams-2020).
 
+
+# Decisões de Arquitetura tomadas
+As decisões geral de Arquitetura já estão descritas no documeto geral de Arquitetura. Este documento apenas descreve as decisões tomadas para este caso de uso.
+O caso de uso pode ser visto como um caso de uso "classico" de criação de um objeto e persistencia do mesmo num repositório. Neste caso usamos inversão de dependencias e injeção de dependendias, para assim termos as camadas de software desacopladas.
+
 # Views:
 
 ## Nível 1
@@ -69,12 +74,7 @@ Para modelar/representar visualmente, tanto o que foi implementado como as ideia
 
 ### Vista Processo
 ![Nivel2-VP](N2_VP.svg)
-
-
-### Vista Física
-
-![N2-VF](N2_VF.svg)
-
+ 
 
 ## Nível 3 (MDR)
 
