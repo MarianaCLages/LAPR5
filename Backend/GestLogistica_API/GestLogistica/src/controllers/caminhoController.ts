@@ -44,6 +44,10 @@ export default class caminhoController
                 return res.status(400).json(caminhoOrError.error).send();
             }
 
+            if(caminhoOrError.getValue().length == 0) {
+                return res.status(404).json("Nenhum caminho foi encontrado").send();
+            }
+
             const caminhosDTO = caminhoOrError.getValue();
             return res.status(200).json(caminhosDTO).send();
 
@@ -60,6 +64,10 @@ export default class caminhoController
                 return res.status(400).json(caminhoOrError.error).send();
             }
 
+            if(caminhoOrError.getValue().length == 0) {
+                return res.status(404).json("Nenhum caminho com esse armazém de partida foi encontrado!").send();
+            }
+
             const caminhoDTO = caminhoOrError.getValue();
             return res.status(200).json(caminhoDTO).send();
 
@@ -74,6 +82,10 @@ export default class caminhoController
 
             if (caminhoOrError.isFailure) {
                 return res.status(400).json(caminhoOrError.error).send();
+            }
+
+            if(caminhoOrError.getValue().length == 0) {
+                return res.status(404).json("Nenhum caminho com esse armazém de chegada foi encontrado!").send();
             }
             
             const caminhoDTO = caminhoOrError.getValue();

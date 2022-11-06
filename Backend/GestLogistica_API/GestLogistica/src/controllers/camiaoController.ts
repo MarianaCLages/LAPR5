@@ -45,6 +45,10 @@ export default class camiaoController
                 return res.json(camiaoOrError.error).status(400);
             }
 
+            if(camiaoOrError.getValue().length == 0) {
+                return res.status(404).json("Nenhum camião foi encontrado!").send();
+            }
+
             const camioesDTO = camiaoOrError.getValue();
             return res.json(camioesDTO).status(200);
 
@@ -61,6 +65,10 @@ export default class camiaoController
                 return res.status(400).json(camiaoOrError.error).send();
             }
 
+            if(camiaoOrError.getValue().length == 0) {
+                return res.status(404).json("Nenhum camião com esse camiaoCaract foi encontrado!").send();
+            }
+
             const camiaoDTO = camiaoOrError.getValue();
             return res.status(200).json(camiaoDTO).send();
 
@@ -75,6 +83,10 @@ export default class camiaoController
 
             if (camiaoOrError.isFailure) {
                 return res.status(400).json(camiaoOrError.error).send();
+            }
+
+            if(camiaoOrError.getValue().length == 0) {
+                return res.status(404).json("Nenhum camião com essa matricula foi encontrado!").send();
             }
 
             const camiaoDTO = camiaoOrError.getValue();
