@@ -80,7 +80,7 @@ export default class CamiaoService implements ICamiaoService {
 
     public async updateCamiao(camiaoDTO: ICamiaoDTO): Promise<Result<ICamiaoDTO>> {
 
-        const camiao = await this.camiaoRepo.findByCaractCamiao(camiaoDTO.caractCamiao);
+        const camiao = await this.camiaoRepo.findByDomainId(camiaoDTO.domainId);
 
         if (camiao === null) {
             return Result.fail<ICamiaoDTO>("Camiao não existe");

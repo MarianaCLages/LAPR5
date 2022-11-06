@@ -2,12 +2,7 @@ import {NextFunction, Request, Response} from "express";
 import {Inject, Service} from "typedi";
 import config from "../../config";
 
-import ICaminhoController from "./IControllers/ICaminhoController";
-import ICaminhoService from "../services/IServices/ICaminhoService";
-import ICriarCaminhoDTO from "../dto/caminho/ICriarCaminhoDTO";
-import ICaminhoDTO from "../dto/caminho/ICaminhoDTO";
 import {BaseController} from "../core/infra/BaseController";
-import ICaminhoIdDto from "../dto/caminho/ICaminhoIdDto";
 import IPacoteController from "./IControllers/IPacoteController";
 import IPacoteService from "../services/IServices/IPacoteService";
 import ICriarEmpacotamentoDTO from "../dto/empacotamento/ICriarEmpacotamentoDTO";
@@ -49,6 +44,10 @@ export default class PacoteController
         return res.status(400).json(caminhoOrError.error).send();
       }
 
+      if(caminhoOrError.getValue().length == 0) {
+        return res.status(404).json("Nenhum empacotamento foi encontrado com essa encomenda associado!").send();
+      }
+
       const caminhoDTO = caminhoOrError.getValue();
       return res.status(200).json(caminhoDTO).send();
     } catch (e) {
@@ -62,6 +61,10 @@ export default class PacoteController
 
       if (caminhoOrError.isFailure) {
         return res.status(400).json(caminhoOrError.error).send();
+      }
+
+      if(caminhoOrError.getValue().length == 0) {
+        return res.status(404).json("Nenhum empacotamento foi encontrado com esse camião associado!").send();
       }
 
       const caminhoDTO = caminhoOrError.getValue();
@@ -94,6 +97,10 @@ export default class PacoteController
         return res.json(caminhoOrError.error).status(400);
       }
 
+      if(caminhoOrError.getValue().length == 0) {
+        return res.status(404).json("Nenhum empacotamento foi encontrado").send();
+      }
+
       const caminhosDTO = caminhoOrError.getValue();
       return res.json(caminhosDTO).status(200).send();
 
@@ -101,8 +108,6 @@ export default class PacoteController
       return next(e);
     }
   }
-
-
 
   public async updatePacote(req: Request, res: Response, next: NextFunction) {
     try {
