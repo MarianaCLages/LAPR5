@@ -12,4 +12,3 @@
 | **A**  | [UC13 - Criar Empacotamento](GestLog_API_Wiki/UseCases/UC13)|
 | **A**  | [UC14 - Listar Empacotamento](GestLog_API_Wiki/UseCases/UC14/)|
 | **A**  | [UC15 - Editar Empacotamento](GestLog_API_Wiki/UseCases/UC15/)|
->>>>>>> f6b99c8e7aed44e54bdce44d3b168baab0028547
