@@ -31,6 +31,25 @@ jobs:
           command: |
             dotnet build
             dotnet dotnet test --collect:"XPlat Code Coverage"
+            dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.4
+            cd Controladores
+            cd $(ls -d */ | head -n 1)
+            reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:../../../../../Backend/GestArm_API/GestArmTestes/UnitTesting/coverage" "-reporttypes:HtmlInline_AzurePipelines;Cobertura"
+            cd ../../..
+            cd Dominio
+            cd $(ls -d */ | head -n 1)
+            reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:../../../../../Backend/GestArm_API/GestArmTestes/UnitTesting/coverage" "-reporttypes:HtmlInline_AzurePipelines;Cobertura"
+            cd ../../..
+            cd Servicos
+            cd $(ls -d */ | head -n 1)
+            reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:../../../../../Backend/GestArm_API/GestArmTestes/UnitTesting/coverage" "-reporttypes:HtmlInline_AzurePipelines;Cobertura"
+      - store_artifacts:
+          path: Backend/GestArm_API/GestArmTestes/UnitTesting/coverage
+          destination: coverage
+
+          
+
+
         
   build-and-test-GestLog_API:
     docker:
