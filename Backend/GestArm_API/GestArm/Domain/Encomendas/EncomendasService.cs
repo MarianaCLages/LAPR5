@@ -26,7 +26,7 @@ public class EncomendasService : IEncomendasService
 
     public async Task<EncomendaDto> AddAsync(CreatingEncomendaDto dto)
     {
-        var verifiy = _repositoryArmazem.GetByArmazemIdAsync(new AlphaId(dto.ArmazemId));
+        var verifiy = await _repositoryArmazem.GetByArmazemIdAsync(new AlphaId(dto.ArmazemId));
 
         if (verifiy == null)
             throw new BusinessRuleValidationException("Não existe nenhum armazém com esse ID especificado!");
