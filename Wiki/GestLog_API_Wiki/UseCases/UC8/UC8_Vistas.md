@@ -1,5 +1,4 @@
-### 
-
+# UC8 - Listar Camião
 
 ## Contents
 - [Views](#views)
@@ -41,6 +40,14 @@ Os níveis encontram-se definidos da seguinte forma:
 Pode-se dizer que estes dois modelos se expandem ao longo de eixos distintos, sendo que o Modelo C4 apresenta o sistema com diferentes níveis de detalhe e o Modelo de Vista 4+1 apresenta o sistema de diferentes perspetivas. Ao combinar os dois modelos, torna-se possível representar o sistema de diversas perspetivas, cada uma com vários níveis de detalhe.
 
 Para modelar/representar visualmente, tanto o que foi implementado como as ideias e alternativas consideradas, recorre-se à Unified Modeling Language (UML) [[UML-2020]](References.md#UML-2020) [[UMLDiagrams-2020]](References.md#UMLDiagrams-2020).
+
+<br>
+
+# Decisões de Arquitetura tomadas
+As decisões gerais de Arquitetura já estão descritas no documento geral de Arquitetura. Este documento apenas descreve as decisões tomadas para este caso de uso.
+O caso de uso pode ser visto como um caso de uso "clássico" de listagem de um objeto, neste caso, a listagem de camiões, a qual pode ser filtrada ou não. No caso de ser filtrada, pode ser por caractere do camião ou por matrícula.
+
+<br>
 
 # Views:
 
