@@ -117,3 +117,14 @@ Quanto á implentação, cada um dos modulos é desenvolvido numa tecnologia dif
 O edializado para o deployment do sistema é a instalação de cada serviço em containers virtuais separados, podendo ou não estar a correr no mesmo servidor. Quanto ás bases de dados estas são totalmente remotas, estado a correr nos servidores virtual do DEI, no entanto em ambientes de produção estas poderiam estar a correr em servidores dedicados, sendo este um ponto a prestar atenção em proximos ciclos de desenvolvimento.
 
 Os modulos comunicação entre si atraves de requests REST, estando a listas dos endpoints no ficheiro [API.md](APIList.md).
+
+## Vista de Implementação
+
+### Alternativa 1
+![Nivel3-VI](Artifacts/VI_N3_alt1.svg)
+
+### Alternativa 2
+![Nivel3-VI](Artifacts/VI_N3_alt2.svg)
+
+### Alternativa 3
+![Nivel3-VI](Artifacts/VI_N3_alt3.svg)

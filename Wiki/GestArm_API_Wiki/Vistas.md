@@ -92,4 +92,12 @@ Para modelar/representar visualmente, tanto o que foi implementado como as ideia
 ![Nivel3-VL](GeralGestArm_API_Docs/VL_N3_alt2.svg)
 
 ## Vista de Implementação
-![Nivel3-VI](GeralGestArm_API_Docs/VI_N3.svg)
+
+### Alternativa 1
+![Nivel3-VI](GeralGestArm_API_Docs/VI_N3_alt1.svg)
+
+### Alternativa 2
+![Nivel3-VI](GeralGestArm_API_Docs/VI_N3_alt2.svg)
+
+### Alternativa 3
+![Nivel3-VI](GeralGestArm_API_Docs/VI_N3_alt3.svg)

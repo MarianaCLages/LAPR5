@@ -121,27 +121,50 @@ Na quinta alternativa funciona exatamente como a alt2 mas seria se fosse o caso 
 
 ![Nivel2-VL](VL_N2_alt1.svg)
 
+Na vista lógica é possível observar as aplicações principais que estão presentes no decorrer da funcionalidade.
+Neste caso é ilustrado um diagrama que já foi explicado várias vezes em sítios diferentes, existindo um "Front-end" que vai estabelecer
+a user interface com os possíveis utilizadores e vai rencaminhar os pedidos entre os mesmos às devidas aplicações, neste caso ao **MASTER DATA ARMAZENS**.
+
+
 ### Alternativa 2
 
 ![Nivel2-VL](VL_N2_alt2.svg)
+
+Na segunda alternativa proposta, funciona da mesma maneira que a primeira, existindo a diferença da presença da aplicação da "Autenticação", a mesma, como explicado várias vezes, vai servir de proxy para os pedidos e vai autenticar os mesmos.
+
 
 ### Alternativa 3
 
 ![Nivel2-VL](VL_N2_alt3.svg)
 
-### Alternativa 4 (2.5)
+Na terceira alternativa, é ilustrado a base de dados interligada ao **MASTER DATA ARMAZEM** que mostra como são feitas as trocas de informação entre o mesmo. É necessário ilustrar a base de dados pois é lá que é persistido todas as informações necessárias para o funcionamento da aplicação.
 
+
+### Alternativa 4 (2.5)
 
 ![Nivel2-VL](VL_N2.5.svg)
 
+Esta alternativa é ilustrada para complementar a alternativa 3, tal como nos foi mostrar pelo o regente da cadeira, é possível existir esta interligação entre o mesmo, chamando a esta alternativa como um nível 2.5
+
+
 ## Vista de Implementação
 ![Nivel2-VI](VI_N2.svg)
+
+Esta vista é simplesmente para ilustrar como está implementado a aplicação de **MASTER DATA GESTÃO ARMAZENS**, sendo a mesma em **.NET**.
+
 
 ## Vista Processo
 
 ### Alternativa 1
 
 ![Nivel2-VP](VP_N2_alt1.svg)
+
+Tal como explicado anteriormente na vista de processos de nível 1, vai existir VÁRIAS alternativas a mostrar TODAS as possibilidades de comunicação entre a aplicação (no caso de ser a listagem de várias maneiras).
+Neste caso concreto vai ser a listagem de um caminho pelo o gestor de armazéns.
+A aplicação após receber o pedido do front-end vai interpretar os dados recebidos e condicionar uma resposta ao pedido(caso tenha sucesso o request).
+No final, retorna uma mensagem consoante o despacho do fluxo, sendo este tanto sucesso como insucesso (avisando o utilizador com uma mensagem de erro e um código HTTP).
+
+Todas as outras alternativas vão servir, tal como anteriormente, para complementar as possíveis filtragens e gets diferentes.
 
 ### Alternativa 2
 
@@ -196,6 +219,8 @@ Este diagrama é igual ao anterior, mas apenas difere na ligação do módulo da
 ### Alternativa 1
 
 ![Nivel2-VP](VP_N3_alt1.svg)
+
+Na vista de processos nível 3, temos a abordagem mais detalhada como vai decorrer o flux da listagem.
 
 ### Alternativa 2
 
