@@ -54,7 +54,7 @@ public class ArmazemController : ControllerBase
         {
             return BadRequest(new { ex.Message });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return NotFound("Não foi encontrado nenhum armazém com essa designaçao!");
         }
@@ -94,12 +94,16 @@ public class ArmazemController : ControllerBase
                 throw new BusinessRuleValidationException("Armazem com esse AlphaNumeric ID já existe!");
 
             var armazem = await _service.AddAsync(dto);
-
-            return armazem;
+            
+            return CreatedAtAction(nameof(GetById), new { id = armazem.Id }, armazem);
         }
         catch (BusinessRuleValidationException ex)
         {
             return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return BadRequest("Ocorreu um erro na criação do armazém! (Por-favor especifique um AlphaId válido!)");
         }
     }
 
@@ -169,6 +173,10 @@ public class ArmazemController : ControllerBase
         {
             return BadRequest(new { ex.Message });
         }
+        catch (Exception)
+        {
+            return BadRequest("Ocorreu um erro na criação do armazém! (Por-favor especifique um AlphaId válido!)");
+        }
     }
 
     // DELETE: api/Armazem/id
@@ -187,6 +195,10 @@ public class ArmazemController : ControllerBase
         catch (BusinessRuleValidationException ex)
         {
             return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return BadRequest("Ocorreu um erro na criação do armazém! (Por-favor especifique um ID válido, seguir as regras do GUID!)");
         }
     }
 }

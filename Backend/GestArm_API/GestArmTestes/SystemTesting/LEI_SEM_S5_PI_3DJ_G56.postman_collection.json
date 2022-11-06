@@ -30,8 +30,8 @@
 													"    pm.response.to.have.status(201);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Response time is less than 400ms\", function () {\r",
-													"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -145,6 +145,44 @@
 									"response": []
 								},
 								{
+									"name": "Get_All_Encomendas",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda"
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "Put_Encomenda",
 									"event": [
 										{
@@ -155,8 +193,8 @@
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Response time is less than 450ms\", function () {\r",
-													"    pm.expect(pm.response.responseTime).to.be.below(450);\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Put With Success (Verify body)\", function () {\r",
@@ -265,8 +303,8 @@
 													"    pm.response.to.have.status(201);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Response time is less than 400ms\", function () {\r",
-													"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -375,8 +413,8 @@
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Response time is less than 450ms\", function () {\r",
-													"    pm.expect(pm.response.responseTime).to.be.below(450);\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Put With Success (Verify body)\", function () {\r",
@@ -595,8 +633,8 @@
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Response time is less than 450ms\", function () {\r",
-													"    pm.expect(pm.response.responseTime).to.be.below(450);\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Put With Success (Verify body)\", function () {\r",
@@ -820,8 +858,8 @@
 													"    pm.response.to.have.status(200);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Response time is less than 450ms\", function () {\r",
-													"    pm.expect(pm.response.responseTime).to.be.below(450);\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Put With Success (Verify body)\", function () {\r",
@@ -912,7 +950,7 @@
 							]
 						},
 						{
-							"name": "Test_Case_Five_Fail_Case",
+							"name": "Test_Case_Five_Gets_Fail_Case",
 							"item": [
 								{
 									"name": "Post_Encomenda",
@@ -936,8 +974,8 @@
 													"    pm.response.to.have.status(201);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Response time is less than 400ms\", function () {\r",
-													"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -1281,23 +1319,1193 @@
 					"item": [
 						{
 							"name": "Test_Case_One",
-							"item": []
+							"item": [
+								{
+									"name": "Post_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"id_armazem\", responseJson.id);\r",
+													"pm.collectionVariables.set(\"id_armazem_domain\", responseJson.alphaNumId);\r",
+													"\r",
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Post With success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"    \"id\": pm.collectionVariables.get(\"id_armazem\"),\r",
+													"    \"latitudeGrau\": 5,\r",
+													"    \"latitudeSegundo\": 5,\r",
+													"    \"latitudeMinuto\": 5,\r",
+													"    \"longitudeGrau\": 5,\r",
+													"    \"longitudeSegundo\": 5,\r",
+													"    \"longitudeMinuto\": 5,\r",
+													"    \"designacao\": \"Ola\",\r",
+													"    \"alphaNumId\": pm.collectionVariables.get(\"id_armazem_domain\"),\r",
+													"    \"rua\": \"Rua dos Coiso\",\r",
+													"    \"numeroPorta\": 5,\r",
+													"    \"codigoPostal\": \"4000-999\",\r",
+													"    \"cidade\": \"Famalicão\",\r",
+													"    \"pais\": \"Portugal\"\r",
+													"});\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"AlphaNumId\" : \"L78\",\r\n    \"LatitudeGrau\" : \"5\",\r\n    \"LatitudeSegundo\": \"5\",\r\n    \"LatitudeMinuto\": \"5\",\r\n    \"LongitudeGrau\": \"5\",\r\n    \"LongitudeSegundo\": \"5\",\r\n    \"LongitudeMinuto\": \"5\",\r\n    \"Designacao\": \"Ola\",\r\n    \"Rua\": \"Rua dos Coiso\",\r\n    \"NumeroPorta\": \"5\",\r\n    \"CodigoPostal\": \"4000-999\",\r\n    \"Cidade\": \"Famalicão\",\r\n    \"Pais\": \"Portugal\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Armazem_Por_ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/id?id={{id_armazem}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												"id"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "{{id_armazem}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Id\" : \"{{id_armazem}}\",\r\n    \"AlphaNumId\" : \"{{id_armazem_domain}}\",\r\n    \"LatitudeGrau\" : 3,\r\n    \"LatitudeMinuto\" : 5,\r\n    \"LatitudeSegundo\" : 4,\r\n    \"LongitudeGrau\" : 8,\r\n    \"LongitudeMinuto\" : 6,\r\n    \"LongitudeSegundo\" : 2,\r\n    \"Designacao\" : \"armazenes\",\r\n    \"Rua\" : \"rua dos armazenes\",\r\n    \"NumeroPorta\" : 123654,\r\n    \"CodigoPostal\" : \"4000-123\",\r\n    \"Cidade\" : \"armazenes city\",\r\n    \"Pais\" : \"armazenes country\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/{{id_armazem}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												"{{id_armazem}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						},
 						{
 							"name": "Test_Case_Two",
-							"item": []
+							"item": [
+								{
+									"name": "Post_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"id_armazem\", responseJson.id);\r",
+													"pm.collectionVariables.set(\"designacao\", responseJson.designacao);\r",
+													"\r",
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Post With success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"    \"id\": pm.collectionVariables.get(\"id_armazem\"),\r",
+													"    \"latitudeGrau\": 5,\r",
+													"    \"latitudeSegundo\": 5,\r",
+													"    \"latitudeMinuto\": 5,\r",
+													"    \"longitudeGrau\": 5,\r",
+													"    \"longitudeSegundo\": 5,\r",
+													"    \"longitudeMinuto\": 5,\r",
+													"    \"designacao\": \"Ola\",\r",
+													"    \"alphaNumId\": pm.collectionVariables.get(\"id_armazem_domain\"),\r",
+													"    \"rua\": \"Rua dos Coiso\",\r",
+													"    \"numeroPorta\": 5,\r",
+													"    \"codigoPostal\": \"4000-999\",\r",
+													"    \"cidade\": \"Famalicão\",\r",
+													"    \"pais\": \"Portugal\"\r",
+													"});\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"AlphaNumId\" : \"L78\",\r\n    \"LatitudeGrau\" : \"5\",\r\n    \"LatitudeSegundo\": \"5\",\r\n    \"LatitudeMinuto\": \"5\",\r\n    \"LongitudeGrau\": \"5\",\r\n    \"LongitudeSegundo\": \"5\",\r\n    \"LongitudeMinuto\": \"5\",\r\n    \"Designacao\": \"Ola\",\r\n    \"Rua\": \"Rua dos Coiso\",\r\n    \"NumeroPorta\": \"5\",\r\n    \"CodigoPostal\": \"4000-999\",\r\n    \"Cidade\": \"Famalicão\",\r\n    \"Pais\": \"Portugal\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Armazem_Por_Designação",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/designacao?designacao={{designacao}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												"designacao"
+											],
+											"query": [
+												{
+													"key": "designacao",
+													"value": "{{designacao}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Id\" : \"{{id_armazem}}\",\r\n    \"AlphaNumId\" : \"{{id_armazem_domain}}\",\r\n    \"LatitudeGrau\" : 3,\r\n    \"LatitudeMinuto\" : 5,\r\n    \"LatitudeSegundo\" : 4,\r\n    \"LongitudeGrau\" : 8,\r\n    \"LongitudeMinuto\" : 6,\r\n    \"LongitudeSegundo\" : 2,\r\n    \"Designacao\" : \"armazenes\",\r\n    \"Rua\" : \"rua dos armazenes\",\r\n    \"NumeroPorta\" : 123654,\r\n    \"CodigoPostal\" : \"4000-123\",\r\n    \"Cidade\" : \"armazenes city\",\r\n    \"Pais\" : \"armazenes country\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/{{id_armazem}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												"{{id_armazem}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						},
 						{
 							"name": "Test_Case_Three",
-							"item": []
+							"item": [
+								{
+									"name": "Post_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"id_armazem\", responseJson.id);\r",
+													"pm.collectionVariables.set(\"id_armazem_domain\", responseJson.alphaNumId);\r",
+													"\r",
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Post With success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"    \"id\": pm.collectionVariables.get(\"id_armazem\"),\r",
+													"    \"latitudeGrau\": 5,\r",
+													"    \"latitudeSegundo\": 5,\r",
+													"    \"latitudeMinuto\": 5,\r",
+													"    \"longitudeGrau\": 5,\r",
+													"    \"longitudeSegundo\": 5,\r",
+													"    \"longitudeMinuto\": 5,\r",
+													"    \"designacao\": \"Ola\",\r",
+													"    \"alphaNumId\": pm.collectionVariables.get(\"id_armazem_domain\"),\r",
+													"    \"rua\": \"Rua dos Coiso\",\r",
+													"    \"numeroPorta\": 5,\r",
+													"    \"codigoPostal\": \"4000-999\",\r",
+													"    \"cidade\": \"Famalicão\",\r",
+													"    \"pais\": \"Portugal\"\r",
+													"});\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"AlphaNumId\" : \"L78\",\r\n    \"LatitudeGrau\" : \"5\",\r\n    \"LatitudeSegundo\": \"5\",\r\n    \"LatitudeMinuto\": \"5\",\r\n    \"LongitudeGrau\": \"5\",\r\n    \"LongitudeSegundo\": \"5\",\r\n    \"LongitudeMinuto\": \"5\",\r\n    \"Designacao\": \"Ola\",\r\n    \"Rua\": \"Rua dos Coiso\",\r\n    \"NumeroPorta\": \"5\",\r\n    \"CodigoPostal\": \"4000-999\",\r\n    \"Cidade\": \"Famalicão\",\r\n    \"Pais\": \"Portugal\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Armazem_Por_DomainID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/porAlphaId?armazemId={{id_armazem_domain}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												"porAlphaId"
+											],
+											"query": [
+												{
+													"key": "armazemId",
+													"value": "{{id_armazem_domain}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Id\" : \"{{id_armazem}}\",\r\n    \"AlphaNumId\" : \"{{id_armazem_domain}}\",\r\n    \"LatitudeGrau\" : 3,\r\n    \"LatitudeMinuto\" : 5,\r\n    \"LatitudeSegundo\" : 4,\r\n    \"LongitudeGrau\" : 8,\r\n    \"LongitudeMinuto\" : 6,\r\n    \"LongitudeSegundo\" : 2,\r\n    \"Designacao\" : \"armazenes\",\r\n    \"Rua\" : \"rua dos armazenes\",\r\n    \"NumeroPorta\" : 123654,\r\n    \"CodigoPostal\" : \"4000-123\",\r\n    \"Cidade\" : \"armazenes city\",\r\n    \"Pais\" : \"armazenes country\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/{{id_armazem}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												"{{id_armazem}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						},
 						{
 							"name": "Test_Case_Four",
-							"item": []
+							"item": [
+								{
+									"name": "Post_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"id_armazem\", responseJson.id);\r",
+													"pm.collectionVariables.set(\"id_armazem_domain\", responseJson.alphaNumId);\r",
+													"\r",
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Post With success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"    \"id\": pm.collectionVariables.get(\"id_armazem\"),\r",
+													"    \"latitudeGrau\": 5,\r",
+													"    \"latitudeSegundo\": 5,\r",
+													"    \"latitudeMinuto\": 5,\r",
+													"    \"longitudeGrau\": 5,\r",
+													"    \"longitudeSegundo\": 5,\r",
+													"    \"longitudeMinuto\": 5,\r",
+													"    \"designacao\": \"Ola\",\r",
+													"    \"alphaNumId\": pm.collectionVariables.get(\"id_armazem_domain\"),\r",
+													"    \"rua\": \"Rua dos Coiso\",\r",
+													"    \"numeroPorta\": 5,\r",
+													"    \"codigoPostal\": \"4000-999\",\r",
+													"    \"cidade\": \"Famalicão\",\r",
+													"    \"pais\": \"Portugal\"\r",
+													"});\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"AlphaNumId\" : \"L78\",\r\n    \"LatitudeGrau\" : \"5\",\r\n    \"LatitudeSegundo\": \"5\",\r\n    \"LatitudeMinuto\": \"5\",\r\n    \"LongitudeGrau\": \"5\",\r\n    \"LongitudeSegundo\": \"5\",\r\n    \"LongitudeMinuto\": \"5\",\r\n    \"Designacao\": \"Ola\",\r\n    \"Rua\": \"Rua dos Coiso\",\r\n    \"NumeroPorta\": \"5\",\r\n    \"CodigoPostal\": \"4000-999\",\r\n    \"Cidade\": \"Famalicão\",\r\n    \"Pais\": \"Portugal\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_All_Armazens",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Id\" : \"{{id_armazem}}\",\r\n    \"AlphaNumId\" : \"{{id_armazem_domain}}\",\r\n    \"LatitudeGrau\" : 3,\r\n    \"LatitudeMinuto\" : 5,\r\n    \"LatitudeSegundo\" : 4,\r\n    \"LongitudeGrau\" : 8,\r\n    \"LongitudeMinuto\" : 6,\r\n    \"LongitudeSegundo\" : 2,\r\n    \"Designacao\" : \"armazenes\",\r\n    \"Rua\" : \"rua dos armazenes\",\r\n    \"NumeroPorta\" : 123654,\r\n    \"CodigoPostal\" : \"4000-123\",\r\n    \"Cidade\" : \"armazenes city\",\r\n    \"Pais\" : \"armazenes country\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/{{id_armazem}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												"{{id_armazem}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						},
 						{
-							"name": "Test_Case_Five",
-							"item": []
+							"name": "Test_Case_Five_Gets_Fail_Case",
+							"item": [
+								{
+									"name": "Post_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"id_armazem\", responseJson.id);\r",
+													"pm.collectionVariables.set(\"id_armazem_domain\", responseJson.alphaNumId);\r",
+													"\r",
+													"pm.collectionVariables.set(\"id_armazem_invalid\", \"59294c42-fff1-4b82-9cd6-43dd9c3f2b5d\");\r",
+													"pm.collectionVariables.set(\"id_armazem_domain_invalido\", \"000\");\r",
+													"pm.collectionVariables.set(\"designacao_invalido\", \"11-11-2022\");\r",
+													"\r",
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Post With success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"    \"id\": pm.collectionVariables.get(\"id_armazem\"),\r",
+													"    \"latitudeGrau\": 5,\r",
+													"    \"latitudeSegundo\": 5,\r",
+													"    \"latitudeMinuto\": 5,\r",
+													"    \"longitudeGrau\": 5,\r",
+													"    \"longitudeSegundo\": 5,\r",
+													"    \"longitudeMinuto\": 5,\r",
+													"    \"designacao\": \"Ola\",\r",
+													"    \"alphaNumId\": pm.collectionVariables.get(\"id_armazem_domain\"),\r",
+													"    \"rua\": \"Rua dos Coiso\",\r",
+													"    \"numeroPorta\": 5,\r",
+													"    \"codigoPostal\": \"4000-999\",\r",
+													"    \"cidade\": \"Famalicão\",\r",
+													"    \"pais\": \"Portugal\"\r",
+													"});\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"AlphaNumId\" : \"L78\",\r\n    \"LatitudeGrau\" : \"5\",\r\n    \"LatitudeSegundo\": \"5\",\r\n    \"LatitudeMinuto\": \"5\",\r\n    \"LongitudeGrau\": \"5\",\r\n    \"LongitudeSegundo\": \"5\",\r\n    \"LongitudeMinuto\": \"5\",\r\n    \"Designacao\": \"Ola\",\r\n    \"Rua\": \"Rua dos Coiso\",\r\n    \"NumeroPorta\": \"5\",\r\n    \"CodigoPostal\": \"4000-999\",\r\n    \"Cidade\": \"Famalicão\",\r\n    \"Pais\": \"Portugal\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Armazem_Por_ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/id?id={{id_armazem_invalid}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												"id"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "{{id_armazem_invalid}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Armazem_Por_Designação",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/designacao?designacao={{designacao_invalido}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												"designacao"
+											],
+											"query": [
+												{
+													"key": "designacao",
+													"value": "{{designacao_invalido}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Armazem_Por_DomainID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/porAlphaId?armazemId={{id_armazem_domain_invalido}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												"porAlphaId"
+											],
+											"query": [
+												{
+													"key": "armazemId",
+													"value": "{{id_armazem_domain_invalido}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 2000ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Id\" : \"{{id_armazem}}\",\r\n    \"AlphaNumId\" : \"{{id_armazem_domain}}\",\r\n    \"LatitudeGrau\" : 3,\r\n    \"LatitudeMinuto\" : 5,\r\n    \"LatitudeSegundo\" : 4,\r\n    \"LongitudeGrau\" : 8,\r\n    \"LongitudeMinuto\" : 6,\r\n    \"LongitudeSegundo\" : 2,\r\n    \"Designacao\" : \"armazenes\",\r\n    \"Rua\" : \"rua dos armazenes\",\r\n    \"NumeroPorta\" : 123654,\r\n    \"CodigoPostal\" : \"4000-123\",\r\n    \"Cidade\" : \"armazenes city\",\r\n    \"Pais\" : \"armazenes country\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete_Armazem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Armazem/{{id_armazem}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Armazem",
+												"{{id_armazem}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				}
@@ -1419,6 +2627,30 @@
 		},
 		{
 			"key": "armazemId_invalido",
+			"value": ""
+		},
+		{
+			"key": "id_armazem",
+			"value": ""
+		},
+		{
+			"key": "id_armazem_domain",
+			"value": ""
+		},
+		{
+			"key": "designacao",
+			"value": ""
+		},
+		{
+			"key": "id_armazem_invalid",
+			"value": ""
+		},
+		{
+			"key": "id_armazem_domain_invalido",
+			"value": ""
+		},
+		{
+			"key": "designacao_invalido",
 			"value": ""
 		}
 	]
