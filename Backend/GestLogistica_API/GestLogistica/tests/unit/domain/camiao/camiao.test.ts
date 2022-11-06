@@ -53,4 +53,106 @@ describe('Camiao', () => {
         expect(camiao.isSuccess).to.be.false;
     });
 
+    it('should not create a new Camiao with invalid tara', () => {
+        const camiaoDTO = {
+            domainId: 'domainId',
+            caractCamiao: 'caractCamiao',
+            matriculaCamiao: 'matriculaCamiao',
+            tara: -1,
+            capacidadeCarga: 1,
+            cargaMax: 1,
+            cargaTotal: 1,
+            tempoCarregamento: 1
+        };
+
+        const camiao = Camiao.create(camiaoDTO);
+
+        expect(camiao.isSuccess).to.be.false;
+    });
+
+    it('should not create a new Camiao with invalid capacidadeCarga', () => {
+        const camiaoDTO = {
+            domainId: 'domainId',
+            caractCamiao: 'caractCamiao',
+            matriculaCamiao: 'matriculaCamiao',
+            tara: 1,
+            capacidadeCarga: -1,
+            cargaMax: 1,
+            cargaTotal: 1,
+            tempoCarregamento: 1
+        };
+
+        const camiao = Camiao.create(camiaoDTO);
+
+        expect(camiao.isSuccess).to.be.false;
+    });
+
+    it('should not create a new Camiao with invalid cargaMax', () => {
+        const camiaoDTO = {
+            domainId: 'domainId',
+            caractCamiao: 'caractCamiao',
+            matriculaCamiao: 'matriculaCamiao',
+            tara: 1,
+            capacidadeCarga: 1,
+            cargaMax: -1,
+            cargaTotal: 1,
+            tempoCarregamento: 1
+        };
+
+        const camiao = Camiao.create(camiaoDTO);
+
+        expect(camiao.isSuccess).to.be.false;
+    });
+
+    it('should not create a new Camiao with invalid cargaTotal', () => {
+        const camiaoDTO = {
+            domainId: 'domainId',
+            caractCamiao: 'caractCamiao',
+            matriculaCamiao: 'matriculaCamiao',
+            tara: 1,
+            capacidadeCarga: 1,
+            cargaMax: 1,
+            cargaTotal: -1,
+            tempoCarregamento: 1
+        };
+
+        const camiao = Camiao.create(camiaoDTO);
+
+        expect(camiao.isSuccess).to.be.false;
+    });
+
+    it('should not create a new Camiao with invalid tempoCarregamento', () => {
+        const camiaoDTO = {
+            domainId: 'domainId',
+            caractCamiao: 'caractCamiao',
+            matriculaCamiao: 'matriculaCamiao',
+            tara: 1,
+            capacidadeCarga: 1,
+            cargaMax: 1,
+            cargaTotal: 1,
+            tempoCarregamento: -1
+        };
+
+        const camiao = Camiao.create(camiaoDTO);
+
+        expect(camiao.isSuccess).to.be.false;
+    });
+
+    it('should not create a new Camiao with invalid domainId', () => {
+        const camiaoDTO = {
+            domainId: '',
+            caractCamiao: 'caractCamiao',
+            matriculaCamiao: 'matriculaCamiao',
+            tara: 1,
+            capacidadeCarga: 1,
+            cargaMax: 1,
+            cargaTotal: 1,
+            tempoCarregamento: 1
+        };
+
+        const camiao = Camiao.create(camiaoDTO);
+
+        expect(camiao.isSuccess).to.be.false;
+    });
+
 });
