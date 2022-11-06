@@ -1,5 +1,4 @@
-### 
-
+# UC3 - Editar armazém
 
 ## Contents
 - [Views](#views)
@@ -42,6 +41,8 @@ Pode-se dizer que estes dois modelos se expandem ao longo de eixos distintos, se
 
 Para modelar/representar visualmente, tanto o que foi implementado como as ideias e alternativas consideradas, recorre-se à Unified Modeling Language (UML) [[UML-2020]](References.md#UML-2020) [[UMLDiagrams-2020]](References.md#UMLDiagrams-2020).
 
+<br>
+
 # Views:
 
 # Nível 1
@@ -79,13 +80,14 @@ Para modelar/representar visualmente, tanto o que foi implementado como as ideia
 
 ![Nivel1-VP](N1_VP_alt6.svg)
 
+<br>
 
 # Nível 2
 ## Vista Lógica
 
 ### Alternativa 1
 
-![Nivel2-VL](N2_VL_alt1.svg)
+![Nivel2-VL](N2_VL.svg)
 
 
 ## Vista de Implementação
@@ -122,6 +124,7 @@ Para modelar/representar visualmente, tanto o que foi implementado como as ideia
 ### Alternativa 1
 ![N2-VF](N2_VF.svg)
 
+<br>
 
 ## Nível 3 (MDR)
 
