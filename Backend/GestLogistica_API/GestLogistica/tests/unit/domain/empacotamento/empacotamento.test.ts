@@ -227,7 +227,6 @@ describe('Empacotamento Test', () => {
     expect(pacote.getValue().empEntregaRef.toString()).to.be.equal("123");
   });
 
-
   it('should set the empCamiaoRef', () => {
 
     // Arrange
@@ -243,7 +242,5 @@ describe('Empacotamento Test', () => {
     // Assert
     expect(pacote.getValue().empCamiaoRef.toString()).to.be.equal("123");
   });
-
-
 
 })
