@@ -57,7 +57,7 @@ describe('Camiao', () => {
         const camiaoDTO = {
             domainId: 'domainId',
             caractCamiao: 'caractCamiao',
-            matriculaCamiao: 'matriculaCamiao',
+            matriculaCamiao: 'AA-56-BB',
             tara: -1,
             capacidadeCarga: 1,
             cargaMax: 1,
@@ -74,7 +74,7 @@ describe('Camiao', () => {
         const camiaoDTO = {
             domainId: 'domainId',
             caractCamiao: 'caractCamiao',
-            matriculaCamiao: 'matriculaCamiao',
+            matriculaCamiao: 'AA-56-BB',
             tara: 1,
             capacidadeCarga: -1,
             cargaMax: 1,
@@ -91,7 +91,7 @@ describe('Camiao', () => {
         const camiaoDTO = {
             domainId: 'domainId',
             caractCamiao: 'caractCamiao',
-            matriculaCamiao: 'matriculaCamiao',
+            matriculaCamiao: 'AA-56-BB',
             tara: 1,
             capacidadeCarga: 1,
             cargaMax: -1,
@@ -108,7 +108,7 @@ describe('Camiao', () => {
         const camiaoDTO = {
             domainId: 'domainId',
             caractCamiao: 'caractCamiao',
-            matriculaCamiao: 'matriculaCamiao',
+            matriculaCamiao: 'AA-56-BB',
             tara: 1,
             capacidadeCarga: 1,
             cargaMax: 1,
@@ -125,7 +125,7 @@ describe('Camiao', () => {
         const camiaoDTO = {
             domainId: 'domainId',
             caractCamiao: 'caractCamiao',
-            matriculaCamiao: 'matriculaCamiao',
+            matriculaCamiao: 'AA-56-BB',
             tara: 1,
             capacidadeCarga: 1,
             cargaMax: 1,
@@ -138,11 +138,11 @@ describe('Camiao', () => {
         expect(camiao.isSuccess).to.be.false;
     });
 
-    it('should not create a new Camiao with invalid domainId', () => {
+    it('should get tara from Camiao', () => {
         const camiaoDTO = {
-            domainId: '',
+            domainId: 'domainId',
             caractCamiao: 'caractCamiao',
-            matriculaCamiao: 'matriculaCamiao',
+            matriculaCamiao: 'AA-56-BB',
             tara: 1,
             capacidadeCarga: 1,
             cargaMax: 1,
@@ -152,7 +152,82 @@ describe('Camiao', () => {
 
         const camiao = Camiao.create(camiaoDTO);
 
-        expect(camiao.isSuccess).to.be.false;
+        expect(camiao.isSuccess).to.be.true;
+        expect(camiao.getValue().tara.props.value).to.be.equal(1);
     });
+
+    it('should get capacidadeCarga from Camiao', () => {
+        const camiaoDTO = {
+            domainId: 'domainId',
+            caractCamiao: 'caractCamiao',
+            matriculaCamiao: 'AA-56-BB',
+            tara: 1,
+            capacidadeCarga: 1,
+            cargaMax: 1,
+            cargaTotal: 1,
+            tempoCarregamento: 1
+        };
+
+        const camiao = Camiao.create(camiaoDTO);
+
+        expect(camiao.isSuccess).to.be.true;
+        expect(camiao.getValue().capacidadeCarga.props.value).to.be.equal(1);
+    });
+
+    it('should get cargaMax from Camiao', () => {
+        const camiaoDTO = {
+            domainId: 'domainId',
+            caractCamiao: 'caractCamiao',
+            matriculaCamiao: 'AA-56-BB',
+            tara: 1,
+            capacidadeCarga: 1,
+            cargaMax: 1,
+            cargaTotal: 1,
+            tempoCarregamento: 1
+        };
+
+        const camiao = Camiao.create(camiaoDTO);
+
+        expect(camiao.isSuccess).to.be.true;
+        expect(camiao.getValue().cargaMax.props.value).to.be.equal(1);
+    });
+
+    it('should get cargaTotal from Camiao', () => {
+        const camiaoDTO = {
+            domainId: 'domainId',
+            caractCamiao: 'caractCamiao',
+            matriculaCamiao: 'AA-56-BB',
+            tara: 1,
+            capacidadeCarga: 1,
+            cargaMax: 1,
+            cargaTotal: 1,
+            tempoCarregamento: 1
+        };
+
+        const camiao = Camiao.create(camiaoDTO);
+
+        expect(camiao.isSuccess).to.be.true;
+        expect(camiao.getValue().cargaTotal.props.value).to.be.equal(1);
+    });
+
+    it('should get tempoCarregamento from Camiao', () => {
+        const camiaoDTO = {
+            domainId: 'domainId',
+            caractCamiao: 'caractCamiao',
+            matriculaCamiao: 'AA-56-BB',
+            tara: 1,
+            capacidadeCarga: 1,
+            cargaMax: 1,
+            cargaTotal: 1,
+            tempoCarregamento: 1
+        };
+
+        const camiao = Camiao.create(camiaoDTO);
+
+        expect(camiao.isSuccess).to.be.true;
+        expect(camiao.getValue().tempoCarregamento.props.value).to.be.equal(1);
+    });
+
+    
 
 });
