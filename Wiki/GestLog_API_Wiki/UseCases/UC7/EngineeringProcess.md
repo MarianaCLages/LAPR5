@@ -2,19 +2,21 @@
 
 
 ## Contents
+- [Analise de Requisitos](#analise-de-requisitos)
+  - [Valores de Negócio e restrições](#valores-de-negócio-e-restrições)
 - [Decisões de Arquitetura tomadas](#decisões-de-arquitetura-tomadas)
 - [Views:](#views)
   - [Nível 1](#nível-1)
     - [Vista Lógica](#vista-lógica)
     - [Vista de Cenários](#vista-de-cenários)
-    - [Vista Processo](#vista-processo)
+    - [Vista de Processos](#vista-de-processos)
   - [Nível 2](#nível-2)
     - [Vista Lógica](#vista-lógica-1)
     - [Vista de Implementação](#vista-de-implementação)
-    - [Vista Processo](#vista-processo-1)
+    - [Vista de Processos](#vista-de-processos-1)
   - [Nível 3 (MDR)](#nível-3-mdr)
     - [Vista Lógica](#vista-lógica-2)
-    - [Vista Processo](#vista-processo-2)
+    - [Vista de Processos](#vista-de-processos-2)
     - [Vista de Implementação](#vista-de-implementação-1)
 
 ## Introduction
@@ -41,6 +43,17 @@ Pode-se dizer que estes dois modelos se expandem ao longo de eixos distintos, se
 
 Para modelar/representar visualmente, tanto o que foi implementado como as ideias e alternativas consideradas, recorre-se à Unified Modeling Language (UML) [[UML-2020]](References.md#UML-2020) [[UMLDiagrams-2020]](References.md#UMLDiagrams-2020).
 
+
+# Analise de Requisitos
+ ## Valores de Negócio e restrições
+ Camião:
+ - Tara: Inteiro positivo
+ - Capacidade Carga: Inteiro positivo
+ - Carga Total: Inteiro positivo
+ - Carga Maxima: Inteiro positivo
+ - Tempo Carregamento: Inteiro positivo
+ - Matricula: String da seguinte forma: XX-II-XX em que X é uma letra e I é um número
+ - Caracteristica: String
 
 # Decisões de Arquitetura tomadas
 As decisões gerais de Arquitetura já estão descritas no documento geral de Arquitetura. Este documento apenas descreve as decisões tomadas para este caso de uso.
