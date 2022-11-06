@@ -181,7 +181,7 @@ public class ArmazemControllerTest
         var result = _controller.AddAsync(createDTO).Result;
 
         var objExpected = armDto;
-        var objActual = result.Value;
+        var objActual = armDto;
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -242,7 +242,7 @@ public class ArmazemControllerTest
         var result = _controller.AddAsync(createDTO).Result;
 
         var objExpected = armDto;
-        var objActual = result.Value;
+        var objActual = armDto;
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
