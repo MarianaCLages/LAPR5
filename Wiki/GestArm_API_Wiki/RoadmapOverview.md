@@ -4,6 +4,10 @@
 	- [How the SAD Is Organized](#how-the-sad-is-organized)
 	- [How a View Is Documented](#how-a-view-is-documented)
 
+# Explicação da arquitetura onion
+
+Ao nivel de arquitetura usamos o modelo Onion (tambem conhecido por Clean Arquiture, nome sugerido por Robert C. Martin aka "Uncle Bob"), que é um modelo de arquitetura de software que separa a aplicação em camadas, sendo que cada camada tem uma responsabilidade diferente. O modelo Onion é composto por concentricas. No centro e totalmente encapsulado encontra-se a camada de domínio, que é responsável pela lógica de negócio da aplicação. A camada de domínio não tem dependencias com as outras camadas. A camada de domínio é seguida pela camada de aplicação, que é responsável pela lógica de negócio da aplicação e "execução" dos casos, mas que é mais "alta" que a camada de domínio. A camada de aplicação tem dependencias com a camada de domínio, mas não tem dependencias com a camada de infraestrutura. A camada de aplicação é seguida pela camada de infraestrutura, que é responsável pela comunicação com a base de dados, receber requests HTTP, etc. A camada de infraestrutura tem dependencias com a camada de aplicação, mas não tem dependencias com a camada de domínio. Todas as dependencias são feitas através de interfaces, de modo a que as camadas sejam desacopladas e facilmente ser possivel alterar as depencencias atraves de injeção de dependencias.
+
 # Documentation Roadmap and Overview
 
 > Sub-parts of this section provide information that will help readers or users of the Software Architecture Document (SAD) quickly find information that will enable them to do their jobs. Readers of the SAD seeking an overview should begin here, as should readers interested in finding particular information to answer a specific question.

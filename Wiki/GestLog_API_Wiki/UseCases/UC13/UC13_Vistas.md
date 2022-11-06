@@ -43,12 +43,18 @@ Para modelar/representar visualmente, tanto o que foi implementado como as ideia
 
 <br>
 
+# Decisões de Arquitetura tomadas
+As decisões gerais de Arquitetura já estão descritas no documento geral de Arquitetura. Este documento apenas descreve as decisões tomadas para este caso de uso.
+O caso de uso em questão é a criação de um empacotamento. Este foge à regra dos outros casos de uso "clássicos", já que necessita de uma interface de forma a fazer a junção do módulo de gestão de armazéns e o módulo de logística.
+
 # Views:
 
 # Nível 1
 ## Vista Lógica
 
 ![Nivel1-VL](N1_VL.svg)
+
+
 
 ### Vista de Cenários
 

@@ -53,14 +53,20 @@ O caso de uso em questão é a edição de um empacotamento. Este foge à regra 
 
 ![Nivel1-VL](N1_VL.svg)
 
+Na vista lógica mostramos o Sistema como um todo e as possíveis comunicação com o exterior. O sistema (EletricGo) vai fornecer uma UI específica para o Gestor de Logística, sendo a Logística a **Master Data Logística**, uma aplicação a correr dentro do Sistema. O EletricGo também vai consumir uma API de autenticação exterior, conhecida como **SSO_API**.
+
 ### Vista de Cenários
 
 ![Nivel1-VC](N1_VC.svg)
+
+Na vista de cenários apenas temos a interação desta UC que é a edição de um epacotamento. Com edição o ator da UC vai poder tanto eliminar como editar o empacotamento.
 
 ### Vista Processo
 
 
 ![Nivel1-VP](N1_VP.svg)
+
+Na vista de processos, temos as interações básicas que o ator (neste caso interpretamos que poderia tanto ser o Postman, visto que no **SPRINT A**` não existem autores) em que vai ter de ser introduzido a referência a uma encomenda válida e a referência válida a um camião. Tanto uma como a outra vão ser validadas mais tarde durante a edição do empacotamento, uma vez que é possível alterar as posições 3D do mesmo.
 
 ## Nível 2
 ### Vista Lógica
@@ -68,9 +74,13 @@ O caso de uso em questão é a edição de um empacotamento. Este foge à regra 
 
 ![Nivel2-VL](N2_VL.svg)
 
+Na vista lógica nível 2, tal como já foi explicado nos diagramas gerais da aplicação **MASTER DATA GESTÃO LOGÍSTICA**, uma das possíveis arquiteturas para o sitema seria a existência de uma aplicação (**AUTH**) que vai fazer de proxy entre os vários requests dentro do sistema. Nesta UC apenas nos interessa a parte do front-end e da MasterDataLogística uma vez que os empacotamentos fazem parte deste módulo. O ator vai ter que enviar um request que posteriormente vai ser interpretado pela Aplicação em si retornando uma possível mensagem de sucesso ou erro dependendo da operação.
+
 
 ### Vista Processo
 ![Nivel2-VP](N2_VP.svg)
+
+Na vista lógica de nível 2, tal como explicado anteriormente, mostra de forma mais explícita a edição do empacotamento em si. Quando a aplicação **MASTER DATA LOGÍTICA** recebe o pedido, o mesmo vai interpretar o mesmo e realizar a tarefa que lhe foi proposta no pedido (neste preciso caso a edição do empacotamento ou mesmo a eliminação do mesmo). Após verificar a integridade das novas posições ou o novo camião (uma vez que apenas é possível alterar a atribuição de um camião a uma encomenda ou as suas devidas posiões dentro do camião) vai retornar uma mensagem de sucesso ou erro dependendo da operação em si.
  
 
 ## Nível 3 (MDR)
@@ -78,13 +88,44 @@ O caso de uso em questão é a edição de um empacotamento. Este foge à regra 
 ### Vista Lógica
 
 ![Nivel3-VL](N3_VL_alt1.svg)
+
+Na vista lógica nível 3 é explicitado com mais rigor o funcionamento na aplicação **MASTER DATA LOGÍSTICA**.
+A mesma obedece à **onion architecture**, sendo este bastante complexo no que toca em padrões arquiteturais.
+A aplicação apresenta 4 camadas diferentes *Frameworks e Drivers Layers*, *Interfaces Adapter Layer*, *Application Bussiness Rules*, *Enterprise Bussiness Rules*, onde cada uma tem um nível de abstração diferente e responsabilidades muito diferentes.
+Tal como é possível observar, na camada mais exterior, *frameworks e drivers layers* existe lá a route e a persistance, sendo estes os responsáveis por comunicar com o exterior, respetivamente receber os requests (REST), analisando o pedido e o seu body e rencaminhando para o correto controlador, enquanto que a persistance é responsável, tal como o nome indica, de persistir os dados na Base de Dados da aplicação (Neste caso na MongoDB hospedada nos Virtual Servers do DEI).
+Posteriormente temos os controllers, que vão controlar o fluxo do decorrer da funcionalidade, chamando o respetivo serviço que tem lá dentro toda a lógica/regras de negócio intrísecas a esta funcionalidade.
+Finalmente temos a camada de domínio que apresenta o CORE do negócio relacionado a esta entidade, ao empacotamento (existindo lá TODAS as regras de negócio).
+No final, voltando novamente à camada do serviço, a mesma vai aceder ao seu devido repositório para conseguir fazer a persistência correta dos dados.
+Por fim, o controlador vai reconstruir a informação obtida pelo o fluxo total, gerando assim a resposta ao pedido.
+
 ![Nivel3-VL](N3_VL_alt2.svg)
+
+Este diagrama é igual ao posterior, mas apenas difere na ligação do módulo da persistance à interface exposta pela base de dados (uma vez que o design anterior seria, por exemplo, para uma base de dados em memória, enquanto que, este diagrama menciona base de dados a serem hospedadas em outras máquinas, como por exemplo na cloud).
 
 
 ### Vista Processo
 
 ![Nivel3-VP](N3_VP.svg)
 
+Na vista de processos nível 3, finalmente, temos um "insight" correto do fluxo da funcionalidade na sua totalidade.
+
+Primeiro vai verificar se tanto a referência ao Camião como a referência à encomenda são validas, isto é, se existem. Caso não existem, não vai ser possível alterar as informações do empacotamento retornando uma mensagem de erro e um código de um erro respetivo (Neste caso 400 -> Bad request).
+
+Caso sejam informações válidas vai alterar as informações respetivas à posição do empacotamento no novo (ou não) camião estabelecido.
+
+No final, caso seja sucesso, devolve uma mensagem de sucesso e um código respetivo, neste caso, um 200 -> OK.
+
 
 ### Vista de Implementação
-![Nivel3-VI](N3_VI.svg)
+
+![Nivel3-VI](VI_N3_alt1.svg)
+
+Na vista de implementação nível 3 temos um insight das dependecias de cada camada, esta primeira alternativa mostra por alto as camadas, uma vez que numa próxima alternativa vai ilustrar melhor as camadas e dependências.
+
+![Nivel3-VI](VI_N3_alt2.svg)
+
+Na segunda alternativa já é possível entender melhor o funcionamento das dependencias de cada camada e respetivos módulos, o fluxo vai ser igual ao explicado anteriormente.
+
+![Nivel3-VI](VI_N3_alt3.svg)
+
+Finalmente, na alternativa 3, temos um insight MUITO mais técnico e funcional das dependências, sendo este como "uma lupa", pois mostra realmente até depedencias entre interfaces e devidos módulos.
