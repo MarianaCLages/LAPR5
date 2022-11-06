@@ -2,6 +2,8 @@
 
 
 ## Contents
+- [Analise de Requisitos](#analise-de-requisitos)
+	- [Dados de Entrada e Restrições](#dados-de-entrada-e-restrições)
 - [Decisões de Arquitetura tomadas](#decisões-de-arquitetura-tomadas)
 - [Views:](#views)
 	- [Nível 1](#nível-1)
@@ -41,6 +43,15 @@ Pode-se dizer que estes dois modelos se expandem ao longo de eixos distintos, se
 
 Para modelar/representar visualmente, tanto o que foi implementado como as ideias e alternativas consideradas, recorre-se à Unified Modeling Language (UML) [[UML-2020]](References.md#UML-2020) [[UMLDiagrams-2020]](References.md#UMLDiagrams-2020).
 
+# Analise de Requisitos
+ ## Dados de Entrada e Restrições
+ Encomenda:
+ - Data de entrega: Data em que a encomenda deve ser entregue, deve ser posterior á data atual.
+ - Massa: Massa da encomenda em kg, positiva.
+ - Tempo de carga: Tempo que demora a encomenda a ser carregada, positivo.
+ - Tempo de descarga: Tempo que demora a encomenda a ser descarregada, positivo.
+ - Armazém de chegada: Armazém de chegada da encomenda.
+ - Id de encomenda: Id da encomenda, gerado automaticamente: unico, gerardo a partir da data e hora da encomenda e do numero de encomendas já existentes. EX: 20221201/1, 20221201/2, 20221201/3, etc.
 
 # Decisões de Arquitetura tomadas
 As decisões geral de Arquitetura já estão descritas no documeto geral de Arquitetura. Este documento apenas descreve as decisões tomadas para este caso de uso.
