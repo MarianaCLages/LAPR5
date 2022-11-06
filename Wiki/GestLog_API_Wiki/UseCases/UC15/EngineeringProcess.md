@@ -1,21 +1,21 @@
-# UC8 - Listar Camião
+### 
+
 
 ## Contents
-- [Views](#views)
-	- [Introduction](#introduction)
-	- [Nível 1](#nível-1)
-		- [Vista Lógica](#vista-lógica)
-		- [Vista de Cenários](#vista-de-cenários)
-	- [Nível 2](#nível-2)
-		- [Vista Lógica](#vista-lógica-1)
-		- [Vista de Processos](#vista-de-processos)
-		- [Vista de Implementação](#vista-de-implementação)
-		- [Vista Física](#vista-física)
-   - [Nível 3 (MDR)](#nível-3-mdr)
-		- [Vista Lógica](#vista-lógica-2)
-		- [Vista de Processos](#vista-de-processos-1)
-		- [Vista de Implementação](#vista-de-implementação-1)
-	- [Lista de Funcionalidades](Planeamento.md)
+- [Decisões de Arquitetura tomadas](#decisões-de-arquitetura-tomadas)
+- [Views:](#views)
+  - [Nível 1](#nível-1)
+    - [Vista Lógica](#vista-lógica)
+    - [Vista de Cenários](#vista-de-cenários)
+    - [Vista Processo](#vista-processo)
+  - [Nível 2](#nível-2)
+    - [Vista Lógica](#vista-lógica-1)
+    - [Vista de Implementação](#vista-de-implementação)
+    - [Vista Processo](#vista-processo-1)
+  - [Nível 3 (MDR)](#nível-3-mdr)
+    - [Vista Lógica](#vista-lógica-2)
+    - [Vista Processo](#vista-processo-2)
+    - [Vista de Implementação](#vista-de-implementação-1)
 
 ## Introduction
 Será adotada a combinação de dois modelos de representação arquitetural: C4 e 4+1.
@@ -41,18 +41,15 @@ Pode-se dizer que estes dois modelos se expandem ao longo de eixos distintos, se
 
 Para modelar/representar visualmente, tanto o que foi implementado como as ideias e alternativas consideradas, recorre-se à Unified Modeling Language (UML) [[UML-2020]](References.md#UML-2020) [[UMLDiagrams-2020]](References.md#UMLDiagrams-2020).
 
-<br>
 
 # Decisões de Arquitetura tomadas
 As decisões gerais de Arquitetura já estão descritas no documento geral de Arquitetura. Este documento apenas descreve as decisões tomadas para este caso de uso.
-O caso de uso pode ser visto como um caso de uso "clássico" de listagem de um objeto, neste caso, a listagem de camiões, a qual pode ser filtrada ou não. No caso de ser filtrada, pode ser por caractere do camião ou por matrícula.
-
-<br>
+O caso de uso em questão é a edição de um empacotamento. Este foge à regra dos outros casos de uso "clássicos", já que necessita de uma interface de forma a fazer a junção do módulo de gestão de armazéns e o módulo de logística.
 
 # Views:
 
-# Nível 1
-## Vista Lógica
+## Nível 1
+### Vista Lógica
 
 ![Nivel1-VL](N1_VL.svg)
 
@@ -60,80 +57,34 @@ O caso de uso pode ser visto como um caso de uso "clássico" de listagem de um o
 
 ![Nivel1-VC](N1_VC.svg)
 
-## Vista Processo
-
-### Alternativa 1
-
-![Nivel1-VP](N1_VP_alt1.svg)
-
-### Alternativa 2
-
-![Nivel1-VP](N1_VP_alt2.svg)
-
-### Alternativa 3
-
-![Nivel1-VP](N1_VP_alt3.svg)
+### Vista Processo
 
 
-# Nível 2
-## Vista Lógica
+![Nivel1-VP](N1_VP.svg)
 
-### Alternativa 1
-
-![Nivel2-VL](N2_VL_alt1.svg)
+## Nível 2
+### Vista Lógica
 
 
-## Vista de Implementação
-![Nivel2-VI](N2_VI.svg)
-
-## Vista Processo
-
-### Alternativa 1
-
-![Nivel2-VP](N2_VP_alt1.svg)
-
-### Alternativa 2
-
-![Nivel2-VP](N2_VP_alt2.svg)
-
-### Alternativa 3
-
-![Nivel2-VP](N2_VP_alt3.svg)
+![Nivel2-VL](N2_VL.svg)
 
 
-## Vista Física
-
-### Alternativa 1
-![N2-VF](N2_VF_alt1.svg)
-
-### Alternativa 2
-![N2-VF](N2_VF_alt2.svg)
-
+### Vista Processo
+![Nivel2-VP](N2_VP.svg)
+ 
 
 ## Nível 3 (MDR)
 
-## Vista Lógica
+### Vista Lógica
 
-### Alternativa 1
 ![Nivel3-VL](N3_VL_alt1.svg)
-
-### Alternativa 2
 ![Nivel3-VL](N3_VL_alt2.svg)
 
-## Vista Processo
 
-### Alternativa 1
+### Vista Processo
 
-![Nivel3-VP](N3_VP_alt1.svg)
-
-### Alternativa 2
-
-![Nivel3-VP](N3_VP_alt2.svg)
-
-### Alternativa 3
-
-![Nivel3-VP](N3_VP_alt3.svg)
+![Nivel3-VP](N3_VP.svg)
 
 
-## Vista de Implementação
+### Vista de Implementação
 ![Nivel3-VI](N3_VI.svg)
