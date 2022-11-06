@@ -11,7 +11,7 @@ O grupo de trabalho é constituído pelo estudantes identificados na tabela segu
 | **[1200902](SprintA/1200902)** | Mariana Lages  |
 | **[1200920](SprintA/1200920)** | Eduardo Sousa  |
 | **[1201487](SprintA/1201487)** | Miguel Jordão  |
-| **[1201346](SprintA/1201487)** | Ines Ribeiro   |
+| **[1201346](SprintA/1201487)** | Inês Ribeiro   |
 
 # 2. Distribuição de Funcionalidades ###
 
