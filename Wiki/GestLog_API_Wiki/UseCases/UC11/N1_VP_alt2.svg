@@ -24,28 +24,28 @@
       ><path d="M0 0 L963 0 L963 104 L0 104 L0 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath7"
-      ><path d="M602 30 L602 45 L355 45 L355 30 ZM571 61 L571 76 L374 76 L374 61 ZM0 0 L0 104 L963 104 L963 13 L829 13 L829 0 Z"
+      ><path d="M600 30 L600 45 L353 45 L353 30 ZM575 61 L575 76 L369 76 L369 61 ZM0 0 L0 104 L963 104 L963 13 L829 13 L829 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath8"
       ><path d="M0 0 L962 0 L962 104 L0 104 L0 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath9"
-      ><path d="M570 29 L570 44 L373 44 L373 29 ZM606 88 L606 103 L350 103 L350 88 ZM0 0 L0 104 L962 104 L962 0 L601 0 L601 13 L354 13 L354 0 Z"
+      ><path d="M574 29 L574 44 L368 44 L368 29 ZM575 88 L575 103 L380 103 L380 88 ZM0 0 L0 104 L962 104 L962 0 L599 0 L599 13 L352 13 L352 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath10"
-      ><path d="M607 30 L607 45 L351 45 L351 30 ZM571 59 L571 74 L384 74 L384 59 ZM0 0 L0 104 L963 104 L963 0 Z"
+      ><path d="M576 30 L576 45 L381 45 L381 30 ZM571 59 L571 74 L384 74 L384 59 ZM0 0 L0 104 L963 104 L963 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath11"
-      ><path d="M570 29 L570 44 L383 44 L383 29 ZM0 0 L0 104 L962 104 L962 0 L606 0 L606 15 L350 15 L350 0 Z"
+      ><path d="M570 29 L570 44 L383 44 L383 29 ZM0 0 L0 104 L962 104 L962 0 L575 0 L575 15 L380 15 L380 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath12"
       ><path d="M-187 -15 L374 -15 L374 30 L-187 30 L-187 -15 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath13"
-      ><path d="M-256 -15 L512 -15 L512 30 L-256 30 L-256 -15 Z"
+      ><path d="M-195 -15 L390 -15 L390 30 L-195 30 L-195 -15 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath14"
-      ><path d="M-197 -15 L394 -15 L394 30 L-197 30 L-197 -15 Z"
+      ><path d="M-206 -15 L412 -15 L412 30 L-206 30 L-206 -15 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath15"
       ><path d="M-247 -15 L494 -15 L494 30 L-247 30 L-247 -15 Z"
@@ -114,17 +114,17 @@
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath12)" stroke="none"
       >2.1: Informa sucesso da operação</text
     ></g
-    ><g font-size="11px" transform="translate(317,124)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
-    ><rect x="0" width="256" height="15" y="0" clip-path="url(#clipPath13)" stroke="none"
+    ><g font-size="11px" transform="translate(347,124)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
+    ><rect x="0" width="195" height="15" y="0" clip-path="url(#clipPath13)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath13)" stroke="none"
-      >2: Dá informação dos percursos entre armazéns</text
+      >2: Dá o ID do armazém de chegada</text
     ></g
-    ><g font-size="11px" transform="translate(340,65)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
-    ><rect x="0" width="197" height="15" y="0" clip-path="url(#clipPath14)" stroke="none"
+    ><g font-size="11px" transform="translate(335,65)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
+    ><rect x="0" width="206" height="15" y="0" clip-path="url(#clipPath14)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath14)" stroke="none"
-      >1.1: Pede informação dos percursos</text
+      >1.1: Pede ID do armazém de chegada</text
     ></g
-    ><g font-size="11px" transform="translate(321,34)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
+    ><g font-size="11px" transform="translate(319,34)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="247" height="15" y="0" clip-path="url(#clipPath15)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath15)" stroke="none"
       >1: Quero listar o percurso entre dois armazéns</text
