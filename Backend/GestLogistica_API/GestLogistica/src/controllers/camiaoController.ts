@@ -97,7 +97,7 @@ export default class camiaoController
             const camiaoDTO = camiaoOrError.getValue();
             return res.json(camiaoDTO).status(200);
         } catch (e) {
-            throw e;
+            next(e);
         }
     }
 

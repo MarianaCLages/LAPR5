@@ -73,9 +73,9 @@ export default class camiaoRepo implements ICamiaoRepo {
 
     public async update(camiao: Camiao): Promise<Result<Camiao>> {
 
-        const query = { domainId: camiao.id.toString() };
 
-        const camiaoDocument = await this.camiaoSchema.findOne(query);
+        const query = { caractCamiao: camiao.caractCamiao.value };
+        const camiaoDocument = await this.camiaoSchema.findOne(query as FilterQuery<ICamiaoPersistence & Document>);
 
         try {
             if (camiaoDocument == null) {
