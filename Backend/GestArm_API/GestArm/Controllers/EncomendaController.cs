@@ -56,7 +56,7 @@ public class EncomendaController : ControllerBase
         }
         catch (Exception)
         {
-            return NotFound("Ocorreu um erro aquando a procura da Encomenda! (Não foi encontrado nenhuma encomenda com esse ID!)");
+            return NotFound("Não foi possível adicionar o armazém! (Data inválida!)");
         }
     }
 
@@ -79,6 +79,10 @@ public class EncomendaController : ControllerBase
         catch (BusinessRuleValidationException ex)
         {
             return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Erro na atualização da encomenda!. Por favor especifique uma data válida!");
         }
 
 
@@ -111,9 +115,20 @@ public class EncomendaController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetAllAsync()
     {
-        var encomendas = await _service.GetAllAsync();
+        try
+        {
+            var encomendas = await _service.GetAllAsync();
 
-        return encomendas.ToList();
+            return encomendas.ToList();
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Ocorreu um erro aquando a procura da Encomenda! (Não foi encontrado nenhuma encomenda)");
+        }
     }
 
     // GET: api/Encomenda/dataEntrega=dataEntrega
@@ -121,13 +136,24 @@ public class EncomendaController : ControllerBase
     [HttpGet("porData")]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByDataDeEntregaAysnc(DateTime data)
     {
-        var encomendas = await _service.GetByDataEntregaAysnc(data);
+        try
+        {
+            var encomendas = await _service.GetByDataEntregaAysnc(data);
 
-        if (encomendas?.Any() != true)
-            //_loggerEncomendas.LogInformation("Nenhuma encomenda foi encontrada com o id de armazém dado");
-            return NotFound("Não foi encontrado nenhuma encomenda que tenha uma entrega nesse dia");
+            if (encomendas?.Any() != true)
+                //_loggerEncomendas.LogInformation("Nenhuma encomenda foi encontrada com o id de armazém dado");
+                return NotFound("Não foi encontrado nenhuma encomenda que tenha uma entrega nesse dia");
 
-        return encomendas;
+            return encomendas;
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Ocorreu um erro aquando a procura da Encomenda! (Por favor especifique uma data válida!)");
+        }
     }
 
     // GET: api/Encomenda/porFiltragem?armazemId=X&data=Y
@@ -135,14 +161,26 @@ public class EncomendaController : ControllerBase
     [HttpGet("porFiltragem")]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByFiltragemAysnc(string armazemId, string data)
     {
-        var encomendas = await _service.GetByFiltragemAysnc(armazemId, DateTime.Parse(data));
+        try
+        {
+            var encomendas = await _service.GetByFiltragemAysnc(armazemId, DateTime.Parse(data));
 
-        if (encomendas?.Any() != true)
-            //_loggerEncomendas.LogInformation("Nenhuma encomenda foi encontrada com o id de armazém dado");
-            return NotFound(
-                "Não foi encontrado nenhuma encomenda que tenha uma entrega nesse dia ou um com um id de armazém associado");
+            if (encomendas?.Any() != true)
+                //_loggerEncomendas.LogInformation("Nenhuma encomenda foi encontrada com o id de armazém dado");
+                return NotFound(
+                    "Não foi encontrado nenhuma encomenda que tenha uma entrega nesse dia ou um com um id de armazém associado");
 
-        return encomendas;
+            return encomendas;
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Ocorreu um erro aquando a procura da Encomenda! (Por favor especifique uma data válida!)");
+        }
+        
     }
 
     //MÉTODO UTILIZADO PELO REPOSITÓRIO EM NODE
@@ -151,11 +189,23 @@ public class EncomendaController : ControllerBase
     [Route("~/api/[controller]/search/{encomendaId}", Name = "GetEncomendaPorArmazem")]
     public async Task<ActionResult<EncomendaDto>> GetByArmazemIdAsync(string encomendaId)
     {
-        var armazem = await _service.GetByIdAsync(new EncomendaId(encomendaId));
+        try
+        {
+            var armazem = await _service.GetByIdAsync(new EncomendaId(encomendaId));
 
-        if (armazem == null) return NotFound("Não foi encontrado um armazem com esse ID!");
+            if (armazem == null) return NotFound("Não foi encontrado um armazem com esse ID!");
 
-        return armazem;
+            return armazem;
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Ocorreu um erro aquando a procura da Encomenda!");
+        }
+        
     }
 
     ////MÉTODO UTILIZADO PELO REPOSITÓRIO EM NODE
@@ -164,11 +214,22 @@ public class EncomendaController : ControllerBase
     [Route("~/api/[controller]/search/{data}/{nextID}", Name = "GetEncomendaPorEncomendaDomainID")]
     public async Task<ActionResult<EncomendaDto>> GetByEncomendaDomainIDAsync(string nextID, string data)
     {
-        var armazem = await _service.GetEncomendaByDomainIdAsync(data, nextID);
+        try
+        {
+            var armazem = await _service.GetEncomendaByDomainIdAsync(data, nextID);
 
-        if (armazem == null) return NotFound("Não foi encontrado um armazem com esse ID!");
+            if (armazem == null) return NotFound("Não foi encontrado um armazem com esse ID!");
 
-        return armazem;
+            return armazem;
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Ocorreu um erro aquando a procura da Encomenda!");
+        }
     }
 
     //GET : api/Armazem/filtro?armazemId=X&data=Y
@@ -176,14 +237,25 @@ public class EncomendaController : ControllerBase
     [HttpGet("{filtro}")]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByFiltragemQuery(string armazemId, DateTime data)
     {
-        var encomendas = await _service.GetByFiltragemAysnc(armazemId, data);
+        try
+        {
+            var encomendas = await _service.GetByFiltragemAysnc(armazemId, data);
 
-        if (encomendas?.Any() != true)
-            //_loggerEncomendas.LogInformation("Nenhuma encomenda foi encontrada com o id de armazém dado");
-            return NotFound(
-                "Não foi encontrado nenhuma encomenda que tenha uma entrega nesse dia ou um com um id de armazém associado");
+            if (encomendas?.Any() != true)
+                //_loggerEncomendas.LogInformation("Nenhuma encomenda foi encontrada com o id de armazém dado");
+                return NotFound(
+                    "Não foi encontrado nenhuma encomenda que tenha uma entrega nesse dia ou um com um id de armazém associado");
 
-        return encomendas;
+            return encomendas;
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Ocorreu um erro aquando a procura da Encomenda!");
+        }
     }
 
     // GET: api/Encomenda/porArmazemID?armazemId=armazemId
@@ -191,12 +263,24 @@ public class EncomendaController : ControllerBase
     [HttpGet("{porArmazemID}")]
     public async Task<ActionResult<IEnumerable<EncomendaDto>>> GetByArmazemIdAysnc(string armazemId)
     {
-        var encomendas = await _service.GetByArmazemIdAsync(armazemId);
+        try
+        {
+            var encomendas = await _service.GetByArmazemIdAsync(armazemId);
 
-        if (encomendas?.Any() != true)
-            return NotFound("Não foi encontrado nenhuma encomenda que tenha esse id de armazém associado");
+            if (encomendas?.Any() != true)
+                return NotFound("Não foi encontrado nenhuma encomenda que tenha esse id de armazém associado");
 
-        return encomendas;
+            return encomendas;
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Ocorreu um erro aquando a procura da Encomenda!");
+        }
+        
     }
 
 }

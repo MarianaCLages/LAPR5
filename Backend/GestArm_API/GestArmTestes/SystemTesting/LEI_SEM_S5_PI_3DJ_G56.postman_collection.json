@@ -1,0 +1,1425 @@
+{
+	"info": {
+		"_postman_id": "a7dcc796-d986-4b04-981d-f0beef08ffd9",
+		"name": "LEI_SEM_S5_PI_3DJ_G56",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23425866"
+	},
+	"item": [
+		{
+			"name": "GEST_ARM",
+			"item": [
+				{
+					"name": "Encomenda Entity",
+					"item": [
+						{
+							"name": "Test_Case_One",
+							"item": [
+								{
+									"name": "Post_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"pm.collectionVariables.set(\"id_encomenda\", responseJson.id.value);\r",
+													"pm.collectionVariables.set(\"identificador\", responseJson.identificador);\r",
+													"\r",
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 400ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Post With success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"     \"id\": {\r",
+													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"    },\r",
+													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
+													"    \"dataEntrega\": \"12/27/2022 00:00:00\",\r",
+													"    \"massaEntrega\": 200.0,\r",
+													"    \"tempoCarga\": 5.0,\r",
+													"    \"tempoDescarga\": 5.0,\r",
+													"    \"armazemId\": \"MA1\"\r",
+													"});\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DataEntrega\": \"27-12-2022\",\r\n    \"MassaEntrega\": 200,\r\n    \"TempoCarga\": 5,\r\n    \"TempoDescarga\": 5,\r\n    \"ArmazemID\": \"MA1\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Encomenda",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Encomenda"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Encomenda_By_ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 200ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Get With Success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"     \"id\": {\r",
+													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"    },\r",
+													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
+													"    \"dataEntrega\": \"12/27/2022 00:00:00\",\r",
+													"    \"massaEntrega\": 200.0,\r",
+													"    \"tempoCarga\": 5.0,\r",
+													"    \"tempoDescarga\": 5.0,\r",
+													"    \"armazemId\": \"MA1\"\r",
+													"});\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/porId?id={{id_encomenda}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"porId"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "{{id_encomenda}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 450ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(450);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Put With Success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"     \"id\": {\r",
+													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"    },\r",
+													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
+													"     \"dataEntrega\": \"12/28/2022 00:00:00\",\r",
+													"    \"massaEntrega\": 200.0,\r",
+													"    \"tempoCarga\": 5.0,\r",
+													"    \"tempoDescarga\": 6.0,\r",
+													"    \"armazemId\": \"C15\"\r",
+													"});\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DataEntrega\": \"28/12/2022\",\r\n    \"MassaEntrega\": \"200\",\r\n    \"ArmazemId\": \"C15\",\r\n    \"TempoCarga\": \"5\",\r\n    \"TempoDescarga\": \"6\",\r\n    \"EncomendaDomainId\": \"221227/4\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Encomenda/{{id_encomenda}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Encomenda",
+												"{{id_encomenda}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/{{id_encomenda}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"{{id_encomenda}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Test_Case_Two",
+							"item": [
+								{
+									"name": "Post_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"pm.collectionVariables.set(\"id_encomenda\", responseJson.id.value);\r",
+													"pm.collectionVariables.set(\"data_entrega\", responseJson.dataEntrega);\r",
+													"pm.collectionVariables.set(\"identificador\", responseJson.identificador);\r",
+													"\r",
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 400ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Post With success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"     \"id\": {\r",
+													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"    },\r",
+													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
+													"    \"dataEntrega\": \"12/12/2022 00:00:00\",\r",
+													"    \"massaEntrega\": 500.0,\r",
+													"    \"tempoCarga\": 10.0,\r",
+													"    \"tempoDescarga\": 20.0,\r",
+													"    \"armazemId\": \"MA1\"\r",
+													"});\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DataEntrega\": \"12-12-2022\",\r\n    \"MassaEntrega\": 500,\r\n    \"TempoCarga\": 10,\r\n    \"TempoDescarga\": 20,\r\n    \"ArmazemID\": \"MA1\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Encomenda",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Encomenda"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Encomenda_By_Data",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 200ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/porData?data={{data_entrega}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"porData"
+											],
+											"query": [
+												{
+													"key": "data",
+													"value": "{{data_entrega}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 450ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(450);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Put With Success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"     \"id\": {\r",
+													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"    },\r",
+													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
+													"    \"dataEntrega\": \"12/20/2022 00:00:00\",\r",
+													"    \"massaEntrega\": 5000.0,\r",
+													"    \"tempoCarga\": 100.0,\r",
+													"    \"tempoDescarga\": 200.0,\r",
+													"    \"armazemId\": \"CZ7\"\r",
+													"});\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DataEntrega\": \"20-12-2022\",\r\n    \"MassaEntrega\": 5000,\r\n    \"TempoCarga\": 100,\r\n    \"TempoDescarga\": 200,\r\n    \"ArmazemID\": \"CZ7\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Encomenda/{{id_encomenda}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Encomenda",
+												"{{id_encomenda}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/{{id_encomenda}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"{{id_encomenda}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Test_Case_Three",
+							"item": [
+								{
+									"name": "Post_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"pm.collectionVariables.set(\"id_encomenda\", responseJson.id.value);\r",
+													"pm.collectionVariables.set(\"armazemId\", responseJson.armazemId);\r",
+													"pm.collectionVariables.set(\"identificador\", responseJson.identificador);\r",
+													"\r",
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 400ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Post With success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"     \"id\": {\r",
+													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"    },\r",
+													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
+													"    \"dataEntrega\": \"12/12/2022 00:00:00\",\r",
+													"    \"massaEntrega\": 500.0,\r",
+													"    \"tempoCarga\": 10.0,\r",
+													"    \"tempoDescarga\": 20.0,\r",
+													"    \"armazemId\": \"MA1\"\r",
+													"});\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DataEntrega\": \"12-12-2022\",\r\n    \"MassaEntrega\": 500,\r\n    \"TempoCarga\": 10,\r\n    \"TempoDescarga\": 20,\r\n    \"ArmazemID\": \"MA1\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Encomenda",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Encomenda"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Encomenda_By_Data",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 200ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/porArmazemID?armazemId={{armazemId}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"porArmazemID"
+											],
+											"query": [
+												{
+													"key": "armazemId",
+													"value": "{{armazemId}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 450ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(450);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Put With Success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"     \"id\": {\r",
+													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"    },\r",
+													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
+													"    \"dataEntrega\": \"12/20/2022 00:00:00\",\r",
+													"    \"massaEntrega\": 5000.0,\r",
+													"    \"tempoCarga\": 100.0,\r",
+													"    \"tempoDescarga\": 200.0,\r",
+													"    \"armazemId\": \"CZ7\"\r",
+													"});\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DataEntrega\": \"20-12-2022\",\r\n    \"MassaEntrega\": 5000,\r\n    \"TempoCarga\": 100,\r\n    \"TempoDescarga\": 200,\r\n    \"ArmazemID\": \"CZ7\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Encomenda/{{id_encomenda}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Encomenda",
+												"{{id_encomenda}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/{{id_encomenda}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"{{id_encomenda}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Test_Case_Four",
+							"item": [
+								{
+									"name": "Post_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"pm.collectionVariables.set(\"id_encomenda\", responseJson.id.value);\r",
+													"pm.collectionVariables.set(\"identificador\", responseJson.identificador);\r",
+													"pm.collectionVariables.set(\"data_entrega\", responseJson.dataEntrega);\r",
+													"pm.collectionVariables.set(\"armazemId\", responseJson.armazemId);\r",
+													"\r",
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 400ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Post With success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"     \"id\": {\r",
+													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"    },\r",
+													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
+													"    \"dataEntrega\": \"12/12/2022 00:00:00\",\r",
+													"    \"massaEntrega\": 500.0,\r",
+													"    \"tempoCarga\": 10.0,\r",
+													"    \"tempoDescarga\": 20.0,\r",
+													"    \"armazemId\": \"MA1\"\r",
+													"});\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DataEntrega\": \"12-12-2022\",\r\n    \"MassaEntrega\": 500,\r\n    \"TempoCarga\": 10,\r\n    \"TempoDescarga\": 20,\r\n    \"ArmazemID\": \"MA1\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Encomenda",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Encomenda"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Encomenda_By_Filtragem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 200ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/porFiltragem?armazemId={{armazemId}}&data={{data_entrega}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"porFiltragem"
+											],
+											"query": [
+												{
+													"key": "armazemId",
+													"value": "{{armazemId}}"
+												},
+												{
+													"key": "data",
+													"value": "{{data_entrega}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 450ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(450);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Put With Success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"     \"id\": {\r",
+													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"    },\r",
+													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
+													"    \"dataEntrega\": \"12/20/2022 00:00:00\",\r",
+													"    \"massaEntrega\": 5000.0,\r",
+													"    \"tempoCarga\": 100.0,\r",
+													"    \"tempoDescarga\": 200.0,\r",
+													"    \"armazemId\": \"CZ7\"\r",
+													"});\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DataEntrega\": \"20-12-2022\",\r\n    \"MassaEntrega\": 5000,\r\n    \"TempoCarga\": 100,\r\n    \"TempoDescarga\": 200,\r\n    \"ArmazemID\": \"CZ7\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Encomenda/{{id_encomenda}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Encomenda",
+												"{{id_encomenda}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/{{id_encomenda}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"{{id_encomenda}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Test_Case_Five_Fail_Case",
+							"item": [
+								{
+									"name": "Post_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"pm.collectionVariables.set(\"id_encomenda\", responseJson.id.value);\r",
+													"pm.collectionVariables.set(\"identificador\", responseJson.identificador);\r",
+													"pm.collectionVariables.set(\"data_entrega\", responseJson.dataEntrega);\r",
+													"pm.collectionVariables.set(\"armazemId\", responseJson.armazemId);\r",
+													"\r",
+													"pm.collectionVariables.set(\"id_encomenda_invalid\", \"59294c42-d175-4b82-9cd6-43dd9c3f2b5d\");\r",
+													"pm.collectionVariables.set(\"identificador_invalido\", \"221212/100\");\r",
+													"pm.collectionVariables.set(\"data_entrega_invalido\", \"11-11-2022\");\r",
+													"pm.collectionVariables.set(\"armazemId_invalido\", \"ZZZ\");\r",
+													"\r",
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 400ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Successful POST request\", function () {\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Post With success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"     \"id\": {\r",
+													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"    },\r",
+													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
+													"    \"dataEntrega\": \"12/12/2022 00:00:00\",\r",
+													"    \"massaEntrega\": 500.0,\r",
+													"    \"tempoCarga\": 10.0,\r",
+													"    \"tempoDescarga\": 20.0,\r",
+													"    \"armazemId\": \"MA1\"\r",
+													"});\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DataEntrega\": \"12-12-2022\",\r\n    \"MassaEntrega\": 500,\r\n    \"TempoCarga\": 10,\r\n    \"TempoDescarga\": 20,\r\n    \"ArmazemID\": \"MA1\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Encomenda",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Encomenda"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Encomenda_By_ID",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 200ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/porId?id={{id_encomenda_invalid}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"porId"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "{{id_encomenda_invalid}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Encomenda_By_Data",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 200ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/porData?data={{data_entrega_invalido}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"porData"
+											],
+											"query": [
+												{
+													"key": "data",
+													"value": "{{data_entrega_invalido}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Encomenda_By_Data",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 200ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/porArmazemID?armazemId={{armazemId_invalido}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"porArmazemID"
+											],
+											"query": [
+												{
+													"key": "armazemId",
+													"value": "{{armazemId_invalido}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get_Encomenda_By_Filtragem",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 200ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/porFiltragem?armazemId={{armazemId_invalido}}&data={{data_entrega_invalido}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"porFiltragem"
+											],
+											"query": [
+												{
+													"key": "armazemId",
+													"value": "{{armazemId_invalido}}"
+												},
+												{
+													"key": "data",
+													"value": "{{data_entrega_invalido}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 450ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(450);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Put With Success (Verify body)\", function () {\r",
+													"    pm.response.to.have.body(\r",
+													"{\r",
+													"     \"id\": {\r",
+													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"    },\r",
+													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
+													"    \"dataEntrega\": \"12/20/2022 00:00:00\",\r",
+													"    \"massaEntrega\": 5000.0,\r",
+													"    \"tempoCarga\": 100.0,\r",
+													"    \"tempoDescarga\": 200.0,\r",
+													"    \"armazemId\": \"CZ7\"\r",
+													"});\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"DataEntrega\": \"20-12-2022\",\r\n    \"MassaEntrega\": 5000,\r\n    \"TempoCarga\": 100,\r\n    \"TempoDescarga\": 200,\r\n    \"ArmazemID\": \"CZ7\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5000/api/Encomenda/{{id_encomenda}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5000",
+											"path": [
+												"api",
+												"Encomenda",
+												"{{id_encomenda}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete_Encomenda",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:5001/api/Encomenda/{{id_encomenda}}",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "5001",
+											"path": [
+												"api",
+												"Encomenda",
+												"{{id_encomenda}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Armazem Entity",
+					"item": [
+						{
+							"name": "Test_Case_One",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Two",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Three",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Four",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Five",
+							"item": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "GEST_LOG",
+			"item": [
+				{
+					"name": "Empacotamento Entity",
+					"item": [
+						{
+							"name": "Test_Case_One",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Two",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Three",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Four",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Five",
+							"item": []
+						}
+					]
+				},
+				{
+					"name": "Camião Entity",
+					"item": [
+						{
+							"name": "Test_Case_One",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Two",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Three",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Four",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Five",
+							"item": []
+						}
+					]
+				},
+				{
+					"name": "Caminho Entity",
+					"item": [
+						{
+							"name": "Test_Case_One",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Two",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Three",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Four",
+							"item": []
+						},
+						{
+							"name": "Test_Case_Five",
+							"item": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "identificador",
+			"value": ""
+		},
+		{
+			"key": "id_encomenda",
+			"value": ""
+		},
+		{
+			"key": "data_entrega",
+			"value": ""
+		},
+		{
+			"key": "armazemId",
+			"value": ""
+		},
+		{
+			"key": "id_encomenda_invalid",
+			"value": ""
+		},
+		{
+			"key": "identificador_invalido",
+			"value": ""
+		},
+		{
+			"key": "data_entrega_invalido",
+			"value": ""
+		},
+		{
+			"key": "armazemId_invalido",
+			"value": ""
+		}
+	]
+}

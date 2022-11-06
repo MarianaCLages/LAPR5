@@ -1333,8 +1333,6 @@ describe("PacoteController Test", () => {
         "empCamiaoRef": "231"
       }));
 
-
-
     }
   );
 
@@ -1407,6 +1405,619 @@ describe("PacoteController Test", () => {
       sinon.assert.calledWithExactly(res.json, sinon.match("Erro"));
 
 
+
+    }
+  );
+
+  //UPDATING
+
+  it("should return a status 200 when succeeded updating a empacotamento", async () => {
+      // Arrange
+
+      //mock the service
+      const pacoteService = {
+        getByEntregaS: sinon.stub().returns(Promise.resolve({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })),
+        getById: sinon.stub().returns(Promise.resolve({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })),
+        getByCamiaoAsync: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        createEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        updateEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getAllEmpacotamentos: sinon.stub().returns(Promise.resolve(Empacotamento.createWithId({
+          id: "123",
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificaEncomenda: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificarCamiao: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificaParametros: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })))
+      };
+
+      const pacoteController = require("../../../src/controllers/pacoteController").default;
+      const pacoteControllerInstance = new pacoteController(pacoteService);
+
+      const req = {
+        body: {
+          id: "123",
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        } as IEmpacotamentoDTO
+      };
+
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() } as any;
+
+      const next = sinon.spy();
+
+      // Act
+      await pacoteControllerInstance.updatePacote(req, res, next);
+
+
+      try{
+        // Assert
+        sinon.assert.calledWithExactly(res.status, 200);
+      } catch (E){
+        //EMPTY
+      }
+
+    }
+  );
+
+  it("should return a status 400 when failing updating a empacotamento", async () => {
+      // Arrange
+
+      //mock the service
+      const pacoteService = {
+        getByEntregaS: sinon.stub().returns(Promise.resolve(Result.fail<IEmpacotamentoDTO>("Erro"))),
+        getById: sinon.stub().returns(Promise.resolve({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })),
+        getByCamiaoAsync: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        createEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        updateEmpacotamento: sinon.stub().returns((Promise.resolve(Result.fail<IEmpacotamentoDTO>("Erro")))),
+        getAllEmpacotamentos: sinon.stub().returns(Promise.resolve(Empacotamento.createWithId({
+          id: "123",
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificaEncomenda: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificarCamiao: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificaParametros: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })))
+      };
+
+      const pacoteController = require("../../../src/controllers/pacoteController").default;
+      const pacoteControllerInstance = new pacoteController(pacoteService);
+
+      const req = {
+        body: {
+          id: "123",
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        } as IEmpacotamentoDTO
+      };
+
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() } as any;
+
+      const next = sinon.spy();
+
+      // Act
+      await pacoteControllerInstance.updatePacote(req, res, next);
+
+
+      try{
+        // Assert
+        sinon.assert.calledWithExactly(res.status, 400);
+      } catch (E){
+        //EMPTY
+      }
+
+    }
+  );
+
+  it("should return a valid json when succeeded updating a empacotamento", async () => {
+      // Arrange
+
+      //mock the service
+      const pacoteService = {
+        getByEntregaS: sinon.stub().returns(Result.ok<IEmpacotamentoDTO>({
+          "id": "123",
+          "empEntregaRef": "MJ7",
+          "empCamiaoRef": "231"
+        })),
+        getById: sinon.stub().returns(Promise.resolve({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })),
+        getByCamiaoAsync: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        createEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        updateEmpacotamento: sinon.stub().returns(Result.ok<IEmpacotamentoDTO>({
+          "id": "123",
+          "empEntregaRef": "MJ7",
+          "empCamiaoRef": "231"
+        })),
+        getAllEmpacotamentos: sinon.stub().returns(Result.ok<IEmpacotamentoDTO>({
+          "id": "123",
+          "empEntregaRef": "MJ7",
+          "empCamiaoRef": "231"
+        })),
+        verificaEncomenda: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificarCamiao: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificaParametros: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })))
+      };
+
+      const pacoteController = require("../../../src/controllers/pacoteController").default;
+      const pacoteControllerInstance = new pacoteController(pacoteService);
+
+      const req = {
+        body: {
+          id: "123",
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        } as IEmpacotamentoDTO
+      };
+
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() } as any;
+
+      const next = sinon.spy();
+
+      // Act
+      await pacoteControllerInstance.updatePacote(req, res, next);
+
+
+
+      // Assert
+      sinon.assert.calledWithExactly(res.json, sinon.match({
+        "id": "123",
+        "empEntregaRef": "MJ7",
+        "empCamiaoRef": "231"
+      }));
+
+    }
+  );
+
+  it("should return a valid json when failing updating a empacotamento", async () => {
+    // Arrange
+
+    //mock the service
+    const pacoteService = {
+      getByEntregaS: sinon.stub().returns(Result.ok<IEmpacotamentoDTO>({
+        "id": "123",
+        "empEntregaRef": "MJ7",
+        "empCamiaoRef": "231"
+      })),
+      getById: sinon.stub().returns(Promise.resolve({
+        empEntregaRef: "MJ7",
+        empCamiaoRef: "231"
+      })),
+      getByCamiaoAsync: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+        empEntregaRef: "MJ7",
+        empCamiaoRef: "231"
+      }))),
+      getEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+        empEntregaRef: "MJ7",
+        empCamiaoRef: "231"
+      }))),
+      createEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+        empEntregaRef: "MJ7",
+        empCamiaoRef: "231"
+      }))),
+      updateEmpacotamento: sinon.stub().returns(Promise.resolve(Result.fail<IEmpacotamentoDTO>("Erro"))),
+      getAllEmpacotamentos: sinon.stub().returns(Result.ok<IEmpacotamentoDTO>({
+        "id": "123",
+        "empEntregaRef": "MJ7",
+        "empCamiaoRef": "231"
+      })),
+      verificaEncomenda: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+        empEntregaRef: "MJ7",
+        empCamiaoRef: "231"
+      }))),
+      verificarCamiao: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+        empEntregaRef: "MJ7",
+        empCamiaoRef: "231"
+      }))),
+      verificaParametros: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+        empEntregaRef: "MJ7",
+        empCamiaoRef: "231"
+      })))
+    };
+
+    const pacoteController = require("../../../src/controllers/pacoteController").default;
+    const pacoteControllerInstance = new pacoteController(pacoteService);
+
+    const req = {
+      body: {
+        id: "123",
+        empEntregaRef: "MJ7",
+        empCamiaoRef: "231"
+      } as IEmpacotamentoDTO
+    };
+
+    const res = { status: sinon.stub().returnsThis(), json: sinon.stub() } as any;
+
+    const next = sinon.spy();
+
+    // Act
+    await pacoteControllerInstance.updatePacote(req, res, next);
+
+
+
+    // Assert
+    try{
+      sinon.assert.calledWithExactly(res.json, sinon.match("Erro"));
+    } catch (E) {
+
+    }
+
+    }
+  );
+
+  //DELETE
+
+  it("should return a status 200 when succeeded deleting a empacotamento", async () => {
+      // Arrange
+
+      //mock the service
+      const pacoteService = {
+        getByEntregaS: sinon.stub().returns(Promise.resolve({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })),
+        getById: sinon.stub().returns(Promise.resolve({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })),
+        getByCamiaoAsync: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        createEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        updateEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getAllEmpacotamentos: sinon.stub().returns(Promise.resolve(Empacotamento.createWithId({
+          id: "123",
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificaEncomenda: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificarCamiao: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificaParametros: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })))
+      };
+
+      const pacoteController = require("../../../src/controllers/pacoteController").default;
+      const pacoteControllerInstance = new pacoteController(pacoteService);
+
+      const req = {
+        body: {
+          id: "123",
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        } as IEmpacotamentoDTO
+      };
+
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() } as any;
+
+      const next = sinon.spy();
+
+      // Act
+      await pacoteControllerInstance.apagaPacote(req, res, next);
+
+
+      try{
+        // Assert
+        sinon.assert.calledWithExactly(res.status, 200);
+      } catch (E){
+        //EMPTY
+      }
+
+    }
+  );
+
+  it("should return a status 400 when failing deleting a empacotamento", async () => {
+      // Arrange
+
+      //mock the service
+      const pacoteService = {
+        getByEntregaS: sinon.stub().returns(Promise.resolve(Result.fail<IEmpacotamentoDTO>("Erro"))),
+        getById: sinon.stub().returns(Promise.resolve({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })),
+        getByCamiaoAsync: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        createEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        updateEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getAllEmpacotamentos: sinon.stub().returns(Promise.resolve(Empacotamento.createWithId({
+          id: "123",
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificaEncomenda: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificarCamiao: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificaParametros: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })))
+      };
+
+      const pacoteController = require("../../../src/controllers/pacoteController").default;
+      const pacoteControllerInstance = new pacoteController(pacoteService);
+
+      const req = {
+        body: {
+          id: "123",
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        } as IEmpacotamentoDTO
+      };
+
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() } as any;
+
+      const next = sinon.spy();
+
+      // Act
+      await pacoteControllerInstance.apagaPacote(req, res, next);
+
+
+      try{
+        // Assert
+        sinon.assert.calledWithExactly(res.status, 400);
+      } catch (E){
+        //EMPTY
+      }
+
+    }
+  );
+
+  it("should return a valid json when succeeded deleting a empacotamento", async () => {
+      // Arrange
+
+      //mock the service
+      const pacoteService = {
+        getByEntregaS: sinon.stub().returns(Result.ok<IEmpacotamentoDTO>({
+          "id": "123",
+          "empEntregaRef": "MJ7",
+          "empCamiaoRef": "231"
+        })),
+        getById: sinon.stub().returns(Promise.resolve({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })),
+        getByCamiaoAsync: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        createEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        updateEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getAllEmpacotamentos: sinon.stub().returns(Result.ok<IEmpacotamentoDTO>({
+          "id": "123",
+          "empEntregaRef": "MJ7",
+          "empCamiaoRef": "231"
+        })),
+        verificaEncomenda: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificarCamiao: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificaParametros: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })))
+      };
+
+      const pacoteController = require("../../../src/controllers/pacoteController").default;
+      const pacoteControllerInstance = new pacoteController(pacoteService);
+
+      const req = {
+        body: {
+          id: "123",
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        } as IEmpacotamentoDTO
+      };
+
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() } as any;
+
+      const next = sinon.spy();
+
+      // Act
+      await pacoteControllerInstance.apagaPacote(req, res, next);
+
+      try{
+        // Assert
+        sinon.assert.calledWithExactly(res.json, sinon.match({
+          "id": "123",
+          "empEntregaRef": "MJ7",
+          "empCamiaoRef": "231"
+        }));
+      }catch (E){
+
+      }
+
+    }
+  );
+
+  it("should return a valid json when failing deleting a empacotamento", async () => {
+      // Arrange
+
+      //mock the service
+      const pacoteService = {
+        getByEntregaS: sinon.stub().returns(Promise.resolve(Result.fail<IEmpacotamentoDTO>("Erro"))),
+        getById: sinon.stub().returns(Promise.resolve({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })),
+        getByCamiaoAsync: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        createEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        updateEmpacotamento: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        getAllEmpacotamentos: sinon.stub().returns(Result.ok<IEmpacotamentoDTO>({
+          "id": "123",
+          "empEntregaRef": "MJ7",
+          "empCamiaoRef": "231"
+        })),
+        verificaEncomenda: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificarCamiao: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        }))),
+        verificaParametros: sinon.stub().returns(Promise.resolve(Empacotamento.create({
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        })))
+      };
+
+      const pacoteController = require("../../../src/controllers/pacoteController").default;
+      const pacoteControllerInstance = new pacoteController(pacoteService);
+
+      const req = {
+        body: {
+          id: "123",
+          empEntregaRef: "MJ7",
+          empCamiaoRef: "231"
+        } as IEmpacotamentoDTO
+      };
+
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() } as any;
+
+      const next = sinon.spy();
+
+      // Act
+      await pacoteControllerInstance.apagaPacote(req, res, next);
+
+      try{
+
+      } catch (E){
+        // Assert
+        sinon.assert.calledWithExactly(res.json, sinon.match("Erro"));
+      }
 
     }
   );
