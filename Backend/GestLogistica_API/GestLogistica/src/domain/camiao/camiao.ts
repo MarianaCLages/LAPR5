@@ -101,19 +101,40 @@ export class Camiao extends AggregateRoot<CamiaoProps> {
         if (!guardResult.succeeded || !RegExp('^[A-Z]{2}-[0-9]{2}-[A-Z]{2}$').test(camiaoDTO.matriculaCamiao)) {
             return Result.fail<Camiao>("Camiao inválido");
         } else {
-            const camiao = new Camiao({
-                    caractCamiao: new CaractCamiao({value: camiaoDTO.caractCamiao}),
-                    matriculaCamiao: new MatriculaCamiao({value: camiaoDTO.matriculaCamiao}),
-                    tara: new Tara({value: camiaoDTO.tara}),
-                    capacidadeCarga: new CapacidadeCarga({value: camiaoDTO.capacidadeCarga}),
-                    cargaMax: new CargaMaxima({value: camiaoDTO.cargaMax}),
-                    cargaTotal: new CargaTotal({value: camiaoDTO.cargaTotal}),
-                    tempoCarregamento: new TempoCarregamento({value: camiaoDTO.tempoCarregamento})
-                },
-                id
-            );
+            const caractCamiaoOrError = CaractCamiao.create(camiaoDTO.caractCamiao);
+            const matriculaCamiaoOrError = MatriculaCamiao.create(camiaoDTO.matriculaCamiao);
+            const taraOrError = Tara.create(camiaoDTO.tara);
+            const capacidadeCargaOrError = CapacidadeCarga.create(camiaoDTO.capacidadeCarga);
+            const cargaMaxOrError = CargaMaxima.create(camiaoDTO.cargaMax);
+            const cargaTotalOrError = CargaTotal.create(camiaoDTO.cargaTotal);
+            const tempoCarregamentoOrError = TempoCarregamento.create(camiaoDTO.tempoCarregamento);
 
-            return Result.ok<Camiao>(camiao);
+            const result = Result.combine([
+                caractCamiaoOrError,
+                matriculaCamiaoOrError,
+                taraOrError,
+                capacidadeCargaOrError,
+                cargaMaxOrError,
+                cargaTotalOrError,
+                tempoCarregamentoOrError
+            ]);
+
+            if (!result.isSuccess) {
+                return Result.fail<Camiao>(result.errorValue());
+            } else {
+
+                const camiao = new Camiao({
+                    caractCamiao: caractCamiaoOrError.getValue(),
+                    matriculaCamiao: matriculaCamiaoOrError.getValue(),
+                    tara: taraOrError.getValue(),
+                    capacidadeCarga: capacidadeCargaOrError.getValue(),
+                    cargaMax: cargaMaxOrError.getValue(),
+                    cargaTotal: cargaTotalOrError.getValue(),
+                    tempoCarregamento: tempoCarregamentoOrError.getValue()
+                }, id);
+
+                return Result.ok<Camiao>(camiao);
+            }
         }
     }
 
