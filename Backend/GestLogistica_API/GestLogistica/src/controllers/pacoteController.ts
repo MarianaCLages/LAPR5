@@ -95,7 +95,7 @@ export default class PacoteController
       }
 
       const caminhosDTO = caminhoOrError.getValue();
-      return res.json(caminhosDTO).status(200);
+      return res.json(caminhosDTO).status(200).send();
 
     } catch (e) {
       return next(e);
@@ -113,7 +113,7 @@ export default class PacoteController
       }
 
       const caminhoDTO = caminhoOrError.getValue();
-      return res.json(caminhoDTO).status(200);
+      return res.json(caminhoDTO).status(200).send();
     } catch (e) {
       return next(e);
     }
@@ -127,7 +127,7 @@ export default class PacoteController
         return res.status(400).send("O caminho especificado nao foi encontrado!");
       }
 
-      return res.json().status(200);
+      return res.json().status(200).send();
     } catch (e) {
       return next(e);
     }
