@@ -2,7 +2,9 @@
 
 
 ## Contents
-- [Decisões de Arquitetura tomadas](#decisões-de-arquitetura-tomadas)
+- [Analise de Requisitos](#analise-de-requisitos)
+  - [Valores de Negócio e restrições](#valores-de-negócio-e-restrições)
+- [Decisões de Arquitetura/Design tomadas](#decisões-de-arquiteturadesign-tomadas)
 - [Views:](#views)
   - [Nível 1](#nível-1)
     - [Vista Lógica](#vista-lógica)
@@ -41,8 +43,17 @@ Pode-se dizer que estes dois modelos se expandem ao longo de eixos distintos, se
 
 Para modelar/representar visualmente, tanto o que foi implementado como as ideias e alternativas consideradas, recorre-se à Unified Modeling Language (UML) [[UML-2020]](References.md#UML-2020) [[UMLDiagrams-2020]](References.md#UMLDiagrams-2020).
 
+# Analise de Requisitos
+ ## Valores de Negócio e restrições
+  Caminho:
+  - Armazem de partida: String com id do armazem (3 caracteres alfanuméricos)
+  - Armazem de destino: String com id do armazem (3 caracteres alfanuméricos)
+  - Distancia: Inteiro positivo com a distancia entre os armazens
+  - Energie: Inteiro positivo com a energia necessária para percorrer a distancia
+  - Tempo: Inteiro positivo com o tempo necessário para percorrer a distancia
+  - Tempo de carregamento: Inteiro positivo com o tempo necessário para carregar o camião
 
-# Decisões de Arquitetura tomadas
+# Decisões de Arquitetura/Design tomadas
 As decisões geral de Arquitetura já estão descritas no documeto geral de Arquitetura. Este documento apenas descreve as decisões tomadas para este caso de uso.
 O caso de uso pode ser visto como um caso de uso "classico" de criação de um objeto e persistencia do mesmo num repositório. Neste caso usamos inversão de dependencias e injeção de dependendias, para assim termos as camadas de software desacopladas.
 
