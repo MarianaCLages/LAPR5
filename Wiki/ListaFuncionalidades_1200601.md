@@ -3,7 +3,8 @@
 
 ### Índice das Funcionalidades Desenvolvidas ###
 
-| Sprint | Funcionalidade |
-| ------ | -------------- |
-| **A**  |                |
-| **A**  |                |
+| Sprint | Funcionalidade                                                                 |
+| ------ | ------------------------------------------------------------------------------ |
+| **A**  |  [UC01 - Criar Armazém](GestArm_API_Wiki/UseCases/UC1/)              |
+| **A**  |  [UC06 - Editar Entrega](GestArm_API_Wiki/UseCases/UC6/)             |
+| **A**  |  [UC09 - Editar Camião](GestLog_API_Wiki/UseCases/UC9/)              |
