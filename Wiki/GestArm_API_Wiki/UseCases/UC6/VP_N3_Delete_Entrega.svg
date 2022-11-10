@@ -616,15 +616,15 @@
     /></g
     ><g font-size="11px" transform="translate(2622,477)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="15" xml:space="preserve" y="12" clip-path="url(#clipPath37)" stroke="none"
-      >Entrega</text
+      >Order</text
     ></g
     ><g font-size="11px" transform="translate(1749,356)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath38)" stroke="none"
-      >EntregaDTO</text
+      >OrderDTO</text
     ></g
     ><g font-size="11px" transform="translate(1540,40)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="7" xml:space="preserve" y="12" clip-path="url(#clipPath39)" stroke="none"
-      >&lt;&lt;Component(C4)&gt;&gt;  EntregaMapper</text
+      >&lt;&lt;Component(C4)&gt;&gt;  OrderMapper</text
     ></g
     ><g font-size="11px" transform="translate(0,75)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
@@ -638,13 +638,13 @@
     ></g
     ><g font-size="11px" transform="translate(2331,40)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath42)" stroke="none"
-      >&lt;&lt;repository&gt;&gt;             EntregaRepository</text
+      >&lt;&lt;repository&gt;&gt;             OrderRepository</text
     ></g
     ><g font-size="11px" transform="translate(1991,40)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="54" xml:space="preserve" y="12" clip-path="url(#clipPath43)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="70" xml:space="preserve" y="27" clip-path="url(#clipPath43)" stroke="none"
-      >EntregaService</text
+      >OrderService</text
     ></g
     ><g font-size="11px" transform="translate(0,75)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
@@ -672,7 +672,7 @@
     ><text x="54" xml:space="preserve" y="12" clip-path="url(#clipPath43)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="64" xml:space="preserve" y="27" clip-path="url(#clipPath43)" stroke="none"
-      >EntregaController</text
+      >OrderController</text
     ></g
     ><g fill-opacity="1" text-rendering="geometricPrecision" stroke="black" stroke-linecap="butt" transform="translate(-133,606)" stroke-miterlimit="0" stroke-opacity="1" fill="black" stroke-dasharray="8,3" font-family="sans-serif" stroke-linejoin="round" font-size="11px" image-rendering="optimizeQuality"
     ><line y2="167" fill="none" x1="506" clip-path="url(#clipPath47)" x2="166" y1="167"
@@ -817,12 +817,12 @@
     ><g font-size="11px" transform="translate(2166,583)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="202" height="15" y="0" clip-path="url(#clipPath87)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath87)" stroke="none"
-      >3.1.1.2.1.2.1: deleteEntrega(entrega)</text
+      >3.1.1.2.1.2.1: deleteOrder(order)</text
     ></g
     ><g font-size="11px" transform="translate(2210,517)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="117" height="15" y="0" clip-path="url(#clipPath88)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath88)" stroke="none"
-      >3.1.1.2.1.2: entrega</text
+      >3.1.1.2.1.2: order</text
     ></g
     ><g font-size="11px" transform="translate(2480,473)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="109" height="15" y="0" clip-path="url(#clipPath89)" stroke="none"
@@ -842,7 +842,7 @@
     ><g font-size="11px" transform="translate(1437,336)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="168" height="15" y="0" clip-path="url(#clipPath92)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath92)" stroke="none"
-      >3.1.1.1: createEntregaDTO(id)</text
+      >3.1.1.1: createOrderDTO(id)</text
     ></g
     ><g font-size="11px" transform="translate(1175,901)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="145" height="15" y="0" clip-path="url(#clipPath93)" stroke="none"
@@ -877,32 +877,32 @@
     ><g font-size="11px" transform="translate(1671,440)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="152" height="15" y="0" clip-path="url(#clipPath99)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath99)" stroke="none"
-      >3.1.1.2: deleteEntrega(dto)</text
+      >3.1.1.2: deleteOrder(dto)</text
     ></g
     ><g font-size="11px" transform="translate(1167,326)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="159" height="15" y="0" clip-path="url(#clipPath100)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath100)" stroke="none"
-      >3.1.1: DELETE entrega / {id}</text
+      >3.1.1: DELETE order / {id}</text
     ></g
     ><g font-size="11px" transform="translate(122,237)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="149" height="15" y="0" clip-path="url(#clipPath101)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath101)" stroke="none"
-      >2: Introduz o id da entrega</text
+      >2: Introduz o id da order</text
     ></g
     ><g font-size="11px" transform="translate(75,159)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="241" height="15" y="0" clip-path="url(#clipPath102)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath102)" stroke="none"
-      >1.1: Pede pela identificação única da entrega</text
+      >1.1: Pede pela identificação única da order</text
     ></g
     ><g font-size="11px" transform="translate(116,116)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="165" height="15" y="0" clip-path="url(#clipPath103)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath103)" stroke="none"
-      >1: Quero apagar uma entrega</text
+      >1: Quero deleter uma order</text
     ></g
     ><g font-size="11px" transform="translate(869,283)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="150" height="15" y="0" clip-path="url(#clipPath104)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath104)" stroke="none"
-      >3.1: DELETE entrega / {id}</text
+      >3.1: DELETE order / {id}</text
     ></g
     ><g font-size="11px" transform="translate(873,931)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="154" height="15" y="0" clip-path="url(#clipPath105)" stroke="none"
@@ -942,7 +942,7 @@
     ><g font-size="11px" transform="translate(516,247)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="141" height="15" y="0" clip-path="url(#clipPath112)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath112)" stroke="none"
-      >3: DELETE entrega / {id}</text
+      >3: DELETE order / {id}</text
     ></g
     ><g font-size="11px" transform="translate(114,987)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="172" height="15" y="0" clip-path="url(#clipPath113)" stroke="none"

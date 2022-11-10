@@ -224,7 +224,7 @@
       ><text x="355" xml:space="preserve" y="30" clip-path="url(#clipPath2)" stroke="none"
       >&lt;&lt;Container (C4)&gt;&gt;</text
       ><text x="329" xml:space="preserve" y="45" clip-path="url(#clipPath2)" font-weight="bold" stroke="none"
-      >MasterDataGestaoArmazens</text
+      >MasterDataGestaoWarehouses</text
     ></g
     ><g font-size="11px" transform="translate(167,122)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" stroke-opacity="1"
     ><rect x="0" width="12" height="12" y="0" clip-path="url(#clipPath4)" stroke="none"

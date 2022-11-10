@@ -594,7 +594,7 @@
     ><text x="37" xml:space="preserve" y="12" clip-path="url(#clipPath44)" stroke="none"
       >&lt;&lt;Container(C4)&gt;&gt;</text
       ><text x="43" xml:space="preserve" y="27" clip-path="url(#clipPath44)" stroke="none"
-      >GestãoArmazem</text
+      >GestãoWarehouse</text
     ></g
     ><g font-size="11px" transform="translate(1008,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="6" xml:space="preserve" y="12" clip-path="url(#clipPath45)" stroke="none"
@@ -889,7 +889,7 @@
     ><g font-size="11px" transform="translate(390,617)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="425" height="15" y="0" clip-path="url(#clipPath109)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath109)" stroke="none"
-      >3.1: PUT truck / {tara,capacidadeCarga,cargaMax,autonomia,tempoCarregamento}</text
+      >3.1: PUT truck / {tare,weightCapacity,cargaMax,autonomia,chargingTime}</text
     ></g
     ><g font-size="11px" transform="translate(107,596)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="185" height="15" y="0" clip-path="url(#clipPath110)" stroke="none"

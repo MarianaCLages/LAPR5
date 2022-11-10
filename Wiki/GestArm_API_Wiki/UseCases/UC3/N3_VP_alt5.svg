@@ -393,37 +393,37 @@
     /></g
     ><g font-size="11px" transform="translate(2241,491)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath23)" stroke="none"
-      >armazem : Armazem</text
+      >warehouse : Warehouse</text
     ></g
     ><g font-size="11px" transform="translate(2024,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath24)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="14" xml:space="preserve" y="27" clip-path="url(#clipPath24)" stroke="none"
-      >ArmazemRepository</text
+      >WarehouseRepository</text
     ></g
     ><g font-size="11px" transform="translate(1659,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath24)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="22" xml:space="preserve" y="27" clip-path="url(#clipPath24)" stroke="none"
-      >ArmazemService</text
+      >WarehouseService</text
     ></g
     ><g font-size="11px" transform="translate(1512,326)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="7" xml:space="preserve" y="12" clip-path="url(#clipPath25)" stroke="none"
-      >armazemDTO :</text
+      >warehouseDTO :</text
       ><text x="9" xml:space="preserve" y="27" clip-path="url(#clipPath25)" stroke="none"
-      >ArmazemDTO</text
+      >WarehouseDTO</text
     ></g
     ><g font-size="11px" transform="translate(1328,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath26)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="20" xml:space="preserve" y="27" clip-path="url(#clipPath26)" stroke="none"
-      >ArmazemMapper</text
+      >WarehouseMapper</text
     ></g
     ><g font-size="11px" transform="translate(1084,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath26)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="16" xml:space="preserve" y="27" clip-path="url(#clipPath26)" stroke="none"
-      >ArmazemController</text
+      >WarehouseController</text
     ></g
     ><g font-size="11px" transform="translate(840,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath26)" stroke="none"
@@ -435,7 +435,7 @@
     ><text x="30" xml:space="preserve" y="12" clip-path="url(#clipPath27)" stroke="none"
       >&lt;&lt;Container (C4)&gt;&gt;</text
       ><text x="9" xml:space="preserve" y="27" clip-path="url(#clipPath27)" stroke="none"
-      >MasterDataGestaoArmazem</text
+      >MasterDataGestaoWarehouse</text
     ></g
     ><g font-size="11px" transform="translate(323,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath28)" stroke="none"
@@ -566,7 +566,7 @@
     ><g font-size="11px" transform="translate(1159,287)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="222" height="15" y="0" clip-path="url(#clipPath62)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath62)" stroke="none"
-      >2.1.1.1.1: criaArmazemDTO(armazemID)</text
+      >2.1.1.1.1: criaWarehouseDTO(warehouseID)</text
     ></g
     ><g font-size="11px" transform="translate(116,162)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="172" height="15" y="0" clip-path="url(#clipPath63)" stroke="none"
@@ -576,7 +576,7 @@
     ><g font-size="11px" transform="translate(101,113)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="202" height="15" y="0" clip-path="url(#clipPath64)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath64)" stroke="none"
-      >1.1: pede o id do armazem a eliminar</text
+      >1.1: pede o id do warehouse a eliminar</text
     ></g
     ><g font-size="11px" transform="translate(117,64)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="170" height="15" y="0" clip-path="url(#clipPath65)" stroke="none"
@@ -616,7 +616,7 @@
     ><g font-size="11px" transform="translate(1821,550)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="162" height="15" y="0" clip-path="url(#clipPath71)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath71)" stroke="none"
-      >2.1.1.1.2.2: delete(armazem)</text
+      >2.1.1.1.2.2: delete(warehouse)</text
     ></g
     ><g font-size="11px" transform="translate(2108,487)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="118" height="15" y="0" clip-path="url(#clipPath68)" stroke="none"
@@ -626,12 +626,12 @@
     ><g font-size="11px" transform="translate(1733,427)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="341" height="15" y="0" clip-path="url(#clipPath72)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath72)" stroke="none"
-      >2.1.1.1.2.1: armazem = getByIdAsync(armazemDTO.armazemID)</text
+      >2.1.1.1.2.1: warehouse = getByIdAsync(warehouseDTO.warehouseID)</text
     ></g
     ><g font-size="11px" transform="translate(1323,396)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="223" height="15" y="0" clip-path="url(#clipPath73)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath73)" stroke="none"
-      >2.1.1.1.2: apagaArmazem(armazemDTO)</text
+      >2.1.1.1.2: deleteWarehouse(warehouseDTO)</text
     ></g
     ><g font-size="11px" transform="translate(1398,322)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="109" height="15" y="0" clip-path="url(#clipPath70)" stroke="none"
@@ -641,12 +641,12 @@
     ><g font-size="11px" transform="translate(911,254)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="225" height="15" y="0" clip-path="url(#clipPath74)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath74)" stroke="none"
-      >2.1.1.1: DELETE armazem / {armazemID}</text
+      >2.1.1.1: DELETE warehouse / {warehouseID}</text
     ></g
     ><g font-size="11px" transform="translate(663,220)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="212" height="21" y="0" clip-path="url(#clipPath75)" stroke="none"
       /><text fill="black" x="8" xml:space="preserve" y="15" clip-path="url(#clipPath75)" stroke="none"
-      >2.1.1: DELETE armazem / {armazemID}</text
+      >2.1.1: DELETE warehouse / {warehouseID}</text
     ></g
     ><g font-size="11px" transform="translate(397,902)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="242" height="15" y="0" clip-path="url(#clipPath76)" stroke="none"
@@ -661,7 +661,7 @@
     ><g font-size="11px" transform="translate(414,191)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="196" height="21" y="0" clip-path="url(#clipPath78)" stroke="none"
       /><text fill="black" x="4" xml:space="preserve" y="15" clip-path="url(#clipPath78)" stroke="none"
-      >2.1: DELETE armazem / {armazemID}</text
+      >2.1: DELETE warehouse / {warehouseID}</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

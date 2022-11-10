@@ -127,7 +127,7 @@
     /></g
     ><g font-size="11px" transform="translate(2,37)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath11)" stroke="none"
-      >GestorArmazem</text
+      >GestorWarehouse</text
     ></g
     ><g font-size="11px" transform="translate(371,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath12)" stroke="none"
@@ -178,7 +178,7 @@
     ><g font-size="11px" transform="translate(137,108)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="202" height="15" y="0" clip-path="url(#clipPath22)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath22)" stroke="none"
-      >1.1: pede o id do armazem a eliminar</text
+      >1.1: pede o id do warehouse a eliminar</text
     ></g
     ><g font-size="11px" transform="translate(153,67)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="170" height="15" y="0" clip-path="url(#clipPath23)" stroke="none"

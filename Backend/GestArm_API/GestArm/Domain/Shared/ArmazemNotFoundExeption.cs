@@ -1,12 +1,12 @@
 namespace GestArm.Domain.Shared;
 
-public class ArmazemNotFoundExeption : Exception
+public class WarehouseNotFoundExeption : Exception
 {
-    public ArmazemNotFoundExeption(string message) : base(message)
+    public WarehouseNotFoundExeption(string message) : base(message)
     {
     }
 
-    public ArmazemNotFoundExeption(string message, string details) : base(message)
+    public WarehouseNotFoundExeption(string message, string details) : base(message)
     {
         Details = details;
     }

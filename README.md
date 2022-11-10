@@ -24,7 +24,7 @@
 * [Code](Backend/GestLogistica_API)
 * [Documentation](Wiki/GestLog_API_Wiki)
 
-### GestArm - BackEnd GestArmazem
+### GestArm - BackEnd GestWarehouse
 * Languages and Tools: C#,MySQL,.NET
 * [Code and Reports](Backend/GestArm_API)
 * [Documentation](Wiki/GestArm_API_Wiki)

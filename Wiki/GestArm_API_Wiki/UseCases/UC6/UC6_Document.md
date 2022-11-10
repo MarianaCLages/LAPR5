@@ -6,32 +6,32 @@ As Warehouse Employee, I want to costumize deliveries.
 
 ###Acceptance Criteria
 
-**AC1:** O ID do armazem de destino tem de existir!
+**AC1:** O ID do warehouse de destino tem de existir!
 
-**AC2:** A data de entrega tem de ser maior que a data atual.
+**AC2:** A data de order tem de ser maior que a data atual.
 
 
 ## 2. Análise
 
 ## 2.1. Informação
 
-Segundo os requesitos do cliente, a encomenda terá de ser desenvolvido através de uma API em dotnet, usando a linguagem C#.
-Iremos testar a edição da Encomenda fazendo Put Requests á API através do software PostMan pois ainda não temos o FrontEnd implementado.
+Segundo os requesitos do cliente, a order terá de ser desenvolvido através de uma API em dotnet, usando a linguagem C#.
+Iremos testar a edição da Order fazendo Put Requests á API através do software PostMan pois ainda não temos o FrontEnd implementado.
 
 ## 2.2. Análise
 
 Esta é a estrutura de analise de armazém que chegamos segundo o cliente:
-![Analise_Armazem](Analise_Encomenda.svg)
+![Analise_Warehouse](Analise_Order.svg)
 
 
-Durante a alteração da Encomenda, o Armazém que é colocado no request terá de existir.
+Durante a alteração da Order, o Armazém que é colocado no request terá de existir.
 
-![VP_N1_Entrega](VP_N1_Editar_Entrega.svg)
+![VP_N1_Order](VP_N1_Editar_Order.svg)
 
-Foi criado duas situações: uma em que o utilizador altera só uma entrega ou alterar várias, como ainda não temos UI para
-poder colocar a situação de mudar várias encomendas, só temos implementado a alteração de uma encomeda pois só acontece uma request.
-O utilizador envia a informação para o sistema, mencionando o ID da Entrega e as suas alterações, se as alterações serem possiveis o sistema
-altera a encomenda.
+Foi criado duas situações: uma em que o utilizador altera só uma order ou alterar várias, como ainda não temos UI para
+poder colocar a situação de mudar várias orders, só temos implementado a alteração de uma encomeda pois só acontece uma request.
+O utilizador envia a informação para o sistema, mencionando o ID da Order e as suas alterações, se as alterações serem possiveis o sistema
+altera a order.
 
 ## 3. Design
 
@@ -44,9 +44,9 @@ para a satisfação da US. O Service chamará o repositório que fará as comuni
 
 # 3.2 Vistas de Design
 
-![VL_N3_Editar_Encomenda](VL_N3_Entrega.svg)
+![VL_N3_Editar_Order](VL_N3_Order.svg)
 
-![VP_N3_Armazem](VP_N3_Editar_Entegas_Alt2.svg)
+![VP_N3_Warehouse](VP_N3_Editar_Entegas_Alt2.svg)
 
 
 Como podemos obervar no VP, após o PUT request que o cliente envia á API, o Controller converte o corpo num DTO, este será enviado para o Service,
@@ -75,29 +75,29 @@ respeita as regras de negócio do cliente.
 
 ### Integration Testing
 
-* Modifica uma Encomenda, através do Update
+* Modifica uma Order, através do Update
 
 
     [Fact]
-    public void UpdateAsyncTest_ShouldUpdateAnArmazemReturningAnEncomendaDTO()
+    public void UpdateAsyncTest_ShouldUpdateAnWarehouseReturningAnOrderDTO()
     {
         //ARRANGE
-        var en = new Encomenda(new EncomendaDomainId("5", "221227"), new DataEntrega(DateTime.Parse("2022-12-27")),
-            new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120), "A12");
+        var en = new Order(new OrderDomainId("5", "221227"), new OrderDate(DateTime.Parse("2022-12-27")),
+            new OrderMass(10), new TimeOrder(120), new TimeOrder(120), "A12");
         
-        var creatingEncomendaDto = new CreatingEncomendaDto("2022-12-27", 10, 120, 120, "A12");
+        var creatingOrderDto = new CreatingOrderDto("2022-12-27", 10, 120, 120, "A12");
 
-        var encomendaDto = EncomendaDtoParser.convertToDto(en);
+        var orderDto = OrderDtoParser.convertToDto(en);
         
         //ACT
         _repositoryEnMock.Setup(x => x.UpdateAsync(en)).ReturnsAsync(en);
         _repositoryEnMock.Setup(x => x.AddAsync(en)).ReturnsAsync(en);
-        var result = _controller.AddAsync(creatingEncomendaDto).Result;
+        var result = _controller.AddAsync(creatingOrderDto).Result;
 
-        var objExpected = encomendaDto;
+        var objExpected = orderDto;
         var objActual = result.Value;
 
-        objActual = encomendaDto;
+        objActual = orderDto;
         
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -110,26 +110,26 @@ respeita as regras de negócio do cliente.
 ###Unit Testing
 
 ####Controller Testing
-* Modifica uma Encomenda
+* Modifica uma Order
 
 
     [Fact]
-    public void UpdateAsyncTest_ShouldUpdateAnArmazemReturningAnEncomendaDTO()
+    public void UpdateAsyncTest_ShouldUpdateAnWarehouseReturningAnOrderDTO()
     {
         //ARRANGE
-        var en = new Encomenda(new EncomendaDomainId("5", "221227"), new DataEntrega(DateTime.Parse("2022-12-27")),
-            new MassaEntrega(10), new TempoEncomenda(120), new TempoEncomenda(120), "A12");
+        var en = new Order(new OrderDomainId("5", "221227"), new OrderDate(DateTime.Parse("2022-12-27")),
+            new OrderMass(10), new TimeOrder(120), new TimeOrder(120), "A12");
         
-        var creatingEncomendaDto = new CreatingEncomendaDto("2022-12-27", 10, 120, 120, "A12");
+        var creatingOrderDto = new CreatingOrderDto("2022-12-27", 10, 120, 120, "A12");
 
-        var encomendaDto = EncomendaDtoParser.convertToDto(en);
+        var orderDto = OrderDtoParser.convertToDto(en);
         
         //ACT
-        _ServiceMock.Setup(x => x.UpdateAsync(en.Id,creatingEncomendaDto)).ReturnsAsync(encomendaDto);
-        var result = _controller.Update(en.Id.AsGuid(),creatingEncomendaDto).Result;
+        _ServiceMock.Setup(x => x.UpdateAsync(en.Id,creatingOrderDto)).ReturnsAsync(orderDto);
+        var result = _controller.Update(en.Id.AsGuid(),creatingOrderDto).Result;
 
-        var objExpected = encomendaDto;
-        var objActual = encomendaDto;
+        var objExpected = orderDto;
+        var objActual = orderDto;
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -141,28 +141,28 @@ respeita as regras de negócio do cliente.
 
 
 ####Service Testing
-* Modifica uma Encomenda
+* Modifica uma Order
 
 
 
     [Fact]
-    public void UpdateAsyncTest_ShouldUpdateAnEncomenda()
+    public void UpdateAsyncTest_ShouldUpdateAnOrder()
     {
         //ARRANGE
-        var list = new List<Encomenda>();
+        var list = new List<Order>();
 
-        var en = new Encomenda(new EncomendaDomainId("5", "220505"),
-            new DataEntrega(DateTime.Parse("2022-12-27")), new MassaEntrega(10), new TempoEncomenda(120),
-            new TempoEncomenda(120), "A12");
+        var en = new Order(new OrderDomainId("5", "220505"),
+            new OrderDate(DateTime.Parse("2022-12-27")), new OrderMass(10), new TimeOrder(120),
+            new TimeOrder(120), "A12");
 
-        var creatingEncomendaDto = new CreatingEncomendaDto("2022-12-27", 10, 120, 120, "A12");
+        var creatingOrderDto = new CreatingOrderDto("2022-12-27", 10, 120, 120, "A12");
         list.Add(en);
 
         //ACT
         _repositoryMock.Setup(x => x.UpdateAsync(en)).ReturnsAsync(en);
 
-        var resultDTO = EncomendaDtoParser.convertToDto(en);
-        var result = _service.UpdateAsync(en.Id, creatingEncomendaDto);
+        var resultDTO = OrderDtoParser.convertToDto(en);
+        var result = _service.UpdateAsync(en.Id, creatingOrderDto);
         var resultAlt = resultDTO;
 
         var obj1StrExpected = JsonConvert.SerializeObject(resultAlt.ToString());
@@ -177,7 +177,7 @@ respeita as regras de negócio do cliente.
 
 
 								{
-									"name": "Put_Encomenda",
+									"name": "Put_Order",
 									"event": [
 										{
 											"listen": "test",
@@ -195,14 +195,14 @@ respeita as regras de negócio do cliente.
 													"    pm.response.to.have.body(\r",
 													"{\r",
 													"     \"id\": {\r",
-													"        \"value\": pm.collectionVariables.get(\"id_encomenda\")\r",
+													"        \"value\": pm.collectionVariables.get(\"id_order\")\r",
 													"    },\r",
-													"    \"identificador\": pm.collectionVariables.get(\"identificador\"),\r",
-													"    \"dataEntrega\": \"12/20/2022 00:00:00\",\r",
-													"    \"massaEntrega\": 5000.0,\r",
-													"    \"tempoCarga\": 100.0,\r",
-													"    \"tempoDescarga\": 200.0,\r",
-													"    \"armazemId\": \"CZ7\"\r",
+													"    \"identifier\": pm.collectionVariables.get(\"identifier\"),\r",
+													"    \"orderDate\": \"12/20/2022 00:00:00\",\r",
+													"    \"orderMass\": 5000.0,\r",
+													"    \"chargingTime\": 100.0,\r",
+													"    \"unloadingTime\": 200.0,\r",
+													"    \"warehouseId\": \"CZ7\"\r",
 													"});\r",
 													"});"
 												],
@@ -215,7 +215,7 @@ respeita as regras de negócio do cliente.
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"DataEntrega\": \"20-12-2022\",\r\n    \"MassaEntrega\": 5000,\r\n    \"TempoCarga\": 100,\r\n    \"TempoDescarga\": 200,\r\n    \"ArmazemID\": \"CZ7\"\r\n}",
+											"raw": "{\r\n    \"OrderDate\": \"20-12-2022\",\r\n    \"OrderMass\": 5000,\r\n    \"ChargingTime\": 100,\r\n    \"UnloadingTime\": 200,\r\n    \"WarehouseID\": \"CZ7\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -223,7 +223,7 @@ respeita as regras de negócio do cliente.
 											}
 										},
 										"url": {
-											"raw": "http://localhost:5000/api/Encomenda/{{id_encomenda}}",
+											"raw": "http://localhost:5000/api/Order/{{id_order}}",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -231,15 +231,15 @@ respeita as regras de negócio do cliente.
 											"port": "5000",
 											"path": [
 												"api",
-												"Encomenda",
-												"{{id_encomenda}}"
+												"Order",
+												"{{id_order}}"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "Delete_Encomenda",
+									"name": "Delete_Order",
 									"event": [
 										{
 											"listen": "test",
@@ -261,7 +261,7 @@ respeita as regras de negócio do cliente.
 										"method": "DELETE",
 										"header": [],
 										"url": {
-											"raw": "https://localhost:5001/api/Encomenda/{{id_encomenda}}",
+											"raw": "https://localhost:5001/api/Order/{{id_order}}",
 											"protocol": "https",
 											"host": [
 												"localhost"
@@ -269,8 +269,8 @@ respeita as regras de negócio do cliente.
 											"port": "5001",
 											"path": [
 												"api",
-												"Encomenda",
-												"{{id_encomenda}}"
+												"Order",
+												"{{id_order}}"
 											]
 										}
 									},

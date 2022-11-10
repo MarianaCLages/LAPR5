@@ -1,4 +1,4 @@
-# UC14 - Listar Empacotamento
+# UC14 - Listar Packaging
 
 ## Contents
 - [Views](#views)
@@ -28,7 +28,7 @@ O Modelo de Vistas 4+1 [[Krutchen-1995]](References.md#Kruchten-1995) propõe a 
 - Vista física: relativa ao mapeamento dos vários componentes do software em hardware, i.e. onde é executado o software;
 - Vista de cenários: relativa à associação de processos de negócio com atores capazes de os espoletar.
 
-O Modelo C4 [[Brown-2020]](References.md#Brown-2020)[[C4-2020]](References.md#C4-2020) defende a descrição do software através de quatro níveis de abstração: sistema, contentor, componente e código. Cada nível adota uma granularidade mais fina que o nível que o antecede, dando assim acesso a mais detalhe de uma parte mais pequena do sistema. Estes níveis podem ser equiparáveis a mapas, e.g. a vista de sistema corresponde ao globo, a vista de contentor corresponde ao mapa de cada continente, a vista de componentes ao mapa de cada país e a vista de código ao mapa de estradas e bairros de cada cidade.
+O Modelo C4 [[Brown-2020]](References.md#Brown-2020)[[C4-2020]](References.md#C4-2020) defende a descrição do software através de quatro níveis de abstração: sistema, contentor, componente e código. Cada nível adota uma granularidade mais fina que o nível que o antecede, dando assim acesso a mais detalhe de uma parte mais pequena do sistema. Estes níveis podem ser equiparáveis a mapas, e.g. a vista de sistema corresponde ao globo, a vista de contentor corresponde ao mapa de cada continente, a vista de componentes ao mapa de cada país e a vista de código ao mapa de estradas e bairros de cada city.
 Diferentes níveis permitem contar histórias diferentes a audiências distintas.
 
 Os níveis encontram-se definidos da seguinte forma:

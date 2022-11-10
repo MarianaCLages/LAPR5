@@ -188,32 +188,32 @@
     ><g font-size="11px" transform="translate(66,331)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="376" height="15" y="0" clip-path="url(#clipPath21)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath21)" stroke="none"
-      >3.1: mostra a lista de todos os empacotamentos (com a devida filtragem)</text
+      >3.1: mostra a lista de todos os packagings (com a devida filtragem)</text
     ></g
     ><g font-size="11px" transform="translate(106,291)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="296" height="15" y="0" clip-path="url(#clipPath22)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath22)" stroke="none"
-      >3: quero listar todos os empacotamentos (com filtragem)</text
+      >3: quero listar todos os packagings (com filtragem)</text
     ></g
     ><g font-size="11px" transform="translate(144,231)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="222" height="15" y="0" clip-path="url(#clipPath23)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath23)" stroke="none"
-      >2.1: mostra o empacotamento pretendido</text
+      >2.1: mostra o packaging pretendido</text
     ></g
     ><g font-size="11px" transform="translate(52,192)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="404" height="15" y="0" clip-path="url(#clipPath24)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath24)" stroke="none"
-      >2: quero ver um empacotamento em específico (introduzindo já o identificador)</text
+      >2: quero ver um packaging em específico (introduzindo já o identifier)</text
     ></g
     ><g font-size="11px" transform="translate(126,125)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="255" height="15" y="0" clip-path="url(#clipPath25)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath25)" stroke="none"
-      >1.1: mostra a lista de todos os empacotamentos</text
+      >1.1: mostra a lista de todos os packagings</text
     ></g
     ><g font-size="11px" transform="translate(143,85)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="219" height="15" y="0" clip-path="url(#clipPath26)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath26)" stroke="none"
-      >1: quero listar todos os empacotamentos</text
+      >1: quero listar todos os packagings</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

@@ -28,7 +28,7 @@
 
 A Graphs4Social, S.A. é uma startup com sede no Porto (Portugal) cuja missão é fornecer aplicações de manipulação e visualização de grafos de redes sociais.
 A empresa decidiu recentemente expandir o seu portfolio de produtos entrando na área de jogos, mas mantendo o foco nos grafos de redes sociais.
-A empresa decidiu recorrer à subcontratação de serviços de desenvolvimento uma vez que não possui capacidade livre de momento.
+A empresa decidiu recorrer à subcontratação de serviços de desenvolvimento uma vez que não possui capacity livre de momento.
 
 ---
 
@@ -93,7 +93,7 @@ FURPS é um acrónimo que representa um modelo para classificação de atributos
 
 ##### Confiabilidade (Reliability)
 
-6. A base de dados está normalizada segundo as normas. Assim, a duplicidade de dados é mínimia e a confiabilidade da base de dados é elevada.
+6. A base de dados está normalizada segundo as normas. Assim, a duplicity de dados é mínimia e a confiabilidade da base de dados é elevada.
 
 7. Os protocolos http já estão implementados na framework do .NET pelo que só têm de ser personalizados
 
@@ -106,10 +106,10 @@ FURPS é um acrónimo que representa um modelo para classificação de atributos
 ##### Design constraints
 9. O sistema deve ser composto por uma aplicação web do tipo Single Page Application (SPA) que permite aos utilizadores autorizados acederem aos diferentes módulos da aplicação, bem como por um conjunto de serviços que implementem as componentes de regras de negócio necessárias para o funcionamento da aplicação web.
 
-De um modo geral, as principais funcionalidades de cada módulo são as seguintes:
+De um modo geral, as princicountry funcionalidades de cada módulo são as seguintes:
 
 - Master data – permite a gestão da informação relacionada com a rede (nós, percursos), tipos de viaturas, tipos de tripulantes, linhas e viagens.
-- Planeamento – com base nos percursos existentes planear as trocas de tripulações nos pontos de rendição. Planear os serviços de tripulantes com base nos serviços de viatura. Consome a informação gerida no módulo master data e publica informação do planeamento para o módulo de visualização.
+- Planeamento – com base nos percursos existsntes planear as trocas de tripulações nos pontos de rendição. Planear os serviços de tripulantes com base nos serviços de viatura. Consome a informação gerida no módulo master data e publica informação do planeamento para o módulo de visualização.
 - Visualizador 3D –  permite a visualização 2D e 3D da rede, a navegação pela cena e a consulta gráfica de informação sobre as viagens. Consome a informação gerida no módulo master data e no módulo
 - UI – interface com o utilizador
 - Clientes + RGPD – gestão de informação dos utilizadores finais “clientes” e seus consentimentos no âmbito do RGPD
@@ -126,9 +126,9 @@ De um modo geral, as principais funcionalidades de cada módulo são as seguin
 15.  O módulo de Visualização deve consumir dados de serviços de tripulante através da API do planeamento
 
 ##### Physical constraints
-16. Existem dois servidores em load balancing, onde estão instaladas as aplicações, serviços e as bases de dados e que se encarregam do armazenamento da informação.
+16. Existsm dois servidores em load balancing, onde estão instaladas as aplicações, serviços e as bases de dados e que se encarregam do armazenamento da informação.
 
-17. Existem ainda dois servidores em failover que distribuem os endereços a todos os sistemas e se encarregam da autenticação de sistemas e utilizadores (DHCP, DNS (se aplicável) e autenticação de servidores, e eventualmente um servidor Kerberos).
+17. Existsm ainda dois servidores em failover que distribuem os endereços a todos os sistemas e se encarregam da autenticação de sistemas e utilizadores (DHCP, DNS (se aplicável) e autenticação de servidores, e eventualmente um servidor Kerberos).
 18. Algumas das aplicações devem ser implantadas *on premises* e outras em IaaS e PaaS (*on cloud*). Cf. requisitos específicos das UC por sprint.
 
 ---
@@ -150,7 +150,7 @@ Outras abordagens/estilos/padrões, como e.g. interligação entre aplicações 
 
 ### Analysis Results
 
-Não existem por agora resultados de análise ou avaliação. Estudos qualitativos acerca dos estilos/padrões adotados (nomeadamente Onion em MDR e MDV, mas também Dependency Injection na UI), permitem empiricamente advogar que a manutenibilidade, evolutabilidade e testabilidade do software são elevadas, ao mesmo tempo que permitem atingir as funcionalidades desejadas.
+Does not existm por agora resultados de análise ou avaliação. Estudos qualitativos acerca dos estilos/padrões adotados (nomeadamente Onion em MDR e MDV, mas também Dependency Injection na UI), permitem empiricamente advogar que a manutenibilidade, evolutabilidade e testabilidade do software são elevadas, ao mesmo time que permitem atingir as funcionalidades desejadas.
 
 ---
 

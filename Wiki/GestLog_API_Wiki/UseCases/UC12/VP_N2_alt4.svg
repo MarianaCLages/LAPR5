@@ -278,7 +278,7 @@
     ><g font-size="11px" transform="translate(659,479)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="189" height="15" y="0" clip-path="url(#clipPath32)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath32)" stroke="none"
-      >2.1.1: apagarCaminho(caminhoID)</text
+      >2.1.1: deleterPath(pathID)</text
     ></g
     ><g font-size="11px" transform="translate(389,659)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="172" height="15" y="0" clip-path="url(#clipPath33)" stroke="none"
@@ -293,7 +293,7 @@
     ><g font-size="11px" transform="translate(364,388)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="216" height="49" y="0" clip-path="url(#clipPath35)" stroke="none"
       /><text fill="black" x="17" xml:space="preserve" y="29" clip-path="url(#clipPath35)" stroke="none"
-      >2.1: DELETE caminho /  {caminhoID}</text
+      >2.1: DELETE path /  {pathID}</text
     ></g
     ><g font-size="11px" transform="translate(96,694)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="190" height="15" y="0" clip-path="url(#clipPath36)" stroke="none"

@@ -280,7 +280,7 @@
     ><g font-size="11px" transform="translate(84,98)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="186" height="15" y="0" clip-path="url(#clipPath30)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath30)" stroke="none"
-      >1: quero criar um empacotamento</text
+      >1: quero criar um packaging</text
     ></g
     ><g font-size="11px" transform="translate(395,424)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="132" height="15" y="0" clip-path="url(#clipPath33)" stroke="none"
@@ -295,14 +295,14 @@
     ><g font-size="11px" transform="translate(634,276)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="323" height="15" y="0" clip-path="url(#clipPath35)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath35)" stroke="none"
-      >2.1.1: criarEmpacotamento {empEntregaRef, empCamiaoRef}</text
+      >2.1.1: criarPackaging {orderRef, truckRef}</text
     ></g
     ><g font-size="11px" transform="translate(366,200)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="193" height="33" y="0" clip-path="url(#clipPath36)" stroke="none"
       /><text fill="black" x="29" xml:space="preserve" y="13" clip-path="url(#clipPath36)" stroke="none"
-      >2.1: POST empacotamento</text
+      >2.1: POST packaging</text
       ><text fill="black" x="13" xml:space="preserve" y="28" clip-path="url(#clipPath36)" stroke="none"
-      >{empEntregaRef, empCamiaoRef}</text
+      >{orderRef, truckRef}</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

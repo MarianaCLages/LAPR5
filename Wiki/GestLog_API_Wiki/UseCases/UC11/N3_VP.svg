@@ -391,33 +391,33 @@
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath23)" stroke="none"
       >&lt;&lt;Component(C4)&gt;&gt;</text
       ><text x="21" xml:space="preserve" y="27" clip-path="url(#clipPath23)" stroke="none"
-      >CaminhoService</text
+      >PathService</text
     ></g
     ><g font-size="11px" transform="translate(2579,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath23)" stroke="none"
       >&lt;&lt;Component(C4)&gt;&gt;</text
       ><text x="26" xml:space="preserve" y="27" clip-path="url(#clipPath23)" stroke="none"
-      >CaminhoRepo</text
+      >PathRepo</text
     ></g
     ><g font-size="11px" transform="translate(2785,211)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath24)" stroke="none"
-      >listaCaminhos : List&lt;Caminho&gt;</text
+      >listaPaths : List&lt;Path&gt;</text
     ></g
     ><g font-size="11px" transform="translate(3027,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath23)" stroke="none"
       >&lt;&lt;Component(C4)&gt;&gt;</text
       ><text x="28" xml:space="preserve" y="27" clip-path="url(#clipPath23)" stroke="none"
-      >CaminhoMap</text
+      >PathMap</text
     ></g
     ><g font-size="11px" transform="translate(3270,303)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath25)" stroke="none"
-      >ListaCaminhosDTO : caminhoDTO</text
+      >ListaPathsDTO : pathDTO</text
     ></g
     ><g font-size="11px" transform="translate(2018,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath23)" stroke="none"
       >&lt;&lt;Component(C4)&gt;&gt;</text
       ><text x="16" xml:space="preserve" y="27" clip-path="url(#clipPath23)" stroke="none"
-      >CaminhoController</text
+      >PathController</text
     ></g
     ><g stroke-linecap="butt" font-size="11px" transform="translate(-2,9)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
     ><line y2="50" fill="none" x1="50" clip-path="url(#clipPath27)" x2="349" y1="50"
@@ -512,22 +512,22 @@
     ><g font-size="11px" transform="translate(2107,168)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="156" height="15" y="0" clip-path="url(#clipPath54)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath54)" stroke="none"
-      >1.1.1.1.1: GetAllCaminhos()</text
+      >1.1.1.1.1: GetAllPaths()</text
     ></g
     ><g font-size="11px" transform="translate(2106,361)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="162" height="15" y="0" clip-path="url(#clipPath55)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath55)" stroke="none"
-      >1.1.1.1.2: listaCaminhosDTO</text
+      >1.1.1.1.2: listaPathsDTO</text
     ></g
     ><g font-size="11px" transform="translate(2526,318)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="180" height="15" y="0" clip-path="url(#clipPath56)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath56)" stroke="none"
-      >1.1.1.1.1.2.2: listaCaminhosDTO</text
+      >1.1.1.1.1.2.2: listaPathsDTO</text
     ></g
     ><g font-size="11px" transform="translate(2530,282)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="185" height="15" y="0" clip-path="url(#clipPath57)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath57)" stroke="none"
-      >1.1.1.1.1.2: mapToDTO(caminho)</text
+      >1.1.1.1.1.2: mapToDTO(path)</text
     ></g
     ><g font-size="11px" transform="translate(1090,409)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="157" height="15" y="0" clip-path="url(#clipPath58)" stroke="none"
@@ -542,7 +542,7 @@
     ><g font-size="11px" transform="translate(1516,158)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="521" height="20" y="0" clip-path="url(#clipPath60)" stroke="none"
       /><text fill="black" x="197" xml:space="preserve" y="14" clip-path="url(#clipPath60)" stroke="none"
-      >1.1.1.1: GetAllCaminhos()</text
+      >1.1.1.1: GetAllPaths()</text
     ></g
     ><g font-size="11px" transform="translate(3117,300)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="126" height="15" y="0" clip-path="url(#clipPath61)" stroke="none"
@@ -552,7 +552,7 @@
     ><g font-size="11px" transform="translate(2314,228)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="157" height="15" y="0" clip-path="url(#clipPath58)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath58)" stroke="none"
-      >1.1.1.1.1.1.2: listaCaminhos</text
+      >1.1.1.1.1.1.2: listaPaths</text
     ></g
     ><g font-size="11px" transform="translate(2649,208)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="129" height="15" y="0" clip-path="url(#clipPath62)" stroke="none"
@@ -562,12 +562,12 @@
     ><g font-size="11px" transform="translate(2351,176)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="165" height="15" y="0" clip-path="url(#clipPath63)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath63)" stroke="none"
-      >1.1.1.1.1.1: GetAllCaminhos()</text
+      >1.1.1.1.1.1: GetAllPaths()</text
     ></g
     ><g font-size="11px" transform="translate(1110,145)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="124" height="15" y="0" clip-path="url(#clipPath64)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath64)" stroke="none"
-      >1.1.1: GET caminhos</text
+      >1.1.1: GET paths</text
     ></g
     ><g font-size="11px" transform="translate(516,548)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="165" height="15" y="0" clip-path="url(#clipPath63)" stroke="none"
@@ -587,7 +587,7 @@
     ><g font-size="11px" transform="translate(552,99)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="115" height="15" y="0" clip-path="url(#clipPath67)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath67)" stroke="none"
-      >1.1: GET caminhos</text
+      >1.1: GET paths</text
     ></g
     ><g font-size="11px" transform="translate(75,496)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="242" height="15" y="0" clip-path="url(#clipPath68)" stroke="none"

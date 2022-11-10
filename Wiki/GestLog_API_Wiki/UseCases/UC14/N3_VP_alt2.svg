@@ -692,51 +692,51 @@
     /></g
     ><g font-size="11px" transform="translate(2777,870)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="6" xml:space="preserve" y="12" clip-path="url(#clipPath35)" stroke="none"
-      >empacotamentoDTO :</text
+      >packagingDTO :</text
       ><text x="8" xml:space="preserve" y="27" clip-path="url(#clipPath35)" stroke="none"
-      >EmpacotamentoDTO</text
+      >PackagingDTO</text
     ></g
     ><g font-size="11px" transform="translate(2619,790)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="8" xml:space="preserve" y="12" clip-path="url(#clipPath36)" stroke="none"
-      >empacotamento :</text
+      >packaging :</text
       ><text x="10" xml:space="preserve" y="27" clip-path="url(#clipPath36)" stroke="none"
-      >Empacotamento</text
+      >Packaging</text
     ></g
     ><g font-size="11px" transform="translate(2677,315)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="6" xml:space="preserve" y="12" clip-path="url(#clipPath37)" stroke="none"
-      >listaEmpacotamentosDTO :</text
+      >listaPackagingsDTO :</text
       ><text x="7" xml:space="preserve" y="27" clip-path="url(#clipPath37)" stroke="none"
-      >List&lt;EmpacotamentoDTO&gt;</text
+      >List&lt;PackagingDTO&gt;</text
     ></g
     ><g font-size="11px" transform="translate(2519,227)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="6" xml:space="preserve" y="12" clip-path="url(#clipPath38)" stroke="none"
-      >listaEmpacotamentos :</text
+      >listaPackagings :</text
       ><text x="6" xml:space="preserve" y="27" clip-path="url(#clipPath38)" stroke="none"
-      >List&lt;Empacotamento&gt;</text
+      >List&lt;Packaging&gt;</text
     ></g
     ><g font-size="11px" transform="translate(2286,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="22" xml:space="preserve" y="12" clip-path="url(#clipPath39)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="10" xml:space="preserve" y="27" clip-path="url(#clipPath39)" stroke="none"
-      >EmpacotamentoRepository</text
+      >PackagingRepository</text
     ></g
     ><g font-size="11px" transform="translate(2126,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="4" xml:space="preserve" y="27" clip-path="url(#clipPath40)" stroke="none"
-      >EmpacotamentoMapper</text
+      >PackagingMapper</text
     ></g
     ><g font-size="11px" transform="translate(1707,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="5" xml:space="preserve" y="27" clip-path="url(#clipPath40)" stroke="none"
-      >EmpacotamentoService</text
+      >PackagingService</text
     ></g
     ><g font-size="11px" transform="translate(1268,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="19" xml:space="preserve" y="12" clip-path="url(#clipPath37)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="10" xml:space="preserve" y="27" clip-path="url(#clipPath37)" stroke="none"
-      >EmpacotamentoController</text
+      >PackagingController</text
     ></g
     ><g font-size="11px" transform="translate(977,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
@@ -1024,62 +1024,62 @@
     ><g font-size="11px" transform="translate(1875,1283)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="375" height="15" y="0" clip-path="url(#clipPath105)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath105)" stroke="none"
-      >3.1.1.1.1.1: listaEmpacotamentos = getAllEmpacotamentosByFilter(filtro)</text
+      >3.1.1.1.1.1: listaPackagings = getAllPackagingsByFilter(filtro)</text
     ></g
     ><g font-size="11px" transform="translate(1863,763)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="402" height="15" y="0" clip-path="url(#clipPath106)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath106)" stroke="none"
-      >2.1.1.1.1.1: empacotamento = getAllEmpacotamentosById(empacotamentoID)</text
+      >2.1.1.1.1.1: packaging = getAllPackagingsById(packagingID)</text
     ></g
     ><g font-size="11px" transform="translate(1935,202)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="261" height="15" y="0" clip-path="url(#clipPath107)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath107)" stroke="none"
-      >1.1.1.1.1.1: listaEmpacotamentos = getAllAsync()</text
+      >1.1.1.1.1.1: listaPackagings = getAllAsync()</text
     ></g
     ><g font-size="11px" transform="translate(1597,1481)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="331" height="15" y="0" clip-path="url(#clipPath108)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath108)" stroke="none"
-      >3.1.1.1.2: pedidosJSON = geraJson(listaEmpacotamentosDTO)</text
+      >3.1.1.1.2: pedidosJSON = geraJson(listaPackagingsDTO)</text
     ></g
     ><g font-size="11px" transform="translate(1782,1373)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="389" height="15" y="0" clip-path="url(#clipPath109)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath109)" stroke="none"
-      >3.1.1.1.1.2: listaEmpacotamentosDTO = mapToDTO(listaEmpacotamentos)</text
+      >3.1.1.1.1.2: listaPackagingsDTO = mapToDTO(listaPackagings)</text
     ></g
     ><g font-size="11px" transform="translate(1611,942)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="305" height="15" y="0" clip-path="url(#clipPath110)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath110)" stroke="none"
-      >2.1.1.1.2: pedidosJSON = geraJson(empacotamentoDTO)</text
+      >2.1.1.1.2: pedidosJSON = geraJson(packagingDTO)</text
     ></g
     ><g font-size="11px" transform="translate(1811,843)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="337" height="15" y="0" clip-path="url(#clipPath111)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath111)" stroke="none"
-      >2.1.1.1.1.2: empacotamentoDTO = mapToDTO(empacotamento)</text
+      >2.1.1.1.1.2: packagingDTO = mapToDTO(packaging)</text
     ></g
     ><g font-size="11px" transform="translate(1599,397)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="331" height="15" y="0" clip-path="url(#clipPath108)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath108)" stroke="none"
-      >1.1.1.1.2: pedidosJSON = geraJson(listaEmpacotamentosDTO)</text
+      >1.1.1.1.2: pedidosJSON = geraJson(listaPackagingsDTO)</text
     ></g
     ><g font-size="11px" transform="translate(1783,292)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="389" height="15" y="0" clip-path="url(#clipPath109)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath109)" stroke="none"
-      >1.1.1.1.1.2: listaEmpacotamentosDTO = mapToDTO(listaEmpacotamentos)</text
+      >1.1.1.1.1.2: listaPackagingsDTO = mapToDTO(listaPackagings)</text
     ></g
     ><g font-size="11px" transform="translate(1371,1258)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="366" height="15" y="0" clip-path="url(#clipPath112)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath112)" stroke="none"
-      >3.1.1.1.1: listaEmpacotamentos = getAllEmpacotamentosByFilter(filtro)</text
+      >3.1.1.1.1: listaPackagings = getAllPackagingsByFilter(filtro)</text
     ></g
     ><g font-size="11px" transform="translate(1358,739)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="393" height="15" y="0" clip-path="url(#clipPath113)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath113)" stroke="none"
-      >2.1.1.1.1: empacotamento = getAllEmpacotamentosById(empacotamentoID)</text
+      >2.1.1.1.1: packaging = getAllPackagingsById(packagingID)</text
     ></g
     ><g font-size="11px" transform="translate(1378,180)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="354" height="15" y="0" clip-path="url(#clipPath114)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath114)" stroke="none"
-      >1.1.1.1.1: listaEmpacotamentosDTO = getAllEmpacotamentosDTO()</text
+      >1.1.1.1.1: listaPackagingsDTO = getAllPackagingsDTO()</text
     ></g
     ><g font-size="11px" transform="translate(1116,1578)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="148" height="15" y="0" clip-path="url(#clipPath115)" stroke="none"
@@ -1104,7 +1104,7 @@
     ><g font-size="11px" transform="translate(1087,1235)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="202" height="15" y="0" clip-path="url(#clipPath117)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath117)" stroke="none"
-      >3.1.1.1: GET empacotamento / {filtro}</text
+      >3.1.1.1: GET packaging / {filtro}</text
     ></g
     ><g font-size="11px" transform="translate(1378,1000)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="213" height="15" y="0" clip-path="url(#clipPath116)" stroke="none"
@@ -1114,7 +1114,7 @@
     ><g font-size="11px" transform="translate(1052,711)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="271" height="15" y="0" clip-path="url(#clipPath118)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath118)" stroke="none"
-      >2.1.1.1: GET empacotamento / {empacotamentoID}</text
+      >2.1.1.1: GET packaging / {packagingID}</text
     ></g
     ><g font-size="11px" transform="translate(1381,453)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="213" height="15" y="0" clip-path="url(#clipPath116)" stroke="none"
@@ -1124,7 +1124,7 @@
     ><g font-size="11px" transform="translate(1099,155)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="181" height="15" y="0" clip-path="url(#clipPath119)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath119)" stroke="none"
-      >1.1.1.1: GET empacotamento / {}</text
+      >1.1.1.1: GET packaging / {}</text
     ></g
     ><g font-size="11px" transform="translate(829,1603)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="130" height="15" y="0" clip-path="url(#clipPath120)" stroke="none"
@@ -1144,17 +1144,17 @@
     ><g font-size="11px" transform="translate(798,1213)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="193" height="15" y="0" clip-path="url(#clipPath121)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath121)" stroke="none"
-      >3.1.1: GET empacotamento / {filtro}</text
+      >3.1.1: GET packaging / {filtro}</text
     ></g
     ><g font-size="11px" transform="translate(763,686)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="262" height="15" y="0" clip-path="url(#clipPath122)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath122)" stroke="none"
-      >2.1.1: GET empacotamento / {empacotamentoID}</text
+      >2.1.1: GET packaging / {packagingID}</text
     ></g
     ><g font-size="11px" transform="translate(810,133)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="172" height="15" y="0" clip-path="url(#clipPath123)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath123)" stroke="none"
-      >1.1.1: GET empacotamento / {}</text
+      >1.1.1: GET packaging / {}</text
     ></g
     ><g font-size="11px" transform="translate(549,1623)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="121" height="15" y="0" clip-path="url(#clipPath124)" stroke="none"
@@ -1174,47 +1174,47 @@
     ><g font-size="11px" transform="translate(519,1192)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="184" height="15" y="0" clip-path="url(#clipPath125)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath125)" stroke="none"
-      >3.1: GET empacotamento / {filtro}</text
+      >3.1: GET packaging / {filtro}</text
     ></g
     ><g font-size="11px" transform="translate(482,663)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="253" height="15" y="0" clip-path="url(#clipPath126)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath126)" stroke="none"
-      >2.1: GET empacotamento / {empacotamentoID}</text
+      >2.1: GET packaging / {packagingID}</text
     ></g
     ><g font-size="11px" transform="translate(529,113)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="163" height="15" y="0" clip-path="url(#clipPath127)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath127)" stroke="none"
-      >1.1: GET empacotamento / {}</text
+      >1.1: GET packaging / {}</text
     ></g
     ><g font-size="11px" transform="translate(63,1646)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="376" height="15" y="0" clip-path="url(#clipPath128)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath128)" stroke="none"
-      >3.3: mostra a lista de todos os empacotamentos (com a devida filtragem)</text
+      >3.3: mostra a lista de todos os packagings (com a devida filtragem)</text
     ></g
     ><g font-size="11px" transform="translate(140,1103)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="222" height="15" y="0" clip-path="url(#clipPath129)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath129)" stroke="none"
-      >2.3: mostra o empacotamento pretendido</text
+      >2.3: mostra o packaging pretendido</text
     ></g
     ><g font-size="11px" transform="translate(124,556)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="255" height="15" y="0" clip-path="url(#clipPath130)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath130)" stroke="none"
-      >1.3: mostra a lista de todos os empacotamentos</text
+      >1.3: mostra a lista de todos os packagings</text
     ></g
     ><g font-size="11px" transform="translate(103,1172)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="296" height="15" y="0" clip-path="url(#clipPath131)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath131)" stroke="none"
-      >3: quero listar todos os empacotamentos (com filtragem)</text
+      >3: quero listar todos os packagings (com filtragem)</text
     ></g
     ><g font-size="11px" transform="translate(47,635)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="404" height="15" y="0" clip-path="url(#clipPath132)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath132)" stroke="none"
-      >2: quero ver um empacotamento em específico (introduzindo já o identificador)</text
+      >2: quero ver um packaging em específico (introduzindo já o identifier)</text
     ></g
     ><g font-size="11px" transform="translate(140,88)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="219" height="15" y="0" clip-path="url(#clipPath133)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath133)" stroke="none"
-      >1: quero listar todos os empacotamentos</text
+      >1: quero listar todos os packagings</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

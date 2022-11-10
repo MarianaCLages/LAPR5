@@ -105,7 +105,7 @@
     /></g
     ><g font-size="11px" transform="translate(2,22)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="327" xml:space="preserve" y="12" clip-path="url(#clipPath2)" stroke="none"
-      >&lt;&lt;Armazem Aggregate&gt;&gt;</text
+      >&lt;&lt;Warehouse Aggregate&gt;&gt;</text
     ></g
     ><g font-size="11px" transform="translate(272,283)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="174" height="128" y="0" clip-path="url(#clipPath3)" stroke="none"
@@ -116,7 +116,7 @@
     /></g
     ><g font-size="11px" transform="matrix(1,0,0,1,272,298)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="14" clip-path="url(#clipPath4)" stroke="none"
-      >-ArmazemID</text
+      >-WarehouseID</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,272,298)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="29" clip-path="url(#clipPath4)" stroke="none"
@@ -124,11 +124,11 @@
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,272,298)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="44" clip-path="url(#clipPath4)" stroke="none"
-      >-Designacao</text
+      >-Designation</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,272,298)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="59" clip-path="url(#clipPath4)" stroke="none"
-      >-Endereco</text
+      >-Address</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,272,298)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="74" clip-path="url(#clipPath4)" stroke="none"
@@ -140,7 +140,7 @@
     ></g
     ><g font-size="11px" transform="translate(272,283)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="62" xml:space="preserve" y="12" clip-path="url(#clipPath5)" stroke="none"
-      >Armazem</text
+      >Warehouse</text
     ></g
     ><g font-size="11px" transform="translate(280,124)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="134" height="86" y="0" clip-path="url(#clipPath6)" stroke="none"
@@ -151,15 +151,15 @@
     /></g
     ><g font-size="11px" transform="matrix(1,0,0,1,280,139)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="14" clip-path="url(#clipPath7)" stroke="none"
-      >-Graus</text
+      >-Degrees</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,280,139)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="29" clip-path="url(#clipPath7)" stroke="none"
-      >-Segundos</text
+      >-Seconds</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,280,139)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="44" clip-path="url(#clipPath7)" stroke="none"
-      >-Minutos</text
+      >-Minutes</text
     ></g
     ><g font-size="11px" transform="translate(280,124)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="31" xml:space="preserve" y="12" clip-path="url(#clipPath8)" stroke="none"
@@ -178,7 +178,7 @@
     ></g
     ><g font-size="11px" transform="translate(81,155)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="22" xml:space="preserve" y="12" clip-path="url(#clipPath11)" stroke="none"
-      >ArmazemID</text
+      >WarehouseID</text
     ></g
     ><g font-size="11px" transform="translate(542,136)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="127" height="86" y="0" clip-path="url(#clipPath12)" stroke="none"
@@ -189,11 +189,11 @@
     /></g
     ><g font-size="11px" transform="matrix(1,0,0,1,542,151)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="14" clip-path="url(#clipPath13)" stroke="none"
-      >-designacao</text
+      >-designation</text
     ></g
     ><g font-size="11px" transform="translate(542,136)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="32" xml:space="preserve" y="12" clip-path="url(#clipPath14)" stroke="none"
-      >Designacao</text
+      >Designation</text
     ></g
     ><g font-size="11px" transform="translate(532,298)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="127" height="98" y="0" clip-path="url(#clipPath15)" stroke="none"
@@ -204,27 +204,27 @@
     /></g
     ><g font-size="11px" transform="matrix(1,0,0,1,532,313)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="14" clip-path="url(#clipPath16)" stroke="none"
-      >-rua</text
+      >-street</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,532,313)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="29" clip-path="url(#clipPath16)" stroke="none"
-      >-numeroporta</text
+      >-doornumber</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,532,313)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="44" clip-path="url(#clipPath16)" stroke="none"
-      >-codigopostal</text
+      >-postalcode</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,532,313)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="59" clip-path="url(#clipPath16)" stroke="none"
-      >-cidade</text
+      >-city</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,532,313)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="74" clip-path="url(#clipPath16)" stroke="none"
-      >-pais</text
+      >-country</text
     ></g
     ><g font-size="11px" transform="translate(532,298)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="37" xml:space="preserve" y="12" clip-path="url(#clipPath14)" stroke="none"
-      >Endereco</text
+      >Address</text
     ></g
     ><g font-size="11px" transform="translate(68,351)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="118" height="60" y="0" clip-path="url(#clipPath17)" stroke="none"

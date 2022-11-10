@@ -11,7 +11,7 @@ a API corre através do NodeJs e a linguagem para o seu desenvolvimento é o Typ
 ### Entidade da API:
 
 * Camião
-* Caminho
+* Path
 
 ### Base de dados:
 

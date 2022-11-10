@@ -24,12 +24,12 @@ A distribuição de requisitos/funcionalidades ao longo do período de desenvolv
 | Vista Implementação (Todos os níveis) | **[1201487](SprintA/1201487)** |  |  |
 | Vista Cenários (Todos os níveis) | **[1201487](SprintA/1201487)** |  |  |
 | Preparação da pipeline | **[1201487](SprintA/1201487)** |  |  |
-| Criação Caminho | **[1200920](SprintA/1200920)** |  |  |
-| Listar Caminho | **[1201346](SprintA/1201346)** |  |  |
-| Editar Caminho (eliminar também) | **[1201487](SprintA/1201487)** |  |  |
+| Criação Path | **[1200920](SprintA/1200920)** |  |  |
+| Listar Path | **[1201346](SprintA/1201346)** |  |  |
+| Editar Path (eliminar também) | **[1201487](SprintA/1201487)** |  |  |
 | Criação Camião | **[1201346](SprintA/1201346)** |  |  |
 | Listar Camião | **[1200902](SprintA/1200902)** |  |  |
 | Editar Camião (eliminar também) | **[1200601](SprintA/1200601)** |  |  |
-| Criação Empacotamento | **[1201487](SprintA/1201487)** |  |  |
-| Listar Empacotamento | **[1201487](SprintA/1200920)** |  |  |
-| Editar Empacotamento (eliminar também) | **[1201487](SprintA/1201487)** |  |  |
+| Criação Packaging | **[1201487](SprintA/1201487)** |  |  |
+| Listar Packaging | **[1201487](SprintA/1200920)** |  |  |
+| Editar Packaging (eliminar também) | **[1201487](SprintA/1201487)** |  |  |

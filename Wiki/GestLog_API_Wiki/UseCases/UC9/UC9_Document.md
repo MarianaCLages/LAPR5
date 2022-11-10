@@ -6,9 +6,9 @@ As Fleet Manager, I want to costumize truck.
 
 ###Acceptance Criteria
 
-**AC1:** A matricula terá de ser com a estrutura letra letra - numero numero - letra letra
+**AC1:** A plate terá de ser com a estrutura letra letra - numero numero - letra letra
 
-**AC2:** A Tara não pode ser positiva.
+**AC2:** A Tare não pode ser positiva.
 
 
 
@@ -17,23 +17,23 @@ As Fleet Manager, I want to costumize truck.
 
 ## 2.1. Informação
 
-Segundo os requesitos do cliente, a encomenda terá de ser desenvolvido através de uma API em dotnet, usando a linguagem C#.
-Iremos testar a edição da Encomenda fazendo Put Requests á API através do software PostMan pois ainda não temos o FrontEnd implementado.
+Segundo os requesitos do cliente, a order terá de ser desenvolvido através de uma API em dotnet, usando a linguagem C#.
+Iremos testar a edição da Order fazendo Put Requests á API através do software PostMan pois ainda não temos o FrontEnd implementado.
 
 ## 2.2. Análise
 
 Esta é a estrutura de analise de armazém que chegamos segundo o cliente:
-![Analise_Camiao](Analise_Camiao.svg)
+![Analise_Truck](Analise_Truck.svg)
 
 
-Durante a alteração da Encomenda, o Armazém que é colocado no request terá de existir.
+Durante a alteração da Order, o Armazém que é colocado no request terá de existir.
 
-![VP_N1_Entrega](VP_N1_Editar_Camiao.svg)
+![VP_N1_Order](VP_N1_Editar_Truck.svg)
 
 Foi criado duas situações: uma em que o utilizador altera só um camião ou alterar vários, como ainda não temos UI para
 poder colocar a situação de mudar vários camiões, só temos implementado a alteração de uma encomeda pois só acontece uma request.
-O utilizador envia a informação para o sistema, mencionando o ID da Entrega e as suas alterações, se as alterações serem possiveis o sistema
-altera a encomenda.
+O utilizador envia a informação para o sistema, mencionando o ID da Order e as suas alterações, se as alterações serem possiveis o sistema
+altera a order.
 
 ## 3. Design
 
@@ -46,9 +46,9 @@ para a satisfação da US. O Service chamará o repositório que fará as comuni
 
 # 3.2 Vistas de Design
 
-![VL_N3_Editar_Encomenda](VL_N3_Camiao.svg)
+![VL_N3_Editar_Order](VL_N3_Truck.svg)
 
-![VP_N3_Armazem](VP_N3_Editar_Camiao.svg)
+![VP_N3_Warehouse](VP_N3_Editar_Truck.svg)
 
 
 Como podemos obervar no VP, após o PUT request que o cliente envia á API, o Controller converte o corpo num DTO, este será enviado para o Service,
@@ -78,84 +78,84 @@ respeita as regras de negócio do cliente.
 
 ###Unit Testing
 
- * Return a valid result when updating camiao
+ * Return a valid result when updating truck
 
- ```     it('should return a valid result when succeeding updating a camiao', async function() {
-    //mocks camiaoRepository
-    const camiaoRepo = {
-      save: sinon.stub().returns(Promise.resolve(Camiao.create({
-        caractCamiao: "E1234",
-        matriculaCamiao: "AA-BB-DD",
-        capacidadeCarga: 1000,
+ ```     it('should return a valid result when succeeding updating a truck', async function() {
+    //mocks truckRepository
+    const truckRepo = {
+      save: sinon.stub().returns(Promise.resolve(Truck.create({
+        caractTruck: "E1234",
+        truckPlate: "AA-BB-DD",
+        weightCapacity: 1000,
         cargaMax: 1000,
-        cargaTotal: 1000,
-        tara: 1000,
-        tempoCarregamento: 1
+        totalBatCharge: 1000,
+        tare: 1000,
+        chargingTime: 1
       }))),
-      findByDomainId: sinon.stub().returns(Promise.resolve(Camiao.create({
-        caractCamiao: "E1234",
-        matriculaCamiao: "AA-BB-DD",
-        capacidadeCarga: 1000,
+      findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
+        caractTruck: "E1234",
+        truckPlate: "AA-BB-DD",
+        weightCapacity: 1000,
         cargaMax: 1000,
-        cargaTotal: 1000,
-        tara: 1000,
-        tempoCarregamento: 1
+        totalBatCharge: 1000,
+        tare: 1000,
+        chargingTime: 1
       }))),
-      update: sinon.stub().returns(Promise.resolve(Result.ok<Camiao>())),
-      findByCaractCamiao: sinon.stub().returns(Promise.resolve(new Array((Camiao.create({
-        caractCamiao: "E1234",
-        matriculaCamiao: "AA-BB-DD",
-        capacidadeCarga: 1000,
+      update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
+      findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
+        caractTruck: "E1234",
+        truckPlate: "AA-BB-DD",
+        weightCapacity: 1000,
         cargaMax: 1000,
-        cargaTotal: 1000,
-        tara: 1000,
-        tempoCarregamento: 1
+        totalBatCharge: 1000,
+        tare: 1000,
+        chargingTime: 1
       }))))),
-      getAllCamioes: sinon.stub().returns(Promise.resolve(new Array((Camiao.create({
-        caractCamiao: "E1234",
-        matriculaCamiao: "AA-BB-DD",
-        capacidadeCarga: 1000,
+      getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
+        caractTruck: "E1234",
+        truckPlate: "AA-BB-DD",
+        weightCapacity: 1000,
         cargaMax: 1000,
-        cargaTotal: 1000,
-        tara: 1000,
-        tempoCarregamento: 1
+        totalBatCharge: 1000,
+        tare: 1000,
+        chargingTime: 1
       }))))),
-      getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Camiao.create({
-        caractCamiao: "E1234",
-        matriculaCamiao: "AA-BB-DD",
-        capacidadeCarga: 1000,
+      getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
+        caractTruck: "E1234",
+        truckPlate: "AA-BB-DD",
+        weightCapacity: 1000,
         cargaMax: 1000,
-        cargaTotal: 1000,
-        tara: 1000,
-        tempoCarregamento: 1
+        totalBatCharge: 1000,
+        tare: 1000,
+        chargingTime: 1
       }))))),
-      getByMatriculaAsync: sinon.stub().returns(Promise.resolve(new Array((Camiao.create({
-        caractCamiao: "E1234",
-        matriculaCamiao: "AA-BB-DD",
-        capacidadeCarga: 1000,
+      getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
+        caractTruck: "E1234",
+        truckPlate: "AA-BB-DD",
+        weightCapacity: 1000,
         cargaMax: 1000,
-        cargaTotal: 1000,
-        tara: 1000,
-        tempoCarregamento: 1
+        totalBatCharge: 1000,
+        tare: 1000,
+        chargingTime: 1
       }))))),
-      deleteCamiao: sinon.stub().returns(Promise.resolve(true))
+      deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
 
-    const camiaoService = require('../../../src/services/camiaoService');
-    const camiaoServiceInstance = new camiaoService.default(camiaoRepo);
+    const truckService = require('../../../src/services/truckService');
+    const truckServiceInstance = new truckService.default(truckRepo);
 
-    const camiaoDTO = {
-      caractCamiao: "E1234",
-      matriculaCamiao: "AA-BB-DD",
-      capacidadeCarga: 1000,
+    const truckDTO = {
+      caractTruck: "E1234",
+      truckPlate: "AA-BB-DD",
+      weightCapacity: 1000,
       cargaMax: 1000,
-      cargaTotal: 1000,
-      tara: 1000,
-      tempoCarregamento: 10
+      totalBatCharge: 1000,
+      tare: 1000,
+      chargingTime: 10
     };
 
     try{
-      const result = await camiaoServiceInstance.updateCamiao(camiaoDTO);
+      const result = await truckServiceInstance.updateTruck(truckDTO);
 
       sinon.assert.match(result.isSuccess, true);
     } catch (E) {
@@ -165,87 +165,87 @@ respeita as regras de negócio do cliente.
 ```
 
 
-  * Return an invalid result update camiao
+  * Return an invalid result update truck
 
 
 
 
-```it('should return a invalid result when failing updating a camiao', async function() {
-//mocks camiaoRepository
-const camiaoRepo = {
-save: sinon.stub().returns(Promise.resolve(Camiao.create({
-caractCamiao: "E1234",
-matriculaCamiao: "AA-BB-DD",
-capacidadeCarga: 1000,
+```it('should return a invalid result when failing updating a truck', async function() {
+//mocks truckRepository
+const truckRepo = {
+save: sinon.stub().returns(Promise.resolve(Truck.create({
+caractTruck: "E1234",
+truckPlate: "AA-BB-DD",
+weightCapacity: 1000,
 cargaMax: 1000,
-cargaTotal: 1000,
-tara: 1000,
-tempoCarregamento: 1
+totalBatCharge: 1000,
+tare: 1000,
+chargingTime: 1
 }))),
-findByDomainId: sinon.stub().returns(Promise.resolve(Camiao.create({
-caractCamiao: "E1234",
-matriculaCamiao: "AA-BB-DD",
-capacidadeCarga: 1000,
+findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
+caractTruck: "E1234",
+truckPlate: "AA-BB-DD",
+weightCapacity: 1000,
 cargaMax: 1000,
-cargaTotal: 1000,
-tara: 1000,
-tempoCarregamento: 1
+totalBatCharge: 1000,
+tare: 1000,
+chargingTime: 1
 }))),
-update: sinon.stub().returns(Promise.resolve(Result.ok<Camiao>())),
-findByCaractCamiao: sinon.stub().returns(Promise.resolve(new Array((Camiao.create({
-caractCamiao: "E1234",
-matriculaCamiao: "AA-BB-DD",
-capacidadeCarga: 1000,
+update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
+findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
+caractTruck: "E1234",
+truckPlate: "AA-BB-DD",
+weightCapacity: 1000,
 cargaMax: 1000,
-cargaTotal: 1000,
-tara: 1000,
-tempoCarregamento: 1
+totalBatCharge: 1000,
+tare: 1000,
+chargingTime: 1
 }))))),
-getAllCamioes: sinon.stub().returns(Promise.resolve(new Array((Camiao.create({
-caractCamiao: "E1234",
-matriculaCamiao: "AA-BB-DD",
-capacidadeCarga: 1000,
+getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
+caractTruck: "E1234",
+truckPlate: "AA-BB-DD",
+weightCapacity: 1000,
 cargaMax: 1000,
-cargaTotal: 1000,
-tara: 1000,
-tempoCarregamento: 1
+totalBatCharge: 1000,
+tare: 1000,
+chargingTime: 1
 }))))),
-getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Camiao.create({
-caractCamiao: "E1234",
-matriculaCamiao: "AA-BB-DD",
-capacidadeCarga: 1000,
+getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
+caractTruck: "E1234",
+truckPlate: "AA-BB-DD",
+weightCapacity: 1000,
 cargaMax: 1000,
-cargaTotal: 1000,
-tara: 1000,
-tempoCarregamento: 1
+totalBatCharge: 1000,
+tare: 1000,
+chargingTime: 1
 }))))),
-getByMatriculaAsync: sinon.stub().returns(Promise.resolve(new Array((Camiao.create({
-caractCamiao: "E1234",
-matriculaCamiao: "AA-BB-DD",
-capacidadeCarga: 1000,
+getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
+caractTruck: "E1234",
+truckPlate: "AA-BB-DD",
+weightCapacity: 1000,
 cargaMax: 1000,
-cargaTotal: 1000,
-tara: 1000,
-tempoCarregamento: 1
+totalBatCharge: 1000,
+tare: 1000,
+chargingTime: 1
 }))))),
-deleteCamiao: sinon.stub().returns(Promise.resolve(true))
+deleteTruck: sinon.stub().returns(Promise.resolve(true))
 }
 
-    const camiaoService = require('../../../src/services/camiaoService');
-    const camiaoServiceInstance = new camiaoService.default(camiaoRepo);
+    const truckService = require('../../../src/services/truckService');
+    const truckServiceInstance = new truckService.default(truckRepo);
 
-    const camiaoDTO = {
-      caractCamiao: "E1234",
-      matriculaCamiao: "AA-BB-DD",
-      capacidadeCarga: 1000,
+    const truckDTO = {
+      caractTruck: "E1234",
+      truckPlate: "AA-BB-DD",
+      weightCapacity: 1000,
       cargaMax: 1000,
-      cargaTotal: 1000,
-      tara: 1000,
-      tempoCarregamento: 10
+      totalBatCharge: 1000,
+      tare: 1000,
+      chargingTime: 10
     };
 
     try{
-      const result = await camiaoServiceInstance.updateCamiao(camiaoDTO);
+      const result = await truckServiceInstance.updateTruck(truckDTO);
 
       sinon.assert.match(result.isSuccess, false);
     } catch (E) {

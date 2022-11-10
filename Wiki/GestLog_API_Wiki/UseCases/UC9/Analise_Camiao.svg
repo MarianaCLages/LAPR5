@@ -153,7 +153,7 @@
     /></g
     ><g font-size="11px" transform="translate(1.6364,21.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="498" xml:space="preserve" y="12" clip-path="url(#clipPath2)" stroke="none"
-      >&lt;&lt;Camiao Aggregate&gt;&gt;</text
+      >&lt;&lt;Truck Aggregate&gt;&gt;</text
     ></g
     ><g font-size="11px" transform="translate(459.6364,126.5455)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="273" height="143" y="0" clip-path="url(#clipPath3)" stroke="none"
@@ -164,19 +164,19 @@
     /></g
     ><g font-size="11px" transform="matrix(1,0,0,1,459.6364,141.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="14" clip-path="url(#clipPath4)" stroke="none"
-      >-Tara</text
+      >-Tare</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,459.6364,141.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="29" clip-path="url(#clipPath4)" stroke="none"
-      >-CamiaoId</text
+      >-TruckId</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,459.6364,141.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="44" clip-path="url(#clipPath4)" stroke="none"
-      >-caractCamiao</text
+      >-caractTruck</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,459.6364,141.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="59" clip-path="url(#clipPath4)" stroke="none"
-      >-TempoCarregamento</text
+      >-ChargingTime</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,459.6364,141.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="74" clip-path="url(#clipPath4)" stroke="none"
@@ -184,15 +184,15 @@
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,459.6364,141.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="89" clip-path="url(#clipPath4)" stroke="none"
-      >-cargaTotal</text
+      >-totalBatCharge</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,459.6364,141.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="104" clip-path="url(#clipPath4)" stroke="none"
-      >-capacidadeCarga</text
+      >-weightCapacity</text
     ></g
     ><g font-size="11px" transform="matrix(1,0,0,1,459.6364,141.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="2" xml:space="preserve" y="119" clip-path="url(#clipPath4)" stroke="none"
-      >-matriculaCamiao</text
+      >-truckPlate</text
     ></g
     ><g font-size="11px" transform="translate(459.6364,126.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="116" xml:space="preserve" y="12" clip-path="url(#clipPath5)" stroke="none"
@@ -207,7 +207,7 @@
     /></g
     ><g font-size="11px" transform="translate(148.6364,101.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="67" xml:space="preserve" y="12" clip-path="url(#clipPath8)" stroke="none"
-      >Tara</text
+      >Tare</text
     ></g
     ><g font-size="11px" transform="translate(148.6364,331.5455)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="167" height="70" y="0" clip-path="url(#clipPath9)" stroke="none"
@@ -218,7 +218,7 @@
     /></g
     ><g font-size="11px" transform="translate(148.6364,331.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="38" xml:space="preserve" y="12" clip-path="url(#clipPath11)" stroke="none"
-      >MatriculaCamiao</text
+      >TruckPlate</text
     ></g
     ><g font-size="11px" transform="translate(480.6364,393.5455)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="187" height="70" y="0" clip-path="url(#clipPath12)" stroke="none"
@@ -229,7 +229,7 @@
     /></g
     ><g font-size="11px" transform="translate(480.6364,393.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="56" xml:space="preserve" y="12" clip-path="url(#clipPath14)" stroke="none"
-      >CaractCamiao</text
+      >CaractTruck</text
     ></g
     ><g font-size="11px" transform="translate(704.6364,331.5455)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="176" height="70" y="0" clip-path="url(#clipPath15)" stroke="none"
@@ -240,7 +240,7 @@
     /></g
     ><g font-size="11px" transform="translate(704.6364,331.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="41" xml:space="preserve" y="12" clip-path="url(#clipPath17)" stroke="none"
-      >CapacidadeCarga</text
+      >WeightCapacity</text
     ></g
     ><g font-size="11px" transform="translate(837.6364,126.5455)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="123" height="71" y="0" clip-path="url(#clipPath18)" stroke="none"
@@ -251,7 +251,7 @@
     /></g
     ><g font-size="11px" transform="translate(837.6364,126.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="32" xml:space="preserve" y="12" clip-path="url(#clipPath20)" stroke="none"
-      >CargaTotal</text
+      >TotalBatCharge</text
     ></g
     ><g font-size="11px" transform="translate(865.6364,229.5455)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="160" height="49" y="0" clip-path="url(#clipPath21)" stroke="none"
@@ -262,7 +262,7 @@
     /></g
     ><g font-size="11px" transform="translate(865.6364,229.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="44" xml:space="preserve" y="12" clip-path="url(#clipPath23)" stroke="none"
-      >CargaMaxima</text
+      >MaxLoadAutonomy</text
     ></g
     ><g font-size="11px" transform="translate(148.6364,216.5455)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="167" height="62" y="0" clip-path="url(#clipPath24)" stroke="none"
@@ -273,7 +273,7 @@
     /></g
     ><g font-size="11px" transform="translate(148.6364,216.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="28" xml:space="preserve" y="12" clip-path="url(#clipPath11)" stroke="none"
-      >TempoCarregamento</text
+      >ChargingTime</text
     ></g
     ><g stroke-linecap="butt" font-size="11px" transform="translate(262.6364,83.5455)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
     ><line y2="45" fill="none" x1="195" clip-path="url(#clipPath27)" x2="45" y1="45"

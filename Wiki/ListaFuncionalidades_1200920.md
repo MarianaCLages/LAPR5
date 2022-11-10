@@ -6,5 +6,5 @@
 
 | Sprint | Funcionalidade                            |
 |--------|-------------------------------------------|
-| **A**  | [UC04 - Criar Entrega](GestArm_API_Wiki/UseCases/UC4/)|
-| **A**  | [UC10 - Criar Caminho](GestLog_API_Wiki/UseCases/UC10/)|
+| **A**  | [UC04 - Criar Order](GestArm_API_Wiki/UseCases/UC4/)|
+| **A**  | [UC10 - Criar Path](GestLog_API_Wiki/UseCases/UC10/)|

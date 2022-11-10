@@ -15,11 +15,11 @@ A arquitetura de software dum sistema é a estrutura ou estruturas desse sistema
 
 Este SAD descreve a arquitetura de software do sistema a desenvolver por solicitação da Autoridade Intermunicipal de Transportes (AIT) para gestão e planeamento de transportes públicos que permite a gestão bem como consulta pelo público em geral de diferentes redes de transportes, linhas e viagens, bem como o planeamento dos serviços de viaturas e tripulantes a efetuar nessas linhas.
 
-Este SAD é desenvolvido num contexto académico de ensino-aprendizagem (no 5º semestre da LEI no ano letivo 2020-2021), em que várias competências estão a ser adquiridas ao longo do semestre pelos/as estudantes, ao mesmo tempo que desenvolvem o sistema.
+Este SAD é desenvolvido num contexto académico de ensino-aprendizagem (no 5º semestre da LEI no ano letivo 2020-2021), em que várias competências estão a ser adquiridas ao longo do semestre pelos/as estudantes, ao mesmo time que desenvolvem o sistema.
 
 Porque visa suportar o processo de ensino-aprendizagem, não tem como objetivo ser completo ou descrever a melhor arquitetura possível, mas servir de guia e exemplo, em linha com as competências a adquirir em cada iteração/sprint do projeto.
 
-Embora os/as estudantes sejam destinatários principais do SAD, as competências a adquirir pelos/as estudantes nas várias UC do semestre permitem-lhe desempenhar diferentes papéis (diferentes partes interessadas/destinatários), e.g. eliciadores (de requisitos), analistas, arquitetos de software, programadores/"testers", administradores e operadores (ops) e utilizadores.
+Embora os/as estudantes sejam destinatários princicountry do SAD, as competências a adquirir pelos/as estudantes nas várias UC do semestre permitem-lhe desempenhar diferentes papéis (diferentes partes interessadas/destinatários), e.g. eliciadores (de requisitos), analistas, arquitetos de software, programadores/"testers", administradores e operadores (ops) e utilizadores.
 
 ## How the SAD Is Organized
 >This section provides a narrative description of the seven major sections of the SAD and the overall contents of each. Readers seeking specific information can use this section to help them locate it more quickly.
@@ -67,7 +67,7 @@ e descreve as abordagens abordadas.
 > 5. Parent View
 >	- If the current view is the refinement of another view, indicate which one
 
-Neste DAS/SAD será adotado a notação UML, nomeadamente (mas não exclusivamente) diagramas de componentes, de sequência, de pacotes e de nós. Tal, garante 1.1, 1.2 e 1.3.
+Neste DAS/SAD será adotado a notação UML, nomeadamente (mas não exclusivamente) diagramas de componentes, de sequência, de packagings e de nós. Tal, garante 1.1, 1.2 e 1.3.
 
 A organização das vistas pela combinação do modelo C4 (diferentes níveis de abstração/granularidade) e modelo 4+1 vistas (vários pontos de vista da arquitetura) permite desde logo endereçar o requisito 1.4.
 

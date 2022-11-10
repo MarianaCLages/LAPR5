@@ -256,7 +256,7 @@
     ><g font-size="11px" transform="translate(55,108)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="9" width="291" height="17" y="-1" clip-path="url(#clipPath17)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath17)" stroke="none"
-      >[No caso em que o utilizador queira lista todas as entregas]</text
+      >[No caso em que o utilizador queira lista todas as orders]</text
     ></g
     ><g font-size="11px" transform="translate(303,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="410" xml:space="preserve" y="12" clip-path="url(#clipPath18)" stroke="none"
@@ -345,62 +345,62 @@
     ><g font-size="11px" transform="translate(648,204)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="119" height="15" y="0" clip-path="url(#clipPath41)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath41)" stroke="none"
-      >1.1.1: getEntregas()</text
+      >1.1.1: getOrders()</text
     ></g
     ><g font-size="11px" transform="translate(652,543)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="173" height="15" y="0" clip-path="url(#clipPath42)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath42)" stroke="none"
-      >3.1.1: getEntrega(identificação)</text
+      >3.1.1: getOrder(identificação)</text
     ></g
     ><g font-size="11px" transform="translate(128,620)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="183" height="15" y="0" clip-path="url(#clipPath43)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath43)" stroke="none"
-      >3.1.3: Mostra a entrega solicitada</text
+      >3.1.3: Mostra a order solicitada</text
     ></g
     ><g font-size="11px" transform="translate(427,600)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="126" height="15" y="0" clip-path="url(#clipPath44)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath44)" stroke="none"
-      >3.1.2: entrega(JSON)</text
+      >3.1.2: order(JSON)</text
     ></g
     ><g font-size="11px" transform="translate(398,484)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="183" height="15" y="0" clip-path="url(#clipPath43)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath43)" stroke="none"
-      >3.1: GET entrega / {identificação}</text
+      >3.1: GET order / {identificação}</text
     ></g
     ><g font-size="11px" transform="translate(115,466)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="202" height="15" y="0" clip-path="url(#clipPath45)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath45)" stroke="none"
-      >3: Introduz a identificação da entrega</text
+      >3: Introduz a identificação da order</text
     ></g
     ><g font-size="11px" transform="translate(97,402)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="242" height="15" y="0" clip-path="url(#clipPath46)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath46)" stroke="none"
-      >2.1: Pede pela identificação única da entrega</text
+      >2.1: Pede pela identificação única da order</text
     ></g
     ><g font-size="11px" transform="translate(107,319)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="218" height="15" y="0" clip-path="url(#clipPath47)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath47)" stroke="none"
-      >2: Quero ver uma entrega em específico</text
+      >2: Quero ver uma order em específico</text
     ></g
     ><g font-size="11px" transform="translate(132,236)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="175" height="15" y="0" clip-path="url(#clipPath48)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath48)" stroke="none"
-      >1.1.3: Mostra todas as entregas</text
+      >1.1.3: Mostra todas as orders</text
     ></g
     ><g font-size="11px" transform="translate(424,224)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="132" height="15" y="0" clip-path="url(#clipPath49)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath49)" stroke="none"
-      >1.1.2: entregas(JSON)</text
+      >1.1.2: orders(JSON)</text
     ></g
     ><g font-size="11px" transform="translate(424,152)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="128" height="15" y="0" clip-path="url(#clipPath50)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath50)" stroke="none"
-      >1.1: GET entregas / {}</text
+      >1.1: GET orders / {}</text
     ></g
     ><g font-size="11px" transform="translate(129,143)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="172" height="15" y="0" clip-path="url(#clipPath51)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath51)" stroke="none"
-      >1: Quero ver todas as entregas</text
+      >1: Quero ver todas as orders</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

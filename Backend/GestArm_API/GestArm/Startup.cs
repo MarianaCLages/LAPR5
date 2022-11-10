@@ -1,13 +1,13 @@
-﻿using GestArm.Domain.Armazens;
+﻿using GestArm.Domain.Warehouses;
 using GestArm.Domain.Categories;
-using GestArm.Domain.Encomendas;
+using GestArm.Domain.Orders;
 using GestArm.Domain.Families;
 using GestArm.Domain.Products;
 using GestArm.Domain.Shared;
 using GestArm.Infrastructure;
-using GestArm.Infrastructure.Armazens;
+using GestArm.Infrastructure.Warehouses;
 using GestArm.Infrastructure.Categories;
-using GestArm.Infrastructure.Encomendas;
+using GestArm.Infrastructure.Orders;
 using GestArm.Infrastructure.Families;
 using GestArm.Infrastructure.Products;
 using GestArm.Infrastructure.Shared;
@@ -69,10 +69,10 @@ public class Startup
         services.AddTransient<IFamilyRepository, FamilyRepository>();
         services.AddTransient<FamilyService>();
 
-        services.AddTransient<IArmazemRepository, ArmazemRepository>();
-        services.AddTransient<IArmazemService, ArmazemService>();
+        services.AddTransient<IWarehouseRepository, WarehouseRepository>();
+        services.AddTransient<IWarehouseService, WarehouseService>();
 
-        services.AddTransient<IEncomendasRepository, EncomendasRepository>();
-        services.AddTransient<IEncomendasService, EncomendasService>();
+        services.AddTransient<IOrdersRepository, OrdersRepository>();
+        services.AddTransient<IOrdersService, OrdersService>();
     }
 }

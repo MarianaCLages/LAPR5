@@ -612,7 +612,7 @@
     ><text x="37" xml:space="preserve" y="12" clip-path="url(#clipPath33)" stroke="none"
       >&lt;&lt;Container(C4)&gt;&gt;</text
       ><text x="43" xml:space="preserve" y="27" clip-path="url(#clipPath33)" stroke="none"
-      >GestãoArmazem</text
+      >GestãoWarehouse</text
     ></g
     ><g font-size="11px" transform="translate(1008,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="6" xml:space="preserve" y="12" clip-path="url(#clipPath34)" stroke="none"
@@ -650,7 +650,7 @@
     ><text x="37" xml:space="preserve" y="12" clip-path="url(#clipPath33)" stroke="none"
       >&lt;&lt;Container(C4)&gt;&gt;</text
       ><text x="43" xml:space="preserve" y="27" clip-path="url(#clipPath33)" stroke="none"
-      >GestãoArmazem</text
+      >GestãoWarehouse</text
     ></g
     ><g font-size="11px" transform="translate(1008,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="6" xml:space="preserve" y="12" clip-path="url(#clipPath34)" stroke="none"
@@ -971,7 +971,7 @@
     ><g font-size="11px" transform="translate(117,77)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="158" height="15" y="0" clip-path="url(#clipPath90)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath90)" stroke="none"
-      >1: Quero apagar um camião</text
+      >1: Quero deleter um camião</text
     ></g
     ><g font-size="11px" transform="translate(1935,301)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="138" height="15" y="0" clip-path="url(#clipPath91)" stroke="none"

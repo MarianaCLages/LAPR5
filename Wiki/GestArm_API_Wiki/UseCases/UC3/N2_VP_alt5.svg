@@ -205,7 +205,7 @@
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath15)" stroke="none"
       >&lt;&lt;Container (C4)&gt;&gt;</text
       ><text x="17" xml:space="preserve" y="27" clip-path="url(#clipPath15)" stroke="none"
-      >GestaoArmazem</text
+      >GestaoWarehouse</text
     ></g
     ><g font-size="11px" transform="translate(307,28)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath15)" stroke="none"
@@ -278,7 +278,7 @@
     ><g font-size="11px" transform="translate(91,134)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="202" height="15" y="0" clip-path="url(#clipPath32)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath32)" stroke="none"
-      >1.1: pede o id do armazem a eliminar</text
+      >1.1: pede o id do warehouse a eliminar</text
     ></g
     ><g font-size="11px" transform="translate(107,93)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="170" height="15" y="0" clip-path="url(#clipPath33)" stroke="none"
@@ -298,12 +298,12 @@
     ><g font-size="11px" transform="translate(647,259)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="197" height="15" y="0" clip-path="url(#clipPath36)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath36)" stroke="none"
-      >2.1.1: apagarArmazem(armazemID)</text
+      >2.1.1: deleterWarehouse(warehouseID)</text
     ></g
     ><g font-size="11px" transform="translate(388,204)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="201" height="21" y="0" clip-path="url(#clipPath37)" stroke="none"
       /><text fill="black" x="6" xml:space="preserve" y="15" clip-path="url(#clipPath37)" stroke="none"
-      >2.1: DELETE armazem / {armazemID}</text
+      >2.1: DELETE warehouse / {warehouseID}</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

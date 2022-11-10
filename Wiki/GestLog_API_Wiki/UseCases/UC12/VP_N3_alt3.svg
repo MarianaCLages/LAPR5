@@ -588,31 +588,31 @@
     ><text x="44" xml:space="preserve" y="12" clip-path="url(#clipPath36)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="52" xml:space="preserve" y="27" clip-path="url(#clipPath36)" stroke="none"
-      >CaminhoController</text
+      >PathController</text
     ></g
     ><g font-size="11px" transform="translate(1698,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="7" xml:space="preserve" y="12" clip-path="url(#clipPath37)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="20" xml:space="preserve" y="27" clip-path="url(#clipPath37)" stroke="none"
-      >CaminhoMapper</text
+      >PathMapper</text
     ></g
     ><g font-size="11px" transform="translate(2158,356)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="16" xml:space="preserve" y="12" clip-path="url(#clipPath38)" stroke="none"
-      >caminhoDTO :</text
+      >pathDTO :</text
       ><text x="19" xml:space="preserve" y="27" clip-path="url(#clipPath38)" stroke="none"
-      >caminhoDTO</text
+      >pathDTO</text
     ></g
     ><g font-size="11px" transform="translate(2467,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="30" xml:space="preserve" y="12" clip-path="url(#clipPath39)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="44" xml:space="preserve" y="27" clip-path="url(#clipPath39)" stroke="none"
-      >CaminhoService</text
+      >PathService</text
     ></g
     ><g font-size="11px" transform="translate(2888,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="57" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="63" xml:space="preserve" y="27" clip-path="url(#clipPath40)" stroke="none"
-      >CaminhoRepository</text
+      >PathRepository</text
     ></g
     ><g font-size="11px" transform="translate(972,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="5" xml:space="preserve" y="12" clip-path="url(#clipPath41)" stroke="none"
@@ -628,19 +628,19 @@
     ><text x="22" xml:space="preserve" y="12" clip-path="url(#clipPath43)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="26" xml:space="preserve" y="27" clip-path="url(#clipPath43)" stroke="none"
-      >ArmazemRepository</text
+      >WarehouseRepository</text
     ></g
     ><g font-size="11px" transform="translate(3604,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="20" xml:space="preserve" y="12" clip-path="url(#clipPath44)" stroke="none"
-      >Caminho :</text
+      >Path :</text
       ><text x="23" xml:space="preserve" y="27" clip-path="url(#clipPath44)" stroke="none"
-      >Caminho</text
+      >Path</text
     ></g
     ><g font-size="11px" transform="translate(3867,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="16" xml:space="preserve" y="12" clip-path="url(#clipPath45)" stroke="none"
-      >Armazem :</text
+      >Warehouse :</text
       ><text x="19" xml:space="preserve" y="27" clip-path="url(#clipPath45)" stroke="none"
-      >Armazem</text
+      >Warehouse</text
     ></g
     ><g stroke-linecap="butt" font-size="11px" transform="translate(283,104)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
     ><line y2="72" fill="none" x1="71" clip-path="url(#clipPath47)" x2="449" y1="72"
@@ -803,42 +803,42 @@
     ><g font-size="11px" transform="translate(2699,1093)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="152" height="15" y="0" clip-path="url(#clipPath92)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath92)" stroke="none"
-      >1.1.1.1.3.8: save(caminho)</text
+      >1.1.1.1.3.8: save(path)</text
     ></g
     ><g font-size="11px" transform="translate(2751,995)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="702" height="14" y="0" clip-path="url(#clipPath93)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath93)" stroke="none"
-      >1.1.1.1.3.7: atualizarCaminho(armazemPartida.ID, armazemChegada.ID, caminhoDto.energia, caminhoDTO.distancia, caminhoDTO.tempo)</text
+      >1.1.1.1.3.7: atualizarPath(warehouseBeginning.ID, warehouseEnding.ID, pathDto.energy, pathDTO.distance, pathDTO.time)</text
     ></g
     ><g font-size="11px" transform="translate(2609,912)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="333" height="14" y="0" clip-path="url(#clipPath94)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath94)" stroke="none"
-      >1.1.1.1.3.6: caminho = GetByIdAsync(CaminhoDTO.caminhoID)</text
+      >1.1.1.1.3.6: path = GetByIdAsync(PathDTO.pathID)</text
     ></g
     ><g font-size="11px" transform="translate(2756,828)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="430" height="14" y="0" clip-path="url(#clipPath95)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath95)" stroke="none"
-      >1.1.1.1.3.5: armazemChegada = GetByIdAsync(CaminhoDTO.armazemChegadaID)</text
+      >1.1.1.1.3.5: warehouseEnding = GetByIdAsync(PathDTO.endingWarehouseId)</text
     ></g
     ><g font-size="11px" transform="translate(2763,751)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="412" height="14" y="0" clip-path="url(#clipPath96)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath96)" stroke="none"
-      >1.1.1.1.3.4: armazemPartida = GetByIdAsync(CaminhoDTO.armazemPartidaID)</text
+      >1.1.1.1.3.4: warehouseBeginning = GetByIdAsync(PathDTO.beginningWarehouseId)</text
     ></g
     ><g font-size="11px" transform="translate(2609,662)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="247" height="14" y="0" clip-path="url(#clipPath97)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath97)" stroke="none"
-      >1.1.1.1.3.3: validaTempo(caminhoDTO.tempo)</text
+      >1.1.1.1.3.3: validaTime(pathDTO.time)</text
     ></g
     ><g font-size="11px" transform="translate(2605,562)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="257" height="14" y="0" clip-path="url(#clipPath98)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath98)" stroke="none"
-      >1.1.1.1.3.2: validaEnergia(caminhoDTO.energia)</text
+      >1.1.1.1.3.2: validaEnergy(pathDTO.energy)</text
     ></g
     ><g font-size="11px" transform="translate(2602,483)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="271" height="15" y="0" clip-path="url(#clipPath99)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath99)" stroke="none"
-      >1.1.1.1.3.1: validaDistancia(caminhoDTO.distancia)</text
+      >1.1.1.1.3.1: validaDistance(pathDTO.distance)</text
     ></g
     ><g font-size="11px" transform="translate(58,65)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="268" height="41" y="0" clip-path="url(#clipPath100)" stroke="none"
@@ -870,11 +870,11 @@
     ><g font-size="11px" transform="translate(752,159)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="254" height="50" y="0" clip-path="url(#clipPath105)" stroke="none"
       /><text fill="black" x="24" xml:space="preserve" y="14" clip-path="url(#clipPath105)" stroke="none"
-      >1.1.1: PUT caminho / {IdArmazémPartida,</text
+      >1.1.1: PUT path / {IdArmazémPartida,</text
       ><text fill="black" x="10" xml:space="preserve" y="29" clip-path="url(#clipPath105)" stroke="none"
-      >idArmazémChegada, distancia, tempo, energia,</text
+      >idArmazémChegada, distance, time, energy,</text
       ><text fill="black" x="98" xml:space="preserve" y="44" clip-path="url(#clipPath105)" stroke="none"
-      >caminhoID}</text
+      >pathID}</text
     ></g
     ><g font-size="11px" transform="translate(1888,1488)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="114" height="14" y="0" clip-path="url(#clipPath106)" stroke="none"
@@ -909,7 +909,7 @@
     ><g font-size="11px" transform="translate(1833,426)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="228" height="15" y="0" clip-path="url(#clipPath112)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath112)" stroke="none"
-      >1.1.1.1.3: atualizarCaminho(caminhoDTO)</text
+      >1.1.1.1.3: atualizarPath(pathDTO)</text
     ></g
     ><g font-size="11px" transform="translate(1903,352)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="109" height="14" y="0" clip-path="url(#clipPath113)" stroke="none"
@@ -929,14 +929,14 @@
     ><g font-size="11px" transform="translate(1095,226)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="183" height="15" y="0" clip-path="url(#clipPath116)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath116)" stroke="none"
-      >1.1.1.1: atualizarCaminho(JSON)</text
+      >1.1.1.1: atualizarPath(JSON)</text
     ></g
     ><g font-size="11px" transform="translate(376,115)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="320" height="54" y="0" clip-path="url(#clipPath117)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="24" clip-path="url(#clipPath117)" stroke="none"
-      >1.1: PUT caminho / {IdArmazémPartida, idArmazémChegada,</text
+      >1.1: PUT path / {IdArmazémPartida, idArmazémChegada,</text
       ><text fill="black" x="67" xml:space="preserve" y="39" clip-path="url(#clipPath117)" stroke="none"
-      >distancia, tempo, energia, caminhoID}</text
+      >distance, time, energy, pathID}</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

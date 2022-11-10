@@ -416,12 +416,12 @@
     ><g font-size="11px" transform="translate(481,704)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="129" height="15" y="0" clip-path="url(#clipPath45)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath45)" stroke="none"
-      >4.1.2: camioes(JSON)</text
+      >4.1.2: trucks(JSON)</text
     ></g
     ><g font-size="11px" transform="translate(699,664)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="138" height="15" y="0" clip-path="url(#clipPath46)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath46)" stroke="none"
-      >4.1.1: getCamioes(filtro)</text
+      >4.1.1: getTrucks(filtro)</text
     ></g
     ><g font-size="11px" transform="translate(477,619)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="140" height="15" y="0" clip-path="url(#clipPath47)" stroke="none"
@@ -441,27 +441,27 @@
     ><g font-size="11px" transform="translate(485,509)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="123" height="15" y="0" clip-path="url(#clipPath50)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath50)" stroke="none"
-      >3.1.2: camiao(JSON)</text
+      >3.1.2: truck(JSON)</text
     ></g
     ><g font-size="11px" transform="translate(699,473)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="158" height="15" y="0" clip-path="url(#clipPath51)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath51)" stroke="none"
-      >3.1.1: getCamiao(camiaoID)</text
+      >3.1.1: getTruck(truckID)</text
     ></g
     ><g font-size="11px" transform="translate(463,426)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="166" height="15" y="0" clip-path="url(#clipPath52)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath52)" stroke="none"
-      >3.1: GET camião / {camiaoID}</text
+      >3.1: GET camião / {truckID}</text
     ></g
     ><g font-size="11px" transform="translate(148,400)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="188" height="15" y="0" clip-path="url(#clipPath53)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath53)" stroke="none"
-      >3: insere o identificador do camião</text
+      >3: insere o identifier do camião</text
     ></g
     ><g font-size="11px" transform="translate(146,355)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="192" height="15" y="0" clip-path="url(#clipPath54)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath54)" stroke="none"
-      >2.1: pede o identificador do camião</text
+      >2.1: pede o identifier do camião</text
     ></g
     ><g font-size="11px" transform="translate(137,316)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="207" height="15" y="0" clip-path="url(#clipPath55)" stroke="none"
@@ -476,12 +476,12 @@
     ><g font-size="11px" transform="translate(482,228)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="129" height="15" y="0" clip-path="url(#clipPath45)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath45)" stroke="none"
-      >1.1.2: camioes(JSON)</text
+      >1.1.2: trucks(JSON)</text
     ></g
     ><g font-size="11px" transform="translate(698,184)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="117" height="15" y="0" clip-path="url(#clipPath57)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath57)" stroke="none"
-      >1.1.1: getCamioes()</text
+      >1.1.1: getTrucks()</text
     ></g
     ><g font-size="11px" transform="translate(487,140)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="120" height="15" y="0" clip-path="url(#clipPath58)" stroke="none"

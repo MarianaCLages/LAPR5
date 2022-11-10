@@ -456,7 +456,7 @@
     ><text x="22" xml:space="preserve" y="12" clip-path="url(#clipPath24)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="10" xml:space="preserve" y="27" clip-path="url(#clipPath24)" stroke="none"
-      >EmpacotamentoRepository</text
+      >PackagingRepository</text
     ></g
     ><g font-size="11px" transform="translate(2386,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath25)" stroke="none"
@@ -466,33 +466,33 @@
     ></g
     ><g font-size="11px" transform="translate(2222,647)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="7" xml:space="preserve" y="12" clip-path="url(#clipPath26)" stroke="none"
-      >empacotamento :</text
+      >packaging :</text
       ><text x="9" xml:space="preserve" y="27" clip-path="url(#clipPath26)" stroke="none"
-      >Empacotamento</text
+      >Packaging</text
     ></g
     ><g font-size="11px" transform="translate(2073,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="11" xml:space="preserve" y="12" clip-path="url(#clipPath27)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="9" xml:space="preserve" y="27" clip-path="url(#clipPath27)" stroke="none"
-      >EncomendaRepository</text
+      >OrderRepository</text
     ></g
     ><g font-size="11px" transform="translate(1809,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath28)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="17" xml:space="preserve" y="27" clip-path="url(#clipPath28)" stroke="none"
-      >CamiaoRepository</text
+      >TruckRepository</text
     ></g
     ><g font-size="11px" transform="translate(1536,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="14" xml:space="preserve" y="12" clip-path="url(#clipPath29)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="10" xml:space="preserve" y="27" clip-path="url(#clipPath29)" stroke="none"
-      >EmpacotamentoService</text
+      >PackagingService</text
     ></g
     ><g font-size="11px" transform="translate(1170,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="19" xml:space="preserve" y="12" clip-path="url(#clipPath30)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="10" xml:space="preserve" y="27" clip-path="url(#clipPath30)" stroke="none"
-      >EmpacotamentoController</text
+      >PackagingController</text
     ></g
     ><g font-size="11px" transform="translate(824,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath28)" stroke="none"
@@ -667,7 +667,7 @@
     ><g font-size="11px" transform="translate(99,58)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="186" height="15" y="0" clip-path="url(#clipPath70)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath70)" stroke="none"
-      >1: quero criar um empacotamento</text
+      >1: quero criar um packaging</text
     ></g
     ><g font-size="11px" transform="translate(686,972)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="127" height="15" y="0" clip-path="url(#clipPath73)" stroke="none"
@@ -717,12 +717,12 @@
     ><g font-size="11px" transform="translate(2159,416)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="264" height="15" y="0" clip-path="url(#clipPath80)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath80)" stroke="none"
-      >2.1.1.1.1.2.1: GET encomenda / {empEntregaRef}</text
+      >2.1.1.1.1.2.1: GET order / {orderRef}</text
     ></g
     ><g font-size="11px" transform="translate(1734,391)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="274" height="15" y="0" clip-path="url(#clipPath81)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath81)" stroke="none"
-      >2.1.1.1.1.2: verificaEncomendaRef(empEntregaRef)</text
+      >2.1.1.1.1.2: verificaOrderRef(orderRef)</text
     ></g
     ><g font-size="11px" transform="translate(1860,644)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="109" height="15" y="0" clip-path="url(#clipPath75)" stroke="none"
@@ -742,24 +742,24 @@
     ><g font-size="11px" transform="translate(1610,337)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="252" height="15" y="0" clip-path="url(#clipPath84)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath84)" stroke="none"
-      >2.1.1.1.1.1: verificaCamiaoRef(empCamiaoRef)</text
+      >2.1.1.1.1.1: verificaTruckRef(truckRef)</text
     ></g
     ><g font-size="11px" transform="translate(1252,298)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="341" height="15" y="0" clip-path="url(#clipPath85)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath85)" stroke="none"
-      >2.1.1.1.1: criarEmpacotamento {empEntregaRef, empCamiaoRef}</text
+      >2.1.1.1.1: criarPackaging {orderRef, truckRef}</text
     ></g
     ><g font-size="11px" transform="translate(900,260)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="332" height="15" y="0" clip-path="url(#clipPath86)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath86)" stroke="none"
-      >2.1.1.1: criarEmpacotamento {empEntregaRef, empCamiaoRef}</text
+      >2.1.1.1: criarPackaging {orderRef, truckRef}</text
     ></g
     ><g font-size="11px" transform="translate(656,208)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="186" height="31" y="0" clip-path="url(#clipPath87)" stroke="none"
       /><text fill="black" x="21" xml:space="preserve" y="12" clip-path="url(#clipPath87)" stroke="none"
-      >2.1.1: POST empacotamento</text
+      >2.1.1: POST packaging</text
       ><text fill="black" x="9" xml:space="preserve" y="27" clip-path="url(#clipPath87)" stroke="none"
-      >{empEntregaRef, empCamiaoRef}</text
+      >{orderRef, truckRef}</text
     ></g
     ><g font-size="11px" transform="translate(386,1002)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="187" height="15" y="0" clip-path="url(#clipPath88)" stroke="none"
@@ -774,9 +774,9 @@
     ><g font-size="11px" transform="translate(385,169)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="193" height="33" y="0" clip-path="url(#clipPath90)" stroke="none"
       /><text fill="black" x="29" xml:space="preserve" y="13" clip-path="url(#clipPath90)" stroke="none"
-      >2.1: POST empacotamento</text
+      >2.1: POST packaging</text
       ><text fill="black" x="13" xml:space="preserve" y="28" clip-path="url(#clipPath90)" stroke="none"
-      >{empEntregaRef, empCamiaoRef}</text
+      >{orderRef, truckRef}</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

@@ -191,7 +191,7 @@
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath15)" stroke="none"
       >&lt;&lt;Container (C4)&gt;&gt;</text
       ><text x="17" xml:space="preserve" y="27" clip-path="url(#clipPath15)" stroke="none"
-      >GestaoArmazem</text
+      >GestaoWarehouse</text
     ></g
     ><g stroke-linecap="butt" font-size="11px" transform="translate(-12,75)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
     ><line y2="50" fill="none" x1="50" clip-path="url(#clipPath17)" x2="453" y1="50"
@@ -253,12 +253,12 @@
     ><g font-size="11px" transform="translate(727,208)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="390" height="15" y="0" clip-path="url(#clipPath30)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath30)" stroke="none"
-      >1.1.1: atualizarArmazem {idArmazem, designação, endereço, coordenadas}</text
+      >1.1.1: atualizarWarehouse {idWarehouse, designação, endereço, coordenadas}</text
     ></g
     ><g font-size="11px" transform="translate(470,119)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="195" height="41" y="0" clip-path="url(#clipPath31)" stroke="none"
       /><text fill="black" x="18" xml:space="preserve" y="17" clip-path="url(#clipPath31)" stroke="none"
-      >1.1: PUT armazem {idArmazem,</text
+      >1.1: PUT warehouse {idWarehouse,</text
       ><text fill="black" x="6" xml:space="preserve" y="32" clip-path="url(#clipPath31)" stroke="none"
       >designação, endereço, coordenadas}</text
     ></g

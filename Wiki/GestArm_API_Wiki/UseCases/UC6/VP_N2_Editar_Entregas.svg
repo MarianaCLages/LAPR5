@@ -306,17 +306,17 @@
     ><g font-size="11px" transform="translate(491,789)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="394" height="16" y="0" clip-path="url(#clipPath40)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
-      >3.2: PUT camião / {id,capacidadeCarga,matricula,tara,cargaTotal,cargaMax}</text
+      >3.2: PUT camião / {id,weightCapacity,plate,tare,totalBatCharge,cargaMax}</text
     ></g
     ><g font-size="11px" transform="translate(107,751)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="242" height="16" y="0" clip-path="url(#clipPath41)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath41)" stroke="none"
-      >3.1: Pede pela identificação única da entrega</text
+      >3.1: Pede pela identificação única da order</text
     ></g
     ><g font-size="11px" transform="translate(140,642)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="173" height="16" y="0" clip-path="url(#clipPath42)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath42)" stroke="none"
-      >3: Quero editar varias entregas</text
+      >3: Quero editar varias orders</text
     ></g
     ><g font-size="11px" transform="translate(81,372)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="288" height="16" y="0" clip-path="url(#clipPath39)" stroke="none"
@@ -326,7 +326,7 @@
     ><g font-size="11px" transform="translate(437,263)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="496" height="16" y="0" clip-path="url(#clipPath43)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath43)" stroke="none"
-      >2.1: PUT Entrega / {id,dataEntrega,dataEntrega,massa,tempoCarga,tempoDescarga,ArmazemId}</text
+      >2.1: PUT Order / {id,orderDate,orderDate,mass,chargingTime,unloadingTime,WarehouseId}</text
     ></g
     ><g font-size="11px" transform="translate(123,226)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="204" height="16" y="0" clip-path="url(#clipPath44)" stroke="none"
@@ -336,12 +336,12 @@
     ><g font-size="11px" transform="translate(149,88)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="154" height="16" y="0" clip-path="url(#clipPath45)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath45)" stroke="none"
-      >1: Quero editar um entrega</text
+      >1: Quero editar um order</text
     ></g
     ><g font-size="11px" transform="translate(104,130)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="242" height="16" y="0" clip-path="url(#clipPath41)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath41)" stroke="none"
-      >1.1: Pede pela identificação única da entrega</text
+      >1.1: Pede pela identificação única da order</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

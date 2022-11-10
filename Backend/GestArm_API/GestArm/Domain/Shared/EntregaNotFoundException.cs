@@ -1,12 +1,12 @@
 namespace GestArm.Domain.Shared;
 
-public class EntregaNotFoundException : Exception
+public class OrderNotFoundException : Exception
 {
-    public EntregaNotFoundException(string message) : base(message)
+    public OrderNotFoundException(string message) : base(message)
     {
     }
 
-    public EntregaNotFoundException(string message, string details) : base(message)
+    public OrderNotFoundException(string message, string details) : base(message)
     {
         Details = details;
     }

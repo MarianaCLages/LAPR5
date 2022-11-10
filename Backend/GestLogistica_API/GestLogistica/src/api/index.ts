@@ -2,19 +2,19 @@ import { Router } from 'express';
 import auth from './routes/userRoute';
 import user from './routes/userRoute';
 import role from './routes/roleRoute';
-import caminho from './routes/caminhoRoute';
-import camiao from './routes/camiaoRoute';
-import pacote from './routes/pacoteRoute';
+import path from './routes/pathRoute';
+import truck from './routes/truckRoute';
+import packaging from './routes/packagingRoute';
 
 export default () => {
 	const app = Router();
 
-	pacote(app);
+	packaging(app);
 	auth(app);
 	user(app);
 	role(app);
-	caminho(app);
-	camiao(app);
+	path(app);
+	truck(app);
 	
 	return app
 }

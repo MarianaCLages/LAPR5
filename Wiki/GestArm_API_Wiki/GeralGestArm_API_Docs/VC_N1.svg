@@ -53,7 +53,7 @@
     ><text x="7" xml:space="preserve" y="28" clip-path="url(#clipPath3)" stroke="none"
       >Criar. Listar e Editar</text
       ><text x="23" xml:space="preserve" y="43" clip-path="url(#clipPath3)" stroke="none"
-      >um Armazem</text
+      >um Warehouse</text
     ></g
     ><g font-size="11px" transform="translate(283,119)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" stroke-opacity="1"
     ><ellipse rx="56.5" ry="31.5" clip-path="url(#clipPath2)" cx="56.5" cy="31.5" stroke="none"
@@ -65,11 +65,11 @@
     ><text x="7" xml:space="preserve" y="28" clip-path="url(#clipPath3)" stroke="none"
       >Criar, Listar e Editar</text
       ><text x="25" xml:space="preserve" y="43" clip-path="url(#clipPath3)" stroke="none"
-      >uma Entrega</text
+      >uma Order</text
     ></g
     ><g font-size="11px" transform="translate(42,134)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath4)" stroke="none"
-      >GestorArmazem</text
+      >GestorWarehouse</text
     ></g
     ><g stroke-linecap="butt" font-size="11px" transform="translate(132,7)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
     ><line y2="100" fill="none" x1="50" clip-path="url(#clipPath6)" x2="50" y1="100"

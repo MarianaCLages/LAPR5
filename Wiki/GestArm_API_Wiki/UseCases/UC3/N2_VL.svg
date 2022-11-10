@@ -218,7 +218,7 @@
       ><text x="31" xml:space="preserve" y="30" clip-path="url(#clipPath13)" stroke="none"
       >&lt;&lt;Container(C4)&gt;&gt;</text
       ><text x="5" xml:space="preserve" y="45" clip-path="url(#clipPath13)" font-weight="bold" stroke="none"
-      >MasterDataGestaoArmazem</text
+      >MasterDataGestaoWarehouse</text
     ></g
     ><g font-size="11px" transform="translate(497,127)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><circle r="9.5" clip-path="url(#clipPath4)" cx="9.5" cy="9.5" stroke="none"
@@ -228,7 +228,7 @@
     /></g
     ><g font-size="11px" transform="translate(6,362)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath15)" stroke="none"
-      >GestaoArmazem_UI</text
+      >GestaoWarehouse_UI</text
     ></g
     ><g font-size="11px" transform="translate(350,362)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" font-weight="bold" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath16)" stroke="none"

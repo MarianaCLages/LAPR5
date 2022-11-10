@@ -21,22 +21,22 @@ export default async ({ expressApp }) => {
     schema: "../persistence/schemas/roleSchema"
   };
 
-  const caminhoSchema = {
+  const pathSchema = {
     // compare with the approach followed in repos and services
-    name: "caminhoSchema",
-    schema: "../persistence/schemas/caminhoSchema"
+    name: "pathSchema",
+    schema: "../persistence/schemas/pathSchema"
   };
 
-  const camiaoSchema = {
+  const truckSchema = {
     // compare with the approach followed in repos and services
-    name: "camiaoSchema",
-    schema: "../persistence/schemas/camiaoSchema"
+    name: "truckSchema",
+    schema: "../persistence/schemas/truckSchema"
   };
 
-  const empacotamentoSchema = {
+  const packagingSchema = {
     // compare with the approach followed in repos and services
-    name: "empacotamentoSchema",
-    schema: "../persistence/schemas/empacotamentoSchema"
+    name: "packagingSchema",
+    schema: "../persistence/schemas/packagingSchema"
   };
 
   const roleController = {
@@ -44,19 +44,19 @@ export default async ({ expressApp }) => {
     path: config.controllers.role.path
   };
 
-  const caminhoController = {
-    name: config.controllers.caminho.name,
-    path: config.controllers.caminho.path
+  const pathController = {
+    name: config.controllers.path.name,
+    path: config.controllers.path.path
   };
 
-  const camiaoController = {
-    name: config.controllers.camiao.name,
-    path: config.controllers.camiao.path
+  const truckController = {
+    name: config.controllers.truck.name,
+    path: config.controllers.truck.path
   };
 
-  const pacoteController = {
-    name: config.controllers.pacote.name,
-    path: config.controllers.pacote.path
+  const packagingController = {
+    name: config.controllers.packaging.name,
+    path: config.controllers.packaging.path
   };
 
   const roleRepo = {
@@ -69,19 +69,19 @@ export default async ({ expressApp }) => {
     path: config.repos.user.path
   };
 
-  const caminhoRepo = {
-    name: config.repos.caminho.name,
-    path: config.repos.caminho.path
+  const pathRepo = {
+    name: config.repos.path.name,
+    path: config.repos.path.path
   };
 
-  const camiaoRepo = {
-    name: config.repos.camiao.name,
-    path: config.repos.camiao.path
+  const truckRepo = {
+    name: config.repos.truck.name,
+    path: config.repos.truck.path
   };
 
-  const pacoteRepo = {
-    name: config.repos.pacote.name,
-    path: config.repos.pacote.path
+  const packagingRepo = {
+    name: config.repos.packaging.name,
+    path: config.repos.packaging.path
   };
 
   const roleService = {
@@ -89,29 +89,29 @@ export default async ({ expressApp }) => {
     path: config.services.role.path
   };
 
-  const caminhoService = {
-    name: config.services.caminho.name,
-    path: config.services.caminho.path
+  const pathService = {
+    name: config.services.path.name,
+    path: config.services.path.path
   };
 
-  const camiaoService = {
-    name: config.services.camiao.name,
-    path: config.services.camiao.path
+  const truckService = {
+    name: config.services.truck.name,
+    path: config.services.truck.path
   };
 
-  const pacoteService= {
-    name: config.services.pacote.name,
-    path: config.services.pacote.path
+  const packagingService= {
+    name: config.services.packaging.name,
+    path: config.services.packaging.path
   };
 
-  const armazemRepo = {
-    name: config.repos.armazem.name,
-    path: config.repos.armazem.path
+  const warehouseRepo = {
+    name: config.repos.warehouse.name,
+    path: config.repos.warehouse.path
   };
 
-  const entregaRepo = {
-    name: config.repos.entrega.name,
-    path: config.repos.entrega.path
+  const orderRepo = {
+    name: config.repos.order.name,
+    path: config.repos.order.path
   };
 
   await dependencyInjectorLoader({
@@ -119,30 +119,30 @@ export default async ({ expressApp }) => {
     schemas: [
       userSchema,
       roleSchema,
-      caminhoSchema,
-      camiaoSchema,
-      empacotamentoSchema
+      pathSchema,
+      truckSchema,
+      packagingSchema
     ],
     controllers: [
       roleController,
-      caminhoController,
-      camiaoController,
-      pacoteController
+      pathController,
+      truckController,
+      packagingController
     ],
     repos: [
       roleRepo,
       userRepo,
-      caminhoRepo,
-      armazemRepo,
-      camiaoRepo,
-      pacoteRepo,
-      entregaRepo
+      pathRepo,
+      warehouseRepo,
+      truckRepo,
+      packagingRepo,
+      orderRepo
     ],
     services: [
       roleService,
-      caminhoService,
-      camiaoService,
-      pacoteService
+      pathService,
+      truckService,
+      packagingService
     ]
   });
   Logger.info("✌️ Schemas, Controllers, Repositories, Services, etc. loaded");

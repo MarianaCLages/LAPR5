@@ -219,12 +219,12 @@
     ><g font-size="11px" transform="translate(858,170)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="138" height="15" y="0" clip-path="url(#clipPath26)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath26)" stroke="none"
-      >1.1.1: GetAllCaminhos()</text
+      >1.1.1: GetAllPaths()</text
     ></g
     ><g font-size="11px" transform="translate(531,112)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="115" height="15" y="0" clip-path="url(#clipPath27)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath27)" stroke="none"
-      >1.1: GET caminhos</text
+      >1.1: GET paths</text
     ></g
     ><g font-size="11px" transform="translate(103,237)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="187" height="15" y="0" clip-path="url(#clipPath28)" stroke="none"

@@ -356,7 +356,7 @@
     ></g
     ><g font-size="11px" transform="translate(1599,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath24)" stroke="none"
-      >ListarArmazemMapper</text
+      >ListarWarehouseMapper</text
     ></g
     ><g font-size="11px" transform="translate(1769,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="8" xml:space="preserve" y="12" clip-path="url(#clipPath23)" stroke="none"
@@ -364,11 +364,11 @@
     ></g
     ><g font-size="11px" transform="translate(1962,278)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath25)" stroke="none"
-      >listaArmazéns : List &lt;Armazem&gt;</text
+      >listaArmazéns : List &lt;Warehouse&gt;</text
     ></g
     ><g font-size="11px" transform="translate(1463,307)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath26)" stroke="none"
-      >ListaDTOArmazem : List &lt;ArmazemDTO&gt;</text
+      >ListaDTOWarehouse : List &lt;WarehouseDTO&gt;</text
     ></g
     ><g font-size="11px" transform="translate(1302,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="16" xml:space="preserve" y="12" clip-path="url(#clipPath23)" stroke="none"
@@ -452,17 +452,17 @@
     ><g font-size="11px" transform="translate(1393,348)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="125" height="15" y="0" clip-path="url(#clipPath52)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath52)" stroke="none"
-      >2: listaArmazensDTO</text
+      >2: listaWarehousesDTO</text
     ></g
     ><g font-size="11px" transform="translate(1130,371)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="134" height="15" y="0" clip-path="url(#clipPath53)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath53)" stroke="none"
-      >2.1: listaArmazensDTO</text
+      >2.1: listaWarehousesDTO</text
     ></g
     ><g font-size="11px" transform="translate(779,217)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="123" height="15" y="0" clip-path="url(#clipPath54)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath54)" stroke="none"
-      >1.1.1: GET armazem</text
+      >1.1.1: GET warehouse</text
     ></g
     ><g font-size="11px" transform="translate(776,442)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="130" height="15" y="0" clip-path="url(#clipPath55)" stroke="none"
@@ -472,7 +472,7 @@
     ><g font-size="11px" transform="translate(1086,233)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="222" height="15" y="0" clip-path="url(#clipPath56)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath56)" stroke="none"
-      >1.1.1.1: listaArmazens = listarArmazens()</text
+      >1.1.1.1: listaWarehouses = listarWarehouses()</text
     ></g
     ><g font-size="11px" transform="translate(1347,302)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="107" height="15" y="0" clip-path="url(#clipPath57)" stroke="none"
@@ -487,12 +487,12 @@
     ><g font-size="11px" transform="translate(1377,276)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="223" height="15" y="0" clip-path="url(#clipPath59)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath59)" stroke="none"
-      >1.1.1.1.2: listaArmazéns = getArmazens()</text
+      >1.1.1.1.2: listaArmazéns = getWarehouses()</text
     ></g
     ><g font-size="11px" transform="translate(1351,247)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="294" height="15" y="0" clip-path="url(#clipPath60)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath60)" stroke="none"
-      >1.1.1.1.1: ListaDTOArmazem = map2Dto(listaArmazem)</text
+      >1.1.1.1.1: ListaDTOWarehouse = map2Dto(listaWarehouse)</text
     ></g
     ><g font-size="11px" transform="translate(121,619)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="223" height="15" y="0" clip-path="url(#clipPath59)" stroke="none"
@@ -522,7 +522,7 @@
     ><g font-size="11px" transform="translate(461,147)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="130" height="15" y="0" clip-path="url(#clipPath55)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath55)" stroke="none"
-      >1.1: GET armazem / {}</text
+      >1.1: GET warehouse / {}</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

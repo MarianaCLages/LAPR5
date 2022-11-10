@@ -542,7 +542,7 @@
     /></g
     ><g font-size="11px" transform="translate(0,37)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath37)" stroke="none"
-      >GestorArmazem</text
+      >GestorWarehouse</text
     ></g
     ><g font-size="11px" transform="translate(304,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="24" xml:space="preserve" y="12" clip-path="url(#clipPath38)" stroke="none"
@@ -554,7 +554,7 @@
     ><text x="37" xml:space="preserve" y="12" clip-path="url(#clipPath39)" stroke="none"
       >&lt;&lt;Container(C4)&gt;&gt;</text
       ><text x="43" xml:space="preserve" y="27" clip-path="url(#clipPath39)" stroke="none"
-      >GestãoArmazem</text
+      >GestãoWarehouse</text
     ></g
     ><g font-size="11px" transform="translate(881,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="54" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
@@ -826,7 +826,7 @@
     ><g font-size="11px" transform="translate(1318,367)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="121" height="15" y="0" clip-path="url(#clipPath96)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath96)" stroke="none"
-      >2.1.1.3: entregaDTO</text
+      >2.1.1.3: orderDTO</text
     ></g
     ><g font-size="11px" transform="translate(1886,316)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="123" height="15" y="0" clip-path="url(#clipPath99)" stroke="none"
@@ -851,7 +851,7 @@
     ><g font-size="11px" transform="translate(392,617)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="374" height="15" y="0" clip-path="url(#clipPath102)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath102)" stroke="none"
-      >3.1: PUT entrega / {data,massa,idArmazem,tempoColocar,tempoRetirar}</text
+      >3.1: PUT order / {data,mass,idWarehouse,timeColocar,timeRetirar}</text
     ></g
     ><g font-size="11px" transform="translate(107,596)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="185" height="15" y="0" clip-path="url(#clipPath103)" stroke="none"
@@ -861,17 +861,17 @@
     ><g font-size="11px" transform="translate(1879,357)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="130" height="15" y="0" clip-path="url(#clipPath104)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath104)" stroke="none"
-      >2.1.1.2.2: entregaDTO</text
+      >2.1.1.2.2: orderDTO</text
     ></g
     ><g font-size="11px" transform="translate(515,399)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="130" height="15" y="0" clip-path="url(#clipPath104)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath104)" stroke="none"
-      >2.1.1.4.1: entregaDTO</text
+      >2.1.1.4.1: orderDTO</text
     ></g
     ><g font-size="11px" transform="translate(824,386)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="121" height="15" y="0" clip-path="url(#clipPath96)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath96)" stroke="none"
-      >2.1.1.4: entregaDTO</text
+      >2.1.1.4: orderDTO</text
     ></g
     ><g font-size="11px" transform="translate(1319,293)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="113" height="15" y="0" clip-path="url(#clipPath105)" stroke="none"
@@ -886,27 +886,27 @@
     ><g font-size="11px" transform="translate(510,213)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="130" height="15" y="0" clip-path="url(#clipPath104)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath104)" stroke="none"
-      >2.1: GET entrega / {id}</text
+      >2.1: GET order / {id}</text
     ></g
     ><g font-size="11px" transform="translate(100,201)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="202" height="15" y="0" clip-path="url(#clipPath107)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath107)" stroke="none"
-      >2: Introduz a identificação da entrega</text
+      >2: Introduz a identificação da order</text
     ></g
     ><g font-size="11px" transform="translate(79,139)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="241" height="15" y="0" clip-path="url(#clipPath108)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath108)" stroke="none"
-      >1.1: Pede pela identificação única da entrega</text
+      >1.1: Pede pela identificação única da order</text
     ></g
     ><g font-size="11px" transform="translate(67,430)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="272" height="15" y="0" clip-path="url(#clipPath109)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath109)" stroke="none"
-      >2.1.1.4.1.1: Pede os dados para alterar as entregas</text
+      >2.1.1.4.1.1: Pede os dados para alterar as orders</text
     ></g
     ><g font-size="11px" transform="translate(120,78)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="159" height="15" y="0" clip-path="url(#clipPath110)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath110)" stroke="none"
-      >1: Quero editar uma entrega</text
+      >1: Quero editar uma order</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

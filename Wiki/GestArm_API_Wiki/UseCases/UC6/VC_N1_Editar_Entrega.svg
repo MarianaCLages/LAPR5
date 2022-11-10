@@ -45,11 +45,11 @@
     /></g
     ><g font-size="11px" transform="translate(214,20)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="38" xml:space="preserve" y="29" clip-path="url(#clipPath3)" stroke="none"
-      >Editar uma entrega</text
+      >Editar uma order</text
     ></g
     ><g font-size="11px" transform="translate(2,62)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath4)" stroke="none"
-      >GestorArmazem</text
+      >GestorWarehouse</text
     ></g
     ><g stroke-linecap="butt" font-size="11px" transform="translate(17,-10)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
     ><line y2="50" fill="none" x1="50" clip-path="url(#clipPath6)" x2="198" y1="50"

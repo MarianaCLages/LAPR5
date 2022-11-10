@@ -217,7 +217,7 @@
     /></g
     ><g font-size="11px" transform="matrix(1,-0,0,1,-42.0046,-37.9853) translate(541,172)" fill-opacity="1" fill="black" text-rendering="optimizeLegibility" image-rendering="optimizeQuality" stroke="black" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="12" clip-path="url(#clipPath13)" stroke="none"
-      >O Gestor de Armazéns só quer editar uma entrega.</text
+      >O Gestor de Armazéns só quer editar uma order.</text
     ></g
     ><g font-size="11px" transform="translate(-42,-38) matrix(2.63,0,0,0.28,243.7223,692.1632)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" stroke-opacity="1"
     ><path d="M155.9991 152.9747 L155.9991 53.0115 L255.9991 52.9884 L255.9991 152.9514 L155.9991 152.9747 Z" fill-rule="evenodd" clip-path="url(#clipPath10)" stroke="none"
@@ -227,7 +227,7 @@
     /></g
     ><g font-size="11px" transform="matrix(1,-0,0,1,-42.0179,-37.9805) translate(653,707)" fill-opacity="1" fill="black" text-rendering="optimizeLegibility" image-rendering="optimizeQuality" stroke="black" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="12" clip-path="url(#clipPath16)" stroke="none"
-      >O Gestor de Armazéns quer editar várias entregas.</text
+      >O Gestor de Armazéns quer editar várias orders.</text
     ></g
     ><g font-size="11px" transform="translate(23,97)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><circle r="7" clip-path="url(#clipPath17)" cx="7" cy="9" stroke="none"
@@ -358,17 +358,17 @@
     ><g font-size="11px" transform="translate(125,635)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="265" height="15" y="0" clip-path="url(#clipPath47)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath47)" stroke="none"
-      >6.1: Pede que atributo da entrega pretende alterar</text
+      >6.1: Pede que atributo da order pretende alterar</text
     ></g
     ><g font-size="11px" transform="translate(157,584)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="202" height="15" y="0" clip-path="url(#clipPath48)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath48)" stroke="none"
-      >6: Introduz a identificação da entrega</text
+      >6: Introduz a identificação da order</text
     ></g
     ><g font-size="11px" transform="translate(165,490)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="167" height="15" y="0" clip-path="url(#clipPath49)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath49)" stroke="none"
-      >5: Quero editar várias entrega</text
+      >5: Quero editar várias order</text
     ></g
     ><g font-size="11px" transform="translate(105,422)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="288" height="15" y="0" clip-path="url(#clipPath45)" stroke="none"
@@ -393,17 +393,17 @@
     ><g font-size="11px" transform="translate(115,220)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="265" height="15" y="0" clip-path="url(#clipPath47)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath47)" stroke="none"
-      >2.1: Pede que atributo da entrega pretende alterar</text
+      >2.1: Pede que atributo da order pretende alterar</text
     ></g
     ><g font-size="11px" transform="translate(148,166)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="202" height="15" y="0" clip-path="url(#clipPath48)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath48)" stroke="none"
-      >2: Introduz a identificação da entrega</text
+      >2: Introduz a identificação da order</text
     ></g
     ><g font-size="11px" transform="translate(173,86)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="153" height="15" y="0" clip-path="url(#clipPath52)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath52)" stroke="none"
-      >1: Quero editar um entrega</text
+      >1: Quero editar um order</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

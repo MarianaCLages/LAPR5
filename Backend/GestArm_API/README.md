@@ -11,7 +11,7 @@ a API corre através do Dotnet e a linguagem para o seu desenvolvimento é o C#.
 ### Entidade da API:
 
 * Armazém
-* Entregas
+* Orders
 
 ### Base de dados:
 

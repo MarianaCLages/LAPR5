@@ -19,7 +19,7 @@ const attachCurrentUser = async (req, res, next) => {
     const userRepo = Container.get(config.repos.user.name) as IUserRepo
 
     if( !req.token || req.token == undefined )
-      next( new Error("Token inexistente ou inválido ") );
+      next( new Error("Token inexistsnte ou inválido ") );
 
     const id = req.token.id;
 

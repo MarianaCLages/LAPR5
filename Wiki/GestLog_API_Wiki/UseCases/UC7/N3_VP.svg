@@ -465,7 +465,7 @@
     ><g font-size="11px" transform="translate(1270,297)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="234" height="15" y="0" clip-path="url(#clipPath50)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath50)" stroke="none"
-      >2.1.1.2: camiao = criarCamiao(camiaoDTO)</text
+      >2.1.1.2: truck = criarTruck(truckDTO)</text
     ></g
     ><g font-size="11px" transform="translate(1231,218)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="147" height="15" y="0" clip-path="url(#clipPath51)" stroke="none"
@@ -520,7 +520,7 @@
     ><g font-size="11px" transform="translate(473,184)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="408" height="15" y="0" clip-path="url(#clipPath59)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath59)" stroke="none"
-      >2.1: POST camião/{id, tara, capacidadeCarga, cargaMax, tempoCarregamento}</text
+      >2.1: POST camião/{id, tare, weightCapacity, cargaMax, chargingTime}</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

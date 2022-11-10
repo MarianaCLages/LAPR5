@@ -698,7 +698,7 @@
     ><text x="155" xml:space="preserve" y="15" clip-path="url(#clipPath7)" stroke="none"
       >references</text
       ><text x="4" xml:space="preserve" y="30" clip-path="url(#clipPath7)" stroke="none"
-      > : Entrega [*] {unique}</text
+      > : Order [*] {unique}</text
       ><text x="4" xml:space="preserve" y="45" clip-path="url(#clipPath7)" stroke="none"
       > : Rota {unique}</text
     ></g
@@ -743,7 +743,7 @@
     ><text x="89" xml:space="preserve" y="15" clip-path="url(#clipPath14)" stroke="none"
       >references</text
       ><text x="4" xml:space="preserve" y="30" clip-path="url(#clipPath14)" stroke="none"
-      > : Caminho [1..*] {unique}</text
+      > : Path [1..*] {unique}</text
     ></g
     ><g font-size="11px" transform="translate(436,260)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="342" height="192" y="0" clip-path="url(#clipPath15)" stroke="none"
@@ -791,15 +791,15 @@
     ><text x="155" xml:space="preserve" y="15" clip-path="url(#clipPath20)" stroke="none"
       >references</text
       ><text x="4" xml:space="preserve" y="30" clip-path="url(#clipPath20)" stroke="none"
-      > : Tara {unique}</text
+      > : Tare {unique}</text
       ><text x="4" xml:space="preserve" y="45" clip-path="url(#clipPath20)" stroke="none"
       > : Autonomia {unique}</text
       ><text x="4" xml:space="preserve" y="60" clip-path="url(#clipPath20)" stroke="none"
-      > : TempoCarregamento {unique}</text
+      > : ChargingTime {unique}</text
       ><text x="4" xml:space="preserve" y="75" clip-path="url(#clipPath20)" stroke="none"
-      > : CargaMaxima {unique}</text
+      > : MaxLoadAutonomy {unique}</text
       ><text x="4" xml:space="preserve" y="90" clip-path="url(#clipPath20)" stroke="none"
-      > : CapacidadeCarga {unique}</text
+      > : WeightCapacity {unique}</text
       ><text x="4" xml:space="preserve" y="105" clip-path="url(#clipPath20)" stroke="none"
       > : Plano [*] {unique}</text
       ><text x="4" xml:space="preserve" y="120" clip-path="url(#clipPath20)" stroke="none"
@@ -816,23 +816,23 @@
     ><text x="153" xml:space="preserve" y="12" clip-path="url(#clipPath21)" stroke="none"
       >&lt;&lt;Entity&gt;&gt;</text
       ><text x="156" xml:space="preserve" y="27" clip-path="url(#clipPath21)" font-weight="bold" stroke="none"
-      >Caminho</text
+      >Path</text
     ></g
     ><g font-size="11px" transform="translate(2667,418)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="155" xml:space="preserve" y="15" clip-path="url(#clipPath22)" stroke="none"
       >references</text
       ><text x="4" xml:space="preserve" y="30" clip-path="url(#clipPath22)" stroke="none"
-      > : EnergiaAGastar {unique}</text
+      > : EnergyAGastar {unique}</text
       ><text x="4" xml:space="preserve" y="45" clip-path="url(#clipPath22)" stroke="none"
-      > : Tempo {unique}</text
+      > : Time {unique}</text
       ><text x="4" xml:space="preserve" y="60" clip-path="url(#clipPath22)" stroke="none"
       > : Distância {unique}</text
       ><text x="4" xml:space="preserve" y="75" clip-path="url(#clipPath22)" stroke="none"
-      > : ArmazemChegadaID {unique}</text
+      > : EndingWarehouseId {unique}</text
       ><text x="4" xml:space="preserve" y="90" clip-path="url(#clipPath22)" stroke="none"
-      > : ArmazemPartidaID {unique}</text
+      > : BeginningWarehouseId {unique}</text
       ><text x="4" xml:space="preserve" y="105" clip-path="url(#clipPath22)" stroke="none"
-      > : TempoExtraCarregamento {unique}</text
+      > : TimeExtraCarregamento {unique}</text
       ><text x="4" xml:space="preserve" y="120" clip-path="url(#clipPath22)" stroke="none"
       > : Armazém {unique}</text
       ><text x="4" xml:space="preserve" y="135" clip-path="url(#clipPath22)" stroke="none"
@@ -849,21 +849,21 @@
     ><text x="126" xml:space="preserve" y="12" clip-path="url(#clipPath24)" stroke="none"
       >&lt;&lt;Entity&gt;&gt;</text
       ><text x="133" xml:space="preserve" y="27" clip-path="url(#clipPath24)" font-weight="bold" stroke="none"
-      >Entrega</text
+      >Order</text
     ></g
     ><g font-size="11px" transform="translate(677,1956)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="127" xml:space="preserve" y="15" clip-path="url(#clipPath25)" stroke="none"
       >references</text
       ><text x="4" xml:space="preserve" y="30" clip-path="url(#clipPath25)" stroke="none"
-      > : EntregaID {unique}</text
+      > : OrderID {unique}</text
       ><text x="4" xml:space="preserve" y="45" clip-path="url(#clipPath25)" stroke="none"
-      > : DataEntrega {unique}</text
+      > : OrderDate {unique}</text
       ><text x="4" xml:space="preserve" y="60" clip-path="url(#clipPath25)" stroke="none"
-      > : MassaEntrega {unique}</text
+      > : OrderMass {unique}</text
       ><text x="4" xml:space="preserve" y="75" clip-path="url(#clipPath25)" stroke="none"
-      > : TempoCarga {unique}</text
+      > : ChargingTime {unique}</text
       ><text x="4" xml:space="preserve" y="90" clip-path="url(#clipPath25)" stroke="none"
-      > : TempoDescarga {unique}</text
+      > : UnloadingTime {unique}</text
       ><text x="4" xml:space="preserve" y="105" clip-path="url(#clipPath25)" stroke="none"
       > : Armazém {unique}</text
       ><text x="4" xml:space="preserve" y="120" clip-path="url(#clipPath25)" stroke="none"
@@ -966,7 +966,7 @@
     ><text x="30" xml:space="preserve" y="12" clip-path="url(#clipPath32)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="60" xml:space="preserve" y="27" clip-path="url(#clipPath32)" font-weight="bold" stroke="none"
-      >Tara</text
+      >Tare</text
     ></g
     ><g font-size="11px" transform="translate(2485,1844)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="146" height="75" y="0" clip-path="url(#clipPath34)" stroke="none"
@@ -992,7 +992,7 @@
     ><text x="30" xml:space="preserve" y="12" clip-path="url(#clipPath32)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="18" xml:space="preserve" y="27" clip-path="url(#clipPath32)" font-weight="bold" stroke="none"
-      >TempoCarregamento</text
+      >ChargingTime</text
     ></g
     ><g font-size="11px" transform="translate(3032,2084)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="150" height="73" y="0" clip-path="url(#clipPath35)" stroke="none"
@@ -1005,7 +1005,7 @@
     ><text x="32" xml:space="preserve" y="12" clip-path="url(#clipPath36)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="39" xml:space="preserve" y="27" clip-path="url(#clipPath36)" font-weight="bold" stroke="none"
-      >CargaMaxima</text
+      >MaxLoadAutonomy</text
     ></g
     ><g font-size="11px" transform="translate(2925,2254)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="146" height="73" y="0" clip-path="url(#clipPath38)" stroke="none"
@@ -1018,7 +1018,7 @@
     ><text x="30" xml:space="preserve" y="12" clip-path="url(#clipPath32)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="27" xml:space="preserve" y="27" clip-path="url(#clipPath32)" font-weight="bold" stroke="none"
-      >CapacidadeCarga</text
+      >WeightCapacity</text
     ></g
     ><g font-size="11px" transform="translate(2646,713)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="144" height="76" y="0" clip-path="url(#clipPath39)" stroke="none"
@@ -1031,7 +1031,7 @@
     ><text x="29" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="23" xml:space="preserve" y="27" clip-path="url(#clipPath40)" font-weight="bold" stroke="none"
-      >ArmazemPartidaID</text
+      >BeginningWarehouseId</text
     ></g
     ><g font-size="11px" transform="translate(2762,822)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="143" height="75" y="0" clip-path="url(#clipPath42)" stroke="none"
@@ -1044,7 +1044,7 @@
     ><text x="28" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="18" xml:space="preserve" y="27" clip-path="url(#clipPath40)" font-weight="bold" stroke="none"
-      >ArmazemChegadaID</text
+      >EndingWarehouseId</text
     ></g
     ><g font-size="11px" transform="translate(2862,715)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="143" height="75" y="0" clip-path="url(#clipPath42)" stroke="none"
@@ -1070,7 +1070,7 @@
     ><text x="29" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="53" xml:space="preserve" y="27" clip-path="url(#clipPath40)" font-weight="bold" stroke="none"
-      >Tempo</text
+      >Time</text
     ></g
     ><g font-size="11px" transform="translate(2886,183)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="143" height="75" y="0" clip-path="url(#clipPath42)" stroke="none"
@@ -1083,7 +1083,7 @@
     ><text x="29" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="29" xml:space="preserve" y="27" clip-path="url(#clipPath40)" font-weight="bold" stroke="none"
-      >EnergiaAGastar</text
+      >EnergyAGastar</text
     ></g
     ><g font-size="11px" transform="translate(631,2228)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="144" height="76" y="0" clip-path="url(#clipPath39)" stroke="none"
@@ -1096,7 +1096,7 @@
     ><text x="29" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="46" xml:space="preserve" y="27" clip-path="url(#clipPath40)" font-weight="bold" stroke="none"
-      >EntregaID</text
+      >OrderID</text
     ></g
     ><g font-size="11px" transform="translate(737,2362)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="144" height="75" y="0" clip-path="url(#clipPath44)" stroke="none"
@@ -1109,7 +1109,7 @@
     ><text x="29" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="39" xml:space="preserve" y="27" clip-path="url(#clipPath40)" font-weight="bold" stroke="none"
-      >DataEntrega</text
+      >OrderDate</text
     ></g
     ><g font-size="11px" transform="translate(839,2228)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="144" height="75" y="0" clip-path="url(#clipPath44)" stroke="none"
@@ -1122,7 +1122,7 @@
     ><text x="29" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="34" xml:space="preserve" y="27" clip-path="url(#clipPath40)" font-weight="bold" stroke="none"
-      >MassaEntrega</text
+      >OrderMass</text
     ></g
     ><g font-size="11px" transform="translate(841,1718)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="144" height="75" y="0" clip-path="url(#clipPath44)" stroke="none"
@@ -1135,7 +1135,7 @@
     ><text x="29" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="37" xml:space="preserve" y="27" clip-path="url(#clipPath40)" font-weight="bold" stroke="none"
-      >TempoCarga</text
+      >ChargingTime</text
     ></g
     ><g font-size="11px" transform="translate(631,1643)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="144" height="75" y="0" clip-path="url(#clipPath44)" stroke="none"
@@ -1148,7 +1148,7 @@
     ><text x="29" xml:space="preserve" y="12" clip-path="url(#clipPath40)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="29" xml:space="preserve" y="27" clip-path="url(#clipPath40)" font-weight="bold" stroke="none"
-      >TempoDescarga</text
+      >UnloadingTime</text
     ></g
     ><g font-size="11px" transform="translate(2762,68)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="163" height="75" y="0" clip-path="url(#clipPath45)" stroke="none"
@@ -1161,7 +1161,7 @@
     ><text x="39" xml:space="preserve" y="12" clip-path="url(#clipPath46)" stroke="none"
       >&lt;&lt;ValueObject&gt;&gt;</text
       ><text x="12" xml:space="preserve" y="27" clip-path="url(#clipPath46)" font-weight="bold" stroke="none"
-      >TempoExtraCarregamento</text
+      >TimeExtraCarregamento</text
     ></g
     ><g font-size="11px" transform="translate(1093,576)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" stroke-opacity="1"
     ><rect x="0" width="222" height="20" y="0" clip-path="url(#clipPath48)" stroke="none"
@@ -1172,7 +1172,7 @@
     /></g
     ><g font-size="11px" transform="translate(1093,596)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="477" xml:space="preserve" y="12" clip-path="url(#clipPath49)" stroke="none"
-      >&lt;&lt;Empacotamento Aggregate&gt;&gt;</text
+      >&lt;&lt;Packaging Aggregate&gt;&gt;</text
     ></g
     ><g font-size="11px" transform="translate(1499,658)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="306" height="190" y="0" clip-path="url(#clipPath23)" stroke="none"
@@ -1187,7 +1187,7 @@
       ><text x="125" xml:space="preserve" y="27" clip-path="url(#clipPath50)" stroke="none"
       >&lt;&lt;Entity&gt;&gt;</text
       ><text x="110" xml:space="preserve" y="42" clip-path="url(#clipPath50)" font-weight="bold" stroke="none"
-      >Empacotamento</text
+      >Packaging</text
     ></g
     ><g font-size="11px" transform="translate(1499,702)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="127" xml:space="preserve" y="15" clip-path="url(#clipPath51)" stroke="none"
@@ -1195,7 +1195,7 @@
       ><text x="4" xml:space="preserve" y="30" clip-path="url(#clipPath51)" stroke="none"
       > : Camião {unique}</text
       ><text x="4" xml:space="preserve" y="45" clip-path="url(#clipPath51)" stroke="none"
-      > : Entrega {unique}</text
+      > : Order {unique}</text
       ><text x="4" xml:space="preserve" y="60" clip-path="url(#clipPath51)" stroke="none"
       > : PosiçaoX {unique}</text
       ><text x="4" xml:space="preserve" y="75" clip-path="url(#clipPath51)" stroke="none"
@@ -1880,7 +1880,7 @@
     ><g font-size="11px" transform="translate(12,1193)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><path d="M8 0 L13 13 L3 13 Z" stroke="none" clip-path="url(#clipPath172)"
       /><text x="28" xml:space="preserve" y="12" clip-path="url(#clipPath171)" transform="translate(-10,0)" stroke="none"
-      >entrega a partir de</text
+      >order a partir de</text
     ></g
     ><g font-size="11px" transform="translate(127,1088)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><path d="M8 0 L13 13 L3 13 Z" stroke="none" clip-path="url(#clipPath174)"

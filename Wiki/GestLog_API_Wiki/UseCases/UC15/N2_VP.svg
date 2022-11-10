@@ -262,12 +262,12 @@
     ><g font-size="11px" transform="translate(809,202)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="332" height="15" y="0" clip-path="url(#clipPath32)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath32)" stroke="none"
-      >2.1.1: updateEmpacotamento(empEntregaRef, empCamiaoRef)</text
+      >2.1.1: updatePackaging(orderRef, truckRef)</text
     ></g
     ><g font-size="11px" transform="translate(410,179)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="322" height="15" y="0" clip-path="url(#clipPath33)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath33)" stroke="none"
-      >2.1: PUT empacotamento / {empEntregaRef, empCamiaoRef}</text
+      >2.1: PUT packaging / {orderRef, truckRef}</text
     ></g
     ><g font-size="11px" transform="translate(107,398)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="214" height="15" y="0" clip-path="url(#clipPath34)" stroke="none"
@@ -292,7 +292,7 @@
     ><g font-size="11px" transform="translate(116,34)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="194" height="15" y="0" clip-path="url(#clipPath38)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath38)" stroke="none"
-      >1: Quero editar um empacotamento</text
+      >1: Quero editar um packaging</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

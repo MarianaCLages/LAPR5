@@ -172,7 +172,7 @@
       ><text x="90" xml:space="preserve" y="30" clip-path="url(#clipPath5)" stroke="none"
       >&lt;&lt;Container (C4)&gt;&gt;</text
       ><text x="64" xml:space="preserve" y="45" clip-path="url(#clipPath5)" font-weight="bold" stroke="none"
-      >MasterDataGestaoArmazens</text
+      >MasterDataGestaoWarehouses</text
     ></g
     ><g font-size="11px" transform="translate(140.1429,154.4286)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" font-weight="bold" stroke-opacity="1"
     ><rect x="0" width="266" height="93" y="0" clip-path="url(#clipPath10)" stroke="none"

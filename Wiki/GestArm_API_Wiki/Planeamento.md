@@ -27,6 +27,6 @@ A distribuição de requisitos/funcionalidades ao longo do período de desenvolv
 | Criação Armazém                       | **[1200601](SprintA/1200601)** |          |          |
 | Listar Armazém                        | **[1201346](SprintA/1201346)** |          |          |
 | Editar Armazém                        | **[1200902](SprintA/1200902)** |          |          |
-| Criação Entrega                       | **[1200920](SprintA/1200920)** |          |          |
-| Listar Entrega                        | **[1200920](SprintA/1200920)** |          |          |
-| Editar Entrega                        | **[1200601](SprintA/1200601)** |          |          |
+| Criação Order                       | **[1200920](SprintA/1200920)** |          |          |
+| Listar Order                        | **[1200920](SprintA/1200920)** |          |          |
+| Editar Order                        | **[1200601](SprintA/1200601)** |          |          |

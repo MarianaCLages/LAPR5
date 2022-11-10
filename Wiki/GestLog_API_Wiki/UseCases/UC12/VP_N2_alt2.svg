@@ -251,7 +251,7 @@
     ><g font-size="11px" transform="translate(860,200)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="516" height="15" y="0" clip-path="url(#clipPath30)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath30)" stroke="none"
-      >1.1.1: atualizarCaminho(idArmazémPartida,idArmazémChegada,distancia,tempo,energia, caminhoID)</text
+      >1.1.1: atualizarPath(idArmazémPartida,idArmazémChegada,distance,time,energy, pathID)</text
     ></g
     ><g font-size="11px" transform="translate(195,444)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="190" height="15" y="0" clip-path="url(#clipPath31)" stroke="none"
@@ -281,11 +281,11 @@
     ><g font-size="11px" transform="translate(560,99)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="216" height="49" y="0" clip-path="url(#clipPath36)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="14" clip-path="url(#clipPath36)" stroke="none"
-      >1.1: PUT caminho / {IdArmazémPartida,</text
+      >1.1: PUT path / {IdArmazémPartida,</text
       ><text fill="black" x="13" xml:space="preserve" y="29" clip-path="url(#clipPath36)" stroke="none"
-      >idArmazémChegada, distancia, tempo,</text
+      >idArmazémChegada, distance, time,</text
       ><text fill="black" x="58" xml:space="preserve" y="44" clip-path="url(#clipPath36)" stroke="none"
-      >energia, caminhoID}</text
+      >energy, pathID}</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

@@ -515,7 +515,7 @@
     ></g
     ><g font-size="11px" transform="translate(1865,273)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath42)" stroke="none"
-      >Armazem</text
+      >Warehouse</text
     ></g
     ><g stroke-linecap="butt" font-size="11px" transform="translate(365,188)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
     ><line y2="45" fill="none" x1="46" clip-path="url(#clipPath44)" x2="387" y1="45"
@@ -658,7 +658,7 @@
     ><g font-size="11px" transform="translate(1619,578)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="80" height="15" y="0" clip-path="url(#clipPath80)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath80)" stroke="none"
-      >7: armazem</text
+      >7: warehouse</text
     ></g
     ><g font-size="11px" transform="translate(1935,521)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="170" height="15" y="0" clip-path="url(#clipPath81)" stroke="none"
@@ -718,7 +718,7 @@
     ><g font-size="11px" transform="translate(1695,670)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="145" height="15" y="0" clip-path="url(#clipPath91)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath91)" stroke="none"
-      >7.1: AddAsync(armazem)</text
+      >7.1: AddAsync(warehouse)</text
     ></g
     ><g font-size="11px" transform="translate(1215,251)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="132" height="15" y="0" clip-path="url(#clipPath92)" stroke="none"
@@ -733,7 +733,7 @@
     ><g font-size="11px" transform="translate(401,205)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="365" height="15" y="0" clip-path="url(#clipPath94)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath94)" stroke="none"
-      >2.1: POST armazem/ {alphaId,designação,endereço,latitude,longitude}</text
+      >2.1: POST warehouse/ {alphaId,designação,endereço,latitude,longitude}</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

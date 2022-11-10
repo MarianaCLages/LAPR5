@@ -46,17 +46,17 @@ export default {
             name: "RoleController",
             path: "../controllers/roleController"
         },
-        caminho: {
-            name: "CaminhoController",
-            path: "../controllers/caminhoController"
+        path: {
+            name: "PathController",
+            path: "../controllers/pathController"
         },
-        camiao: {
-            name: "CamiaoController",
-            path: "../controllers/camiaoController"
+        truck: {
+            name: "TruckController",
+            path: "../controllers/truckController"
         },
-        pacote: {
-            name: "PacoteController",
-            path: "../controllers/pacoteController"
+        packaging: {
+            name: "PackagingController",
+            path: "../controllers/packagingController"
         }
     },
 
@@ -69,25 +69,25 @@ export default {
             name: "UserRepo",
             path: "../repos/userRepo"
         },
-        caminho: {
-            name: "CaminhoRepo",
-            path: "../repos/caminhoRepo"
+        path: {
+            name: "PathRepo",
+            path: "../repos/pathRepo"
         },
-        camiao: {
-            name: "CamiaoRepo",
-            path: "../repos/camiaoRepo"
+        truck: {
+            name: "TruckRepo",
+            path: "../repos/truckRepo"
         },
-        armazem: {
-            name: "ArmazemRepo",
-            path: "../repos/AmazemAPIGetter"
+        warehouse: {
+            name: "WarehouseRepo",
+            path: "../repos/WarehouseAPIGetter"
         },
-        pacote: {
-            name: "EmpacotamentoRepo",
-            path: "../repos/empacotamentoRepo"
+        packaging: {
+            name: "PackagingRepo",
+            path: "../repos/packagingRepo"
         },
-        entrega: {
-            name: "EncomendaAPIGetter",
-            path: "../repos/EncomendaAPIGetter"
+        order: {
+            name: "OrderAPIGetter",
+            path: "../repos/OrderAPIGetter"
         },
     },
 
@@ -96,23 +96,23 @@ export default {
             name: "RoleService",
             path: "../services/roleService"
         },
-        caminho: {
-            name: "CaminhoService",
-            path: "../services/caminhoService"
+        path: {
+            name: "PathService",
+            path: "../services/pathService"
         },
-        camiao: {
-            name: "CamiaoService",
-            path: "../services/camiaoService"
+        truck: {
+            name: "TruckService",
+            path: "../services/truckService"
         },
-        pacote: {
-            name: "PacoteService",
-            path: "../services/pacoteService"
+        packaging: {
+            name: "PackagingService",
+            path: "../services/packagingService"
         }
     },
 
-    amazemAPIAdress: "https://localhost:5001/api/armazem/search/",
-    encomendaAPIAdress: "https://localhost:5001/api/encomenda/search/",
+    warehouseAPIAdress: "https://localhost:5001/api/warehouse/search/",
+    orderAPIAdress: "https://localhost:5001/api/order/search/",
     armazenIDNumberOfCharacters: 3,
-    errorNotFoundArmazem: "Não foi encontrado um armazem com esse ID!",
-    errorNotFoundEncomenda: "Não foi encontrado nenhuma encomenda!"
+    errorNotFoundWarehouse: "A warehouse with that ID was not found!",
+    errorNotFoundOrder: "Não foi encontrado nenhuma order!"
 };

@@ -269,7 +269,7 @@
     ><g font-size="11px" transform="translate(674,171)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="155" height="15" y="0" clip-path="url(#clipPath31)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath31)" stroke="none"
-      >2.1.1: GetById(armazemID)</text
+      >2.1.1: GetById(warehouseID)</text
     ></g
     ><g font-size="11px" transform="translate(126,383)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="214" height="15" y="0" clip-path="url(#clipPath32)" stroke="none"
@@ -299,7 +299,7 @@
     ><g font-size="11px" transform="translate(438,146)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="187" height="15" y="0" clip-path="url(#clipPath36)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath36)" stroke="none"
-      >2.1: GET armazem / {armazemID}</text
+      >2.1: GET warehouse / {warehouseID}</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

@@ -8,9 +8,9 @@ As Warehouse Employee, I want to create a Warehouse.
 
 **AC1:** A identificação do armazém é um código único alfanúmerico com 3 caracteres.
 
-**AC2:** Endereço do Armazem tem de indicar a rua, número de porta, código postal, endereço da cidade e país.
+**AC2:** Endereço do Warehouse tem de indicar a street, número de porta, código postal, endereço da city e país.
 
-**AC3:** Latitude e Longitude devem ser apresentado por grau,minuto e segundos.
+**AC3:** Latitude e Longitude devem ser apresentado por grau,minuto e seconds.
 
 ## 2. Análise
 
@@ -22,21 +22,21 @@ Iremos testar a criação do Armazém fazendo Post Requests á API através do s
 ## 2.2. Análise
 
 Esta é a estrutura de analise de armazém que chegamos segundo o cliente:
-![Analise_Armazem](Analise_Armazem.svg)
+![Analise_Warehouse](Analise_Warehouse.svg)
 
 
 Como podemos observar os objetos: Latitude e Longitude pertencem ao mesmo objeto Coordenadas,
-sendo que o objeto Coordenadas está a usar a estrutura de graus,minutos e segundos, o objeto também
+sendo que o objeto Coordenadas está a usar a estrutura de degrees,minutes e seconds, o objeto também
 tem as regras de negócio implementadas.
 
-O ArmazemID será o ID de identificação na Base de Dados, já o Alpha Numeric ID é a identificação
+O WarehouseID será o ID de identificação na Base de Dados, já o Alpha Numeric ID é a identificação
 de negócio pedida pelo cliente.
 
-![VP_N1_Armazem](VP_N1_Armazem.svg)
+![VP_N1_Warehouse](VP_N1_Warehouse.svg)
 
 Numa interação entre cliente e sistema, sem entrar muito em design, o cliente pede
-ao sistema que deseja criar um armazem e o sistema pede as informações dele. Após o cliente
-colocar corretamente as informações do Armazem, este entrará na base de dados com sucesso.
+ao sistema que deseja criar um warehouse e o sistema pede as informações dele. Após o cliente
+colocar corretamente as informações do Warehouse, este entrará na base de dados com sucesso.
 
 Como atualmente não há tecnicamente nenhuma UI nem roles pois nesta fase do projeto as USs
 são testadas através de requests, assumimos que estes pedidos venham de um software que envie requests.
@@ -52,9 +52,9 @@ para a satisfação da US. O Service chamará o repositório que fará as comuni
 
 # 3.2 Vistas de Design
 
-![VL_N3_Armazem](VL_N3_Armazem.svg)
+![VL_N3_Warehouse](VL_N3_Warehouse.svg)
 
-![VP_N3_Armazem](VP_N3_Armazem.svg)
+![VP_N3_Warehouse](VP_N3_Warehouse.svg)
 
 
 Como podemos obervar no VP, após o POST request que o cliente envia á API, o Controller converte o corpo num DTO, este será enviado para o Service,
@@ -83,19 +83,19 @@ respeita as regras de negócio do cliente.
 
 ### Integration Testing
 
-* Adiciona um armazem, através do AddSync devolvendo um DTO
+* Adiciona um warehouse, através do AddSync devolvendo um DTO
 
   
     [Fact]
-    public void AddAsyncIntegrationTest_ShouldAddAnArmazem()
+    public void AddAsyncIntegrationTest_ShouldAddAnWarehouse()
     {
   
 
     //ARRANGE
-    var arm = new Armazem(new ArmazemId(Guid.NewGuid()), new CoordenadasArmazem(10, 20, 30), new CoordenadasArmazem(10, 30, 40),new DesignacaoArmazem("Designação teste"),
-    new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"), new AlphaId("A12"));
-    var creatingDto =   new CreatingArmazemDto(10, 20, 30, 
-              10, 30, 40, "Designação teste", "Rua das flores",
+    var arm = new Warehouse(new WarehouseId(Guid.NewGuid()), new WarehouseCoordinates(10, 20, 30), new WarehouseCoordinates(10, 30, 40),new DesignationWarehouse("Designação teste"),
+    new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"), new AlphaId("A12"));
+    var creatingDto =   new CreatingWarehouseDto(10, 20, 30, 
+              10, 30, 40, "Designação teste", "Street das flores",
               1, "4000-300", "Pourto", "Pourtougal", "A12");
 
         
@@ -104,7 +104,7 @@ respeita as regras de negócio do cliente.
         var result = _controller.AddAsync(creatingDto).Result;
 
         var objExpected = result.Value;
-        var objActual = ArmazemDtoParser.convertToDto(arm);
+        var objActual = WarehouseDtoParser.convertToDto(arm);
         
         objActual.Id = objExpected.Id;
         
@@ -118,28 +118,28 @@ respeita as regras de negócio do cliente.
 ###Unit Testing
 
 ####Controller Testing
-* Adicionar um Armazem 
+* Adicionar um Warehouse 
 
 
     [Fact]
-    public void AddAsyncTest_ShouldAddAnArmazem()
+    public void AddAsyncTest_ShouldAddAnWarehouse()
     {
     
 
     //ARRANGE
   
   
-    var arm = new Armazem(new ArmazemId(Guid.NewGuid()),
-    new CoordenadasArmazem(12, 13, 14),
-    new CoordenadasArmazem(15, 12, 13),
-    new DesignacaoArmazem("Designação teste"),
-    new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
+    var arm = new Warehouse(new WarehouseId(Guid.NewGuid()),
+    new WarehouseCoordinates(12, 13, 14),
+    new WarehouseCoordinates(15, 12, 13),
+    new DesignationWarehouse("Designação teste"),
+    new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
     new AlphaId("A12"));
 
-          var armDto = ArmazemDtoParser.convertToDto(arm);
+          var armDto = WarehouseDtoParser.convertToDto(arm);
 
-          CreatingArmazemDto createDTO = new CreatingArmazemDto(12, 13, 14, 15, 12, 13, "Designação teste",
-          "Rua das flores", 1, "4000-300", "Pourto", "Pourtougal", "A12");
+          CreatingWarehouseDto createDTO = new CreatingWarehouseDto(12, 13, 14, 15, 12, 13, "Designação teste",
+          "Street das flores", 1, "4000-300", "Pourto", "Pourtougal", "A12");
         
           //ACT
           _ServiceMock.Setup(x => x.AddAsync(createDTO)).ReturnsAsync(armDto);
@@ -156,29 +156,29 @@ respeita as regras de negócio do cliente.
     }
 
 ####Service Testing
-* Adicionar um Armazem 
+* Adicionar um Warehouse 
 
 
 
     [Fact]
-    public void AddAsyncTest_ShouldAddAnArmazem()
+    public void AddAsyncTest_ShouldAddAnWarehouse()
     {
     //ASSERT
-    var arm = new Armazem(new ArmazemId(Guid.NewGuid()),
-    new CoordenadasArmazem(10, 20, 30),
-    new CoordenadasArmazem(10, 30, 40),
-    new DesignacaoArmazem("Designação teste"),
-    new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
+    var arm = new Warehouse(new WarehouseId(Guid.NewGuid()),
+    new WarehouseCoordinates(10, 20, 30),
+    new WarehouseCoordinates(10, 30, 40),
+    new DesignationWarehouse("Designação teste"),
+    new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
     new AlphaId("A12")); 
 
-    CreatingArmazemDto armDto = new CreatingArmazemDto(10, 20, 30, 
-                10, 30, 40, "Deisgnação teste", "Rua das flores",
+    CreatingWarehouseDto armDto = new CreatingWarehouseDto(10, 20, 30, 
+                10, 30, 40, "Deisgnação teste", "Street das flores",
                 1, "4000-300", "Pourto", "Pourtougal", "A12");
         
             //ACT
             _repositoryMock.Setup(x => x.AddAsync(arm)).ReturnsAsync(arm);
 
-            var resultDTO = ArmazemDtoParser.convertToDto(arm);
+            var resultDTO = WarehouseDtoParser.convertToDto(arm);
             var result = _service.AddAsync(armDto).Result;
 
             var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());
@@ -190,211 +190,211 @@ respeita as regras de negócio do cliente.
 
 ####Domain
 
-  * Create a Valid Armazem Test
+  * Create a Valid Warehouse Test
 
 
     [Fact]
-    public void CreateValidArmazemTest_ShouldCreateAValidArmazem()
+    public void CreateValidWarehouseTest_ShouldCreateAValidWarehouse()
     {
-    var arm = new Armazem(new ArmazemId(Guid.NewGuid()),
-    new CoordenadasArmazem(10, 20, 30),
-    new CoordenadasArmazem(10, 30, 40),
-    new DesignacaoArmazem("Designação teste"),
-    new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
+    var arm = new Warehouse(new WarehouseId(Guid.NewGuid()),
+    new WarehouseCoordinates(10, 20, 30),
+    new WarehouseCoordinates(10, 30, 40),
+    new DesignationWarehouse("Designação teste"),
+    new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
     new AlphaId("A12"));
 
         Assert.NotNull(arm);
     }
 
-  * Create Armazem Invalid ID Test
+  * Create Warehouse Invalid ID Test
   
 
  
 
       [Fact]
-    public void CreateArmazemWithInvalidArmazemIdTest_ShouldThrowsANullReferenceException()
+    public void CreateWarehouseWithInvalidWarehouseIdTest_ShouldThrowsANullReferenceException()
     {
     Assert.Throws<NullReferenceException>(() =>
     {
-    new Armazem(new ArmazemId(null),
-    new CoordenadasArmazem(10, 20, 30),
-    new CoordenadasArmazem(10, 30, 40),
-    new DesignacaoArmazem("Designação teste"),
-    new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
+    new Warehouse(new WarehouseId(null),
+    new WarehouseCoordinates(10, 20, 30),
+    new WarehouseCoordinates(10, 30, 40),
+    new DesignationWarehouse("Designação teste"),
+    new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
     new AlphaId("A12"));
     });
     }
 
 
-* Create Armazem Invalid Empty ID Test
+* Create Warehouse Invalid Empty ID Test
 
   
     [Fact]
-    public void CreateArmazemWithInvalidArmazemIdStringVaziaTest_ShouldThrowsAFormatException()
+    public void CreateWarehouseWithInvalidWarehouseIdStringVaziaTest_ShouldThrowsAFormatException()
     {
     Assert.Throws<FormatException>(() =>
     {
-    new Armazem(new ArmazemId(""),
-    new CoordenadasArmazem(10, 20, 30),
-    new CoordenadasArmazem(10, 30, 40),
-    new DesignacaoArmazem("Designação teste"),
-    new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
+    new Warehouse(new WarehouseId(""),
+    new WarehouseCoordinates(10, 20, 30),
+    new WarehouseCoordinates(10, 30, 40),
+    new DesignationWarehouse("Designação teste"),
+    new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
     new AlphaId("A12"));
     });
     }
 
-* Create Armazem with invalid Latitude Graus
+* Create Warehouse with invalid Latitude Degrees
 
   
       [Fact]
-    public void CreateArmazemWithInvalidLatitudeGrausTest_ShouldThrowsBusinessRuleValidationException()
+    public void CreateWarehouseWithInvalidLatitudeDegreesTest_ShouldThrowsBusinessRuleValidationException()
     {
     Assert.Throws<BusinessRuleValidationException>(() =>
     {
-    new Armazem(new ArmazemId(Guid.NewGuid()),
-    new CoordenadasArmazem(-190, 20, 30),
-    new CoordenadasArmazem(10, 30, 40),
-    new DesignacaoArmazem("Designação teste"),
-    new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
+    new Warehouse(new WarehouseId(Guid.NewGuid()),
+    new WarehouseCoordinates(-190, 20, 30),
+    new WarehouseCoordinates(10, 30, 40),
+    new DesignationWarehouse("Designação teste"),
+    new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
     new AlphaId("A12"));
     });
     }
 
-* Create Armazem with invalid Latitude Minutos
+* Create Warehouse with invalid Latitude Minutes
 
 
     [Fact]
-    public void CreateArmazemWithInvalidLatitudeMinutosTest_ShouldThrowsBusinessRuleValidationException()
+    public void CreateWarehouseWithInvalidLatitudeMinutesTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            new Armazem(new ArmazemId(Guid.NewGuid()),
-                new CoordenadasArmazem(10, -20, 30),
-                new CoordenadasArmazem(10, 30, 40),
-                new DesignacaoArmazem("Designação teste"),
-                new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
+            new Warehouse(new WarehouseId(Guid.NewGuid()),
+                new WarehouseCoordinates(10, -20, 30),
+                new WarehouseCoordinates(10, 30, 40),
+                new DesignationWarehouse("Designação teste"),
+                new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
         });
     }
     
-* Create Armazem with invalid Latitude Segundos
+* Create Warehouse with invalid Latitude Seconds
 
   
     [Fact]
-    public void CreateArmazemWithInvalidLatitudeSegundosTest_ShouldThrowsBusinessRuleValidationException()
+    public void CreateWarehouseWithInvalidLatitudeSecondsTest_ShouldThrowsBusinessRuleValidationException()
     {
     Assert.Throws<BusinessRuleValidationException>(() =>
     {
-    new Armazem(new ArmazemId(Guid.NewGuid()),
-    new CoordenadasArmazem(10, 20, -30),
-    new CoordenadasArmazem(10, 30, 40),
-    new DesignacaoArmazem("Designação teste"),
-    new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
+    new Warehouse(new WarehouseId(Guid.NewGuid()),
+    new WarehouseCoordinates(10, 20, -30),
+    new WarehouseCoordinates(10, 30, 40),
+    new DesignationWarehouse("Designação teste"),
+    new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
     new AlphaId("A12"));
     });
     }
 
-* Create Armazem with invalid Designacao
+* Create Warehouse with invalid Designation
 
 
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoArmazemTest_ShouldThrowsBusinessRuleValidationException()
+    public void CreateWarehouseWithInvalidDesignationWarehouseTest_ShouldThrowsBusinessRuleValidationException()
     {
     Assert.Throws<BusinessRuleValidationException>(() =>
     {
-    new Armazem(new ArmazemId(Guid.NewGuid()),
-    new CoordenadasArmazem(10, 20, 30),
-    new CoordenadasArmazem(10, 30, 40),
-    new DesignacaoArmazem(null),
-    new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
+    new Warehouse(new WarehouseId(Guid.NewGuid()),
+    new WarehouseCoordinates(10, 20, 30),
+    new WarehouseCoordinates(10, 30, 40),
+    new DesignationWarehouse(null),
+    new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
     new AlphaId("A12"));
     });
     }
 
-* Createm Armazem with Invalid Rua
+* Createm Warehouse with Invalid Street
 
   
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoEndereçoRuaTest_ShouldThrowsBusinessRuleValidationException()
+    public void CreateWarehouseWithInvalidDesignationEndereçoStreetTest_ShouldThrowsBusinessRuleValidationException()
     {
     Assert.Throws<BusinessRuleValidationException>(() =>
     {
-    new Armazem(new ArmazemId(Guid.NewGuid()),
-    new CoordenadasArmazem(-10, 20, 30),
-    new CoordenadasArmazem(10, 30, 40),
-    new DesignacaoArmazem("Designação teste"),
-    new EnderecoArmazem("", 1, "4000-300", "Pourto", "Pourtougal"),
+    new Warehouse(new WarehouseId(Guid.NewGuid()),
+    new WarehouseCoordinates(-10, 20, 30),
+    new WarehouseCoordinates(10, 30, 40),
+    new DesignationWarehouse("Designação teste"),
+    new WarehouseAddress("", 1, "4000-300", "Pourto", "Pourtougal"),
     new AlphaId("A12"));
     });
     }
 
-* Createm Armazem with invalid Nr Porta
+* Createm Warehouse with invalid Nr Porta
 
 
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoEndereçoNumeroPortaTest_ShouldThrowsBusinessRuleValidationException()
+    public void CreateWarehouseWithInvalidDesignationEndereçoDoorNumberTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            new Armazem(new ArmazemId(Guid.NewGuid()),
-                new CoordenadasArmazem(-10, 20, 30),
-                new CoordenadasArmazem(10, 30, 40),
-                new DesignacaoArmazem("Designação teste"),
-                new EnderecoArmazem("Rua das flores", -10, "4000-300", "Pourto", "Pourtougal"),
+            new Warehouse(new WarehouseId(Guid.NewGuid()),
+                new WarehouseCoordinates(-10, 20, 30),
+                new WarehouseCoordinates(10, 30, 40),
+                new DesignationWarehouse("Designação teste"),
+                new WarehouseAddress("Street das flores", -10, "4000-300", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
         });
     }
 
-* Create Armazem with invalid Codigo Postal
+* Create Warehouse with invalid Codigo Postal
 
 
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoEndereçoCodigoPostalTest_ShouldThrowsBusinessRuleValidationException()
+    public void CreateWarehouseWithInvalidDesignationEndereçoPostalCodeTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            new Armazem(new ArmazemId(Guid.NewGuid()),
-                new CoordenadasArmazem(-10, 20, 30),
-                new CoordenadasArmazem(10, 30, 40),
-                new DesignacaoArmazem("Designação teste"),
-                new EnderecoArmazem("Rua das flores", 1, "", "Pourto", "Pourtougal"),
+            new Warehouse(new WarehouseId(Guid.NewGuid()),
+                new WarehouseCoordinates(-10, 20, 30),
+                new WarehouseCoordinates(10, 30, 40),
+                new DesignationWarehouse("Designação teste"),
+                new WarehouseAddress("Street das flores", 1, "", "Pourto", "Pourtougal"),
                 new AlphaId("A12"));
         });
     }
 
-* Create Armazem with invalid Cidade
+* Create Warehouse with invalid City
 
 
 
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoEndereçoCidadeTest_ShouldThrowsBusinessRuleValidationException()
+    public void CreateWarehouseWithInvalidDesignationEndereçoCityTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            new Armazem(new ArmazemId(Guid.NewGuid()),
-                new CoordenadasArmazem(-10, 20, 30),
-                new CoordenadasArmazem(10, 30, 40),
-                new DesignacaoArmazem("Designação teste"),
-                new EnderecoArmazem("Rua das flores", 1, "4000-300", null, "Pourtougal"),
+            new Warehouse(new WarehouseId(Guid.NewGuid()),
+                new WarehouseCoordinates(-10, 20, 30),
+                new WarehouseCoordinates(10, 30, 40),
+                new DesignationWarehouse("Designação teste"),
+                new WarehouseAddress("Street das flores", 1, "4000-300", null, "Pourtougal"),
                 new AlphaId("A12"));
         });
     }
 
-* Create Armazem with invalid Pais
+* Create Warehouse with invalid Country
 
 
 
 
     [Fact]
-    public void CreateArmazemWithInvalidDesignacaoEndereçoPaisTest_ShouldThrowsBusinessRuleValidationException()
+    public void CreateWarehouseWithInvalidDesignationEndereçoCountryTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            new Armazem(new ArmazemId(Guid.NewGuid()),
-                new CoordenadasArmazem(-10, 20, 30),
-                new CoordenadasArmazem(10, 30, 40),
-                new DesignacaoArmazem("Designação teste"),
-                new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", ""),
+            new Warehouse(new WarehouseId(Guid.NewGuid()),
+                new WarehouseCoordinates(-10, 20, 30),
+                new WarehouseCoordinates(10, 30, 40),
+                new DesignationWarehouse("Designação teste"),
+                new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", ""),
                 new AlphaId("A12"));
         });
     }
@@ -404,15 +404,15 @@ respeita as regras de negócio do cliente.
 
 
     [Fact]
-    public void CreateArmazemWithInvalidAlphaIdTest_ShouldThrowsBusinessRuleValidationException()
+    public void CreateWarehouseWithInvalidAlphaIdTest_ShouldThrowsBusinessRuleValidationException()
     {
         Assert.Throws<BusinessRuleValidationException>(() =>
         {
-            new Armazem(new ArmazemId(Guid.NewGuid()),
-                new CoordenadasArmazem(-10, 20, 30),
-                new CoordenadasArmazem(10, 30, 40),
-                new DesignacaoArmazem("Designação teste"),
-                new EnderecoArmazem("Rua das flores", 1, "4000-300", "Pourto", "Pourtougal"),
+            new Warehouse(new WarehouseId(Guid.NewGuid()),
+                new WarehouseCoordinates(-10, 20, 30),
+                new WarehouseCoordinates(10, 30, 40),
+                new DesignationWarehouse("Designação teste"),
+                new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
                 new AlphaId("AAAAAAAAA"));
         });
     }
@@ -421,13 +421,13 @@ respeita as regras de negócio do cliente.
 
 
 
-					"name": "Armazem Entity",
+					"name": "Warehouse Entity",
 					"item": [
 						{
 							"name": "Test_Case_One",
 							"item": [
 								{
-									"name": "Post_Armazem",
+									"name": "Post_Warehouse",
 									"event": [
 										{
 											"listen": "test",
@@ -435,8 +435,8 @@ respeita as regras de negócio do cliente.
 												"exec": [
 													"const responseJson = pm.response.json();\r",
 													"\r",
-													"pm.collectionVariables.set(\"id_armazem\", responseJson.id);\r",
-													"pm.collectionVariables.set(\"id_armazem_domain\", responseJson.alphaNumId);\r",
+													"pm.collectionVariables.set(\"id_warehouse\", responseJson.id);\r",
+													"pm.collectionVariables.set(\"id_warehouse_domain\", responseJson.alphaNumId);\r",
 													"\r",
 													"pm.test(\"Status code is 201\", function () {\r",
 													"    pm.response.to.have.status(201);\r",
@@ -453,20 +453,20 @@ respeita as regras de negócio do cliente.
 													"pm.test(\"Post With success (Verify body)\", function () {\r",
 													"    pm.response.to.have.body(\r",
 													"{\r",
-													"    \"id\": pm.collectionVariables.get(\"id_armazem\"),\r",
-													"    \"latitudeGrau\": 5,\r",
-													"    \"latitudeSegundo\": 5,\r",
-													"    \"latitudeMinuto\": 5,\r",
-													"    \"longitudeGrau\": 5,\r",
-													"    \"longitudeSegundo\": 5,\r",
-													"    \"longitudeMinuto\": 5,\r",
-													"    \"designacao\": \"Ola\",\r",
-													"    \"alphaNumId\": pm.collectionVariables.get(\"id_armazem_domain\"),\r",
-													"    \"rua\": \"Rua dos Coiso\",\r",
-													"    \"numeroPorta\": 5,\r",
-													"    \"codigoPostal\": \"4000-999\",\r",
-													"    \"cidade\": \"Famalicão\",\r",
-													"    \"pais\": \"Portugal\"\r",
+													"    \"id\": pm.collectionVariables.get(\"id_warehouse\"),\r",
+													"    \"latitudeDegree\": 5,\r",
+													"    \"latitudeSecond\": 5,\r",
+													"    \"latitudeMinute\": 5,\r",
+													"    \"longitudeDregree\": 5,\r",
+													"    \"longitudeSecond\": 5,\r",
+													"    \"longitudeMinute\": 5,\r",
+													"    \"designation\": \"Ola\",\r",
+													"    \"alphaNumId\": pm.collectionVariables.get(\"id_warehouse_domain\"),\r",
+													"    \"street\": \"Street dos Coiso\",\r",
+													"    \"doorNumber\": 5,\r",
+													"    \"postalCode\": \"4000-999\",\r",
+													"    \"city\": \"Famalicão\",\r",
+													"    \"country\": \"Portugal\"\r",
 													"});\r",
 													"});\r",
 													""
@@ -480,7 +480,7 @@ respeita as regras de negócio do cliente.
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"AlphaNumId\" : \"L78\",\r\n    \"LatitudeGrau\" : \"5\",\r\n    \"LatitudeSegundo\": \"5\",\r\n    \"LatitudeMinuto\": \"5\",\r\n    \"LongitudeGrau\": \"5\",\r\n    \"LongitudeSegundo\": \"5\",\r\n    \"LongitudeMinuto\": \"5\",\r\n    \"Designacao\": \"Ola\",\r\n    \"Rua\": \"Rua dos Coiso\",\r\n    \"NumeroPorta\": \"5\",\r\n    \"CodigoPostal\": \"4000-999\",\r\n    \"Cidade\": \"Famalicão\",\r\n    \"Pais\": \"Portugal\"\r\n}",
+											"raw": "{\r\n    \"AlphaNumId\" : \"L78\",\r\n    \"LatitudeDegree\" : \"5\",\r\n    \"LatitudeSecond\": \"5\",\r\n    \"LatitudeMinute\": \"5\",\r\n    \"LongitudeDregree\": \"5\",\r\n    \"LongitudeSecond\": \"5\",\r\n    \"LongitudeMinute\": \"5\",\r\n    \"Designation\": \"Ola\",\r\n    \"Street\": \"Street dos Coiso\",\r\n    \"DoorNumber\": \"5\",\r\n    \"PostalCode\": \"4000-999\",\r\n    \"City\": \"Famalicão\",\r\n    \"Country\": \"Portugal\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -488,7 +488,7 @@ respeita as regras de negócio do cliente.
 											}
 										},
 										"url": {
-											"raw": "http://localhost:5000/api/Armazem",
+											"raw": "http://localhost:5000/api/Warehouse",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -496,14 +496,14 @@ respeita as regras de negócio do cliente.
 											"port": "5000",
 											"path": [
 												"api",
-												"Armazem"
+												"Warehouse"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "Get_Armazem_Por_ID",
+									"name": "Get_Warehouse_Por_ID",
 									"event": [
 										{
 											"listen": "test",
@@ -525,7 +525,7 @@ respeita as regras de negócio do cliente.
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "http://localhost:5000/api/Armazem/id?id={{id_armazem}}",
+											"raw": "http://localhost:5000/api/Warehouse/id?id={{id_warehouse}}",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -533,13 +533,13 @@ respeita as regras de negócio do cliente.
 											"port": "5000",
 											"path": [
 												"api",
-												"Armazem",
+												"Warehouse",
 												"id"
 											],
 											"query": [
 												{
 													"key": "id",
-													"value": "{{id_armazem}}"
+													"value": "{{id_warehouse}}"
 												}
 											]
 										}
@@ -547,7 +547,7 @@ respeita as regras de negócio do cliente.
 									"response": []
 								},
 								{
-									"name": "Put_Armazem",
+									"name": "Put_Warehouse",
 									"event": [
 										{
 											"listen": "test",
@@ -574,7 +574,7 @@ respeita as regras de negócio do cliente.
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"Id\" : \"{{id_armazem}}\",\r\n    \"AlphaNumId\" : \"{{id_armazem_domain}}\",\r\n    \"LatitudeGrau\" : 3,\r\n    \"LatitudeMinuto\" : 5,\r\n    \"LatitudeSegundo\" : 4,\r\n    \"LongitudeGrau\" : 8,\r\n    \"LongitudeMinuto\" : 6,\r\n    \"LongitudeSegundo\" : 2,\r\n    \"Designacao\" : \"armazenes\",\r\n    \"Rua\" : \"rua dos armazenes\",\r\n    \"NumeroPorta\" : 123654,\r\n    \"CodigoPostal\" : \"4000-123\",\r\n    \"Cidade\" : \"armazenes city\",\r\n    \"Pais\" : \"armazenes country\"\r\n}",
+											"raw": "{\r\n    \"Id\" : \"{{id_warehouse}}\",\r\n    \"AlphaNumId\" : \"{{id_warehouse_domain}}\",\r\n    \"LatitudeDegree\" : 3,\r\n    \"LatitudeMinute\" : 5,\r\n    \"LatitudeSecond\" : 4,\r\n    \"LongitudeDregree\" : 8,\r\n    \"LongitudeMinute\" : 6,\r\n    \"LongitudeSecond\" : 2,\r\n    \"Designation\" : \"armazenes\",\r\n    \"Street\" : \"street dos armazenes\",\r\n    \"DoorNumber\" : 123654,\r\n    \"PostalCode\" : \"4000-123\",\r\n    \"City\" : \"armazenes city\",\r\n    \"Country\" : \"armazenes country\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -582,7 +582,7 @@ respeita as regras de negócio do cliente.
 											}
 										},
 										"url": {
-											"raw": "http://localhost:5000/api/Armazem/",
+											"raw": "http://localhost:5000/api/Warehouse/",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -590,7 +590,7 @@ respeita as regras de negócio do cliente.
 											"port": "5000",
 											"path": [
 												"api",
-												"Armazem",
+												"Warehouse",
 												""
 											]
 										}
@@ -598,7 +598,7 @@ respeita as regras de negócio do cliente.
 									"response": []
 								},
 								{
-									"name": "Delete_Armazem",
+									"name": "Delete_Warehouse",
 									"event": [
 										{
 											"listen": "test",
@@ -629,7 +629,7 @@ respeita as regras de negócio do cliente.
 											}
 										},
 										"url": {
-											"raw": "http://localhost:5000/api/Armazem/{{id_armazem}}",
+											"raw": "http://localhost:5000/api/Warehouse/{{id_warehouse}}",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -637,8 +637,8 @@ respeita as regras de negócio do cliente.
 											"port": "5000",
 											"path": [
 												"api",
-												"Armazem",
-												"{{id_armazem}}"
+												"Warehouse",
+												"{{id_warehouse}}"
 											]
 										}
 									},
@@ -650,7 +650,7 @@ respeita as regras de negócio do cliente.
 							"name": "Test_Case_Two",
 							"item": [
 								{
-									"name": "Post_Armazem",
+									"name": "Post_Warehouse",
 									"event": [
 										{
 											"listen": "test",
@@ -658,8 +658,8 @@ respeita as regras de negócio do cliente.
 												"exec": [
 													"const responseJson = pm.response.json();\r",
 													"\r",
-													"pm.collectionVariables.set(\"id_armazem\", responseJson.id);\r",
-													"pm.collectionVariables.set(\"designacao\", responseJson.designacao);\r",
+													"pm.collectionVariables.set(\"id_warehouse\", responseJson.id);\r",
+													"pm.collectionVariables.set(\"designation\", responseJson.designation);\r",
 													"\r",
 													"pm.test(\"Status code is 201\", function () {\r",
 													"    pm.response.to.have.status(201);\r",
@@ -676,20 +676,20 @@ respeita as regras de negócio do cliente.
 													"pm.test(\"Post With success (Verify body)\", function () {\r",
 													"    pm.response.to.have.body(\r",
 													"{\r",
-													"    \"id\": pm.collectionVariables.get(\"id_armazem\"),\r",
-													"    \"latitudeGrau\": 5,\r",
-													"    \"latitudeSegundo\": 5,\r",
-													"    \"latitudeMinuto\": 5,\r",
-													"    \"longitudeGrau\": 5,\r",
-													"    \"longitudeSegundo\": 5,\r",
-													"    \"longitudeMinuto\": 5,\r",
-													"    \"designacao\": \"Ola\",\r",
-													"    \"alphaNumId\": pm.collectionVariables.get(\"id_armazem_domain\"),\r",
-													"    \"rua\": \"Rua dos Coiso\",\r",
-													"    \"numeroPorta\": 5,\r",
-													"    \"codigoPostal\": \"4000-999\",\r",
-													"    \"cidade\": \"Famalicão\",\r",
-													"    \"pais\": \"Portugal\"\r",
+													"    \"id\": pm.collectionVariables.get(\"id_warehouse\"),\r",
+													"    \"latitudeDegree\": 5,\r",
+													"    \"latitudeSecond\": 5,\r",
+													"    \"latitudeMinute\": 5,\r",
+													"    \"longitudeDregree\": 5,\r",
+													"    \"longitudeSecond\": 5,\r",
+													"    \"longitudeMinute\": 5,\r",
+													"    \"designation\": \"Ola\",\r",
+													"    \"alphaNumId\": pm.collectionVariables.get(\"id_warehouse_domain\"),\r",
+													"    \"street\": \"Street dos Coiso\",\r",
+													"    \"doorNumber\": 5,\r",
+													"    \"postalCode\": \"4000-999\",\r",
+													"    \"city\": \"Famalicão\",\r",
+													"    \"country\": \"Portugal\"\r",
 													"});\r",
 													"});\r",
 													""
@@ -703,7 +703,7 @@ respeita as regras de negócio do cliente.
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"AlphaNumId\" : \"L78\",\r\n    \"LatitudeGrau\" : \"5\",\r\n    \"LatitudeSegundo\": \"5\",\r\n    \"LatitudeMinuto\": \"5\",\r\n    \"LongitudeGrau\": \"5\",\r\n    \"LongitudeSegundo\": \"5\",\r\n    \"LongitudeMinuto\": \"5\",\r\n    \"Designacao\": \"Ola\",\r\n    \"Rua\": \"Rua dos Coiso\",\r\n    \"NumeroPorta\": \"5\",\r\n    \"CodigoPostal\": \"4000-999\",\r\n    \"Cidade\": \"Famalicão\",\r\n    \"Pais\": \"Portugal\"\r\n}",
+											"raw": "{\r\n    \"AlphaNumId\" : \"L78\",\r\n    \"LatitudeDegree\" : \"5\",\r\n    \"LatitudeSecond\": \"5\",\r\n    \"LatitudeMinute\": \"5\",\r\n    \"LongitudeDregree\": \"5\",\r\n    \"LongitudeSecond\": \"5\",\r\n    \"LongitudeMinute\": \"5\",\r\n    \"Designation\": \"Ola\",\r\n    \"Street\": \"Street dos Coiso\",\r\n    \"DoorNumber\": \"5\",\r\n    \"PostalCode\": \"4000-999\",\r\n    \"City\": \"Famalicão\",\r\n    \"Country\": \"Portugal\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -711,7 +711,7 @@ respeita as regras de negócio do cliente.
 											}
 										},
 										"url": {
-											"raw": "http://localhost:5000/api/Armazem",
+											"raw": "http://localhost:5000/api/Warehouse",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -719,7 +719,7 @@ respeita as regras de negócio do cliente.
 											"port": "5000",
 											"path": [
 												"api",
-												"Armazem"
+												"Warehouse"
 											]
 										}
 									},

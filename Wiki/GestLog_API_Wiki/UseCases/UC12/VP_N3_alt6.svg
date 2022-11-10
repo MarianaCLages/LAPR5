@@ -423,9 +423,9 @@
     ></g
     ><g font-size="11px" transform="translate(3578,610)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="22" xml:space="preserve" y="12" clip-path="url(#clipPath28)" stroke="none"
-      >Caminho :</text
+      >Path :</text
       ><text x="25" xml:space="preserve" y="27" clip-path="url(#clipPath28)" stroke="none"
-      >Caminho</text
+      >Path</text
     ></g
     ><g font-size="11px" transform="translate(1305,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="5" xml:space="preserve" y="12" clip-path="url(#clipPath29)" stroke="none"
@@ -437,31 +437,31 @@
     ><text x="59" xml:space="preserve" y="12" clip-path="url(#clipPath30)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="65" xml:space="preserve" y="27" clip-path="url(#clipPath30)" stroke="none"
-      >CaminhoRepository</text
+      >PathRepository</text
     ></g
     ><g font-size="11px" transform="translate(2151,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="30" xml:space="preserve" y="12" clip-path="url(#clipPath31)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="44" xml:space="preserve" y="27" clip-path="url(#clipPath31)" stroke="none"
-      >CaminhoService</text
+      >PathService</text
     ></g
     ><g font-size="11px" transform="translate(2938,448)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="16" xml:space="preserve" y="12" clip-path="url(#clipPath32)" stroke="none"
-      >caminhoDTO :</text
+      >pathDTO :</text
       ><text x="19" xml:space="preserve" y="27" clip-path="url(#clipPath32)" stroke="none"
-      >caminhoDTO</text
+      >pathDTO</text
     ></g
     ><g font-size="11px" transform="translate(2567,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="9" xml:space="preserve" y="12" clip-path="url(#clipPath33)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="22" xml:space="preserve" y="27" clip-path="url(#clipPath33)" stroke="none"
-      >CaminhoMapper</text
+      >PathMapper</text
     ></g
     ><g font-size="11px" transform="translate(1590,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="45" xml:space="preserve" y="12" clip-path="url(#clipPath34)" stroke="none"
       >&lt;&lt;Component (C4)&gt;&gt;</text
       ><text x="53" xml:space="preserve" y="27" clip-path="url(#clipPath34)" stroke="none"
-      >CaminhoController</text
+      >PathController</text
     ></g
     ><g font-size="11px" transform="translate(995,2)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="25" xml:space="preserve" y="12" clip-path="url(#clipPath35)" stroke="none"
@@ -618,12 +618,12 @@
     ><g font-size="11px" transform="translate(2048,426)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="215" height="15" y="0" clip-path="url(#clipPath74)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath74)" stroke="none"
-      >2.1.1.1.1: criaCaminhoDTO(caminhoID)</text
+      >2.1.1.1.1: criaPathDTO(pathID)</text
     ></g
     ><g font-size="11px" transform="translate(708,269)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="320" height="53" y="0" clip-path="url(#clipPath75)" stroke="none"
       /><text fill="black" x="69" xml:space="preserve" y="31" clip-path="url(#clipPath75)" stroke="none"
-      >2.1: DELETE caminho /  {caminhoID}</text
+      >2.1: DELETE path /  {pathID}</text
     ></g
     ><g font-size="11px" transform="translate(805,867)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="126" height="15" y="0" clip-path="url(#clipPath76)" stroke="none"
@@ -638,12 +638,12 @@
     ><g font-size="11px" transform="translate(2700,713)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="158" height="15" y="0" clip-path="url(#clipPath78)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath78)" stroke="none"
-      >2.1.1.1.2.2: delete(caminho)</text
+      >2.1.1.1.2.2: delete(path)</text
     ></g
     ><g font-size="11px" transform="translate(2614,570)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="333" height="15" y="0" clip-path="url(#clipPath79)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath79)" stroke="none"
-      >2.1.1.1.2.1: caminho = GetByIdAsync(CaminhoDTO.caminhoID)</text
+      >2.1.1.1.2.1: path = GetByIdAsync(PathDTO.pathID)</text
     ></g
     ><g font-size="11px" transform="translate(1144,1090)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="128" height="15" y="0" clip-path="url(#clipPath80)" stroke="none"
@@ -658,7 +658,7 @@
     ><g font-size="11px" transform="translate(1084,310)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="255" height="50" y="0" clip-path="url(#clipPath82)" stroke="none"
       /><text fill="black" x="31" xml:space="preserve" y="29" clip-path="url(#clipPath82)" stroke="none"
-      >2.1.1: DELETE caminho /  {caminhoID}</text
+      >2.1.1: DELETE path /  {pathID}</text
     ></g
     ><g font-size="11px" transform="translate(1904,1056)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="109" height="15" y="0" clip-path="url(#clipPath83)" stroke="none"
@@ -683,7 +683,7 @@
     ><g font-size="11px" transform="translate(1848,494)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="216" height="15" y="0" clip-path="url(#clipPath85)" stroke="none"
       /><text fill="black" x="10" xml:space="preserve" y="12" clip-path="url(#clipPath85)" stroke="none"
-      >2.1.1.1.2: apagaCaminho(caminhoDTO)</text
+      >2.1.1.1.2: deletePath(pathDTO)</text
     ></g
     ><g font-size="11px" transform="translate(2730,439)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="109" height="15" y="0" clip-path="url(#clipPath83)" stroke="none"
@@ -693,7 +693,7 @@
     ><g font-size="11px" transform="translate(1411,379)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="220" height="15" y="0" clip-path="url(#clipPath86)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath86)" stroke="none"
-      >2.1.1.1: DELETE caminho /  {caminhoID}</text
+      >2.1.1.1: DELETE path /  {pathID}</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"

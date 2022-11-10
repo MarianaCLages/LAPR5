@@ -91,7 +91,7 @@
     ></g
     ><g font-size="11px" transform="translate(2,37)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="12" clip-path="url(#clipPath6)" stroke="none"
-      >GestorArmazem</text
+      >GestorWarehouse</text
     ></g
     ><g stroke-linecap="butt" font-size="11px" transform="translate(6,26)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
     ><line y2="50" fill="none" x1="50" clip-path="url(#clipPath8)" x2="417" y1="50"
@@ -116,22 +116,22 @@
     ><g font-size="11px" transform="translate(96,161)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="285" height="15" y="0" clip-path="url(#clipPath12)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath12)" stroke="none"
-      >2.1: informa que a encomenda foi criada com sucesso</text
+      >2.1: informa que a order foi criada com sucesso</text
     ></g
     ><g font-size="11px" transform="translate(73,129)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="331" height="15" y="0" clip-path="url(#clipPath13)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath13)" stroke="none"
-      >2: envia a informação necessária para a criação da encomenda</text
+      >2: envia a informação necessária para a criação da order</text
     ></g
     ><g font-size="11px" transform="translate(130,91)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="219" height="15" y="0" clip-path="url(#clipPath14)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath14)" stroke="none"
-      >1.1: pergunta informação da encomenda</text
+      >1.1: pergunta informação da order</text
     ></g
     ><g font-size="11px" transform="translate(152,56)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="white" stroke-opacity="1"
     ><rect x="0" width="173" height="15" y="0" clip-path="url(#clipPath15)" stroke="none"
       /><text fill="black" x="9" xml:space="preserve" y="12" clip-path="url(#clipPath15)" stroke="none"
-      >1: Quero criar uma encomenda</text
+      >1: Quero criar uma order</text
     ></g
     ><g font-size="8px" fill-opacity="1" fill="rgb(120,120,120)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" stroke="rgb(120,120,120)" stroke-opacity="1"
     ><text x="0" xml:space="preserve" y="10" stroke="none"
