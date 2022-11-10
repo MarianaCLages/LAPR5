@@ -2,16 +2,32 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-jobs:
-  build-and-test-GestArm_API:
+orbs:
+  win: circleci/windows@4.1.1
+  azure-cli: circleci/azure-cli@1.2.0
+
+executors:
+  my-armexecutor:
     docker:
-      - image: mcr.microsoft.com/dotnet/sdk:6.0
+       - image: mcr.microsoft.com/dotnet/sdk:6.0
+    working_directory: Backend/GestArm_API/GestArm/
+  my_gestexecutor:
+    docker:
+       - image: cimg/node:current
+    working_directory: Backend/GestLogistica_API/GestLogistica
+
+
+jobs:
+  build-GestArm_API:
+    description: Build and restore the .NET API
+    executor: my-armexecutor
     steps:
       - checkout
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: Build
           command: |
+            dotnet restore
             dotnet build
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
@@ -30,15 +46,38 @@ jobs:
           name: Generate XUnit Coverage
           command: |
             dotnet build
-            dotnet dotnet test --collect:"XPlat Code Coverage"      
-  build-and-test-GestLog_API:
-    docker:
-       - image: cimg/node:current
+            dotnet dotnet test --collect:"XPlat Code Coverage" 
+
+  test-GestArm_API:
+    description: Build and restore the .NET API
+    executor: my-armexecutor
     steps:
       - checkout
       - run:
-          working_directory: Backend/GestLogistica_API/GestLogistica
-          name: install-npm
+          working_directory: Backend/GestArm_API/GestArmTestes/IntegrationTesting
+          name: Integration Testing
+          command: |
+            dotnet build
+            dotnet test
+      - run:
+          working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
+          name: Unit Testing
+          command: |
+            dotnet build
+            dotnet test 
+      - run:
+          working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
+          name: Generate XUnit Coverage
+          command: |
+            dotnet test --collect:"XPlat Code Coverage"  
+
+  build-GestLog_API:
+    description: Build and restore Node.js API
+    executor: my_gestexecutor
+    steps:
+      - checkout
+      - run:
+          name: Install project and dependecies
           command:  |
            npm innit --yes
            npm install --save
@@ -47,21 +86,84 @@ jobs:
           paths:
             - Backend/GestLogistica_API/GestLogistica/node_modules
       - run:
-          working_directory: Backend/GestLogistica_API/GestLogistica
-          name : Build
+          name : Build project
           command: |
             npm run build
+            
+        #if needed persist
+        #- persist_to_workspace:
+        # root: /tmp/gestLog
+      
+  test-GestLog_API:
+    description: Build and restore Node.js API
+    executor: my_gestexecutor
+    steps:
+      - checkout
       - run:
-          working_directory: Backend/GestLogistica_API/GestLogistica
-          name : Coverage
+          name : Run all tests and generate the coverage
           command: |
             npm run coverage     
       - store_artifacts:
           path: Backend/GestLogistica_API/GestLogistica/coverage
-   
 
+  build-gestArm-cloud-application:
+    description: Build application with Release configuration
+    executor:
+      name: win/default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dotnet-packages-v1-{{ checksum "Backend/GestArm_API/GestArm/DDDNetCore.csproj" }}
+      #Tirar este passo?
+      - run:
+          name: "Install project dependencies"
+          command: dotnet restore
+      - run:
+          name: "Build Application according to some given configuration"
+          command: dotnet build --configuration Release
+      - run:
+          name: "Publish to a subfolder"
+          command: |
+            dotnet publish --configuration Release --output GestArmFolder
+      - persist_to_workspace:
+          root: Backend/GestArm_API/GestArm/
+          paths:
+            - GestArmFolder    
+
+  login-to-azure-and-deploy:
+    executor: azure-cli/azure-docker
+    steps:
+      - azure-cli/install
+      - azure-cli/login-with-user:
+          alternate-tenant: false
+      - attach_workspace:
+          at: Backend/GestArm_API/GestArm/
+      - run:
+          command: az webapp deployment source show --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement-application
+      - run:
+          name: "Deploy Web App to Azure"
+          command: |
+            az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement-application    
+  
 workflows:
-  development:
+  build-test-deploy:
     jobs:
-      - build-and-test-GestArm_API
-      - build-and-test-GestLog_API
+      - build-GestArm_API
+      - build-GestLog_API
+
+      - test-GestArm_API:
+          requires:
+            - build-GestArm_API
+
+      - test-GestLog_API:
+          requires:
+            - build-GestLog_API
+
+      - build-gestArm-cloud-application:
+          requires:
+            - test-GestArm_API
+
+      - login-to-azure-and-deploy:
+          requires:
+            - build-gestArm-cloud-application
