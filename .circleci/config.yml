@@ -15,44 +15,23 @@ executors:
     docker:
        - image: cimg/node:current
     working_directory: Backend/GestLogistica_API/GestLogistica
-  my_deployexecutor:
-    docker:
-       - image: win/default
-    working_directory: Backend/GestArm_API/GestArm/
-
-
-
+ 
 jobs:
   build-GestArm_API:
     description: Build and restore the .NET API
     executor: my-armexecutor
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - dotnet-packages-v1-{{ checksum "Backend/GestArm_API/GestArm/DDDNetCore.csproj" }}
       - run:
           working_directory: Backend/GestArm_API/GestArm/
-          name: Build
+          name: Build and restore all depdencies
           command: |
             dotnet restore
             dotnet build
-      - run:
-          working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
-          name: Unit Testing
-          command: |
-            dotnet build
-            dotnet test
-      - run:
-          working_directory: Backend/GestArm_API/GestArmTestes/IntegrationTesting
-          name: Integration Testing
-          command: |
-            dotnet build
-            dotnet test
-      - run:
-          working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
-          name: Generate XUnit Coverage
-          command: |
-            dotnet build
-            dotnet dotnet test --collect:"XPlat Code Coverage" 
-
+      
   test-GestArm_API:
     description: Build and restore the .NET API
     executor: my-armexecutor
@@ -70,11 +49,12 @@ jobs:
           command: |
             dotnet build
             dotnet test 
-      - run:
-          working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
-          name: Generate XUnit Coverage
-          command: |
-            dotnet test --collect:"XPlat Code Coverage"  
+
+     # - run:
+     #     working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
+     #     name: Generate XUnit Coverage
+     #     command: |
+     #       dotnet test --collect:"XPlat Code Coverage"  
 
   build-GestLog_API:
     description: Build and restore Node.js API
@@ -113,7 +93,8 @@ jobs:
 
   build-gestArm-cloud-application:
     description: Build application with Release configuration
-    executor: my_deployexecutor
+    executor:
+      name: win/default
     steps:
       - checkout
       - restore_cache:
@@ -129,6 +110,7 @@ jobs:
           name: "Build Application according to some given configuration"
           command: dotnet build --configuration Release
       - run:
+          working_directory: Backend/GestArm_API/GestArm/
           name: "Publish to a subfolder"
           command: |
             dotnet publish --configuration Release --output GestArmFolder
