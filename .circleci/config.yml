@@ -15,6 +15,11 @@ executors:
     docker:
        - image: cimg/node:current
     working_directory: Backend/GestLogistica_API/GestLogistica
+  my_deployexecutor:
+    docker:
+       - image: win/default
+    working_directory: Backend/GestArm_API/GestArm/
+
 
 
 jobs:
@@ -108,8 +113,7 @@ jobs:
 
   build-gestArm-cloud-application:
     description: Build application with Release configuration
-    executor:
-      name: win/default
+    executor: my_deployexecutor
     steps:
       - checkout
       - restore_cache:
@@ -117,9 +121,11 @@ jobs:
             - dotnet-packages-v1-{{ checksum "Backend/GestArm_API/GestArm/DDDNetCore.csproj" }}
       #Tirar este passo?
       - run:
+          working_directory: Backend/GestArm_API/GestArm/
           name: "Install project dependencies"
           command: dotnet restore
       - run:
+          working_directory: Backend/GestArm_API/GestArm/
           name: "Build Application according to some given configuration"
           command: dotnet build --configuration Release
       - run:
