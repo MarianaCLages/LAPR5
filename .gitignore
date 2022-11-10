@@ -439,4 +439,9 @@ Backend/GestArm_API/Backend/GestArm_API/GestArmTestes/UnitTesting/coverage/DDDNe
 Backend/GestArm_API/Backend/GestArm_API/GestArmTestes/UnitTesting/coverage/DDDNetCore_ValuesController.html
 Backend/GestArm_API/Backend/GestArm_API/GestArmTestes/UnitTesting/coverage/index.htm
 Backend/GestArm_API/Backend/GestArm_API/GestArmTestes/UnitTesting/coverage/index.html
+
 Frontend/SPA/ElecticGo/package-lock.json
+
+#Visualization module
+Frontend/SGRAI/node_modules
+Frontend/SGRAI/three.js-master
