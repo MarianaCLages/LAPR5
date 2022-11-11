@@ -5,7 +5,6 @@ version: 2.1
 orbs:
   win: circleci/windows@5.0
   azure-cli: circleci/azure-cli@1.2.0
-  node: circleci/node@5.0.3
 
 executors:
   my-armexecutor:
@@ -42,8 +41,8 @@ jobs:
           name: Integration Testing
           command: |
             pwd
-            dotnet build IntegrationTests.csproj
-            dotnet test IntegrationTests.csproj
+            dotnet build
+            dotnet test
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
           name: Unit Testing
@@ -52,7 +51,7 @@ jobs:
             dotnet build
             dotnet test 
 
-     # - run: GENERATE DOTNET COVERAGE
+     # - run:
      #     working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
      #     name: Generate XUnit Coverage
      #     command: |
@@ -61,7 +60,7 @@ jobs:
   build-GestLog_API:
     description: Build and restore Node.js API
     docker:
-       - image: node/default
+       - image: cimg/node:current
     steps:
       - checkout
       - run:
@@ -79,10 +78,10 @@ jobs:
           name : Build project
           command: |
             npm run build
-      - persist_to_workspace:
-          root: Backend/GestLogistica_API/GestLogistica
-          paths:
-            - GestLogBuild
+            
+        #if needed persist
+        #- persist_to_workspace:
+        # root: /tmp/gestLog
       
   test-GestLog_API:
     description: Build and restore Node.js API
