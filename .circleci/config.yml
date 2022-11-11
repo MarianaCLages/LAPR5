@@ -3,7 +3,7 @@
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.0
   azure-cli: circleci/azure-cli@1.2.0
 
 executors:
@@ -94,7 +94,7 @@ jobs:
   build-gestArm-cloud-application:
     description: Build application with Release configuration
     executor:
-      name: win/default
+      name: win/server-2022
     steps:
       - checkout
       - restore_cache:
