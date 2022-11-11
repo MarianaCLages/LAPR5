@@ -57,10 +57,12 @@ jobs:
 
   build-GestLog_API:
     description: Build and restore Node.js API
-    executor: my_gestexecutor
+    docker:
+       - image: cimg/node:current
     steps:
       - checkout
       - run:
+          working_directory: Backend/GestLogistica_API/GestLogistica
           name: Install project and dependecies
           command:  |
            npm innit --yes
@@ -70,6 +72,7 @@ jobs:
           paths:
             - Backend/GestLogistica_API/GestLogistica/node_modules
       - run:
+          working_directory: Backend/GestLogistica_API/GestLogistica
           name : Build project
           command: |
             npm run build
@@ -136,15 +139,12 @@ workflows:
   build-test-deploy:
     jobs:
       - build-GestArm_API
+      - build-GestLog_API
       
       - test-GestArm_API:
           requires:
             - build-GestArm_API
-    
-      - build-GestLog_API:
-          requires:
-            - build-GestArm_API
-
+  
       - test-GestLog_API:
           requires:
             - build-GestLog_API
