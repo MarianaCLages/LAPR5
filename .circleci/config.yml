@@ -36,7 +36,6 @@ jobs:
     description: Build and restore the .NET API
     executor: my-armexecutor
     steps:
-      - checkout
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/IntegrationTesting
           name: Integration Testing
@@ -123,8 +122,7 @@ jobs:
     executor: azure-cli/azure-docker
     steps:
       - azure-cli/install
-      - azure-cli/login-with-user:
-          alternate-tenant: false
+      - azure-cli/login-with-service-principal
       - attach_workspace:
           at: Backend/GestArm_API/GestArm/
       - run:
@@ -138,9 +136,12 @@ workflows:
   build-test-deploy:
     jobs:
       - build-GestArm_API
-      - build-GestLog_API
-
+      
       - test-GestArm_API:
+          requires:
+            - build-GestArm_API
+    
+      - build-GestLog_API:
           requires:
             - build-GestArm_API
 
