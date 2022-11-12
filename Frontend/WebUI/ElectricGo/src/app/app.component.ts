@@ -10,9 +10,4 @@ export class AppComponent implements OnInit {
 
   }
   title = 'ElecticGo';
-  hero = {
-    id: 1,
-    name: 'Windstorm'
-  };
-
 }
