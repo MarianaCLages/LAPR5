@@ -1,43 +1,54 @@
-import { readFileSync, writeFileSync, promises as fsPromises } from 'fs';
-import { join } from 'path';
+import {openSync, readFileSync, writeFileSync, promises as fsPromises} from 'fs';
+import {join} from 'path';
 
 
-async function createFile() {
+export default class WritePathIntoFile {
 
-    const http = require('http');
-    var data;
-    http.get('http://localhost:3000/api/pathing', res => {
-        let data = [];
-        const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
-        console.log('Status Code:', res.statusCode);
-        console.log('Date in Response header:', headerDate);
+    public files(){
+        fsPromises.open(join(__dirname, 'path_info.txt'),'w');
 
-        res.on('data', chunk => {
-            data.push(chunk);
-        });
-
-        fsPromises.writeFile(join(__dirname, 'base.txt'), '', {
-            flag: 'w',
-        })
-
-        res.on('end', () => {
-            console.log('Response ended: ');
-            data = JSON.parse(Buffer.concat(data).toString());
-            data.forEach(element => {
-                fsPromises.writeFile(join(__dirname, 'base.txt'), JSON.stringify(element), {
-                    flag: 'a+',
-                })
-            });
-        });
-
-        const contents = fsPromises.readFile(
-            join(__dirname, 'base.txt'),
-            'utf-8',
-        );
-        console.log(contents); // 👉️ "One Two Three Four"
-
-        return contents;
-    }).on('error', err => {
-        console.log('Error: ', err.message);
-    });
     }
+
+    public createFile() {
+
+        try {
+            const http = require('http');
+
+            http.get('http://localhost:3000/api/paths/allPaths', async res => {
+                let data = [];
+                const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
+                console.log('Status Code:', res.statusCode);
+                console.log('Date in Response header:', headerDate);
+
+                res.on('data', chunk => {
+                    data.push(chunk);
+                });
+
+                res.on('end', () => {
+                    console.log('Response ended: ');
+                    data = JSON.parse(Buffer.concat(data).toString());
+
+                        fsPromises.writeFile(join(__dirname, 'path_info.txt'), JSON.stringify(data), {
+                            flag: 'a+',
+
+                    });
+                });
+
+                const contents = fsPromises.readFile(
+                    join(__dirname, 'path_info.txt'),
+                    'utf-8',
+                );
+                console.log(contents); // 👉️ "One Two Three Four"
+
+                return contents;
+            });
+
+        }catch (e){
+
+            if( e instanceof TypeError){
+                console.log("Não existe Paths");
+            }
+        }
+    }
+    }
+
