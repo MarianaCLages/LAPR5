@@ -8,7 +8,7 @@ internal class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {
-        builder.ToTable("Order")
+        builder.ToTable("Orders")
             .HasKey(e => e.Id);
         //mapeia cada value object
         //id de dominio
