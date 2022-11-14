@@ -1,1 +1,1 @@
-[{"id":"6bc95886-33a8-42b7-ad2d-a30d7c040c88","endingWarehouseId":"C57","beginningWarehouseId":"C20","energy":19,"time":20,"distance":20,"chargingTime":20}]
+path(C57,C20,19,20,20,20).

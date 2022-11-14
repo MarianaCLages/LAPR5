@@ -29,7 +29,7 @@ async function startServer() {
       return;
   });
   file.files();
-  file.createFile();
+  file.createFile("path_info.txt","paths/allPaths");
 }
 
 startServer();
