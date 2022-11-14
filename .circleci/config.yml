@@ -21,12 +21,18 @@ jobs:
           name: Build
           command: |
             dotnet build
+      - save_cache:
+          key: dotnet-packages-v1-{{ checksum "Backend/GestArm_API/GestArm/DDDNetCore.csproj" }}
+          paths:
+            - Backend/GestArm_API/GestArm/
+
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
           name: Unit Testing
           command: |
             dotnet build
             dotnet test
+
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/IntegrationTesting
           name: Integration Testing
@@ -50,11 +56,13 @@ jobs:
           key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
           paths:
             - Backend/GestLogistica_API/GestLogistica/node_modules
+
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Build
           command: |
             npm run build
+
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Coverage
@@ -77,19 +85,21 @@ jobs:
           working_directory: Backend/GestArm_API/GestArm/
           name: "Install project dependencies"
           command: dotnet restore
+
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: "Build Application according to some given configuration"
           command: dotnet build --configuration Release
+          
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: "Publish to a subfolder"
           command: |
-            dotnet publish --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+            dotnet publish --configuration Release --no-build --output $env.AZURE_WEBAPP_PACKAGE_PATH
       - persist_to_workspace:
           root: Backend/GestArm_API/GestArm/
           paths:
-            - ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}   
+            - $env.AZURE_WEBAPP_PACKAGE_PATH
 
   login-to-azure-and-deploy:
     executor: azure-cli/azure-docker
@@ -99,11 +109,11 @@ jobs:
       - attach_workspace:
           at: Backend/GestArm_API/GestArm/
       - run:
-          command: az webapp deployment source show --resource-group ${{ env.AZURE_WEBAPP_NAME }} --name MasterDataWarehouseManagement-application
+          command: az webapp deployment source show --resource-group $env.AZURE_WEBAPP_NAME --name MasterDataWarehouseManagement-application
       - run:
           name: "Deploy Web App to Azure"
           command: |
-            az webapp deployment source config-local-git --resource-group ${{ env.AZURE_WEBAPP_NAME }} --name MasterDataWarehouseManagement-application    
+            az webapp deployment source config-local-git --resource-group $env.AZURE_WEBAPP_NAME --name MasterDataWarehouseManagement-application    
    
 workflows:
   build-test-deploy:
