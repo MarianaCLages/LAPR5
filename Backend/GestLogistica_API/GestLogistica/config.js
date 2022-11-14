@@ -111,7 +111,7 @@ export default {
     },
 
     warehouseAPIAdress: "https://localhost:5001/api/warehouse/search/",
-    orderAPIAdress: "https://localhost:5001/api/order/search/",
+    orderAPIAdress: "https://localhost:5001/api/order/search?",
     armazenIDNumberOfCharacters: 3,
     errorNotFoundWarehouse: "A warehouse with that ID was not found!",
     errorNotFoundOrder: "Não foi encontrado nenhuma order!"

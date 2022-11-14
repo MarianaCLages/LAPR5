@@ -210,8 +210,8 @@ public class OrderController : ControllerBase
 
     ////MÉTODO UTILIZADO PELO REPOSITÓRIO EM NODE
     // GET: api/Warehouse/search/{date}/{nextID} (Os dois juntos vão fazer o DOMAIN ID da order)
-    [HttpGet]
-    [Route("~/api/[controller]/search/{date}/{nextID}", Name = "GetOrderByDomainID")]
+    [Route("~/api/[controller]/search", Name = "GetOrderByDomainID")]
+    [HttpGet("search")]
     public async Task<ActionResult<OrderDto>> GetByOrderDomainIDAsync(string nextID, string data)
     {
         try

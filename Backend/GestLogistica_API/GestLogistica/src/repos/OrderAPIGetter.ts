@@ -18,7 +18,7 @@ export default class OrderAPIGetter implements IOrderRepo {
 
     const splitArr = orderId.split("/");
 
-    const url = address + splitArr[0] + '/' + splitArr[1];
+    const url = address + "nextId=" + splitArr[0] + "&data=" + splitArr[1];
     const responseChegada = await fetch(url, {
       method: 'GET',
       agent: this.httpsAgent,
