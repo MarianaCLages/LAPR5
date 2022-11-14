@@ -39,6 +39,7 @@ jobs:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name: install-npm
           command:  |
+           npm cache clean
            npm innit --yes
            npm install --save
       - save_cache:
