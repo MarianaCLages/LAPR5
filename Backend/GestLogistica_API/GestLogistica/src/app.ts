@@ -5,9 +5,11 @@ import config from '../config';
 import express from 'express';
 
 import Logger from './loaders/logger';
+import File from "./core/infra/WritePathIntoFile";
 
 async function startServer() {
   const app = express();
+  var file = new File();
 
   await require('./loaders').default({ expressApp: app });
 
@@ -26,6 +28,9 @@ async function startServer() {
       process.exit(1);
       return;
   });
+  file.files();
+  file.createFile();
 }
 
 startServer();
+
