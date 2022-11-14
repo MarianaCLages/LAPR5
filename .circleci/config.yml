@@ -90,16 +90,16 @@ jobs:
           working_directory: Backend/GestArm_API/GestArm/
           name: "Build Application according to some given configuration"
           command: dotnet build --configuration Release
-          
+
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: "Publish to a subfolder"
           command: |
-            dotnet publish --configuration Release --no-build --output $env.AZURE_WEBAPP_PACKAGE_PATH
+            dotnet publish --configuration Release --no-build --output ${env.AZURE_WEBAPP_PACKAGE_PATH}
       - persist_to_workspace:
           root: Backend/GestArm_API/GestArm/
           paths:
-            - $env.AZURE_WEBAPP_PACKAGE_PATH
+            - ${env.AZURE_WEBAPP_PACKAGE_PATH}
 
   login-to-azure-and-deploy:
     executor: azure-cli/azure-docker
@@ -109,11 +109,11 @@ jobs:
       - attach_workspace:
           at: Backend/GestArm_API/GestArm/
       - run:
-          command: az webapp deployment source show --resource-group $env.AZURE_WEBAPP_NAME --name MasterDataWarehouseManagement-application
+          command: az webapp deployment source show --resource-group ${env.AZURE_WEBAPP_NAME} --name MasterDataWarehouseManagement-application
       - run:
           name: "Deploy Web App to Azure"
           command: |
-            az webapp deployment source config-local-git --resource-group $env.AZURE_WEBAPP_NAME --name MasterDataWarehouseManagement-application    
+            az webapp deployment source config-local-git --resource-group ${env.AZURE_WEBAPP_NAME} --name MasterDataWarehouseManagement-application    
    
 workflows:
   build-test-deploy:
