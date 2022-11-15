@@ -109,6 +109,7 @@ jobs:
       - attach_workspace:
           at: Backend/GestArm_API/GestArm/published
       - run:
+          working_directory: Backend/GestArm_API/GestArm/
           command: az webapp deployment source show --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
       - run:
           working_directory: Backend/GestArm_API/GestArm/
