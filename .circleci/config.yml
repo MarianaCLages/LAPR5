@@ -107,13 +107,21 @@ jobs:
       - azure-cli/install
       - azure-cli/login-with-service-principal
       - attach_workspace:
-          at: Backend/GestArm_API/GestArm/
+          at: Backend/GestArm_API/GestArm/published
       - run:
           command: az webapp deployment source show --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
       - run:
+          working_directory: Backend/GestArm_API/GestArm/
           name: "Deploy Web App to Azure"
           command: |
-            az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement   
+            az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
+            git init
+            git config --global user.email "1201487@isep.ipp.pt"
+            git config --global user.name "Jordans"
+            git add .
+            git commit -m "Deploy Azure Web Application"
+            git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@masterdatawarehousemanagement.scm.azurewebsites.net/MasterDataWarehouseManagement.git
+            git push azure master --force 
    
 workflows:
   build-test-deploy:
