@@ -40,7 +40,7 @@ async function startServer() {
   
   file.files();
   file.createFile("path_info.txt","paths/allPaths");
-  test.sendOrdersByTheTruckPackages("adas");
+  //test.sendOrdersByTheTruckPackages("adas");
 }
 
 startServer();
