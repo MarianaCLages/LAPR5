@@ -12,6 +12,7 @@ env:
    
 jobs:
   Build-GestArm_API:
+    description: Build the GestArm API
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
@@ -27,6 +28,7 @@ jobs:
             - Backend/GestArm_API/GestArm/
 
   Unit-testing-GestArm_API:
+    description: Unit testing in the GestArm API
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
@@ -50,7 +52,8 @@ jobs:
             dotnet build
             dotnet test
     
-  build-and-test-GestLog_API:
+  Build-GestLog_API:
+    description: Build the GestLog API
     docker:
        - image: cimg/node:current
     steps:
@@ -66,12 +69,21 @@ jobs:
           key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
           paths:
             - Backend/GestLogistica_API/GestLogistica/node_modules
-
+            
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Build
           command: |
             npm run build
+
+  Unit-Test-GestLog_API:
+    description: Unit testing in the GestLog API
+    docker:
+       - image: cimg/node:current
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
 
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
@@ -81,10 +93,10 @@ jobs:
       - store_artifacts:
           path: Backend/GestLogistica_API/GestLogistica/coverage
 
-  build-gestArm-cloud-application:
+  Build-gestArm-cloud-application:
     description: Build application with Release configuration
-    executor:
-      name: win/server-2022
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
       - restore_cache:
@@ -111,7 +123,8 @@ jobs:
           paths:
             - published
 
-  login-to-azure-and-deploy:
+  Login-to-azure-and-deploy:
+    description: Deploy the GestArm into Azure
     executor: azure-cli/azure-docker
     steps:
       - azure-cli/install
@@ -138,7 +151,7 @@ workflows:
   build-test-deploy:
     jobs:
       - Build-GestArm_API
-      - build-and-test-GestLog_API
+      - Build-GestLog_API
       
       - Integration-testing-GestArm_API:
           requires:
@@ -148,11 +161,16 @@ workflows:
           requires:
             - Build-GestArm_API
 
-      - build-gestArm-cloud-application:
+      - Unit-Test-GestLog_API:
+          requires:
+            - Build-GestLog_API
+
+      - Build-gestArm-cloud-application:
           requires:
             - Integration-testing-GestArm_API
             - Unit-testing-GestArm_API
+            - Unit-Test-GestLog_API
 
-      - login-to-azure-and-deploy:
+      - Login-to-azure-and-deploy:
           requires:
-            - build-gestArm-cloud-application
+            - Build-gestArm-cloud-application
