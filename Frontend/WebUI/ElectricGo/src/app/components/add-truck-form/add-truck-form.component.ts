@@ -1,6 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { AddTruckServiceService } from 'src/app/services/add-truck-service.service';
+import {AddTruckServiceService} from 'src/app/services/add-truck-service.service';
+import {ITruckDTO} from 'src/app/services/shared/truckDTO';
+
+
 
 @Component({
   selector: 'app-add-truck-form',
@@ -9,14 +12,20 @@ import { AddTruckServiceService } from 'src/app/services/add-truck-service.servi
   providers: [AddTruckServiceService]
 })
 export class AddTruckFormComponent implements OnInit {
+  trucksArr: ITruckDTO[] | undefined;
 
-  constructor(private addTruckService: AddTruckServiceService) { }
+
+  constructor(private addTruckService: AddTruckServiceService) {
+  }
 
   ngOnInit(): void {
   }
+
   addTruck() {
     console.log("add truck");
-    this.addTruckService.addTruck("any");
+    const trucksres = this.addTruckService.addTruck("any");
+    //add res to the array of trucks
+    trucksres.subscribe(res => this.trucksArr = res);
   }
 
 }
