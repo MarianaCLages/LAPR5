@@ -1,31 +1,29 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {tap} from "rxjs";
+import { ITruckDTO } from './shared/truckDTO';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddTruckServiceService {
 
-  constructor(private http: HttpClient) { }
+  baseUrl = 'http://localhost:3000/api/trucks/all';
 
-  addTruck(any: string) {
-    console.log("add truck" + any);
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    //get from www.google.com
-    var dados;
-    
-    try {
-      this.http.get('https://localhost:5001/api/order/', { headers: headers }).subscribe(data => {
-        dados = data;
-        console.log(data);
-      });
-      console.log(dados);
-    } catch (e) {
-      console.log(e);
-    }
+  constructor(private http: HttpClient) {
   }
 
+  addTruck(name: string) {
+
+    let truck: ITruckDTO;
+    //Array of trucks
+    let trucks = this.http.get<ITruckDTO[]>(this.baseUrl);
+
+    trucks.pipe(tap(_ => console.log('fetched trucks')));
+    //for each truck in the array logs all the data
+    return trucks;
+  }
 }

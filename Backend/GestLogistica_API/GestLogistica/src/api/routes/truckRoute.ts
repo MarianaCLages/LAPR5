@@ -1,10 +1,8 @@
-import { Router } from 'express';
-import { celebrate, Joi } from 'celebrate';
+import { Joi, celebrate } from 'celebrate';
 
 import { Container } from 'typedi';
-
 import ITruckController from '../../controllers/IControllers/ITruckController';
-
+import { Router } from 'express';
 import config from "../../../config";
 
 const route = Router();
@@ -27,6 +25,7 @@ export default (app: Router) => {
             })
         }),
         (req, res, next) => ctrl.createTruck(req, res, next));
+        
     route.put('',
         celebrate({
             body: Joi.object({

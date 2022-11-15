@@ -6,7 +6,7 @@ export default class WritePathIntoFile {
 
     public files(){
         fsPromises.open(join(__dirname, 'path_info.txt'),'w');
-
+        fsPromises.open(join(__dirname,'orders.txt'),'w');
     }
 
     public createFile(filename : string, requestArgument : string) {
