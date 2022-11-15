@@ -109,10 +109,10 @@ jobs:
       - attach_workspace:
           at: Backend/GestArm_API/GestArm/published
       - run:
-          working_directory: Backend/GestArm_API/GestArm/
+          working_directory: Backend/GestArm_API/GestArm/published
           command: az webapp deployment source show --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
       - run:
-          working_directory: Backend/GestArm_API/GestArm/
+          working_directory: Backend/GestArm_API/GestArm/published
           name: "Deploy Web App to Azure"
           command: |
             az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
