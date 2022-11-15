@@ -11,7 +11,7 @@ env:
     AZURE_WEBAPP_PACKAGE_PATH: './published' 
    
 jobs:
-  build-and-test-GestArm_API:
+  Build-GestArm_API:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
@@ -26,6 +26,11 @@ jobs:
           paths:
             - Backend/GestArm_API/GestArm/
 
+  Unit-testing-GestArm_API:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
+    steps:
+      - checkout
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
           name: Unit Testing
@@ -33,6 +38,11 @@ jobs:
             dotnet build
             dotnet test
 
+  Integration-testing-GestArm_API:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
+    steps:
+      - checkout
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/IntegrationTesting
           name: Integration Testing
@@ -127,12 +137,21 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - build-and-test-GestArm_API
+      - Build-GestArm_API
       - build-and-test-GestLog_API
       
+      - Integration-testing-GestArm_API:
+          requires:
+            - Build-GestArm_API
+
+      - Unit-testing-GestArm_API:
+          requires:
+            - Build-GestArm_API
+
       - build-gestArm-cloud-application:
           requires:
-            - build-and-test-GestArm_API
+            - Integration-testing-GestArm_API
+            - Unit-testing-GestArm_API
 
       - login-to-azure-and-deploy:
           requires:
