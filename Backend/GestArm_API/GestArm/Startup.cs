@@ -18,6 +18,7 @@ namespace GestArm;
 
 public class Startup
 {
+    static string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
     public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
@@ -36,6 +37,16 @@ public class Startup
         ConfigureMyServices(services);
 
         services.AddControllers().AddNewtonsoftJson();
+        services.AddCors(options =>
+        {
+            options.AddPolicy(name: MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+        });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +61,7 @@ public class Startup
         app.UseHttpsRedirection();
 
         app.UseRouting();
+        app.UseCors(MyAllowSpecificOrigins);
 
         app.UseAuthorization();
 

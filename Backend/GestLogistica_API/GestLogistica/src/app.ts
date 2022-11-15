@@ -1,15 +1,22 @@
 import 'reflect-metadata'; // We need this in order to use @Decorators
 
-import config from '../config';
-
-import express from 'express';
-
-import Logger from './loaders/logger';
 import File from "./core/infra/WritePathIntoFile";
+import Logger from './loaders/logger';
+import config from '../config';
+import express from 'express';
 
 async function startServer() {
   const app = express();
   var file = new File();
+
+  const cors = require('cors');
+  app.use(cors(
+    {
+      origin: '*',
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      allowedHeaders: ['Content-Type', 'Authorization']
+    }
+  ));
 
   await require('./loaders').default({ expressApp: app });
 
@@ -22,12 +29,13 @@ async function startServer() {
       🛡️  Server listening on port: ${config.port} 🛡️ 
       ################################################
     `);
-    })
-    .on('error', (err) => {      
+  })
+    .on('error', (err) => {
       Logger.error(err);
       process.exit(1);
       return;
   });
+  
   file.files();
   file.createFile("path_info.txt","paths/allPaths");
 }
