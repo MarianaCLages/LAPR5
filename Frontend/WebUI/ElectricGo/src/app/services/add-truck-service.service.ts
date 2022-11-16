@@ -1,10 +1,7 @@
 import {HttpClient} from '@angular/common/http';
-
+import { ITruckDTO } from '../shared/truckDTO';
 import {Injectable} from '@angular/core';
 import {tap} from "rxjs";
-import { ITruckDTO } from './shared/truckDTO';
-
-
 
 @Injectable({
   providedIn: 'root'

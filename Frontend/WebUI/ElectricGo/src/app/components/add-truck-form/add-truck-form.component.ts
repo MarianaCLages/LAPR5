@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {AddTruckServiceService} from 'src/app/services/add-truck-service.service';
-import {ITruckDTO} from 'src/app/services/shared/truckDTO';
-
-
+import {ITruckDTO} from 'src/app/shared/truckDTO';
 
 @Component({
   selector: 'app-add-truck-form',
