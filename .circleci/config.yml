@@ -11,7 +11,8 @@ env:
     AZURE_WEBAPP_PACKAGE_PATH: './published' 
    
 jobs:
-  build-and-test-GestArm_API:
+  Build-GestArm_API:
+    description: Build the GestArm API
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
@@ -26,6 +27,12 @@ jobs:
           paths:
             - Backend/GestArm_API/GestArm/
 
+  Unit-testing-GestArm_API:
+    description: Unit testing in the GestArm API
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
+    steps:
+      - checkout
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
           name: Unit Testing
@@ -33,6 +40,11 @@ jobs:
             dotnet build
             dotnet test
 
+  Integration-testing-GestArm_API:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
+    steps:
+      - checkout
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/IntegrationTesting
           name: Integration Testing
@@ -40,7 +52,8 @@ jobs:
             dotnet build
             dotnet test
     
-  build-and-test-GestLog_API:
+  Build-GestLog_API:
+    description: Build the GestLog API
     docker:
        - image: cimg/node:current
     steps:
@@ -56,12 +69,21 @@ jobs:
           key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
           paths:
             - Backend/GestLogistica_API/GestLogistica/node_modules
-
+            
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Build
           command: |
             npm run build
+
+  Unit-Test-GestLog_API:
+    description: Unit testing in the GestLog API
+    docker:
+       - image: cimg/node:current
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
 
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
@@ -71,10 +93,10 @@ jobs:
       - store_artifacts:
           path: Backend/GestLogistica_API/GestLogistica/coverage
 
-  build-gestArm-cloud-application:
+  Build-gestArm-cloud-application:
     description: Build application with Release configuration
-    executor:
-      name: win/server-2022
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
       - restore_cache:
@@ -101,30 +123,54 @@ jobs:
           paths:
             - published
 
-  login-to-azure-and-deploy:
+  Login-to-azure-and-deploy:
+    description: Deploy the GestArm into Azure
     executor: azure-cli/azure-docker
     steps:
       - azure-cli/install
       - azure-cli/login-with-service-principal
       - attach_workspace:
-          at: Backend/GestArm_API/GestArm/
+          at: Backend/GestArm_API/GestArm/published
       - run:
+          working_directory: Backend/GestArm_API/GestArm/published
           command: az webapp deployment source show --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
       - run:
+          working_directory: Backend/GestArm_API/GestArm/published
           name: "Deploy Web App to Azure"
           command: |
-            az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement   
+            az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
+            git init
+            git config --global user.email "1201487@isep.ipp.pt"
+            git config --global user.name "Jordans"
+            git add .
+            git commit -m "Deploy Azure Web Application"
+            git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@masterdatawarehousemanagement.scm.azurewebsites.net/MasterDataWarehouseManagement.git
+            git push azure master --force 
    
 workflows:
   build-test-deploy:
     jobs:
-      - build-and-test-GestArm_API
-      - build-and-test-GestLog_API
+      - Build-GestArm_API
+      - Build-GestLog_API
       
-      - build-gestArm-cloud-application:
+      - Integration-testing-GestArm_API:
           requires:
-            - build-and-test-GestArm_API
+            - Build-GestArm_API
 
-      - login-to-azure-and-deploy:
+      - Unit-testing-GestArm_API:
           requires:
-            - build-gestArm-cloud-application
+            - Build-GestArm_API
+
+      - Unit-Test-GestLog_API:
+          requires:
+            - Build-GestLog_API
+
+      - Build-gestArm-cloud-application:
+          requires:
+            - Integration-testing-GestArm_API
+            - Unit-testing-GestArm_API
+            - Unit-Test-GestLog_API
+
+      - Login-to-azure-and-deploy:
+          requires:
+            - Build-gestArm-cloud-application
