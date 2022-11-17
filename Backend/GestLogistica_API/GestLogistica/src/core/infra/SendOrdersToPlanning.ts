@@ -2,17 +2,25 @@ import {Service} from "typedi";
 import fetch from 'node-fetch';
 import IOrderRepo from "../../services/IRepos/IOrderRepo";
 import * as https from "https";
-import {openSync, readFileSync, writeFileSync, promises as fsPromises} from 'fs';
-import config from "../../../config";
-import {join} from "path";
 
+import {openSync, readFileSync, writeFileSync,statSync, promises as fsPromises} from 'fs';
+import config from "../../../config";
+import path, {join} from "path";
+import FormData from "form-data";
+import * as http from "http";
 
 
 @Service()
 export default class SendOrdersToPlanning implements IOrderRepo{
 
+
+
     httpsAgent = new https.Agent({
         rejectUnauthorized: false,
+    });
+
+    httpAgent = new http.Agent({
+
     });
 
 
@@ -39,7 +47,8 @@ export default class SendOrdersToPlanning implements IOrderRepo{
             }
         }
 
-        var orderArr = this.getOrders(orderTruck);
+        this.getOrders(orderTruck);
+        this.sendOrdersToProlog();
 
     }
 
@@ -68,19 +77,48 @@ export default class SendOrdersToPlanning implements IOrderRepo{
             })
 
             var object = await response.json();
+            var warehouseString = object.warehouseId.toString();
 
-            stringFormat = "Orders("+object.orderMass.toString() + "," + object.chargingTime.toString()+ "," + object.chargingTime.toString() + ","+ object.warehouseId.toString() + ").";
+            warehouseString = warehouseString.substring(1);
+            let warehouseNumber = +warehouseString;
+
+            stringFormat = "orders("+object.orderMass.toString() + "," + object.chargingTime.toString()+ "," + object.chargingTime.toString() + ","+ warehouseNumber + ").";
             orderArr.push(stringFormat);
         }
 
         for(var i = 0; i < orderArr.length;i++) {
-            await fsPromises.appendFile(join(__dirname, "orders.txt"), orderArr[i] + "\r\n", {
+            await fsPromises.appendFile(join(__dirname, "orders.pl"), orderArr[i] + "\r\n", {
                 flag: 'a+',
             });
 
         }
 
-        return orderArr;
+
+    }
+
+    private async sendOrdersToProlog() {
+
+       // const file = new LocalFileData('C:\\Users\\Tiago Ferreira\\Documents\\lei21-22-s5-3dj-56\\Backend\\GestLogistica_API\\GestLogistica\\src\\core\\infra\\orderspath.txt');
+       // const file = new LocalFileData('Backend/GestLogistica_API/GestLogistica/src/core/infra/orderspath.txt');
+
+
+        let formData = new FormData();
+
+        var buffer = require('fs').readFileSync('Backend/GestLogistica_API/GestLogistica/src/core/infra/orderspath.txt');
+        formData.append('file',buffer);
+
+        const rep = await fetch("http://localhost:5002/send_file_post", {
+            method: "POST",
+            agent: this.httpAgent,
+            headers:{
+                Accept: 'application/json',
+            },
+            body: formData,
+        })
+
+
+        var object = await rep;
+        console.log("REQUEST DO PROLOG:"+object)
 
     }
 

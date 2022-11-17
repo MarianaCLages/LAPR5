@@ -1,12 +1,111 @@
 import {openSync, readFileSync, writeFileSync, promises as fsPromises} from 'fs';
 import {join} from 'path';
+import http from "http";
+import fetch from 'node-fetch';
+import https from "https";
 
 
 export default class WritePathIntoFile {
 
+    prologApiPath = '../../Prolog_API';
+
+    httpsAgent = new https.Agent({
+        rejectUnauthorized: false,
+    });
+
+    httpAgent = new http.Agent({
+
+    });
+
     public files(){
-        fsPromises.open(join(__dirname, 'path_info.txt'),'w');
-        fsPromises.open(join(__dirname,'orders.txt'),'w');
+
+
+        var c = '\\';
+        fsPromises.open(join(__dirname,'orderspath.txt'),'w');
+        fsPromises.writeFile(join(__dirname,'orderspath.txt'), __dirname+c+"orders.pl");
+    }
+
+    public generateFiles(){
+        var c = '\\';
+        fsPromises.open(join(this.prologApiPath,'paths.pl'),'w');
+        fsPromises.open(join(this.prologApiPath,'warehouse.pl'),'w');
+        fsPromises.open(join(__dirname,'orders.pl'),'w');
+        fsPromises.open(join(__dirname,'orderspath.txt'),'w');
+        fsPromises.writeFile(join(__dirname,'orderspath.txt'), __dirname+c+"orders.pl");
+    }
+
+    public async createWarehousesFile(){
+
+        const url = 'https://localhost:5001/api/Warehouse';
+
+        const response = await fetch(url, {
+            method: 'GET',
+            agent: this.httpsAgent,
+            headers: {
+                Accept: 'application/json',
+            }
+        })
+
+        const result = (await response.json());
+        var pathArray = [];
+        var stringFormat: string;
+
+        for(var i = 0; i < result.length; i++){
+
+            var warehouseId = result[i].alphaNumId
+            warehouseId = warehouseId.substring(1);
+
+            var warehouseIdNumber = +warehouseId;
+
+            stringFormat = 'warehouses(' + result[i].street + ',' + warehouseIdNumber + ').';
+
+            pathArray.push(stringFormat);
+        }
+
+        for(var i = 0; i < result.length; i++){
+            await fsPromises.appendFile(join(this.prologApiPath, "warehouse.pl"), pathArray[i] + "\r\n", {
+                flag: 'a+',
+            });
+        }
+    }
+
+    public async createPathFile() {
+
+        const url = 'http://localhost:3000/api/paths/allPaths';
+
+        const response = await fetch(url, {
+            method: 'GET',
+            agent: this.httpAgent,
+            headers: {
+                Accept: 'application/json',
+            }
+        })
+
+        const result = (await response.json());
+        var pathArray = [];
+        var stringFormat: string;
+
+        for (var i = 0; i < result.length; i++) {
+
+            var warehouseBegginingString = result[i].beginningWarehouseId.toString();
+            var warehouseEndingString = result[i].endingWarehouseId.toString();
+
+            warehouseBegginingString = warehouseBegginingString.substring(1);
+            warehouseEndingString = warehouseEndingString.substring(1);
+
+            var warehouseBegginingNumber = +warehouseBegginingString;
+            var warehouseEndingNumber = +warehouseEndingString;
+
+            stringFormat = 'paths(' + warehouseBegginingNumber + ',' + warehouseEndingNumber + ',' + result[i].distance.toString() + ',' + result[i].energy.toString() + ',' + result[i].chargingTime.toString() + ',' + result[i].time.toString() + ').';
+            pathArray.push(stringFormat);
+        }
+
+        for (var i = 0; i < result.length; i++) {
+            await fsPromises.appendFile(join(this.prologApiPath, "paths.pl"), pathArray[i] + "\r\n", {
+                flag: 'a+',
+            });
+
+        }
     }
 
     public createFile(filename : string, requestArgument : string) {
@@ -28,8 +127,8 @@ export default class WritePathIntoFile {
                     console.log('Response ended: ');
                     data = JSON.parse(Buffer.concat(data).toString());
 
-                        fsPromises.writeFile(join(__dirname, filename), JSON.stringify(data), {
-                            flag: 'a+',
+                    fsPromises.writeFile(join(__dirname, filename), JSON.stringify(data), {
+                        flag: 'a+',
 
                     });
                 });
@@ -46,7 +145,7 @@ export default class WritePathIntoFile {
                 return contents;
             });
 
-            
+
 
         }catch (e){
 
@@ -56,14 +155,14 @@ export default class WritePathIntoFile {
         }
 
 
-        
+
     }
 
     //Acrescentar este método e chamá-lo no método que escreve no file
     //Transforma o conteúdo original dos ficheiros em formato predicado
     private async createPredicate(filename: string){
-        
-        
+
+
         var contents = await fsPromises.readFile(
             join(__dirname, filename),
             'utf-8',
@@ -73,7 +172,6 @@ export default class WritePathIntoFile {
         var value;
         var rep = /,/gi;
         var finalContent = '';
-        console.log("CONTENTS:" + contentsArr);    
 
         for (let l = 0; l < contentsArr.length-1; l++) {
             value = contentsArr[l].split(',');
@@ -92,4 +190,3 @@ export default class WritePathIntoFile {
         return await finalContent;
     }
 }
-

@@ -102,7 +102,6 @@ jobs:
       - restore_cache:
           keys:
             - dotnet-packages-v1-{{ checksum "Backend/GestArm_API/GestArm/DDDNetCore.csproj" }}
-      #Tirar este passo?
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: "Install project dependencies"
@@ -117,7 +116,7 @@ jobs:
           working_directory: Backend/GestArm_API/GestArm/
           name: "Publish to a subfolder"
           command: |
-            dotnet publish --configuration Release --no-build --output published
+            dotnet publish --configuration Release --output published
       - persist_to_workspace:
           root: Backend/GestArm_API/GestArm/
           paths:
@@ -169,7 +168,6 @@ workflows:
           requires:
             - Integration-testing-GestArm_API
             - Unit-testing-GestArm_API
-            - Unit-Test-GestLog_API
 
       - Login-to-azure-and-deploy:
           requires:
