@@ -1,10 +1,8 @@
-<app-license-input></app-license-input>
-
 button that adds a truck to the database
 
-<button mat-fab (click)="addTruck()"><mat-icon>local_shipping</mat-icon></button>
-
-
+<button mat-fab (click)="addTruck()">
+  <mat-icon>local_shipping</mat-icon>
+</button>
 
 <div class="container">
   <h1>Trucks</h1>
@@ -12,7 +10,7 @@ button that adds a truck to the database
     <mat-list-item *ngFor="let truck of trucksArr">
       <mat-icon mat-list-icon>local_shipping</mat-icon>
       <h3 mat-line>matricula: {{ truck.truckPlate }}</h3>
-      <p mat-line> bateria total: {{ truck.totalBatCharge }}</p>
+      <p mat-line>bateria total: {{ truck.totalBatCharge }}</p>
       <p mat-line>característica: {{ truck.caractTruck }}</p>
       <p mat-line>capacidade de carga: {{ truck.weightCapacity }}</p>
       <p mat-line>capacidade maxima: {{ truck.cargaMax }}</p>

@@ -12,8 +12,10 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { HeaderComponent } from './components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
-import { LicenseInputComponent } from './components/license-input/license-input.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
@@ -48,12 +50,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { NgModule } from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     AddTruckFormComponent,
-    LicenseInputComponent,
+    LoginPageComponent,
+    HeaderComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,8 +117,13 @@ import { NgModule } from '@angular/core';
     CdkMenuModule,
     ClipboardModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [AddTruckServiceService],
+  exports: [
+    HeaderComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

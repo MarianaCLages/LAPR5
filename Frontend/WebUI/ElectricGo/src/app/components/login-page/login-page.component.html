@@ -1,0 +1,24 @@
+<h1>Login</h1>
+<div class="content">
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput type="text" [(ngModel)]="username"/>
+    <!-- <mat-error *ngIf="username.hasError('required')">
+      Username is <strong>required</strong>
+    </mat-error> -->
+  </mat-form-field>
+
+  <br/>
+
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput type="password" [(ngModel)]="password"/>
+    <!-- <mat-error *ngIf="password.hasError('required')">
+    Password is <strong>required</strong>
+  </mat-error> -->
+  </mat-form-field>
+
+  <br/>
+
+  <button mat-raised-button color="primary" (click)="login()">Login</button>
+</div>
