@@ -38,8 +38,8 @@ async function startServer() {
       return;
   });
   
-  file.files();
-  file.createFile("path_info.txt","paths/allPaths");
+  //file.files();
+  //file.createFile("path_info.txt","paths/allPaths");
   //test.sendOrdersByTheTruckPackages("adas");
 }
 

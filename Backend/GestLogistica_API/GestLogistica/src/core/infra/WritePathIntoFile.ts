@@ -5,8 +5,12 @@ import {join} from 'path';
 export default class WritePathIntoFile {
 
     public files(){
+
+        var c = '\\';
         fsPromises.open(join(__dirname, 'path_info.txt'),'w');
-        fsPromises.open(join(__dirname,'orders.txt'),'w');
+        fsPromises.open(join(__dirname,'orders.pl'),'w');
+        fsPromises.open(join(__dirname,'orderspath.txt'),'w');
+        fsPromises.writeFile(join(__dirname,'orderspath.txt'), __dirname+c+"orders.pl");
     }
 
     public createFile(filename : string, requestArgument : string) {
@@ -28,8 +32,8 @@ export default class WritePathIntoFile {
                     console.log('Response ended: ');
                     data = JSON.parse(Buffer.concat(data).toString());
 
-                        fsPromises.writeFile(join(__dirname, filename), JSON.stringify(data), {
-                            flag: 'a+',
+                    fsPromises.writeFile(join(__dirname, filename), JSON.stringify(data), {
+                        flag: 'a+',
 
                     });
                 });
@@ -46,7 +50,7 @@ export default class WritePathIntoFile {
                 return contents;
             });
 
-            
+
 
         }catch (e){
 
@@ -56,14 +60,14 @@ export default class WritePathIntoFile {
         }
 
 
-        
+
     }
 
     //Acrescentar este método e chamá-lo no método que escreve no file
     //Transforma o conteúdo original dos ficheiros em formato predicado
     private async createPredicate(filename: string){
-        
-        
+
+
         var contents = await fsPromises.readFile(
             join(__dirname, filename),
             'utf-8',
@@ -73,7 +77,6 @@ export default class WritePathIntoFile {
         var value;
         var rep = /,/gi;
         var finalContent = '';
-        console.log("CONTENTS:" + contentsArr);    
 
         for (let l = 0; l < contentsArr.length-1; l++) {
             value = contentsArr[l].split(',');
@@ -92,4 +95,3 @@ export default class WritePathIntoFile {
         return await finalContent;
     }
 }
-
