@@ -38,10 +38,13 @@ async function startServer() {
       return;
   });
 
-  
+
   //file.files();
   //file.createFile("path_info.txt","paths/allPaths");
   //test.sendOrdersByTheTruckPackages("adas");
+  //  file.generateFiles();
+  //  file.createPathFile();
+  //  file.createWarehousesFile();
 }
 
 startServer();
