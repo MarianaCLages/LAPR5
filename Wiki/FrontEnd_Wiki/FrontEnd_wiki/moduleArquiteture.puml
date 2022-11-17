@@ -1,0 +1,15 @@
+@startuml Arquitetura de modelos
+package "UI" {
+  [App Module]
+  [Auth Module]
+  [Warehouse Manager Module]
+  [Fleet Manager Module]
+  [Logistic Manager Module]
+  [Admin Module]
+}
+  [App Module] -- [Auth Module]
+  [Auth Module] -- [Warehouse Manager Module]
+  [Auth Module] -- [Fleet Manager Module]
+  [Auth Module] -- [Logistic Manager Module]
+  [Auth Module] -- [Admin Module]
+@enduml
