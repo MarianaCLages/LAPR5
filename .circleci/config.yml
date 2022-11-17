@@ -169,7 +169,6 @@ workflows:
           requires:
             - Integration-testing-GestArm_API
             - Unit-testing-GestArm_API
-            - Unit-Test-GestLog_API
 
       - Login-to-azure-and-deploy:
           requires:
