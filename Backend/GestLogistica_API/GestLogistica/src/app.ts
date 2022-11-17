@@ -37,6 +37,7 @@ async function startServer() {
       process.exit(1);
       return;
   });
+
   
   //file.files();
   //file.createFile("path_info.txt","paths/allPaths");
