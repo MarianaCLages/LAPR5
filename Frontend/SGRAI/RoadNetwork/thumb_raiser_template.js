@@ -35,7 +35,7 @@ import UserInterface from "./user_interface_template.js";
  *  initialDirection: Float,
  *  turningSpeed: Float,
  *  runningFactor: Float,
- *  keyCodes: { fixedView: String, firstPersonView: String, thirdPersonView: String, topView: String, viewMode: String, userInterface: String, miniMap: String, help: String, statistics: String, run: String, left: String, right: String, backward: String, forward: String, jump: String, yes: String, no: String, wave: String, punch: String, thumbsUp: String }
+ *  keyCodes: { fixedView: String, firstPersonView: String, thirdPersonView: String, topView: String, viewMode: String, userInterface: String, miniMap: String, help: String, statistics: String, run: String, left: String, right: String, backward: String, forward: String }
  * }
  *
  * lightsParameters = {
@@ -663,9 +663,6 @@ export default class ThumbRaiser {
             }
         }
         else {
-            // Update the model animations
-            const deltaT = this.clock.getDelta();
-
             // Update statistics
             this.statistics.update();
 
