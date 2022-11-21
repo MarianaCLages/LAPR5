@@ -5,7 +5,7 @@ import {Guard} from "../../core/logic/Guard";
 interface WeightCapacityProps {
     value: number;
 }
-
+// weight capacity of the truck (kg)
 export class WeightCapacity extends ValueObject<WeightCapacityProps> {
     public constructor(props: WeightCapacityProps) {
         super(props);

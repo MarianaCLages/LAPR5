@@ -6,7 +6,7 @@ interface MaxLoadAutonomyProps {
     value: number;
 }
 
-// autonomy with maximum load of truck
+// autonomy with maximum load of truck (km)
 export class MaxLoadAutonomy extends ValueObject<MaxLoadAutonomyProps> {
     public constructor(props: MaxLoadAutonomyProps) {
         super(props);

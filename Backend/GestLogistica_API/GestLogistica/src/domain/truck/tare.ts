@@ -6,6 +6,7 @@ interface TareProps {
     value: number;
 }
 
+// tare of the truck (kg)
 export class Tare extends ValueObject<TareProps> {
     public constructor(props: TareProps) {
         super(props);
