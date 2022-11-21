@@ -5,6 +5,7 @@ version: 2.1
 orbs:
   win: circleci/windows@5.0
   azure-cli: circleci/azure-cli@1.2.0
+  browser-tools: circleci/browser-tools@1.2.3
 
 env:
     AZURE_WEBAPP_NAME: MasterDataWarehouseManagement
@@ -69,7 +70,6 @@ jobs:
           key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
           paths:
             - Backend/GestLogistica_API/GestLogistica/node_modules
-            
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Build the gestLog application
@@ -93,6 +93,52 @@ jobs:
       - store_artifacts:
           path: Backend/GestLogistica_API/GestLogistica/coverage
 
+  Build-FrontEnd-Application:
+    description: Build the Front end Application
+    docker:
+       - image: cimg/node:16.13.1-browsers
+    steps:
+      - checkout
+      - run:
+          working_directory: Frontend/WebUI/ElectricGo
+          name : Install all dependecies
+          command: |
+             rm -f package-lock.json
+             npm innit --yes
+             npm install --save
+      - run:
+          working_directory: Frontend/WebUI/ElectricGo
+          name : Build the Front end application
+          command: |
+            ng build
+      - save_cache:
+          key: dependency-cache-{{ checksum "Frontend/WebUI/ElectricGo/package.json" }}
+          paths:
+            - Frontend/WebUI/ElectricGo/node_modules
+
+  Test-FrontEnd-Application:
+    description: Build the Front end Application
+    docker:
+       - image: cimg/node:16.13.1-browsers
+    steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run:
+          name: Verify installation
+          command: |
+            google-chrome --version
+            chromedriver --version
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "Frontend/WebUI/ElectricGo/package.json" }}
+      - run:
+          working_directory: Frontend/WebUI/ElectricGo
+          name : Run the gestLog tests and generate coverage
+          command: |
+            pwd
+            # ng test
+
+
   Pulish-gestArm-to-folder:
     description: Publish the application to a folder with a certain configuration reference
     docker:
@@ -106,12 +152,10 @@ jobs:
           working_directory: Backend/GestArm_API/GestArm/
           name: Install project dependencies
           command: dotnet restore
-
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: Build gestArm application according to some given configuration
           command: dotnet build --no-restore --configuration Release
-
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: Publish the build result to a subfolder
@@ -152,6 +196,7 @@ workflows:
     jobs:
       - Build-GestArm_API
       - Build-GestLog_API
+      - Build-FrontEnd-Application
       
       - Integration-testing-GestArm_API:
           requires:
@@ -164,6 +209,10 @@ workflows:
       - Unit-Integration-Tests-GestLog_API:
           requires:
             - Build-GestLog_API
+
+      - Test-FrontEnd-Application:
+          requires:
+            - Build-FrontEnd-Application
 
       -  Pulish-gestArm-to-folder:
           requires:
