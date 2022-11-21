@@ -12,55 +12,67 @@ env:
    
 jobs:
   Build-GestArm_API:
-    description: Build the GestArm API
+    description: Build the GestArm application
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
       - run:
           working_directory: Backend/GestArm_API/GestArm/
-          name: Build
-          command: |
-            dotnet build
+          name: Install project dependencies
+          command: dotnet restore
+      - run:
+          working_directory: Backend/GestArm_API/GestArm/
+          name: Build gestArm application according to some given configuration (Release)
+          command: dotnet build --no-restore --configuration Release
       - save_cache:
           key: dotnet-packages-v1-{{ checksum "Backend/GestArm_API/GestArm/DDDNetCore.csproj" }}
           paths:
             - Backend/GestArm_API/GestArm/
 
   Unit-testing-GestArm_API:
-    description: Unit testing in the GestArm API
+    description: Run the unit tests from the GestArm application
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
-          name: Unit Testing
+          name: Building the Unit Tests solution
           command: |
             dotnet build
+      - run:
+          working_directory: Backend/GestArm_API/GestArmTestes/UnitTesting
+          name:  Running the unit tests
+          command: |
             dotnet test
 
   Integration-testing-GestArm_API:
+    description: Run the Integration tests from the GestArm application
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
       - run:
           working_directory: Backend/GestArm_API/GestArmTestes/IntegrationTesting
-          name: Integration Testing
+          name: Building the Integration Tests solution
           command: |
             dotnet build
+      - run:
+          working_directory: Backend/GestArm_API/GestArmTestes/IntegrationTesting
+          name: Running the integration tests
+          command: |
             dotnet test
     
   Build-GestLog_API:
-    description: Build the GestLog API
+    description: Build the GestLog application
     docker:
        - image: cimg/node:current
     steps:
       - checkout
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
-          name: install-npm
+          name: Install all the node-modules from the project 
           command:  |
            rm -f package-lock.json
            npm innit --yes
@@ -69,7 +81,6 @@ jobs:
           key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
           paths:
             - Backend/GestLogistica_API/GestLogistica/node_modules
-            
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Build
@@ -77,24 +88,23 @@ jobs:
             npm run build
 
   Unit-Test-GestLog_API:
-    description: Unit testing in the GestLog API
+    description: Run the unit tests from the GestLog application
     docker:
        - image: cimg/node:current
     steps:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
-
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
-          name : Coverage
+          name : Run the tests and generate the test coverage
           command: |
             npm run coverage     
       - store_artifacts:
           path: Backend/GestLogistica_API/GestLogistica/coverage
 
-  Build-gestArm-cloud-application:
-    description: Build application with Release configuration
+  Publish-gestArm-application-to-folder:
+    description: Publish GestArm application with release configuration to a folder
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
@@ -102,16 +112,6 @@ jobs:
       - restore_cache:
           keys:
             - dotnet-packages-v1-{{ checksum "Backend/GestArm_API/GestArm/DDDNetCore.csproj" }}
-      - run:
-          working_directory: Backend/GestArm_API/GestArm/
-          name: "Install project dependencies"
-          command: dotnet restore
-
-      - run:
-          working_directory: Backend/GestArm_API/GestArm/
-          name: "Build Application according to some given configuration"
-          command: dotnet build --no-restore --configuration Release
-
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: "Publish to a subfolder"
@@ -123,7 +123,7 @@ jobs:
             - published
 
   Login-to-azure-and-deploy:
-    description: Deploy the GestArm into Azure
+    description: Deploy the GestArm application into the Azure cloud
     executor: azure-cli/azure-docker
     steps:
       - azure-cli/install
@@ -164,11 +164,11 @@ workflows:
           requires:
             - Build-GestLog_API
 
-      - Build-gestArm-cloud-application:
+      - Publish-gestArm-application-to-folder:
           requires:
             - Integration-testing-GestArm_API
             - Unit-testing-GestArm_API
 
       - Login-to-azure-and-deploy:
           requires:
-            - Build-gestArm-cloud-application
+            - Publish-gestArm-application-to-folder
