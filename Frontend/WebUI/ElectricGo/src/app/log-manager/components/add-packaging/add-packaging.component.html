@@ -1,0 +1,36 @@
+<br>
+<h1>Logistic Manager: Create Packaging</h1>
+<br>
+<div class="form">
+  <div class="btn-group">
+    <mat-form-field>
+      <mat-label>Truck Reference</mat-label>
+      <input matInput type="text" [(ngModel)]="truckReference"/>
+    </mat-form-field>
+    <br/>
+    <mat-form-field>
+      <mat-label>Order Reference</mat-label>
+      <input matInput type="text" [(ngModel)]="orderReference"/>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" (click)="addPackaging()">Add Packaging</button>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <button mat-raised-button color="primary" (click)="logout()">Exit</button>
+    <p>{{truck}}</p>
+  </div>
+</div>
+
+
+<div *ngIf = showResponse, class = "showRes">
+  <br>
+  <br>
+  <br>
+  <br>
+  <button mat-raised-button color="primary" (click)="logout()">XDDDD</button>
+</div>
+

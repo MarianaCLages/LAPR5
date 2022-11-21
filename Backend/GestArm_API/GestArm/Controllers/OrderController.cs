@@ -212,11 +212,11 @@ public class OrderController : ControllerBase
     // GET: api/Warehouse/search/{date}/{nextID} (Os dois juntos vão fazer o DOMAIN ID da order)
     [Route("~/api/[controller]/search", Name = "GetOrderByDomainID")]
     [HttpGet("search")]
-    public async Task<ActionResult<OrderDto>> GetByOrderDomainIDAsync(string nextID, string data)
+    public async Task<ActionResult<OrderDto>> GetByOrderDomainIDAsync(string data, string nextID)
     {
         try
         {
-            var warehouse = await _service.GetOrderByDomainIdAsync(data, nextID);
+            var warehouse = await _service.GetOrderByDomainIdAsync(nextID, data);
 
             if (warehouse == null) return NotFound("A warehouse with that ID was not found!");
 

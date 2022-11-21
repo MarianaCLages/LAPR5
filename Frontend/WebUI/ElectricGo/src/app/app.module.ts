@@ -15,6 +15,10 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {FleetManagerModule} from "./fleet-manager/fleet-manager.module";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
+import { AddPackagingComponent } from './log-manager/components/add-packaging/add-packaging.component';
+import { AddPackagingService } from 'src/app/services/add-packaging.service';
+
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,9 +27,11 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-b
     LoginPageComponent,
     HeaderComponent,
     ErrorPageComponent,
+    AddPackagingComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     MatToolbarModule,
     MatIconModule,
@@ -36,7 +42,7 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-b
     BrowserAnimationsModule,
     NoopAnimationsModule
   ],
-  providers: [AddTruckServiceService],
+  providers: [HttpClientModule,AddTruckServiceService,AddPackagingService],
   exports: [
     HeaderComponent,
     AddTruckFormComponent,

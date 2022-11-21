@@ -445,3 +445,6 @@ Frontend/SPA/ElecticGo/package-lock.json
 #Visualization module
 Frontend/SGRAI/node_modules
 Frontend/SGRAI/three.js-master
+
+#Publish GestArm
+Backend/GestArm_API/GestArm/published
