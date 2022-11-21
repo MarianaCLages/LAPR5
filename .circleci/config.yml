@@ -18,6 +18,8 @@ jobs:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
+      - restore_cache:
+          key: dotnet-packages-v1-{{ checksum "Backend/GestArm_API/GestArm/DDDNetCore.csproj" }}
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: Build the application
@@ -59,6 +61,8 @@ jobs:
        - image: cimg/node:current
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name: Install all gestLog dependecies
@@ -84,7 +88,6 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
-
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Run the gestLog tests and generate coverage
@@ -186,6 +189,7 @@ jobs:
           working_directory: Backend/GestArm_API/GestArm/published
           name: Deploy gestArm application to Azure cloud
           command: |
+            pwd
             az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
             git init
             git config --global user.email "1201487@isep.ipp.pt"
