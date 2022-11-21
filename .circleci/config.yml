@@ -98,20 +98,23 @@ jobs:
     docker:
        - image: cimg/node:16.13.1-browsers
     steps:
-      - checkout
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run:
           working_directory: Frontend/WebUI/ElectricGo
-          name : Install all dependecies
           command: |
-             npm install -g @angular/cli 
-             rm -f package-lock.json
-             npm innit --yes
-             npm install --save
+            google-chrome --version
+            chromedriver --version
+          name: Check install
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "Frontend/WebUI/ElectricGo/package.json" }}
       - run:
           working_directory: Frontend/WebUI/ElectricGo
           name : Build the Front end application
           command: |
-            ng build
+            npm install
+            npm run build
       - save_cache:
           key: dependency-cache-{{ checksum "Frontend/WebUI/ElectricGo/package.json" }}
           paths:
