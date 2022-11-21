@@ -194,7 +194,6 @@ jobs:
             git config --global user.email "1201487@isep.ipp.pt"
             git config --global user.name "Jordans"
             git add .
-            mv /root/project/Backend/GestArm_API/GestArm/published/* /root/project/Backend/GestArm_API/GestArm
             git commit -m "Deploy Azure Web Application"
             git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@masterdatawarehousemanagement.scm.azurewebsites.net/MasterDataWarehouseManagement.git
             git push azure master --force 
