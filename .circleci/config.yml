@@ -138,7 +138,6 @@ jobs:
           name: "Deploy Web App to Azure"
           command: |
             az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
-            cd /published
             git init
             git config --global user.email "1201487@isep.ipp.pt"
             git config --global user.name "Jordans"
