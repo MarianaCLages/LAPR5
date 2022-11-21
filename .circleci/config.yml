@@ -98,6 +98,7 @@ jobs:
     docker:
        - image: cimg/node:16.13.1-browsers
     steps:
+      - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run:
@@ -105,9 +106,7 @@ jobs:
           command: |
             google-chrome --version
             chromedriver --version
-            ls -l
           name: Check install
-      - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "Frontend/WebUI/ElectricGo/package.json" }}
       - run:
