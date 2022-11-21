@@ -114,6 +114,16 @@ jobs:
             - dotnet-packages-v1-{{ checksum "Backend/GestArm_API/GestArm/DDDNetCore.csproj" }}
       - run:
           working_directory: Backend/GestArm_API/GestArm/
+          name: "Install project dependencies"
+          command: dotnet restore
+
+      - run:
+          working_directory: Backend/GestArm_API/GestArm/
+          name: "Build Application according to some given configuration"
+          command: dotnet build --no-restore --configuration Release
+
+      - run:
+          working_directory: Backend/GestArm_API/GestArm/
           name: "Publish to a subfolder"
           command: |
             dotnet publish --configuration Release --no-build --output published
