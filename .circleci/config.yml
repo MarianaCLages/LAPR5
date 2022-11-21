@@ -110,13 +110,13 @@ jobs:
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: "Build Application according to some given configuration"
-          command: dotnet build --configuration Release
+          command: dotnet build --no-restore --configuration Release
 
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: "Publish to a subfolder"
           command: |
-            dotnet publish --configuration Release --output published
+            dotnet publish --configuration Release --no-build --output published
       - persist_to_workspace:
           root: Backend/GestArm_API/GestArm/
           paths:
@@ -138,6 +138,7 @@ jobs:
           name: "Deploy Web App to Azure"
           command: |
             az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
+            cd /published
             git init
             git config --global user.email "1201487@isep.ipp.pt"
             git config --global user.name "Jordans"
