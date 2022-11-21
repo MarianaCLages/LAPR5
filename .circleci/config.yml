@@ -103,10 +103,10 @@ jobs:
           working_directory: Frontend/WebUI/ElectricGo
           name : Install all dependecies
           command: |
+             npm install -g @angular/cli 
              rm -f package-lock.json
              npm innit --yes
              npm install --save
-             npm install @angular/cli --save
       - run:
           working_directory: Frontend/WebUI/ElectricGo
           name : Build the Front end application
