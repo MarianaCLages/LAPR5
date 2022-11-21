@@ -105,6 +105,7 @@ jobs:
           command: |
             google-chrome --version
             chromedriver --version
+            ls -l
           name: Check install
       - checkout
       - restore_cache:
