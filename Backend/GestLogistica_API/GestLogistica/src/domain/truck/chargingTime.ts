@@ -5,7 +5,7 @@ import {Guard} from "../../core/logic/Guard";
 interface ChargingTimeProps {
     value: number;
 }
-
+// time that takes to charge the truck from 20 to 80% (minutes)
 export class ChargingTime extends ValueObject<ChargingTimeProps> {
     public constructor(props: ChargingTimeProps) {
         super(props);

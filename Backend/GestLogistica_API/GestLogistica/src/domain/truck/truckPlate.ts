@@ -7,6 +7,7 @@ interface TruckPlateProps {
     value: string;
 }
 
+// truck plate (e.g. AA-11-AA)
 export class TruckPlate extends ValueObject<TruckPlateProps> {
     get value (): string {
         return this.props.value;

@@ -6,6 +6,7 @@ interface CaractTruckProps {
     value: string;
 }
 
+// truck characteristic (eTruck01, etc)
 export class CaractTruck extends ValueObject<CaractTruckProps> {
     get value (): string {
         return this.props.value;

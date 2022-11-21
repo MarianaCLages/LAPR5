@@ -6,7 +6,7 @@ interface totalBatChargeProps {
     value: number;
 }
 
-// total battery charge
+// total battery charge of the truck (kWh)
 export class TotalBatCharge extends ValueObject<totalBatChargeProps> {
     public constructor(props: totalBatChargeProps) {
         super(props);
