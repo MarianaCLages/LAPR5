@@ -1,6 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-fleet-manager',
@@ -8,40 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./fleet-manager.component.css']
 })
 export class FleetManagerComponent implements OnInit {
-  @Output()
-  redirectEvent = new EventEmitter<string>();
 
-  constructor(private router: Router, private location: Location) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  addTruck() {
-    //route to add truck menu
-    let opt = 'addTruck';
-    let url = 'FleetManager/' + opt;
-    this.router.navigate([url]).then(r => console.log(r));
+  goTo(destination: any) {
+    //changes the route to the destination
+    this.router.navigate([destination]).then(r => console.log(r));
   }
-
-  listTrucks() {
-    //route to list trucks menu
-    let opt = 'listTrucks';
-    let url = 'FleetManager/' + opt;
-    this.router.navigate([url]).then(r => console.log(r));
-  }
-
-  updateTruck() {
-    //route to update truck menu
-    let opt = 'updateTruck';
-    let url = 'FleetManager/' + opt;
-    this.router.navigate([url]).then(r => console.log(r));
-  }
-
-  logout() {
-    this.location.back();
-  }
-
-
-
-
 }
+
