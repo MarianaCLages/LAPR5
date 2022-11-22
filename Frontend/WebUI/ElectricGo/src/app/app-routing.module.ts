@@ -7,6 +7,7 @@ import {LogManagerComponent} from "./log-manager/log-manager.component";
 import {AddPackagingComponent} from './log-manager/components/add-packaging/add-packaging.component';
 import {ErrorPageComponent} from "./components/error-page/error-page.component";
 import {CreatePathComponent} from "./log-manager/components/create-path/create-path.component";
+import { AddTruckComponent } from './fleet-manager/components/add-truck/add-truck.component';
 
 const routes: Routes = [
   {path: '', component: LoginPageComponent},
@@ -18,6 +19,9 @@ const routes: Routes = [
   {
     path: 'FleetManager',
     component: FleetManagerComponent
+  },
+  {
+    path: 'FleetManager/addTruck', component: AddTruckComponent
   },
   {
     path: 'LogisticManager',
