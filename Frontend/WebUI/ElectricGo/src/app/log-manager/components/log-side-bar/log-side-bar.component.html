@@ -1,0 +1,24 @@
+<div class="example-container">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="example-app-name">ElectricGo</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #snav>
+      <mat-nav-list>
+        <button mat-button (click)="goToMenu('LogisticManager/createPackaging')">Create a Packaging</button>
+        <br>
+        <button mat-button (click)="goToMenu('LogisticManager/createPackaging')">List all Packagings</button>
+        <br>
+        <button mat-button (click)="goToMenu('LogisticManager/createPath')">Create a Path</button>
+        <br>
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+  </mat-sidenav-container>
+</div>
+

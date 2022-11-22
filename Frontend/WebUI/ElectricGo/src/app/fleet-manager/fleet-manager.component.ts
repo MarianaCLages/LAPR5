@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-fleet-manager',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FleetManagerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  goTo(destination: any) {
+    //changes the route to the destination
+    this.router.navigate([destination]).then(r => console.log(r));
+  }
 }

@@ -19,6 +19,7 @@ namespace GestArm;
 public class Startup
 {
     static string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
     public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
@@ -39,12 +40,14 @@ public class Startup
         services.AddControllers().AddNewtonsoftJson();
         services.AddCors(options =>
         {
+            //allows all origins and headers and methods for all endpoints in the application
             options.AddPolicy(name: MyAllowSpecificOrigins,
                 builder =>
                 {
                     builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .AllowAnyHeader();
+                        .AllowCredentials();
                 });
         });
     }
