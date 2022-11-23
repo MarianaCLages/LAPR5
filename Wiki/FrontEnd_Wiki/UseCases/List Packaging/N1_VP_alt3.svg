@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="316px" preserveAspectRatio="none" style="width:329px;height:316px;background:#FFFFFF;" version="1.1" viewBox="0 0 329 316" width="329px" zoomAndPan="magnify"><defs><filter height="300%" id="f1xo5p0n96n9nl" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f1xo5p0n96n9nl)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="43" y="121.9609"/><rect fill="#FFFFFF" filter="url(#f1xo5p0n96n9nl)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="43" y="182.6641"/><rect fill="#FFFFFF" filter="url(#f1xo5p0n96n9nl)" height="91.0547" style="stroke:#A80036;stroke-width:1.0;" width="10" x="282" y="121.9609"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="48" x2="48" y1="89.6094" y2="231.0156"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="287" x2="287" y1="89.6094" y2="231.0156"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="80" x="5" y="86.5332">LogManager</text><ellipse cx="48" cy="15" fill="#FEFECE" filter="url(#f1xo5p0n96n9nl)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M48,23 L48,50 M35,31 L61,31 M48,50 L35,65 M48,50 L61,65 " fill="none" filter="url(#f1xo5p0n96n9nl)" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="80" x="5" y="244.5488">LogManager</text><ellipse cx="48" cy="257.625" fill="#FEFECE" filter="url(#f1xo5p0n96n9nl)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M48,265.625 L48,292.625 M35,273.625 L61,273.625 M48,292.625 L35,307.625 M48,292.625 L61,307.625 " fill="none" filter="url(#f1xo5p0n96n9nl)" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" filter="url(#f1xo5p0n96n9nl)" height="31.6094" rx="10" ry="10" style="stroke:#A80036;stroke-width:1.5;" width="60" x="255" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="262" y="74.5332">System</text><rect fill="#FEFECE" filter="url(#f1xo5p0n96n9nl)" height="31.6094" rx="10" ry="10" style="stroke:#A80036;stroke-width:1.5;" width="60" x="255" y="230.0156"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="262" y="251.5488">System</text><rect fill="#FFFFFF" filter="url(#f1xo5p0n96n9nl)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="43" y="121.9609"/><rect fill="#FFFFFF" filter="url(#f1xo5p0n96n9nl)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="43" y="182.6641"/><rect fill="#FFFFFF" filter="url(#f1xo5p0n96n9nl)" height="91.0547" style="stroke:#A80036;stroke-width:1.0;" width="10" x="282" y="121.9609"/><polygon fill="#A80036" points="270,117.9609,280,121.9609,270,125.9609,274,121.9609" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:2.0;" x1="53" x2="276" y1="121.9609" y2="121.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="197" x="60" y="117.1045">wants to list packages by order ID</text><polygon fill="#A80036" points="59,148.3125,49,152.3125,59,156.3125,55,152.3125" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="53" x2="281" y1="152.3125" y2="152.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="95" x="65" y="147.4561">asks for order ID</text><polygon fill="#A80036" points="270,178.6641,280,182.6641,270,186.6641,274,182.6641" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="53" x2="276" y1="182.6641" y2="182.6641"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="60" y="177.8076">gives order ID</text><polygon fill="#A80036" points="59,209.0156,49,213.0156,59,217.0156,55,213.0156" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="53" x2="286" y1="213.0156" y2="213.0156"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="205" x="65" y="208.1592">Shows list or informs about an error</text><!--MD5=[e2c6be308c9fdf9eb4a9186dd581aacf]
+@startuml N1_VP_alt3
+
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+
+
+actor LogManager
+participant System
+
+LogManager -> System : wants to list packages by order ID
+activate LogManager
+activate System
+System - -> LogManager : asks for order ID
+deactivate LogManager
+LogManager - -> System : gives order ID
+activate LogManager
+System - -> LogManager : Shows list or informs about an error
+deactivate LogManager
+deactivate System
+
+
+@enduml
+
+PlantUML version 1.2022.1(Tue Feb 01 18:19:58 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

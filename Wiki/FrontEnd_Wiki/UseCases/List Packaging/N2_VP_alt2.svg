@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="210px" preserveAspectRatio="none" style="width:321px;height:210px;background:#FFFFFF;" version="1.1" viewBox="0 0 321 210" width="321px" zoomAndPan="magnify"><defs><filter height="300%" id="fh2smgpy9g0fs" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#fh2smgpy9g0fs)" height="39.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="38.5" y="117.3125"/><rect fill="#FFFFFF" filter="url(#fh2smgpy9g0fs)" height="105.0547" style="stroke:#A80036;stroke-width:1.0;" width="10" x="210.5" y="51.6094"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="43" x2="43" y1="41.6094" y2="165.6641"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="215.5" x2="215.5" y1="41.6094" y2="165.6641"/><rect fill="#FEFECE" filter="url(#fh2smgpy9g0fs)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="73" x="5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="59" x="12" y="26.5332">FrontEnd</text><rect fill="#FEFECE" filter="url(#fh2smgpy9g0fs)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="73" x="5" y="164.6641"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="59" x="12" y="186.1973">FrontEnd</text><rect fill="#FEFECE" filter="url(#fh2smgpy9g0fs)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="68" x="179.5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="54" x="186.5" y="26.5332">GestLog</text><rect fill="#FEFECE" filter="url(#fh2smgpy9g0fs)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="68" x="179.5" y="164.6641"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="54" x="186.5" y="186.1973">GestLog</text><rect fill="#FFFFFF" filter="url(#fh2smgpy9g0fs)" height="39.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="38.5" y="117.3125"/><rect fill="#FFFFFF" filter="url(#fh2smgpy9g0fs)" height="105.0547" style="stroke:#A80036;stroke-width:1.0;" width="10" x="210.5" y="51.6094"/><line style="stroke:#A80036;stroke-width:1.0;" x1="220.5" x2="262.5" y1="73.9609" y2="73.9609"/><line style="stroke:#A80036;stroke-width:1.0;" x1="262.5" x2="262.5" y1="73.9609" y2="86.9609"/><line style="stroke:#A80036;stroke-width:1.0;" x1="221.5" x2="262.5" y1="86.9609" y2="86.9609"/><polygon fill="#A80036" points="231.5,82.9609,221.5,86.9609,231.5,90.9609,227.5,86.9609" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="87" x="227.5" y="69.1045">GET /api/Truck</text><polygon fill="#A80036" points="198.5,113.3125,208.5,117.3125,198.5,121.3125,202.5,117.3125" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="48.5" x2="204.5" y1="117.3125" y2="117.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="116" x="55.5" y="112.4561">GET /api/Packaging</text><polygon fill="#A80036" points="59.5,143.6641,49.5,147.6641,59.5,151.6641,55.5,147.6641" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="53.5" x2="209.5" y1="147.6641" y2="147.6641"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="138" x="65.5" y="142.8076">Packagings by Truck ID</text><!--MD5=[e38e5e8d6b1b92dc1fb8feb0d2bea9b2]
+@startuml N2_VP_alt2
+
+participant FrontEnd
+participant GestLog
+
+activate GestLog
+GestLog -> GestLog : GET /api/Truck
+FrontEnd -> GestLog : GET /api/Packaging
+activate FrontEnd
+
+GestLog - -> FrontEnd : Packagings by Truck ID
+
+
+@enduml
+
+PlantUML version 1.2022.1(Tue Feb 01 18:19:58 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>
