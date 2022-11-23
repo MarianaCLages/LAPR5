@@ -8,7 +8,7 @@ import { Observable, tap } from 'rxjs';
 })
 
 export class AddWarehouseService{
-  baseURL = "http://localhost:5000/api/Warehouse";
+  baseURL = "https://localhost:5001/api/Warehouse";
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +22,11 @@ export class AddWarehouseService{
       .post<ICreateWarehouseDTO>(this.baseURL,body,{
         headers: headers,
         observe: 'response',
-    });
+    }).subscribe(
+      response=>{
+        console.log(response);
+      }
+      );
 
 
     return data;
