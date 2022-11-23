@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+
+import { CreatePathServiceService } from "../../../services/create-path-service.service";
+import { FormControl } from "@angular/forms";
+import { GetWarehouseServiceService } from "../../../services/get-warehouse-service.service";
 import IPathDTO from "../../../shared/pathDTO";
-import {CreatePathServiceService} from "../../../services/create-path-service.service";
-import {GetWarehouseServiceService} from "../../../services/get-warehouse-service.service";
 
 @Component({
   selector: 'app-create-path',
@@ -11,10 +12,7 @@ import {GetWarehouseServiceService} from "../../../services/get-warehouse-servic
 })
 export class CreatePathComponent implements OnInit {
 
-//array of warehouses
 
-
-  // filteredwarehouses: Observable<string>;
   myControl = new FormControl();
   initialWarehouse: any;
   destinationWarehouse: any;
@@ -22,7 +20,11 @@ export class CreatePathComponent implements OnInit {
   distance: any;
   time: any;
   timeToCharge: any;
-  warehouses: any;
+  warehouses: any[] = [];
+  errorMessage: any;
+  error: boolean = false;
+  success: any;
+  successMessage: any;
 
 
   constructor(
@@ -32,26 +34,25 @@ export class CreatePathComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //fills the warehouses array with the warehouses from the backend
-     this.warehouses = this.getWarehouseService.getWarehouses();
-
+    //gets the warehouses from the backend
+    let warehouses = this.getWarehouseService.getWarehouses();
+    this.warehouses = warehouses;
+    this.error = false;
 
   }
 
   createTruck() {
-    console.log(this.initialWarehouse);
-    console.log(this.destinationWarehouse);
-    console.log(this.energyNeeded);
-    console.log(this.distance);
-    console.log(this.time);
-    console.log(this.timeToCharge);
+    //clears the error message
+    this.errorMessage = "";
+    this.error = false;
 
-
+    //clears the success message
+    this.success = "";
 
     //creates the path DTO
     let pathDTO: IPathDTO = {
-      beginningWarehouseId: this.initialWarehouse.AlphaNumId,
-      endingWarehouseId: this.destinationWarehouse.AlphaNumId,
+      beginningWarehouseId: this.initialWarehouse.alphaNumId,
+      endingWarehouseId: this.destinationWarehouse.alphaNumId,
       energy: this.energyNeeded,
       distance: this.distance,
       time: this.time,
@@ -66,18 +67,38 @@ export class CreatePathComponent implements OnInit {
     this.time = null;
     this.timeToCharge = null;
 
-    //logs the pathDTO
-    console.log(pathDTO);
 
 
     //sends the path DTO to the backend
-    let errorOrSuccess = this.createPathService.createPath(pathDTO);
-    console.log(errorOrSuccess);
 
-    //if the path was created successfully, show a success message
+    let errorOrSuccess: any = this.createPathService.createPath(pathDTO);
+    errorOrSuccess.subscribe(
+      (data: any) => {
+        this.success = true;
+        this.successMessage = "Path created successfully";
+        //TODO: still unsure if we should show the created path or not
+        //this.path = data;
+      },
+      //transforms into an http error
+      (error: any) => {
+        this.error = true;
+        if (error.status == 400) {
+          this.errorMessage = error.error;
+        }
+        else {
+          if (error.status == 500) {
 
-
-
+            this.errorMessage = error.error.errors.message;
+          }
+          else {
+            this.errorMessage = "An unknown error has ocurred";
+          }
+        }
+      }
+    );
+  }
+  goBack() {
+    window.history.back();
   }
 
 }

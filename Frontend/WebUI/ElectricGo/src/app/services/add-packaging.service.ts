@@ -1,8 +1,8 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { ICreatePackagingDTO } from '../shared/createPackagingDTO';
-import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 
+import { ICreatePackagingDTO } from '../shared/createPackagingDTO';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,6 @@ export class AddPackagingService {
     const headers = { 'content-type': 'application/json' };
 
     const body = JSON.stringify(createPackage);
-    console.log(body);
 
    const data = this.http
       .post<ICreatePackagingDTO>(this.baseUrl, body, {
