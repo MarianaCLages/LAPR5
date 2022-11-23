@@ -19,4 +19,4 @@
     
 ## Palete de cores
     
-        A palete de cores do projeto deve ter aspeto profissional, ou seja, deve conter cores que  e que não sejam muito claras ou muito escuras. A palete de cores deve ser composta por cores que sejam fáceis de ler e que sejam fáceis de distinguir entre si.
+    A palete de cores do projeto deve ter aspeto profissional, ou seja, deve conter cores que  e que não sejam muito claras ou muito escuras. A palete de cores deve ser composta por cores que sejam fáceis de ler e que sejam fáceis de distinguir entre si.

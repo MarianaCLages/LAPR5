@@ -5,7 +5,7 @@ Os dados do objeto já foram definidos em outras USs.
 
 - Como são inseridos os dados no formulário de criação de caminho?
 
-- Armazem de partida e chegada são campos obrigatórios. Como são preenchidos? **Lista de seleção? Busca? (pergunto ao cliente)**
+- Armazem de partida e chegada são campos obrigatórios. Como são preenchidos? **O cliente prefere que seja feita a pesquisa a partir de uma caixa de seleção com busca, no entanto aceita que a busca não seja implementada**
 
 - Distancia é um campo obrigatório. Como é preenchido? **Insere-se o valor na caixa de texto.**
 
@@ -33,3 +33,6 @@ Caso seja necessário escolher o armazem de partida e chegada, o sistema deve ex
 O FrontEnd deve enviar um request para o BackEnd com os dados do caminho. O BackEnd deve criar o caminho e retornar uma mensagem de sucesso.
 
 Na barra de navegação, o usuário pode clicar no botão de criar caminho. O sistema exibe a página de criação de caminho. 
+
+
+## Diagrama de Sequência

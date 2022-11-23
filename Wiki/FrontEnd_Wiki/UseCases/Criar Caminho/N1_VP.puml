@@ -1,0 +1,16 @@
+@startuml N1_VP
+
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+
+
+actor LogisticManager
+participant System
+
+LogisticManager -> System : wants to create an path
+System --> LogisticManager : asks for the data
+LogisticManager -> System : provides the data
+System --> LogisticManager : Confirms the creation or informs about an error
+
+
+@enduml

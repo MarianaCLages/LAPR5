@@ -1,0 +1,20 @@
+@startuml 
+
+participant FrontEnd
+participant GestLog
+participant GestArm
+
+FrontEnd -> GestArm : GET /api/Warehouse
+activate GestArm
+GestArm --> FrontEnd : all Warehouses
+deactivate GestArm
+
+FrontEnd -> GestLog : POST /api/path
+activate GestLog
+GestLog -> GestArm: GET /api/Warehouse/{id}
+activate GestArm
+GestArm --> GestLog : Warehouse
+deactivate GestArm
+GestLog --> FrontEnd : Path
+
+@enduml

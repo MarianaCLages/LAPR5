@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="306px" preserveAspectRatio="none" style="width:388px;height:306px;background:#FFFFFF;" version="1.1" viewBox="0 0 388 306" width="388px" zoomAndPan="magnify"><defs/><g><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="60" x2="60" y1="82.6094" y2="224.0156"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="352" x2="352" y1="82.6094" y2="224.0156"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="104" x="5" y="79.5332">LogisticManager</text><ellipse cx="60" cy="13.5" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M60,21.5 L60,48.5 M47,29.5 L73,29.5 M60,48.5 L47,63.5 M60,48.5 L73,63.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="104" x="5" y="237.5488">LogisticManager</text><ellipse cx="60" cy="249.125" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M60,257.125 L60,284.125 M47,265.125 L73,265.125 M60,284.125 L47,299.125 M60,284.125 L73,299.125 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E2E2F0" height="31.6094" rx="10" ry="10" style="stroke:#181818;stroke-width:0.5;" width="60" x="322" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="329" y="71.5332">System</text><rect fill="#E2E2F0" height="31.6094" rx="10" ry="10" style="stroke:#181818;stroke-width:0.5;" width="60" x="322" y="223.0156"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="329" y="244.5488">System</text><polygon fill="#181818" points="340,110.9609,350,114.9609,340,118.9609,344,114.9609" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:2.0;" x1="60" x2="346" y1="114.9609" y2="114.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="136" x="67" y="110.1045">wants to create an path</text><polygon fill="#181818" points="71,141.3125,61,145.3125,71,149.3125,67,145.3125" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="65" x2="351" y1="145.3125" y2="145.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="97" x="77" y="140.4561">asks for the data</text><polygon fill="#181818" points="340,171.6641,350,175.6641,340,179.6641,344,175.6641" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:2.0;" x1="60" x2="346" y1="175.6641" y2="175.6641"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="98" x="67" y="170.8076">provides the data</text><polygon fill="#181818" points="71,202.0156,61,206.0156,71,210.0156,67,206.0156" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="65" x2="351" y1="206.0156" y2="206.0156"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="268" x="77" y="201.1592">Confirms the creation or informs about an error</text><!--MD5=[d2c91187cef6264ad835938e19b61384]
+@startuml N1_VP
+
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+
+
+actor LogisticManager
+participant System
+
+LogisticManager -> System : wants to create an path
+System - -> LogisticManager : asks for the data
+LogisticManager -> System : provides the data
+System - -> LogisticManager : Confirms the creation or informs about an error
+
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 BST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>
