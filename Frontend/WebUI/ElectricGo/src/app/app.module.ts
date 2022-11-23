@@ -29,6 +29,7 @@ import {LogManagerComponent} from "./log-manager/log-manager.component";
 import {AddWarehouseService} from "./services/add-warehouse.service";
 import {WarehouseManagerComponent} from "./warehouse-manager/warehouse-manager.component";
 import { AddTruckComponent } from "./fleet-manager/components/add-truck/add-truck.component";
+import { AddWarehouseComponent } from "./warehouse-manager/components/add-warehouse/add-warehouse.component";
 
 @NgModule({
   declarations: [
