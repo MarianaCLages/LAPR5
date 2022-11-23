@@ -28,6 +28,9 @@ import { FleetSideBarComponent } from './fleet-manager/fleet-side-bar/fleet-side
 import {FleetManagerComponent} from "./fleet-manager/fleet-manager.component";
 import { LogSideBarComponent } from './log-manager/components/log-side-bar/log-side-bar.component';
 import {LogManagerComponent} from "./log-manager/log-manager.component";
+import {AddWarehouseComponent} from "./warehouse-manager/components/add-warehouse/add-warehouse.component";
+import {AddWarehouseService} from "./services/add-warehouse.service";
+import {WarehouseManagerComponent} from "./warehouse-manager/warehouse-manager.component";
 
 @NgModule({
   declarations: [
@@ -40,6 +43,7 @@ import {LogManagerComponent} from "./log-manager/log-manager.component";
     CreatePathComponent,
     FleetSideBarComponent,
     FleetManagerComponent,
+    WarehouseManagerComponent,
     LogSideBarComponent,
     LogManagerComponent
   ],
@@ -67,7 +71,7 @@ import {LogManagerComponent} from "./log-manager/log-manager.component";
     ReactiveFormsModule,
     MatAutocompleteModule,
   ],
-  providers: [HttpClientModule, AddTruckServiceService, AddPackagingService],
+  providers: [HttpClientModule, AddTruckServiceService, AddPackagingService, AddWarehouseService],
   exports: [
     HeaderComponent,
     AddTruckFormComponent,
