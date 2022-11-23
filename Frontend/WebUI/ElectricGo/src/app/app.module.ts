@@ -30,6 +30,7 @@ import {AddWarehouseService} from "./services/add-warehouse.service";
 import {WarehouseManagerComponent} from "./warehouse-manager/warehouse-manager.component";
 import { AddTruckComponent } from "./fleet-manager/components/add-truck/add-truck.component";
 import { AddWarehouseComponent } from "./warehouse-manager/components/add-warehouse/add-warehouse.component";
+import { ListPackagingComponent } from './log-manager/components/list-packaging/list-packaging.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AddWarehouseComponent } from "./warehouse-manager/components/add-wareho
     FleetManagerComponent,
     WarehouseManagerComponent,
     LogSideBarComponent,
-    LogManagerComponent
+    LogManagerComponent,
+    ListPackagingComponent
   ],
   imports: [
     BrowserModule,

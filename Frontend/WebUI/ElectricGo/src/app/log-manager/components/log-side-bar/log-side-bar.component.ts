@@ -32,4 +32,8 @@ export class LogSideBarComponent implements OnInit {
   goToMenu(logisticManagerCreatePath: string) {
     this.menuSelected.emit(logisticManagerCreatePath);
   }
+
+  goToMenu2(logisticManagerListPath: string) {
+    this.menuSelected.emit(logisticManagerListPath);
+  }
 }
