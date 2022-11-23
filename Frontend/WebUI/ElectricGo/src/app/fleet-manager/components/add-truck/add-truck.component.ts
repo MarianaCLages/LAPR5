@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Location } from '@angular/common';
-import { ITruckDTO } from 'src/app/shared/truckDTO';
+import { AddTruckService } from '../../services/add-truck.service';
 
 @Component({
   selector: 'app-add-truck',
@@ -9,10 +9,11 @@ import { ITruckDTO } from 'src/app/shared/truckDTO';
 })
 export class AddTruckComponent implements OnInit {
   caractTruck: any;
+  truckPlate: any;
   tare: any;
   weightCapacity: any;
   totalBatCharge: any;
-  maxLoadAutonomy: any;
+  cargaMax: any;
   chargingTime: any;
   res: any;
 
@@ -21,6 +22,7 @@ export class AddTruckComponent implements OnInit {
 
   constructor(
     private location: Location,
+    private addTruckService: AddTruckService
   ) { }
 
   ngOnInit(): void {
@@ -33,14 +35,17 @@ export class AddTruckComponent implements OnInit {
   addTruck() {
     let truck = {
       caractTruck: this.caractTruck,
+      truckPlate: this.truckPlate,
       tare: this.tare,
       weightCapacity: this.weightCapacity,
       totalBatCharge: this.totalBatCharge,
-      maxLoadAutonomy: this.maxLoadAutonomy,
+      cargaMax: this.cargaMax,
       chargingTime: this.chargingTime
     };
 
     console.log(truck);
+    this.res = this.addTruckService.addTruck(truck);
+    console.log(this.res);
 
   }
 

@@ -3,8 +3,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {AddPackagingComponent} from './log-manager/components/add-packaging/add-packaging.component';
 import {AddPackagingService} from 'src/app/services/add-packaging.service';
-import {AddTruckFormComponent} from './components/add-truck-form/add-truck-form.component';
-import {AddTruckServiceService} from './services/add-truck-service.service';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserModule} from '@angular/platform-browser';
@@ -28,7 +26,6 @@ import { FleetSideBarComponent } from './fleet-manager/fleet-side-bar/fleet-side
 import {FleetManagerComponent} from "./fleet-manager/fleet-manager.component";
 import { LogSideBarComponent } from './log-manager/components/log-side-bar/log-side-bar.component';
 import {LogManagerComponent} from "./log-manager/log-manager.component";
-import {AddWarehouseComponent} from "./warehouse-manager/components/add-warehouse/add-warehouse.component";
 import {AddWarehouseService} from "./services/add-warehouse.service";
 import {WarehouseManagerComponent} from "./warehouse-manager/warehouse-manager.component";
 import { AddTruckComponent } from "./fleet-manager/components/add-truck/add-truck.component";
@@ -36,7 +33,6 @@ import { AddTruckComponent } from "./fleet-manager/components/add-truck/add-truc
 @NgModule({
   declarations: [
     AppComponent,
-    AddTruckFormComponent,
     LoginPageComponent,
     HeaderComponent,
     ErrorPageComponent,
@@ -73,10 +69,9 @@ import { AddTruckComponent } from "./fleet-manager/components/add-truck/add-truc
     ReactiveFormsModule,
     MatAutocompleteModule,
   ],
-  providers: [HttpClientModule, AddTruckServiceService, AddPackagingService, AddWarehouseService],
+  providers: [HttpClientModule, AddPackagingService, AddWarehouseService],
   exports: [
     HeaderComponent,
-    AddTruckFormComponent,
     LoginPageComponent,
     ErrorPageComponent,
   ],

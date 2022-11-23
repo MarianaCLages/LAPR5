@@ -1,13 +1,17 @@
 <div class="container" matAutocompleteOrigin>
     <h1>Create Truck</h1>
 
-
     <mat-form-field>
         <mat-label> Truck Characteristic</mat-label>
         <input matInput type = "text" [(ngModel)]="caractTruck"/>
     </mat-form-field>
 
     <br>
+
+    <mat-form-field>
+        <mat-label> Truck Plate Number </mat-label>
+        <input matInput type = "text" [(ngModel)]="truckPlate"/>
+    </mat-form-field>
 
     <mat-form-field>
         <mat-label> Truck Tare </mat-label>
@@ -32,7 +36,7 @@
 
     <mat-form-field>
         <mat-label> Truck Autonomy </mat-label>
-        <input matInput type = "number" [(ngModel)]="maxLoadAutonomy"/>
+        <input matInput type = "number" [(ngModel)]="cargaMax"/>
     </mat-form-field>
 
     <br>
