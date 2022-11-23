@@ -31,6 +31,7 @@ import {LogManagerComponent} from "./log-manager/log-manager.component";
 import {AddWarehouseComponent} from "./warehouse-manager/components/add-warehouse/add-warehouse.component";
 import {AddWarehouseService} from "./services/add-warehouse.service";
 import {WarehouseManagerComponent} from "./warehouse-manager/warehouse-manager.component";
+import { AddTruckComponent } from "./fleet-manager/components/add-truck/add-truck.component";
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {WarehouseManagerComponent} from "./warehouse-manager/warehouse-manager.c
     ErrorPageComponent,
     AddPackagingComponent,
     CreatePathComponent,
+    AddTruckComponent,
     FleetSideBarComponent,
     FleetManagerComponent,
     WarehouseManagerComponent,
