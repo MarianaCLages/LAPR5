@@ -2,7 +2,7 @@ namespace GestArm.Domain.Warehouses;
 
 public class CreatingWarehouseDto
 {
-    public CreatingWarehouseDto(int latitudeDegree, int latitudeMinute, int latitudeSecond, int longitudeDregree,
+    public CreatingWarehouseDto(int latitudeDegree, int latitudeMinute, int latitudeSecond, int longitudeDegree,
         int longitudeMinute, int longitudeSecond, string designation, string street, int doorNumber, string postalCode,
         string city, string country, string alphaNumId)
 
@@ -10,7 +10,7 @@ public class CreatingWarehouseDto
         LatitudeDegree = latitudeDegree;
         LatitudeMinute = latitudeMinute;
         LatitudeSecond = latitudeSecond;
-        LongitudeDregree = longitudeDregree;
+        LongitudeDregree = longitudeDegree;
         LongitudeMinute = longitudeMinute;
         LongitudeSecond = longitudeSecond;
         Designation = designation;

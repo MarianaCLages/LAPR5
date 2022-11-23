@@ -8,6 +8,7 @@ import {AddPackagingComponent} from './log-manager/components/add-packaging/add-
 import {ErrorPageComponent} from "./components/error-page/error-page.component";
 import {CreatePathComponent} from "./log-manager/components/create-path/create-path.component";
 import { AddTruckComponent } from './fleet-manager/components/add-truck/add-truck.component';
+import {AddWarehouseComponent} from "./warehouse-manager/components/add-warehouse/add-warehouse.component";
 
 const routes: Routes = [
   {path: '', component: LoginPageComponent},
@@ -16,6 +17,8 @@ const routes: Routes = [
     path: 'WarehouseManager',
     component: WarehouseManagerComponent
   },
+  {
+    path: 'WarehouseManager/addWarehouse', component: AddWarehouseComponent},
   {
     path: 'FleetManager',
     component: FleetManagerComponent
@@ -30,7 +33,6 @@ const routes: Routes = [
 
   {path: 'LogisticManager/addPackaging', component: AddPackagingComponent},
   {path: 'LogisticManager/createPath', component: CreatePathComponent},
-
   {path: '**', component: ErrorPageComponent}
 ];
 

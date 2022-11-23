@@ -1,4 +1,51 @@
 <div class="container" matAutocompleteOrigin>
     <h1>Create Truck</h1>
 
-    
+
+    <mat-form-field>
+        <mat-label> Truck Characteristic</mat-label>
+        <input matInput type = "text" [(ngModel)]="caractTruck"/>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label> Truck Tare </mat-label>
+        <input matInput type = "number" [(ngModel)]="tare"/>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label> Truck Weight Capacity </mat-label>
+        <input matInput type = "number" [(ngModel)]="weightCapacity"/>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label> Truck Total Battery Charge </mat-label>
+        <input matInput type = "number" [(ngModel)]="totalBatCharge"/>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label> Truck Autonomy </mat-label>
+        <input matInput type = "number" [(ngModel)]="maxLoadAutonomy"/>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label> Truck Charge Time </mat-label>
+        <input matInput type = "number" [(ngModel)]="chargingTime"/>
+
+    </mat-form-field>
+
+    <br>
+
+    <button mat-raised-button color="primary" (click)="addTruck()">Create</button>
+
+
+</div>
