@@ -1,4 +1,83 @@
-<div class="container" matAutocompleteOrigin>
-  <h1>Create Warehouse</h1>
-
+<br>
+<h1>Warehouse Manager: Create Warehouse</h1>
+<br>
+<div class="form">
+  <div class="btn-group">
+    <mat-form-field>
+      <mat-label>Alpha Numeric</mat-label>
+      <input matInput type="text" [(ngModel)]="alphaNumericId"/>
+    </mat-form-field>
+    <br/>
+    <br>
+    <mat-form-field>
+      <mat-label>Latitude Degrees</mat-label>
+      <input matInput type="number" [(ngModel)]="latitudeDegree"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Latitude Minutes</mat-label>
+      <input matInput type="number" [(ngModel)]="latitudeMinutes"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Latitude Seconds</mat-label>
+      <input matInput type="number" [(ngModel)]="latitudeSeconds"/>
+    </mat-form-field>
+    <br/>
+    <mat-form-field>
+      <mat-label>Longitude Degrees</mat-label>
+      <input matInput type="number" [(ngModel)]="longitudeDegree"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Longitude Minutes</mat-label>
+      <input matInput type="number" [(ngModel)]="longitudeMinutes"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Longitude Seconds</mat-label>
+      <input matInput type="number" [(ngModel)]="longitudeSeconds"/>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Designation</mat-label>
+      <input matInput type="text" [(ngModel)]="designation"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Street</mat-label>
+      <input matInput type="text" [(ngModel)]="street"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Door Number</mat-label>
+      <input matInput type="number" [(ngModel)]="doorNumber"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Postal Code</mat-label>
+      <input matInput type="text" [(ngModel)]="postalCode"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>City</mat-label>
+      <input matInput type="text" [(ngModel)]="city"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Country</mat-label>
+      <input matInput type="text" [(ngModel)]="country"/>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" (click)="addWarehouse()">Add Warehouse</button>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <button mat-raised-button color="primary" (click)="logout()">Exit</button>
+    <p>{{warehouse}}</p>
+  </div>
 </div>
+
+
+<div *ngIf = showRespose, class = "showRes">
+  <br>
+  <br>
+  <br>
+  <br>
+  <button mat-raised-button color="primary" (click)="logout()">lmao?</button>
+</div>
+

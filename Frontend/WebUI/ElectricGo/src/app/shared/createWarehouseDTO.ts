@@ -1,15 +1,15 @@
 export interface ICreateWarehouseDTO{
-  alphaNumericId : string;
   latitudeDegree : number;
-  latitudeMinutes : number;
-  latitudeSeconds : number;
+  latitudeMinute : number;
+  latitudeSecond : number;
   longitudeDegree: number;
-  longitudeMinutes : number;
-  longitudeSeconds: number;
+  longitudeMinute : number;
+  longitudeSecond: number;
   designation: string;
   street: string;
   doorNumber: number;
   postalCode: string;
   city: string;
   country: string;
+  alphaNumId : string;
 }

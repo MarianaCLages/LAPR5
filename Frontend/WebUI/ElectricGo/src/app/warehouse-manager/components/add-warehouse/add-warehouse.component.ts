@@ -43,12 +43,12 @@ export class  AddWarehouseComponent implements  OnInit{
 
   addWarehouse(){
     let warehouse = {
-      alphaNumericId: this.alphaNumericId,
+      alphaNumId: this.alphaNumericId,
       latitudeDegree: this.latitudeDegree,
-      latitudeSeconds: this.latitudeSeconds,
-      latitudeMinutes: this.latitudeMinutes,
-      longitudeSeconds: this.longitudeSeconds,
-      longitudeMinutes: this.longitudeMinutes,
+      latitudeSecond: this.latitudeSeconds,
+      latitudeMinute: this.latitudeMinutes,
+      longitudeSecond: this.longitudeSeconds,
+      longitudeMinute: this.longitudeMinutes,
       longitudeDegree: this.longitudeDegree,
       designation: this.designation,
       street: this.street,
@@ -65,10 +65,6 @@ export class  AddWarehouseComponent implements  OnInit{
 
     console.log(this.res.status);
     console.log('a' + this.res.body);
-
-    if(this.res.status == 201){
-      this.showRespose = true;
-    }else this.showRespose = false;
 
     console.log(this.showRespose);
   }

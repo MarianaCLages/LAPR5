@@ -41,6 +41,7 @@ import { AddTruckComponent } from "./fleet-manager/components/add-truck/add-truc
     HeaderComponent,
     ErrorPageComponent,
     AddPackagingComponent,
+    AddWarehouseComponent,
     CreatePathComponent,
     AddTruckComponent,
     FleetSideBarComponent,
