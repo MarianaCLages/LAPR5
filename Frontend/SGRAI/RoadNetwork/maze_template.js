@@ -38,73 +38,63 @@ export default class Maze {
         maze.object.add(roundaboutObject);
       }
 
-      let points = [];
-
-      // material
-
-      var material = new THREE.LineBasicMaterial();
-
+      // ROADS
       for (let i = 0; i < description.roads.length; i++) {
         for (let j = 0; j < description.roads[i].length; j++) {
           if (description.roads[i][j] != 0) {
 
-            points.push(
-              new THREE.Vector3(
-                description.map[i][0],
-                description.map[i][1],
-                description.map[i][2]
-              )
-            );
-            points.push(
-              new THREE.Vector3(
-                description.map[j][0],
-                description.map[j][1],
-                description.map[j][2]
-              )
+            var distance = Math.sqrt(
+              Math.pow(description.map[j][0] - description.map[i][0], 2) +
+                Math.pow(description.map[j][1] - description.map[i][1], 2) +
+                Math.pow(description.map[j][2] - description.map[i][2], 2)
             );
 
-            var geometry = new THREE.BufferGeometry().setFromPoints(points);
-            var line = new THREE.Line(geometry, material);
+            // Create a plane geometry
+            const geometry = new THREE.PlaneGeometry(0.2, distance);
 
-            maze.object.add(line);
+            // Create a texture
+            //const texture = new THREE.TextureLoader().load(maze.textureUrl);
+
+            // Configure the magnification and minification filters
+
+            /*
+            texture.magFilter = THREE.LinearFilter;
+            texture.minFilter = THREE.LinearMipmapLinearFilter;
+            */
+
+            // Create a material
+            const material = new THREE.MeshBasicMaterial({
+              color: 0xffff00,
+              side: THREE.DoubleSide,
+            });
+
+            const plane = new THREE.Mesh(geometry, material);
+
+            // Set the plane's position
+            plane.position.set(
+              (description.map[j][0] + description.map[i][0]) / 2,
+              (description.map[j][1] + description.map[i][1]) / 2,
+              (description.map[j][2] + description.map[i][2]) / 2
+            );
+
+            // Set the plane's rotation
+            plane.rotateOnAxis(
+              new THREE.Vector3(0, 0, 1),
+              description.map[j][2] - description.map[i][2]
+            );
+
+            plane.rotation.z =
+              Math.atan2(
+                description.map[j][1] - description.map[i][1],
+                description.map[j][0] - description.map[i][0]
+              )  - Math.PI / 2;
+
+            // Add the plane to the group
+            maze.object.scale.set(2, 2, 2);
+            maze.object.add(plane);
           }
         }
       }
-
-
-      /*
-      let i = 2;
-      let j = 1;
-       
-      let a = new THREE.Vector3(description.map[i][0], description.map[i][1],description.map[i][2]);
-      let b = new THREE.Vector3(description.map[j][0], description.map[j][1], description.map[j][2]);
-      let c = new THREE.Vector3(description.map[i][0] - 1, description.map[i][1] - 1,description.map[i][2] - 1);
-
-      let geometry = new THREE.PlaneGeometry(a.x - b.x, a.y - b.y);
-
-      a.normalize();
-      b.normalize();
-      c.normalize();
-
-      var quaternion = new THREE.Quaternion();
-      quaternion.setFromUnitVectors(a, b);
-
-      var euler = new THREE.Euler();
-      euler.setFromQuaternion(quaternion);
-      geometry.rotateX(euler.toArray()[0]);
-      geometry.rotateX(euler.toArray()[1]);
-      geometry.rotateX(euler.toArray()[2]);
-
-      var plane = new THREE.Mesh(
-        geometry,
-        new THREE.MeshBasicMaterial({
-          color: "red",
-          side: THREE.DoubleSide,
-        })
-      );
-
-      */
-
 
       /*
       const geometry = new THREE.PlaneGeometry(16 / 10, 9 / 10, 16, 16);
