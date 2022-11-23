@@ -5,3 +5,10 @@
   justify-content: center;
   height: 100%;
 }
+
+.backBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}

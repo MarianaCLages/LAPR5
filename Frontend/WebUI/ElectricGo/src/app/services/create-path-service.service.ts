@@ -1,24 +1,24 @@
-import {Injectable} from '@angular/core';
+import { HttpClient, HttpResponse } from "@angular/common/http";
+import { Observable, catchError, of } from "rxjs";
+
 import IPathDTO from "../shared/pathDTO";
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreatePathServiceService {
+  errorMessage = "";
 
   constructor(private http: HttpClient) {
 
   }
 
   createPath(pathDTO: IPathDTO) {
-    let errorOrSuccess = this.http.post('http://localhost:3000/api/paths', pathDTO).subscribe(
-      (data) => {
-        return data;
-      }
-    )
 
-    return errorOrSuccess;
+    return this.http.post<HttpResponse<any>>('http://localhost:3000/api/paths', pathDTO);
+
+
   }
 
 }

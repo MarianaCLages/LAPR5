@@ -1,6 +1,7 @@
-import {Injectable} from '@angular/core';
-import IPathDTO from "../shared/pathDTO";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
+import { ICreateWarehouseDTO } from "../shared/createWarehouseDTO";
+import { Injectable } from '@angular/core';
+import { firstValueFrom } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,29 @@ export class GetWarehouseServiceService {
   }
 
   getWarehouses(): any {
-    let warehouses = this.http.get('http://localhost:5000/api/warehouses').subscribe(
-      (data) => {
-        return data;
+    //set the http headers
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    };
+
+    //set the http options
+    const options = {
+      headers: headers
+    };
+
+    //create an IWarehouseDTO array
+    let warehouses: ICreateWarehouseDTO[] = [];
+
+    //return the http get request and fill the array with the data
+    firstValueFrom(this.http.get<ICreateWarehouseDTO[]>("http://localhost:5000/api/Warehouse", options)).then(res => {
+      for (let i = 0; i < res.length; i++) {
+        warehouses.push(res[i]);
       }
-    )
+    });
+    //return the array
+    return warehouses;
   }
+
 }
