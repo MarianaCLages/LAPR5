@@ -193,6 +193,7 @@ jobs:
             git init
             git config --global user.email "1201487@isep.ipp.pt"
             git config --global user.name "Jordans"
+            git config --global http.postBuffer 157286400
             git add .
             git commit -m "Deploy Azure Web Application"
             git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@masterdatawarehousemanagement.scm.azurewebsites.net/MasterDataWarehouseManagement.git
