@@ -10,6 +10,7 @@ import ITruckCaractDTO from "../dto/truck/ITruckCaractDTO";
 import {Result} from "../core/logic/Result";
 import {BaseController} from "../core/infra/BaseController";
 import ITruckPlateDTO from "../dto/truck/ITruckPlateDTO";
+import SendInfoToPlanningService from "../services/sendInfoToPlanningService";
 
 @Service()
 export default class truckController
@@ -127,6 +128,20 @@ export default class truckController
             return next(e);
         }
     }
+
+    public async sendInfo(req: Request, res: Response, next: NextFunction){
+
+        var fileService = new SendInfoToPlanningService();
+        let idTruck = req.params.idTruck;
+
+        fileService.generateFiles();
+        fileService.sendPaths();
+        fileService.sendWarehouse();
+        fileService.sendOrdersToPlanning(idTruck);
+
+        return res.status(200).json("Success!");
+    }
+
 
     protected executeImpl(): Promise<any> {
         throw new Error("Method not implemented.");

@@ -1,15 +1,19 @@
 import {Service} from "typedi";
 import fetch from 'node-fetch';
-import IOrderRepo from "../../services/IRepos/IOrderRepo";
+import IOrderRepo from "./IRepos/IOrderRepo";
 import * as https from "https";
 
 import {openSync, readFileSync, writeFileSync,statSync, promises as fsPromises} from 'fs';
-import config from "../../../config";
+import config from "../../config";
 import path, {join} from "path";
 import FormData from "form-data";
 import * as http from "http";
 
-export default class SendInfoToPlanning {
+@Service()
+export default class SendInfoToPlanningService {
+
+    constructor() {
+    }
 
     httpsAgent = new https.Agent({
         rejectUnauthorized: false,
@@ -60,7 +64,7 @@ export default class SendInfoToPlanning {
             var warehouseBegginingNumber = +warehouseBegginingString;
             var warehouseEndingNumber = +warehouseEndingString;
 
-            stringFormat = 'paths(' + warehouseBegginingNumber + ',' + warehouseEndingNumber + ',' + result[i].distance.toString() + ',' + result[i].energy.toString() + ',' + result[i].chargingTime.toString() + ',' + result[i].time.toString() + ').';
+            stringFormat = 'dadosCam_t_e_ta(truck,' + warehouseBegginingNumber + ',' + warehouseEndingNumber + ',' + result[i].time.toString() + ',' + result[i].energy.toString() + ',' + result[i].chargingTime.toString() + ').';
             pathArray.push(stringFormat);
         }
 
@@ -185,6 +189,9 @@ export default class SendInfoToPlanning {
         var orderArr = [];
         var os = require("os");
         let stringFormat : string;
+        let entrega_armazem: string;
+
+        entrega_armazem = 'entrega_armazens([';
 
         for(var i = 0; i < ordersId.length; i++) {
 
@@ -209,10 +216,20 @@ export default class SendInfoToPlanning {
             warehouseString = warehouseString.substring(1);
             let warehouseNumber = +warehouseString;
 
-            stringFormat = "orders("+object.orderMass.toString() + "," + object.chargingTime.toString()+ "," + object.chargingTime.toString() + ","+ warehouseNumber + ").";
+            let idSplit = object.identifier.toString().split('/');
+
+            stringFormat = "entrega("+ idSplit[0] + idSplit[1]+ ",222," + object.orderMass.toString() + ","+ warehouseNumber + ','+ object.chargingTime.toString()+ ','+ object.unloadingTime.toString()+ ").";
             orderArr.push(stringFormat);
+
+            if(i == ordersId.length - 1){
+                entrega_armazem = entrega_armazem + warehouseNumber + ']).';
+            }
+            else {
+                entrega_armazem = entrega_armazem + warehouseNumber + ',';
+            }
         }
 
+        orderArr.push(entrega_armazem);
         for(var i = 0; i < orderArr.length;i++) {
             await fsPromises.appendFile(join(__dirname, "orders.txt"), orderArr[i] + "\r\n", {
                 flag: 'a+',
