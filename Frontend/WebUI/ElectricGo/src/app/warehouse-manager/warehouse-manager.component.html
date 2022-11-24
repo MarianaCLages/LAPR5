@@ -1,10 +1,20 @@
-<br>
+
+<app-warehouse-side-bar (menuSelected)="goTo($event)"></app-warehouse-side-bar>
+
+<router-outlet></router-outlet>
+
+<!-- Mensagem a mostrar qual é o user e algum texto-->
+
+
+<!--<br>
 <h1>Warehouse Manager Front Page</h1>
 <br>
 <div class="form">
   <div class="btn-group">
     <div class="column">
       <button mat-raised-button color="primary" (click)="addWarehouse()">Add Warehouse</button>
+      <br>
+      <button mat-raised-button color="primary" (click)="addOrder()">Add Order</button>
       <br>
       <br>
       <br>
@@ -13,4 +23,4 @@
       <button mat-raised-button color="primary" (click)="logout()">Logout</button>
     </div>
   </div>
-</div>
+</div>-->
