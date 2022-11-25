@@ -37,6 +37,7 @@ import { WarehouseSideBarComponent } from "./warehouse-manager/components/wareho
 import { GetAllPackagingsComponent } from './log-manager/components/get-all-packagings/get-all-packagings.component';
 import { GetPackagingByOrderComponent } from './log-manager/components/get-packaging-by-order/get-packaging-by-order.component';
 import { GetPackagingByTruckComponent } from './log-manager/components/get-packaging-by-truck/get-packaging-by-truck.component';
+import {GetAllWarehousesComponent} from "./warehouse-manager/components/get-all-warehouse/get-all-warehouses.component";
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { GetPackagingByTruckComponent } from './log-manager/components/get-packa
     CreateOrderComponent,
     WarehouseSideBarComponent,
     GetAllPackagingsComponent,
+    GetAllWarehousesComponent,
     GetPackagingByOrderComponent,
     GetPackagingByTruckComponent
   ],

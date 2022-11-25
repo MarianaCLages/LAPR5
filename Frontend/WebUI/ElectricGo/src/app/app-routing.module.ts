@@ -12,6 +12,7 @@ import { AddTruckComponent } from './fleet-manager/components/add-truck/add-truc
 import {AddWarehouseComponent} from "./warehouse-manager/components/add-warehouse/add-warehouse.component";
 import { ListPackagingComponent } from './log-manager/components/list-packaging/list-packaging.component';
 import { CreateOrderComponent } from './warehouse-manager/components/create-order/create-order.component';
+import {GetAllWarehousesComponent} from "./warehouse-manager/components/get-all-warehouse/get-all-warehouses.component";
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
@@ -20,7 +21,7 @@ const routes: Routes = [
   {path: 'WarehouseManager', component: WarehouseManagerComponent},
   {path: 'WarehouseManager/addWarehouse', component: AddWarehouseComponent},
   {path: 'WarehouseManager/addOrder', component: CreateOrderComponent},
-  
+
   // Fleet Manager
   {path: 'FleetManager', component: FleetManagerComponent},
   {path: 'FleetManager/addTruck', component: AddTruckComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: 'LogisticManager/addPackaging', component: AddPackagingComponent},
   {path: 'LogisticManager/createPath', component: CreatePathComponent},
   {path: 'LogisticManager/listPackaging', component: ListPackagingComponent},
+  {path: 'WarehouseManager/getAllWarehouse', component: GetAllWarehousesComponent},
   {path: 'LogisticManager/viewNetwork', component: ViewRoadMapNetworkComponent},
   {path: '**', component: ErrorPageComponent},
 ];
