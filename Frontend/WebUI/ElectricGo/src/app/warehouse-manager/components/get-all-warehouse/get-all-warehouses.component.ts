@@ -24,15 +24,15 @@ export class GetAllWarehousesComponent implements OnInit {
   async getAllWarehouse() {
     this.warehouses = await this.getAllWarehouseService.getAllWarehouse();
     let stringMethod: string;
-    stringMethod = "";
+    this.warehousesAsString = "\n\n";
 
 
     for(let i = 0; i < this.warehouses.length; i++){
-      console.log(stringMethod);
+      this.warehousesAsString = this.warehousesAsString + "\nAlphaID: "+ this.warehouses[i].alphaNumId +"\nDoor Number:"+ this.warehouses[i].doorNumber + "\nPostal Code: "+ this.warehouses[i].postalCode + "\n\n\n";
 
     }
 
-    this.warehousesAsString = "\nAlphaID:"+ this.warehouses[0].alphaNumId +"Door Number:"+ this.warehouses[0].doorNumber + "\nPostal Code:"+ this.warehouses[0].postalCode;
+    //this.warehousesAsString = "\nAlphaID:"+ this.warehouses[0].alphaNumId +"Door Number:"+ this.warehouses[0].doorNumber + "\nPostal Code:"+ this.warehouses[0].postalCode;
     console.log(this.warehousesAsString);
 
   }
