@@ -72,4 +72,6 @@ export default (app: Router) => {
         }),
         (req, res, next) => ctrl.getTruckByPlate(req, res, next));
 
+    route.get('/send_info/:idTruck',
+        (req,res,next) => ctrl.sendInfo(req,res,next) );
 }

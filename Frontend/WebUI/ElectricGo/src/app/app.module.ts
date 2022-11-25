@@ -32,6 +32,8 @@ import { AddTruckComponent } from "./fleet-manager/components/add-truck/add-truc
 import { AddWarehouseComponent } from "./warehouse-manager/components/add-warehouse/add-warehouse.component";
 import { ListPackagingComponent } from './log-manager/components/list-packaging/list-packaging.component';
 import { ViewRoadMapNetworkComponent } from './log-manager/components/view-road-map-network/view-road-map-network.component';
+import { CreateOrderComponent } from './warehouse-manager/components/create-order/create-order.component';
+import { WarehouseSideBarComponent } from "./warehouse-manager/components/warehouse-side-bar/warehouse-side-bar.component";
 
 @NgModule({
   declarations: [
@@ -49,7 +51,10 @@ import { ViewRoadMapNetworkComponent } from './log-manager/components/view-road-
     LogSideBarComponent,
     LogManagerComponent,
     ListPackagingComponent,
-    ViewRoadMapNetworkComponent
+    ViewRoadMapNetworkComponent,
+    CreateOrderComponent,
+    WarehouseSideBarComponent
+
   ],
   imports: [
     BrowserModule,

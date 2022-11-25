@@ -7,4 +7,5 @@ export default interface ITruckController  {
     getTruckByPlate(req: Request, res: Response, next: NextFunction);
     updateTruck(req: Request, res: Response, next: NextFunction);
     deleteTruck(req: Request, res: Response, next: NextFunction);
+    sendInfo(req: Request,res: Response,next: NextFunction);
 }

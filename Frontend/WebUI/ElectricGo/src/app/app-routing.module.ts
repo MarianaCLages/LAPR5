@@ -11,35 +11,26 @@ import { CreatePathComponent } from './log-manager/components/create-path/create
 import { AddTruckComponent } from './fleet-manager/components/add-truck/add-truck.component';
 import {AddWarehouseComponent} from "./warehouse-manager/components/add-warehouse/add-warehouse.component";
 import { ListPackagingComponent } from './log-manager/components/list-packaging/list-packaging.component';
+import { CreateOrderComponent } from './warehouse-manager/components/create-order/create-order.component';
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
 
-  {
-    path: 'WarehouseManager',
-    component: WarehouseManagerComponent,
-  },
-  {
-    path: 'WarehouseManager/addWarehouse',
-    component: AddWarehouseComponent,
-  },
-  {
-    path: 'FleetManager',
-    component: FleetManagerComponent,
-  },
-  {
-    path: 'FleetManager/addTruck',
-    component: AddTruckComponent,
-  },
-  {
-    path: 'LogisticManager',
-    component: LogManagerComponent,
-  },
+  // Warehouse Manager
+  {path: 'WarehouseManager', component: WarehouseManagerComponent},
+  {path: 'WarehouseManager/addWarehouse', component: AddWarehouseComponent},
+  {path: 'WarehouseManager/addOrder', component: CreateOrderComponent},
+  
+  // Fleet Manager
+  {path: 'FleetManager', component: FleetManagerComponent},
+  {path: 'FleetManager/addTruck', component: AddTruckComponent},
 
+  // Logistic Manager
+  {path: 'LogisticManager', component: LogManagerComponent},
   {path: 'LogisticManager/addPackaging', component: AddPackagingComponent},
   {path: 'LogisticManager/createPath', component: CreatePathComponent},
   {path: 'LogisticManager/listPackaging', component: ListPackagingComponent},
-  { path: 'LogisticManager/viewNetwork', component: ViewRoadMapNetworkComponent },
+  {path: 'LogisticManager/viewNetwork', component: ViewRoadMapNetworkComponent},
   {path: '**', component: ErrorPageComponent},
 ];
 

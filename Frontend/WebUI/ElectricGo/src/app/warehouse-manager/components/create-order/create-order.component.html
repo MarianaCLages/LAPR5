@@ -1,0 +1,59 @@
+<br>
+<h1 style="text-align: center;">Warehouse Manager</h1>
+<h2 style="text-align: center;">Create Order</h2>
+<br>
+<div class="form">
+  <div class="btn-group" style="text-align: center;">
+    <mat-form-field>
+      <mat-label>Date</mat-label>
+      <input matInput type="date" [(ngModel)]="orderDate"/>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Mass</mat-label>
+      <input matInput type="number" [(ngModel)]="orderMass"/>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Loading Time</mat-label>
+      <input matInput type="number" [(ngModel)]="chargingTime"/>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Unloading Time</mat-label>
+      <input matInput type="number" [(ngModel)]="unloadingTime"/>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Warehouse ID</mat-label>
+      <input matInput type="text" [(ngModel)]="warehouseId"/>
+    </mat-form-field>
+
+    <br>
+
+    <button mat-raised-button color="primary" (click)="addOrder()">Create</button>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <button mat-raised-button color="primary" (click)="logout()">Back</button>
+  </div>
+</div>
+
+<div *ngIf = showResponse, class = "showRes">
+  <br>
+  <br>
+  <br>
+  <br>
+  <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+</div>
