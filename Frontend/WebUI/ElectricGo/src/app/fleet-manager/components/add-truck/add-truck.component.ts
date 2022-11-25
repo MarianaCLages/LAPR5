@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Location } from '@angular/common';
 import { AddTruckService } from '../../services/add-truck.service';
 
 @Component({
@@ -15,21 +14,18 @@ export class AddTruckComponent implements OnInit {
   totalBatCharge: any;
   cargaMax: any;
   chargingTime: any;
+  error: boolean = false;
+  errorMessage: any;
   res: any;
 
   @Output()
   redirectEvent = new EventEmitter<string>();
 
   constructor(
-    private location: Location,
     private addTruckService: AddTruckService
   ) { }
 
   ngOnInit(): void {
-  }
-
-  logout() {
-    this.location.back();
   }
 
   addTruck() {
@@ -43,10 +39,35 @@ export class AddTruckComponent implements OnInit {
       chargingTime: this.chargingTime
     };
 
-    console.log(truck);
     this.res = this.addTruckService.addTruck(truck);
-    console.log(this.res);
 
+    let errorOrSuccess: any = this.addTruckService.addTruck(truck);
+    errorOrSuccess.subscribe(
+      (data: any) => {
+        window.history.back();
+      },
+      //transforms into an http error
+      (error: any) => {
+        this.error = true;
+        if (error.status == 400) {
+          this.errorMessage = error.error;
+        }
+        else {
+          if (error.status == 500) {
+
+            this.errorMessage = error.error.errors.message;
+          }
+          else {
+            this.errorMessage = "An unknown error has ocurred";
+          }
+        }
+      }
+    );
+
+  }
+
+  goBack() {
+    window.history.back();
   }
 
 }

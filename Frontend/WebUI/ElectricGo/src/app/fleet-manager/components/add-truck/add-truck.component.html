@@ -1,6 +1,12 @@
 <div class="container" matAutocompleteOrigin>
     <h1>Create Truck</h1>
 
+    <div>
+        <mat-error *ngIf="error" class="alert alert-warning">
+          <strong>Error</strong> {{errorMessage |json | slice:0:100}}
+        </mat-error>
+      </div>
+
     <mat-form-field>
         <mat-label> Truck Characteristic</mat-label>
         <input matInput type = "text" [(ngModel)]="caractTruck"/>
@@ -50,6 +56,9 @@
     <br>
 
     <button mat-raised-button color="primary" (click)="addTruck()">Create</button>
+
+
+    <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
 
 
 </div>
