@@ -1,15 +1,14 @@
 import 'reflect-metadata'; // We need this in order to use @Decorators
 
 import File from "./core/infra/WritePathIntoFile";
-import Test from "./core/infra/SendOrdersToPlanning";
 import Logger from './loaders/logger';
+import Test from "./core/infra/SendOrdersToPlanning";
 import config from '../config';
 import express from 'express';
 
 async function startServer() {
   const app = express();
-  var file = new File();
-  var test = new Test();
+ 
 
   const cors = require('cors');
   app.use(cors(

@@ -1,0 +1,43 @@
+<!--Table with all the paths from the array.-->
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="paths">
+    <caption><h1>Paths</h1></caption>
+    <ng-container matColumnDef="Beginning Warehouse">
+      <th mat-header-cell *matHeaderCellDef> Beginning Warehouse</th>
+      <td mat-cell *matCellDef="let path"> {{path.beginningWarehouseId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Ending Warehouse">
+      <th mat-header-cell *matHeaderCellDef> Ending Warehouse</th>
+      <td mat-cell *matCellDef="let path"> {{path.endingWarehouseId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="distance">
+      <th mat-header-cell *matHeaderCellDef> Distance</th>
+      <td mat-cell *matCellDef="let path"> {{path.distance}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="energy">
+      <th mat-header-cell *matHeaderCellDef> Energy</th>
+      <td mat-cell *matCellDef="let path"> {{path.energy}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef> Time</th>
+      <td mat-cell *matCellDef="let path"> {{path.time}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="chargingTime">
+      <th mat-header-cell *matHeaderCellDef> Charging Time</th>
+      <td mat-cell *matCellDef="let path"> {{path.chargingTime}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Page navigation"></mat-paginator>
+
+</div>
+
+<button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>

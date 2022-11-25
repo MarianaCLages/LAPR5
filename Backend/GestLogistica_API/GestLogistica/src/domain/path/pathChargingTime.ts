@@ -18,7 +18,7 @@ export class PathChargingTime extends ValueObject<pathChargingTimeProps> {
     public static create(pathChargingTime: number): Result<PathChargingTime> {
         const guardResult = Guard.combine([
             Guard.againstNullOrUndefined(pathChargingTime, 'pathChargingTime'),
-            Guard.inRange(pathChargingTime, 1, Infinity, 'pathChargingTime')
+            Guard.inRange(pathChargingTime, 0, Infinity, 'pathChargingTime')
         ]);
         if (!guardResult.succeeded) {
             return Result.fail<PathChargingTime>(guardResult.message);

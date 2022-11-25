@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { CreatePathServiceService } from "../../../services/create-path-service.service";
-import { FormControl } from "@angular/forms";
-import { GetWarehouseServiceService } from "../../../services/get-warehouse-service.service";
+import {CreatePathServiceService} from "../../../services/create-path-service.service";
+import {FormControl} from "@angular/forms";
+import {GetWarehouseServiceService} from "../../../services/get-warehouse-service.service";
 import IPathDTO from "../../../shared/pathDTO";
 
 @Component({
@@ -13,7 +13,6 @@ import IPathDTO from "../../../shared/pathDTO";
 export class CreatePathComponent implements OnInit {
 
 
-  myControl = new FormControl();
   initialWarehouse: any;
   destinationWarehouse: any;
   energyNeeded: any;
@@ -35,8 +34,7 @@ export class CreatePathComponent implements OnInit {
 
   ngOnInit(): void {
     //gets the warehouses from the backend
-    let warehouses = this.getWarehouseService.getWarehouses();
-    this.warehouses = warehouses;
+    this.warehouses = this.getWarehouseService.getWarehouses();
     this.error = false;
 
   }
@@ -68,7 +66,6 @@ export class CreatePathComponent implements OnInit {
     this.timeToCharge = null;
 
 
-
     //sends the path DTO to the backend
 
     let errorOrSuccess: any = this.createPathService.createPath(pathDTO);
@@ -78,25 +75,25 @@ export class CreatePathComponent implements OnInit {
         this.successMessage = "Path created successfully";
         //TODO: still unsure if we should show the created path or not
         //this.path = data;
+        this.goBack();
       },
-      //transforms into an http error
+      //transforms into a http error
       (error: any) => {
         this.error = true;
         if (error.status == 400) {
           this.errorMessage = error.error;
-        }
-        else {
+        } else {
           if (error.status == 500) {
 
             this.errorMessage = error.error.errors.message;
-          }
-          else {
+          } else {
             this.errorMessage = "An unknown error has ocurred";
           }
         }
       }
     );
   }
+
   goBack() {
     window.history.back();
   }

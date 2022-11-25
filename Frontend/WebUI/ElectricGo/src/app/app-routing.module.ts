@@ -13,6 +13,7 @@ import {AddWarehouseComponent} from "./warehouse-manager/components/add-warehous
 import { ListPackagingComponent } from './log-manager/components/list-packaging/list-packaging.component';
 import { CreateOrderComponent } from './warehouse-manager/components/create-order/create-order.component';
 import {GetAllWarehousesComponent} from "./warehouse-manager/components/get-all-warehouse/get-all-warehouses.component";
+import { ListPathsComponent } from './log-manager/components/list-paths/list-paths.component';
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'LogisticManager/listPackaging', component: ListPackagingComponent},
   {path: 'WarehouseManager/getAllWarehouse', component: GetAllWarehousesComponent},
   {path: 'LogisticManager/viewNetwork', component: ViewRoadMapNetworkComponent},
+  {path: 'LogisticManager/listPath', component: ListPathsComponent},
   {path: '**', component: ErrorPageComponent},
 ];
 

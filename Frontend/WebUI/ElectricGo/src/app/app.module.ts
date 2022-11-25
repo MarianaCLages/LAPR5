@@ -38,6 +38,10 @@ import { GetAllPackagingsComponent } from './log-manager/components/get-all-pack
 import { GetPackagingByOrderComponent } from './log-manager/components/get-packaging-by-order/get-packaging-by-order.component';
 import { GetPackagingByTruckComponent } from './log-manager/components/get-packaging-by-truck/get-packaging-by-truck.component';
 import {GetAllWarehousesComponent} from "./warehouse-manager/components/get-all-warehouse/get-all-warehouses.component";
+import { ListPathsComponent } from './log-manager/components/list-paths/list-paths.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -61,7 +65,8 @@ import {GetAllWarehousesComponent} from "./warehouse-manager/components/get-all-
     GetAllPackagingsComponent,
     GetAllWarehousesComponent,
     GetPackagingByOrderComponent,
-    GetPackagingByTruckComponent
+    GetPackagingByTruckComponent,
+    ListPathsComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +91,9 @@ import {GetAllWarehousesComponent} from "./warehouse-manager/components/get-all-
     MatSelectSearchModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
   providers: [HttpClientModule, AddPackagingService, AddWarehouseService],
   exports: [
