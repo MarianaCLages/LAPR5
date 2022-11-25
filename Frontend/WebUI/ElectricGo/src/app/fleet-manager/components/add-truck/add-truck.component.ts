@@ -44,7 +44,7 @@ export class AddTruckComponent implements OnInit {
     let errorOrSuccess: any = this.addTruckService.addTruck(truck);
     errorOrSuccess.subscribe(
       (data: any) => {
-        window.history.back();
+        this.goBack();
       },
       //transforms into an http error
       (error: any) => {
