@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ListPackagingService } from '../../services/list-packaging.service';
 
 @Component({
@@ -6,9 +6,14 @@ import { ListPackagingService } from '../../services/list-packaging.service';
   templateUrl: './list-packaging.component.html',
   styleUrls: ['./list-packaging.component.css']
 })
+
+
 export class ListPackagingComponent implements OnInit {
 
+  @Output() menuSelected = new EventEmitter<string>();
+
   packaging: any;
+  res: any;
 
   constructor(
     private listPackagingService: ListPackagingService
@@ -16,10 +21,27 @@ export class ListPackagingComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.packaging = this.listPackagingService.getPackaging();
-
   }
 
+  goToMenu(getPackagingPath: string) {
+    this.menuSelected.emit(getPackagingPath);
+  }
+
+  getPackaging() {
+    this.res = this.listPackagingService.getPackaging();
+  }
+
+  getPackagingByTruck() {
+    this.res = this.listPackagingService.getPackagingByTruck();
+  }
+
+  getPackagingByOrder() {
+    this.res = this.listPackagingService.getPackagingByOrder();
+  }
+
+  goBack() {
+    window.history.back();
+  }
 
 
 }

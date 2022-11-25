@@ -1,4 +1,14 @@
 <div class="container" matAutocompleteOrigin>
     <h1>List Packagings</h1>
 
+    <br>
+    <button mat-button (click)="goToMenu('ListPackaging/getAllPackagings')">List All Packagings</button>
+    <br>
+    <button mat-button (click)="goToMenu('ListPackaging/getPackagingByTruck')">List Packagings By Truck</button>
+    <br>
+    <button mat-button (click)="goToMenu('ListPackaging/getPackagingByOrder')">List Packagings By Order</button>
+    <br>
+
+    </div>
     
+<!-- Um componente para cada um, uma função pra cada no serviço -->

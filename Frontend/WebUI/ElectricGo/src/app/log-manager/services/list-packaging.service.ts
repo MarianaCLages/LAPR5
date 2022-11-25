@@ -11,10 +11,27 @@ export class ListPackagingService {
    }
 
     getPackaging(): any {
-      let packaging = this.http.get('http://localhost:3000/api/packaging').subscribe(
+      let packaging = this.http.get('http://localhost:3000/api/packagings/all').subscribe(
         (data) => {
           return data;
         }
       )
     }
+
+    getPackagingByTruck(): any {
+      let packaging = this.http.get('http://localhost:3000/api/packagings/truck').subscribe(
+        (data) => {
+          return data;
+        }
+      )
+    }
+
+    getPackagingByOrder(): any {
+      let packaging = this.http.get('http://localhost:3000/api/packagings/order').subscribe(
+        (data) => {
+          return data;
+        }
+      )
+    }
+
 }
