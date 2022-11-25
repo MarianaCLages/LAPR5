@@ -183,6 +183,23 @@ export default class SendInfoToPlanningService {
     }
 
 
+    public async getHeuristic(): Promise<string>{
+
+        let object: string;
+
+        const rep = await fetch("http://localhost:5003/send_heuristic", {
+            method: 'GET',
+            agent: this.httpAgent,
+            headers:{
+                Accept: 'application/json',
+            },
+        })
+
+
+        return await rep.text();
+
+    }
+
     private async getOrders(ordersId= []){
 
         let orderIdVar : string;
@@ -263,36 +280,7 @@ export default class SendInfoToPlanningService {
 
     }
 
-/*
-    private async sendOrdersToProlog() {
 
-        // const file = new LocalFileData('C:\\Users\\Tiago Ferreira\\Documents\\lei21-22-s5-3dj-56\\Backend\\GestLogistica_API\\GestLogistica\\src\\core\\infra\\orderspath.txt');
-        // const file = new LocalFileData('Backend/GestLogistica_API/GestLogistica/src/core/infra/orderspath.txt');
-
-        //SEND Orders TO PROLOG
-
-        let formData = new FormData();
-
-        //var buffer = require('fs').readFileSync('C:/Users/Tiago Ferreira/Documents/lei21-22-s5-3dj-56/Backend/GestLogistica_API/GestLogistica/src/core/infra/paths.txt');
-        var buffer = require('fs').readFileSync(this.dirnameOrders);
-        formData.append('file',buffer);
-
-        const rep = await fetch("http://localhost:5003/receive_order_post", {
-            method: "POST",
-            agent: this.httpAgent,
-            headers:{
-                Accept: 'application/json',
-            },
-            body: formData,
-        })
-
-
-        var object = await rep;
-        console.log("Orders to Planning sent!");
-
-    }
-
-*/
 
 
 }

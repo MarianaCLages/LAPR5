@@ -134,12 +134,15 @@ export default class truckController
         var fileService = new SendInfoToPlanningService();
         let idTruck = req.params.idTruck;
 
-        fileService.generateFiles();
-        fileService.sendPaths();
-        fileService.sendWarehouse();
-        fileService.sendOrdersToPlanning(idTruck);
+        let stringTest: string;
+        //fileService.generateFiles();
+        //fileService.sendPaths();
+        //fileService.sendWarehouse();
+        //fileService.sendOrdersToPlanning(idTruck);
 
-        return res.status(200).json("Success!");
+        stringTest = await fileService.getHeuristic();
+
+        return res.status(200).json(stringTest);
     }
 
 
