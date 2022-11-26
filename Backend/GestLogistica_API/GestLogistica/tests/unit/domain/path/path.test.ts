@@ -1,13 +1,13 @@
+import IPathDTO from "../../../../src/dto/path/IPathDTO";
 import {Path} from "../../../../src/domain/path/path";
-import {expect} from 'chai';
-import {UniqueEntityID} from "../../../../src/core/domain/UniqueEntityID";
 import {PathBeginningWarehouseId} from "../../../../src/domain/path/pathBeginningWarehouseId";
+import {PathChargingTime} from "../../../../src/domain/path/pathChargingTime";
+import {PathDistance} from "../../../../src/domain/path/pathDistance";
 import {PathEndingWarehouseId} from "../../../../src/domain/path/pathEndingWarehouseId";
 import {PathEnergy} from "../../../../src/domain/path/pathEnergy";
-import {PathDistance} from "../../../../src/domain/path/pathDistance";
 import {PathTime} from "../../../../src/domain/path/pathTime";
-import {PathChargingTime} from "../../../../src/domain/path/pathChargingTime";
-import IPathDTO from "../../../../src/dto/path/IPathDTO";
+import {UniqueEntityID} from "../../../../src/core/domain/UniqueEntityID";
+import {expect} from 'chai';
 
 describe('Path Test', () => {
     it('should create a valid path ', () => {
@@ -127,7 +127,7 @@ describe('Path Test', () => {
             energy: 1,
             distance: 1,
             time: 1,
-            chargingTime: 0,
+            chargingTime: -1,
         };
 
         // Act
