@@ -1,14 +1,30 @@
-<div class="container" matAutocompleteOrigin>
-    <h1>List Packagings</h1>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="packagings"> 
+        <caption><h1>List Packagings</h1></caption>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID</th>
+            <td mat-cell *matCellDef="let packaging"> {{packaging.id}} </td>
 
-    <br>
-    <button mat-button (click)="goToMenu('ListPackaging/getAllPackagings')">List All Packagings</button>
-    <br>
-    <button mat-button (click)="goToMenu('ListPackaging/getPackagingByTruck')">List Packagings By Truck</button>
-    <br>
-    <button mat-button (click)="goToMenu('ListPackaging/getPackagingByOrder')">List Packagings By Order</button>
-    <br>
+        </ng-container>
 
-    </div>
-    
-<!-- Um componente para cada um, uma função pra cada no serviço -->
+        <ng-container matColumnDef="OrderRef">
+            <th mat-header-cell *matHeaderCellDef> Order Reference</th>
+            <td mat-cell *matCellDef="let packaging"> {{packaging.orderRef}} </td>
+
+        </ng-container>
+
+        <ng-container matColumnDef="TruckRef">
+            <th mat-header-cell *matHeaderCellDef> Truck Reference</th>
+            <td mat-cell *matCellDef="let packaging"> {{packaging.truckRef}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Page navigation"></mat-paginator>
+
+</div>
+
+<button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
