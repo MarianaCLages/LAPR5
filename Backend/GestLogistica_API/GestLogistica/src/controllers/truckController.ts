@@ -135,12 +135,43 @@ export default class truckController
         let idTruck = req.params.idTruck;
 
         let stringTest: string;
-        //fileService.generateFiles();
-        //fileService.sendPaths();
-        //fileService.sendWarehouse();
-        //fileService.sendOrdersToPlanning(idTruck);
+        fileService.generateFiles();
+        fileService.sendPaths();
+        fileService.sendWarehouse();
+        fileService.sendOrdersToPlanning(idTruck);
 
         stringTest = await fileService.getHeuristic();
+
+        return res.status(200).json(stringTest);
+    }
+
+    public async getHeuristicByWeight(req: Request,res: Response,next: NextFunction){
+        var fileService = new SendInfoToPlanningService();
+        let idTruck = req.params.idTruck;
+
+        let stringTest: string;
+        fileService.generateFiles();
+        fileService.sendPaths();
+        fileService.sendWarehouse();
+        fileService.sendOrdersToPlanning(idTruck);
+
+        stringTest = await fileService.getHeuristicByWeight();
+
+        return res.status(200).json(stringTest);
+    }
+
+    public async getHeuristicByTimeWeight(req: Request, res: Response, next: NextFunction){
+
+        var fileService = new SendInfoToPlanningService();
+        let idTruck = req.params.idTruck;
+
+        let stringTest: string;
+        fileService.generateFiles();
+        fileService.sendPaths();
+        fileService.sendWarehouse();
+        fileService.sendOrdersToPlanning(idTruck);
+
+        stringTest = await fileService.getHeuristicByWeightTime();
 
         return res.status(200).json(stringTest);
     }

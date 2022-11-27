@@ -8,4 +8,6 @@ export default interface ITruckController  {
     updateTruck(req: Request, res: Response, next: NextFunction);
     deleteTruck(req: Request, res: Response, next: NextFunction);
     sendInfo(req: Request,res: Response,next: NextFunction);
+    getHeuristicByWeight(req: Request,res: Response,next: NextFunction);
+    getHeuristicByTimeWeight(req: Request,res: Response,next: NextFunction);
 }

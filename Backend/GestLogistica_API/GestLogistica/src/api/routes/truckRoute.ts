@@ -74,4 +74,10 @@ export default (app: Router) => {
 
     route.get('/send_info/:idTruck',
         (req,res,next) => ctrl.sendInfo(req,res,next) );
+
+    route.get('/get_heuristic_weight/:idTruck',
+        (req,res,next) => ctrl.getHeuristicByWeight(req,res,next) );
+
+    route.get('/get_heuristic_weight_time/:idTruck',
+        (req,res,next) => ctrl.getHeuristicByTimeWeight(req,res,next) );
 }

@@ -8,7 +8,8 @@ import express from 'express';
 
 async function startServer() {
   const app = express();
- 
+
+
 
   const cors = require('cors');
   app.use(cors(
@@ -41,7 +42,7 @@ async function startServer() {
   //file.files();
   //file.createFile("path_info.txt","paths/allPaths");
   //test.sendOrdersByTheTruckPackages("adas");
-  //  file.generateFiles();
+  //file.generateFiles();
   //  file.createPathFile();
   //  file.createWarehousesFile();
 }

@@ -113,7 +113,7 @@ export default class SendInfoToPlanningService {
         const result = (await response.json());
         var pathArray = [];
         var stringFormat: string;
-
+        var aspas = "'";
         for(var i = 0; i < result.length; i++){
 
             var warehouseId = result[i].alphaNumId
@@ -121,7 +121,7 @@ export default class SendInfoToPlanningService {
 
             var warehouseIdNumber = +warehouseId;
 
-            stringFormat = 'warehouses(' + result[i].street + ',' + warehouseIdNumber + ').';
+            stringFormat = 'idArmazem(' + aspas + result[i].street + aspas+ ',' + warehouseIdNumber + ').';
 
             pathArray.push(stringFormat);
         }
@@ -197,6 +197,42 @@ export default class SendInfoToPlanningService {
 
 
         return await rep.text();
+
+    }
+
+    public async getHeuristicByWeight(): Promise<string>{
+
+        let object: string;
+
+        const rep = await fetch("http://localhost:5003/send_heuristic_weight", {
+            method: 'GET',
+            agent: this.httpAgent,
+            headers:{
+                Accept: 'application/json',
+            },
+        })
+
+
+        return await rep.text();
+
+
+    }
+
+    public async getHeuristicByWeightTime(): Promise<string>{
+
+        let object: string;
+
+        const rep = await fetch("http://localhost:5003/send_heuristic_weight_time", {
+            method: 'GET',
+            agent: this.httpAgent,
+            headers:{
+                Accept: 'application/json',
+            },
+        })
+
+
+        return await rep.text();
+
 
     }
 
