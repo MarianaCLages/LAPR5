@@ -1,0 +1,12 @@
+<div class="container" matAutocompleteOrigin>
+  <h1>List All Warehouse</h1>
+
+  <br>
+  <mat-label>BD ID</mat-label>
+  <input matInput type="any" [(ngModel)]="alphaNumericId"/>
+  <button mat-raised-button color="primary" (click)="getWarehouse()">List</button>
+  <h2>Warehouse: {{warehouseAsString}}</h2>
+
+  <br>
+</div>
+

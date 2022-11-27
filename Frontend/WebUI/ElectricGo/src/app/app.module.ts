@@ -35,6 +35,7 @@ import { ViewRoadMapNetworkComponent } from './log-manager/components/view-road-
 import { CreateOrderComponent } from './warehouse-manager/components/create-order/create-order.component';
 import { WarehouseSideBarComponent } from "./warehouse-manager/components/warehouse-side-bar/warehouse-side-bar.component";
 import {GetAllWarehousesComponent} from "./warehouse-manager/components/get-all-warehouse/get-all-warehouses.component";
+import {GetWarehouseComponent} from "./warehouse-manager/components/get-warehouse/get-warehouse.component";
 import { ListPathsComponent } from './log-manager/components/list-paths/list-paths.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
@@ -60,6 +61,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     CreateOrderComponent,
     WarehouseSideBarComponent,
     GetAllWarehousesComponent,
+    GetWarehouseComponent,
     ListPathsComponent,
     ListPathsComponent
   ],
