@@ -22,7 +22,7 @@ const routes: Routes = [
   // Warehouse Manager
   {path: 'WarehouseManager', component: WarehouseManagerComponent},
   {path: 'WarehouseManager/addWarehouse', component: AddWarehouseComponent},
-  {path: 'WarehouseManager/addOrder', component: CreateOrderComponent},
+  {path: 'WarehouseManager/createOrder', component: CreateOrderComponent},
 
   // Fleet Manager
   {path: 'FleetManager', component: FleetManagerComponent},

@@ -1,59 +1,68 @@
-<br>
-<h1 style="text-align: center;">Warehouse Manager</h1>
-<h2 style="text-align: center;">Create Order</h2>
-<br>
-<div class="form">
-  <div class="btn-group" style="text-align: center;">
-    <mat-form-field>
-      <mat-label>Date</mat-label>
-      <input matInput type="date" [(ngModel)]="orderDate"/>
-    </mat-form-field>
+<div class="container" matAutocompleteOrigin>
 
-    <br>
-
-    <mat-form-field>
-      <mat-label>Mass</mat-label>
-      <input matInput type="number" [(ngModel)]="orderMass"/>
-    </mat-form-field>
-
-    <br>
-
-    <mat-form-field>
-      <mat-label>Loading Time</mat-label>
-      <input matInput type="number" [(ngModel)]="chargingTime"/>
-    </mat-form-field>
-
-    <br>
-
-    <mat-form-field>
-      <mat-label>Unloading Time</mat-label>
-      <input matInput type="number" [(ngModel)]="unloadingTime"/>
-    </mat-form-field>
-
-    <br>
-
-    <mat-form-field>
-      <mat-label>Warehouse ID</mat-label>
-      <input matInput type="text" [(ngModel)]="warehouseId"/>
-    </mat-form-field>
-
-    <br>
-
-    <button mat-raised-button color="primary" (click)="addOrder()">Create</button>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <button mat-raised-button color="primary" (click)="logout()">Back</button>
+  <div>
+    <mat-error *ngIf="error" class="alert alert-warning">
+      <strong>Error</strong> {{errorMessage | json | slice:0:100}}
+    </mat-error>
   </div>
-</div>
 
-<div *ngIf = showResponse, class = "showRes">
   <br>
+
+  <h1>Warehouse Manager</h1>
+  <h2>Create Order</h2>
+
   <br>
+
+  <mat-form-field>
+    <mat-label>Date</mat-label>
+    <input matInput type="date" [(ngModel)]="orderDate">
+  </mat-form-field>
+
   <br>
+
+  <mat-form-field>
+    <mat-label>Mass</mat-label>
+    <input matInput type="number" [(ngModel)]="orderMass">
+  </mat-form-field>
+  
   <br>
-  <button mat-raised-button color="primary" (click)="logout()">Logout</button>
-</div>
+
+  <mat-form-field>
+    <mat-label>Loading Time</mat-label>
+    <input matInput type="number" [(ngModel)]="loadingTime">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>Unloading Time</mat-label>
+    <input matInput type="number" [(ngModel)]="unloadingTime">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>Warehouse ID</mat-label>
+    <mat-select [(value)]="warehouseId">
+      <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse">
+        {{warehouse.alphaNumId}}
+        {{warehouse.designation}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+
+  <div>
+    <button mat-raised-button color="primary" (click)="createOrder()">Create</button>
+    <div *ngIf="success" class="success-popup">
+      <span>
+        <h3><strong>Success!</strong></h3>
+        <h4>{{successMessage}}</h4>
+          <button mat-raised-button color="primary" class="success-btn" (click)="goBack()">Ok</button>
+      </span>
+    </div>
+  </div>
+
+ <!-- button to go back to the previous page -->
+  <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
