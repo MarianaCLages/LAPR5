@@ -15,27 +15,40 @@ describe("Packaging Service test", () => {
     const packagingRepository = {
       async: sinon.stub().returns(Promise.resolve(true)),
       save: sinon.stub().returns(Promise.resolve(Result.ok<IPackagingDTO>({
+        pos3DX: 0, pos3DY: 0, pos3DZ: 0,
         "id": "123",
         "orderRef": "MJ7",
         "truckRef": "231"
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Packaging>())),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       getByOrderAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))))
     } as PackagingRepo;
 
@@ -129,21 +142,33 @@ describe("Packaging Service test", () => {
       save: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Packaging>())),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       getByOrderAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))))
     } as PackagingRepo;
 
@@ -238,21 +263,33 @@ describe("Packaging Service test", () => {
       findByDomainId: sinon.stub().returns(Promise.resolve(Packaging.createWithId({
         id: "126",
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Packaging>())),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       getByOrderAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))))
     } as PackagingRepo;
 
@@ -355,17 +392,26 @@ describe("Packaging Service test", () => {
       findByDomainId: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Packaging>())),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       getByOrderAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))))
     } as PackagingRepo;
 
@@ -468,17 +514,26 @@ describe("Packaging Service test", () => {
       findByDomainId: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Packaging>())),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       getByOrderAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))))
     } as PackagingRepo;
 
@@ -581,14 +636,20 @@ describe("Packaging Service test", () => {
       findByDomainId: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Packaging>())),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getByOrderAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))))
     } as PackagingRepo;
 
@@ -691,17 +752,26 @@ describe("Packaging Service test", () => {
       findByDomainId: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Packaging>())),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       getByOrderAsync: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))))
     } as PackagingRepo;
 
@@ -804,7 +874,10 @@ describe("Packaging Service test", () => {
       findByDomainId: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Packaging>())),
@@ -911,12 +984,18 @@ describe("Packaging Service test", () => {
       findByDomainId: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getByOrderAsync: sinon.stub().returns(Promise.resolve((Promise.resolve(Result.fail<IPackagingDTO>("Erro")))))
@@ -1018,7 +1097,10 @@ describe("Packaging Service test", () => {
       findByDomainId: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
@@ -1122,12 +1204,18 @@ describe("Packaging Service test", () => {
       findByDomainId: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getByOrderAsync: sinon.stub().returns(Promise.resolve((Promise.resolve(Result.fail<IPackagingDTO>("Erro")))))
@@ -1324,12 +1412,18 @@ describe("Packaging Service test", () => {
       findByDomainId: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getByOrderAsync: sinon.stub().returns(Promise.resolve((Promise.resolve(Result.fail<IPackagingDTO>("Erro")))))
@@ -1530,12 +1624,18 @@ describe("Packaging Service test", () => {
       findByDomainId: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(new Array((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))))),
       delete: sinon.stub().returns(Promise.resolve(true)),
       update: sinon.stub().returns(Promise.resolve((Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getByOrderAsync: sinon.stub().returns(Promise.resolve((Promise.resolve(Result.fail<IPackagingDTO>("Erro")))))

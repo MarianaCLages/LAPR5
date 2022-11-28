@@ -18,6 +18,9 @@ export default (app: Router) => {
       body: Joi.object({
         orderRef: Joi.string().required(),
         truckRef: Joi.string().required(),
+        pos3DX: Joi.number().required(),
+        pos3DY: Joi.number().required(),
+        pos3DZ: Joi.number().required()
       })
     }),
     (req, res, next) => ctrl.createPackaging(req, res, next));

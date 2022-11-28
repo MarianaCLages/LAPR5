@@ -15,6 +15,9 @@ describe('Packaging Test', () => {
     const pathDTO = {
       orderRef: "541",
       truckRef: "672",
+      pos3DZ: 1,
+      pos3DY: 1,
+      pos3DX: 1
     };
 
     // Act
@@ -29,6 +32,9 @@ describe('Packaging Test', () => {
     const pathDTO = {
       orderRef: "541",
       truckRef: "541",
+      pos3DZ: 1,
+      pos3DY: 1,
+      pos3DX: 1
     };
 
     // Act
@@ -43,6 +49,9 @@ describe('Packaging Test', () => {
     const pathDTO = {
       orderRef: "",
       truckRef: "541",
+      pos3DZ: 1,
+      pos3DY: 1,
+      pos3DX: 1
     };
 
     // Act
@@ -57,6 +66,9 @@ describe('Packaging Test', () => {
     const pathDTO = {
       orderRef: "AAA",
       truckRef: "",
+      pos3DZ: 1,
+      pos3DY: 1,
+      pos3DX: 1
     };
 
     // Act
@@ -153,6 +165,9 @@ describe('Packaging Test', () => {
     const pathDTO = {
       orderRef: "672",
       truckRef: "541",
+      pos3DZ: 1,
+      pos3DY: 1,
+      pos3DX: 1
     };
 
     // Act
@@ -167,6 +182,9 @@ describe('Packaging Test', () => {
     const pathDTO = {
       orderRef: "655",
       truckRef: "672",
+      pos3DZ: 1,
+      pos3DY: 1,
+      pos3DX: 1
     };
 
     // Act
@@ -217,6 +235,9 @@ describe('Packaging Test', () => {
     const pathDTO = {
       orderRef: "655",
       truckRef: "672",
+      pos3DZ: 1,
+      pos3DY: 1,
+      pos3DX: 1
     };
 
     // Act
@@ -233,6 +254,9 @@ describe('Packaging Test', () => {
     const pathDTO = {
       orderRef: "655",
       truckRef: "672",
+      pos3DZ: 1,
+      pos3DY: 1,
+      pos3DX: 1
     };
 
     // Act
