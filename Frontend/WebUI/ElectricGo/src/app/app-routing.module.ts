@@ -13,6 +13,7 @@ import {AddWarehouseComponent} from "./warehouse-manager/components/add-warehous
 import { ListPackagingComponent } from './log-manager/components/list-packaging/list-packaging.component';
 import { CreateOrderComponent } from './warehouse-manager/components/create-order/create-order.component';
 import {GetAllWarehousesComponent} from "./warehouse-manager/components/get-all-warehouse/get-all-warehouses.component";
+import {GetWarehouseComponent} from "./warehouse-manager/components/get-warehouse/get-warehouse.component";
 import { ListPathsComponent } from './log-manager/components/list-paths/list-paths.component';
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
   // Warehouse Manager
   {path: 'WarehouseManager', component: WarehouseManagerComponent},
   {path: 'WarehouseManager/addWarehouse', component: AddWarehouseComponent},
-  {path: 'WarehouseManager/addOrder', component: CreateOrderComponent},
+  {path: 'WarehouseManager/createOrder', component: CreateOrderComponent},
 
   // Fleet Manager
   {path: 'FleetManager', component: FleetManagerComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'LogisticManager/addPackaging', component: AddPackagingComponent},
   {path: 'LogisticManager/createPath', component: CreatePathComponent},
   {path: 'LogisticManager/listPackaging', component: ListPackagingComponent},
+  {path: 'WarehouseManager/getWarehouse', component: GetWarehouseComponent},
   {path: 'WarehouseManager/getAllWarehouse', component: GetAllWarehousesComponent},
   {path: 'LogisticManager/viewNetwork', component: ViewRoadMapNetworkComponent},
   {path: 'LogisticManager/listPath', component: ListPathsComponent},

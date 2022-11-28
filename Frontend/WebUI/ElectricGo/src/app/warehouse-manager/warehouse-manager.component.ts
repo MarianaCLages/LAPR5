@@ -2,13 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import { Location } from '@angular/common';
 import { AddWarehouseService } from '../services/add-warehouse.service'
-import { AddOrderService } from '../services/add-order.service';
+import { CreateOrderService } from '../services/create-order.service';
 
 @Component({
   selector: 'app-warehouse-manager',
   templateUrl: './warehouse-manager.component.html',
   styleUrls: ['./warehouse-manager.component.css'],
-  providers: [AddWarehouseService, AddOrderService]
+  providers: [AddWarehouseService, CreateOrderService]
 })
 export class WarehouseManagerComponent implements OnInit {
   
@@ -25,9 +25,9 @@ export class WarehouseManagerComponent implements OnInit {
     this.router.navigate([url]).then(r => console.log(r));
   }
 
-  addOrder(){
+  createOrder(){
     //route to add order menu
-    let opt = 'addOrder';
+    let opt = 'createOrder';
     //this.redirectEvent.emit(opt);
     const url = 'WarehouseManager/' + opt;
     this.router.navigate([url]).then(r => console.log(r));

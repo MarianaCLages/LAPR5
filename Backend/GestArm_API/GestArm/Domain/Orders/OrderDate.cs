@@ -15,12 +15,11 @@ public class OrderDate : ValueObject
 
     //verifica se a data é válida e se é maior que a data atual
     private void IsValid(DateTime data)
-    {/*
+    {
         if (data > DateTime.Now) return;
 
-        throw new BusinessRuleValidationException("Invalid order date!");*/
-        return;
-        //ISTO NÃO ESTAVA A FUNCIONAR QUANDO DAVA DELETE ÁS ORDERS
+        throw new BusinessRuleValidationException("Invalid order date!");
+        
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

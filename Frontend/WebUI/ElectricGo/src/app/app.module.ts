@@ -40,6 +40,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import { ViewRoadMapNetworkComponent } from './log-manager/components/view-road-map-network/view-road-map-network.component';
 import {WarehouseManagerComponent} from "./warehouse-manager/warehouse-manager.component";
 import { WarehouseSideBarComponent } from "./warehouse-manager/components/warehouse-side-bar/warehouse-side-bar.component";
+import { GetWarehouseComponent } from './warehouse-manager/components/get-warehouse/get-warehouse.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { WarehouseSideBarComponent } from "./warehouse-manager/components/wareho
     CreateOrderComponent,
     WarehouseSideBarComponent,
     GetAllWarehousesComponent,
+    GetWarehouseComponent,
     ListPathsComponent,
     ListPathsComponent
   ],
