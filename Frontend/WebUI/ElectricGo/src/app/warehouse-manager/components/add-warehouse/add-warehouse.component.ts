@@ -49,7 +49,7 @@ export class  AddWarehouseComponent implements  OnInit{
       latitudeMinute: this.latitudeMinutes,
       longitudeSecond: this.longitudeSeconds,
       longitudeMinute: this.longitudeMinutes,
-      longitudeDegree: this.longitudeDegree,
+      longitudeDregree: this.longitudeDegree,
       designation: this.designation,
       street: this.street,
       doorNumber: this.doorNumber,

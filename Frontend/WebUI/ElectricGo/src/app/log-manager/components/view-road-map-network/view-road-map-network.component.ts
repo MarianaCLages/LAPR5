@@ -1,19 +1,16 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  ElementRef,
-  Input,
-  ViewChild,
-} from '@angular/core';
-
-//import Stats from 'stats.js';
-
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
 
+import {Component, ElementRef, Input, OnInit, ViewChild,} from '@angular/core';
+
+import {GetPathsService} from 'src/app/services/get-paths.service';
+import {GetWarehouseServiceService} from 'src/app/services/get-warehouse-service.service';
+import IPathDTO from 'src/app/shared/pathDTO';
+import {IPathViewRepresentation} from 'src/app/shared/pathViewRepresentation';
+import {IWarehouseViewRepresentation} from 'src/app/shared/warehouseViewRepresentation';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import jsonInfo from './roadMap/roadMap.json';
-import { single } from 'rxjs';
+import {ICreateWarehouseDTO} from "../../../shared/createWarehouseDTO";
+
 
 @Component({
   selector: 'app-view-road-map-network',
@@ -21,52 +18,194 @@ import { single } from 'rxjs';
   styleUrls: ['./view-road-map-network.component.css'],
 })
 export class ViewRoadMapNetworkComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  ngAfterViewInit() {
-    this.createScene();
-    this.startRenderingLoop();
-  }
-
-  @ViewChild('canvas')
-  private canvasRef!: ElementRef;
-
-  //ANIMATION
-
   @Input() public size: number = 200;
-
   //Road Texture
   @Input() public texture: string = './roadMap/road_free.png';
+  @Input() public cameraZ: number = 1500;
+  @Input() public fieldOfView: number = 1;
+  @Input('nearClipping') public nearClippingPlane: number = 1;
+  @Input('farClipping') public farClippingPlane: number = 3000;
+  private warehouses: any;
+  private paths: any;
+  private info: any;
+
+  //ANIMATION
+  @ViewChild('canvas')
+  private canvasRef!: ElementRef;
+  private camera!: THREE.PerspectiveCamera;
 
   //STAGE PROPERTIES
+  private loader = new THREE.TextureLoader();
+  private roundabout!: THREE.Mesh;
+  private render!: THREE.WebGLRenderer;
+  private scene!: THREE.Scene;
+  private roadMap!: THREE.Group;
+  private controls!: OrbitControls;
 
-  @Input() public cameraZ: number = 6000;
-
-  @Input() public fieldOfView: number = 1;
-
-  @Input('nearClipping') public nearClippingPlane: number = 1;
-
-  @Input('farClipping') public farClippingPlane: number = 10000;
-
-  private camera!: THREE.PerspectiveCamera;
+  constructor(
+    private getWarehouseService: GetWarehouseServiceService,
+    private getPathService: GetPathsService
+  ) {
+  }
 
   private get canvas(): HTMLCanvasElement {
     return this.canvasRef.nativeElement;
   }
 
-  private loader = new THREE.TextureLoader();
+  ngOnInit(): void {
+  }
 
-  private roundabout!: THREE.Mesh;
+  async ngAfterViewInit() {
+    //get all warehouses and all paths from api on 2 arrays
 
-  private render!: THREE.WebGLRenderer;
+    this.paths = this.getPathService.getPaths().then((data: IPathDTO[]) => {
 
-  private scene!: THREE.Scene;
+      this.paths = data;
 
-  private roadMap!: THREE.Group;
+      this.getWarehouseService.getWarehouses().then((data: ICreateWarehouseDTO[]) => {
 
-  private controls!: OrbitControls;
+        this.warehouses = data;
+        this.saveConfFile(this.warehouses, this.paths);
+        this.createScene();
+        this.startRenderingLoop();
+
+      });
+    });
+  }
+
+  saveConfFile(warehouses: ICreateWarehouseDTO[], paths: any) {
+    //transform warehouse to warehouseViewRepresentation
+    let warehouseViewRepresentation: IWarehouseViewRepresentation[] = [];
+
+
+    warehouses.forEach((warehouse: ICreateWarehouseDTO) => {
+
+        let latitude = this.convertDMSToDD(
+          warehouse.latitudeDegree,
+          warehouse.latitudeMinute,
+          warehouse.latitudeSecond
+        );
+        let longitude = this.convertDMSToDD(
+          warehouse.longitudeDregree,
+          warehouse.longitudeMinute,
+          warehouse.longitudeSecond
+        );
+
+        //calculate the x,y,z coordinates
+        let coordinates = this.transformToCartesian(latitude, longitude);
+
+        //create the warehouseViewRepresentation
+        let warehouseViewRepresentationAux: IWarehouseViewRepresentation = {
+          id: warehouse.alphaNumId,
+          x: coordinates[0] / 300,
+          y: coordinates[1] / 300,
+          z: coordinates[2] / 300,
+        };
+
+        //add the warehouseViewRepresentation to the array
+        warehouseViewRepresentation.push(warehouseViewRepresentationAux);
+      }
+    );
+
+    //transform paths to pathRepresentation
+    let pathRepresentation: IPathViewRepresentation[] = [];
+    paths.forEach((path: any) => {
+      //create the pathRepresentation
+      let pathRepresentationAux: IPathViewRepresentation = {
+        beginningWarehouse: path.beginningWarehouseId,
+        endingWarehouse: path.endingWarehouseId,
+        thickness: Math.random()
+      };
+
+      //add the pathRepresentation to the array
+      pathRepresentation.push(pathRepresentationAux);
+    });
+
+    //create an example json file
+    this.info = {
+      warehouses: warehouseViewRepresentation,
+      paths: pathRepresentation,
+    };
+    console.log(this.info);
+  }
+
+  convertDMSToDD(latitudeDegrees: number, latitudeMinutes: number, latitudeSeconds: number) {
+    return latitudeDegrees + latitudeMinutes / 60 + latitudeSeconds / 3600;
+  }
+
+  private createMap() {
+    this.roadMap = new THREE.Group();
+    this.createRoundAbout();
+    this.scene.add(this.roadMap);
+    //this.roadMap.scale.set(2,2,2);
+
+    //DEFINE THE BACKGROUND COLOR
+    this.scene.background = new THREE.Color(0xadd8e6);
+
+    // ROUNDABOUTS
+    for (const element of this.info.warehouses) {
+      let roundabout = this.roundabout.clone();
+      roundabout.position.set(element.x, element.y, element.z);
+      this.roadMap.add(roundabout);
+    }
+
+    const circleConstant = 2;
+    const connectionConstant = 0.5;
+
+    const connectionLength = connectionConstant * circleConstant;
+
+    const radius = 2.1;
+
+    // PATHS
+    for (const element of this.info.paths) {
+      const start = this.info.warehouses.find(
+        (x: any) => x.id === element.beginningWarehouse
+      );
+      const end = this.info.warehouses.find(
+        (x: any) => x.id === element.endingWarehouse
+      );
+
+      const material2 = new THREE.LineBasicMaterial({color: 0xff0000});
+
+      let roadLength = Math.sqrt(
+        Math.pow(end.x - start.x, 2) +
+        Math.pow(end.y - start.y, 2) +
+        Math.pow(end.z - start.z, 2)
+      );
+
+      let angle = Math.sqrt(
+        Math.pow(end.x - start.x, 2) +
+        Math.pow(end.y - start.y, 2)
+      );
+
+      let roadGeometry = new THREE.PlaneGeometry(element.thickness, roadLength, 32);
+
+      let roadMaterial = new THREE.MeshBasicMaterial({
+        color: 0x000000,
+        side: THREE.DoubleSide,
+      });
+
+      let road = new THREE.Mesh(roadGeometry, roadMaterial);
+
+      road.position.set(
+        (start.x + end.x) / 2,
+        (start.y + end.y) / 2,
+        (start.z + end.z) / 2
+      );
+
+      road.rotation.z = Math.atan2(end.y - start.y, end.x - start.x) - Math.PI / 2;
+
+      road.rotateOnAxis(
+        new THREE.Vector3(1, 0, 0),
+        Math.atan2(end.z - start.z, angle)
+      );
+
+      this.roadMap.add(road);
+
+    }
+
+
+  }
 
   private createRoadMap() {
     this.roadMap = new THREE.Group();
@@ -78,14 +217,14 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     this.scene.background = new THREE.Color(0xadd8e6);
 
     // ROUNDABOUTS
-    for (let i = 0; i < jsonInfo.map.length; i++) {
+    for (const element of jsonInfo.map) {
       let roundabouT = this.roundabout.clone();
 
       //Set the position of the roundabout
       roundabouT.position.set(
-        jsonInfo.map[i][0],
-        jsonInfo.map[i][1],
-        jsonInfo.map[i][2]
+        element[0],
+        element[1],
+        element[2]
       );
 
       this.roadMap.add(roundabouT);
@@ -102,14 +241,14 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     //   'Frontend/WebUI/ElectricGo/src/app/log-manager/components/view-road-map-network/roadMap/road_1.jpg'
     // );
 
-    for (let i = 0; i < jsonInfo.paths.length; i++) {
+    for (const element of jsonInfo.paths) {
       //INFO
-      let initWarehouse = jsonInfo.paths[i][0] - 1;
-      let finalWarehouse = jsonInfo.paths[i][1] - 1;
-      let roadWidth = jsonInfo.paths[i][2];
+      let initWarehouse = element[0] - 1;
+      let finalWarehouse = element[1] - 1;
+      let roadWidth = element[2];
 
       // //Incoming Edges
-      const material2 = new THREE.LineBasicMaterial({ color: 0xff0000 });
+      const material2 = new THREE.LineBasicMaterial({color: 0xff0000});
 
       let points = [];
       let points2 = [];
@@ -177,14 +316,14 @@ export class ViewRoadMapNetworkComponent implements OnInit {
           jsonInfo.map[finalWarehouse][0] - jsonInfo.map[initWarehouse][0],
           2
         ) +
-          Math.pow(
-            jsonInfo.map[finalWarehouse][1] - jsonInfo.map[initWarehouse][1],
-            2
-          ) +
-          Math.pow(
-            jsonInfo.map[finalWarehouse][2] - jsonInfo.map[initWarehouse][2],
-            2
-          )
+        Math.pow(
+          jsonInfo.map[finalWarehouse][1] - jsonInfo.map[initWarehouse][1],
+          2
+        ) +
+        Math.pow(
+          jsonInfo.map[finalWarehouse][2] - jsonInfo.map[initWarehouse][2],
+          2
+        )
       );
 
       let angle =
@@ -193,10 +332,10 @@ export class ViewRoadMapNetworkComponent implements OnInit {
             jsonInfo.map[finalWarehouse][0] - jsonInfo.map[initWarehouse][0],
             2
           ) +
-            Math.pow(
-              jsonInfo.map[finalWarehouse][1] - jsonInfo.map[initWarehouse][1],
-              2
-            )
+          Math.pow(
+            jsonInfo.map[finalWarehouse][1] - jsonInfo.map[initWarehouse][1],
+            2
+          )
         ) -
         connectionLength * 2;
 
@@ -257,7 +396,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     this.scene.background = new THREE.Color(0x000000);
     //this.scene.add(this.cube);
 
-    this.createRoadMap();
+    this.createMap();
 
     //Rotate the scene to a correct angle
     this.scene.rotation.x = -Math.PI / 2.0;
@@ -272,35 +411,25 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       this.farClippingPlane
     );
 
-    this.camera.position.z = this.cameraZ;
 
     //this.camera.position.set( 0, 0, this.cube.position.z - 1000 );// OrbitControls target is the origin
 
-    //this.camera.position.set(26.6951, -36.7615, 34.375);
+
+    this.camera.position.set(0, 0, 0);
+    this.camera.position.z = this.cameraZ;
+
+
   }
 
   private getAspectRatio() {
     return this.canvas.clientWidth / this.canvas.clientHeight;
   }
 
-  private calculateCoordinates() {
-    // x = R * cos(lat) * cos(lon)
-
-    // y = R * cos(lat) * sin(lon)
-
-    // z = R *sin(lat)
-
-    const r = 6371;
-
-    // let x = r * Math.cos(lat) * Math.cos(lon);
-    // let y = r * Math.sin(lat) * Math.cos(lon);
-    // let z = r * Math.sin(lat);
-  }
 
   private startRenderingLoop() {
     //Renderer
     //Use canvas element in template
-    this.render = new THREE.WebGLRenderer({ canvas: this.canvas });
+    this.render = new THREE.WebGLRenderer({canvas: this.canvas});
     this.render.setPixelRatio(devicePixelRatio);
     this.render.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
 
@@ -342,4 +471,14 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       );
     })();
   }
+
+  private transformToCartesian(latitude: any, longitude: any) {
+    let x = 6371 * Math.cos(latitude) * Math.cos(longitude);
+    let y = 6371 * Math.sin(latitude) * Math.cos(longitude);
+    let z = 6371 * Math.sin(longitude);
+
+    return [x, y, z];
+  }
+
+
 }
