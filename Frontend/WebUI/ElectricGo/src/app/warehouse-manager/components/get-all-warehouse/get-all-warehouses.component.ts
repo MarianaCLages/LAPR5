@@ -15,7 +15,7 @@ export class GetAllWarehousesComponent implements OnInit {
 
   warehouses = new MatTableDataSource<IPackagingDTO>();
 
-  displayedColumns: string[] = ['id', 'designation', 'city'];
+  displayedColumns: string[] = ['alphaNumId', 'designation', 'street','postalCode','latitudeDegree','latitudeMinute','latitudeSecond','longitudeDregree','longitudeMinute','longitudeSecond'];
 
 
   // @ts-ignore

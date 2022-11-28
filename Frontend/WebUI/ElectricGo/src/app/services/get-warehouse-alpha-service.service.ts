@@ -28,7 +28,9 @@ export class GetWarehouseAlphaService {
     });
 
     const result = (await data.json());
+    var warehouse = [];
 
-    return result;
+    warehouse.push(result);
+    return warehouse;
   }
 }
