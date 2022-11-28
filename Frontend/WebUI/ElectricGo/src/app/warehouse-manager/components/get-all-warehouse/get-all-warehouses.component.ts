@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { GetAllWarehouseService } from '../../../services/get-all-warehouse.service';
+import {MatTableDataSource} from "@angular/material/table";
+import IPackagingDTO from "../../../shared/pathDTO";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-get-all-warehouses',
@@ -8,7 +12,17 @@ import { GetAllWarehouseService } from '../../../services/get-all-warehouse.serv
 })
 export class GetAllWarehousesComponent implements OnInit {
 
-  warehouses: any [] = [];
+
+  warehouses = new MatTableDataSource<IPackagingDTO>();
+
+  displayedColumns: string[] = ['id', 'designation', 'city'];
+
+
+  // @ts-ignore
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator ;
+  // @ts-ignore
+  @ViewChild(MatSort, {static: true}) sort: MatSort ;
+  //warehouses: any [] = [];
   warehousesAsString: any;
   errorMessage: any;
   error: boolean = false;
@@ -17,23 +31,21 @@ export class GetAllWarehousesComponent implements OnInit {
     private getAllWarehouseService: GetAllWarehouseService
   ) { }
 
-  ngOnInit(): void {
-    this.error = false;
+  ngAfterViewInit() {
+    // @ts-ignore
+    this.warehouses.paginator = this.paginator;
   }
 
-  async getAllWarehouse() {
-    this.warehouses = await this.getAllWarehouseService.getAllWarehouse();
-    let stringMethod: string;
-    this.warehousesAsString = "\n\n";
+  async ngOnInit() {
+    let dataWarehouse = await this.getAllWarehouseService.getAllWarehouse();
 
 
-    for(let i = 0; i < this.warehouses.length; i++){
-      this.warehousesAsString = this.warehousesAsString + "\nAlphaID: "+ this.warehouses[i].alphaNumId +"\nDoor Number:"+ this.warehouses[i].doorNumber + "\nPostal Code: "+ this.warehouses[i].postalCode + "\n\n\n";
+    this.warehouses.data = dataWarehouse;
+    this.warehouses.sort = this.sort;
+    this.warehouses.paginator = this.paginator;
 
-    }
 
-    //this.warehousesAsString = "\nAlphaID:"+ this.warehouses[0].alphaNumId +"Door Number:"+ this.warehouses[0].doorNumber + "\nPostal Code:"+ this.warehouses[0].postalCode;
-    console.log(this.warehousesAsString);
+    console.log(dataWarehouse);
 
   }
   goBack() {

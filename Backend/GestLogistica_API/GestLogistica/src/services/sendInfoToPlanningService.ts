@@ -283,11 +283,11 @@ export default class SendInfoToPlanningService {
         }
 
         orderArr.push(entrega_armazem);
-        for(var i = 0; i < orderArr.length;i++) {
-            await fsPromises.appendFile(join(__dirname, "orders.txt"), orderArr[i] + "\r\n", {
+        for(var z = 0; z < orderArr.length;z++) {
+            await fsPromises.appendFile(join(__dirname, "orders.txt"), orderArr[z] + "\r\n", {
                 flag: 'a+',
             });
-
+        }
             // const file = new LocalFileData('C:\\Users\\Tiago Ferreira\\Documents\\lei21-22-s5-3dj-56\\Backend\\GestLogistica_API\\GestLogistica\\src\\core\\infra\\orderspath.txt');
             // const file = new LocalFileData('Backend/GestLogistica_API/GestLogistica/src/core/infra/orderspath.txt');
 
@@ -311,7 +311,7 @@ export default class SendInfoToPlanningService {
 
             var object = await rep;
             console.log("Orders to Planning sent!");
-        }
+
 
 
     }

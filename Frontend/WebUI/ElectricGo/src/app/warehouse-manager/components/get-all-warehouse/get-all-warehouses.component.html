@@ -1,11 +1,30 @@
-<div class="container" matAutocompleteOrigin>
-  <h1>List All Warehouse</h1>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="warehouses">
+    <caption><h1>List Warehouses</h1></caption>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID</th>
+      <td mat-cell *matCellDef="let warehouse"> {{warehouse.id}} </td>
 
-  <br>
+    </ng-container>
 
-  <button mat-raised-button color="primary" (click)="getAllWarehouse()">List</button>
-  <h2>Warehouses: {{warehousesAsString}}</h2>
+    <ng-container matColumnDef="designation">
+      <th mat-header-cell *matHeaderCellDef> Designation</th>
+      <td mat-cell *matCellDef="let warehouse"> {{warehouse.designation}} </td>
 
-  <br>
+    </ng-container>
+
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef> City</th>
+      <td mat-cell *matCellDef="let warehouse"> {{warehouse.city}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Page navigation"></mat-paginator>
+
 </div>
 
+<button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
