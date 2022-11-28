@@ -16,7 +16,7 @@ export class Pos3DX extends ValueObject<pos3DX> {
   }
 
   public static create(pos3DX: number): Result<Pos3DX> {
-    if (!pos3DX || (pos3DX < 0 || pos3DX > 11)) {
+    if (!pos3DX || (pos3DX < 0 || pos3DX > 10)) {
       return Result.fail<Pos3DX>('Wrong X position on the packaging! (Needs to be between 0-10');
     }
     return Result.ok<Pos3DX>(new Pos3DX({value: pos3DX}))
