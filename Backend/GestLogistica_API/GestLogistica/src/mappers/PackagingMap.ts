@@ -12,6 +12,9 @@ export class PackagingMap extends Mapper<Packaging> {
       id: packaging.id.toString(),
       orderRef: packaging.orderRef.value,
       truckRef: packaging.truckRef.value,
+      pos3DX: packaging.pos3DX.value,
+      pos3DY: packaging.pos3DY.value,
+      pos3DZ: packaging.pos3DZ.value
     };
   }
 
@@ -26,11 +29,13 @@ export class PackagingMap extends Mapper<Packaging> {
   }
 
   public static toPersistence(packaging: Packaging): any {
-
     return {
       id: packaging.id,
       orderRef: packaging.orderRef.value,
       truckRef: packaging.truckRef.value,
+      pos3DX: packaging.pos3DX.value,
+      pos3DY: packaging.pos3DY.value,
+      pos3DZ: packaging.pos3DZ.value
     };
   }
 }
