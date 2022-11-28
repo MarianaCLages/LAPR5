@@ -29,7 +29,7 @@
 
   <mat-form-field>
     <mat-label>Loading Time</mat-label>
-    <input matInput type="number" [(ngModel)]="loadingTime">
+    <input matInput type="number" [(ngModel)]="chargingTime">
   </mat-form-field>
 
   <br>
@@ -53,15 +53,12 @@
 
   <br>
 
-  <div>
-    <button mat-raised-button color="primary" (click)="createOrder()">Create</button>
-    <div *ngIf="success" class="success-popup">
-      <span>
-        <h3><strong>Success!</strong></h3>
-        <h4>{{successMessage}}</h4>
-          <button mat-raised-button color="primary" class="success-btn" (click)="goBack()">Ok</button>
-      </span>
-    </div>
+  <button mat-raised-button color="primary" (click)="createOrder()">Create</button>
+
+  <div *ngIf="success" class="success-popup">
+    <br>
+    <p><strong>Success!</strong> {{successMessage}}</p>
+    <button mat-raised-button color="primary" (click)="goBack()">Ok</button>
   </div>
 
  <!-- button to go back to the previous page -->

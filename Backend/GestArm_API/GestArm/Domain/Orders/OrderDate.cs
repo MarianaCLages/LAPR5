@@ -7,7 +7,6 @@ public class OrderDate : ValueObject
 {
     public OrderDate(DateTime data)
     {
-        IsValid(data);
         Data = data;
     }
 
