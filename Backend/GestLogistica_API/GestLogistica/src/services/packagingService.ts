@@ -82,11 +82,30 @@ export default class PackagingService implements IPackagingService {
 
   public async createPackaging(packagingDTO: ICreatePackagingDTO): Promise<Result<IPackagingDTO>> {
     try {
-
       const verifica = await this.verificaParametros(packagingDTO.orderRef, packagingDTO.truckRef);
 
       if (verifica.isFailure) {
         return Result.fail<IPackagingDTO>(verifica.errorValue());
+      }
+
+      //Verify the positions introduced by the actor
+      const listOfAllPackagingsInThatTruck = await this.packagingRepo.getByTruckAsync(packagingDTO.truckRef);
+
+      let value = true;
+      value = listOfAllPackagingsInThatTruck.getValue().some(
+        p => (p.pos3DX.value === packagingDTO.pos3DX.valueOf()) && (p.pos3DY.value === packagingDTO.pos3DY.valueOf()) && (p.pos3DZ.value === packagingDTO.pos3DZ.valueOf())
+      );
+
+      if(value){
+        return Result.fail<IPackagingDTO>("There already exists a packaging with those positions inside the specified truck!");
+      }
+
+      //Verify if the order is unique
+
+      const listOfAllPackagingsOfThatOrder = await this.packagingRepo.getByOrderAsync(packagingDTO.orderRef);
+
+      if(listOfAllPackagingsOfThatOrder.getValue().length > 0) {
+        return Result.fail<IPackagingDTO>("You can't create another packaging for an order that already has a package associated!");
       }
 
       const packagingOrError = Packaging.create(packagingDTO);
@@ -98,7 +117,6 @@ export default class PackagingService implements IPackagingService {
       const packagingResult = packagingOrError.getValue();
 
       await this.packagingRepo.save(packagingResult);
-
 
       const packagingDTOResult = PackagingMap.toDTO(packagingResult);
       return Result.ok<IPackagingDTO>(packagingDTOResult);
@@ -181,7 +199,7 @@ export default class PackagingService implements IPackagingService {
 
   }
 
-  private async verificaParametros(orderRef: string, truckRef: string) : Promise<Result<boolean>>{
+  private async verificaParametros(orderRef: string, truckRef: string): Promise<Result<boolean>> {
     const verificarOrder = await this.verificaOrder(orderRef);
 
     if (verificarOrder.isFailure) {
