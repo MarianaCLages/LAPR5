@@ -9,13 +9,14 @@ import { ViewRoadMapNetworkComponent } from './log-manager/components/view-road-
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { CreatePathComponent } from './log-manager/components/create-path/create-path.component';
 import { AddTruckComponent } from './fleet-manager/components/add-truck/add-truck.component';
-import {AddWarehouseComponent} from "./warehouse-manager/components/add-warehouse/add-warehouse.component";
+import { AddWarehouseComponent } from "./warehouse-manager/components/add-warehouse/add-warehouse.component";
 import { ListPackagingComponent } from './log-manager/components/list-packaging/list-packaging.component';
 import { CreateOrderComponent } from './warehouse-manager/components/create-order/create-order.component';
-import {GetAllWarehousesComponent} from "./warehouse-manager/components/get-all-warehouse/get-all-warehouses.component";
-import {GetWarehouseComponent} from "./warehouse-manager/components/get-warehouse/get-warehouse.component";
-import {GetHeuristicComponent} from "./fleet-manager/components/get-heuristic/get-heuristic.component";
+import { GetAllWarehousesComponent } from "./warehouse-manager/components/get-all-warehouse/get-all-warehouses.component";
+import { GetWarehouseComponent } from "./warehouse-manager/components/get-warehouse/get-warehouse.component";
+import { GetHeuristicComponent } from "./fleet-manager/components/get-heuristic/get-heuristic.component";
 import { ListPathsComponent } from './log-manager/components/list-paths/list-paths.component';
+import { ListOrdersComponent } from './warehouse-manager/components/list-orders/list-orders.component';
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'WarehouseManager', component: WarehouseManagerComponent},
   {path: 'WarehouseManager/addWarehouse', component: AddWarehouseComponent},
   {path: 'WarehouseManager/createOrder', component: CreateOrderComponent},
+  {path: 'WarehouseManager/listOrders', component: ListOrdersComponent},
 
   // Fleet Manager
   {path: 'FleetManager', component: FleetManagerComponent},
