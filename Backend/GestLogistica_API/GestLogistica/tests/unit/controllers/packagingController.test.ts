@@ -17,35 +17,59 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -81,35 +105,59 @@ describe("PackagingController Test", () => {
       createPackaging: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getByOrderS: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))
     };
 
@@ -142,41 +190,66 @@ describe("PackagingController Test", () => {
     //Mock the service
     const packagingService = {
       createPackaging: sinon.stub().returns(Promise.resolve(Result.ok<IPackagingDTO>({
+        pos3DY: 0, pos3DZ: 0, pos3DX: 0,
         "id": "123",
         "orderRef": "MJ7",
         "truckRef": "231"
       }))),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getByOrderS: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))
     };
 
@@ -214,36 +287,60 @@ describe("PackagingController Test", () => {
     const packagingService = {
       createPackaging: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getByOrderS: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))
     };
 
@@ -284,35 +381,59 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -350,32 +471,53 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -409,42 +551,65 @@ describe("PackagingController Test", () => {
     //Mock the service
     const packagingService = {
       createPackaging: sinon.stub().returns(Promise.resolve(Result.ok<IPackagingDTO>({
+        pos3DX: 0, pos3DY: 0, pos3DZ: 0,
         "id": "123",
         "orderRef": "MJ7",
         "truckRef": "231"
       }))),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getPackaging: sinon.stub().returns(Promise.resolve(Result.ok<IPackagingDTO>({
+        pos3DX: 0, pos3DY: 0, pos3DZ: 0,
         "id": "123",
         "orderRef": "MJ7",
         "truckRef": "231"
       }))),
       getByOrderS: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))
     };
 
@@ -482,33 +647,54 @@ describe("PackagingController Test", () => {
     const packagingService = {
       createPackaging: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getPackaging: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getByOrderS: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
-        orderRef: "221228/1",
-        truckRef: "E1234"
+        orderRef: "MJ7",
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))
     };
 
@@ -548,35 +734,59 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -618,31 +828,52 @@ describe("PackagingController Test", () => {
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -682,37 +913,59 @@ describe("PackagingController Test", () => {
           truckRef: "231"
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Result.ok<IPackagingDTO>({
+          pos3DX: 0, pos3DY: 0, pos3DZ: 0,
           "id": "123",
           "orderRef": "MJ7",
           "truckRef": "231"
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -759,31 +1012,52 @@ describe("PackagingController Test", () => {
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Promise.resolve(Result.fail<IPackagingDTO>("Erro")))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -825,36 +1099,60 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.createWithId({
           id: "123",
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -901,33 +1199,54 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.createWithId({
           id: "123",
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -974,36 +1293,58 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Result.ok<IPackagingDTO>({
+          pos3DX: 0, pos3DY: 0, pos3DZ: 0,
           "id": "123",
           "orderRef": "MJ7",
           "truckRef": "231"
         })),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1053,32 +1394,53 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Promise.resolve(Result.fail<IPackagingDTO>("Erro")))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1121,36 +1483,60 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.createWithId({
           id: "123",
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1195,36 +1581,60 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.createWithId({
           id: "123",
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1263,6 +1673,7 @@ describe("PackagingController Test", () => {
       //mock the service
       const packagingService = {
         getByOrderS: sinon.stub().returns(Result.ok<IPackagingDTO>({
+          pos3DX: 0, pos3DY: 0, pos3DZ: 0,
           "id": "123",
           "orderRef": "MJ7",
           "truckRef": "231"
@@ -1273,36 +1684,58 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Result.ok<IPackagingDTO>({
+          pos3DX: 0, pos3DY: 0, pos3DZ: 0,
           "id": "123",
           "orderRef": "MJ7",
           "truckRef": "231"
         })),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1348,36 +1781,58 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Result.ok<IPackagingDTO>({
+          pos3DX: 0, pos3DY: 0, pos3DZ: 0,
           "id": "123",
           "orderRef": "MJ7",
           "truckRef": "231"
         })),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1426,36 +1881,60 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.createWithId({
           id: "123",
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1500,33 +1979,54 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns((Promise.resolve(Result.fail<IPackagingDTO>("Erro")))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.createWithId({
           id: "123",
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1565,47 +2065,71 @@ describe("PackagingController Test", () => {
       //mock the service
       const packagingService = {
         getByOrderS: sinon.stub().returns(Result.ok<IPackagingDTO>({
+          pos3DX: 0, pos3DY: 0, pos3DZ: 0,
           "id": "123",
           "orderRef": "MJ7",
           "truckRef": "231"
         })),
         getById: sinon.stub().returns(Promise.resolve({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Result.ok<IPackagingDTO>({
+          pos3DX: 0, pos3DY: 0, pos3DZ: 0,
           "id": "123",
           "orderRef": "MJ7",
           "truckRef": "231"
         })),
         getAllPackagings: sinon.stub().returns(Result.ok<IPackagingDTO>({
+          pos3DX: 0, pos3DY: 0, pos3DZ: 0,
           "id": "123",
           "orderRef": "MJ7",
           "truckRef": "231"
         })),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1645,43 +2169,66 @@ describe("PackagingController Test", () => {
     //mock the service
     const packagingService = {
       getByOrderS: sinon.stub().returns(Result.ok<IPackagingDTO>({
+        pos3DX: 0, pos3DY: 0, pos3DZ: 0,
         "id": "123",
         "orderRef": "MJ7",
         "truckRef": "231"
       })),
       getById: sinon.stub().returns(Promise.resolve({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })),
       getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       updatePackaging: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro"))),
       getAllPackagings: sinon.stub().returns(Result.ok<IPackagingDTO>({
+        pos3DX: 0, pos3DY: 0, pos3DZ: 0,
         "id": "123",
         "orderRef": "MJ7",
         "truckRef": "231"
       })),
       verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       }))),
       verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
         orderRef: "MJ7",
-        truckRef: "231"
+        truckRef: "231",
+        pos3DZ: 1,
+        pos3DY: 1,
+        pos3DX: 1
       })))
     };
 
@@ -1732,36 +2279,60 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.createWithId({
           id: "123",
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1806,36 +2377,60 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Promise.resolve(Packaging.createWithId({
           id: "123",
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1874,46 +2469,72 @@ describe("PackagingController Test", () => {
       //mock the service
       const packagingService = {
         getByOrderS: sinon.stub().returns(Result.ok<IPackagingDTO>({
+          pos3DX: 0, pos3DY: 0, pos3DZ: 0,
           "id": "123",
           "orderRef": "MJ7",
           "truckRef": "231"
         })),
         getById: sinon.stub().returns(Promise.resolve({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Result.ok<IPackagingDTO>({
+          pos3DX: 0, pos3DY: 0, pos3DZ: 0,
           "id": "123",
           "orderRef": "MJ7",
           "truckRef": "231"
         })),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 
@@ -1961,36 +2582,58 @@ describe("PackagingController Test", () => {
         })),
         getByTruckAsync: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         createPackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         updatePackaging: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         getAllPackagings: sinon.stub().returns(Result.ok<IPackagingDTO>({
+          pos3DX: 0, pos3DY: 0, pos3DZ: 0,
           "id": "123",
           "orderRef": "MJ7",
           "truckRef": "231"
         })),
         verificaOrder: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificarTruck: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         }))),
         verificaParametros: sinon.stub().returns(Promise.resolve(Packaging.create({
           orderRef: "MJ7",
-          truckRef: "231"
+          truckRef: "231",
+          pos3DZ: 1,
+          pos3DY: 1,
+          pos3DX: 1
         })))
       };
 

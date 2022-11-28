@@ -8,9 +8,16 @@ import ICreatePackagingDTO from "../../dto/packaging/ICreatePackagingDTO";
 import IPackagingDTO from "../../dto/packaging/IPackagingDTO";
 import { PathId } from "../path/pathId";
 
+import { Pos3DX } from "./pos3DX";
+import { Pos3DY } from "./pos3DY";
+import { Pos3DZ } from "./pos3DZ";
+
 interface PackagingProps {
   orderRef: OrderRef;
   truckRef: TruckRef;
+  pos3DX: Pos3DX;
+  pos3DY: Pos3DY;
+  pos3DZ: Pos3DZ;
 }
 
 export class Packaging extends AggregateRoot<PackagingProps> {
@@ -34,6 +41,30 @@ export class Packaging extends AggregateRoot<PackagingProps> {
     return this.props.truckRef;
   }
 
+  get pos3DX(): Pos3DX {
+    return this.props.pos3DX;
+  }
+
+  get pos3DY(): Pos3DY {
+    return this.props.pos3DY;
+  }
+
+  get pos3DZ(): Pos3DZ {
+    return this.props.pos3DZ;
+  }
+
+  set pos3DX(value: Pos3DX) {
+    this.props.pos3DX = value;
+  }
+
+  set pos3DY(value: Pos3DY) {
+    this.props.pos3DY = value;
+  }
+
+  set pos3DZ(value: Pos3DZ) {
+    this.props.pos3DZ = value;
+  }
+
   set truckRef(value: TruckRef) {
     this.props.truckRef = value;
   }
@@ -45,7 +76,10 @@ export class Packaging extends AggregateRoot<PackagingProps> {
   public static create(packagingDTO: ICreatePackagingDTO, id?: UniqueEntityID): Result<Packaging> {
     const guardedProps = [
       { argument: packagingDTO.orderRef, argumentName: "referencedOrder" },
-      { argument: packagingDTO.truckRef, argumentName: "referencedTruck" }
+      { argument: packagingDTO.truckRef, argumentName: "referencedTruck" },
+      { argument: packagingDTO.pos3DX, argumentName: "packaging3DXPosition" },
+      { argument: packagingDTO.pos3DY, argumentName: "packaging3DYPosition" },
+      { argument: packagingDTO.pos3DZ, argumentName: "packaging3DZPosition" }
     ];
 
     const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
@@ -60,41 +94,53 @@ export class Packaging extends AggregateRoot<PackagingProps> {
       try {
         const _orderRef = OrderRef.create(packagingDTO.orderRef);
         const _truckRef = TruckRef.create(packagingDTO.truckRef);
+        const _3DXPosition = Pos3DX.create(packagingDTO.pos3DX);
+        const _3DYPosition = Pos3DY.create(packagingDTO.pos3DY);
+        const _3DZPosition = Pos3DZ.create(packagingDTO.pos3DZ);
 
-        if (_orderRef.isFailure || _truckRef.isFailure) {
-          //adds to the message the errors of each value object if they exist
-          let message = "It was not possible to create the packaging:\n";
-          if (_orderRef.isFailure) {
-            message += _orderRef.errorValue() + "\n";
-          }
-          if (_truckRef.isFailure) {
-            message += _truckRef.errorValue() + "\n";
-          }
-          return Result.fail<Packaging>(message);
+        const result = Result.combine(
+          [
+            _orderRef, _truckRef, _3DZPosition, _3DYPosition, _3DXPosition
+          ]
+        );
+
+        if (result.isFailure) {
+          return Result.fail<Packaging>(result.errorValue());
+        } else {
+          const packaging = new Packaging({
+            orderRef: _orderRef.getValue(),
+            truckRef: _truckRef.getValue(),
+            pos3DX: _3DXPosition.getValue(),
+            pos3DY: _3DYPosition.getValue(),
+            pos3DZ: _3DZPosition.getValue()
+          }, id);
+          return Result.ok<Packaging>(packaging);
         }
-
-        const packaging = new Packaging({
-          orderRef: _orderRef.getValue(),
-          truckRef: _truckRef.getValue()
-        }, id);
-        return Result.ok<Packaging>(packaging);
       } catch (err) {
         console.debug(err);
         return Result.fail<Packaging>(err.toString());
       }
 
+
     }
+
+
   }
 
   public static createWithId(packagingDTO: IPackagingDTO): Result<Packaging> {
+
     const guardedProps = [
       { argument: packagingDTO.orderRef, argumentName: "referencedOrder" },
-      { argument: packagingDTO.truckRef, argumentName: "referencedTruck" }
+      { argument: packagingDTO.truckRef, argumentName: "referencedTruck" },
+      { argument: packagingDTO.pos3DX, argumentName: "packaging3DXPosition" },
+      { argument: packagingDTO.pos3DY, argumentName: "packaging3DYPosition" },
+      { argument: packagingDTO.pos3DZ, argumentName: "packaging3DZPosition" }
     ];
 
     const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
     //path chega e partida não podem ser iguais
-    if (packagingDTO.orderRef === packagingDTO.truckRef) {
+    if (packagingDTO.orderRef === packagingDTO.truckRef
+    ) {
       return Result.fail<Packaging>("You can't have the same references between the truck and the order");
     }
 
@@ -104,24 +150,29 @@ export class Packaging extends AggregateRoot<PackagingProps> {
       try {
         const _orderRef = OrderRef.create(packagingDTO.orderRef);
         const _truckRef = TruckRef.create(packagingDTO.truckRef);
+        const _3DXPosition = Pos3DX.create(packagingDTO.pos3DX);
+        const _3DYPosition = Pos3DY.create(packagingDTO.pos3DY);
+        const _3DZPosition = Pos3DZ.create(packagingDTO.pos3DZ);
 
-        if (_orderRef.isFailure || _truckRef.isFailure) {
-          //adds to the message the errors of each value object if they exist
-          let message = "It was not possible to create the path: \n";
-          if (_orderRef.isFailure) {
-            message += _orderRef.errorValue() + "\n";
-          }
-          if (_truckRef.isFailure) {
-            message += _truckRef.errorValue() + "\n";
-          }
-          return Result.fail<Packaging>(message);
+        const result = Result.combine(
+          [
+            _orderRef, _truckRef, _3DZPosition, _3DYPosition, _3DXPosition
+          ]
+        );
+
+        if (result.isFailure) {
+          return Result.fail<Packaging>(result.errorValue());
+        } else {
+          const packaging = new Packaging({
+            orderRef: _orderRef.getValue(),
+            truckRef: _truckRef.getValue(),
+            pos3DX: _3DXPosition.getValue(),
+            pos3DY: _3DYPosition.getValue(),
+            pos3DZ: _3DZPosition.getValue()
+          }, new UniqueEntityID(packagingDTO.id));
+          return Result.ok<Packaging>(packaging);
         }
 
-        const packaging = new Packaging({
-          orderRef: _orderRef.getValue(),
-          truckRef: _truckRef.getValue()
-        }, new UniqueEntityID(packagingDTO.id));
-        return Result.ok<Packaging>(packaging);
       } catch (err) {
         console.debug(err);
         return Result.fail<Packaging>(err.toString());
