@@ -72,6 +72,7 @@ export default (app: Router) => {
         }),
         (req, res, next) => ctrl.getTruckByPlate(req, res, next));
 
+
     route.get('/send_info/:idTruck',
         (req,res,next) => ctrl.sendInfo(req,res,next) );
 
@@ -80,4 +81,5 @@ export default (app: Router) => {
 
     route.get('/get_heuristic_weight_time/:idTruck',
         (req,res,next) => ctrl.getHeuristicByTimeWeight(req,res,next) );
+
 }

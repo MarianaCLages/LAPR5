@@ -41,6 +41,7 @@ import { ViewRoadMapNetworkComponent } from './log-manager/components/view-road-
 import {WarehouseManagerComponent} from "./warehouse-manager/warehouse-manager.component";
 import { WarehouseSideBarComponent } from "./warehouse-manager/components/warehouse-side-bar/warehouse-side-bar.component";
 import { GetWarehouseComponent } from './warehouse-manager/components/get-warehouse/get-warehouse.component';
+import {GetHeuristicComponent} from "./fleet-manager/components/get-heuristic/get-heuristic.component";
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { GetWarehouseComponent } from './warehouse-manager/components/get-wareho
     WarehouseSideBarComponent,
     GetAllWarehousesComponent,
     GetWarehouseComponent,
+    GetHeuristicComponent,
     ListPathsComponent,
     ListPathsComponent
   ],

@@ -14,6 +14,7 @@ import { ListPackagingComponent } from './log-manager/components/list-packaging/
 import { CreateOrderComponent } from './warehouse-manager/components/create-order/create-order.component';
 import {GetAllWarehousesComponent} from "./warehouse-manager/components/get-all-warehouse/get-all-warehouses.component";
 import {GetWarehouseComponent} from "./warehouse-manager/components/get-warehouse/get-warehouse.component";
+import {GetHeuristicComponent} from "./fleet-manager/components/get-heuristic/get-heuristic.component";
 import { ListPathsComponent } from './log-manager/components/list-paths/list-paths.component';
 
 const routes: Routes = [
@@ -27,7 +28,7 @@ const routes: Routes = [
   // Fleet Manager
   {path: 'FleetManager', component: FleetManagerComponent},
   {path: 'FleetManager/addTruck', component: AddTruckComponent},
-
+  {path: 'FleetManager/getHeuristic',component:GetHeuristicComponent},
   // Logistic Manager
   {path: 'LogisticManager', component: LogManagerComponent},
   {path: 'LogisticManager/addPackaging', component: AddPackagingComponent},

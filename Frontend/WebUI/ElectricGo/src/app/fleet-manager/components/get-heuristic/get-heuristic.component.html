@@ -1,0 +1,12 @@
+<div class="container" matAutocompleteOrigin>
+  <h1>Get Heuristic</h1>
+
+  <mat-form-field>
+    <mat-label> Caract Truck </mat-label>
+    <input matInput type = "any" [(ngModel)]="caractId"/>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="getHeuristic()">Get Heuristic</button>
+
+  <h2>Heuristic: {{heuristic}}</h2>
+</div>
