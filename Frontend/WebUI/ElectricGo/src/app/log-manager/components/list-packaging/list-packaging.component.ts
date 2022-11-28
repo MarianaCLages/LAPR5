@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import IPackagingDTO from "../../../shared/pathDTO";
+import { IPackagingDTO } from 'src/app/shared/packagingDTO';
 import { MatTableDataSource } from '@angular/material/table';
 import { ListPackagingService } from '../../services/list-packaging.service';
 import {MatPaginator} from "@angular/material/paginator";
@@ -41,6 +41,15 @@ export class ListPackagingComponent implements OnInit {
       // @ts-ignore
       this.packagings.paginator = this.paginator;
 
+      // filter by order ref
+      this.packagings.filterPredicate = (data, filter) => {
+        return data.orderRef.toLowerCase().includes(filter);
+      }
+
+      // filter by truck ref
+      this.packagings.filterPredicate = (data, filter) => {
+        return data.truckRef.toLowerCase().includes(filter);
+      }
     }));
   }
   goBack() {
