@@ -118,7 +118,7 @@ jobs:
           command: |
             npm install
             npm run build            
-            npm run test
+            
       - save_cache:
           key: dependency-cache-{{ checksum "Frontend/WebUI/ElectricGo/package.json" }}
           paths:
@@ -143,7 +143,7 @@ jobs:
           working_directory: Frontend/WebUI/ElectricGo
           name : Run the gestLog tests and generate coverage
           command: |
-            pwd
+            npm run test
       - store_artifacts:
           path: Frontend/WebUI/ElectricGo/coverage
 

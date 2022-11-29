@@ -215,10 +215,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       );
 
       this.roadMap.add(road);
-
     }
-
-
   }
 
   private loadModel(element: IWarehouseViewRepresentation) {
