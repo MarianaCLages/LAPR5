@@ -151,10 +151,10 @@ export default class truckController
         try {
             this.fileService.generateFiles();
             this.fileService.sendPaths();
-            this.fileService.sendWarehouse();
+            await this.fileService.sendWarehouse();
             this.fileService.sendTrucks();
 
-            this.fileService.getTruck(idTruck);
+            await this.fileService.getTruck(idTruck);
             this.fileService.sendOrdersToPlanning(idTruck);
 
             stringTest = await fileService.getHeuristic();

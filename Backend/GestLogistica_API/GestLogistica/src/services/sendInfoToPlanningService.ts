@@ -161,13 +161,18 @@ export default class SendInfoToPlanningService {
     public async sendWarehouse(){
         const url = 'https://localhost:5001/api/Warehouse';
 
-        const response = await fetch(url, {
-            method: 'GET',
-            agent: this.httpsAgent,
-            headers: {
-                Accept: 'application/json',
-            }
-        })
+        let  response
+        try {
+            response = await fetch(url, {
+                method: 'GET',
+                agent: this.httpsAgent,
+                headers: {
+                    Accept: 'application/json',
+                }
+            })
+        }catch (error){
+            throw  TypeError("GestArm not connected!");
+        }
 
         const result = (await response.json());
         var pathArray = [];
@@ -246,15 +251,19 @@ export default class SendInfoToPlanningService {
 
         let object: string;
 
-        const rep = await fetch("http://localhost:5003/send_heuristic", {
-            method: 'GET',
-            agent: this.httpAgent,
-            headers:{
-                Accept: 'application/json',
-            },
-        })
+        let rep
+        try {
+                rep = await fetch("http://localhost:5003/send_heuristic", {
+                method: 'GET',
+                agent: this.httpAgent,
+                headers: {
+                    Accept: 'application/json',
+                },
+            })
 
-
+        }catch (error){
+            throw  TypeError("Planning not connected!");
+        }
         return await rep.text();
 
     }
