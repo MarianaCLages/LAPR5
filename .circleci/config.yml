@@ -143,8 +143,9 @@ jobs:
           name : Run the gestLog tests and generate coverage
           command: |
             pwd
-            # ng test
-
+            ng test --no-watch --code-coverage
+      - store_artifacts:
+          path: Frontend/WebUI/ElectricGo/coverage
 
   Pulish-gestArm-to-folder:
     description: Publish the application to a folder with a certain configuration reference
