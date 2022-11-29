@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +9,17 @@ export class AppConfigServiceService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
   loadAppConfig() {
+    console.log("loadAppConfig");
     //loads the json file
-    return this.http.get('../assets/config.json').toPromise().then(data => {
+    return this.http.get<any>('./assets/config.json').toPromise()
+      .then(data => {
         this.appConfig = data;
-      }
-      );
+        console.log(this.appConfig);
+      });
   }
 
   getWarehouseURL() {
@@ -25,6 +28,7 @@ export class AppConfigServiceService {
 
 
   getLogisticsURL() {
+
     return this.appConfig.logisticsURI;
   }
 

@@ -16,9 +16,11 @@ import { CreatePathComponent } from "./log-manager/components/create-path/create
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { FleetManagerComponent } from "./fleet-manager/fleet-manager.component";
 import { FleetSideBarComponent } from './fleet-manager/fleet-side-bar/fleet-side-bar.component';
+
 import { GetAllWarehousesComponent } from "./warehouse-manager/components/get-all-warehouse/get-all-warehouses.component";
 import { HeaderComponent } from './components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GetWarehouseComponent } from './warehouse-manager/components/get-warehouse/get-warehouse.component';
 import { ListPackagingComponent } from './log-manager/components/list-packaging/list-packaging.component';
 import { ListPathsComponent } from './log-manager/components/list-paths/list-paths.component';
 import { LogManagerComponent } from "./log-manager/log-manager.component";
@@ -40,10 +42,10 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { ViewRoadMapNetworkComponent } from './log-manager/components/view-road-map-network/view-road-map-network.component';
 import { WarehouseManagerComponent} from "./warehouse-manager/warehouse-manager.component";
 import { WarehouseSideBarComponent } from "./warehouse-manager/components/warehouse-side-bar/warehouse-side-bar.component";
-import { GetWarehouseComponent } from './warehouse-manager/components/get-warehouse/get-warehouse.component';
 import { GetHeuristicComponent } from "./fleet-manager/components/get-heuristic/get-heuristic.component";
 import { ListOrdersComponent } from './warehouse-manager/components/list-orders/list-orders.component';
 import { ListTruckComponent } from './log-manager/components/list-truck/list-truck.component';
+
 
 @NgModule({
   declarations: [

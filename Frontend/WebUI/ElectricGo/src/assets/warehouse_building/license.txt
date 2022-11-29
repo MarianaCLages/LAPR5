@@ -1,0 +1,11 @@
+Model Information:
+* title:	Warehouse Building
+* source:	https://sketchfab.com/3d-models/warehouse-building-0c37b0f92cb54e07a1e1c6c3df9f8439
+* author:	OmegaRedZA (https://sketchfab.com/OmegaRedZA)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Warehouse Building" (https://sketchfab.com/3d-models/warehouse-building-0c37b0f92cb54e07a1e1c6c3df9f8439) by OmegaRedZA (https://sketchfab.com/OmegaRedZA) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

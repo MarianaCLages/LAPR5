@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
 import {CreatePathServiceService} from "../../../services/create-path-service.service";
-import {FormControl} from "@angular/forms";
 import {GetWarehouseServiceService} from "../../../services/get-warehouse-service.service";
 import IPathDTO from "../../../shared/pathDTO";
 
@@ -34,7 +33,10 @@ export class CreatePathComponent implements OnInit {
 
   ngOnInit(): void {
     //gets the warehouses from the backend
-    this.warehouses = this.getWarehouseService.getWarehouses();
+    this.getWarehouseService.getWarehouses().then((data: any) => {
+        this.warehouses = data;
+      }
+    );
     this.error = false;
 
   }
@@ -73,8 +75,6 @@ export class CreatePathComponent implements OnInit {
       (data: any) => {
         this.success = true;
         this.successMessage = "Path created successfully";
-        //TODO: still unsure if we should show the created path or not
-        //this.path = data;
         this.goBack();
       },
       //transforms into a http error

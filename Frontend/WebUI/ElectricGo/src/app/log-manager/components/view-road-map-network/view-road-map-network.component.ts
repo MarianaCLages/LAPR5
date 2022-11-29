@@ -10,6 +10,8 @@ import {IWarehouseViewRepresentation} from 'src/app/shared/warehouseViewRepresen
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import jsonInfo from './roadMap/roadMap.json';
 import {ICreateWarehouseDTO} from "../../../shared/createWarehouseDTO";
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
 
 
 @Component({
@@ -147,6 +149,15 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       let roundabout = this.roundabout.clone();
       roundabout.position.set(element.x, element.y, element.z);
       this.roadMap.add(roundabout);
+      const glftLoader = new GLTFLoader();
+      glftLoader.load(
+        'assets/warehouse_building/scene.gltf',
+        (gltf) => {
+          gltf.scene.scale.set(0.1, 0.1, 0.1);
+          gltf.scene.position.set(element.x, element.y, element.z);
+          this.roadMap.add(gltf.scene);
+        }
+      );
     }
 
     const circleConstant = 2;
