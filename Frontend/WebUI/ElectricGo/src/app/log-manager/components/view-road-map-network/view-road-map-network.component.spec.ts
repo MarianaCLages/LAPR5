@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewRoadMapNetworkComponent } from './view-road-map-network.component';
+import {HttpClient, HttpHandler} from "@angular/common/http";
 
 describe('ViewRoadMapNetworkComponent', () => {
   let component: ViewRoadMapNetworkComponent;
@@ -8,7 +9,8 @@ describe('ViewRoadMapNetworkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewRoadMapNetworkComponent ]
+      declarations: [ ViewRoadMapNetworkComponent],
+      providers: [HttpClient,HttpHandler]
     })
     .compileComponents();
 

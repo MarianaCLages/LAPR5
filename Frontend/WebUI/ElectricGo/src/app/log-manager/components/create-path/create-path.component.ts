@@ -5,9 +5,7 @@ import {GetWarehouseServiceService} from "../../../services/get-warehouse-servic
 import IPathDTO from "../../../shared/pathDTO";
 
 @Component({
-  selector: 'app-create-path',
-  templateUrl: './create-path.component.html',
-  styleUrls: ['./create-path.component.css']
+  selector: 'app-create-path', templateUrl: './create-path.component.html', styleUrls: ['./create-path.component.css']
 })
 export class CreatePathComponent implements OnInit {
 
@@ -25,18 +23,14 @@ export class CreatePathComponent implements OnInit {
   successMessage: any;
 
 
-  constructor(
-    private createPathService: CreatePathServiceService,
-    private getWarehouseService: GetWarehouseServiceService
-  ) {
+  constructor(private createPathService: CreatePathServiceService, private getWarehouseService: GetWarehouseServiceService) {
   }
 
   ngOnInit(): void {
     //gets the warehouses from the backend
     this.getWarehouseService.getWarehouses().then((data: any) => {
-        this.warehouses = data;
-      }
-    );
+      this.warehouses = data;
+    });
     this.error = false;
 
   }
@@ -71,13 +65,11 @@ export class CreatePathComponent implements OnInit {
     //sends the path DTO to the backend
 
     let errorOrSuccess: any = this.createPathService.createPath(pathDTO);
-    errorOrSuccess.subscribe(
-      (data: any) => {
+    errorOrSuccess.subscribe((data: any) => {
         this.success = true;
         this.successMessage = "Path created successfully";
         this.goBack();
-      },
-      //transforms into a http error
+      }, //transforms into a http error
       (error: any) => {
         this.error = true;
         if (error.status == 400) {
@@ -90,8 +82,7 @@ export class CreatePathComponent implements OnInit {
             this.errorMessage = "An unknown error has ocurred";
           }
         }
-      }
-    );
+      });
   }
 
   goBack() {

@@ -2,17 +2,15 @@ import * as THREE from 'three';
 
 import {Component, ElementRef, Input, OnInit, ViewChild,} from '@angular/core';
 
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import {GetPathsService} from 'src/app/services/get-paths.service';
 import {GetWarehouseServiceService} from 'src/app/services/get-warehouse-service.service';
+import {ICreateWarehouseDTO} from "../../../shared/createWarehouseDTO";
 import IPathDTO from 'src/app/shared/pathDTO';
 import {IPathViewRepresentation} from 'src/app/shared/pathViewRepresentation';
 import {IWarehouseViewRepresentation} from 'src/app/shared/warehouseViewRepresentation';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import jsonInfo from './roadMap/roadMap.json';
-import {ICreateWarehouseDTO} from "../../../shared/createWarehouseDTO";
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-
-
 
 @Component({
   selector: 'app-view-road-map-network',
@@ -144,6 +142,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     //DEFINE THE BACKGROUND COLOR
     this.scene.background = new THREE.Color(0xadd8e6);
 
+    //ADD THE LIGHTS
+    this.scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
     // ROUNDABOUTS
     for (const element of this.info.warehouses) {
       let roundabout = this.roundabout.clone();
@@ -159,6 +160,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
           this.roadMap.add(gltf.scene);
         }
       );
+      this.loadModel(element);
     }
 
     const circleConstant = 2;
@@ -219,171 +221,19 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   }
 
-  private createRoadMap() {
-    this.roadMap = new THREE.Group();
-    this.createRoundAbout();
-    this.scene.add(this.roadMap);
-    //this.roadMap.scale.set(2,2,2);
-
-    //DEFINE THE BACK GROUND COLOR
-    this.scene.background = new THREE.Color(0xadd8e6);
-
-    // ROUNDABOUTS
-    for (const element of jsonInfo.map) {
-      let roundabouT = this.roundabout.clone();
-
-      //Set the position of the roundabout
-      roundabouT.position.set(
-        element[0],
-        element[1],
-        element[2]
-      );
-
-      this.roadMap.add(roundabouT);
-    }
-
-    const circleConstant = 2;
-    const connectionConstant = 0.5;
-
-    const connectionLength = connectionConstant * circleConstant;
-
-    const radius = 2.1;
-
-    // const roadTexture = new THREE.TextureLoader().load(
-    //   'Frontend/WebUI/ElectricGo/src/app/log-manager/components/view-road-map-network/roadMap/road_1.jpg'
-    // );
-
-    for (const element of jsonInfo.paths) {
-      //INFO
-      let initWarehouse = element[0] - 1;
-      let finalWarehouse = element[1] - 1;
-      let roadWidth = element[2];
-
-      // //Incoming Edges
-      const material2 = new THREE.LineBasicMaterial({color: 0xff0000});
-
-      let points = [];
-      let points2 = [];
-
-      const difX =
-        jsonInfo.map[initWarehouse][0] - jsonInfo.map[finalWarehouse][0];
-      const difY =
-        jsonInfo.map[initWarehouse][1] - jsonInfo.map[finalWarehouse][1];
-      const difZ =
-        jsonInfo.map[initWarehouse][2] - jsonInfo.map[finalWarehouse][2];
-
-      points.push(
-        new THREE.Vector3(
-          jsonInfo.map[initWarehouse][0],
-          jsonInfo.map[initWarehouse][1],
-          jsonInfo.map[initWarehouse][2]
-        )
-      );
-      points.push(
-        new THREE.Vector3(
-          jsonInfo.map[initWarehouse][0] - 0.1 * difX,
-          jsonInfo.map[initWarehouse][1] - 0.1 * difY,
-          jsonInfo.map[initWarehouse][2]
-        )
-      );
-      points2.push(
-        new THREE.Vector3(
-          jsonInfo.map[finalWarehouse][0],
-          jsonInfo.map[finalWarehouse][1],
-          jsonInfo.map[finalWarehouse][2]
-        )
-      );
-      points2.push(
-        new THREE.Vector3(
-          jsonInfo.map[finalWarehouse][0] + 0.1 * difX,
-          jsonInfo.map[finalWarehouse][1] + 0.1 * difY,
-          jsonInfo.map[finalWarehouse][2]
-        )
-      );
-
-      const geometry = new THREE.BufferGeometry().setFromPoints(points);
-      const geometry2 = new THREE.BufferGeometry().setFromPoints(points2);
-
-      const line = new THREE.Line(geometry, material2);
-      const line2 = new THREE.Line(geometry2, material2);
-
-      this.roadMap.add(line);
-      this.roadMap.add(line2);
-
-      //Outgoing Edges
-
-      //Incoming Edge final
-      let finalWarehousePosX = jsonInfo.map[finalWarehouse][0] + 0.1 * difX;
-      let finalWarehousePosY = jsonInfo.map[finalWarehouse][1] + 0.1 * difY;
-      let finalWarehousePosZ = jsonInfo.map[finalWarehouse][2];
-
-      //Incoming Edge init
-      let initWarehousePosX = jsonInfo.map[initWarehouse][0] - 0.1 * difX;
-      let initWarehousePosY = jsonInfo.map[initWarehouse][0] - 0.1 * difY;
-      let initWarehousePosZ = jsonInfo.map[initWarehouse][2];
-
-
-      let roadLength = Math.sqrt(
-        Math.pow(
-          jsonInfo.map[finalWarehouse][0] - jsonInfo.map[initWarehouse][0],
-          2
-        ) +
-        Math.pow(
-          jsonInfo.map[finalWarehouse][1] - jsonInfo.map[initWarehouse][1],
-          2
-        ) +
-        Math.pow(
-          jsonInfo.map[finalWarehouse][2] - jsonInfo.map[initWarehouse][2],
-          2
-        )
-      );
-
-      let angle =
-        Math.sqrt(
-          Math.pow(
-            jsonInfo.map[finalWarehouse][0] - jsonInfo.map[initWarehouse][0],
-            2
-          ) +
-          Math.pow(
-            jsonInfo.map[finalWarehouse][1] - jsonInfo.map[initWarehouse][1],
-            2
-          )
-        ) -
-        connectionLength * 2;
-
-      //Road information
-      let roadGeometry = new THREE.PlaneGeometry(roadWidth, roadLength, 32);
-      let roadMaterial = new THREE.MeshBasicMaterial({
-        color: 0x000000,
-        side: THREE.DoubleSide,
-      });
-
-      let road = new THREE.Mesh(roadGeometry, roadMaterial);
-
-      road.position.set(
-        (jsonInfo.map[finalWarehouse][0] + jsonInfo.map[initWarehouse][0]) / 2,
-        (jsonInfo.map[finalWarehouse][1] + jsonInfo.map[initWarehouse][1]) / 2,
-        (jsonInfo.map[finalWarehouse][2] + jsonInfo.map[initWarehouse][2]) / 2
-      );
-
-      road.rotation.z =
-        Math.atan2(
-          jsonInfo.map[finalWarehouse][1] - jsonInfo.map[initWarehouse][1],
-          jsonInfo.map[finalWarehouse][0] - jsonInfo.map[initWarehouse][0]
-        ) -
-        Math.PI / 2;
-
-      road.rotateOnAxis(
-        new THREE.Vector3(1, 0, 0),
-        Math.atan2(
-          jsonInfo.map[finalWarehouse][2] - jsonInfo.map[initWarehouse][2],
-          angle
-        )
-      );
-
-      this.roadMap.add(road);
-    }
+  private loadModel(element: IWarehouseViewRepresentation) {
+    const glftLoader = new GLTFLoader();
+    glftLoader.load(
+      'assets/warehouse_building/scene.gltf',
+      (gltf) => {
+        gltf.scene.scale.set(0.1, 0.1, 0.1);
+        gltf.scene.position.set(element.x, element.y, element.z);
+        gltf.scene.rotation.x = Math.PI / 2.0;
+        this.roadMap.add(gltf.scene);
+      }
+    );
   }
+
 
   private createRoundAbout() {
     const geometry = new THREE.CircleGeometry((2.1 * 1) / 2, 32);
@@ -409,6 +259,17 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     //this.scene.add(this.cube);
 
     this.createMap();
+
+    // lights
+    const dirLight1 = new THREE.DirectionalLight( 0xffffff );
+				dirLight1.position.set( this.fieldOfView, this.nearClippingPlane, this.farClippingPlane );
+				this.scene.add( dirLight1 );
+
+				const dirLight2 = new THREE.DirectionalLight( 0x002288 );
+				dirLight2.position.set( -this.fieldOfView, -this.nearClippingPlane, -this.farClippingPlane );
+				this.scene.add( dirLight2 );
+    const ambientLight = new THREE.AmbientLight(0x404040, 2);
+    this.scene.add(ambientLight);
 
     //Rotate the scene to a correct angle
     this.scene.rotation.x = -Math.PI / 2.0;
