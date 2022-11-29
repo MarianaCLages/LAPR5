@@ -29,7 +29,9 @@ export class CreateOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.warehouses = this.getWarehouseService.getWarehouses();
+    this.getWarehouseService.getWarehouses().then((data: any) => {
+      this.warehouses = data;
+    });
     this.error = false;
   }
 

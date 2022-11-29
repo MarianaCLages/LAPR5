@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LogSideBarComponent } from './log-side-bar.component';
+import {LogSideBarComponent} from './log-side-bar.component';
+import {HttpClient, HttpHandler} from "@angular/common/http";
 
 describe('LogSideBarComponent', () => {
   let component: LogSideBarComponent;
@@ -8,9 +9,9 @@ describe('LogSideBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LogSideBarComponent ]
+      declarations: [LogSideBarComponent], providers: [HttpClient, HttpHandler]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(LogSideBarComponent);
     component = fixture.componentInstance;
