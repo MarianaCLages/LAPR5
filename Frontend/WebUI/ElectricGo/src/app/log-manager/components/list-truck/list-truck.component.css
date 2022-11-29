@@ -15,3 +15,16 @@ table {
 .titles {
   text-align: center;
 }
+
+.example-section {
+  margin-left: 20px;
+}
+
+.example-margin {
+  margin-left: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}

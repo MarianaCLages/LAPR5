@@ -45,6 +45,7 @@ import { WarehouseSideBarComponent } from "./warehouse-manager/components/wareho
 import { GetHeuristicComponent } from "./fleet-manager/components/get-heuristic/get-heuristic.component";
 import { ListOrdersComponent } from './warehouse-manager/components/list-orders/list-orders.component';
 import { ListTruckComponent } from './log-manager/components/list-truck/list-truck.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -98,6 +99,7 @@ import { ListTruckComponent } from './log-manager/components/list-truck/list-tru
     MatAutocompleteModule,
     MatTableModule,
     MatSortModule,
+    MatCheckboxModule,
     MatPaginatorModule,
   ],
   providers: [HttpClientModule, AddPackagingService, AddWarehouseService,{
