@@ -34,33 +34,6 @@ public class OrderTest
     }
 
     /*
- * Creates an invalid order throwing a NullReferenceException
- */
-
-    [Fact]
-    public void CreateOrderWithInvalidOrderDateTest_ShouldThrowAnArgumentNullException()
-    {
-        Assert.Throws<ArgumentNullException>(() => new Order(new OrderDomainId("5", "220505"),
-            new OrderDate(DateTime.Parse(null)),
-            new OrderMass(10),
-            new TimeOrder(120), new TimeOrder(120), "A12"));
-    }
-
-    /*
-* Creates an invalid order throwing a BusinessRuleValidationException
-*/
-
-    [Fact]
-    public void
-        CreateOrderWithInvalidOrderDateBussinessInvalidationTest_ShouldThrowABusinessRuleValidationException()
-    {
-        Assert.Throws<BusinessRuleValidationException>(() => new Order(new OrderDomainId("5", "220505"),
-            new OrderDate(DateTime.Now.Subtract(TimeSpan.FromDays(1))),
-            new OrderMass(10),
-            new TimeOrder(120), new TimeOrder(120), "A12"));
-    }
-
-    /*
     *Creates an invalid order throwing a BusinessRuleValidationException
     */
     

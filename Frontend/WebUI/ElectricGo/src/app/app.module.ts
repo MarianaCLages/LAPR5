@@ -43,6 +43,7 @@ import { WarehouseSideBarComponent } from "./warehouse-manager/components/wareho
 import { GetWarehouseComponent } from './warehouse-manager/components/get-warehouse/get-warehouse.component';
 import { GetHeuristicComponent } from "./fleet-manager/components/get-heuristic/get-heuristic.component";
 import { ListOrdersComponent } from './warehouse-manager/components/list-orders/list-orders.component';
+import { ListTruckComponent } from './log-manager/components/list-truck/list-truck.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ListOrdersComponent } from './warehouse-manager/components/list-orders/
     GetWarehouseComponent,
     GetHeuristicComponent,
     ListPathsComponent,
-    ListOrdersComponent
+    ListOrdersComponent,
+    ListTruckComponent
   ],
   imports: [
     BrowserModule,
