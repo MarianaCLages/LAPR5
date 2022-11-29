@@ -144,6 +144,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     //DEFINE THE BACKGROUND COLOR
     this.scene.background = new THREE.Color(0xadd8e6);
 
+    //ADD THE LIGHTS
+    this.scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
     // ROUNDABOUTS
     for (const element of this.info.warehouses) {
       let roundabout = this.roundabout.clone();
@@ -227,6 +230,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     //DEFINE THE BACK GROUND COLOR
     this.scene.background = new THREE.Color(0xadd8e6);
 
+    //ADD THE LIGHTS
+    this.scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
     // ROUNDABOUTS
     for (const element of jsonInfo.map) {
       let roundabouT = this.roundabout.clone();
@@ -248,9 +254,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
     const radius = 2.1;
 
-    // const roadTexture = new THREE.TextureLoader().load(
-    //   'Frontend/WebUI/ElectricGo/src/app/log-manager/components/view-road-map-network/roadMap/road_1.jpg'
-    // );
+    const roadTexture = new THREE.TextureLoader().load(
+      'Frontend/WebUI/ElectricGo/src/app/log-manager/components/view-road-map-network/roadMap/road_1.jpg'
+   );
 
     for (const element of jsonInfo.paths) {
       //INFO
@@ -408,6 +414,17 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     //this.scene.add(this.cube);
 
     this.createMap();
+
+    // lights
+    const dirLight1 = new THREE.DirectionalLight( 0xffffff );
+				dirLight1.position.set( this.fieldOfView, this.nearClippingPlane, this.farClippingPlane );
+				this.scene.add( dirLight1 );
+
+				const dirLight2 = new THREE.DirectionalLight( 0x002288 );
+				dirLight2.position.set( -this.fieldOfView, -this.nearClippingPlane, -this.farClippingPlane );
+				this.scene.add( dirLight2 );
+    const ambientLight = new THREE.AmbientLight(0x404040, 2);
+    this.scene.add(ambientLight);
 
     //Rotate the scene to a correct angle
     this.scene.rotation.x = -Math.PI / 2.0;
