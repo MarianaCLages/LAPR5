@@ -142,7 +142,7 @@ jobs:
           working_directory: Frontend/WebUI/ElectricGo
           name : Run the gestLog tests and generate coverage
           command: |
-            npm install -g @angular/cli
+            npm install
             pwd
             ng test --no-watch --code-coverage
       - store_artifacts:
