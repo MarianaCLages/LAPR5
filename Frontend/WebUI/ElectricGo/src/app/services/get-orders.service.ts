@@ -11,7 +11,7 @@ export class GetOrdersService {
     private http: HttpClient
   ) { }
 
-  getOrders() {
+  getOrders() : any {
     //set the http headers
     const headers = {
     };

@@ -1,36 +1,58 @@
-<br>
-<h1>Logistic Manager: Create Packaging</h1>
-<br>
-<div class="form">
-  <div class="btn-group">
-    <mat-form-field>
-      <mat-label>Truck Reference</mat-label>
-      <input matInput type="text" [(ngModel)]="truckReference"/>
-    </mat-form-field>
-    <br/>
-    <mat-form-field>
-      <mat-label>Order Reference</mat-label>
-      <input matInput type="text" [(ngModel)]="orderReference"/>
-    </mat-form-field>
-    <br>
-    <button mat-raised-button color="primary" (click)="addPackaging()">Add Packaging</button>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <button mat-raised-button color="primary" (click)="logout()">Exit</button>
-    <p>{{truck}}</p>
+<div class="container" matAutocompleteOrigin>
+
+  <div>
+    <mat-error *ngIf="error" class="alert alert-warning">
+      <strong>Error</strong> {{errorMessage |json | slice:0:100}}
+    </mat-error>
   </div>
-</div>
+
+  <h1>Create Package</h1>
+
+  <mat-form-field>
+    <mat-label>Orders</mat-label>
+    <mat-select [(value)]="orders">
+      <mat-option *ngFor="let order of orders" [value]="order">
+        {{order.orderRef}}
+      </mat-option>
+    </mat-select>
+
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <mat-label>Trucks</mat-label>
+    <mat-select [(value)]="trucks">
+      <mat-option *ngFor="let truck of trucks" [value]="truck">
+        {{truck.truckRef}}
+      </mat-option>
+    </mat-select>
+
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>X position</mat-label>
+    <input matInput type="number" [(ngModel)]="posX">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Y position</mat-label>
+    <input matInput type="number" [(ngModel)]="posY">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Z position</mat-label>
+    <input matInput type="number" [(ngModel)]="posZ">
+  </mat-form-field>
+  <br>
+
+  <button mat-raised-button color="primary" (click)="addPackaging()">Create</button>
 
 
-<div *ngIf = showResponse, class = "showRes">
-  <br>
-  <br>
-  <br>
-  <br>
-  <button mat-raised-button color="primary" (click)="logout()">XDDDD</button>
-</div>
+  <div *ngIf="success" class="alert alert-success">
+    <strong>Success!</strong> {{successMessage}}
 
+  </div>
+
+
+ <!-- button to go back to the previous page -->
+  <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>

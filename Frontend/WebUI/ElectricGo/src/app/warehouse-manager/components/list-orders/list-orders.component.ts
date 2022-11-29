@@ -28,18 +28,14 @@ export class ListOrdersComponent implements OnInit {
         this.orders.paginator = this.paginator;
     }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
         //calls the service to get the orders
-        this.getOrdersService.getOrders().subscribe((orders => {
-            // @ts-ignore
-            this.orders.data = orders;
-            // @ts-ignore
-            this.orders.sort = this.sort;
-            // @ts-ignore
-            this.orders.paginator = this.paginator;
-        }));
+        this.getOrdersService.getOrders().then((data: IOrderDTO[]) => {
+          this.orders.data = data;
+        }
+        );
     }
-    
+
     goBack() {
         window.history.back();
     }

@@ -30,16 +30,10 @@ export class ListTruckComponent {
     this.trucks.paginator = this.paginator;
   }
 
-  ngOnInit(): void {
-    this.getTrucksService.getTrucks().subscribe((trucks => {
-       // @ts-ignore
-       this.trucks.data = trucks;
-       // @ts-ignore
-       this.trucks.sort = this.sort;
-       // @ts-ignore
-       this.trucks.paginator = this.paginator;
-    }));
-
+  async ngOnInit(): Promise<void> {
+    this.getTrucksService.getTrucks().then((data: ITruckDTO[]) => {
+      this.trucks.data = data;
+    });
   }
 
   goBack() {
