@@ -22,7 +22,7 @@
     8.  O usuário clica no botão de importar modelo.
     9.  O sistema exibe uma caixa de diálogo para o usuário selecionar o ficheiro.
     10. O usuário seleciona o ficheiro.
-    11. O sistema guarda o ficheiro na pasta de assests.
+    11. O sistema guarda o ficheiro na pasta de assets.
     12. O FrontEnd exibe uma mensagem de sucesso para o usuário
 
 

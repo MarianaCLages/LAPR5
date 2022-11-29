@@ -22,6 +22,7 @@ export default class truckController
         super();
 
     }
+    fileService = new SendInfoToPlanningService();
 
     public async createTruck(req: Request, res: Response, next: NextFunction) {
         try {
@@ -129,18 +130,37 @@ export default class truckController
         }
     }
 
+    public async sendInfoToPlanning(req: Request,res: Response, next: NextFunction){
+
+        var fileService = new SendInfoToPlanningService();
+        this.fileService.generateFiles();
+        this.fileService.sendPaths();
+        this.fileService.sendWarehouse();
+        this.fileService.sendTrucks();
+
+
+        return res.status(200).json("Info sent successfully!");
+    }
+
     public async sendInfo(req: Request, res: Response, next: NextFunction){
 
         var fileService = new SendInfoToPlanningService();
         let idTruck = req.params.idTruck;
-
         let stringTest: string;
-        fileService.generateFiles();
-        fileService.sendPaths();
-        fileService.sendWarehouse();
-        fileService.sendOrdersToPlanning(idTruck);
 
-        stringTest = await fileService.getHeuristic();
+        try {
+            this.fileService.generateFiles();
+            this.fileService.sendPaths();
+            this.fileService.sendWarehouse();
+            this.fileService.sendTrucks();
+
+            this.fileService.getTruck(idTruck);
+            this.fileService.sendOrdersToPlanning(idTruck);
+
+            stringTest = await fileService.getHeuristic();
+        }catch (error){
+            return res.status(400).json(error.message);
+        }
 
         return res.status(200).json(stringTest);
     }
@@ -150,10 +170,13 @@ export default class truckController
         let idTruck = req.params.idTruck;
 
         let stringTest: string;
-        fileService.generateFiles();
-        fileService.sendPaths();
-        fileService.sendWarehouse();
-        fileService.sendOrdersToPlanning(idTruck);
+
+        this.fileService.generateFiles();
+        this.fileService.sendPaths();
+        this.fileService.sendWarehouse();
+        this.fileService.sendTrucks();
+
+        this.fileService.sendOrdersToPlanning(idTruck);
 
         stringTest = await fileService.getHeuristicByWeight();
 
@@ -162,16 +185,19 @@ export default class truckController
 
     public async getHeuristicByTimeWeight(req: Request, res: Response, next: NextFunction){
 
-        var fileService = new SendInfoToPlanningService();
+
         let idTruck = req.params.idTruck;
 
         let stringTest: string;
-        fileService.generateFiles();
-        fileService.sendPaths();
-        fileService.sendWarehouse();
-        fileService.sendOrdersToPlanning(idTruck);
 
-        stringTest = await fileService.getHeuristicByWeightTime();
+        this.fileService.generateFiles();
+        this.fileService.sendPaths();
+        this.fileService.sendWarehouse();
+        this.fileService.sendTrucks();
+
+        this.fileService.sendOrdersToPlanning(idTruck);
+
+        stringTest = await this.fileService.getHeuristicByWeightTime();
 
         return res.status(200).json(stringTest);
     }

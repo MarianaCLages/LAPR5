@@ -13,6 +13,7 @@ import * as http from "http";
 export default class SendInfoToPlanningService {
 
     constructor() {
+
     }
 
     httpsAgent = new https.Agent({
@@ -26,6 +27,8 @@ export default class SendInfoToPlanningService {
     dirnamePaths : string;
     dirnameWarehouse : string;
     dirnameOrders : string;
+    dirnameTruck : string;
+    dirnameTrucks : string;
 
     public generateFiles(){
         fsPromises.open(join(__dirname,'paths.txt'),'w');
@@ -34,6 +37,10 @@ export default class SendInfoToPlanningService {
         this.dirnameWarehouse = __dirname + '/warehouse.txt';
         fsPromises.open(join(__dirname,'orders.txt'),'w');
         this.dirnameOrders = __dirname + '/orders.txt';
+        fsPromises.open(join(__dirname,'truck.txt'),'w');
+        this.dirnameTruck = __dirname + '/truck.txt';
+        fsPromises.open(join(__dirname,'/trucks.txt'),'w');
+        this.dirnameTrucks = __dirname + '/trucks.txt';
     }
 
     public async sendPaths(){
@@ -97,6 +104,58 @@ export default class SendInfoToPlanningService {
 
         var object = await rep;
         console.log("Paths to Planning sent!");
+    }
+
+    public async sendTrucks(){
+
+        const response = await fetch('http://localhost:3000/api/trucks/all',{
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            }
+        })
+
+        const result = (await response.json());
+
+        let stringFormat : string;
+        var aspas = "'";
+        var pathArray = [];
+
+
+        for(var i = 0; i < result.length; i++) {
+
+            stringFormat = 'carateristicasCam('+ aspas +result[i].caractTruck + aspas + ","+result[i].tare+","+result[i].weightCapacity+","+result[i].totalBatCharge+",100,"+result[i].chargingTime+").";
+            pathArray.push(stringFormat);
+        }
+
+        for(var i = 0; i < pathArray.length; i++) {
+            await fsPromises.appendFile(join(__dirname, "trucks.txt"), pathArray[i] + "\r\n", {
+                flag: 'a+',
+            });
+        }
+
+
+        //SEND TRUCKS TO PROLOG
+
+        let formData = new FormData();
+
+        //var buffer = require('fs').readFileSync('C:/Users/Tiago Ferreira/Documents/lei21-22-s5-3dj-56/Backend/GestLogistica_API/GestLogistica/src/core/infra/paths.txt');
+        var buffer = require('fs').readFileSync(this.dirnameTrucks);
+        formData.append('file',buffer);
+
+        const rep = await fetch("http://localhost:5003/receive_trucks_post", {
+            method: "POST",
+            agent: this.httpAgent,
+            headers:{
+                Accept: 'application/json',
+            },
+            body: formData,
+        })
+
+
+        var object = await rep;
+        console.log("Trucks to Planning sent!");
     }
 
     public async sendWarehouse(){
@@ -234,6 +293,61 @@ export default class SendInfoToPlanningService {
         return await rep.text();
 
 
+    }
+
+    public async getTruck(truckId : string){
+
+
+        const response = await fetch('http://localhost:3000/api/trucks/all',{
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            }
+        })
+
+        const object = (await response.json());
+        var truckObject;
+        let stringFormat: string;
+        var aspas = "'";
+        stringFormat = "cam(" + aspas;
+
+        for(let i = 0; i < object.length;i++){
+
+            if(object[i].caractTruck.toString() == truckId){
+                truckObject = object[i];
+            }
+        }
+
+        if(truckObject == null){
+            throw TypeError("Truck does not exist!");
+        }
+
+        stringFormat = stringFormat + truckObject.caractTruck + aspas +"," + truckObject.totalBatCharge + ").";
+
+        await fsPromises.writeFile(join(__dirname, "truck.txt"), stringFormat , {
+            flag: 'a+',
+        });
+
+
+        let formData = new FormData();
+
+        //var buffer = require('fs').readFileSync('C:/Users/Tiago Ferreira/Documents/lei21-22-s5-3dj-56/Backend/GestLogistica_API/GestLogistica/src/core/infra/paths.txt');
+        var buffer = require('fs').readFileSync(this.dirnameTruck);
+        formData.append('file',buffer);
+
+        const rep = await fetch("http://localhost:5003/receive_truck_post", {
+            method: "POST",
+            agent: this.httpAgent,
+            headers:{
+                Accept: 'application/json',
+            },
+            body: formData,
+        })
+
+
+        var object2 = await rep;
+        console.log("Truck to Planning sent!");
     }
 
     private async getOrders(ordersId= []){

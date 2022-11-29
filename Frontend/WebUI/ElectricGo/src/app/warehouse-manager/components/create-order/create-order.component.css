@@ -17,7 +17,7 @@
 }
 
 .success-popup {
-  background: #bfe3b4;
+  background: white;
   border-radius: 6px;
   border-style: solid;
   border-color: black;
@@ -32,9 +32,8 @@
   color: black;
 }
 
-.success-btn {
+.ok-btn {
   position: absolute;
-  margin: 10px;
   align-items: center;
   justify-content: center;
 }

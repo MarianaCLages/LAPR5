@@ -10,4 +10,5 @@ export default interface ITruckController  {
     sendInfo(req: Request,res: Response,next: NextFunction);
     getHeuristicByWeight(req: Request,res: Response,next: NextFunction);
     getHeuristicByTimeWeight(req: Request,res: Response,next: NextFunction);
+    sendInfoToPlanning(req: Request,res: Response, next: NextFunction);
 }

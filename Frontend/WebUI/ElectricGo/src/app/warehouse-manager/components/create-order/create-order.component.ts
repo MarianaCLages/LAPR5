@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateOrderService } from 'src/app/services/create-order.service';
-import { ICreateOrderDTO } from 'src/app/shared/createOrderDTO';
 import { GetWarehouseServiceService } from 'src/app/services/get-warehouse-service.service';
+import IOrderDTO from 'src/app/shared/orderDTO';
 
 @Component({
   selector: 'app-create-order',
@@ -11,10 +11,10 @@ import { GetWarehouseServiceService } from 'src/app/services/get-warehouse-servi
 })
 
 export class CreateOrderComponent implements OnInit {
-  orderId: any;
+  identifier: any;
   orderDate: any;
   orderMass: any;
-  loadingTime: any;
+  chargingTime: any;
   unloadingTime: any;
   warehouseId: any;
   warehouses: any[] = [];
@@ -42,11 +42,11 @@ export class CreateOrderComponent implements OnInit {
     this.success = "";
 
     //creates the order DTO
-    let orderDTO: ICreateOrderDTO = {
-      orderId: this.orderId,
+    let orderDTO: IOrderDTO = {
+      identifier: this.identifier,
       orderDate: this.orderDate,
       orderMass: this.orderMass,
-      chargingTime: this.loadingTime,
+      chargingTime: this.chargingTime,
       unloadingTime: this.unloadingTime,
       warehouseId: this.warehouseId.alphaNumId
     };
@@ -54,7 +54,7 @@ export class CreateOrderComponent implements OnInit {
     //clears the form
     this.orderDate = null;
     this.orderMass = null;
-    this.loadingTime = null;
+    this.chargingTime = null;
     this.unloadingTime = null;
     this.warehouseId = null;
 
@@ -63,7 +63,8 @@ export class CreateOrderComponent implements OnInit {
     errorOrSuccess.subscribe(
       (data: any) => {
         this.success = true;
-        this.successMessage = "Order created successfully with the ID " + this.orderId;
+        this.identifier = data.identifier;
+        this.successMessage = "Order created successfully with the ID " + this.identifier;
       },
       //transforms into a http error
       (error: any) => {
