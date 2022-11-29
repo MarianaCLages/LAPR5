@@ -339,12 +339,14 @@ idArmazem('Vila Nova de Gaia',17).
 
 
 
-bfs3(Cam,T):-
+bfs3(Cam,LP,T):-
     retractall(tempo(_)),
     assertz(tempo(0)),
     entrega_armazens(Ent),
     delete(Ent,5,Ent2),
-    bfs4(Ent2,[5],Cam,T).
+    bfs4(Ent2,[5],Cam,T),
+    carateristicasCam(C,_,_,_,_,_),
+    checkBattery(Cam,C,LP,T).
 
 bfs4([],[Final|LA],Cam,T):-
     !,reverse([5|LA],Cam),
