@@ -118,7 +118,7 @@ jobs:
           command: |
             npm install
             npm run build            
-            ng run test
+            npm run test
       - save_cache:
           key: dependency-cache-{{ checksum "Frontend/WebUI/ElectricGo/package.json" }}
           paths:
