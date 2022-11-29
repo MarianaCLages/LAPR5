@@ -116,9 +116,9 @@ jobs:
           working_directory: Frontend/WebUI/ElectricGo
           name : Build the Front end application
           command: |
-            npm install
-            npm run build
             npm install @angular/cli
+            npm install
+            npm run build            
             ng test --no-watch --code-coverage
       - save_cache:
           key: dependency-cache-{{ checksum "Frontend/WebUI/ElectricGo/package.json" }}
