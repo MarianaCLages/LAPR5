@@ -35,14 +35,15 @@ export class AddPackagingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getOrdersService.getOrders().then((data: IOrderDTO[]) => {
+    this.getOrdersService.getOrders().then((data: any) => {
       this.orders = data;
     });
+    this.error = false;
 
-    this.trucks = this.getTrucksService.getTrucks();
-
-    console.log(this.orders);
-    console.log('a');
+    this.getTrucksService.getTrucks().then((data: any) => {
+      this.trucks = data;
+    });
+    this.error = false;
   }
 
   goBack() {
@@ -60,8 +61,8 @@ export class AddPackagingComponent implements OnInit {
 
     //creates the path DTO
     let packagingDTO: IPackagingDTO = {
-      orderRef: this.orderRef,
-      truckRef: this.truckRef,
+      orderRef: this.orderRef.identifier,
+      truckRef: this.truckRef.caractTruck,
       pos3DX: this.posX,
       pos3DY: this.posY,
       pos3DZ: this.posZ
@@ -79,12 +80,13 @@ export class AddPackagingComponent implements OnInit {
      errorOrSuccess.subscribe(
        (data: any) => {
          this.success = true;
+         this.goBack();
        },
        //transforms into a http error
        (error: any) => {
          this.error = true;
          if (error.status == 400) {
-           this.errorMessage = error.error.message;
+           this.errorMessage = error.error;
          } else {
            if (error.status == 500) {
              this.errorMessage = error.error.errors.message;

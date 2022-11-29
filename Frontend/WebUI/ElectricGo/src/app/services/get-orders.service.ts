@@ -22,6 +22,6 @@ export class GetOrdersService {
     };
 
     //get the paths from the backend
-    return this.http.get<IOrderDTO>('https://localhost:5001/api/Order', options);
+    return this.http.get<IOrderDTO>('https://localhost:5001/api/Order', options).toPromise();
   }
 }

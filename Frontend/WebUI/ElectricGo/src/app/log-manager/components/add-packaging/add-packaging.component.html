@@ -10,20 +10,19 @@
 
   <mat-form-field>
     <mat-label>Orders</mat-label>
-    <mat-select [(value)]="orders">
+    <mat-select [(value)]="orderRef">
       <mat-option *ngFor="let order of orders" [value]="order">
-        {{order.orderRef}}
+        {{order.identifier}}
       </mat-option>
     </mat-select>
-
   </mat-form-field>
   <br>
 
   <mat-form-field>
     <mat-label>Trucks</mat-label>
-    <mat-select [(value)]="trucks">
+    <mat-select [(value)]="truckRef">
       <mat-option *ngFor="let truck of trucks" [value]="truck">
-        {{truck.truckRef}}
+        {{truck.caractTruck}}
       </mat-option>
     </mat-select>
 

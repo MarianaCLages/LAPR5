@@ -29,7 +29,9 @@ export class CreateOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.warehouses = this.getWarehouseService.getWarehouses();
+    this.getWarehouseService.getWarehouses().then((data: any) => {
+      this.warehouses = data;
+    });
     this.error = false;
   }
 
@@ -70,7 +72,7 @@ export class CreateOrderComponent implements OnInit {
       (error: any) => {
         this.error = true;
         if (error.status == 400) {
-          this.errorMessage = error.error.message;
+          this.errorMessage = error.error;
         } else {
           if (error.status == 500) {
             this.errorMessage = error.error.errors.message;

@@ -155,6 +155,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         (gltf) => {
           gltf.scene.scale.set(0.1, 0.1, 0.1);
           gltf.scene.position.set(element.x, element.y, element.z);
+          gltf.scene.rotation.x = Math.PI / 2.0;
           this.roadMap.add(gltf.scene);
         }
       );
