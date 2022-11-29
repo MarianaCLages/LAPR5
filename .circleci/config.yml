@@ -118,6 +118,7 @@ jobs:
           command: |
             npm install
             npm run build
+            npm install @angular/cli
             ng test --no-watch --code-coverage
       - save_cache:
           key: dependency-cache-{{ checksum "Frontend/WebUI/ElectricGo/package.json" }}
