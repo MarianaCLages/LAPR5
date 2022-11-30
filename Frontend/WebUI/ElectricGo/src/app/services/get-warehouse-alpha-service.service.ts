@@ -8,7 +8,7 @@ import { firstValueFrom } from "rxjs";
 })
 export class GetWarehouseAlphaService {
 
-  baseURL= 'http://localhost:5000/api/Warehouse/id?id=';
+  baseURL= 'http://localhost:5000/api/Warehouse';
 
   constructor(
     private http: HttpClient
@@ -19,7 +19,7 @@ export class GetWarehouseAlphaService {
 
 
 
-    const data = await fetch(this.baseURL + alphaId, {
+    const data = await fetch(this.baseURL, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +30,17 @@ export class GetWarehouseAlphaService {
     const result = (await data.json());
     var warehouse = [];
 
-    warehouse.push(result);
+    console.log(result);
+    for(let i = 0; i < result.length; i++){
+
+
+      if(result[i].alphaNumId == alphaId){
+        warehouse.push(result[i]);
+      }
+    }
+
+    console.log(warehouse[0]);
+
     return warehouse;
   }
 }
