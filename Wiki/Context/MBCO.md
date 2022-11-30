@@ -26,3 +26,9 @@ Pela resposta do cliente podemos inferir que o sistema deve ser resiliente o suf
 Ao nível do sistema podemos inferir um MTD (Maximum Tolerable Downtime) de 1 hora, quanto ao MTPD (Maximum Tolerable Period of Disruption) podemos inferir que o mesmo deve ser superior a 1 hora, estando os módulos principais disponíveis (modulo de Frontend, modulo de Gestão de Logística e modulo de Gestão de Armazéns).
 Podemos classificar o modulo de Planeamento e o modulo de Visualização 3D secundários, uma vez que o funcionamento do modulo de planeamento não é fulcral para o funcionamento do sistema e apenas deverá ser usado 1 vez por dia, sendo o modulo de Visualização 3D apenas usado para visualização de dados e não para o funcionamento do sistema.
 
+Sendo assim temos a seguinte classificação:
+* Módulo de Front-End -> Principal, é fulcral para os atores do interagirem com o sistema
+* Modulo de Visualização 3D -> Secundário, não é fulcral para o funcionamento do sistema
+* Modulo de Gestão de Logística -> Principal, é fulcral para o funcionamento do sistema
+* Modulo de Gestão de Armazéns -> Principal, é fulcral para o funcionamento do sistema
+* Modulo de Planeamento -> Secundário, não é fulcral para o funcionamento do sistema
