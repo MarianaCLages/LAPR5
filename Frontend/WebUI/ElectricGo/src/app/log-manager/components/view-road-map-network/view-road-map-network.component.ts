@@ -57,7 +57,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   async ngAfterViewInit() {
     //get all warehouses and all paths from api on 2 arrays
-
     this.paths = this.getPathService.getPaths().then((data: IPathDTO[]) => {
 
       this.paths = data;
@@ -76,7 +75,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   saveConfFile(warehouses: ICreateWarehouseDTO[], paths: any) {
     //transform warehouse to warehouseViewRepresentation
     let warehouseViewRepresentation: IWarehouseViewRepresentation[] = [];
-
 
     warehouses.forEach((warehouse: ICreateWarehouseDTO) => {
 
@@ -134,13 +132,10 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   }
 
   private createMap() {
+    //Start the roadMap Objects
     this.roadMap = new THREE.Group();
     this.createRoundAbout();
     this.scene.add(this.roadMap);
-    //this.roadMap.scale.set(2,2,2);
-
-    //DEFINE THE BACKGROUND COLOR
-    //this.scene.background = new THREE.Color(0xadd8e6);
 
     //ADD THE LIGHTS
     this.scene.add(new THREE.AmbientLight(0xffffff, 0.5));
@@ -150,25 +145,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       let roundabout = this.roundabout.clone();
       roundabout.position.set(element.x, element.y, element.z);
       this.roadMap.add(roundabout);
-      const glftLoader = new GLTFLoader();
-      glftLoader.load(
-        'assets/warehouse_building/scene.gltf',
-        (gltf) => {
-          gltf.scene.scale.set(0.1, 0.1, 0.1);
-          gltf.scene.position.set(element.x, element.y, element.z);
-          gltf.scene.rotation.x = Math.PI / 2.0;
-          this.roadMap.add(gltf.scene);
-        }
-      );
+
       this.loadModel(element);
     }
-
-    const circleConstant = 2;
-    const connectionConstant = 0.5;
-
-    const connectionLength = connectionConstant * circleConstant;
-
-    const radius = 2.1;
 
     const texture = new THREE.TextureLoader().load("../../../../assets/road/road_texture.jpg");
     texture.wrapS = THREE.RepeatWrapping;
@@ -190,10 +169,8 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       );
 
       //INCOMING START EDGE
-
       const difX = start.x - end.x;
       const difY = start.y - end.y;
-      const difZ = start.z - end.z;
 
       let incomingEdgeStartX = start.x - 0.1 * difX;
       let incomingEdgeStartY = start.y - 0.1 * difY;
@@ -230,7 +207,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       this.roadMap.add(incomingRoad);
 
        //INCOMING OUTGOING EDGE
-
       let incomingEdgeEndX = end.x + 0.1 * difX;
       let incomingEdgeEndY = end.y + 0.1 * difY;
       let incomingEdgeEndZ = end.z;
@@ -265,8 +241,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
       this.roadMap.add(outgoingRoad);
 
-      const endCoor = end.x
-
       let roadLength = Math.sqrt(
         Math.pow(incomingEdgeEndX - incomingEdgeStartX, 2) +
         Math.pow(incomingEdgeEndY - incomingEdgeStartY, 2) +
@@ -283,9 +257,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       let road = new THREE.Mesh(roadGeometry, roadMaterial);
 
       road.position.set(
-        (incomingEdgeEndX - incomingEdgeStartX) / 2,
-        (incomingEdgeEndY - incomingEdgeStartY) / 2,
-        (incomingEdgeEndZ - incomingEdgeStartZ) / 2
+        (incomingEdgeEndX + incomingEdgeStartX) / 2,
+        (incomingEdgeEndY + incomingEdgeStartY) / 2,
+        (incomingEdgeEndZ + incomingEdgeStartZ) / 2
       );
 
       road.rotation.z = Math.atan2(incomingEdgeEndY - incomingEdgeStartY, incomingEdgeEndX - incomingEdgeStartX) - Math.PI / 2;
@@ -305,19 +279,20 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       'assets/warehouse_building/scene.gltf',
       (gltf) => {
         gltf.scene.scale.set(0.1, 0.1, 0.1);
-        gltf.scene.position.set(element.x, element.y, element.z);
+        gltf.scene.position.set(element.x, element.y, element.z + 0.05);
         gltf.scene.rotation.x = Math.PI / 2.0;
         this.roadMap.add(gltf.scene);
       }
     );
   }
 
-
   private createRoundAbout() {
     const geometry = new THREE.CircleGeometry((2.1 * 1) / 2, 32);
     const material = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
+      side: THREE.DoubleSide
     });
+
+    material.color.set(0xD3D3D3);
     this.roundabout = new THREE.Mesh(geometry, material);
 
     //this.roundabout.rotation.x = -Math.PI / 2.0;
@@ -329,53 +304,10 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   }
 
   //CREATE THE SCENE
-
   private createScene() {
     //SCENE
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0x000000);
-    //this.scene.add(this.cube);
-
-    // const path = '../../../../assets/skybox/bluecloud';
-
-    // let materialArray = [];
-    // let texture_ft = new THREE.TextureLoader().load(path + '_ft.jpg');
-    // let texture_bk = new THREE.TextureLoader().load(path + '_bk.jpg');
-    // let texture_up = new THREE.TextureLoader().load(path + '_up.jpg');
-    // let texture_dn = new THREE.TextureLoader().load(path + '_dn.jpg');
-    // let texture_rt = new THREE.TextureLoader().load(path + '_rt.jpg');
-    // let texture_lf = new THREE.TextureLoader().load(path + '_lf.jpg');
-
-    // materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }));
-    // materialArray.push(new THREE.MeshBasicMaterial({ map: texture_bk }));
-    // materialArray.push(new THREE.MeshBasicMaterial({ map: texture_up }));
-    // materialArray.push(new THREE.MeshBasicMaterial({ map: texture_dn }));
-    // materialArray.push(new THREE.MeshBasicMaterial({ map: texture_rt }));
-    // materialArray.push(new THREE.MeshBasicMaterial({ map: texture_lf }));
-
-    // for (let i = 0; i < 6; i++)
-    //   materialArray[i].side = THREE.BackSide;
-
-    // const skyboxImage = 'bluecloud';
-    //const materialArray = this.createMaterialArray(skyboxImage);
-
-    // let skyboxGeo = new THREE.BoxGeometry(10000, 10000, 10000);
-    // let skybox = new THREE.Mesh(skyboxGeo, materialArray);
-    // this.scene.add(skybox);
-
-    // const path = '../../../../assets/skybox/bluecloud';
-
-    // const loader = new THREE.CubeTextureLoader();
-    // const texture = loader.load([
-    //   path + '_ft.jpg',
-    //   path + '_bk.jpg',
-    //   path + '_up.jpg',
-    //   path + '_dn.jpg',
-    //   path + '_rt.jpg',
-    //   path + '_lf.jpg',
-    // ]);
-
-    // this.scene.background = texture
 
     const path = '../../../../assets/skybox2/sky_box.jpg';
 
@@ -385,17 +317,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     );
 
     this.scene.background = texture;
-    //this.scene.scale.set(0.0000001,0.0000001,0.0000001);
-
-    // const skyboxImage = 'bluecloud';
-    // const materialArray = this.createMaterialArray(skyboxImage);
-    // let skyboxGeo = new THREE.BoxGeometry(10000, 10000, 10000);
-
-    // let skybox = new THREE.Mesh(skyboxGeo,materialArray);
-
-    // this.scene.add(skybox);
-    // skybox.position.set(0, 0, 0);
-
     this.createMap();
 
     // lights
@@ -422,54 +343,13 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       this.farClippingPlane
     );
 
-    //this.camera.position.set( 0, 0, this.cube.position.z - 1000 );// OrbitControls target is the origin
-
     this.camera.position.set(0, 0, 0);
     this.camera.position.z = this.cameraZ;
-  }
-
-  private createPathStrings(filename: string) {
-
-    const basePath = '../../../../assets/skybox/';
-
-    const baseFilename = basePath + filename;
-
-    const fileType = ".jpg";
-
-    const sides = ["ft", "bk", "up", "dn", "rt", "lf"];
-
-    const pathStings = sides.map(side => {
-
-      return baseFilename + "_" + side + fileType;
-
-    });
-
-
-    return pathStings;
-
-  }
-
-  private createMaterialArray(filename: string) {
-
-    const skyboxImagepaths = this.createPathStrings(filename);
-
-    const materialArray = skyboxImagepaths.map(image => {
-
-      let texture = new THREE.TextureLoader().load(image);
-
-
-      return new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide });
-
-    });
-
-    return materialArray;
-
   }
 
   private getAspectRatio() {
     return this.canvas.clientWidth / this.canvas.clientHeight;
   }
-
 
   private startRenderingLoop() {
     //Renderer
@@ -483,26 +363,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     this.controls.enableZoom = true;
     this.controls.enablePan = true;
     this.controls.enableDamping = true;
-
-    let div = document.createElement('div');
-    div.innerHTML = '<br><br><br><br><br><br><br>';
-    document.body.appendChild(div);
-
-    // const stats = new Stats()
-    // stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
-    // document.body.appendChild(stats.dom)
-
-    // function animate() {
-
-    //   stats.begin();
-
-    //   // monitored code goes here
-
-    //   stats.end();
-
-    //   requestAnimationFrame( animate );
-
-    // }
 
     let component: ViewRoadMapNetworkComponent = this;
     (function render() {
@@ -525,5 +385,8 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     return [x, y, z];
   }
 
+  goBack() {
+    window.history.back();
+  }
 
 }
