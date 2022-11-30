@@ -9,6 +9,8 @@ import {AppConfigServiceService} from "../../services/app-config-service.service
 export class GetHeuristicService {
   private path: any;
   baseURL= 'http://localhost:3000/api/trucks/send_info/';
+  baseURLWeight = 'http://localhost:3000/api/trucks/get_heuristic_weight/';
+  baseURLWeightTime = 'http://localhost:3000/api/trucks/get_heuristic_weight_time/';
 
   constructor(
     private http: HttpClient,
@@ -30,5 +32,35 @@ export class GetHeuristicService {
     console.log(result)
     return result;
 
+  }
+
+  public async getHeuristicByWeight(alphaId: any):Promise<any>{
+
+    const  data = await fetch(this.baseURLWeight + alphaId, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      }
+    })
+
+    const result = (await data.json());
+    console.log(result)
+    return result;
+  }
+
+  public async getHeuristicByWeightTime(alphaId: any):Promise<any>{
+
+    const  data = await fetch(this.baseURLWeightTime + alphaId, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      }
+    })
+
+    const result = (await data.json());
+    console.log(result)
+    return result;
   }
 }
