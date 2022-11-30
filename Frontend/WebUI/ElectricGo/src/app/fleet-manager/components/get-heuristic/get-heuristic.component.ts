@@ -28,4 +28,15 @@ export class GetHeuristicComponent implements OnInit {
     this.heuristic = await this.getHeuristicService.getHeuristics(this.caractId);
     console.log(this.heuristic);
   }
+
+  async getHeuristicWeight(){
+
+    this.heuristic = await this.getHeuristicService.getHeuristicByWeight(this.caractId);
+    console.log(this.heuristic);
+  }
+
+  async getHeuristicTimeWeight(){
+    this.heuristic = await this.getHeuristicService.getHeuristicByWeightTime(this.caractId);
+    console.log(this.heuristic);
+  }
 }

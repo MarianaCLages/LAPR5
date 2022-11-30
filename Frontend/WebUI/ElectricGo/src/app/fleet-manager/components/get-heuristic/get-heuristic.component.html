@@ -6,7 +6,9 @@
     <input matInput type = "any" [(ngModel)]="caractId"/>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="getHeuristic()">Get Heuristic</button>
+  <button mat-raised-button color="primary" (click)="getHeuristic()">Get Heuristic By Time</button>
+  <button mat-raised-button color="primary" (click)="getHeuristicWeight()">Get Heuristic By Weight</button>
+  <button mat-raised-button color="primary" (click)="getHeuristicTimeWeight()">Get Heuristic By Time/Weight</button>
 
   <h2>Heuristic: {{heuristic}}</h2>
 </div>
