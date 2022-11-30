@@ -18,4 +18,8 @@ describe('GetWarehouseServiceService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should return an array of warehouses', () => {
+    expect(service.getWarehouses()).toBeTruthy();
+  });
 });

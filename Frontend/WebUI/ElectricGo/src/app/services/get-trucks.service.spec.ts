@@ -17,4 +17,8 @@ describe('GetTrucksService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should return an array of trucks', () => {
+    expect(service.getTrucks()).toBeTruthy();
+  });
 });
