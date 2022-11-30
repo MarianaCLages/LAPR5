@@ -45,6 +45,7 @@ import { WarehouseSideBarComponent } from "./warehouse-manager/components/wareho
 import { GetHeuristicComponent } from "./fleet-manager/components/get-heuristic/get-heuristic.component";
 import { ListOrdersComponent } from './warehouse-manager/components/list-orders/list-orders.component';
 import { ListTruckComponent } from './log-manager/components/list-truck/list-truck.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { ListTruckComponent } from './log-manager/components/list-truck/list-tru
     ListTruckComponent
   ],
   imports: [
+    HttpClientTestingModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -100,7 +102,7 @@ import { ListTruckComponent } from './log-manager/components/list-truck/list-tru
     MatSortModule,
     MatPaginatorModule,
   ],
-  providers: [HttpClientModule, AddPackagingService, AddWarehouseService,{
+  providers: [{
     provide: APP_INITIALIZER,
     multi: true,
     deps: [AppConfigServiceService],

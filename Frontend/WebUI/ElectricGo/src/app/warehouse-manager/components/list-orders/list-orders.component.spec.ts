@@ -1,7 +1,8 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListOrdersComponent } from './list-orders.component';
-import {HttpClient, HttpHandler} from "@angular/common/http";
 
 describe('ListOrdersComponent', () => {
   let component: ListOrdersComponent;
@@ -10,7 +11,7 @@ describe('ListOrdersComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ListOrdersComponent ],
-      providers: [HttpClient,HttpHandler]
+      providers: [HttpClient, HttpHandler]
     })
     .compileComponents();
 
