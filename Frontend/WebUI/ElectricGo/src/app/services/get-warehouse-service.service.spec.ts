@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { GetWarehouseServiceService } from './get-warehouse-service.service';
 import {HttpClient, HttpHandler} from "@angular/common/http";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('GetWarehouseServiceService', () => {
   let service: GetWarehouseServiceService;
@@ -9,12 +10,16 @@ describe('GetWarehouseServiceService', () => {
   beforeEach(() => {
 
     TestBed.configureTestingModule({
-      providers: [GetWarehouseServiceService,HttpClient, HttpHandler]
+      imports: [HttpClientTestingModule]
     });
     service = TestBed.inject(GetWarehouseServiceService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should return an array of warehouses', () => {
+    expect(service.getWarehouses()).toBeTruthy();
   });
 });

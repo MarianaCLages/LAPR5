@@ -10,6 +10,6 @@ export class CreateOrderService {
   constructor(private http: HttpClient) { }
 
   createOrder(orderDTO: IOrderDTO) {
-    return this.http.post<HttpResponse<any>>('https://localhost:5001/api/Order', orderDTO);
+    return this.http.post('https://localhost:5001/api/Order', orderDTO);
   }
 }

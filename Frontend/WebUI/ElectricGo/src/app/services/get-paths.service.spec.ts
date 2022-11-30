@@ -2,13 +2,14 @@ import { TestBed } from '@angular/core/testing';
 
 import { GetPathsService } from './get-paths.service';
 import {HttpClient, HttpHandler} from "@angular/common/http";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('GetPathsService', () => {
   let service: GetPathsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [GetPathsService,HttpClient,HttpHandler]
+      imports: [HttpClientTestingModule]
     });
     service = TestBed.inject(GetPathsService);
   });

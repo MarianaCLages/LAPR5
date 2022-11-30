@@ -8,7 +8,7 @@ import { firstValueFrom } from "rxjs";
 })
 export class GetWarehouseAlphaService {
 
-  baseURL= 'http://localhost:5000/api/Warehouse/id?id=';
+  baseURL= 'http://localhost:5000/api/Warehouse/byAlphaId?warehouseId=';
 
   constructor(
     private http: HttpClient
@@ -31,6 +31,7 @@ export class GetWarehouseAlphaService {
     var warehouse = [];
 
     warehouse.push(result);
+
     return warehouse;
   }
 }
