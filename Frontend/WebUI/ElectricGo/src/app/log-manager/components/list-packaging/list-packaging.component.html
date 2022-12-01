@@ -1,11 +1,6 @@
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="packagings"> 
         <caption><h1>List Packagings</h1></caption>
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> ID</th>
-            <td mat-cell *matCellDef="let packaging"> {{packaging.id}} </td>
-
-        </ng-container>
 
         <ng-container matColumnDef="OrderRef">
             <th mat-header-cell *matHeaderCellDef> Order Reference</th>
@@ -18,6 +13,21 @@
             <td mat-cell *matCellDef="let packaging"> {{packaging.truckRef}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="xPos">
+            <th mat-header-cell *matHeaderCellDef> X Position</th>
+            <td mat-cell *matCellDef="let packaging"> {{packaging.pos3DX}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="yPos">
+            <th mat-header-cell *matHeaderCellDef> Y Position</th>
+            <td mat-cell *matCellDef="let packaging"> {{packaging.pos3DY}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="zPos">
+            <th mat-header-cell *matHeaderCellDef> Z Position</th>
+            <td mat-cell *matCellDef="let packaging"> {{packaging.pos3DZ}} </td>
+        </ng-container>
+        
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

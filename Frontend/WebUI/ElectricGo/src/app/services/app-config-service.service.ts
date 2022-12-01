@@ -35,4 +35,9 @@ export class AppConfigServiceService {
   getPathURL() {
     return this.appConfig.getPathPath;
   }
+
+  getPackagingURL() {
+    console.log(this.appConfig.getPackagingPath);
+    return this.appConfig.getPackagingPath;
+  }
 }
