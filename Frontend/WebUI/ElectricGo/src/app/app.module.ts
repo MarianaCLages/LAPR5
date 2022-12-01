@@ -102,7 +102,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCheckboxModule,
     MatPaginatorModule,
   ],
-  providers: [HttpClientModule, AddPackagingService, AddWarehouseService,{
+  providers: [HttpClientModule, AddPackagingService,{
     provide: APP_INITIALIZER,
     multi: true,
     deps: [AppConfigServiceService],

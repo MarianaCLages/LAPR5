@@ -61,23 +61,14 @@
     </mat-form-field>
     <br>
     <button mat-raised-button color="primary" (click)="addWarehouse()">Add Warehouse</button>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <button mat-raised-button color="primary" (click)="logout()">Exit</button>
-    <p>{{warehouse}}</p>
-  </div>
-</div>
+
+    <div *ngIf="success" class="alert alert-success">
+      <strong>Success!</strong> {{successMessage}}
+
+    </div>
 
 
-<div *ngIf = showRespose, class = "showRes">
-  <br>
-  <br>
-  <br>
-  <br>
-  <button mat-raised-button color="primary" (click)="logout()">lmao?</button>
-</div>
+    <!-- button to go back to the previous page -->
+    <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
 
+  </div></div>

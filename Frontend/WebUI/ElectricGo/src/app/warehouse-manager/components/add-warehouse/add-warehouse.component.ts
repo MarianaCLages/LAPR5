@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Location } from '@angular/common';
 import { AddWarehouseService } from 'src/app/services/add-warehouse.service';
 import { ICreateWarehouseDTO } from 'src/app/shared/createWarehouseDTO';
+import {CreatePathServiceService} from "../../../services/create-path-service.service";
+import {GetWarehouseServiceService} from "../../../services/get-warehouse-service.service";
 
 @Component({
   selector: 'app-add-warehouse',
@@ -26,23 +28,33 @@ export class  AddWarehouseComponent implements  OnInit{
   country: any;
   showRespose: boolean = false;
   warehouse: any;
+  errorMessage: any;
+  successMessage: any;
   res: any;
+  error: boolean = false;
+  success: any;
   @Output()
   redirectEvent = new EventEmitter<string>();
 
+
   constructor(
-      private location: Location,
       private addWarehouseService: AddWarehouseService
   ) {}
 
   ngOnInit(): void {}
 
-  logout() {
-    this.location.back();
-  }
 
   addWarehouse(){
-    let warehouse = {
+
+    //clears the error message
+    this.errorMessage = "";
+    this.error = false;
+
+    //clears the success message
+    this.success = "";
+
+
+    let warehouseDTO: ICreateWarehouseDTO = {
       alphaNumId: this.alphaNumericId,
       latitudeDegree: this.latitudeDegree,
       latitudeSecond: this.latitudeSeconds,
@@ -58,14 +70,45 @@ export class  AddWarehouseComponent implements  OnInit{
       country: this.country
     };
 
-    console.log(warehouse);
-    this.res = this.addWarehouseService.addWarehouse(
-      warehouse as ICreateWarehouseDTO
-    );
+    let errorOrSuccess: any = this.addWarehouseService.addWarehouse(warehouseDTO);
+    errorOrSuccess.subscribe((data: any) => {
+        console.log(data);
+        this.success = true;
+        this.successMessage = "Warehouse Created Successfully!";
+        this.goBack();
+      }, //transforms into a http error
+      (error: any) => {
+        this.error = true;
+        if (error.status == 400) {
+          this.errorMessage = error.error;
+        } else {
+          if (error.status == 500) {
 
-    console.log(this.res.status);
-    console.log('a' + this.res.body);
+            this.errorMessage = error.error.errors.message;
+          } else {
+            this.errorMessage = "An unknown error has ocurred";
+          }
+        }
+      });
 
-    console.log(this.showRespose);
+    //Clears the form
+    this.alphaNumericId = null;
+    this.latitudeDegree = null;
+    this.latitudeSeconds = null;
+    this.latitudeMinutes = null;
+    this.longitudeSeconds = null;
+    this.longitudeMinutes = null;
+    this.longitudeDegree = null;
+    this.designation = null;
+    this.street = null;
+    this.doorNumber = null;
+    this.postalCode = null;
+    this.city = null;
+    this.country = null;
+
+  }
+
+  goBack() {
+    window.history.back();
   }
 }
