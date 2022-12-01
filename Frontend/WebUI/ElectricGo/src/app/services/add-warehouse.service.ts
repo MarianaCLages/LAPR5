@@ -1,7 +1,7 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { ICreateWarehouseDTO } from '../shared/createWarehouseDTO';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, catchError, of } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,23 +13,7 @@ export class AddWarehouseService{
   constructor(private http: HttpClient) {}
 
   addWarehouse(createWarehouse: ICreateWarehouseDTO){
-    const headers = { 'content-type': 'application/json' };
-
-    const body = JSON.stringify(createWarehouse);
-    console.log(body);
-
-    const data = this.http
-      .post<ICreateWarehouseDTO>(this.baseURL,body,{
-        headers: headers,
-        observe: 'response',
-    }).subscribe(
-      response=>{
-        console.log(response);
-      }
-      );
-
-
-    return data;
+    return this.http.post<HttpResponse<any>>(this.baseURL, createWarehouse);
   }
 
 }
