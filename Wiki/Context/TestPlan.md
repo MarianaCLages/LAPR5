@@ -125,4 +125,3 @@ Criar um armazem e visualizar na visualização 3D
 | 14. Voltar para a página inicial                               | Encontra-se na página inicial                                                                     |
 | 15. Selecionar o menu View Road Network                        | Encontra a visualização 3D e os caminhos entre os armazéns e o numero de armazéns correspondentes |
 | 16. Verificar que existe um caminho a mais na visualização 3D com os armazéns criados anteriormente | Existe um caminho a mais na visualização 3D com os armazéns criados anteriormente |
-

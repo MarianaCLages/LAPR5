@@ -9,6 +9,7 @@ import { ICreateWarehouseDTO } from "../../../shared/createWarehouseDTO";
 import IPathDTO from 'src/app/shared/pathDTO';
 import { IPathViewRepresentation } from 'src/app/shared/pathViewRepresentation';
 import { IWarehouseViewRepresentation } from 'src/app/shared/warehouseViewRepresentation';
+import {OBJLoader} from "three/examples/jsm/loaders/OBJLoader";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import jsonInfo from './roadMap/roadMap.json';
 
@@ -145,7 +146,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       let roundabout = this.roundabout.clone();
       roundabout.position.set(element.x, element.y, element.z);
       this.roadMap.add(roundabout);
-
       this.loadModel(element);
     }
 
@@ -274,6 +274,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   }
 
   private loadModel(element: IWarehouseViewRepresentation) {
+
     const glftLoader = new GLTFLoader();
     glftLoader.load(
       'assets/warehouse_building/scene.gltf',
@@ -284,6 +285,16 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         this.roadMap.add(gltf.scene);
       }
     );
+
+    const objLoader = new OBJLoader();
+    objLoader.load(
+      'assets/warehouse_building/warehouse.obj',
+      (obj) => {
+        obj.scale.set(0.1, 0.1, 0.1);
+        obj.position.set(element.x, element.y, element.z);
+        obj.rotation.x = Math.PI / 2.0;
+        this.roadMap.add(obj);
+      });
   }
 
   private createRoundAbout() {
@@ -342,7 +353,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       this.nearClippingPlane,
       this.farClippingPlane
     );
-
     this.camera.position.set(0, 0, 0);
     this.camera.position.z = this.cameraZ;
   }

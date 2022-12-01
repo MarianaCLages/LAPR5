@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import {CreatePathServiceService} from "../../../services/create-path-service.service";
-import {GetWarehouseServiceService} from "../../../services/get-warehouse-service.service";
+import { CreatePathServiceService } from "../../../services/create-path-service.service";
+import { GetWarehouseServiceService } from "../../../services/get-warehouse-service.service";
 import IPathDTO from "../../../shared/pathDTO";
 
 @Component({
@@ -66,10 +66,11 @@ export class CreatePathComponent implements OnInit {
 
     let errorOrSuccess: any = this.createPathService.createPath(pathDTO);
     errorOrSuccess.subscribe((data: any) => {
-        this.success = true;
-        this.successMessage = "Path created successfully";
-        this.goBack();
-      }, //transforms into a http error
+      console.log(data);
+      this.success = true;
+      this.successMessage = "Path created successfully";
+      this.goBack();
+    }, //transforms into a http error
       (error: any) => {
         this.error = true;
         if (error.status == 400) {
