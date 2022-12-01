@@ -14,7 +14,7 @@ import { ListPackagingComponent } from './log-manager/components/list-packaging/
 import { CreateOrderComponent } from './warehouse-manager/components/create-order/create-order.component';
 import { GetAllWarehousesComponent } from "./warehouse-manager/components/get-all-warehouse/get-all-warehouses.component";
 import { GetWarehouseComponent } from "./warehouse-manager/components/get-warehouse/get-warehouse.component";
-import { GetHeuristicComponent } from "./fleet-manager/components/get-heuristic/get-heuristic.component";
+import { GetHeuristicComponent } from "./log-manager/components/get-heuristic/get-heuristic.component";
 import { ListPathsComponent } from './log-manager/components/list-paths/list-paths.component';
 import { ListOrdersComponent } from './warehouse-manager/components/list-orders/list-orders.component';
 import { ListTruckComponent } from './log-manager/components/list-truck/list-truck.component';
@@ -32,7 +32,7 @@ const routes: Routes = [
   // Fleet Manager
   {path: 'FleetManager', component: FleetManagerComponent},
   {path: 'FleetManager/addTruck', component: AddTruckComponent},
-  {path: 'FleetManager/getHeuristic',component:GetHeuristicComponent},
+
 
   // Logistic Manager
   {path: 'LogisticManager', component: LogManagerComponent},
@@ -44,6 +44,7 @@ const routes: Routes = [
   {path: 'LogisticManager/viewNetwork', component: ViewRoadMapNetworkComponent},
   {path: 'LogisticManager/listPath', component: ListPathsComponent},
   {path: 'LogisticManager/listTrucks', component: ListTruckComponent},
+  {path: 'LogisticManager/getHeuristic',component:GetHeuristicComponent},
   {path: '**', component: ErrorPageComponent},
 ];
 

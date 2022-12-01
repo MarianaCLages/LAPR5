@@ -9,6 +9,7 @@ import { ICreateWarehouseDTO } from "../../../shared/createWarehouseDTO";
 import IPathDTO from 'src/app/shared/pathDTO';
 import { IPathViewRepresentation } from 'src/app/shared/pathViewRepresentation';
 import { IWarehouseViewRepresentation } from 'src/app/shared/warehouseViewRepresentation';
+import {OBJLoader} from "three/examples/jsm/loaders/OBJLoader";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 @Component({
@@ -444,17 +445,17 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   }
 
+
   private loadModel(posX : number, posY : number, posZ : number) {
-    const glftLoader = new GLTFLoader();
-    glftLoader.load(
-      'assets/warehouse_building/scene.gltf',
-      (gltf) => {
-        gltf.scene.scale.set(0.1, 0.1, 0.1);
-        gltf.scene.position.set(posX, posY, posZ);
-        gltf.scene.rotation.x = Math.PI / 2.0;
-        this.roadMap.add(gltf.scene);
-      }
-    );
+    const objLoader = new OBJLoader();
+    objLoader.load(
+      'assets/warehouse_building/warehouse.obj',
+      (obj) => {
+        obj.scale.set(0.1, 0.1, 0.1);
+        obj.position.set(posX, posY, posZ);
+        obj.rotation.x = Math.PI / 2.0;
+        this.roadMap.add(obj);
+      });
   }
 
   private createRoundAbout(width : number | undefined) : THREE.Mesh {
@@ -517,7 +518,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       this.nearClippingPlane,
       this.farClippingPlane
     );
-
     this.camera.position.set(0, 0, 0);
     this.camera.position.z = this.cameraZ;
   }
