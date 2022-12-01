@@ -11,7 +11,6 @@ import { IPathViewRepresentation } from 'src/app/shared/pathViewRepresentation';
 import { IWarehouseViewRepresentation } from 'src/app/shared/warehouseViewRepresentation';
 import {OBJLoader} from "three/examples/jsm/loaders/OBJLoader";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import jsonInfo from './roadMap/roadMap.json';
 
 @Component({
   selector: 'app-view-road-map-network',
@@ -19,13 +18,13 @@ import jsonInfo from './roadMap/roadMap.json';
   styleUrls: ['./view-road-map-network.component.css'],
 })
 export class ViewRoadMapNetworkComponent implements OnInit {
-  @Input() public size: number = 200;
-  //Road Texture
-  @Input() public texture: string = './roadMap/road_free.png';
-  @Input() public cameraZ: number = 1500;
+
+  //Camera information
+  @Input() public cameraZ: number = 2500;
   @Input() public fieldOfView: number = 1;
   @Input('nearClipping') public nearClippingPlane: number = 1;
-  @Input('farClipping') public farClippingPlane: number = 3000;
+  @Input('farClipping') public farClippingPlane: number = 4000;
+
   private warehouses: any;
   private paths: any;
   private info: any;
@@ -36,8 +35,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private camera!: THREE.PerspectiveCamera;
 
   //STAGE PROPERTIES
-  private loader = new THREE.TextureLoader();
-  private roundabout!: THREE.Mesh;
   private render!: THREE.WebGLRenderer;
   private scene!: THREE.Scene;
   private roadMap!: THREE.Group;
@@ -113,7 +110,8 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       let pathRepresentationAux: IPathViewRepresentation = {
         beginningWarehouse: path.beginningWarehouseId,
         endingWarehouse: path.endingWarehouseId,
-        thickness: Math.random()
+        //LIMIT IN THE WIDTH OF THE PATH
+        thickness: (Math.random() * (1 - 0.2) + 0.2)
       };
 
       //add the pathRepresentation to the array
@@ -125,7 +123,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       warehouses: warehouseViewRepresentation,
       paths: pathRepresentation,
     };
-    console.log(this.info);
   }
 
   convertDMSToDD(latitudeDegrees: number, latitudeMinutes: number, latitudeSeconds: number) {
@@ -135,19 +132,11 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private createMap() {
     //Start the roadMap Objects
     this.roadMap = new THREE.Group();
-    this.createRoundAbout();
+
     this.scene.add(this.roadMap);
 
     //ADD THE LIGHTS
     this.scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-
-    // ROUNDABOUTS
-    for (const element of this.info.warehouses) {
-      let roundabout = this.roundabout.clone();
-      roundabout.position.set(element.x, element.y, element.z);
-      this.roadMap.add(roundabout);
-      this.loadModel(element);
-    }
 
     const texture = new THREE.TextureLoader().load("../../../../assets/road/road_texture.jpg");
     texture.wrapS = THREE.RepeatWrapping;
@@ -158,6 +147,12 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       side: THREE.DoubleSide,
       map: texture
     });
+
+    //MAP THE PATHS
+    let pathsMap = new Map<string, number>();
+
+    //Position of the warehouse
+    let arrPos = new Map<string, number[]>();
 
     // PATHS
     for (const element of this.info.paths) {
@@ -270,48 +265,218 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       );
 
       this.roadMap.add(road);
+
+      //PATHS MAP
+      if(pathsMap.has(start.id)){
+        for (const key of pathsMap.keys()) {
+          //If the key is equal to the beginningWarehouse of the path
+          if (key === start.id) {
+            //If the value of the key is smaller than the thickness of the path
+            if (pathsMap.get(key) != undefined && pathsMap.get(key)! < element.thickness) {
+              pathsMap.set(key, element.thickness);
+            }
+          }
+        }
+      } else {
+        pathsMap.set(start.id, element.thickness);
+      }
+
+      if(pathsMap.has(end.id)){
+        for (const key of pathsMap.keys()) {
+          //If the key is equal to the beginningWarehouse of the path
+          if (key === end.id) {
+            //If the value of the key is smaller than the thickness of the path
+            if (pathsMap.get(key) != undefined && pathsMap.get(key)! < element.thickness) {
+              pathsMap.set(key, element.thickness);
+            }
+          }
+        }
+      } else {
+        pathsMap.set(end.id, element.thickness);
+      }
+
+
+      //WAREHOUSE LOCATIONS
+
+      let incomingEdgeEndXW = end.x - 0.1 * difX;
+      let incomingEdgeEndYW = end.y - 0.1 * difY;
+      let incomingEdgeEndZW = end.z;
+
+      let incomingEdgeStartXW = start.x + 0.1 * difX;
+      let incomingEdgeStartYW = start.y + 0.1 * difY;
+      let incomingEdgeStartZW = start.z;
+
+
+      if(arrPos.has(start.id)){
+        for (const key of arrPos.keys()) {
+          if (key === start.id) {
+            arrPos.set(key, [incomingEdgeStartXW,incomingEdgeStartYW,incomingEdgeStartZW]);
+          }
+        }
+      } else {
+        arrPos.set(start.id, [incomingEdgeStartXW,incomingEdgeStartYW,incomingEdgeStartZW]);
+      }
+
+      if(arrPos.has(end.id)){
+        for (const key of arrPos.keys()) {
+          if (key === end.id) {
+            arrPos.set(key, [incomingEdgeEndXW,incomingEdgeEndYW,incomingEdgeEndZW]);
+          }
+        }
+      } else {
+        arrPos.set(end.id, [incomingEdgeEndXW,incomingEdgeEndYW,incomingEdgeEndZW]);
+      }
+
     }
+
+     // ROUNDABOUTS
+     for (const element of this.info.warehouses) {
+      let roundaboutWidth = pathsMap.get(element.id);
+
+      let warehousePos = arrPos.get(element.id)!;
+
+      let roundabout = this.createRoundAbout(roundaboutWidth);
+      roundabout.position.set(element.x, element.y, element.z);
+      this.roadMap.add(roundabout);
+
+      if(warehousePos == undefined){
+        warehousePos = [element.x + 3, element.y, element.z];
+
+        let differenceDistance = Math.sqrt(
+          Math.pow(warehousePos[0] - element.x, 2) +
+          Math.pow(warehousePos[1] - element.y, 2) +
+          Math.pow(warehousePos[2] - element.z, 2)
+        );
+
+        //VECTORIAL DIFFERENCE
+        const difX = element.x - warehousePos[0];
+        const difY = element.y - warehousePos[1];
+
+        let incomingEdgeStartX = (element.x - 0.1 * difX) * 0.15;
+        let incomingEdgeStartY = (element.y - 0.1 * difY) * 0.15;
+
+        let warehouseX = element.x + incomingEdgeStartX;
+        let warehouseY = element.y + incomingEdgeStartY;
+        let warehouseZ = element.z;
+
+         if(differenceDistance < 40){
+          warehousePos = [warehouseX,warehouseY,warehouseZ];
+         }
+
+         let angleIncoming = Math.sqrt(
+          Math.pow(warehouseX - element.x, 2) +
+          Math.pow(warehouseY - element.y, 2)
+        );
+
+        let warehouseRoad = new THREE.PlaneGeometry(roundaboutWidth, differenceDistance, 32);
+
+        let incomingRoad = new THREE.Mesh(warehouseRoad, roadMaterial);
+
+        incomingRoad.position.set(
+          (element.x + warehouseX) / 2,
+          (element.y + warehouseY) / 2,
+          (element.z + warehouseZ) / 2
+        );
+
+        incomingRoad.rotation.z = Math.atan2(warehouseY - element.y, warehouseX - element.x) - Math.PI / 2;
+
+        incomingRoad.rotateOnAxis(
+          new THREE.Vector3(1, 0, 0),
+          Math.atan2(warehouseZ - element.z, angleIncoming)
+        );
+
+        this.roadMap.add(incomingRoad);
+
+
+      } else {
+
+        let differenceDistance = Math.sqrt(
+          Math.pow(warehousePos[0] - element.x, 2) +
+          Math.pow(warehousePos[1] - element.y, 2) +
+          Math.pow(warehousePos[2] - element.z, 2)
+        );
+
+        //VECTORIAL DIFFERENCE
+        const difX = element.x - warehousePos[0];
+        const difY = element.y - warehousePos[1];
+
+        let incomingEdgeStartX = (element.x - 0.1 * difX) * 0.15;
+        let incomingEdgeStartY = (element.y - 0.1 * difY) * 0.15;
+
+        let warehouseX = element.x + incomingEdgeStartX;
+        let warehouseY = element.y + incomingEdgeStartY;
+        let warehouseZ = element.z;
+
+         if(differenceDistance < 40){
+          warehousePos = [warehouseX,warehouseY,warehouseZ];
+         }
+
+         let angleIncoming = Math.sqrt(
+          Math.pow(warehouseX - element.x, 2) +
+          Math.pow(warehouseY - element.y, 2)
+        );
+
+        let warehouseRoad = new THREE.PlaneGeometry(roundaboutWidth, differenceDistance, 32);
+
+        let incomingRoad = new THREE.Mesh(warehouseRoad, roadMaterial);
+
+        incomingRoad.position.set(
+          (element.x + warehouseX) / 2,
+          (element.y + warehouseY) / 2,
+          (element.z + warehouseZ) / 2
+        );
+
+        incomingRoad.rotation.z = Math.atan2(warehouseY - element.y, warehouseX - element.x) - Math.PI / 2;
+
+        incomingRoad.rotateOnAxis(
+          new THREE.Vector3(1, 0, 0),
+          Math.atan2(warehouseZ - element.z, angleIncoming)
+        );
+
+        this.roadMap.add(incomingRoad);
+
+      }
+
+      this.loadModel(warehousePos[0],warehousePos[1],warehousePos[2]);
+
+      //ADD PATH TO THE WAREHOUSE
+
+    }
+
   }
 
-  private loadModel(element: IWarehouseViewRepresentation) {
 
-    const glftLoader = new GLTFLoader();
-    glftLoader.load(
-      'assets/warehouse_building/scene.gltf',
-      (gltf) => {
-        gltf.scene.scale.set(0.1, 0.1, 0.1);
-        gltf.scene.position.set(element.x, element.y, element.z + 0.05);
-        gltf.scene.rotation.x = Math.PI / 2.0;
-        this.roadMap.add(gltf.scene);
-      }
-    );
-
+  private loadModel(posX : number, posY : number, posZ : number) {
     const objLoader = new OBJLoader();
     objLoader.load(
       'assets/warehouse_building/warehouse.obj',
       (obj) => {
         obj.scale.set(0.1, 0.1, 0.1);
-        obj.position.set(element.x, element.y, element.z);
+        obj.position.set(posX, posY, posZ);
         obj.rotation.x = Math.PI / 2.0;
         this.roadMap.add(obj);
       });
   }
 
-  private createRoundAbout() {
-    const geometry = new THREE.CircleGeometry((2.1 * 1) / 2, 32);
+  private createRoundAbout(width : number | undefined) : THREE.Mesh {
+
+    if(width === undefined){
+      width = 1;
+    }
+
+    const geometry = new THREE.CircleGeometry(width, 32);
     const material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide
     });
 
-    material.color.set(0xD3D3D3);
-    this.roundabout = new THREE.Mesh(geometry, material);
+    material.color.set(0x000000);
+    let roundabout = new THREE.Mesh(geometry, material);
 
-    //this.roundabout.rotation.x = -Math.PI / 2.0;
+    roundabout.castShadow = true;
+    roundabout.receiveShadow = true;
 
-    this.roundabout.scale.set(1.5, 1.5, 1.5);
+    return roundabout;
 
-    this.roundabout.castShadow = true;
-    this.roundabout.receiveShadow = true;
   }
 
   //CREATE THE SCENE
