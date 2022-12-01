@@ -18,43 +18,37 @@ getAllPaths(L,R) :- findall(LP,permutation(L,LP),LLP),
 % warehouse>).
 
 addMatosinhos([],[]).
-addMatosinhos([H|T],[H1|T1]) :- append(H,[5],HR),
-                                append([5],HR,H1),
+addMatosinhos([H|T],[H2|T1]) :- append([5],H,HR),
+                                append(HR,[5],H2),
                                 addMatosinhos(T,T1).
 
-
-% Sums the total time for each path.
-% sumTime/2 (<[O,D|C] - path list>, <R - path's time>).
-
-sumTime([_],0) :- !.
-sumTime([H,H2|T],R) :- dadosCam_t_e_ta(_,H,H2,T,_,_),
-                       sumTime([H2|T],R1),
-                       R is R1 + T.
-
 % Gets the smallest time (fastest path).
-% smallestTime/5 (<[H|T] - path>, <Tr - truck>, <R - most efficient
-% path>, <M - time of the most efficient path>).
+% smallestTime/5 (<[H|T] - path>, <Tr - truck>, <MEP - most efficient
+% path>, <SP - stopping points (warehouses)>, <M - time of the most
+% efficient path (minutes)>).
 
 smallest([],_,[],[],99999) :- !.
-smallest([H|T],Tr,R,P,M) :- checkBattery(H,Tr,P2,F),
-                            smallest(T,Tr,R1,P1,M1),
-                            ((F =< M1, !, M is F, R = H, P = P2);
-                            (F > M1, !, R = R1, M is M1, P = P1)).
+smallest([H|T],Tr,MEP,SP,M) :- checkBattery(H,Tr,SP3,Time),
+                               smallest(T,Tr,MEP2,SP2,M2),
+                               ((Time =< M2, !, M is Time, MEP = H, SP = SP3);
+                                (Time > M2, !, MEP = MEP2, M is M2, SP = SP2)).
 
 % Gets the best path (fastest).
 % bestPath/5 (<L - path>, <Tr - truck>, <MEP - most
-% efficient path>, <WP - stopping points (warehouses)>, <T - time>).
+% efficient path>, <WP - stopping points (warehouses)>, <T - time
+% (minutes)>).
 
 bestPath(L,Tr,MEP,SP,T) :- getAllPaths(L,R),
                            smallest(R,Tr,MEP,SP,T).
 
-% Sums the total weight of a truck.
-% sumWeight/3 (<[H|T] - path>, <Tr - truck>, <IW - initial weight>).
+% Gets the initial weight of a truck (with all the orders weight).
+% sumWeight/3 (<[H|T] - path>, <Tr - truck>, <IW - initial weight
+% (tare)>).
 
 sumWeight([],Tr,IW) :- carateristicasCam(Tr,IW,_,_,_,_).
-sumWeight([H|T],Tr,IW) :- entrega(_,_,M,H,_,_),
+sumWeight([H|T],Tr,IW) :- entrega(_,_,Mass,H,_,_),
                           sumWeight(T,Tr,IW2),
-                          IW is (IW2 + M).
+                          IW is (IW2 + Mass).
 
 % Gets the truck's max weight.
 % truckTotalWeight/2 (<Tr - truck>, <W - truck's max weight>).
@@ -80,37 +74,40 @@ checkBattery(P,Tr,SP,T) :- sumWeight(P,Tr,CurrentWeight),
 checkBattery2([_],_,_,_,[],0) :- !.
 checkBattery2([H,H2|T],Tr,CW,CE,SP,FT) :- truckMaxWeight(Tr,MaxWeight),
                                           dadosCam_t_e_ta(Tr,H,H2,TravelTime,Energy,AdditionalTime),
-                                          ruleOfThree(MaxWeight,Energy,CW,Energy2),
-                                          ruleOfThree(MaxWeight,TravelTime,CW,TravelTime2),
-                                          EnergyDiff is (CE - Energy2),
+                                          ruleOfThree(MaxWeight,Energy,CW,EnergyRequired),
+                                          ruleOfThree(MaxWeight,TravelTime,CW,TravelTimeRequired),
+                                          carateristicasCam(Tr,_,_,InitialEnergy,_,_),
+                                          ((H2 = 5, !, CE2 is (CE + (InitialEnergy * 0.2)));(CE2 is CE)),
+                                            EnergyDiff is (CE2 - EnergyRequired),
                                           ((EnergyDiff > 0,!,
-                                            dontCharge([H,H2|T],Tr,CW,CE,Energy2,SP,TravelTime2,FT));
-                                           (charge([H,H2|T],Tr,CW,CE,Energy2,SP,TravelTime2,FT, AdditionalTime))).
+                                            dontCharge([H,H2|T],Tr,CW,CE2,EnergyRequired,SP,TravelTimeRequired,FT));
+                                           (charge([H,H2|T],Tr,CW,CE2,EnergyRequired,SP,TravelTimeRequired,FT,AdditionalTime))).
 
 % If the truck needs to charge.
 % charge/9 (<[H,H2|T] - path>, <Tr - truck>, <CW - current weight>,
 % <CE - current energy>, <ER - energy required>, <SP - stopping points>,
 % <TT - time of travel>, <CT - current time>, <AT - additional time>).
 
-charge([H,H2|T],Tr,CW,CE,ER,SP,TT,CT, AT) :- biggestTime(H,Tr,CE,BiggestTime),
-                                             CT2 is (TT + BiggestTime),
-                                             carateristicasCam(Tr,_,_,InitialEnergy,_,_),
-                                             CE2 is ((InitialEnergy * 0.6) - ER),
-                                             ((CE2 < 0, !,
-                                               CT3 is CT2 + AT, CE3 is (CE2 + (InitialEnergy * 0.2)));
-                                              (CT3 is CT2, CE3 is CE2)),
-                                             entrega(_,_,OrderWeight,H2,_,_),
-                                             CW2 is (CW - OrderWeight),
-                                             checkBattery2([H2|T],Tr,CW2,CE3,SP2,CT4),
-                                             SP = [H|SP2],
-                                             CT is (CT3 + CT4).
+charge([H,H2|T],Tr,CW,CE,ER,SP,TT,CT,AT) :- biggestTime(H,Tr,CE,BiggestTime),
+                                            CT2 is (TT + BiggestTime),
+                                            carateristicasCam(Tr,_,_,InitialEnergy,_,_),
+                                            CE2 is ((InitialEnergy * 0.6) - ER),
+                                            ((CE2 < 0, !,
+                                              CT3 is CT2 + AT, CE3 is 0);
+                                             (CT3 is CT2, CE3 is CE2)),
+                                              entrega(_,_,OrderWeight,H2,_,_),
+                                              CW2 is (CW - OrderWeight),
+                                              checkBattery2([H2|T],Tr,CW2,CE3,SP2,CT4),
+                                              SP = [H|SP2],
+                                              CT is (CT3 + CT4).
 
 % If the truck doesn't need to charge.
 % dontCharge/8 (<[_,H2|T] - path>, <Tr - truck>, <CW - current weight>,
 % <CE - current energy>, <ER - energy required>, <SP - stopping points>,
 % <TT - time of travel>, <CT - current time>).
 
-dontCharge([_,H2|T],Tr,CW,CE,ER,SP,TT,CT) :- entrega(_,_,OrderWeight,H2,_,UnloadTime),
+dontCharge([H,H2|T],Tr,CW,CE,ER,SP,TT,CT) :- entrega(_,_,_,H,_,UnloadTime),
+                                             entrega(_,_,OrderWeight,H2,_,_),
                                              CT2 is (TT + UnloadTime),
                                              CE2 is (CE - ER),
                                              CW2 is (CW - OrderWeight),
@@ -125,13 +122,13 @@ biggestTime(Wh,Tr,CE,BT) :- getChargingTime(Tr,CE,ChargeTime),
                             entrega(_,_,_,Wh,_,UnloadTime),
                             ((ChargeTime < UnloadTime,!,BT is UnloadTime);(BT is ChargeTime)).
 
-% Gets the truck's charging time.
+% Gets the truck's charging time (in minutes).
 % chargeTruck/3 (<Tr - truck>, <CE - current energy>, <CT - charging
 % time>).
 
 getChargingTime(Tr,CE,CT) :- carateristicasCam(Tr,_,_,FullCharge,_,RechargeTime),
-                             ruleOfThree(FullCharge,CE,100,R),
-                             ruleOfThree(60,RechargeTime,(80 - R),CT).
+                             ruleOfThree((FullCharge * 0.6),60,CE,R),
+                             ruleOfThree(60,RechargeTime,(60 - R),CT).
 
 % Calculates the rule of three (regra de três simples).
 % ruleOfThree/4 (<A - first term>, <B - second term>, <C - third term>,
