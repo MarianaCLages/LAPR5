@@ -17,7 +17,4 @@ describe('ListPackagingService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return an array of packaging', () => {
-    expect(service.getPackaging()).toBeTruthy();
-  });
 });
