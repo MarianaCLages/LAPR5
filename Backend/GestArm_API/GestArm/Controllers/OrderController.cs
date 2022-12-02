@@ -134,11 +134,11 @@ public class OrderController : ControllerBase
     // GET: api/Order/orderDate=orderDate
     [Route("~/api/[controller]/byDate", Name = "GetOrderByDate")]
     [HttpGet("byDate")]
-    public async Task<ActionResult<IEnumerable<OrderDto>>> GetByDataDeOrderAysnc(DateTime data)
+    public async Task<ActionResult<IEnumerable<OrderDto>>> GetByDataDeOrderAysnc(string data)
     {
         try
         {
-            var orders = await _service.GetByOrderDateAysnc(data);
+            var orders = await _service.GetByOrderDateAysnc(DateTime.Parse(data));
 
             if (orders?.Any() != true)
                 //_loggerOrders.LogInformation("Nenhuma order foi encontrada com o id de armazém dado");
@@ -156,7 +156,7 @@ public class OrderController : ControllerBase
         }
     }
 
-    // GET: api/Order/Filtering?warehouseId=X&date=Y
+    // GET: api/Order/Filtering?warehouseId=X&data=Y
     [Route("~/api/[controller]/Filtering", Name = "GetOrderByFilteringmWarehouseEData")]
     [HttpGet("Filtering")]
     public async Task<ActionResult<IEnumerable<OrderDto>>> GetByFiltering(string warehouseId, string data)
@@ -212,13 +212,13 @@ public class OrderController : ControllerBase
     // GET: api/Warehouse/search/{date}/{nextID} (Os dois juntos vão fazer o DOMAIN ID da order)
     [Route("~/api/[controller]/search", Name = "GetOrderByDomainID")]
     [HttpGet("search")]
-    public async Task<ActionResult<OrderDto>> GetByOrderDomainIDAsync(string data, string nextID)
+    public async Task<ActionResult<IEnumerable<OrderDto>>> GetByOrderDomainIDAsync(string data, string nextID)
     {
         try
         {
             var warehouse = await _service.GetOrderByDomainIdAsync(nextID, data);
 
-            if (warehouse == null) return NotFound("A warehouse with that ID was not found!");
+            if (warehouse == null || warehouse.Count == 0) return NotFound("A order with that ID was not found!");
 
             return warehouse;
         }
