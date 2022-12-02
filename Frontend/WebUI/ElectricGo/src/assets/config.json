@@ -3,6 +3,7 @@
   "logisticsURI": "http://localhost:3000/api/",
   "getPathPath": "paths/allPaths",
   "getPackagingPath": "packagings/all",
+  "getPackagingByParamPath": "packagings",
   "getTruckByParamPath" : "trucks",
   "getAllTrucks" : "trucks/all"
 }
