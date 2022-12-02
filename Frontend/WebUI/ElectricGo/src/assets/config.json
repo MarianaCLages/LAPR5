@@ -5,5 +5,6 @@
   "getPackagingPath": "packagings/all",
   "getPackagingByParamPath": "packagings",
   "getTruckByParamPath" : "trucks",
-  "getAllTrucks" : "trucks/all"
+  "getAllTrucks" : "trucks/all",
+  "getAllOrders" : "Order"
 }
