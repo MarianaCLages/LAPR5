@@ -18,9 +18,12 @@ export class GetHeuristicService {
   ) {
   }
 
-  public async getHeuristics(alphaId: any): Promise<any> {
+  public async getHeuristics(alphaId: any, date: any): Promise<any> {
 
-    const data = await fetch(this.baseURL + alphaId, {
+    let dateArray = date.split('/');
+    let sendDate = dateArray[0] + '_' + dateArray[1] + '_' + dateArray[2];
+
+    const data = await fetch(this.baseURL + alphaId + '/' + sendDate, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -34,9 +37,12 @@ export class GetHeuristicService {
 
   }
 
-  public async getHeuristicByWeight(alphaId: any):Promise<any>{
+  public async getHeuristicByWeight(alphaId: any,date: any):Promise<any>{
 
-    const  data = await fetch(this.baseURLWeight + alphaId, {
+    let dateArray = date.split('/');
+    let sendDate = dateArray[0] + '_' + dateArray[1] + '_' + dateArray[2];
+
+    const  data = await fetch(this.baseURLWeight + alphaId + '/' + sendDate, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -49,9 +55,12 @@ export class GetHeuristicService {
     return result;
   }
 
-  public async getHeuristicByWeightTime(alphaId: any):Promise<any>{
+  public async getHeuristicByWeightTime(alphaId: any,date: any):Promise<any>{
 
-    const  data = await fetch(this.baseURLWeightTime + alphaId, {
+    let dateArray = date.split('/');
+    let sendDate = dateArray[0] + '_' + dateArray[1] + '_' + dateArray[2];
+
+    const  data = await fetch(this.baseURLWeightTime + alphaId + '/' + sendDate, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

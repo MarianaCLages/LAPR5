@@ -12,6 +12,7 @@ export class GetHeuristicComponent implements OnInit {
 
   caractId : any;
   heuristic : any;
+  date : any;
 
   @Output()
   redirectEvent = new EventEmitter<string>();
@@ -25,18 +26,18 @@ export class GetHeuristicComponent implements OnInit {
 
   async getHeuristic(){
 
-    this.heuristic = await this.getHeuristicService.getHeuristics(this.caractId);
+    this.heuristic = await this.getHeuristicService.getHeuristics(this.caractId,this.date);
     console.log(this.heuristic);
   }
 
   async getHeuristicWeight(){
 
-    this.heuristic = await this.getHeuristicService.getHeuristicByWeight(this.caractId);
+    this.heuristic = await this.getHeuristicService.getHeuristicByWeight(this.caractId,this.date);
     console.log(this.heuristic);
   }
 
   async getHeuristicTimeWeight(){
-    this.heuristic = await this.getHeuristicService.getHeuristicByWeightTime(this.caractId);
+    this.heuristic = await this.getHeuristicService.getHeuristicByWeightTime(this.caractId,this.date);
     console.log(this.heuristic);
   }
 }

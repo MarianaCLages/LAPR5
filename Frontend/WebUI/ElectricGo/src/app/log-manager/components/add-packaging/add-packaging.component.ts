@@ -1,16 +1,15 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AddPackagingService } from 'src/app/services/add-packaging.service';
 import { IPackagingDTO } from 'src/app/shared/packagingDTO';
 import { GetTrucksService } from 'src/app/services/get-trucks.service';
 import { GetOrdersService } from 'src/app/services/get-orders.service';
-import IOrderDTO from 'src/app/shared/orderDTO';
 
 @Component({
   selector: 'app-add-packaging',
   templateUrl: './add-packaging.component.html',
-  styleUrls: ['./add-packaging.component.css'],
-  providers: [AddPackagingService,GetOrdersService],
+  styleUrls: ['./add-packaging.component.css']
 })
+
 export class AddPackagingComponent implements OnInit {
   orderRef: any;
   truckRef: any;
@@ -20,13 +19,11 @@ export class AddPackagingComponent implements OnInit {
 
   orders: any[] = [];
   trucks: any[] = [];
+
   errorMessage: any;
   error: boolean = false;
   success: any;
   successMessage: any;
-
-  @Output()
-  redirectEvent = new EventEmitter<string>();
 
   constructor(
     private addPackagingService: AddPackagingService,
@@ -35,23 +32,20 @@ export class AddPackagingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //gets the orders from the backend
     this.getOrdersService.getOrders().then((data: any) => {
       this.orders = data;
     });
     this.error = false;
 
+    //gets the trucks from the backend
     this.getTrucksService.getTrucks().then((data: any) => {
       this.trucks = data;
     });
     this.error = false;
   }
 
-  goBack() {
-    window.history.back();
-  }
-
   addPackaging() {
-
     //clears the error message
     this.errorMessage = "";
     this.error = false;
@@ -59,7 +53,7 @@ export class AddPackagingComponent implements OnInit {
     //clears the success message
     this.success = "";
 
-    //creates the path DTO
+    //creates the packaging DTO
     let packagingDTO: IPackagingDTO = {
       orderRef: this.orderRef.identifier,
       truckRef: this.truckRef.caractTruck,
@@ -75,27 +69,31 @@ export class AddPackagingComponent implements OnInit {
     this.posY = null;
     this.posZ = null;
 
-     //send the order DTO to the backend
-     let errorOrSuccess: any = this.addPackagingService.addPackaging(packagingDTO);
-     errorOrSuccess.subscribe(
-       (data: any) => {
-         this.success = true;
-         this.goBack();
-       },
-       //transforms into a http error
-       (error: any) => {
-         this.error = true;
-         if (error.status == 400) {
-           this.errorMessage = error.error;
-         } else {
-           if (error.status == 500) {
-             this.errorMessage = error.error.errors.message;
-           } else {
-             this.errorMessage = "Unknown error!";
-           }
-         }
-       }
-     );
+    //send the packaging DTO to the backend
+    let errorOrSuccess: any = this.addPackagingService.addPackaging(packagingDTO);
+    errorOrSuccess.subscribe(
+      (data: any) => {
+        this.success = true;
+        this.successMessage = "Packaging added successfully";
+        this.goBack();
+      },
+      //transforms into a http error
+      (error: any) => {
+        this.error = true;
+        if (error.status == 400) {
+          this.errorMessage = error.error;
+        } else {
+          if (error.status == 500) {
+            this.errorMessage = error.error.errors.message;
+          } else {
+            this.errorMessage = "An unknown error has occurred!";
+          }
+        }
+      }
+    );
+  }
 
+  goBack() {
+    window.history.back();
   }
 }

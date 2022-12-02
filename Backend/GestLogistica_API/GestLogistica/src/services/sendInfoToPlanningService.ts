@@ -219,7 +219,7 @@ export default class SendInfoToPlanningService {
 
     }
 
-    public async sendOrdersToPlanning(truckId : string){
+    public async sendOrdersToPlanning(truckId : string, date : string){
 
         const response = await fetch('http://localhost:3000/api/packagings/all',{
             method: 'GET',
@@ -242,7 +242,7 @@ export default class SendInfoToPlanningService {
             }
         }
 
-        this.getOrders(orderTruck);
+        this.getOrders(orderTruck,date);
         //this.sendOrdersToProlog();
     }
 
@@ -359,13 +359,20 @@ export default class SendInfoToPlanningService {
         console.log("Truck to Planning sent!");
     }
 
-    private async getOrders(ordersId= []){
+    private async getOrders(ordersId= [],date : string){
 
         let orderIdVar : string;
         var orderArr = [];
         var os = require("os");
         let stringFormat : string;
         let entrega_armazem: string;
+
+        let dateArray = date.split('_');
+        let goodDateFormat = '';
+
+        goodDateFormat = dateArray[0] + '/' + dateArray[1] + '/' + dateArray[2];
+
+        let realDate = new Date(goodDateFormat);
 
         entrega_armazem = 'entrega_armazens([';
 
@@ -378,31 +385,38 @@ export default class SendInfoToPlanningService {
 
             const url = address + "nextId=" + splitArr[0] + "&data=" + splitArr[1];
 
-            const response = await fetch(url,{
+            const response = await fetch(url, {
                 method: 'GET',
                 agent: this.httpsAgent,
-                headers:{
+                headers: {
                     Accept: 'application/json',
                 }
             })
 
+
             var object = await response.json();
-            var warehouseString = object.warehouseId.toString();
+            let dateOrder = new Date(object.orderDate);
+
+            let dateClient = realDate.toLocaleDateString();
+            let dateObj = dateOrder.toLocaleDateString();
+
+            if (dateObj == dateClient){
+                var warehouseString = object.warehouseId.toString();
 
             warehouseString = warehouseString.substring(1);
             let warehouseNumber = +warehouseString;
 
             let idSplit = object.identifier.toString().split('/');
 
-            stringFormat = "entrega("+ idSplit[0] + idSplit[1]+ ",222," + object.orderMass.toString() + ","+ warehouseNumber + ','+ object.chargingTime.toString()+ ','+ object.unloadingTime.toString()+ ").";
+            stringFormat = "entrega(" + idSplit[0] + idSplit[1] + ",222," + object.orderMass.toString() + "," + warehouseNumber + ',' + object.chargingTime.toString() + ',' + object.unloadingTime.toString() + ").";
             orderArr.push(stringFormat);
 
-            if(i == ordersId.length - 1){
+            if (i == ordersId.length - 1) {
                 entrega_armazem = entrega_armazem + warehouseNumber + ']).';
-            }
-            else {
+            } else {
                 entrega_armazem = entrega_armazem + warehouseNumber + ',';
             }
+        }
         }
 
         orderArr.push(entrega_armazem);

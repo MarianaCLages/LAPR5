@@ -36,6 +36,7 @@ export class AppConfigServiceService {
     return this.appConfig.getPathPath;
   }
 
+  // Packaging
   getPackagingURL() {
     console.log(this.appConfig.getPackagingPath);
     return this.appConfig.getPackagingPath;
@@ -56,6 +57,10 @@ export class AppConfigServiceService {
     return this.appConfig.getAllTrucks;
   }
 
+  // Orders
+  getOrderByParamURL() {
+    return this.appConfig.getOrderByParamPath;
+  }
 
 
 

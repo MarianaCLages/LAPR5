@@ -155,7 +155,7 @@ export default class truckController
             this.fileService.sendTrucks();
 
             await this.fileService.getTruck(idTruck);
-            this.fileService.sendOrdersToPlanning(idTruck);
+            this.fileService.sendOrdersToPlanning(idTruck,req.params.date);
 
             stringTest = await fileService.getHeuristic();
         }catch (error){
@@ -168,7 +168,6 @@ export default class truckController
     public async getHeuristicByWeight(req: Request,res: Response,next: NextFunction){
         var fileService = new SendInfoToPlanningService();
         let idTruck = req.params.idTruck;
-
         let stringTest: string;
 
         this.fileService.generateFiles();
@@ -176,7 +175,7 @@ export default class truckController
         this.fileService.sendWarehouse();
         this.fileService.sendTrucks();
 
-        this.fileService.sendOrdersToPlanning(idTruck);
+        this.fileService.sendOrdersToPlanning(idTruck,req.params.date);
 
         stringTest = await fileService.getHeuristicByWeight();
 
@@ -189,13 +188,12 @@ export default class truckController
         let idTruck = req.params.idTruck;
 
         let stringTest: string;
-
         this.fileService.generateFiles();
         this.fileService.sendPaths();
         this.fileService.sendWarehouse();
         this.fileService.sendTrucks();
 
-        this.fileService.sendOrdersToPlanning(idTruck);
+        this.fileService.sendOrdersToPlanning(idTruck,req.params.date);
 
         stringTest = await this.fileService.getHeuristicByWeightTime();
 
