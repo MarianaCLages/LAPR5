@@ -1,26 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GetTrucksService } from '../../../services/get-trucks.service';
-import { ThemePalette } from '@angular/material/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ITruckDTO } from '../../../shared/truckDTO';
-import { MatFormFieldModule } from '@angular/material/form-field';
-
-export interface Task {
-  name: string;
-  completed: boolean;
-  color: ThemePalette;
-  subtasks?: Task[];
-}
 
 @Component({
   selector: 'app-list-truck',
   templateUrl: './list-truck.component.html',
-  styleUrls: ['./list-truck.component.css'],
-  providers: [GetTrucksService],
+  styleUrls: ['./list-truck.component.css']
 })
-export class ListTruckComponent {
+
+export class ListTruckComponent implements OnInit {
   truckPlateRef: any;
   truckCaractRef: any;
   filterOption: any;
@@ -51,7 +42,9 @@ export class ListTruckComponent {
 
   allComplete: boolean = false;
 
-  constructor(private getTrucksService: GetTrucksService) {}
+  constructor(
+    private getTrucksService: GetTrucksService
+  ) {}
 
   ngAfterViewInit() {
     // @ts-ignore
@@ -59,13 +52,10 @@ export class ListTruckComponent {
   }
 
   async ngOnInit(): Promise<void> {
-    this.getTrucksService.getTrucks().then((data: any) => {
-      this.trucks = data;
+    this.getTrucksService.getTrucks().then((data: ITruckDTO[]) => {
+      console.log(data);
+      this.trucks.data = data;
     });
-  }
-
-  goBack() {
-    window.history.back();
   }
 
   chooseFilter() {
@@ -141,5 +131,9 @@ export class ListTruckComponent {
         }
       );
     }
+  }
+
+  goBack() {
+    window.history.back();
   }
 }

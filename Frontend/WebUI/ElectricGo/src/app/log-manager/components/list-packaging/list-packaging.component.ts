@@ -11,11 +11,9 @@ import {MatSort} from "@angular/material/sort";
   styleUrls: ['./list-packaging.component.css']
 })
 
-
 export class ListPackagingComponent implements OnInit {
-
   packagings = new MatTableDataSource<IPackagingDTO>();
-  
+
   displayedColumns: string[] = ['OrderRef', 'TruckRef', 'xPos', 'yPos', 'zPos'];
   // @ts-ignore
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator ;
@@ -24,14 +22,11 @@ export class ListPackagingComponent implements OnInit {
 
   constructor(
     private listPackagingService: ListPackagingService
-  ) {
-  }
+  ) {}
 
   ngAfterViewInit() {
     // @ts-ignore
     this.packagings.paginator = this.paginator;
-
-    
   }
 
   async ngOnInit(): Promise<void> {
@@ -41,6 +36,7 @@ export class ListPackagingComponent implements OnInit {
       this.packagings.data = data;
     });
   }
+  
   goBack() {
     window.history.back();
   }
