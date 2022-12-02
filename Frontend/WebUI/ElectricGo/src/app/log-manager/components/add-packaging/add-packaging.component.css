@@ -22,3 +22,7 @@
 .backBtn button:hover {
   background-color: rgb(51, 51, 145);
 }
+
+.titles {
+  text-align: center;
+}
