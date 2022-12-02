@@ -73,6 +73,14 @@ export default (app: Router) => {
         (req, res, next) => ctrl.getTruckByPlate(req, res, next));
 
 
+    route.get('/caract/:caractTruck',
+        (req, res, next) => ctrl.getTruckByCaractParam(req, res, next));
+
+
+    route.get('/plate/:plate',
+        (req, res, next) => ctrl.getTruckByPlateParam(req, res, next));
+
+
     route.get('/send_info/:idTruck',
         (req,res,next) => ctrl.sendInfo(req,res,next) );
 
