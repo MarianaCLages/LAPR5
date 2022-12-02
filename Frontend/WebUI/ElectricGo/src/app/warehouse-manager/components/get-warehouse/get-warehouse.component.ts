@@ -1,21 +1,23 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { GetWarehouseAlphaService} from "../../../services/get-warehouse-alpha-service.service";
 import {MatTableDataSource} from "@angular/material/table";
 import IPackagingDTO from "../../../shared/pathDTO";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {ICreateWarehouseDTO} from "../../../shared/createWarehouseDTO";
 
 @Component({
   selector: 'app-get-warehouses',
   templateUrl: './get-warehouse.component.html',
-  styleUrls: ['./get-warehouse.component.css']
+  styleUrls: ['./get-warehouse.component.css'],
+  providers: [GetWarehouseAlphaService]
 })
 export class GetWarehouseComponent implements OnInit {
 
 
 
 
-  warehouse = new MatTableDataSource<IPackagingDTO>();
+  warehouse = new MatTableDataSource<ICreateWarehouseDTO>();
 
   displayedColumns: string[] = ['alphaNumId', 'designation', 'street','postalCode','latitudeDegree','latitudeMinute','latitudeSecond','longitudeDregree','longitudeMinute','longitudeSecond'];
 
@@ -26,7 +28,12 @@ export class GetWarehouseComponent implements OnInit {
   //warehouses: any [] = [];
   warehousesAsString: any;
   errorMessage: any;
+  successMessage: any;
+  res: any;
   error: boolean = false;
+  success: any;
+  @Output()
+  redirectEvent = new EventEmitter<string>();
   alphaId : any;
   dataWarehouse: any
 
@@ -42,16 +49,46 @@ export class GetWarehouseComponent implements OnInit {
   async ngOnInit() {
   }
 
-  async getWarehouse() {
-    let dataWarehouse = await this.getWarehouseServiceService.getWarehouses(this.alphaId);
+  getWarehouse() {
+
+    //clears the error message
+    this.errorMessage = "";
+    this.error = false;
+
+    //clears the success message
+    this.success = "";
+
+    let errorOrSuccess: any = this.getWarehouseServiceService.getWarehouses(this.alphaId);
+
+    errorOrSuccess.subscribe((data: any) => {
+        this.success = true;
+        this.successMessage = "Get Warehouse Successful!";
+
+        let warehouseArray = [];
+        let warehouseDTO = new ICreateWarehouseDTO(data.latitudeDegree,data.latitudeMinute,data.latitudeSecond,data.longitudeDregree,data.longitudeMinute,data.longitudeSecond,data.designation,data.street,data.doorNumber,data.postalCode,data.city,data.country,data.alphaNumId);
+
+        warehouseArray.push(warehouseDTO);
+
+        this.warehouse.data = warehouseArray;
+        this.warehouse.sort = this.sort;
+        this.warehouse.paginator = this.paginator;
 
 
-    this.warehouse.data = dataWarehouse;
-    this.warehouse.sort = this.sort;
-    this.warehouse.paginator = this.paginator;
+      }, //transforms into a http error
+      (error: any) => {
+        this.error = true;
+        if (error.status == 400) {
+          this.errorMessage = error.error;
+        } else {
+          if (error.status == 500) {
 
+            this.errorMessage = error.error.errors.message;
+          } else {
+            this.errorMessage = "An unknown error has ocurred";
+          }
+        }
+      });
 
-    console.log(dataWarehouse);
   }
   goBack() {
     window.history.back();
