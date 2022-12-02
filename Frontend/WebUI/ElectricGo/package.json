@@ -23,6 +23,7 @@
     "@angular/router": "^14.2.0",
     "@types/requirejs": "^2.1.34",
     "cypress": "^11.2.0",
+    "cypress-xpath": "^1.6.2",
     "file-system": "^2.2.2",
     "mat-select-search": "^1.2.21",
     "rxjs": "~7.5.0",

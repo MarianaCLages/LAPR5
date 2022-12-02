@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/// <reference types="cypress-xpath" />
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -11,7 +12,11 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('login', (email, password) => {
+  cy.xpath('/html/body/app-root/div/app-login-page/div/mat-form-field[1]/div/div[1]/div/input').type(email)
+  cy.xpath('/html/body/app-root/div/app-login-page/div/mat-form-field[2]/div/div[1]/div/input').type(password)
+  cy.get('button').contains('Login').click()
+ })
 //
 //
 // -- This is a child command --
