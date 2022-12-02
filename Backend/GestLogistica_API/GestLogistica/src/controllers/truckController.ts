@@ -48,7 +48,7 @@ export default class truckController
             }
 
             if(truckOrError.getValue().length == 0) {
-                return res.status(404).json("No truck was found!").send();
+                return res.status(400).json("No truck was found!").send();
             }
 
             const trucksDTO = truckOrError.getValue();
@@ -68,7 +68,7 @@ export default class truckController
             }
 
             if(truckOrError.getValue().length == 0) {
-                return res.status(404).json("No truck with that truckCaract was found!").send();
+                return res.status(400).json("No truck with that truckCaract was found!").send();
             }
 
             const truckDTO = truckOrError.getValue();
@@ -88,7 +88,7 @@ export default class truckController
             }
 
             if(truckOrError.getValue().length == 0) {
-                return res.status(404).json("No truck with that plate was found!").send();
+                return res.status(400).json("No truck with that plate was found!").send();
             }
 
             const truckDTO = truckOrError.getValue();
@@ -206,4 +206,58 @@ export default class truckController
     protected executeImpl(): Promise<any> {
         throw new Error("Method not implemented.");
     }
+
+    public async getTruckByPlateParam(req: Request, res: Response, next: NextFunction) {
+        try {
+
+            const plate : string = req.params.plate;
+            const dto : ITruckPlateDTO = {
+                truckPlate: plate
+            }
+
+            const truckOrError = await this.truckServiceInstance.getByPlate(dto);
+
+            if (truckOrError.isFailure) {
+                return res.status(400).json(truckOrError.error).send();
+            }
+
+            if(truckOrError.getValue().length == 0) {
+                return res.status(400).json("No truck with that plate was found!").send();
+            }
+
+            const truckDTO = truckOrError.getValue();
+            return res.status(200).json(truckDTO).send();
+
+        } catch (e) {
+            return next(e);
+        }
+    }
+
+    public async getTruckByCaractParam(req: Request, res: Response, next: NextFunction) {
+        try {
+
+            const caract : string = req.params.caractTruck;
+            const dto : ITruckCaractDTO = {
+                caractTruck: caract
+            }
+
+            const truckOrError = await this.truckServiceInstance.getByCaract(dto);
+
+            if (truckOrError.isFailure) {
+                return res.status(400).json(truckOrError.error).send();
+            }
+
+            if(truckOrError.getValue().length == 0) {
+                return res.status(400).json("No truck with that truckCaract was found!").send();
+            }
+
+            const truckDTO = truckOrError.getValue();
+            return res.status(200).json(truckDTO).send();
+
+        } catch (e) {
+            return next(e);
+        }
+    }
+
+
 }
