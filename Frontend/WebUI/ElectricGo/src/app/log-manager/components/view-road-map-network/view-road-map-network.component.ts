@@ -9,7 +9,6 @@ import { ICreateWarehouseDTO } from "../../../shared/createWarehouseDTO";
 import IPathDTO from 'src/app/shared/pathDTO';
 import { IPathViewRepresentation } from 'src/app/shared/pathViewRepresentation';
 import { IWarehouseViewRepresentation } from 'src/app/shared/warehouseViewRepresentation';
-import {OBJLoader} from "three/examples/jsm/loaders/OBJLoader";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 @Component({
@@ -336,7 +335,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       let warehousePos = arrPos.get(element.id)!;
 
       let roundabout = this.createRoundAbout(roundaboutWidth);
-      roundabout.position.set(element.x, element.y, element.z);
+      roundabout.position.set(element.x, element.y, element.z + 0.08);
       this.roadMap.add(roundabout);
 
       if(warehousePos == undefined){
@@ -439,23 +438,21 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
       this.loadModel(warehousePos[0],warehousePos[1],warehousePos[2]);
 
-      //ADD PATH TO THE WAREHOUSE
-
     }
 
   }
 
-
   private loadModel(posX : number, posY : number, posZ : number) {
-    const objLoader = new OBJLoader();
-    objLoader.load(
-      'assets/warehouse_building/warehouse.obj',
-      (obj) => {
-        obj.scale.set(0.1, 0.1, 0.1);
-        obj.position.set(posX, posY, posZ);
-        obj.rotation.x = Math.PI / 2.0;
-        this.roadMap.add(obj);
-      });
+    const glftLoader = new GLTFLoader();
+    glftLoader.load(
+      'assets/warehouse_building/scene.gltf',
+      (gltf) => {
+        gltf.scene.scale.set(0.1, 0.1, 0.1);
+        gltf.scene.position.set(posX, posY, posZ);
+        gltf.scene.rotation.x = Math.PI / 2.0;
+        this.roadMap.add(gltf.scene);
+      }
+    );
   }
 
   private createRoundAbout(width : number | undefined) : THREE.Mesh {

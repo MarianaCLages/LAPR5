@@ -2,5 +2,7 @@
   "warehouseURI": "http://localhost:5000/api/",
   "logisticsURI": "http://localhost:3000/api/",
   "getPathPath": "paths/allPaths",
-  "getPackagingPath": "packagings/all"
+  "getPackagingPath": "packagings/all",
+  "getTruckByParamPath" : "trucks",
+  "getAllTrucks" : "trucks/all"
 }
