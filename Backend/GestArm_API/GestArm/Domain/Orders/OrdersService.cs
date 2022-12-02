@@ -32,8 +32,10 @@ public class OrdersService : IOrdersService
             throw new BusinessRuleValidationException("There is no warehouse with the specified ID!");
 
         var nextId = _repository.GestNextIdAsync(DateTime.Parse(dto.OrderDate));
-
-        var order = new Order(
+        
+        if (DateTime.Parse(dto.OrderDate) < DateTime.Now) throw new BusinessRuleValidationException("Invalid order date! (The order date must be after today's date)");
+            
+            var order = new Order(
             new OrderDomainId(nextId.Result, new OrderDate(DateTime.Parse(dto.OrderDate)).ToString("yyMMdd")),
             new OrderDate(DateTime.Parse(dto.OrderDate)), new OrderMass(dto.OrderMass),
             new TimeOrder(dto.ChargingTime), new TimeOrder(dto.UnloadingTime),
