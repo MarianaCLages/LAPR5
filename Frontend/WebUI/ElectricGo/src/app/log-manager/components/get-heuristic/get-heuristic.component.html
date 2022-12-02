@@ -5,7 +5,12 @@
     <mat-label> Caract Truck </mat-label>
     <input matInput type = "any" [(ngModel)]="caractId"/>
   </mat-form-field>
-
+  <br>
+  <mat-form-field>
+    <mat-label> Date </mat-label>
+    <input matInput type = "any" [(ngModel)]="date"/>
+  </mat-form-field>
+  <br>
   <button mat-raised-button color="primary" (click)="getHeuristic()">Get Heuristic By Time</button>
   <button mat-raised-button color="primary" (click)="getHeuristicWeight()">Get Heuristic By Weight</button>
   <button mat-raised-button color="primary" (click)="getHeuristicTimeWeight()">Get Heuristic By Time/Weight</button>

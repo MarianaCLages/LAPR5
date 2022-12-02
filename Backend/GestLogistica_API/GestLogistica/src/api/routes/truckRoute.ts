@@ -81,13 +81,13 @@ export default (app: Router) => {
         (req, res, next) => ctrl.getTruckByPlateParam(req, res, next));
 
 
-    route.get('/send_info/:idTruck',
+    route.get('/send_info/:idTruck/:date',
         (req,res,next) => ctrl.sendInfo(req,res,next) );
 
-    route.get('/get_heuristic_weight/:idTruck',
+    route.get('/get_heuristic_weight/:idTruck/:date',
         (req,res,next) => ctrl.getHeuristicByWeight(req,res,next) );
 
-    route.get('/get_heuristic_weight_time/:idTruck',
+    route.get('/get_heuristic_weight_time/:idTruck/:date',
         (req,res,next) => ctrl.getHeuristicByTimeWeight(req,res,next) );
 
 }
