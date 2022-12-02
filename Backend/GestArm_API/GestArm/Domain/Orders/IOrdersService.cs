@@ -18,5 +18,5 @@ public interface IOrdersService
     Task<OrderDto> UpdateAsync(OrderId id, CreatingOrderDto dto);
     Task<List<OrderDto>> GetAllAsync();
 
-    Task<OrderDto> GetOrderByDomainIdAsync(string nextID, string data);
+    Task<List<OrderDto>> GetOrderByDomainIdAsync(string nextID, string data);
 }

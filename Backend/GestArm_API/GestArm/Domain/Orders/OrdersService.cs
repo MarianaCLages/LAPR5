@@ -96,7 +96,7 @@ public class OrdersService : IOrdersService
 
     public async Task<List<OrderDto>> GetByOrderDateAysnc(DateTime data)
     {
-        var orders = await _repository.GetByOrderDateAysnc(data);
+        var orders = await _repository.GetByOrderDateAysnc(new OrderDate(data));
 
         return orders.Select(order => new OrderDto(order.Id, order.OrderDomainId.ToString(),
             order.OrderDate.ToString(),
@@ -124,7 +124,7 @@ public class OrdersService : IOrdersService
             order.ChargingTime.ToDouble(), order.UnloadingTime.ToDouble(), order.WarehouseId)).ToList();
     }
 
-    public async Task<OrderDto> GetOrderByDomainIdAsync(string data, string next)
+    public async Task<List<OrderDto>> GetOrderByDomainIdAsync(string data, string next)
     {
 
         data = data.Replace("-", "");
@@ -134,8 +134,14 @@ public class OrdersService : IOrdersService
         var order =
             await _repository.GetOrderByDomainIdAsync(sum);
 
-        return new OrderDto(order.Id, order.OrderDomainId.ToString(), order.OrderDate.ToString(),
+        var orderDto = new OrderDto(order.Id, order.OrderDomainId.ToString(), order.OrderDate.ToString(),
             order.OrderMass.ToDouble(),
             order.ChargingTime.ToDouble(), order.UnloadingTime.ToDouble(), order.WarehouseId);
+        
+        List<OrderDto> list = new List<OrderDto>();
+        
+        list.Add(orderDto);
+
+        return list;
     }
 }
