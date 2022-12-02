@@ -33,7 +33,14 @@ export class ListOrdersComponent {
     'Order ID',
     'Order Date',
     'Warehouse ID',
+    'OrderDate & WarehouseID',
+    'All Orders'
   ];
+
+  orderIdentifier : any;
+  orderFilterDate : any;
+  warehouseFilterID: any;
+  dualFilterOn : boolean = false;
 
   orders = new MatTableDataSource<IOrderDTO>();
   displayedColumns: string[] = [
@@ -62,18 +69,21 @@ export class ListOrdersComponent {
   async ngOnInit(): Promise<void> {
     //calls the service to get the orders
     this.getOrdersService.getOrders().then((data: any) => {
-      this.orders = data;
+      this.orders.data = data;
     });
   }
 
   chooseFilter() {
     //clear the form
-    this.identifier = null;
-    this.orderDate = null;
-    this.orderMass = null;
-    this.chargingTime = null;
-    this.unlodingTime = null;
-    this.warehouseId = null;
+    this.orderIdentifier = null;
+    this.orderFilterDate = null;
+    this.warehouseFilterID = null;
+
+    if(this.filterOption == 'OrderDate & WarehouseID'){
+      this.dualFilterOn = true;
+    } else {
+      this.dualFilterOn = false;
+    }
 
     if(this.filterOption == 'All Orders') {
       this.getOrdersByFilter();
@@ -86,9 +96,10 @@ export class ListOrdersComponent {
     this.error = false;
 
     if (this.filterOption == 'Order ID') {
-      this.getOrdersService.getOrdersByID(this.identifier).then(
+      this.getOrdersService.getOrdersByID(this.orderIdentifier).then(
         (data: any) => {
-          this.orders = data;
+          this.orders.data = data;
+          this.orders.paginator = this.paginator;
         },
         //transforms into a http error
         (error: any) => {
@@ -105,9 +116,9 @@ export class ListOrdersComponent {
         }
       );
     } else if (this.filterOption == 'Order Date') {
-      this.getOrdersService.getOrdersByDate(this.orderDate).then(
+      this.getOrdersService.getOrdersByDate(this.orderFilterDate).then(
         (data: any) => {
-          this.orders = data;
+          this.orders.data = data;
         },
         //transforms into a http error
         (error: any) => {
@@ -124,9 +135,9 @@ export class ListOrdersComponent {
         }
       );
     } else if (this.filterOption == 'Warehouse ID') {
-      this.getOrdersService.getOrdersByWarehouseID(this.warehouseId).then(
+      this.getOrdersService.getOrdersByWarehouseID(this.warehouseFilterID).then(
         (data: any) => {
-          this.orders = data;
+          this.orders.data = data;
         },
         //transforms into a http error
         (error: any) => {
@@ -145,7 +156,26 @@ export class ListOrdersComponent {
     } else if (this.filterOption == 'All Orders') {
       this.getOrdersService.getOrders().then(
         (data: any) => {
-          this.orders = data;
+          this.orders.data = data;
+        },
+        //transforms into a http error
+        (error: any) => {
+          this.error = true;
+          if (error.status == 400) {
+            this.errormessage = error.error;
+          } else {
+            if (error.status == 500) {
+              this.errormessage = error.error.errors.message;
+            } else {
+              this.errormessage = 'An unknown error has occurred!';
+            }
+          }
+        }
+      );
+    } else if (this.filterOption == 'OrderDate & WarehouseID') {
+      this.getOrdersService.getOrdersByDateAndWarehouseID(this.orderFilterDate, this.warehouseFilterID).then(
+        (data: any) => {
+          this.orders.data = data;
         },
         //transforms into a http error
         (error: any) => {
@@ -162,6 +192,9 @@ export class ListOrdersComponent {
         }
       );
     }
+
+    this.orders.paginator = this.paginator;
+
   }
 
   goBack() {

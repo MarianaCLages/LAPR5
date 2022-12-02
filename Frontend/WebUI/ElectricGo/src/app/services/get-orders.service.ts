@@ -28,6 +28,8 @@ export class GetOrdersService {
 
     //get the orders from the backend
     this.orderAllURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getAllOrdersURL();
+
+    console.log(this.orderAllURL);
     return this.http.get<IOrderDTO>(this.orderAllURL, options).toPromise();
   }
 
@@ -41,12 +43,15 @@ export class GetOrdersService {
       headers: headers
     };
 
+    console.log(id);
+    const strArr = id.split("/");
+
     //get the orders from the backend
-    this.orderParamURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getOrderByParamURL() + "/id" + id;
+    this.orderParamURL = this.appConfigService.getWarehouseURL() + "Order/search?nextId=" + strArr[0] + "&data=" + strArr[1];
     return this.http.get<IOrderDTO>(this.orderParamURL, options).toPromise();
   }
 
-  getOrdersByDate(date: Date) : any {
+  getOrdersByDate(date: any) : any {
     //set the http headers
     const headers = {
     };
@@ -56,8 +61,14 @@ export class GetOrdersService {
       headers: headers
     };
 
+    let dateStr : string = date;
+    dateStr.replace("/", "-");
+    const arr = dateStr.split("/");
+    let correctDate = arr[0] + "/" + arr[2] + "/" + arr[1];
+
     //get the orders from the backend
-    this.orderParamURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getOrderByParamURL() + "/date" + date;
+    this.orderParamURL = this.appConfigService.getWarehouseURL() + "Order/byDate?data=" + correctDate;
+    console.log(this.orderParamURL);
     return this.http.get<IOrderDTO>(this.orderParamURL, options).toPromise();
   }
 
@@ -72,7 +83,32 @@ export class GetOrdersService {
     };
 
     //get the orders from the backend
-    this.orderParamURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getOrderByParamURL() + "/warehouseID" + warehouseID;
+    this.orderParamURL = this.appConfigService.getWarehouseURL() +  "Order/byWarehouseID?warehouseId=" + warehouseID;;
+    console.log(this.orderParamURL);
+    return this.http.get<IOrderDTO>(this.orderParamURL, options).toPromise();
+  }
+
+  getOrdersByDateAndWarehouseID(orderFilterDate : string,warehouseID: string) : any {
+    //set the http headers
+    const headers = {
+    };
+
+    //set the http options
+    const options = {
+      headers: headers
+    };
+
+    orderFilterDate = orderFilterDate.trim();
+    warehouseID = warehouseID.trim();
+
+    let dateStr : string = orderFilterDate;
+    dateStr.replace("/", "-");
+    const arr = dateStr.split("/");
+    let correctDate = arr[0] + "/" + arr[2] + "/" + arr[1];
+
+    //get the orders from the backend
+    this.orderParamURL = this.appConfigService.getWarehouseURL() +  "Order/Filtering?warehouseId=" + warehouseID + "&data=" + correctDate;
+    console.log(this.orderParamURL);
     return this.http.get<IOrderDTO>(this.orderParamURL, options).toPromise();
   }
 }

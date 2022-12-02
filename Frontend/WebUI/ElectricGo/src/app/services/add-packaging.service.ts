@@ -12,18 +12,16 @@ export class AddPackagingService {
 
   constructor(private http: HttpClient) {}
 
-   addPackaging(createPackage: ICreatePackagingDTO) {
+  addPackaging(createPackage: ICreatePackagingDTO) {
     const headers = { 'content-type': 'application/json' };
 
     const body = JSON.stringify(createPackage);
 
-   const data = this.http
-      .post<ICreatePackagingDTO>(this.baseUrl, body, {
-        headers: headers,
-        observe: 'response',
-      });
+    const data = this.http.post<ICreatePackagingDTO>(this.baseUrl, body, {
+      headers: headers,
+      observe: 'response',
+    });
 
-      return data;
-
+    return data;
   }
 }
