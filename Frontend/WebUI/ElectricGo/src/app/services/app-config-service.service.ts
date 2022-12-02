@@ -57,9 +57,14 @@ export class AppConfigServiceService {
     return this.appConfig.getAllTrucks;
   }
 
+
   // Orders
   getOrderByParamURL() {
     return this.appConfig.getOrderByParamPath;
+  }
+
+  getAllOrdersURL() {
+    return this.appConfig.getAllOrdersPath;
   }
 
 
