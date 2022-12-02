@@ -38,6 +38,7 @@ export default class PackagingController
 
   public async getByOrder(req: Request, res: Response, next: NextFunction) {
     try {
+      console.log(req.body)
       const pathOrError = await this.packagingServiceInstance.getByOrderS(req.body as IPackagingOrderDTO);
 
       if (pathOrError.isFailure) {
@@ -141,5 +142,50 @@ export default class PackagingController
   protected executeImpl(): Promise<any> {
     throw new Error("Method not implemented.");
   }
+
+  public async getPackagingByTruckParams(req: Request, res: Response, next: NextFunction) {
+    try {
+      const truck : string = req.params.truckRef;
+      const dto : IPackagingTruckDTO = {truckRef: truck};
+      const pathOrError = await this.packagingServiceInstance.getByTruckAsync(dto);
+
+      if (pathOrError.isFailure) {
+        return res.status(400).json(pathOrError.error).send();
+      }
+      if(pathOrError.getValue().length == 0) {
+        return res.status(404).json("No packaging with that truck was found!").send();
+      }
+      
+      const pathDTO = pathOrError.getValue();
+      return res.status(200).json(pathDTO).send();
+
+    } catch (e) {
+      return next(e);
+    }
+  }
+
+  public async getPackagingByOrderParams(req: Request, res: Response, next: NextFunction) {
+    try {
+      const order : string = req.params.orderRef+ "/"+ req.params.orderSeq;
+      const dto : IPackagingOrderDTO = {orderRef: order};
+
+      const pathOrError = await this.packagingServiceInstance.getByOrderS(dto);
+
+      if (pathOrError.isFailure) {
+        return res.status(400).json(pathOrError.error).send();
+      }
+
+      if(pathOrError.getValue().length == 0) {
+        return res.status(404).json("No packaging with that order was found!").send();
+      }
+
+      const pathDTO = pathOrError.getValue();
+      return res.status(200).json(pathDTO).send();
+
+    } catch (e) {
+      return next(e);
+    }
+  }
+
 
 }

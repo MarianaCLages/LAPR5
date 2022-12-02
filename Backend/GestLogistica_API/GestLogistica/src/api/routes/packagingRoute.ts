@@ -75,5 +75,11 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.getByTruck(req, res, next));
 
+  route.get('/truck/:truckRef',
+  (req,res,next) => ctrl.getPackagingByTruckParams(req,res,next) );
+
+  route.get('/order/:orderRef/:orderSeq',
+  (req,res,next) => ctrl.getPackagingByOrderParams(req,res,next) );
+
 
 };

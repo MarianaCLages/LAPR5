@@ -8,4 +8,6 @@ export default interface IPackagingController  {
   getById(req: Request, res: Response, next: NextFunction);
   getByOrder(req: Request, res: Response, next: NextFunction);
   getByTruck(req: Request, res: Response, next: NextFunction);
+  getPackagingByTruckParams(req: Request, res: Response, next: NextFunction);
+  getPackagingByOrderParams(req: Request, res: Response, next: NextFunction);
 }
