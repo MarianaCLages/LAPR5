@@ -31,7 +31,6 @@ export class ListPathsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.getPathsService.getPaths().then((data: IPathDTO[]) => {
-      console.log(data);
       this.paths.data = data;
     }
     );

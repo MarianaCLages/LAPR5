@@ -52,8 +52,7 @@ export class ListTruckComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.getTrucksService.getTrucks().then((data: ITruckDTO[]) => {
-      console.log(data);
+    this.getTrucksService.getTrucks().then((data: any) => {
       this.trucks.data = data;
     });
   }
@@ -76,7 +75,7 @@ export class ListTruckComponent implements OnInit {
     if (this.filterOption == 'Truck plate') {
       this.getTrucksService.getTrucksByPlate(this.truckPlateRef).then(
         (data: any) => {
-          this.trucks = data;
+          this.trucks.data = data;
         },
         //transforms into a http error
         (error: any) => {
@@ -95,7 +94,7 @@ export class ListTruckComponent implements OnInit {
     } else if (this.filterOption == 'Truck characteristic') {
       this.getTrucksService.getTrucksByCaract(this.truckCaractRef).then(
         (data: any) => {
-          this.trucks = data;
+          this.trucks.data = data;
         },
         //transforms into a http error
         (error: any) => {
@@ -114,7 +113,7 @@ export class ListTruckComponent implements OnInit {
     } else if (this.filterOption == 'All Trucks') {
       this.getTrucksService.getTrucks().then(
         (data: any) => {
-          this.trucks = data;
+          this.trucks.data = data;
         },
         //transforms into a http error
         (error: any) => {
@@ -131,6 +130,7 @@ export class ListTruckComponent implements OnInit {
         }
       );
     }
+    this.trucks.paginator = this.paginator;
   }
 
   goBack() {

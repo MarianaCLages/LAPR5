@@ -23,7 +23,7 @@ export class GetTrucksService {
 
     //get the trucks from the backend
     this.truckAllURL = this.appConfigService.getLogisticsURL() + this.appConfigService.getAllTrucksURL();
-    
+
     return this.http.get<ITruckDTO>(this.truckAllURL, options).toPromise();
   }
 

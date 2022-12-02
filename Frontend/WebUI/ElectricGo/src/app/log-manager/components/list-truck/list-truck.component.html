@@ -30,7 +30,8 @@
     <input matInput type="string" [(ngModel)]="truckCaractRef" (change)="getTrucksByFilter()">
   </mat-form-field>
 
-  <table mat-table [dataSource]="trucks">
+  <div class="mat-elevation-z8">
+   <table mat-table [dataSource]="trucks">
     <ng-container matColumnDef="Truck characteristic">
       <th mat-header-cell *matHeaderCellDef> Truck characteristic</th>
       <td mat-cell *matCellDef="let truck"> {{truck.caractTruck}} </td>
@@ -69,6 +70,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+</div>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Page navigation"></mat-paginator>
 
