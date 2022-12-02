@@ -56,9 +56,9 @@ public class OrdersRepository : BaseRepository<Order, OrderId>, IOrdersRepositor
         return await _context.Orders.Where(u => u.WarehouseId.Equals(warehouseId)).ToListAsync();
     }
 
-    public async Task<List<Order>> GetByOrderDateAysnc(DateTime date)
+    public async Task<List<Order>> GetByOrderDateAysnc(OrderDate date)
     {
-        return await _context.Orders.Where(u => u.OrderDate.Data.Equals(date)).ToListAsync();
+        return await _context.Orders.Where(u => u.OrderDate.Data.Equals(date.Data)).ToListAsync();
     }
 
     public async Task<List<Order>> GetByFilterAsync(string warehouseId, DateTime data)

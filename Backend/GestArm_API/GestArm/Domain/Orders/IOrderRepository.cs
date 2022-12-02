@@ -8,7 +8,7 @@ public interface IOrdersRepository : IRepository<Order, OrderId>
 
     Task<List<Order>> GetByWarehouseIdAsync(string warehouseId);
 
-    Task<List<Order>> GetByOrderDateAysnc(DateTime warehouseId);
+    Task<List<Order>> GetByOrderDateAysnc(OrderDate warehouseId);
 
     Task<List<Order>> GetAllAsync();
 
