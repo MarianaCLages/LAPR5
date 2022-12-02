@@ -1,25 +1,35 @@
-<section class="example-section">
-  <span class="example-list-section">
-    <ul>
-      <li *ngFor="let subtask of task.subtasks">
-        <mat-checkbox [(ngModel)]="subtask.completed"
-                      [color]="subtask.color"
-                      (ngModelChange)="updateAllComplete()">
-          {{subtask.name}}
-        </mat-checkbox>
-      </li>
-    </ul>
-  </span>
-</section>
-
-
-<!--Table with all the paths from the array.-->
-<div class="mat-elevation-z8">
+<!--Table with all the paths from the array.--><div class="mat-elevation-z8">
   <br>
   <div class = "titles">
     <h1>Logistic Manager</h1>
     <h2>List Trucks</h2>
   </div>
+
+  <div>
+    <mat-error *ngIf="error" class="alert alert-warning">
+      <strong>Error</strong> {{errorMessage |json | slice:0:100}}
+    </mat-error>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Filter Options</mat-label >
+    <mat-select [(value)]="filterOption" (selectionChange)="chooseFilter()">
+      <mat-option *ngFor="let option of options" [value]="option" >
+        {{option}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" *ngIf="filterOption === 'Truck plate'">
+    <mat-label>Truck plate</mat-label>
+    <input matInput type="string" [(ngModel)]="truckPlateRef" (change)="getTrucksByFilter()">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" *ngIf="filterOption === 'Truck characteristic'">
+    <mat-label>Truck characteristic</mat-label>
+    <input matInput type="string" [(ngModel)]="truckCaractRef" (change)="getTrucksByFilter()">
+  </mat-form-field>
+
   <table mat-table [dataSource]="trucks">
     <ng-container matColumnDef="Truck characteristic">
       <th mat-header-cell *matHeaderCellDef> Truck characteristic</th>
