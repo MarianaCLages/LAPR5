@@ -6,8 +6,7 @@ import IOrderDTO from 'src/app/shared/orderDTO';
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
-  styleUrls: ['./create-order.component.css'],
-  providers: [CreateOrderService, GetWarehouseServiceService]
+  styleUrls: ['./create-order.component.css']
 })
 
 export class CreateOrderComponent implements OnInit {
@@ -77,7 +76,7 @@ export class CreateOrderComponent implements OnInit {
           if (error.status == 500) {
             this.errorMessage = error.error.errors.message;
           } else {
-            this.errorMessage = "Unknown error!";
+            this.errorMessage = "An unknown error has occurred!";
           }
         }
       }

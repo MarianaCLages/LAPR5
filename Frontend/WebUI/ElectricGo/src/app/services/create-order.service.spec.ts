@@ -4,7 +4,7 @@ import { CreateOrderService } from './create-order.service';
 import {HttpClient, HttpHandler} from "@angular/common/http";
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('AddOrderService', () => {
+describe('CreateOrderService', () => {
   let service: CreateOrderService;
 
   beforeEach(() => {
