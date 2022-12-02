@@ -36,4 +36,3 @@ Terá de ser criado um serviço que irá receber o ficheiro e irá guardar o fic
 
 # Armazenamento de dados
 O JSON de configuração irá ser guardado na pasta de assets. No ficheiro de configuração irá conter o id do armazém e o caminho relativo para o ficheiro do modelo. O ficheiro do modelo irá ser guardado na pasta de assets.
-

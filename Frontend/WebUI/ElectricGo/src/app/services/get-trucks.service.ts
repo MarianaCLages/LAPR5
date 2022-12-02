@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import {ITruckDTO} from '../shared/truckDTO';
 import { AppConfigServiceService } from 'src/app/services/app-config-service.service';
+import { HttpClient } from '@angular/common/http';
+import {ITruckDTO} from '../shared/truckDTO';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,7 @@ export class GetTrucksService {
 
     //get the trucks from the backend
     this.truckAllURL = this.appConfigService.getLogisticsURL() + this.appConfigService.getAllTrucksURL();
+    
     return this.http.get<ITruckDTO>(this.truckAllURL, options).toPromise();
   }
 
@@ -51,6 +52,7 @@ export class GetTrucksService {
 
     //get the trucks from the backend
     this.truckParamURL = this.appConfigService.getLogisticsURL() + this.appConfigService.getTruckByParamURL() + "/caract/" + caract;
+
     return this.http.get<ITruckDTO>(this.truckParamURL, options).toPromise();
   }
 

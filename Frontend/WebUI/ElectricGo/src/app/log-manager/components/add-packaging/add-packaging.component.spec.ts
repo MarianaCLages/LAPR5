@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+/*import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddPackagingComponent } from './add-packaging.component';
 import {HttpClient, HttpHandler} from "@angular/common/http";
@@ -22,4 +22,4 @@ describe('AddPackagingComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+});*/

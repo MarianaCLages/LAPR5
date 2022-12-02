@@ -28,7 +28,7 @@ export class AppConfigServiceService {
 
 
   getLogisticsURL() {
-
+    console.log(this.appConfig.logisticsURI);
     return this.appConfig.logisticsURI;
   }
 
@@ -42,10 +42,12 @@ export class AppConfigServiceService {
   }
 
   getTruckByParamURL() {
+    console.log(this.appConfig.getTruckByParamPath);
     return this.appConfig.getTruckByParamPath;
   }
 
   getAllTrucksURL() {
+    console.log(this.appConfig.getAllTrucksPath);
     return this.appConfig.getAllTrucks;
   }
 
