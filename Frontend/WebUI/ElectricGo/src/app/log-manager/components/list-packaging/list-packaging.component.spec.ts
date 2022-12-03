@@ -15,8 +15,8 @@ describe('ListPackagingComponent', () => {
     listPackagingServiceFake.getPackaging.and.returnValue(Promise.resolve(
       [
         {
-          "orderRef": "A1",
-          "truckRef": "A2",
+          "orderRef": "A1/1",
+          "truckRef": "AA-77-BB",
           "posX": 5,
           "posY": 1,
           "posZ": 1,
@@ -44,8 +44,8 @@ describe('ListPackagingComponent', () => {
         //create an IPathDTO array
         let packaging: IPackagingDTO[] = [
           {
-            "orderRef": "A1",
-            "truckRef": "A2",
+            "orderRef": "A1/2",
+            "truckRef": "AA-55-CC",
             "pos3DX": 5,
             "pos3DY": 1,
             "pos3DZ": 1,
