@@ -1,10 +1,10 @@
 {
   "warehouseURI": "http://localhost:5000/api/",
   "logisticsURI": "http://localhost:3000/api/",
-  "getPathPath": "paths/allPaths",
+  "getPathPath": "paths",
   "getPackagingPath": "packagings/all",
   "getPackagingByParamPath": "packagings",
   "getTruckByParamPath" : "trucks",
   "getAllTrucks" : "trucks/all",
-  "getAllOrders" : "Order"
+  "getAllOrdersPath" : "Order"
 }

@@ -1,14 +1,14 @@
-import { Inject, Service } from 'typedi';
+import {Inject, Service} from 'typedi';
 
-import { Path } from "../domain/path/path";
-import { PathId } from "../domain/path/pathId";
+import {Path} from "../domain/path/path";
+import {PathId} from "../domain/path/pathId";
 
-import { Document, FilterQuery, Model, models } from 'mongoose';
-import { IPathPersistence } from '../dataschema/IPathPersistence';
-import { PathMap } from '../mappers/PathMap';
+import {Document, FilterQuery, Model, models} from 'mongoose';
+import {IPathPersistence} from '../dataschema/IPathPersistence';
+import {PathMap} from '../mappers/PathMap';
 import IPathRepo from '../services/IRepos/IPathRepo';
-import { Result } from "../core/logic/Result";
-import { PathBeginningWarehouseId } from '../domain/path/pathBeginningWarehouseId';
+import {Result} from "../core/logic/Result";
+import {PathBeginningWarehouseId} from '../domain/path/pathBeginningWarehouseId';
 import IPathEndingWarehouseId from "../dto/path/IPathEndingWarehouseIdDTO";
 
 @Service()
@@ -25,7 +25,7 @@ export default class PathRepo implements IPathRepo {
 
         const idX = path.id instanceof PathId ? (path.id).toValue() : path.id;
 
-        const query = { domainId: idX };
+        const query = {domainId: idX};
         const roleDocument = await this.pathSchema.findOne(query as FilterQuery<IPathPersistence & Document>);
 
         return !!roleDocument === true;
@@ -40,7 +40,7 @@ export default class PathRepo implements IPathRepo {
     }
 
     public async findByDomainId(pathId: PathId | string): Promise<Path> {
-        const query = { id: pathId };
+        const query = {id: pathId};
         const roleRecord = await this.pathSchema.findOne(query as FilterQuery<IPathPersistence & Document>);
 
         if (roleRecord != null) {
@@ -66,7 +66,7 @@ export default class PathRepo implements IPathRepo {
     }
 
     public async getByBeginningWarehouseId(beginningWarehouseId: PathBeginningWarehouseId | string): Promise<Result<Array<Path>>> {
-        const query = { beginningWarehouseId: beginningWarehouseId };
+        const query = {beginningWarehouseId: beginningWarehouseId};
 
         var lista = new Array<Path>;
         (await this.pathSchema.find(query)).forEach(
@@ -82,7 +82,7 @@ export default class PathRepo implements IPathRepo {
     }
 
     public async getByEndingWarehouseId(endingWarehouseId: IPathEndingWarehouseId | string): Promise<Result<Array<Path>>> {
-        const query = { endingWarehouseId: endingWarehouseId };
+        const query = {endingWarehouseId: endingWarehouseId};
 
         const lista = new Array<Path>;
         (await this.pathSchema.find(query)).forEach(
@@ -99,14 +99,14 @@ export default class PathRepo implements IPathRepo {
 
 
     public async delete(pathId: PathId) {
-        const query = { idPath: pathId };
+        const query = {idPath: pathId};
         this.pathSchema.deleteMany(query as FilterQuery<IPathPersistence & Document>);
         return true;
     }
 
     public async update(path: Path): Promise<Result<Path>> {
 
-        const query = { id: path.id.toString() };
+        const query = {id: path.id.toString()};
 
         const pathDocument = await this.pathSchema.findOne(query);
 
@@ -131,14 +131,25 @@ export default class PathRepo implements IPathRepo {
 
             }
         } catch (err) {
+
             throw err;
         }
     }
 
-    private createBaseQuery(): any {
-        return {
-            where: {},
-        }
-    }
+    async getByBeginningAndEndingWarehouseId(beginningWarehouseId: string, endingWarehouseId: string): Promise<Result<Array<Path>>> {
+        const query = {beginningWarehouseId: beginningWarehouseId, endingWarehouseId: endingWarehouseId};
 
+        const lista = new Array<Path>;
+        (await this.pathSchema.find(query)).forEach(
+            path =>
+                lista.push(PathMap.toDomain(path))
+        )
+
+        if (lista != null) {
+            return Result.ok(lista);
+        } else {
+            return null;
+        }
+
+    }
 }

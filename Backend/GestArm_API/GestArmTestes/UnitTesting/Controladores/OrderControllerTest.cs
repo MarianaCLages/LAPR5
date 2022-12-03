@@ -122,7 +122,7 @@ public class OrderControllerTest
 
         //ACT
         _ServiceMock.Setup(x => x.GetByOrderDateAysnc(en.OrderDate.Data)).ReturnsAsync(listDto);
-        var result = _controller.GetByDataDeOrderAysnc(en.OrderDate.Data).Result;
+        var result = _controller.GetByDataDeOrderAysnc(en.OrderDate.Data.ToString()).Result;
 
         var objExpected = result.Value.First();
         var objActual = listDto.First();

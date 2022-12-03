@@ -11,6 +11,7 @@ export class GetHeuristicService {
   baseURL= 'http://localhost:3000/api/trucks/send_info/';
   baseURLWeight = 'http://localhost:3000/api/trucks/get_heuristic_weight/';
   baseURLWeightTime = 'http://localhost:3000/api/trucks/get_heuristic_weight_time/';
+  warehouseURL = 'http://localhost:5000/api/Warehouse'
 
   constructor(
     private http: HttpClient,
@@ -32,8 +33,40 @@ export class GetHeuristicService {
     });
 
     const result = (await data.json());
-    console.log(result)
-    return result;
+    console.log(result);
+    let warehouseIDs = result.split(',');
+
+    console.log(warehouseIDs);
+    const data2 = await fetch(this.warehouseURL, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+
+    const result2 = (await data2.json());
+    let warehouseArray = [];
+    let id;
+
+    console.log(result2);
+    for(let j = 0; j < warehouseIDs.length; j++){
+
+      for(let i = 0; i < result2.length; i++){
+
+        id = + result2[i].alphaNumId.substring(1);
+        console.log(id);
+        if(id == + warehouseIDs[j]){
+          console.log('OLA');
+          warehouseArray.push(result2[i]);
+        }
+
+      }
+
+    }
+
+    console.log(warehouseArray);
+    return warehouseArray;
 
   }
 
@@ -51,8 +84,41 @@ export class GetHeuristicService {
     })
 
     const result = (await data.json());
-    console.log(result)
-    return result;
+    console.log(result);
+    let warehouseIDs = result.split(',');
+
+    console.log(warehouseIDs);
+    const data2 = await fetch(this.warehouseURL, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+
+    const result2 = (await data2.json());
+    let warehouseArray = [];
+    let id;
+
+    console.log(result2);
+    for(let j = 0; j < warehouseIDs.length; j++){
+
+      for(let i = 0; i < result2.length; i++){
+
+        id = + result2[i].alphaNumId.substring(1);
+        console.log(id);
+        if(id == + warehouseIDs[j]){
+          console.log('OLA');
+          warehouseArray.push(result2[i]);
+        }
+
+      }
+
+    }
+
+    console.log(warehouseArray);
+    return warehouseArray;
+
   }
 
   public async getHeuristicByWeightTime(alphaId: any,date: any):Promise<any>{
@@ -69,7 +135,40 @@ export class GetHeuristicService {
     })
 
     const result = (await data.json());
-    console.log(result)
-    return result;
+    console.log(result);
+    let warehouseIDs = result.split(',');
+
+    console.log(warehouseIDs);
+    const data2 = await fetch(this.warehouseURL, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+
+    const result2 = (await data2.json());
+    let warehouseArray = [];
+    let id;
+
+    console.log(result2);
+    for(let j = 0; j < warehouseIDs.length; j++){
+
+      for(let i = 0; i < result2.length; i++){
+
+        id = + result2[i].alphaNumId.substring(1);
+        console.log(id);
+        if(id == + warehouseIDs[j]){
+          console.log('OLA');
+          warehouseArray.push(result2[i]);
+        }
+
+      }
+
+    }
+
+    console.log(warehouseArray);
+    return warehouseArray;
+
   }
 }

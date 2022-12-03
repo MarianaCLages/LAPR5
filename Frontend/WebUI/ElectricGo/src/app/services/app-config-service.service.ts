@@ -18,7 +18,6 @@ export class AppConfigServiceService {
     return this.http.get<any>('./assets/config.json').toPromise()
       .then(data => {
         this.appConfig = data;
-        console.log(this.appConfig);
       });
   }
 
@@ -28,7 +27,6 @@ export class AppConfigServiceService {
 
 
   getLogisticsURL() {
-    console.log(this.appConfig.logisticsURI);
     return this.appConfig.logisticsURI;
   }
 
@@ -36,24 +34,22 @@ export class AppConfigServiceService {
     return this.appConfig.getPathPath;
   }
 
+
+
   // Packaging
   getPackagingURL() {
-    console.log(this.appConfig.getPackagingPath);
     return this.appConfig.getPackagingPath;
   }
 
   getPackagingByParamURL() {
-    console.log(this.appConfig.getPackagingByParamPath);
     return this.appConfig.getPackagingByParamPath;
   }
 
   getTruckByParamURL() {
-    console.log(this.appConfig.getTruckByParamPath);
     return this.appConfig.getTruckByParamPath;
   }
 
   getAllTrucksURL() {
-    console.log(this.appConfig.getAllTrucksPath);
     return this.appConfig.getAllTrucks;
   }
 
