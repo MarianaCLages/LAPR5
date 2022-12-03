@@ -10,7 +10,6 @@ export class ListPackagingService {
 
   private packaging: any;
   private packagingByParamURL: any;
-  private baseURL = this.appConfigService.getLogisticsURL() + this.appConfigService.getPackagingByParamURL();
 
   constructor(
     private http: HttpClient,
