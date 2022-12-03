@@ -11,6 +11,7 @@ import {Result} from "../core/logic/Result";
 import {BaseController} from "../core/infra/BaseController";
 import ITruckPlateDTO from "../dto/truck/ITruckPlateDTO";
 import SendInfoToPlanningService from "../services/sendInfoToPlanningService";
+import {delay} from "lodash";
 
 @Service()
 export default class truckController
@@ -157,6 +158,7 @@ export default class truckController
             await this.fileService.getTruck(idTruck);
             this.fileService.sendOrdersToPlanning(idTruck,req.params.date);
 
+
             stringTest = await fileService.getHeuristic();
         }catch (error){
             return res.status(400).json(error.message);
@@ -176,6 +178,7 @@ export default class truckController
         this.fileService.sendTrucks();
 
         this.fileService.sendOrdersToPlanning(idTruck,req.params.date);
+
 
         stringTest = await fileService.getHeuristicByWeight();
 
@@ -256,6 +259,7 @@ export default class truckController
             return next(e);
         }
     }
+
 
 
 }

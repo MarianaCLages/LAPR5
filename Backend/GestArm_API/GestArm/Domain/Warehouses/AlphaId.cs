@@ -15,7 +15,7 @@ public class AlphaId : ValueObject
 
     private void checkAlphaId(string alphaNumId)
     {
-        var rg = new Regex(@"^[a-zA-Z0-9\s,]*$");
+        var rg = new Regex("C[0-9]{2}");
 
         if (alphaNumId.Length != 3)
             throw new BusinessRuleValidationException("AlphaId exceeds character number");
