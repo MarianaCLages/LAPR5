@@ -1,8 +1,10 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { GetOrdersService } from './get-orders.service';
-import {HttpClient, HttpHandler} from "@angular/common/http";
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {GetOrdersService} from './get-orders.service';
+import {HttpClient} from "@angular/common/http";
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {AppConfigServiceService} from "./app-config-service.service";
+import IOrderDTO from "../shared/orderDTO";
 
 describe('GetOrdersService', () => {
   let service: GetOrdersService;
@@ -19,6 +21,19 @@ describe('GetOrdersService', () => {
   });
 
   it('should return an array of orders', () => {
-    expect(service.getOrders()).toBeTruthy();
+    let fakeAppConfigService = {
+      getWarehouseURL: () => 'https://localhost:5001/api/',
+      getAllOrdersURL: () => 'Order'
+    } as AppConfigServiceService;
+    const http = TestBed.inject(HttpClient);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+
+    let service = new GetOrdersService(http, fakeAppConfigService);
+
+    service.getOrders().then((data:IOrderDTO) => {
+      expect(data).toBeTruthy();
+      //podes fazer qualquer teste aqui
+    });
+
   });
 });

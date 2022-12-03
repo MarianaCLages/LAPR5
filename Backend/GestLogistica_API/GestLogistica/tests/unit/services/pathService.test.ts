@@ -304,7 +304,6 @@ describe('Path Service test', () => {
             getByBeginningAndEndingWarehouseId: sinon.stub().returns(Promise.resolve(true))
         }
 
-
         //mocks warehouseRepository
         const warehouseRepository = {
             exists: sinon.stub().returns(Promise.resolve(true)),
