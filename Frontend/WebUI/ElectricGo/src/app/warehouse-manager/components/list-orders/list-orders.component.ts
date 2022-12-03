@@ -33,7 +33,7 @@ export class ListOrdersComponent {
     'Order ID',
     'Order Date',
     'Warehouse ID',
-    'OrderDate & WarehouseID',
+    'Order Date and Warehouse ID',
     'All Orders'
   ];
 
@@ -79,7 +79,7 @@ export class ListOrdersComponent {
     this.orderFilterDate = null;
     this.warehouseFilterID = null;
 
-    if(this.filterOption == 'OrderDate & WarehouseID'){
+    if(this.filterOption == 'Order Date and Warehouse ID'){
       this.dualFilterOn = true;
     } else {
       this.dualFilterOn = false;
@@ -172,7 +172,7 @@ export class ListOrdersComponent {
           }
         }
       );
-    } else if (this.filterOption == 'OrderDate & WarehouseID') {
+    } else if (this.filterOption == 'Order Date and Warehouse ID') {
       this.getOrdersService.getOrdersByDateAndWarehouseID(this.orderFilterDate, this.warehouseFilterID).then(
         (data: any) => {
           this.orders.data = data;
@@ -192,12 +192,10 @@ export class ListOrdersComponent {
         }
       );
     }
-
     this.orders.paginator = this.paginator;
-
   }
 
   goBack() {
-      window.history.back();
+    window.history.back();
   }
 }
