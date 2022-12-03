@@ -205,31 +205,31 @@ jobs:
             GIT_USERNAME:$GIT_PASSWORD@masterdatawarehousemanagement.scm.azurewebsites.net/MasterDataWarehouseManagement.git
             git push azure master --force 
 
-  Login-to-azure-and-deploy-gest-log:
-    description: Deploy the gestLog application into the Azure cloud
-    executor: azure-cli/azure-docker
-    steps:
-      - azure-cli/install
-      - azure-cli/login-with-service-principal
-      - attach_workspace:
-          at: Backend/GestLogistica_API/GestLogistica
-      - run:
-          working_directory: Backend/GestLogistica_API/GestLogistica
-          name: Access all application resources from the azure cloud
-          command: az webapp deployment source show --resource-group MasterDataWarehouseManagement --name MasterDataLogManagement
-      - run:
-          working_directory: Backend/GestLogistica_API/GestLogistica
-          name: Deploy gestLog application to Azure cloud
-          command: |
-            az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataLogManagement
-            git init
-            git config --global user.email "1201487@isep.ipp.pt"
-            git config --global user.name "Jordans"
-            git config --global http.postBuffer 157286400
-            git add .
-            git commit -m "Deploy Azure Web Application"
-            git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@masterdatawarehousemanagement.scm.azurewebsites.net/MasterDataWarehouseManagement.git
-            git push azure master --force 
+  # Login-to-azure-and-deploy-gest-log:
+  #   description: Deploy the gestLog application into the Azure cloud
+  #   executor: azure-cli/azure-docker
+  #   steps:
+  #     - azure-cli/install
+  #     - azure-cli/login-with-service-principal
+  #     - attach_workspace:
+  #         at: Backend/GestLogistica_API/GestLogistica
+  #     - run:
+  #         working_directory: Backend/GestLogistica_API/GestLogistica
+  #         name: Access all application resources from the azure cloud
+  #         command: az webapp deployment source show --resource-group MasterDataWarehouseManagement --name MasterDataLogManagement
+  #     - run:
+  #         working_directory: Backend/GestLogistica_API/GestLogistica
+  #         name: Deploy gestLog application to Azure cloud
+  #         command: |
+  #           az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataLogManagement
+  #           git init
+  #           git config --global user.email "1201487@isep.ipp.pt"
+  #           git config --global user.name "Jordans"
+  #           git config --global http.postBuffer 157286400
+  #           git add .
+  #           git commit -m "Deploy Azure Web Application"
+  #           git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@masterdatawarehousemanagement.scm.azurewebsites.net/MasterDataWarehouseManagement.git
+  #           git push azure master --force 
    
 workflows:
   build-test-deploy:
@@ -240,8 +240,7 @@ workflows:
       
       - Integration-testing-GestArm_API:
           requires:
-            - Build-GestArm_API
-
+            - Build-GestArm_API 
       - Unit-testing-GestArm_API:
           requires:
             - Build-GestArm_API
@@ -263,6 +262,6 @@ workflows:
           requires:
             - Pulish-gestArm-to-folder
 
-      - Login-to-azure-and-deploy-gest-log:
-          requires:
-            - Unit-Integration-Tests-GestLog_API
+      # - Login-to-azure-and-deploy-gest-log:
+      #     requires:
+      #       - Unit-Integration-Tests-GestLog_API
