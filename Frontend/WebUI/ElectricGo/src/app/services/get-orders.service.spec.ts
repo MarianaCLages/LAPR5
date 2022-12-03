@@ -32,8 +32,6 @@ describe('GetOrdersService', () => {
 
     service.getOrders().then((data:IOrderDTO) => {
       expect(data).toBeTruthy();
-      //podes fazer qualquer teste aqui
     });
-
   });
 });

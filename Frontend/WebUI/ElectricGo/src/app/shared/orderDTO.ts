@@ -4,5 +4,5 @@ export default interface IOrderDTO {
     orderMass: number;
     chargingTime: number;
     unloadingTime: number;
-    warehouseId: number;
+    warehouseId: string;
 }
