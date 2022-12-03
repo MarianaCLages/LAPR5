@@ -187,7 +187,7 @@ public class WarehouseServiceTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
         CreatingWarehouseDto armDto = new CreatingWarehouseDto(10, 20, 30, 
             10, 30, 40, "Deisgnação teste", "Street das flores",
