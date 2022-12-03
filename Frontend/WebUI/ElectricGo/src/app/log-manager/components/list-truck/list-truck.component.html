@@ -11,7 +11,7 @@
     </mat-error>
   </div>
 
-  <mat-form-field>
+  <mat-form-field class="filter-options">
     <mat-label>Filter Options</mat-label >
     <mat-select [(value)]="filterOption" (selectionChange)="chooseFilter()">
       <mat-option *ngFor="let option of options" [value]="option" >
