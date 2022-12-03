@@ -1,0 +1,24 @@
+@startuml N3_VL
+
+
+[View]
+
+[Controller]
+interface ControllerApi
+[Service]
+interface ServiceApi
+[Model]
+interface ModelApi
+
+[Controller] -up- ControllerApi
+ModelApi  -- [Model]
+[Service] -up- ServiceApi
+
+[View] --( ControllerApi
+[Controller] --( ModelApi
+[Controller] --( ServiceApi
+[Service] --( ModelApi
+[View] --( ModelApi
+
+
+@enduml

@@ -10,8 +10,7 @@ No diagrama abaixo, temos a representação do sistema de informação da empres
 * Modulo de Logística
 * Modulo de Planeamento
   
-![Diagrama do Sistema](Artifacts/VL_N2_alt1.svg)
-TODO: Mudar este diagrama para a vista física
+![Diagrama do Sistema](VF.svg)
 
 ## Pedido do cliente
 Pergunta respondida pelo cliente no forum 
