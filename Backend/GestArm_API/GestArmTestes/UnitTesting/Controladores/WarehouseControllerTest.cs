@@ -30,7 +30,7 @@ public class WarehouseControllerTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
         
         var armDto = WarehouseDtoParser.convertToDto(arm);
         listDto.Add(armDto);
@@ -64,7 +64,7 @@ public class WarehouseControllerTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
 
         var armDto = WarehouseDtoParser.convertToDto(arm);
@@ -100,7 +100,7 @@ public class WarehouseControllerTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
 
         var armDto = WarehouseDtoParser.convertToDto(arm);
@@ -136,7 +136,7 @@ public class WarehouseControllerTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
 
         var armDto = WarehouseDtoParser.convertToDto(arm);
@@ -169,12 +169,12 @@ public class WarehouseControllerTest
         new WarehouseCoordinates(15, 12, 13),
         new DesignationWarehouse("Designação teste"),
         new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-        new AlphaId("A12"));
+        new AlphaId("C12"));
 
         var armDto = WarehouseDtoParser.convertToDto(arm);
 
         CreatingWarehouseDto createDTO = new CreatingWarehouseDto(12, 13, 14, 15, 12, 13, "Designação teste",
-        "Street das flores", 1, "4000-300", "Pourto", "Pourtougal", "A12");
+        "Street das flores", 1, "4000-300", "Pourto", "Pourtougal", "C12");
         
         //ACT
         _ServiceMock.Setup(x => x.AddAsync(createDTO)).ReturnsAsync(armDto);
@@ -203,7 +203,7 @@ public class WarehouseControllerTest
             new WarehouseCoordinates(15, 12, 13),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
         
         //ACT
         _ServiceMock.Setup(x => x.DeleteAsync(arm.Id)).ReturnsAsync(false);
@@ -229,12 +229,12 @@ public class WarehouseControllerTest
             new WarehouseCoordinates(15, 12, 13),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
         var armDto = WarehouseDtoParser.convertToDto(arm);
 
         CreatingWarehouseDto createDTO = new CreatingWarehouseDto(12, 13, 14, 15, 12, 13, "Designação teste",
-            "Street das flores", 1, "4000-300", "Pourto", "Pourtougal", "A12");
+            "Street das flores", 1, "4000-300", "Pourto", "Pourtougal", "C12");
         
         //ACT
         _ServiceMock.Setup(x => x.UpdateAsync(armDto)).ReturnsAsync(armDto);
