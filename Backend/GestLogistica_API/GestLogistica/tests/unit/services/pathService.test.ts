@@ -8,73 +8,76 @@ const sinon = require('sinon');
 
 describe('Path Service test', () => {
     it('should return an valid result when adding an valid path', async function () {
-        //mocks the path repository
+            //mocks the path repository
 
-        const pathRepository = {
-            save: sinon.stub().returns(Promise.resolve(Path.create({
+            const pathRepository = {
+                save: sinon.stub().returns(Promise.resolve(Path.create({
+                    endingWarehouseId: "MJ7",
+                    beginningWarehouseId: "231",
+                    distance: 448654,
+                    energy: 654,
+                    time: 7865,
+                    chargingTime: 9865
+                }))),
+                findByDomainId: sinon.stub().returns(Promise.resolve(Path.create({
+                    endingWarehouseId: "MJ7",
+                    beginningWarehouseId: "231",
+                    distance: 448654,
+                    energy: 654,
+                    time: 7865,
+                    chargingTime: 9865
+                }))),
+                getAllPaths: sinon.stub().returns(),
+                delete: sinon.stub().returns(Promise.resolve(true)),
+                update: sinon.stub().returns(Promise.resolve(Result.ok<IPathDTO>())),
+                exists: sinon.stub().returns(Promise.resolve(true)),
+                async: sinon.stub().returns(Promise.resolve(true)),
+                getByBeginningWarehouseId: sinon.stub().returns(Promise.resolve(Path.create({
+                    endingWarehouseId: "MJ7",
+                    beginningWarehouseId: "231",
+                    distance: 448654,
+                    energy: 654,
+                    time: 7865,
+                    chargingTime: 9865
+                }).getValue())),
+                getByEndingWarehouseId: sinon.stub().returns(Promise.resolve(Path.create({
+                    endingWarehouseId: "MJ7",
+                    beginningWarehouseId: "231",
+                    distance: 448654,
+                    energy: 654,
+                    time: 7865,
+                    chargingTime: 9865
+                }).getValue())),
+                getByBeginningAndEndingWarehouseId: sinon.stub().returns(Promise.resolve(true))
+            }
+
+            //mocks warehouseRepository
+            const warehouseRepository = {
+                exists: sinon.stub().returns(Promise.resolve(true)),
+                async: sinon.stub().returns(Promise.resolve(true)),
+                save: sinon.stub().returns(Promise.resolve(true)),
+            }
+
+
+            const pathService = require('../../../src/services/pathService').default;
+            const pathServiceInstance = new PathService(pathRepository, warehouseRepository);
+
+            const pathDto = {
                 endingWarehouseId: "MJ7",
                 beginningWarehouseId: "231",
                 distance: 448654,
                 energy: 654,
                 time: 7865,
                 chargingTime: 9865
-            }))),
-            findByDomainId: sinon.stub().returns(Promise.resolve(Path.create({
-                endingWarehouseId: "MJ7",
-                beginningWarehouseId: "231",
-                distance: 448654,
-                energy: 654,
-                time: 7865,
-                chargingTime: 9865
-            }))),
-            getAllPaths: sinon.stub().returns(),
-            delete: sinon.stub().returns(Promise.resolve(true)),
-            update: sinon.stub().returns(Promise.resolve(Result.ok<IPathDTO>())),
-            exists: sinon.stub().returns(Promise.resolve(true)),
-            async: sinon.stub().returns(Promise.resolve(true)),
-            getByBeginningWarehouseId: sinon.stub().returns(Promise.resolve(Path.create({
-                endingWarehouseId: "MJ7",
-                beginningWarehouseId: "231",
-                distance: 448654,
-                energy: 654,
-                time: 7865,
-                chargingTime: 9865
-            }).getValue())),
-            getByEndingWarehouseId: sinon.stub().returns(Promise.resolve(Path.create({
-                endingWarehouseId: "MJ7",
-                beginningWarehouseId: "231",
-                distance: 448654,
-                energy: 654,
-                time: 7865,
-                chargingTime: 9865
-            }).getValue()))
+            }
+
+            const result = await pathServiceInstance.createPath(pathDto);
+
+            //asserts
+            sinon.assert.match(result.isSuccess, true);
         }
-
-        //mocks warehouseRepository
-        const warehouseRepository = {
-            exists: sinon.stub().returns(Promise.resolve(true)),
-            async: sinon.stub().returns(Promise.resolve(true)),
-            save: sinon.stub().returns(Promise.resolve(true)),
-        }
-
-
-        const pathService = require('../../../src/services/pathService').default;
-        const pathServiceInstance = new PathService(pathRepository, warehouseRepository);
-
-        const pathDto = {
-            endingWarehouseId: "MJ7",
-            beginningWarehouseId: "231",
-            distance: 448654,
-            energy: 654,
-            time: 7865,
-            chargingTime: 9865
-        }
-
-        const result = await pathServiceInstance.createPath(pathDto);
-
-        //asserts
-        sinon.assert.match(result.isSuccess, true);
-    });
+    )
+    ;
 
     it('should return an invalid result when adding an invalid path', async function () {
         //mocks the path repository
@@ -109,7 +112,8 @@ describe('Path Service test', () => {
                 energy: 654,
                 time: 7865,
                 chargingTime: 9865
-            }).getValue()))
+            }).getValue())),
+            getByBeginningAndEndingWarehouseId: sinon.stub().returns(Promise.resolve(true))
         }
 
         //mocks warehouseRepository
@@ -171,7 +175,8 @@ describe('Path Service test', () => {
                 energy: 654,
                 time: 7865,
                 chargingTime: 9865
-            }).getValue()))
+            }).getValue())),
+            getByBeginningAndEndingWarehouseId: sinon.stub().returns(Promise.resolve(true))
         }
 
         //mocks warehouseRepository
@@ -233,7 +238,8 @@ describe('Path Service test', () => {
                 energy: 654,
                 time: 7865,
                 chargingTime: 9865
-            }).getValue()))
+            }).getValue())),
+            getByBeginningAndEndingWarehouseId: sinon.stub().returns(Promise.resolve(true))
         }
 
         //mocks warehouseRepository
@@ -294,7 +300,8 @@ describe('Path Service test', () => {
                 energy: 654,
                 time: 7865,
                 chargingTime: 9865
-            }).getValue()))
+            }).getValue())),
+            getByBeginningAndEndingWarehouseId: sinon.stub().returns(Promise.resolve(true))
         }
 
 
