@@ -133,8 +133,8 @@ public class OrderControllerIntegrationTest
         listEn.Add(en);
 
         //ACT
-        _repositoryEnMock.Setup(x => x.GetByOrderDateAysnc(en.OrderDate.Data)).ReturnsAsync(listEn);
-        var result = _controller.GetByDataDeOrderAysnc(en.OrderDate.Data).Result;
+        _repositoryEnMock.Setup(x => x.GetByOrderDateAysnc(new OrderDate(en.OrderDate.Data))).ReturnsAsync(listEn);
+        var result = _controller.GetByDataDeOrderAysnc(en.OrderDate.Data.ToString()).Result;
 
         var objExpected = result.Value.First();
         var objActual = result.Value.First();

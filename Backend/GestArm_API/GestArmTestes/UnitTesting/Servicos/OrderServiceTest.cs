@@ -92,7 +92,7 @@ public class OrderServiceTest
         list.Add(en);
 
         //ACT
-        _repositoryMock.Setup(x => x.GetByOrderDateAysnc(DateTime.Parse("2022-12-27"))).ReturnsAsync(list);
+        _repositoryMock.Setup(x => x.GetByOrderDateAysnc(new OrderDate(DateTime.Parse("2022-12-27")))).ReturnsAsync(list);
 
         var resultDTO =
             list.ConvertAll(order => OrderDtoParser.convertToDto(order));
