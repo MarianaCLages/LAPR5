@@ -2,6 +2,7 @@ import {HttpClient, HttpResponse} from "@angular/common/http";
 import { ICreateWarehouseDTO } from "../shared/createWarehouseDTO";
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from "rxjs";
+import {AppConfigServiceService} from "./app-config-service.service";
 
 @Injectable({
   providedIn: 'root'

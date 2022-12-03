@@ -1,7 +1,25 @@
-<div class="mat-elevation-z8">
+<!--Table with all the paths from the array.-->
+  <mat-form-field>
+    <mat-label>Filter Options</mat-label>
+    <mat-select [(value)]="filterOption" (selectionChange)="chooseFilter()">
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" *ngIf="filterOption === 'Warehouse by Designation'">
+    <mat-label>Designation Warehouse</mat-label>
+    <input matInput type="string" [(ngModel)]="designation" (change)="getWarehouseByFiltrer()">
+  </mat-form-field>
+<mat-form-field appearance="fill" *ngIf="filterOption === 'All Warehouses'">
+  <mat-label>Designation Warehouse</mat-label>
+  <input matInput type="string" [(ngModel)]="designation" (change)="getWarehouseByFiltrer()">
+</mat-form-field>
+
+  <div class="mat-elevation-z8">
   <table mat-table [dataSource]="warehouses">
-    <caption><h1>Warehouse Manager</h1></caption>
-    <caption><h2>List Warehouses</h2></caption>
+    <caption><h1>List Warehouses</h1></caption>
     <ng-container matColumnDef="alphaNumId">
       <th mat-header-cell *matHeaderCellDef>AlphaNumericID</th>
       <td mat-cell *matCellDef="let warehouse"> {{warehouse.alphaNumId}} </td>

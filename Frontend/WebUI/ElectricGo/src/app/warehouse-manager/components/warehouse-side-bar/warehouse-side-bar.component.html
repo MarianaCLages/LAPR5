@@ -9,13 +9,15 @@
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav>
       <mat-nav-list>
+        <!--Warehouses-->
         <button mat-button (click)="goToMenu('WarehouseManager/addWarehouse')">Create Warehouse</button>
-        <br>
-        <button mat-button (click)="goToMenu('WarehouseManager/createOrder')">Create Order</button>
         <br>
         <button mat-button (click)="goToMenu('WarehouseManager/getAllWarehouse')">List Warehouse</button>
         <br>
         <button mat-button (click)="goToMenu('WarehouseManager/getWarehouse')">Get Warehouse</button>
+        <br>
+        <!--Orders-->
+        <button mat-button (click)="goToMenu('WarehouseManager/createOrder')">Create Order</button>
         <br>
         <button mat-button (click)="goToMenu('WarehouseManager/listOrders')">List Orders</button>
 

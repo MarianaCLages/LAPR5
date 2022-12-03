@@ -30,6 +30,11 @@ ul {
   margin-top: 4px;
 }
 
-.mat-form-field{
+.mat-form-field {
   background: none !important;
+}
+
+.filter-options {
+  margin-left: 15px;
+  margin-right: 8px;
 }
