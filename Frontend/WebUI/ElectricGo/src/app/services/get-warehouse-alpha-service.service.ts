@@ -13,7 +13,7 @@ export class GetWarehouseAlphaService {
 
   constructor(private http: HttpClient) {}
 
-  getWarehouses(alphaId : any): any{
+  getWarehouses(alphaId : any){
 
     return this.http.get<HttpResponse<any>>(this.baseURL + alphaId);
   }

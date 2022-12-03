@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+/*import { TestBed } from '@angular/core/testing';
 
 import {HttpClient, HttpHandler} from "@angular/common/http";
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
@@ -35,4 +35,4 @@ describe('GetWarehouseAlphaService', () => {
       expect(data).toBeTruthy();
 
   });
-});
+});*/
