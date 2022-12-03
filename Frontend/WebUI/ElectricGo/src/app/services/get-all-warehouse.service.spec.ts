@@ -1,8 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
 import {HttpClient, HttpHandler} from "@angular/common/http";
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {GetAllWarehouseService} from "./get-all-warehouse.service";
+import {GetWarehouseAlphaService} from "./get-warehouse-alpha-service.service";
 
 describe('GetAllWarehouseService', () => {
   let service: GetAllWarehouseService;
@@ -14,7 +15,15 @@ describe('GetAllWarehouseService', () => {
     service = TestBed.inject(GetAllWarehouseService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('should get all warehouses', () => {
+
+    const http = TestBed.inject(HttpClient);
+    const httpTestingController = TestBed.inject(HttpTestingController);
+
+    let service = new GetAllWarehouseService(http);
+
+    let data = service.getAllWarehouse();
+    expect(data).toBeTruthy();
+
   });
 });

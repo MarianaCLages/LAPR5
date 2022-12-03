@@ -2,6 +2,7 @@ import {HttpClient, HttpResponse} from "@angular/common/http";
 import { ICreateWarehouseDTO } from "../shared/createWarehouseDTO";
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from "rxjs";
+import {AppConfigServiceService} from "./app-config-service.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class GetWarehouseAlphaService {
 
   constructor(private http: HttpClient) {}
 
-  getWarehouses(alphaId : any){
+  getWarehouses(alphaId : any): any{
 
     return this.http.get<HttpResponse<any>>(this.baseURL + alphaId);
   }
