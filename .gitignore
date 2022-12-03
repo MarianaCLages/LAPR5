@@ -5285,3 +5285,7 @@ Frontend/SGRAI/RoadNetwork/three.js-master/test/README.md
 Frontend/SGRAI/RoadNetwork/three.js-master/test/rollup.treeshake.config.js
 Frontend/WebUI/ElectricGo/package-lock.json
 Frontend/WebUI/ElectricGo/package-lock.json
+Frontend/WebUI/ElectricGo/cypress/videos/general.cy.ts.mp4
+Frontend/WebUI/ElectricGo/cypress/videos/paths.cy.ts.mp4
+Frontend/WebUI/ElectricGo/cypress/videos/spec.cy.ts.mp4
+Frontend/WebUI/ElectricGo/cypress/screenshots/

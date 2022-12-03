@@ -12,6 +12,7 @@
 //
 //
 // -- This is a parent command --
+// @ts-ignore
 Cypress.Commands.add('login', (email, password) => {
   cy.xpath('/html/body/app-root/div/app-login-page/div/mat-form-field[1]/div/div[1]/div/input').type(email)
   cy.xpath('/html/body/app-root/div/app-login-page/div/mat-form-field[2]/div/div[1]/div/input').type(password)
