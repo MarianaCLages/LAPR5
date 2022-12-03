@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import {ICreateWarehouseDTO} from "../shared/createWarehouseDTO";
 import { Injectable } from '@angular/core';
+import IPathDTO from "../shared/pathDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { Injectable } from '@angular/core';
 export class GetAllWarehouseService {
 
   baseURL = "http://localhost:5000/api/Warehouse";
+  designationURL = "http://localhost:5000/api/Warehouse/designation?designation=";
 
   constructor(private http: HttpClient) {
 
@@ -27,6 +29,18 @@ export class GetAllWarehouseService {
     const result = (await data.json());
 
    return result;
+  }
+
+  getPathsByEndingWarehouse(designation: any): any {
+    //set the http headers
+    const headers = {};
+
+    //set the http options
+    const options = {
+      headers: headers
+    };
+
+    return this.http.get<IPathDTO[]>(this.designationURL + designation, options).toPromise();
   }
 
 
