@@ -122,11 +122,14 @@ jobs:
           command: |
             npm install
             npm run build            
-            
       - save_cache:
           key: dependency-cache-{{ checksum "Frontend/WebUI/ElectricGo/package.json" }}
           paths:
             - Frontend/WebUI/ElectricGo/node_modules
+      - persist_to_workspace:
+          root: Frontend/WebUI/ElectricGo
+          paths:
+            - .
 
   Test-FrontEnd-Application:
     description: Build the Front end Application
@@ -185,13 +188,13 @@ jobs:
       - azure-cli/install
       - azure-cli/login-with-service-principal
       - attach_workspace:
-          at: Backend/GestArm_API/GestArm/published
+          at: Frontend/WebUI/ElectricGo
       - run:
-          working_directory: Backend/GestArm_API/GestArm/published
+          working_directory: Frontend/WebUI/ElectricGo
           name: Access all application resources from the azure cloud
           command: az webapp deployment source show --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
       - run:
-          working_directory: Backend/GestArm_API/GestArm/published
+          working_directory: Frontend/WebUI/ElectricGo
           name: Deploy gestArm application to Azure cloud
           command: |
             az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name MasterDataWarehouseManagement
@@ -202,6 +205,33 @@ jobs:
             git add .
             git commit -m "Deploy Azure Web Application"
             git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@masterdatawarehousemanagement.scm.azurewebsites.net/MasterDataWarehouseManagement.git
+            git push azure master --force 
+
+
+  Login-to-azure-and-deploy-frontEnd:
+    description: Deploy the gestArm application into the Azure cloud
+    executor: azure-cli/azure-docker
+    steps:
+      - azure-cli/install
+      - azure-cli/login-with-service-principal
+      - attach_workspace:
+          at: Backend/GestArm_API/GestArm/published
+      - run:
+          working_directory: Backend/GestArm_API/GestArm/published
+          name: Access all application resources from the azure cloud
+          command: az webapp deployment source show --resource-group MasterDataWarehouseManagement --name EletricGO
+      - run:
+          working_directory: Backend/GestArm_API/GestArm/published
+          name: Deploy gestArm application to Azure cloud
+          command: |
+            az webapp deployment source config-local-git --resource-group MasterDataWarehouseManagement --name EletricGO
+            git init
+            git config --global user.email "1201487@isep.ipp.pt"
+            git config --global user.name "Jordans"
+            git config --global http.postBuffer 157286400
+            git add .
+            git commit -m "Deploy Azure Web Application"
+            git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@eletricgo.scm.azurewebsites.net:443/EletricGO.git
             git push azure master --force 
 
   # Login-to-azure-and-deploy-gest-log:
@@ -260,6 +290,10 @@ workflows:
       - Login-to-azure-and-deploy:
           requires:
             - Pulish-gestArm-to-folder
+
+      - Login-to-azure-and-deploy-frontEnd:
+          requires:
+            - Test-FrontEnd-Application
 
       # - Login-to-azure-and-deploy-gest-log:
       #     requires:
