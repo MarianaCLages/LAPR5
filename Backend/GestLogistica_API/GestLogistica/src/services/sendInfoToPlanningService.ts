@@ -395,20 +395,20 @@ export default class SendInfoToPlanningService {
 
 
             var object = await response.json();
-            let dateOrder = new Date(object.orderDate);
+            let dateOrder = new Date(object[0].orderDate);
 
             let dateClient = realDate.toLocaleDateString();
             let dateObj = dateOrder.toLocaleDateString();
 
             if (dateObj == dateClient){
-                var warehouseString = object.warehouseId.toString();
+                var warehouseString = object[0].warehouseId.toString();
 
             warehouseString = warehouseString.substring(1);
             let warehouseNumber = +warehouseString;
 
-            let idSplit = object.identifier.toString().split('/');
+            let idSplit = object[0].identifier.toString().split('/');
 
-            stringFormat = "entrega(" + idSplit[0] + idSplit[1] + ",222," + object.orderMass.toString() + "," + warehouseNumber + ',' + object.chargingTime.toString() + ',' + object.unloadingTime.toString() + ").";
+            stringFormat = "entrega(" + idSplit[0] + idSplit[1] + ",223," + object[0].orderMass.toString() + "," + warehouseNumber + ',' + object[0].chargingTime.toString() + ',' + object[0].unloadingTime.toString() + ").";
             orderArr.push(stringFormat);
 
             if (i == ordersId.length - 1) {
