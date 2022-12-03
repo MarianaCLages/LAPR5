@@ -44,7 +44,7 @@ export default class pathController
                 return res.status(400).json(pathOrError.error).send();
             }
 
-            if(pathOrError.getValue().length == 0) {
+            if (pathOrError.getValue().length == 0) {
                 return res.status(404).json("Nenhum path foi encontrado").send();
             }
 
@@ -58,13 +58,15 @@ export default class pathController
 
     public async getByBeginningWarehouseId(req: Request, res: Response, next: NextFunction) {
         try {
-            const pathOrError = await this.pathServiceInstance.getByBeginningWarehouseId(req.body as IPathBeginningWarehouseIdDTO);
+            const id = req.params.id;
+            const warehouse: IPathBeginningWarehouseIdDTO = {beginningWarehouseId: id};
+            const pathOrError = await this.pathServiceInstance.getByBeginningWarehouseId(warehouse);
 
             if (pathOrError.isFailure) {
                 return res.status(400).json(pathOrError.error).send();
             }
 
-            if(pathOrError.getValue().length == 0) {
+            if (pathOrError.getValue().length == 0) {
                 return res.status(404).json("Nenhum path com esse armazém de partida foi encontrado!").send();
             }
 
@@ -78,16 +80,18 @@ export default class pathController
 
     public async getByEndingWarehouseId(req: Request, res: Response, next: NextFunction) {
         try {
-            const pathOrError = await this.pathServiceInstance.getByEndingWarehouseId(req.body as IPathEndingWarehouseIdDTO);
+            const id = req.params.id;
+            const warehouse: IPathEndingWarehouseIdDTO = {endingWarehouseId: id};
+            const pathOrError = await this.pathServiceInstance.getByEndingWarehouseId(warehouse);
 
             if (pathOrError.isFailure) {
                 return res.status(400).json(pathOrError.error).send();
             }
 
-            if(pathOrError.getValue().length == 0) {
+            if (pathOrError.getValue().length == 0) {
                 return res.status(404).json("Nenhum path com esse armazém de chegada foi encontrado!").send();
             }
-            
+
             const pathDTO = pathOrError.getValue();
             return res.status(200).json(pathDTO).send();
 
@@ -95,7 +99,6 @@ export default class pathController
             return next(e);
         }
     }
-
 
 
     public async updatePath(req: Request, res: Response, next: NextFunction) {
@@ -126,6 +129,27 @@ export default class pathController
             return next(e);
         }
     }
+
+    public async getByBeginningAndEndingWarehouseId(req: Request, res: Response, next: NextFunction) {
+        console.log("req");
+
+        try {
+            const beginningWarehouseId = req.params.beginningId;
+            const endingWarehouseId = req.params.endingId;
+
+            const pathOrError = await this.pathServiceInstance.getByBeginningAndEndingWarehouseId(beginningWarehouseId, endingWarehouseId);
+
+            if (pathOrError.isFailure) {
+                return res.status(404).json("Nenhum path com esse armazém de partida e chegada foi encontrado!").send();
+            }
+
+            const pathDTO = pathOrError.getValue();
+            return res.status(200).json(pathDTO).send();
+        } catch (e) {
+            return next(e);
+        }
+    }
+
 
     protected executeImpl(): Promise<any> {
         throw new Error("Method not implemented.");

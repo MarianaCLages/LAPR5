@@ -8,13 +8,12 @@ import IPathDTO from "../dto/path/IPathDTO";
 import {PathMap} from "../mappers/PathMap";
 import ICreatePathDTO from "../dto/path/ICreatePathDTO";
 import IWarehouseRepo from "../services/IRepos/IWarehouseRepo";
-import https = require("https");
-import { PathEnergy } from "../domain/path/pathEnergy";
-import { PathTime } from "../domain/path/pathTime";
-import { PathChargingTime } from "../domain/path/pathChargingTime";
-import { PathBeginningWarehouseId } from "../domain/path/pathBeginningWarehouseId";
-import { PathEndingWarehouseId } from "../domain/path/pathEndingWarehouseId";
-import { PathDistance } from "../domain/path/pathDistance";
+import {PathEnergy} from "../domain/path/pathEnergy";
+import {PathTime} from "../domain/path/pathTime";
+import {PathChargingTime} from "../domain/path/pathChargingTime";
+import {PathBeginningWarehouseId} from "../domain/path/pathBeginningWarehouseId";
+import {PathEndingWarehouseId} from "../domain/path/pathEndingWarehouseId";
+import {PathDistance} from "../domain/path/pathDistance";
 import IPathIdDto from "../dto/path/IPathIdDto";
 import IPathBeginningWarehouseId from "../dto/path/IPathBeginningWarehouseIdDTO";
 import IPathEndingWarehouseId from "../dto/path/IPathEndingWarehouseIdDTO";
@@ -22,14 +21,28 @@ import IPathEndingWarehouseId from "../dto/path/IPathEndingWarehouseIdDTO";
 
 @Service()
 export default class PathService implements IPathService {
-    httpsAgent = new https.Agent({
-        rejectUnauthorized: false
-    });
-
     constructor(
         @Inject(config.repos.path.name) private pathRepo: IPathRepo,
         @Inject(config.repos.warehouse.name) private warehouseRepo: IWarehouseRepo
     ) {
+    }
+
+    public async getByBeginningAndEndingWarehouseId(beginningWarehouseId: string, endingWarehouseId: string): Promise<Result<IPathDTO[]>> {
+
+        const paths = await this.pathRepo.getByBeginningAndEndingWarehouseId(beginningWarehouseId, endingWarehouseId);
+
+        if (paths == null) {
+            return Result.fail("Paths not found!");
+        } else {
+            const pathsDTO = paths.getValue().map(
+                (path) => {
+                    return PathMap.toDTO(path);
+                }
+            );
+            return Result.ok<IPathDTO[]>(pathsDTO);
+        }
+
+
     }
 
     public async getPath(pathDTO: IPathDTO): Promise<Result<IPathDTO>> {
@@ -132,14 +145,13 @@ export default class PathService implements IPathService {
         try {
             const paths = await this.pathRepo.getByBeginningWarehouseId(beginningWarehouseId.beginningWarehouseId)
 
-            if(paths === null) {
+            if (paths === null) {
                 return Result.fail("Paths not found!");
             } else {
                 const pathsDTO = paths.getValue().map(path => PathMap.toDTO(path));
                 return Result.ok(pathsDTO);
             }
-        }
-        catch (e) {
+        } catch (e) {
             throw e;
         }
     }
@@ -148,21 +160,20 @@ export default class PathService implements IPathService {
         try {
             const paths = await this.pathRepo.getByEndingWarehouseId(endingWarehouseId.endingWarehouseId)
 
-            if(paths === null) {
+            if (paths === null) {
                 return Result.fail("Paths not found!");
             } else {
                 const pathsDTO = paths.getValue().map(path => PathMap.toDTO(path));
                 return Result.ok(pathsDTO);
             }
-        }
-        catch (e) {
+        } catch (e) {
             throw e;
         }
     }
 
-  public async deletePath(pathId: IPathIdDto): Promise<Result<IPathDTO>> {
-    try {
-      const path = await this.pathRepo.findByDomainId(pathId.id);
+    public async deletePath(pathId: IPathIdDto): Promise<Result<IPathDTO>> {
+        try {
+            const path = await this.pathRepo.findByDomainId(pathId.id);
             if (path === null) {
                 return Result.fail<IPathDTO>("Path not found! Specified ID does not exist");
             } else {

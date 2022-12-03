@@ -1,7 +1,38 @@
 <!--Table with all the paths from the array.-->
+<mat-form-field>
+  <mat-label>Filter Options</mat-label>
+  <mat-select [(value)]="filterOption" (selectionChange)="chooseFilter()">
+    <mat-option *ngFor="let option of options" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill" *ngIf="filterOption === 'Path by Beginning Warehouse'">
+  <mat-label>Beginning Warehouse</mat-label>
+  <input matInput type="string" [(ngModel)]="benWare" (change)="getPathsByFilter()">
+</mat-form-field>
+
+<mat-form-field appearance="fill" *ngIf="filterOption === 'Path by Ending Warehouse'">
+  <mat-label>Ending Warehouse</mat-label>
+  <input matInput type="string" [(ngModel)]="endWare" (change)="getPathsByFilter()">
+</mat-form-field>
+
+<mat-form-field appearance="fill" *ngIf="filterOption === 'Path by Beginning and Ending Warehouse'">
+  <mat-label>Beginning Warehouse</mat-label>
+  <input matInput type="string" [(ngModel)]="benWare" (change)="getPathsByFilter()">
+</mat-form-field>
+
+<mat-form-field appearance="fill" *ngIf="filterOption === 'Path by Beginning and Ending Warehouse'">
+  <mat-label>Ending Warehouse</mat-label>
+  <input matInput type="string" [(ngModel)]="endWare" (change)="getPathsByFilter()">
+</mat-form-field>
+
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="paths">
-    <caption><h1>Paths</h1></caption>
+    <caption>
+      <h1>Paths</h1>
+    </caption>
     <ng-container matColumnDef="Beginning Warehouse">
       <th mat-header-cell *matHeaderCellDef> Beginning Warehouse</th>
       <td mat-cell *matCellDef="let path"> {{path.beginningWarehouseId}} </td>

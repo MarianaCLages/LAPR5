@@ -1,11 +1,12 @@
-import { Result } from "../../core/logic/Result";
-import IPathDTO from "../../dto/path/IPathDTO";
 import ICreatePathDTO from "../../dto/path/ICreatePathDTO";
-import IPathIdDto from "../../dto/path/IPathIdDto";
 import IPathBeginningWarehouseIdDTO from "../../dto/path/IPathBeginningWarehouseIdDTO";
+import IPathDTO from "../../dto/path/IPathDTO";
 import IPathEndingWarehouseIdDTO from "../../dto/path/IPathEndingWarehouseIdDTO";
+import IPathIdDto from "../../dto/path/IPathIdDto";
+import { Result } from "../../core/logic/Result";
 
 export default interface IPathService  {
+  getByBeginningAndEndingWarehouseId(beginningWarehouseId: string, endingWarehouseId: string): Promise<Result<IPathDTO[]>>;
   createPath(pathDTO: ICreatePathDTO): Promise<Result<IPathDTO>>;
   updatePath(pathDTO: IPathDTO): Promise<Result<IPathDTO>>;
   getPath (pathDTO: IPathDTO): Promise<Result<IPathDTO>>;

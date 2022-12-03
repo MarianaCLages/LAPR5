@@ -1,9 +1,8 @@
-import {Router} from 'express';
-import {celebrate, Joi} from 'celebrate';
+import { Joi, celebrate } from 'celebrate';
 
-import {Container} from 'typedi';
+import { Container } from 'typedi';
 import IPathController from '../../controllers/IControllers/IPathController';
-
+import { Router } from 'express';
 import config from "../../../config";
 
 const route = Router();
@@ -50,20 +49,21 @@ export default (app: Router) => {
 
     route.get('/allPaths', (req, res, next) => ctrl.getAllPaths(req, res, next));
 
-    route.get('/warehouseEnding',
-        celebrate({
-            body: Joi.object({
-                endingWarehouseId: Joi.string().required(),
-            }),
-        }),
+    route.get('/warehouseEnding/:id',
         (req, res, next) => ctrl.getByEndingWarehouseId(req, res, next));
 
-    route.get('/warehouseBeginning',
+    route.get('/warehouseBeginning/:id',
+        (req, res, next) => ctrl.getByBeginningWarehouseId(req, res, next));
+
+
+    route.get('/warehouseBeginningAndEnding/:beginningId/:endingId',
         celebrate({
             body: Joi.object({
                 beginningWarehouseId: Joi.string().required(),
+                endingWarehouseId: Joi.string().required(),
             }),
         }),
-        (req, res, next) => ctrl.getByBeginningWarehouseId(req, res, next));
+        (req, res, next) => ctrl.getByBeginningAndEndingWarehouseId(req, res, next));
+
 
 };

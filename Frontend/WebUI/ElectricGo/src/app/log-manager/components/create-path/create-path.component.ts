@@ -70,17 +70,20 @@ export class CreatePathComponent implements OnInit {
       this.success = true;
       this.successMessage = "Path created successfully";
       this.goBack();
-    }, //transforms into a http error
+    },
       (error: any) => {
         this.error = true;
         if (error.status == 400) {
           this.errorMessage = error.error;
+          alert(this.errorMessage);
         } else {
           if (error.status == 500) {
 
             this.errorMessage = error.error.errors.message;
+            alert(this.errorMessage);
           } else {
             this.errorMessage = "An unknown error has ocurred";
+            alert(this.errorMessage);
           }
         }
       });
