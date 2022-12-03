@@ -20,7 +20,7 @@ public class WarehouseTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
         Assert.NotNull(arm);
     }
@@ -39,7 +39,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -57,7 +57,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -75,7 +75,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -93,7 +93,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -111,7 +111,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -129,7 +129,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(-190, 30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -147,7 +147,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, -30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -165,7 +165,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, -40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -183,7 +183,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, 40),
                 new DesignationWarehouse(null),
                 new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -201,7 +201,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("", 1, "4000-300", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -219,7 +219,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", -10, "4000-300", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -237,7 +237,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", 1, "", "Pourto", "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -255,7 +255,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", 1, "4000-300", null, "Pourtougal"),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     
@@ -273,7 +273,7 @@ public class WarehouseTest
                 new WarehouseCoordinates(10, 30, 40),
                 new DesignationWarehouse("Designação teste"),
                 new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", ""),
-                new AlphaId("A12"));
+                new AlphaId("C12"));
         });
     }
     

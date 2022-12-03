@@ -36,7 +36,7 @@ public class WarehouseControllerIntegrationTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
         listArm.Add(arm);
 
@@ -68,7 +68,7 @@ public class WarehouseControllerIntegrationTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
 
         listArm.Add(arm);
@@ -101,7 +101,7 @@ public class WarehouseControllerIntegrationTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
         List.Add(arm);
 
@@ -131,7 +131,7 @@ public class WarehouseControllerIntegrationTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
         //ACT
         _repositoryMock.Setup(x => x.GetByWarehouseIdAsync(arm.AlphaNumId)).ReturnsAsync(arm);
@@ -159,11 +159,11 @@ public class WarehouseControllerIntegrationTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
         var creatingDto = new CreatingWarehouseDto(10, 20, 30,
             10, 30, 40, "Designação teste", "Street das flores",
-            1, "4000-300", "Pourto", "Pourtougal", "A12");
+            1, "4000-300", "Pourto", "Pourtougal", "C12");
 
 
         //ACT
@@ -195,7 +195,7 @@ public class WarehouseControllerIntegrationTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
         //ACT
         _repositoryMock.Setup(x => x.RemoveAsync(arm)).ReturnsAsync(false);
@@ -223,11 +223,11 @@ public class WarehouseControllerIntegrationTest
             new WarehouseCoordinates(10, 30, 40),
             new DesignationWarehouse("Designação teste"),
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
-            new AlphaId("A12"));
+            new AlphaId("C12"));
 
         var creatingDto = new CreatingWarehouseDto(10, 20, 30,
             10, 30, 40, "Designação teste", "Street das flores",
-            1, "4000-300", "Pourto", "Pourtougal", "A12");
+            1, "4000-300", "Pourto", "Pourtougal", "C12");
 
         //ACT
         _repositoryMock.Setup(x => x.UpdateAsync(arm)).ReturnsAsync(arm);
