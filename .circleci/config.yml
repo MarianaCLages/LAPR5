@@ -201,8 +201,7 @@ jobs:
             git config --global http.postBuffer 157286400
             git add .
             git commit -m "Deploy Azure Web Application"
-            git remote add azure https://$
-            GIT_USERNAME:$GIT_PASSWORD@masterdatawarehousemanagement.scm.azurewebsites.net/MasterDataWarehouseManagement.git
+            git remote add azure https://$GIT_USERNAME:$GIT_PASSWORD@masterdatawarehousemanagement.scm.azurewebsites.net/MasterDataWarehouseManagement.git
             git push azure master --force 
 
   # Login-to-azure-and-deploy-gest-log:
