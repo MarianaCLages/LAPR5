@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="92px" preserveAspectRatio="none" style="width:292px;height:92px;background:#FFFFFF;" version="1.1" viewBox="0 0 292 92" width="292px" zoomAndPan="magnify"><defs><filter height="300%" id="f1293nbcwrkcmm" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[04b1498491270279ecb0d57ba03a56e7]
+entity FleetManager--><ellipse cx="50" cy="14" fill="#FEFECE" filter="url(#f1293nbcwrkcmm)" rx="8" ry="8" style="stroke:#A80036;stroke-width:1.5;"/><path d="M50,22 L50,49 M37,30 L63,30 M50,49 L37,64 M50,49 L63,64 " fill="none" filter="url(#f1293nbcwrkcmm)" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="6" y="84.0332">FleetManager</text><ellipse cx="205.1002" cy="46.02" fill="#FEFECE" filter="url(#f1293nbcwrkcmm)" rx="75.6002" ry="17.52" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103" x="150.6002" y="50.5366">Criar um camião</text><!--MD5=[3e488ad56fbd46daa2418a6ac7b42702]
+link FleetManager to Criar um camião--><path d="M94.2,46 C105.89,46 117.57,46 129.26,46 " fill="none" id="FleetManager-Criar um camião" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[8a5e97f24f6b2f63977bbb94ab8276d0]
+@startuml
+'https://plantuml.com/use-case-diagram
+
+FleetManager - (Criar um camião)
+@enduml
+
+@startuml
+
+FleetManager - (Criar um camião)
+@enduml
+
+PlantUML version 1.2022.1(Tue Feb 01 18:19:58 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>
