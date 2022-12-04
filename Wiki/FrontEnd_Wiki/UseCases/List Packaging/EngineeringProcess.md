@@ -25,3 +25,35 @@ O FrontEnd deve enviar um request para o BackEnd com os dados da listagem.
 O BackEnd deve listar os empacotamentos e retornar uma mensagem de sucesso.
 
 Na barra de navegação, o usuário pode clicar no botão de listar empacotamentos. O sistema exibe uma lista de empacotamentos. 
+
+Em termos de Design, é apresentado nos diagramas a parte de FrontEnd apenas, já que a parte de BackEnd está já descrita noutras USs.
+
+## Vistas
+
+### Vista de Processo
+
+#### Nível 1
+
+![Vista de Processo Nível 1 - Alternativa 1](N1_VP_alt1.svg)
+
+![Vista de Processo Nível 1 - Alternativa 2](N1_VP_alt2.svg)
+
+![Vista de Processo Nível 1 - Alternativa 3](N1_VP_alt3.svg)
+
+
+#### Nível 2
+
+![Vista de Processo Nível 2 - Alternativa 1](N2_VP_alt1.svg)
+
+![Vista de Processo Nível 2 - Alternativa 2](N2_VP_alt2.svg)
+
+![Vista de Processo Nível 2 - Alternativa 3](N2_VP_alt3.svg)
+
+
+#### Nível 3
+
+![Vista de Processo Nível 3 - Alternativa 1](N3_VP_alt1.svg)
+
+![Vista de Processo Nível 3 - Alternativa 2](N3_VP_alt2.svg)
+
+![Vista de Processo Nível 3 - Alternativa 3](N3_VP_alt3.svg)
