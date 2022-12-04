@@ -8,7 +8,7 @@ Os dados do objeto já foram definidos noutras USs.
 
 - O que acontece se o usuário preencher um campo com um valor válido? **O sistema permite a criação do camião e retorna à página anterior.**
 
-O Usuário deve estar autenticado como FleetManager para criar um camião. Neste momento, a autenticação não está implementada. Existe um mock de autenticação que permite que o usuário seja autenticado como Manager. No próximo sprint, a autenticação será implementada.
+O Usuário deve estar autenticado como FleetManager para criar um camião. Neste momento, a autenticação não está implementada. Existe um mock de autenticação que permite que o usuário seja autenticado como FleetManager. No próximo sprint, a autenticação será implementada.
 
 ## Fluxo de Eventos
 1. O usuário acessa a página de criação de camião. 
@@ -23,3 +23,23 @@ O Usuário deve estar autenticado como FleetManager para criar um camião. Neste
 O FrontEnd deve enviar um request para o BackEnd com os dados do camião. O BackEnd deve criar o camião e retornar uma mensagem de sucesso.
 
 Na barra de navegação, o usuário pode clicar no botão de criar camião. O sistema exibe a página de criação de camião. 
+
+Em termos de Design, é apresentado nos diagramas a parte de FrontEnd apenas, já que a parte de BackEnd está já descrita noutras USs.
+
+## Vistas
+
+### Vista de Processo
+
+#### Nível 1
+
+![Vista de Processo Nível 1](N1_VP.svg)
+
+
+#### Nível 2
+
+![Vista de Processo Nível 2](N2_VP.svg)
+
+
+#### Nível 3
+
+![Vista de Processo Nível 3](N3_VP.svg)
