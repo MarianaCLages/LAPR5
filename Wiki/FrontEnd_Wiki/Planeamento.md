@@ -4,7 +4,7 @@
 
 O grupo de trabalho é constituído pelo estudantes identificados na tabela seguinte.
 
-### Sprint A
+### Sprint A & B
 | Aluno Nr.                      | Nome do Aluno  |
 |--------------------------------|----------------|
 | **[1200601](SprintA/1200601)** | Tiago Ferreira |
@@ -19,3 +19,5 @@ A distribuição de requisitos/funcionalidades ao longo do período de desenvolv
 
 | Requisito/Funcionalidade | Sprint A                                         | Sprint B                                                    | Sprint C                                                |
 |:-------------------------|:-------------------------------------------------|:------------------------------------------------------------|:--------------------------------------------------------|
+| Domain Model |  |  |  |
+| Overall Artifcats (all Use cases diagrams) |  |  |  |
