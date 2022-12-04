@@ -1,25 +1,14 @@
+# Requisitos
+    A formulação da cameras está de acordo com as normas estabelecidas em SGRAI e os requesitos por parte do cliente.
 
-## Requisitos
-Os dados do objeto já foram definidos noutras USs. 
+    Para realizar as cameras é necessário primeiro estudar as possíveis cameras possíveis para a cena. Sendo estas a orbital, zoom e pan.
+    Tal como o nome diz, a zoom camera é simples, temos de disponibilizar a opção de dar zoom na cena para ser possível observar com mais detalhe a cena. Pan que envolve dar a possibilidade de mexer a cena por inteiro (fazendo translações da cena consoante com a direção da nossa visão perante a cena) e, finalmente, a camera mais simples que envolve a possibilidade de mexer a cena toda.
+  
+# Fluxo de Eventos
+    1. O usário, dentro do home page do LogisticManager, vai ter uma opção na aba esquerda que vai lhe permitir ingressar para o menu de visualização da rede viária.
+    2. Quando o utilizado entra neste menu a rede vai ser construída etapa a etapa e a cena vai ser mostrada ao utilizador.
+    3. O utilizador pode visualizar a cena das 3 maneiras explicadas anteriormente de maneira diferente, podendo dar zoom à cena, rodar a cena e fazer translações na mesma.
 
-- Como são inseridos os dados no formulário? **Os dados são inseridos na caixa de texto correspondente.**
-
-- O que acontece se o usuário não preencher algum campo obrigatório? **O sistema não permite a criação do camião e mostra uma mensagem de erro**
-
-- O que acontece se o usuário preencher um campo com um valor válido? **O sistema permite a criação do camião e retorna à página anterior.**
-
-O Usuário deve estar autenticado como FleetManager para criar um camião. Neste momento, a autenticação não está implementada. Existe um mock de autenticação que permite que o usuário seja autenticado como Manager. No próximo sprint, a autenticação será implementada.
-
-## Fluxo de Eventos
-1. O usuário acessa a página de criação de camião. 
-2. O sistema exibe o formulário de criação de camião.
-3. O usuário preenche os campos do formulário e clica no botão de criar camião.
-4.  É feito um request para o servidor com os dados do camião.
-5.  O servidor recebe o request e cria o camião.
-6.  O servidor retorna uma mensagem de sucesso.
-7.  O FrontEnd redireciona o utilizador para a página do FleetManager.
-
-## Integração
-O FrontEnd deve enviar um request para o BackEnd com os dados do camião. O BackEnd deve criar o camião e retornar uma mensagem de sucesso.
-
-Na barra de navegação, o usuário pode clicar no botão de criar camião. O sistema exibe a página de criação de camião. 
+## Visualização
+    1. É ilustrado a cena toda em 3D.
+    2. O utilizador consegue vizualizar a cena com angulos diferentes.
