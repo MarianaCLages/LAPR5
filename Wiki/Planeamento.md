@@ -17,11 +17,11 @@ O grupo de trabalho é constituído pelo estudantes identificados na tabela segu
 
 A distribuição de requisitos/funcionalidades ao longo do período de desenvolvimento do projeto pelos elementos do grupo de trabalho realizou-se conforme descrito na tabela seguinte.
 
-| Requisito/Funcionalidade | Sprint A                                         | Sprint B                                                    | Sprint C                                                |
-|:-------------------------|:-------------------------------------------------|:------------------------------------------------------------|:--------------------------------------------------------|
-| Domain Model | **[All](../Wiki/Context/)** |  **[All](../Wiki/Context/)** |  |
-| Overall Artifcats (all Use cases diagrams) | **[All](../Wiki/Context/)** | **[All](../Wiki/Context/)** |  |
-| Test Plan |  | **[1200920](../Wiki/Context/TestPlan.md)** |  |
-| UI Guidelines |  | **[all](../Wiki/FrontEnd_Wiki/FrontEnd_wiki/UiGuidelines.md)** |  |
-| UI Organization and architecture |  | **[all](../Wiki/FrontEnd_Wiki/FrontEnd_wiki/organization.md)** |  |
-| Data Model |  |  |  |
+| Requisito/Funcionalidade                  | Sprint A                    | Sprint B                                                       | Sprint C |
+|:------------------------------------------|:----------------------------|:---------------------------------------------------------------|:---------|
+| Domain Model                              | **[All](../Wiki/Context/)** | **[All](../Wiki/Context/)**                                    |          |
+| Overall Artifacts (all Use case diagrams) | **[All](../Wiki/Context/)** | **[All](../Wiki/Context/)**                                    |          |
+| Test Plan                                 |                             | **[1200920](../Wiki/Context/TestPlan.md)**                     |          |
+| UI Guidelines                             |                             | **[All](../Wiki/FrontEnd_Wiki/FrontEnd_wiki/UiGuidelines.md)** |          |
+| UI Organization and architecture          |                             | **[All](../Wiki/FrontEnd_Wiki/FrontEnd_wiki/organization.md)** |          |
+| Data Model                                |                             |                                                                |          |
