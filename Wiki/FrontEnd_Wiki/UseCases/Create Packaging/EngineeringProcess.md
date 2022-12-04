@@ -3,10 +3,10 @@ Os dados da listagem já foram definidos em outras USs.
 
 - O que acontece se o usuário não preencher algum campo obrigatório? **O sistema não permite a criação do empacotamento e mostra uma mensagem de erro.**
 
-O Usuário deve estar autenticado como LogisticManager para listar os camiões. Neste momento, a autenticação não está implementada. Existe um mock de autenticação que permite que o usuário seja autenticado como LogisticManager. No próximo sprint, a autenticação será implementada.
+O Usuário deve estar autenticado como LogisticManager para criar empacotamentos. Neste momento, a autenticação não está implementada. Existe um mock de autenticação que permite que o usuário seja autenticado como LogisticManager. No próximo sprint, a autenticação será implementada.
 
 # Fluxo de Eventos
-1. O usuário acessa a página de listagem de camiões.
+1. O usuário acessa a página de criar empacotamentos.
 2. O sistema exibe um formulário com todas as informações necessárias a serem preenchidas para ser possível criar o empacotamento.
 3. O usário introduz todas as informações e clica no botão "create".
 4. O sistema cria o empacotamento e redireciona o usário para a home page.
