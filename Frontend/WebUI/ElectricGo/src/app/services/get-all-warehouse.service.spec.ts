@@ -23,9 +23,7 @@ describe('GetAllWarehouseService', () => {
     const httpTestingController = TestBed.inject(HttpTestingController);
 
     let service = new GetAllWarehouseService(http);
-
-    let data = service.getAllWarehouse();
-
+    
     service.getAllWarehouse().then((data:ICreateWarehouseDTO) => {
       expect(data).toBeTruthy();
     });
