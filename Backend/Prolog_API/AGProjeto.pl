@@ -340,6 +340,9 @@ idArmazem('Vila Nova de Gaia',17).
 :-dynamic prob_mutacao/1.
 :-dynamic num_orders/1.
 :-dynamic current_order/1.
+:-dynamic best_ind/1.
+:-dynamic old_pop/1.
+:-dynamic num_ind/1.
 %tarefa(Id,TempoProcessamento,TempConc,PesoPenalizacao).
 tarefa(t1,2,5,1).
 tarefa(t2,4,7,6).
@@ -396,9 +399,13 @@ tempo_act_x13(Act,[[A|_]|Novos],X):-
 %-------------------------------AG------------------------%
 
 gera:-
+    %retract(num_ind(_)),
+    assertz(num_ind(6)),
     Temp = 9999,
     Less = [1,2,3],
+    BestInd = [2,3,1]*1000,
     retractall(less_time(_)),
+    assertz(best_ind(BestInd)),
     assertz(less_time(Temp)),
     assertz(less_ind(Less)),
     bfs_tempo_entrega(_,_,OrdList),
@@ -417,8 +424,12 @@ gera:-
     NG is 6,
     gera_geracao(0,NG,PopOrd),
     less_ind(Ind),
-    write('MELHOR INDIVIDUO:  '),
-    write(Ind).
+    less_time(Time),
+    write('\n\nMELHOR INDIVIDUO:  '),
+    write(Ind),
+    write('\nTEMPO: '),
+    write(Time).
+
 
 count_seq_orders([],0).
 count_seq_orders([_|Cam],Count):- count_seq_orders(Cam,Count2), Count is Count2 + 1.
@@ -430,7 +441,7 @@ count_seq_orders([_|Cam],Count):- count_seq_orders(Cam,Count2), Count is Count2 
 gera_populacao(Cam,Pop):-
     num_orders(NumT),
     TamPop is 6,
-    gera_populacao(TamPop,Cam,NumT,Pop).
+    gera_populacao(TamPop,Cam,NumT,Pop),retractall(old_pop(_)),assertz(old_pop(Pop)).
 
 gera_populacao(0,_,_,[]):-!.
 
@@ -505,7 +516,12 @@ get_cam_arm([X|L],[Y|L2]):-entrega(X,_,_,Y,_,_),get_cam_arm(L,L2).
 
 
 ordena_populacao(PopAv,PopAvOrd):-
-bsort(PopAv,PopAvOrd).
+%retractall(best_ind(_)),
+    bsort(PopAv,PopAvOrd),
+    getBest(PopAvOrd).
+
+
+getBest([X|_]):-retractall(best_ind(_)),assertz(best_ind(X)).
 
 bsort([X],[X]):-!. %Paragem quando Xs tiver só um elemento e esse elemento fica dentro da Nova Ordem.
 
@@ -516,8 +532,7 @@ btroca([X|Zs],Ys).% Assumindo que isto é a primeira vez que chama este predicado
 btroca([X],[X]):-!.
 
 btroca([X*VX,Y*VY|L1],[Y*VY|L2]):-
-    VX>VY,!,
-    btroca([X*VX|L1],L2).
+       VX>VY,!,btroca([X*VX|L1],L2).
 
 btroca([X|L1],[X|L2]):-btroca(L1,L2).
 
@@ -535,18 +550,61 @@ btroca([X|L1],[X|L2]):-btroca(L1,L2).
 % A Paragem acontece obviamente quando o atual nr da geração é igual á
 % geração final.
 gera_geracao(G,G,Pop):-!,
-write('Geração '), write(G), write(':'), nl, write(Pop), nl.
+write('\n\nGeração '), write(G), write(':'), nl, write(Pop), nl.
 
 gera_geracao(N,G,Pop):-
-write('Geração '), write(N), write(':'), nl, write(Pop), nl,
-cruzamento(Pop,NPop1), %Pop é a lista que temos Npop1 é a nova lista que será feita com o cruzamento.
+write('\n\nGeração '), write(N), write(':'), nl, write(Pop), nl,
+random_permutation(Pop,Pop2),
+cruzamento(Pop2,NPop1), %Pop é a lista que temos Npop1 é a nova lista que será feita com o cruzamento.
 mutacao(NPop1,NPop), % Com a nova geração (NPop1) faz-se a mutação dela.
-avalia_populacao(NPop,NPopAv),
-ordena_populacao(NPopAv,NPopOrd),
+old_pop(OldPop),
+stop_elite(OldPop,NPop,NPop2), %TRABALHA AQUI TIAGO
+ordena_elite(NPop2,NPop3),
+reverse(NPop3,NPop4),
+num_ind(I),
+anti_elitist_pop(NPop4,NPop5,I),
+retractall(old_pop(_)),
+assertz(old_pop(NPop)),
+avalia_populacao(NPop5,NPopAv),
+switch_for_the_best(NPopAv,NPopAv2),
+ordena_populacao(NPopAv2,NPopOrd),
 N1 is N+1,
 gera_geracao(N1,G,NPopOrd).
 
+%Stopping algorithm elitism-------------------------
 
+stop_elite([],[],_):-!.
+stop_elite([],[Y|NPop],[Z|DesoPop]):-random(0.0,1,N),Z = Y*N,stop_elite([],NPop,DesoPop).
+stop_elite([X|Pop],NPop,[Z|DesoPop]):-random(0.0,1,N),Z = X*N,stop_elite(Pop,NPop,DesoPop).
+
+
+
+ordena_elite(PopAv,PopAvOrd):-
+%retractall(best_ind(_)),
+    bsort2(PopAv,PopAvOrd).
+
+
+bsort2([X],[X]):-!. %Paragem quando Xs tiver só um elemento e esse elemento fica dentro da Nova Ordem.
+
+bsort2([X|Xs],Ys):-
+bsort2(Xs,Zs), %Vai correr a recursividade toda, quando volta atrás o Zs só tem um elemento sendo o X.
+btroca2([X|Zs],Ys).% Assumindo que isto é a primeira vez que chama este predicado, o Zs começa com 2 elementos
+
+btroca2([X],[X]):-!.
+
+btroca2([X*VX,Y*VY|L1],[Y*VY|L2]):-
+       VX>VY,!,btroca2([X*VX|L1],L2).
+
+btroca2([X|L1],[X|L2]):-btroca(L1,L2).
+
+anti_elitist_pop(_,_,0).
+anti_elitist_pop([X*_|OldPop],[X|AntiPop],N):-N2 is N - 1,write(N2),anti_elitist_pop(OldPop,AntiPop,N2).
+
+
+%-------------------------------
+
+%Include the last gen best Ind
+switch_for_the_best([_|NPopAv],NPopAv2):-best_ind(Ind), NPopAv2 = [Ind|NPopAv].
 
 gerar_pontos_cruzamento(P1,P2):- gerar_pontos_cruzamento1(P1,P2).
 
