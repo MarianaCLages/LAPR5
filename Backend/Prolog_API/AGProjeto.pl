@@ -343,6 +343,7 @@ idArmazem('Vila Nova de Gaia',17).
 :-dynamic best_ind/1.
 :-dynamic old_pop/1.
 :-dynamic num_ind/1.
+:-dynamic melhor_entrega/1.
 %tarefa(Id,TempoProcessamento,TempConc,PesoPenalizacao).
 tarefa(t1,2,5,1).
 tarefa(t2,4,7,6).
@@ -395,6 +396,74 @@ tempo_act_x13(Act,[[A|_]|Novos],X):-
 
 
 
+bfs_massa(Cam,OrdList):-
+    retractall(massa(_)),
+    retractall(current_order(_)),
+    assertz(massa(0)),
+    assertz(current_order(5555)),
+    entrega_armazens(Ent),
+    delete(Ent,5,Ent2),
+    bfs_massa2(Ent2,[5],Cam,[],OrdList).
+
+bfs_massa2([],LA,Cam,TempList,OrdList):-
+    !,reverse([5|LA],Cam),reverse(TempList,OrdList).
+
+bfs_massa2(Ent,[Act|LA],Cam,TempList,OrdList):-
+    findall([X|LA],
+            (dadosCam_t_e_ta(_,Act,X,_,_,_),member(X,Ent)),Novos),
+    massa_act(Act,Novos,P),
+    delete(Ent,P,Ent2),
+    current_order(Order),
+    append_inicio3(P,[Act|LA],Todos),
+    TempList2 = [Order|TempList],
+    bfs_massa2(Ent2,Todos,Cam,TempList2,OrdList).
+
+append_inicio3(P,L,[P|L]).
+
+massa_act(_,[],0):-retract(massa(_)),assertz(massa(0)).
+massa_act(Act,[[A|_]|Novos],X):-
+    massa_act(Act,Novos,X2),
+    entrega(Order,_,M,A,_,_),
+    massa(Massa),
+    (   (Massa<M,!,retract(massa(_)),assertz(massa(M)),retract(current_order(_)),assertz(current_order(Order)),X=A);X=X2).
+
+
+bfs_massa_tempo(Cam,OrdList):-
+    retractall(massa(_)),
+    retractall(current_order(_)),
+    assertz(massatempo(0)),
+    assertz(current_order(5555)),
+    entrega_armazens(Ent),
+    delete(Ent,5,Ent2),
+    bfs_massa_tempo2(Ent2,[5],Cam,[],OrdList).
+
+bfs_massa_tempo2([],LA,Cam,TempList,OrdList):-
+    !,reverse([5|LA],Cam),reverse(TempList,OrdList).
+
+bfs_massa_tempo2(Ent,[Act|LA],Cam,TempList,OrdList):-
+    findall([X|LA],(dadosCam_t_e_ta(_,Act,X,_,_,_),member(X,Ent)),Novos),
+    massa_tempo_act(Act,Novos,P),
+    delete(Ent,P,Ent2),
+    current_order(Order),
+    append_inicio4(P,[Act|LA],Todos),
+    TempList2 = [Order|TempList],
+    bfs_massa_tempo2(Ent2,Todos,Cam,TempList2,OrdList).
+
+append_inicio4(P,L,[P|L]).
+
+massa_tempo_act(_,[],0):-retract(massatempo(_)),assertz(massatempo(0)).
+massa_tempo_act(Act,[[A|_]|Novos],X):-
+    massa_tempo_act(Act,Novos,X2),
+    entrega(Order,_,M,A,_,RET),
+    dadosCam_t_e_ta(_,Act,A,T,E,_),
+    massatempo(MassaTempo),
+    cam(TR,CE),
+    ED is CE - E,
+    (   (ED > 0,!,T2 is T + RET,CE2 is CE);(getChargingTime(CE,CT),T2 is T + CT + RET,CE2 is CE)  ),
+    D = M / T2,
+    (   (MassaTempo< D,!,retract(cam(_,_)),assertz(cam(TR,CE2)),retract(massatempo(_)),assertz(massatempo(D)),retract(current_order(_)),assertz(current_order(Order)),X=A);X=X2).
+
+
 
 %-------------------------------AG------------------------%
 
@@ -405,17 +474,28 @@ gera:-
     Less = [1,2,3],
     BestInd = [2,3,1]*1000,
     retractall(less_time(_)),
+    retractall(less_ind(_)),
     assertz(best_ind(BestInd)),
     assertz(less_time(Temp)),
     assertz(less_ind(Less)),
     bfs_tempo_entrega(_,_,OrdList),
-    write(OrdList),
+    bfs_massa(_,OrdList2),
+    bfs_massa_tempo(_,OrdList3),
+    %OrdList4 = [OrdList,OrdList2,OrdList3],
+    %write('\n\nORDER LIST4:  '),write(OrdList4),
     count_seq_orders(OrdList,Count),
     assertz(num_orders(Count)),
-    gera_populacao(OrdList,Pop),
+    %gera_populacao(OrdList,Pop),
+    gera_first_populacao(OrdList,Pop2),
+    append(Pop2,[OrdList],Pop3),
+    append(Pop3,[OrdList2],Pop4),
+    append(Pop4,[OrdList3],Pop5),
+    retractall(old_pop(_)),
+    assertz(old_pop(Pop5)),
+    write('\n\nPOPULACAO 5 TESTE:'),write(Pop5),
     write('\n\nPopulação gerada:\n\n'),
-    write(Pop),
-    avalia_populacao(Pop,PopAv),
+    write(Pop5),
+    avalia_populacao(Pop5,PopAv),
     write('\n\nPopulação Avaliada:\n\n'),
     write(PopAv),
     ordena_populacao(PopAv,PopOrd),
@@ -437,6 +517,11 @@ count_seq_orders([_|Cam],Count):- count_seq_orders(Cam,Count2), Count is Count2 
 
 
 % Gera População
+
+gera_first_populacao(Cam,Pop):-
+    num_orders(NumT),
+    TamPop = 6 -3,
+    gera_populacao(TamPop,Cam,NumT,Pop).
 
 gera_populacao(Cam,Pop):-
     num_orders(NumT),
