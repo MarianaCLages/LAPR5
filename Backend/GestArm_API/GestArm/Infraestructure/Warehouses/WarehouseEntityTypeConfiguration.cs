@@ -27,5 +27,7 @@ internal class WarehouseEntityTypeConfiguration : IEntityTypeConfiguration<Wareh
         builder.OwnsOne(e => e.Longitude).Property(e => e.Seconds).HasColumnName("LongitudeSeconds").IsRequired();
         builder.OwnsOne(e => e.Longitude).Property(e => e.Minutes).HasColumnName("LongitudeMinutes").IsRequired();
         builder.OwnsOne(e => e.Longitude).Property(e => e.Degrees).HasColumnName("LongitudeDegrees").IsRequired();
+
+        builder.OwnsOne(e => e.Activated).Property(e => e.Activated).HasColumnName("Activated").IsRequired();
     }
 }

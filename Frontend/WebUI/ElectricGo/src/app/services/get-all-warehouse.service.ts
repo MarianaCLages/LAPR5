@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {ICreateWarehouseDTO} from "../shared/createWarehouseDTO";
+import {ActivatedWarehouseDTO} from "../shared/ActivatedWarehouseDTO";
 import { Injectable } from '@angular/core';
 import IPathDTO from "../shared/pathDTO";
 
@@ -40,7 +41,7 @@ export class GetAllWarehouseService {
       headers: headers
     };
 
-    return this.http.get<IPathDTO[]>(this.designationURL + designation, options).toPromise();
+    return this.http.get<ActivatedWarehouseDTO[]>(this.designationURL + designation, options).toPromise();
   }
 
 

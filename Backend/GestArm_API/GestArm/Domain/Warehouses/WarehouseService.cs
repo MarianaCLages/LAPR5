@@ -9,21 +9,21 @@ public class WarehouseService : IWarehouseService
         _repository = repository;
     }
 
-    public async Task<WarehouseDTO> GetByIdAsync(WarehouseId id)
+    public async Task<ActivatedWarehouseDTO> GetByIdAsync(WarehouseId id)
     {
         var warehouse = await _repository.GetByIdAsync(id);
 
         if (warehouse == null) return null;
 
-        return new WarehouseDTO(warehouse.Id.AsGuid(), warehouse.Latitude.Degrees, warehouse.Latitude.Minutes,
+        return new ActivatedWarehouseDTO(warehouse.Id.AsGuid(), warehouse.Latitude.Degrees, warehouse.Latitude.Minutes,
             warehouse.Latitude.Seconds,
             warehouse.Longitude.Degrees, warehouse.Longitude.Minutes, warehouse.Longitude.Seconds,
             warehouse.Designation.Designation, warehouse.Address.Street, warehouse.Address.DoorNumber,
             warehouse.Address.PostalCode, warehouse.Address.City, warehouse.Address.Country,
-            warehouse.AlphaNumId.AlphaNumId);
+            warehouse.AlphaNumId.AlphaNumId,warehouse.Activated.Activated);
     }
 
-    public async Task<List<WarehouseDTO>> GetByDesignationAsync(string designation)
+    public async Task<List<ActivatedWarehouseDTO>> GetByDesignationAsync(string designation)
     {
         var list = await _repository.GetByDesignationAsync(new DesignationWarehouse(designation));
 
@@ -33,25 +33,25 @@ public class WarehouseService : IWarehouseService
         }
 
         var listDto = list.ConvertAll(arm =>
-            new WarehouseDTO(arm.Id.AsGuid(), arm.Latitude.Degrees, arm.Latitude.Minutes, arm.Latitude.Seconds,
+            new ActivatedWarehouseDTO(arm.Id.AsGuid(), arm.Latitude.Degrees, arm.Latitude.Minutes, arm.Latitude.Seconds,
                 arm.Longitude.Degrees,
                 arm.Longitude.Minutes, arm.Longitude.Seconds, arm.Designation.Designation, arm.Address.Street,
                 arm.Address.DoorNumber, arm.Address.PostalCode, arm.Address.City, arm.Address.Country,
-                arm.AlphaNumId.AlphaNumId));
+                arm.AlphaNumId.AlphaNumId,arm.Activated.Activated));
 
         return listDto;
     }
 
-    public async Task<List<WarehouseDTO>> GetAllAsync()
+    public async Task<List<ActivatedWarehouseDTO>> GetAllAsync()
     {
         var list = await _repository.GetAllAsync();
 
         var listDto = list.ConvertAll(arm =>
-            new WarehouseDTO(arm.Id.AsGuid(), arm.Latitude.Degrees, arm.Latitude.Minutes, arm.Latitude.Seconds,
+            new ActivatedWarehouseDTO(arm.Id.AsGuid(), arm.Latitude.Degrees, arm.Latitude.Minutes, arm.Latitude.Seconds,
                 arm.Longitude.Degrees,
                 arm.Longitude.Minutes, arm.Longitude.Seconds, arm.Designation.Designation, arm.Address.Street,
                 arm.Address.DoorNumber, arm.Address.PostalCode, arm.Address.City, arm.Address.Country,
-                arm.AlphaNumId.AlphaNumId));
+                arm.AlphaNumId.AlphaNumId,arm.Activated.Activated));
 
         return listDto;
     }
@@ -76,18 +76,18 @@ public class WarehouseService : IWarehouseService
             warehouse.AlphaNumId.AlphaNumId);
     }
 
-    public async Task<WarehouseDTO> GetByWarehouseIdAsync(string warehouseId)
+    public async Task<ActivatedWarehouseDTO> GetByWarehouseIdAsync(string warehouseId)
     {
         var warehouse = await _repository.GetByWarehouseIdAsync(new AlphaId(warehouseId));
 
         if (warehouse == null) return null;
 
-        return new WarehouseDTO(warehouse.Id.AsGuid(), warehouse.Latitude.Degrees, warehouse.Latitude.Minutes,
+        return new ActivatedWarehouseDTO(warehouse.Id.AsGuid(), warehouse.Latitude.Degrees, warehouse.Latitude.Minutes,
             warehouse.Latitude.Seconds,
             warehouse.Longitude.Degrees, warehouse.Longitude.Minutes, warehouse.Longitude.Seconds,
             warehouse.Designation.Designation, warehouse.Address.Street, warehouse.Address.DoorNumber,
             warehouse.Address.PostalCode, warehouse.Address.City, warehouse.Address.Country,
-            warehouse.AlphaNumId.AlphaNumId);
+            warehouse.AlphaNumId.AlphaNumId,warehouse.Activated.Activated);
     }
 
     public async Task<WarehouseDTO> UpdateAsync(WarehouseDTO dto)
@@ -124,6 +124,30 @@ public class WarehouseService : IWarehouseService
 
         await _repository.RemoveAsync(warehouse);
 
+        return true;
+    }
+
+    public async Task<bool> DesactivateWarehouseAsync(ActivatedWarehouseDTO dto)
+    {
+        var warehouse = await _repository.GetByIdAsync(new WarehouseId(dto.Id));
+        
+        await _repository.RemoveAsync(warehouse);
+        warehouse.DesactivateWarehouse();
+        await _repository.AddAsync(warehouse);
+        
+        
+        return true;
+    }
+    
+    public async Task<bool> ActivateWarehouseAsync(ActivatedWarehouseDTO dto)
+    {
+        var warehouse = await _repository.GetByIdAsync(new WarehouseId(dto.Id));
+        
+        await _repository.RemoveAsync(warehouse);
+        warehouse.ActivateWarehouse();
+        await _repository.AddAsync(warehouse);
+        
+        
         return true;
     }
 }

@@ -23,7 +23,7 @@ public class WarehouseControllerTest
     public void GetAllAsyncTest_ShouldGetAllWarehouses()
     {
         //ARRANGE
-        var listDto = new List<WarehouseDTO>();
+        var listDto = new List<ActivatedWarehouseDTO>();
 
         var arm = new Warehouse(new WarehouseId(Guid.NewGuid()),
             new WarehouseCoordinates(10, 20, 30),
@@ -32,7 +32,7 @@ public class WarehouseControllerTest
             new WarehouseAddress("Street das flores", 1, "4000-300", "Pourto", "Pourtougal"),
             new AlphaId("C12"));
         
-        var armDto = WarehouseDtoParser.convertToDto(arm);
+        var armDto = WarehouseDtoParser.convertToActivateDto(arm);
         listDto.Add(armDto);
         
         //ACT
@@ -57,7 +57,7 @@ public class WarehouseControllerTest
     public void GetByDesignationTest_ShouldGetAllWarehousesByDesignation()
     {
         //ARRANGE
-        var listDto = new List<WarehouseDTO>();
+        var listDto = new List<ActivatedWarehouseDTO>();
 
         var arm = new Warehouse(new WarehouseId(Guid.NewGuid()),
             new WarehouseCoordinates(10, 20, 30),
@@ -67,7 +67,7 @@ public class WarehouseControllerTest
             new AlphaId("C12"));
 
 
-        var armDto = WarehouseDtoParser.convertToDto(arm);
+        var armDto = WarehouseDtoParser.convertToActivateDto(arm);
         listDto.Add(armDto);
         
         //ACT
@@ -93,7 +93,7 @@ public class WarehouseControllerTest
     {
         
         //ARRANGE
-        var listDto = new List<WarehouseDTO>();
+        var listDto = new List<ActivatedWarehouseDTO>();
 
         var arm = new Warehouse(new WarehouseId(Guid.NewGuid()),
             new WarehouseCoordinates(10, 20, 30),
@@ -103,7 +103,7 @@ public class WarehouseControllerTest
             new AlphaId("C12"));
 
 
-        var armDto = WarehouseDtoParser.convertToDto(arm);
+        var armDto = WarehouseDtoParser.convertToActivateDto(arm);
         listDto.Add(armDto);
 
         //ACT
@@ -129,7 +129,7 @@ public class WarehouseControllerTest
     {
         
         //ARRANGE
-        var listDto = new List<WarehouseDTO>();
+        var listDto = new List<ActivatedWarehouseDTO>();
 
         var arm = new Warehouse(new WarehouseId(Guid.NewGuid()),
             new WarehouseCoordinates(10, 20, 30),
@@ -139,7 +139,7 @@ public class WarehouseControllerTest
             new AlphaId("C12"));
 
 
-        var armDto = WarehouseDtoParser.convertToDto(arm);
+        var armDto = WarehouseDtoParser.convertToActivateDto(arm);
         listDto.Add(armDto);
 
         //ACT

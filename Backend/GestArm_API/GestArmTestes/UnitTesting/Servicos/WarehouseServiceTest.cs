@@ -36,7 +36,7 @@ public class WarehouseServiceTest
         //ACT
         _repositoryMock.Setup(x => x.GetAllAsync()).ReturnsAsync(list);
 
-        var resultDTO = list.ConvertAll(arn => WarehouseDtoParser.convertToDto(arn));
+        var resultDTO = list.ConvertAll(arn => WarehouseDtoParser.convertToActivateDto(arn));
         var result = _service.GetAllAsync().Result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());
@@ -68,7 +68,7 @@ public class WarehouseServiceTest
         //ACT
         _repositoryMock.Setup(x => x.GetByIdAsync(arm.Id)).ReturnsAsync(arm);
 
-        var resultDTO = list.ConvertAll(arn => WarehouseDtoParser.convertToDto(arn));
+        var resultDTO = list.ConvertAll(arn => WarehouseDtoParser.convertToActivateDto(arn));
         var result = _service.GetByIdAsync(arm.Id).Result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());
@@ -100,7 +100,7 @@ public class WarehouseServiceTest
         //ACT
         _repositoryMock.Setup(x => x.GetByWarehouseIdAsync(arm.AlphaNumId)).ReturnsAsync(arm);
 
-        var resultDTO = list.ConvertAll(arn => WarehouseDtoParser.convertToDto(arn));
+        var resultDTO = list.ConvertAll(arn => WarehouseDtoParser.convertToActivateDto(arn));
         var result = _service.GetByWarehouseIdAsync(arm.AlphaNumId.AlphaNumId).Result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());
@@ -132,7 +132,7 @@ public class WarehouseServiceTest
         //ACT
         _repositoryMock.Setup(x => x.GetByDesignationAsync(arm.Designation)).ReturnsAsync(list);
 
-        var resultDTO = list.ConvertAll(arn => WarehouseDtoParser.convertToDto(arn));
+        var resultDTO = list.ConvertAll(arn => WarehouseDtoParser.convertToActivateDto(arn));
         var result = _service.GetByDesignationAsync(arm.Designation.Designation).Result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());
@@ -164,7 +164,7 @@ public class WarehouseServiceTest
         //ACT
         _repositoryMock.Setup(x => x.GetByWarehouseIdAsync(arm.AlphaNumId)).ReturnsAsync(arm);
 
-        var resultDTO = list.ConvertAll(arn => WarehouseDtoParser.convertToDto(arn));
+        var resultDTO = list.ConvertAll(arn => WarehouseDtoParser.convertToActivateDto(arn));
         var result = _service.GetByWarehouseIdAsync(arm.AlphaNumId.AlphaNumId).Result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(result.ToString());

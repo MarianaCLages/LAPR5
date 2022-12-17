@@ -1,0 +1,24 @@
+<br>
+<h1>Warehouse Manager: Activate/Desactivate Warehouse</h1>
+<br>
+
+<br>
+<div class="form">
+  <div class="btn-group">
+    <mat-form-field>
+      <mat-label>Alpha Numeric</mat-label>
+      <input matInput type="text" [(ngModel)]="alphaNumericId"/>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="desactivateWarehouse()">Desactive Warehouse</button>
+    <button mat-raised-button color="primary" (click)="activateWarehouse()">Active Warehouse</button>
+
+
+
+
+<!-- button to go back to the previous page -->
+<button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
+
+
+</div>
+</div>

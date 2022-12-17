@@ -2,13 +2,13 @@
 
 public interface IWarehouseService
 {
-    Task<WarehouseDTO> GetByIdAsync(WarehouseId id);
+    Task<ActivatedWarehouseDTO> GetByIdAsync(WarehouseId id);
 
     //Task<WarehouseDTO> GetByAlphaNumIdAsync(AlphaId id);
 
-    Task<List<WarehouseDTO>> GetByDesignationAsync(string designation);
+    Task<List<ActivatedWarehouseDTO>> GetByDesignationAsync(string designation);
 
-    Task<List<WarehouseDTO>> GetAllAsync();
+    Task<List<ActivatedWarehouseDTO>> GetAllAsync();
 
     Task<WarehouseDTO> AddAsync(CreatingWarehouseDto dto);
 
@@ -16,5 +16,9 @@ public interface IWarehouseService
 
     Task<bool> DeleteAsync(WarehouseId id);
 
-    Task<WarehouseDTO> GetByWarehouseIdAsync(string warehouseId);
+    Task<ActivatedWarehouseDTO> GetByWarehouseIdAsync(string warehouseId);
+
+    Task<bool> DesactivateWarehouseAsync(ActivatedWarehouseDTO dto);
+    
+    Task<bool> ActivateWarehouseAsync(ActivatedWarehouseDTO dto);
 }

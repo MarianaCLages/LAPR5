@@ -5,6 +5,7 @@ import IPackagingDTO from "../../../shared/pathDTO";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {ICreateWarehouseDTO} from "../../../shared/createWarehouseDTO";
+import {ActivatedWarehouseDTO} from "../../../shared/ActivatedWarehouseDTO";
 
 @Component({
   selector: 'app-get-warehouses',
@@ -19,7 +20,7 @@ export class GetWarehouseComponent implements OnInit {
 
   warehouse = new MatTableDataSource<ICreateWarehouseDTO>();
 
-  displayedColumns: string[] = ['alphaNumId', 'designation', 'street','postalCode','latitudeDegree','latitudeMinute','latitudeSecond','longitudeDregree','longitudeMinute','longitudeSecond'];
+  displayedColumns: string[] = ['alphaNumId', 'designation', 'street','postalCode','latitudeDegree','latitudeMinute','latitudeSecond','longitudeDregree','longitudeMinute','longitudeSecond','activated'];
 
   // @ts-ignore
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator ;
@@ -65,14 +66,14 @@ export class GetWarehouseComponent implements OnInit {
         this.successMessage = "Get Warehouse Successful!";
 
         let warehouseArray = [];
-        let warehouseDTO = new ICreateWarehouseDTO(data.latitudeDegree,data.latitudeMinute,data.latitudeSecond,data.longitudeDregree,data.longitudeMinute,data.longitudeSecond,data.designation,data.street,data.doorNumber,data.postalCode,data.city,data.country,data.alphaNumId);
+        let warehouseDTO = new ActivatedWarehouseDTO(data.latitudeDegree,data.latitudeMinute,data.latitudeSecond,data.longitudeDregree,data.longitudeMinute,data.longitudeSecond,data.designation,data.street,data.doorNumber,data.postalCode,data.city,data.country,data.alphaNumId,data.activated);
 
         warehouseArray.push(warehouseDTO);
 
         this.warehouse.data = warehouseArray;
         this.warehouse.sort = this.sort;
         this.warehouse.paginator = this.paginator;
-
+        console.log(warehouseDTO);
 
       }, //transforms into a http error
       (error: any) => {

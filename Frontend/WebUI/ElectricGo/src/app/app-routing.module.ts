@@ -18,7 +18,7 @@ import { GetHeuristicComponent } from "./log-manager/components/get-heuristic/ge
 import { ListPathsComponent } from './log-manager/components/list-paths/list-paths.component';
 import { ListOrdersComponent } from './warehouse-manager/components/list-orders/list-orders.component';
 import { ListTruckComponent } from './log-manager/components/list-truck/list-truck.component';
-
+import {ActivationWarehouseComponentComponent} from "./warehouse-manager/components/activation-warehouse/activation-warehouse-component/activation-warehouse-component.component";
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
@@ -28,7 +28,7 @@ const routes: Routes = [
   {path: 'WarehouseManager/addWarehouse', component: AddWarehouseComponent},
   {path: 'WarehouseManager/createOrder', component: CreateOrderComponent},
   {path: 'WarehouseManager/listOrders', component: ListOrdersComponent},
-
+  {path: 'WarehouseManager/activationWarehouse', component: ActivationWarehouseComponentComponent},
   // Fleet Manager
   {path: 'FleetManager', component: FleetManagerComponent},
   {path: 'FleetManager/addTruck', component: AddTruckComponent},

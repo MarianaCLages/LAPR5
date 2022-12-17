@@ -26,4 +26,5 @@ public interface IWarehouseRepository : IRepository<Warehouse, WarehouseId>
     Task<int> GetCountAsync();
 
     Task<Warehouse> GetByWarehouseIdAsync(AlphaId warehouseId);
+
 }

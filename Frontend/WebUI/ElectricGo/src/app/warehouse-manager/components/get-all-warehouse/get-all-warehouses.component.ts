@@ -6,6 +6,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import IPathDTO from "../../../shared/pathDTO";
 import {ICreateWarehouseDTO} from "../../../shared/createWarehouseDTO";
+import {ActivatedWarehouseDTO} from "../../../shared/ActivatedWarehouseDTO";
 
 @Component({
   selector: 'app-get-all-warehouses',
@@ -15,10 +16,10 @@ import {ICreateWarehouseDTO} from "../../../shared/createWarehouseDTO";
 export class GetAllWarehousesComponent implements OnInit {
 
 
-  warehouses = new MatTableDataSource<ICreateWarehouseDTO>();
+  warehouses = new MatTableDataSource<ActivatedWarehouseDTO>();
   designation: any;
 
-  displayedColumns: string[] = ['alphaNumId', 'designation', 'street','postalCode','latitudeDegree','latitudeMinute','latitudeSecond','longitudeDregree','longitudeMinute','longitudeSecond'];
+  displayedColumns: string[] = ['alphaNumId', 'designation', 'street','postalCode','latitudeDegree','latitudeMinute','latitudeSecond','longitudeDregree','longitudeMinute','longitudeSecond','activated'];
   options: string[] = [
     'Warehouse by Designation',
     'All Warehouses',
@@ -49,6 +50,8 @@ export class GetAllWarehousesComponent implements OnInit {
     this.warehouses.data = dataWarehouse;
     this.warehouses.sort = this.sort;
     this.warehouses.paginator = this.paginator;
+
+    console.log(dataWarehouse);
       }
 
   async chooseFilter() {
@@ -70,7 +73,7 @@ export class GetAllWarehousesComponent implements OnInit {
   async getWarehouseByFiltrer() {
 
     if (this.filterOption == "Warehouse by Designation") {
-      this.getAllWarehouseService.getPathsByEndingWarehouse(this.designation).then((data: ICreateWarehouseDTO[]) => {
+      this.getAllWarehouseService.getPathsByEndingWarehouse(this.designation).then((data: ActivatedWarehouseDTO[]) => {
           this.warehouses.data = data;
         },
         (error: any) => {

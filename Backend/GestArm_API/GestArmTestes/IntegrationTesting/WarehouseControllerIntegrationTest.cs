@@ -45,7 +45,7 @@ public class WarehouseControllerIntegrationTest
         var result = _controller.GetAll().Result;
 
         var objExpected = result.Value.First();
-        var objActual = WarehouseDtoParser.convertToDto(listArm.First());
+        var objActual = WarehouseDtoParser.convertToActivateDto(listArm.First());
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -78,7 +78,7 @@ public class WarehouseControllerIntegrationTest
         var result = _controller.GetByDesignation(arm.Designation.Designation).Result;
 
         var objExpected = result.Value.First();
-        var objActual = WarehouseDtoParser.convertToDto(listArm.First());
+        var objActual = WarehouseDtoParser.convertToActivateDto(listArm.First());
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -110,7 +110,7 @@ public class WarehouseControllerIntegrationTest
         var result = _controller.GetByDesignation(arm.Designation.Designation).Result;
 
         var objExpected = result.Value.First();
-        var objActual = WarehouseDtoParser.convertToDto(arm);
+        var objActual = WarehouseDtoParser.convertToActivateDto(arm);
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -138,7 +138,7 @@ public class WarehouseControllerIntegrationTest
         var result = _controller.GetByWarehouseIdAsync(arm.AlphaNumId.AlphaNumId).Result;
 
         var objExpected = result.Value;
-        var objActual = WarehouseDtoParser.convertToDto(arm);
+        var objActual = WarehouseDtoParser.convertToActivateDto(arm);
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);

@@ -1,4 +1,4 @@
-export class ICreateWarehouseDTO{
+export class ActivatedWarehouseDTO{
   latitudeDegree : number;
   latitudeMinute : number;
   latitudeSecond : number;
@@ -12,10 +12,11 @@ export class ICreateWarehouseDTO{
   city: string;
   country: string;
   alphaNumId : string;
+  activated : string;
 
 
 
-  constructor(latitudeDegree : number, latitudeMinute : number, latitudeSecond : number, longitudeDegree: number, longitudeMinute : number, longitudeSecond: number, designation: string, street: string, doorNumber: number, postalCode: string, city: string, country: string, alphaNumId : string) {
+  constructor(latitudeDegree : number, latitudeMinute : number, latitudeSecond : number, longitudeDegree: number, longitudeMinute : number, longitudeSecond: number, designation: string, street: string, doorNumber: number, postalCode: string, city: string, country: string, alphaNumId : string, activated : string) {
     this.latitudeDegree = latitudeDegree;
     this.latitudeMinute = latitudeMinute;
     this.latitudeSecond = latitudeSecond;
@@ -29,6 +30,7 @@ export class ICreateWarehouseDTO{
     this.city = city;
     this.country = country;
     this.alphaNumId = alphaNumId;
+    this.activated = activated;
   }
 
 

@@ -74,4 +74,6 @@ public class WarehouseRepository : BaseRepository<Warehouse, WarehouseId>, IWare
         return await _context.Warehouses.Where(r => r.AlphaNumId.AlphaNumId.Equals(warehouseId.AlphaNumId))
             .FirstOrDefaultAsync();
     }
+
+
 }

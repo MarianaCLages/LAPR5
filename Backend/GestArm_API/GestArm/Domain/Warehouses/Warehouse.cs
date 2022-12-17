@@ -19,6 +19,7 @@ public class Warehouse : Entity<WarehouseId>, IAggregateRoot
         Longitude = longitude;
         Designation = designation;
         Address = address;
+        Activated = new ActivatedWarehouse(true);
     }
 
     public WarehouseId Id { get; }
@@ -26,12 +27,22 @@ public class Warehouse : Entity<WarehouseId>, IAggregateRoot
     public AlphaId AlphaNumId { get; }
     public WarehouseCoordinates Latitude { get; }
 
+    public ActivatedWarehouse Activated { get; set; }
     public WarehouseCoordinates Longitude { get; }
 
     public DesignationWarehouse Designation { get; set; }
 
     public WarehouseAddress Address { get; }
 
+    public void DesactivateWarehouse()
+    {
+        Activated.DesactivateWarehouse();
+    }
+
+    public void ActivateWarehouse()
+    {
+        Activated.ActivateWarehouse();
+    }
     public void ChangeDesignation(string newDesignation)
     {
         Designation = new DesignationWarehouse(newDesignation);

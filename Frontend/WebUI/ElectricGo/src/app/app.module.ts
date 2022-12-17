@@ -46,6 +46,7 @@ import { GetHeuristicComponent } from "./log-manager/components/get-heuristic/ge
 import { ListOrdersComponent } from './warehouse-manager/components/list-orders/list-orders.component';
 import { ListTruckComponent } from './log-manager/components/list-truck/list-truck.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ActivationWarehouseComponentComponent } from './warehouse-manager/components/activation-warehouse/activation-warehouse-component/activation-warehouse-component.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     GetHeuristicComponent,
     ListPathsComponent,
     ListOrdersComponent,
-    ListTruckComponent
+    ListTruckComponent,
+    ActivationWarehouseComponentComponent
   ],
   imports: [
     BrowserModule,

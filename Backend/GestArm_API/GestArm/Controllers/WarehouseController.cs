@@ -17,7 +17,7 @@ public class WarehouseController : ControllerBase
 
     // GET: api/Warehouse/id?id=X
     [HttpGet("id")]
-    public async Task<ActionResult<WarehouseDTO>> GetById(Guid id)
+    public async Task<ActionResult<ActivatedWarehouseDTO>> GetById(Guid id)
     {
         try
         {
@@ -40,7 +40,7 @@ public class WarehouseController : ControllerBase
 
     // GET: api/Warehouse/designation?designation=designation
     [HttpGet("designation")]
-    public async Task<ActionResult<IEnumerable<WarehouseDTO>>> GetByDesignation(string designation)
+    public async Task<ActionResult<IEnumerable<ActivatedWarehouseDTO>>> GetByDesignation(string designation)
     {
         try
         {
@@ -62,7 +62,7 @@ public class WarehouseController : ControllerBase
 
     // GET: api/Warehouse
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<WarehouseDTO>>> GetAll()
+    public async Task<ActionResult<IEnumerable<ActivatedWarehouseDTO>>> GetAll()
     {
         try
         {
@@ -111,7 +111,7 @@ public class WarehouseController : ControllerBase
     //MÉTODO DO REPOSITORIO WAREHOUSE NO NODE
     [HttpGet]
     [Route("~/api/[controller]/search/{warehouseId}", Name = "GetWarehousePorIDEspecifico")]
-    public async Task<ActionResult<WarehouseDTO>> GetByWarehouseIdAsync(string warehouseId)
+    public async Task<ActionResult<ActivatedWarehouseDTO>> GetByWarehouseIdAsync(string warehouseId)
     {
         try
         {
@@ -132,7 +132,7 @@ public class WarehouseController : ControllerBase
     }
     
     [HttpGet ("byAlphaId")]
-    public async Task<ActionResult<WarehouseDTO>> GetByWarehouseIdQueryAsync(string warehouseId)
+    public async Task<ActionResult<ActivatedWarehouseDTO>> GetByWarehouseIdQueryAsync(string warehouseId)
     {
         try
         {
@@ -200,5 +200,35 @@ public class WarehouseController : ControllerBase
         {
             return BadRequest("An error has occured creating the warehouse! (Please specify a valid ID, following the rules of GUID!)");
         }
+    }
+    
+    //delete=id do armazem
+    // GET: api/Warehouse/delete?delete=delete
+    [HttpPut("delete")]
+    public async Task<ActionResult<bool>> DesactivateAsync(string delete)
+    {
+        
+        var warehouseCheck = await _service.GetByWarehouseIdAsync(delete);
+
+        if (warehouseCheck == null) return NotFound("No warehouse with that AlphaNumericID was found!");
+
+        var boolean = await _service.DesactivateWarehouseAsync(warehouseCheck);
+
+        return boolean;
+    }
+    
+    //activate= id do armazem
+    // GET: api/Warehouse/activate?activate=activate
+    [HttpPut("activate")]
+    public async Task<ActionResult<bool>> ActivateAsync(string activate)
+    {
+        
+        var warehouseCheck = await _service.GetByWarehouseIdAsync(activate);
+
+        if (warehouseCheck == null) return NotFound("No warehouse with that AlphaNumericID was found!");
+
+        var boolean = await _service.ActivateWarehouseAsync(warehouseCheck);
+
+        return boolean;
     }
 }
