@@ -13,4 +13,5 @@ export default interface ITruckController  {
     sendInfoToPlanning(req: Request,res: Response, next: NextFunction);
     getTruckByPlateParam(req: Request, res: Response, next: NextFunction);
     getTruckByCaractParam(req: Request, res: Response, next: NextFunction);
+    getBestPathForEachTruck(req: Request, res: Response, next: NextFunction);
 }

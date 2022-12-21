@@ -89,6 +89,12 @@ export default async ({ expressApp }) => {
     path: config.services.role.path
   };
 
+
+  const bestPathService = {
+    name: config.services.bestpath.name,
+    path: config.services.bestpath.path
+  };
+
   const pathService = {
     name: config.services.path.name,
     path: config.services.path.path
@@ -141,6 +147,7 @@ export default async ({ expressApp }) => {
     services: [
       roleService,
       pathService,
+      bestPathService,
       truckService,
       packagingService
     ]

@@ -92,6 +92,10 @@ export default {
     },
 
     services: {
+        bestpath:{
+            name: "GetBestPathService",
+            path: "../services/getBestPathService"
+        },
         role: {
             name: "RoleService",
             path: "../services/roleService"

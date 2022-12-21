@@ -11,14 +11,17 @@ import {Result} from "../core/logic/Result";
 import {BaseController} from "../core/infra/BaseController";
 import ITruckPlateDTO from "../dto/truck/ITruckPlateDTO";
 import SendInfoToPlanningService from "../services/sendInfoToPlanningService";
+import GetBestPathService from "../services/getBestPathService";
 import {delay} from "lodash";
+import IGestBestPathService from "../services/IServices/IGestBestPathService";
 
 @Service()
 export default class truckController
     extends BaseController
     implements ITruckController {
     constructor(
-        @Inject(config.services.truck.name) private truckServiceInstance: ITruckService
+        @Inject(config.services.truck.name) private truckServiceInstance: ITruckService,
+        @Inject(config.services.bestpath.name) private bestPathServiceInstance : IGestBestPathService
     ) {
         super();
 
@@ -261,5 +264,14 @@ export default class truckController
     }
 
 
+    public async getBestPathForEachTruck(req: Request, res: Response, next: NextFunction) {
+
+        this.bestPathServiceInstance.generateFiles();
+        this.bestPathServiceInstance.sendPaths();
+        this.bestPathServiceInstance.sendTrucks();
+        this.bestPathServiceInstance.sendWarehouse();
+
+        return res.status(200).json("FUNFOU");
+    }
 
 }
