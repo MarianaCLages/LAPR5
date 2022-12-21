@@ -18,6 +18,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 })
 export class ViewRoadMapNetworkComponent implements OnInit {
 
+  private moovSpeed!: number;
+
   //Camera information
   @Input() public cameraZ: number = 2500;
   @Input() public fieldOfView: number = 1;
@@ -27,6 +29,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private warehouses: any;
   private paths: any;
   private info: any;
+  private truck: any;
 
   //ANIMATION
   @ViewChild('canvas')
@@ -69,7 +72,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     });
   }
 
-  saveConfFile(warehouses: ICreateWarehouseDTO[], paths: any) {
+  private saveConfFile(warehouses: ICreateWarehouseDTO[], paths: any) {
     //transform warehouse to warehouseViewRepresentation
     let warehouseViewRepresentation: IWarehouseViewRepresentation[] = [];
 
@@ -109,7 +112,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       let pathRepresentationAux: IPathViewRepresentation = {
         beginningWarehouse: path.beginningWarehouseId,
         endingWarehouse: path.endingWarehouseId,
-        //LIMIT IN THE WIDTH OF THE PATH
+        //limit in the width of the path
         thickness: (Math.random() * (1 - 0.2) + 0.2)
       };
 
@@ -124,7 +127,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     };
   }
 
-  convertDMSToDD(latitudeDegrees: number, latitudeMinutes: number, latitudeSeconds: number) {
+  private convertDMSToDD(latitudeDegrees: number, latitudeMinutes: number, latitudeSeconds: number) {
     return latitudeDegrees + latitudeMinutes / 60 + latitudeSeconds / 3600;
   }
 
@@ -200,7 +203,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
       this.roadMap.add(incomingRoad);
 
-       //INCOMING OUTGOING EDGE
+      //INCOMING OUTGOING EDGE
       let incomingEdgeEndX = end.x + 0.1 * difX;
       let incomingEdgeEndY = end.y + 0.1 * difY;
       let incomingEdgeEndZ = end.z;
@@ -266,7 +269,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       this.roadMap.add(road);
 
       //PATHS MAP
-      if(pathsMap.has(start.id)){
+      if (pathsMap.has(start.id)) {
         for (const key of pathsMap.keys()) {
           //If the key is equal to the beginningWarehouse of the path
           if (key === start.id) {
@@ -280,7 +283,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         pathsMap.set(start.id, element.thickness);
       }
 
-      if(pathsMap.has(end.id)){
+      if (pathsMap.has(end.id)) {
         for (const key of pathsMap.keys()) {
           //If the key is equal to the beginningWarehouse of the path
           if (key === end.id) {
@@ -306,30 +309,30 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       let incomingEdgeStartZW = start.z;
 
 
-      if(arrPos.has(start.id)){
+      if (arrPos.has(start.id)) {
         for (const key of arrPos.keys()) {
           if (key === start.id) {
-            arrPos.set(key, [incomingEdgeStartXW,incomingEdgeStartYW,incomingEdgeStartZW]);
+            arrPos.set(key, [incomingEdgeStartXW, incomingEdgeStartYW, incomingEdgeStartZW]);
           }
         }
       } else {
-        arrPos.set(start.id, [incomingEdgeStartXW,incomingEdgeStartYW,incomingEdgeStartZW]);
+        arrPos.set(start.id, [incomingEdgeStartXW, incomingEdgeStartYW, incomingEdgeStartZW]);
       }
 
-      if(arrPos.has(end.id)){
+      if (arrPos.has(end.id)) {
         for (const key of arrPos.keys()) {
           if (key === end.id) {
-            arrPos.set(key, [incomingEdgeEndXW,incomingEdgeEndYW,incomingEdgeEndZW]);
+            arrPos.set(key, [incomingEdgeEndXW, incomingEdgeEndYW, incomingEdgeEndZW]);
           }
         }
       } else {
-        arrPos.set(end.id, [incomingEdgeEndXW,incomingEdgeEndYW,incomingEdgeEndZW]);
+        arrPos.set(end.id, [incomingEdgeEndXW, incomingEdgeEndYW, incomingEdgeEndZW]);
       }
 
     }
 
-     // ROUNDABOUTS
-     for (const element of this.info.warehouses) {
+    // ROUNDABOUTS
+    for (const element of this.info.warehouses) {
       let roundaboutWidth = pathsMap.get(element.id);
 
       let warehousePos = arrPos.get(element.id)!;
@@ -338,7 +341,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       roundabout.position.set(element.x, element.y, element.z + 0.08);
       this.roadMap.add(roundabout);
 
-      if(warehousePos == undefined){
+      if (warehousePos == undefined) {
         warehousePos = [element.x + 3, element.y, element.z];
 
         let differenceDistance = Math.sqrt(
@@ -358,11 +361,11 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         let warehouseY = element.y + incomingEdgeStartY;
         let warehouseZ = element.z;
 
-         if(differenceDistance < 40){
-          warehousePos = [warehouseX,warehouseY,warehouseZ];
-         }
+        if (differenceDistance < 40) {
+          warehousePos = [warehouseX, warehouseY, warehouseZ];
+        }
 
-         let angleIncoming = Math.sqrt(
+        let angleIncoming = Math.sqrt(
           Math.pow(warehouseX - element.x, 2) +
           Math.pow(warehouseY - element.y, 2)
         );
@@ -406,11 +409,11 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         let warehouseY = element.y + incomingEdgeStartY;
         let warehouseZ = element.z;
 
-         if(differenceDistance < 40){
-          warehousePos = [warehouseX,warehouseY,warehouseZ];
-         }
+        if (differenceDistance < 40) {
+          warehousePos = [warehouseX, warehouseY, warehouseZ];
+        }
 
-         let angleIncoming = Math.sqrt(
+        let angleIncoming = Math.sqrt(
           Math.pow(warehouseX - element.x, 2) +
           Math.pow(warehouseY - element.y, 2)
         );
@@ -436,13 +439,20 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
       }
 
-      this.loadModel(warehousePos[0],warehousePos[1],warehousePos[2]);
+      this.loadModel(warehousePos[0], warehousePos[1], warehousePos[2]);
 
     }
 
+    //creates an truck model and animates it
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+    this.truck = new THREE.Mesh(geometry, material);
+
+    this.scene.add(this.truck);
+
   }
 
-  private loadModel(posX : number, posY : number, posZ : number) {
+  private loadModel(posX: number, posY: number, posZ: number) {
     const glftLoader = new GLTFLoader();
     glftLoader.load(
       'assets/warehouse_building/scene.gltf',
@@ -455,9 +465,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     );
   }
 
-  private createRoundAbout(width : number | undefined) : THREE.Mesh {
+  private createRoundAbout(width: number | undefined): THREE.Mesh {
 
-    if(width === undefined){
+    if (width === undefined) {
       width = 1;
     }
 
@@ -536,10 +546,13 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     this.controls.enablePan = true;
     this.controls.enableDamping = true;
 
+    this.moovSpeed = 0.001
     let component: ViewRoadMapNetworkComponent = this;
     (function render() {
       requestAnimationFrame(render);
       component.controls.update();
+      component.updateTruckPosition()
+
       component.render.render(component.scene, component.camera);
       component.render.setPixelRatio(devicePixelRatio);
       component.render.setSize(
@@ -547,8 +560,12 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         component.canvas.clientHeight
       );
     })();
-  }
 
+  }
+  updateTruckPosition() {
+    const x = this.truck.position.x;
+    this.truck.position.x = x + this.moovSpeed;
+  }
   private transformToCartesian(latitude: any, longitude: any) {
     let x = 6371 * Math.cos(latitude) * Math.cos(longitude);
     let y = 6371 * Math.sin(latitude) * Math.cos(longitude);
@@ -560,5 +577,10 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   goBack() {
     window.history.back();
   }
-
 }
+
+
+
+
+
+
