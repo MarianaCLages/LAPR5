@@ -4,7 +4,6 @@ import {MatTableDataSource} from "@angular/material/table";
 import IPackagingDTO from "../../../shared/pathDTO";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {ICreateWarehouseDTO} from "../../../shared/createWarehouseDTO";
 import {ActivatedWarehouseDTO} from "../../../shared/ActivatedWarehouseDTO";
 
 @Component({
@@ -18,7 +17,7 @@ export class GetWarehouseComponent implements OnInit {
 
 
 
-  warehouse = new MatTableDataSource<ICreateWarehouseDTO>();
+  warehouse = new MatTableDataSource<ActivatedWarehouseDTO >();
 
   displayedColumns: string[] = ['alphaNumId', 'designation', 'street','postalCode','latitudeDegree','latitudeMinute','latitudeSecond','longitudeDregree','longitudeMinute','longitudeSecond','activated'];
 

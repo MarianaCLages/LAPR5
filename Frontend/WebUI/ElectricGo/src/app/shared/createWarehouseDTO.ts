@@ -1,3 +1,5 @@
+import {bool} from "three/examples/jsm/nodes/shadernode/ShaderNodeBaseElements";
+
 export class ICreateWarehouseDTO{
   latitudeDegree : number;
   latitudeMinute : number;
@@ -12,6 +14,7 @@ export class ICreateWarehouseDTO{
   city: string;
   country: string;
   alphaNumId : string;
+  activated : boolean;
 
 
 
@@ -24,6 +27,7 @@ export class ICreateWarehouseDTO{
     this.longitudeSecond = longitudeSecond;
     this.designation = designation;
     this.street = street;
+    this.activated = true;
     this.doorNumber = doorNumber;
     this.postalCode = postalCode;
     this.city = city;

@@ -67,7 +67,8 @@ export class  AddWarehouseComponent implements  OnInit{
       doorNumber: this.doorNumber,
       postalCode: this.postalCode,
       city: this.city,
-      country: this.country
+      country: this.country,
+      activated: true
     };
 
     let errorOrSuccess: any = this.addWarehouseService.addWarehouse(warehouseDTO);
