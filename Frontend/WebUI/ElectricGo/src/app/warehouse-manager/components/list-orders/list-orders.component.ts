@@ -3,7 +3,7 @@ import { GetOrdersService } from "../../../services/get-orders.service";
 import { MatTableDataSource } from "@angular/material/table";
 import IOrderDTO from "../../../shared/orderDTO";
 import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
+import { MatSort, Sort } from "@angular/material/sort";
 import { ThemePalette } from "@angular/material/core";
 
 export interface Task {
@@ -65,6 +65,7 @@ export class ListOrdersComponent {
   ngAfterViewInit() {
       // @ts-ignore
       this.orders.paginator = this.paginator;
+      this.orders.sort = this.sort;
   }
   async ngOnInit(): Promise<void> {
     //calls the service to get the orders
@@ -197,5 +198,88 @@ export class ListOrdersComponent {
 
   goBack() {
     window.history.back();
+  }
+
+  sortChangeByActive(sortState: Sort) {
+
+    console.log(sortState.active);
+
+    if(sortState.active == 'Order ID') {
+      if(sortState.direction == 'asc') {
+        this.orders.data.sort((a: any, b: any) =>  a.identifier > b.identifier ? -1 : 1);
+      } else if (sortState.direction == 'desc'){
+        this.orders.data.sort((a: any, b: any) =>  a.identifier > b.identifier ? 1 : -1);
+      }
+    } else if(sortState.active == 'Order Date') {
+      if(sortState.direction == 'asc') {
+
+        this.orders.data.sort((a: any, b: any) => {
+
+          var auxA1 = a.orderDate.split(' ');
+          var auxA = auxA1[0].split('/');
+
+          var auxB1 = b.orderDate.split(' ');
+          var auxB = auxB1[0].split('/');
+
+          if(auxA[2] > auxB[2]) {
+            return 1;
+          } else if (auxA[2] < auxB[2]) {
+            return -1;
+          } else {
+            if(auxA[1] > auxB[1]) {
+              return 1;
+            } else if (auxA[1] < auxB[1]) {
+              return -1;
+            } else {
+              if(auxA[0] > auxB[0]) {
+                return 1;
+              } else if (auxA[0] < auxB[0]) {
+                return -1;
+              } else {
+                return 0;
+              }
+            }
+          }
+
+        });
+
+      } else if (sortState.direction == 'desc'){
+        this.orders.data.sort((a: any, b: any) => {
+
+          var auxA1 = a.orderDate.split(' ');
+          var auxA = auxA1[0].split('/');
+
+          var auxB1 = b.orderDate.split(' ');
+          var auxB = auxB1[0].split('/');
+
+          if(auxA[2] > auxB[2]) {
+            return -1;
+          } else if (auxA[2] < auxB[2]) {
+            return 1;
+          } else {
+            if(auxA[1] > auxB[1]) {
+              return -1;
+            } else if (auxA[1] < auxB[1]) {
+              return 1;
+            } else {
+              if(auxA[0] > auxB[0]) {
+                return -1;
+              } else if (auxA[0] < auxB[0]) {
+                return 1;
+              } else {
+                return 0;
+              }
+            }
+          }
+
+        });
+      }
+    } else if(sortState.active == 'Warehouse ID') {
+      if(sortState.direction == 'asc') {
+        this.orders.data.sort((a: any, b: any) =>  a.warehouseId > b.warehouseId ? -1 : 1);
+      } else if (sortState.direction == 'desc'){
+        this.orders.data.sort((a: any, b: any) =>  a.warehouseId > b.warehouseId ? 1 : -1);
+      }
+    }
   }
 }

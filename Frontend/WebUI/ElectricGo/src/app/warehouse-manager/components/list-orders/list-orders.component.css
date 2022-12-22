@@ -38,3 +38,7 @@ ul {
   margin-left: 15px;
   margin-right: 8px;
 }
+
+th.mat-sort-header-sorted {
+  color: black;
+}

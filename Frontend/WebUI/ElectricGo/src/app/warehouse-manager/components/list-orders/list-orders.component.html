@@ -46,13 +46,13 @@
     <input matInput type="string" [(ngModel)]="orderFilterDate" (change)="getOrdersByFilter()">
   </mat-form-field>
 
-  <table mat-table [dataSource]="orders">
+  <table mat-table [dataSource]="orders" matSort (matSortChange)="sortChangeByActive($event)">
     <ng-container matColumnDef="Order ID">
-      <th mat-header-cell *matHeaderCellDef>Order ID</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by ID">Order ID</th>
       <td mat-cell *matCellDef="let order"> {{order.identifier}} </td>
     </ng-container>
       <ng-container matColumnDef="Order Date">
-      <th mat-header-cell *matHeaderCellDef>Order Date (MM-DD-YYYY)</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Date">Order Date (MM-DD-YYYY)</th>
       <td mat-cell *matCellDef="let order"> {{order.orderDate}} </td>
     </ng-container>
       <ng-container matColumnDef="Order Mass">
@@ -71,7 +71,7 @@
     </ng-container>
 
     <ng-container matColumnDef="Warehouse ID">
-      <th mat-header-cell *matHeaderCellDef>Warehouse ID</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Warehouse">Warehouse ID</th>
       <td mat-cell *matCellDef="let order"> {{order.warehouseId}} </td>
     </ng-container>
 
