@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 
 import { Component, ElementRef, Input, OnInit, ViewChild, } from '@angular/core';
-
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { GetPathsService } from 'src/app/services/get-paths.service';
 import { GetWarehouseServiceService } from 'src/app/services/get-warehouse-service.service';
@@ -30,6 +29,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private paths: any;
   private info: any;
   private truck: any;
+  private truck2: any;
 
   //ANIMATION
   @ViewChild('canvas')
@@ -448,7 +448,11 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
     this.truck = new THREE.Mesh(geometry, material);
 
+
+
+
     this.scene.add(this.truck);
+
 
   }
 
@@ -565,6 +569,32 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   updateTruckPosition() {
     const x = this.truck.position.x;
     this.truck.position.x = x + this.moovSpeed;
+
+    var event2 : KeyboardEvent;
+
+    document.addEventListener("keydown",event => this.myFunc(event));
+
+
+
+
+
+
+  }
+
+  private myFunc(evt : KeyboardEvent){
+
+    if(evt.which == 87){
+      this.truck.position.y += 0.0001;
+    }
+    else if(evt.which == 83){
+      this.truck.position.y -= 0.0001;
+    }
+    else if(evt.which == 65){
+      this.truck.position.x -= 0.0001;
+    }
+    else if(evt.which == 68){
+      this.truck.position.x += 0.0001;
+    }
   }
   private transformToCartesian(latitude: any, longitude: any) {
     let x = 6371 * Math.cos(latitude) * Math.cos(longitude);
@@ -574,9 +604,27 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     return [x, y, z];
   }
 
+
   goBack() {
     window.history.back();
   }
+
+  private forward(){
+    this.truck.position.x += 0.001;
+  }
+
+  private backward(){
+    this.truck.position.x -= 0.001;
+  }
+
+  private left(){
+    this.truck.position.y -= 0.001;
+  }
+
+  private right(){
+    this.truck.position.y += 0.001;
+  }
+
 }
 
 
