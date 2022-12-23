@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-
+import {GUI} from 'dat.gui';
 import { Component, ElementRef, Input, OnInit, ViewChild, } from '@angular/core';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { GetPathsService } from 'src/app/services/get-paths.service';
@@ -67,6 +67,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         this.saveConfFile(this.warehouses, this.paths);
         this.createScene();
         this.startRenderingLoop();
+
 
       });
     });
@@ -551,11 +552,34 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     this.controls.enableDamping = true;
 
     this.moovSpeed = 0.001
+    var changeMovement = 0;
     let component: ViewRoadMapNetworkComponent = this;
+
+
+    var params = {
+
+      truckMovement: 0
+    };
+
+    var gui = new GUI();
+
+    gui.add(params,'truckMovement',[0,1]);
+
+    gui.open();
+
+
     (function render() {
+
+      console.log(params.truckMovement);
       requestAnimationFrame(render);
       component.controls.update();
-      component.updateTruckPosition()
+
+      if (params.truckMovement == 1) {
+        component.updateTruckPosition()
+      }
+      else if (params.truckMovement == 0){
+        component.updateAutomaticPosition();
+      }
 
       component.render.render(component.scene, component.camera);
       component.render.setPixelRatio(devicePixelRatio);
@@ -566,19 +590,19 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     })();
 
   }
-  updateTruckPosition() {
+
+
+
+  private updateAutomaticPosition(){
+
     const x = this.truck.position.x;
     this.truck.position.x = x + this.moovSpeed;
+  }
+
+  private updateTruckPosition() {
 
     var event2 : KeyboardEvent;
-
     document.addEventListener("keydown",event => this.myFunc(event));
-
-
-
-
-
-
   }
 
   private myFunc(evt : KeyboardEvent){
