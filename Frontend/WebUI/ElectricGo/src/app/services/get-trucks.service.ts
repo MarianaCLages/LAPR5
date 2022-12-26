@@ -56,6 +56,23 @@ export class GetTrucksService {
     return this.http.get<ITruckDTO>(this.truckParamURL, options).toPromise();
   }
 
+  softDeleteTruckPlate(plate: string) : any {
+    //set the http headers
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    //set the http options
+    const options = {
+      headers: headers,
+    };
+
+    //get the trucks from the backend
+    this.truckParamURL = this.appConfigService.getLogisticsURL() + this.appConfigService.getTruckByParamURL() + "/plate/" + plate;
+    return this.http.delete<ITruckDTO>(this.truckParamURL, options).toPromise();
+  }
+
 
 
 }
