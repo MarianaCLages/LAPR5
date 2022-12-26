@@ -8,4 +8,5 @@ export interface ITruckDTO {
     totalBatCharge : number;
     tare : number;
     chargingTime : number;
+    activeTruck: boolean;
 }

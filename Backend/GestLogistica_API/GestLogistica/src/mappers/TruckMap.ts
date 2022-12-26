@@ -19,7 +19,8 @@ export class TruckMap extends Mapper<Truck> {
             weightCapacity: truck.weightCapacity.value,
             cargaMax: truck.cargaMax.value,
             totalBatCharge: truck.totalBatCharge.value,
-            chargingTime: truck.chargingTime.value
+            chargingTime: truck.chargingTime.value,
+            activeTruck: truck.activeTruck.value,
         };
     }
 
@@ -47,6 +48,7 @@ export class TruckMap extends Mapper<Truck> {
             cargaMax: truck.cargaMax.value,
             totalBatCharge: truck.totalBatCharge.value,
             chargingTime: truck.chargingTime.value,
+            activeTruck: truck.activeTruck.value,
         };
 
     }

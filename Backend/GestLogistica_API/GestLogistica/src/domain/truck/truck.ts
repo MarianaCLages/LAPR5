@@ -10,6 +10,7 @@ import {TotalBatCharge} from "./totalBatCharge";
 import {CaractTruck} from "./caractTruck";
 import {TruckPlate} from "./truckPlate";
 import {WeightCapacity} from "./weightCapacity";
+import { ActiveTruck } from "./truckActive";
 
 interface TruckProps {
     caractTruck: CaractTruck;
@@ -19,6 +20,7 @@ interface TruckProps {
     totalBatCharge: TotalBatCharge;
     cargaMax: MaxLoadAutonomy;
     chargingTime: ChargingTime;
+    activeTruck : ActiveTruck;
 }
 
 export class Truck extends AggregateRoot<TruckProps> {
@@ -31,6 +33,10 @@ export class Truck extends AggregateRoot<TruckProps> {
         return this._id;
     }
 
+    get activeTruck(): ActiveTruck{
+        return this.props.activeTruck;
+    }
+
     get caractTruck(): CaractTruck {
         return this.props.caractTruck;
     }
@@ -41,6 +47,10 @@ export class Truck extends AggregateRoot<TruckProps> {
 
     set truckPlate(value: TruckPlate) {
         this.props.truckPlate = value;
+    }
+
+    set activeTruck(value: ActiveTruck){
+        this.props.activeTruck = value;
     }
 
     get tare(): Tare {
@@ -92,7 +102,8 @@ export class Truck extends AggregateRoot<TruckProps> {
             {argument: truckDTO.weightCapacity, argumentName: "weightCapacity"},
             {argument: truckDTO.cargaMax, argumentName: "cargaMax"},
             {argument: truckDTO.totalBatCharge, argumentName: "totalBatCharge"},
-            {argument: truckDTO.chargingTime, argumentName: "chargingTime"}
+            {argument: truckDTO.chargingTime, argumentName: "chargingTime"},
+            {argument: truckDTO.activeTruck, argumentName: "activeTruck"}
 
         ];
 
@@ -108,6 +119,7 @@ export class Truck extends AggregateRoot<TruckProps> {
             const cargaMaxOrError = MaxLoadAutonomy.create(truckDTO.cargaMax);
             const totalBatChargeOrError = TotalBatCharge.create(truckDTO.totalBatCharge);
             const chargingTimeOrError = ChargingTime.create(truckDTO.chargingTime);
+            const activeTruckOrError = ActiveTruck.create(truckDTO.activeTruck);
 
             const result = Result.combine([
                 caractTruckOrError,
@@ -116,7 +128,8 @@ export class Truck extends AggregateRoot<TruckProps> {
                 weightCapacityOrError,
                 cargaMaxOrError,
                 totalBatChargeOrError,
-                chargingTimeOrError
+                chargingTimeOrError,
+                activeTruckOrError
             ]);
 
             if (!result.isSuccess) {
@@ -130,7 +143,8 @@ export class Truck extends AggregateRoot<TruckProps> {
                     weightCapacity: weightCapacityOrError.getValue(),
                     cargaMax: cargaMaxOrError.getValue(),
                     totalBatCharge: totalBatChargeOrError.getValue(),
-                    chargingTime: chargingTimeOrError.getValue()
+                    chargingTime: chargingTimeOrError.getValue(),
+                    activeTruck: activeTruckOrError.getValue()
                 }, id);
 
                 return Result.ok<Truck>(truck);

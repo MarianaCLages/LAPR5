@@ -7,4 +7,5 @@ export interface ICreateTruckDTO {
     totalBatCharge : number;
     tare : number;
     chargingTime : number;
+    activeTruck : boolean;
 }
