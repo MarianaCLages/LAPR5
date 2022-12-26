@@ -33,6 +33,8 @@ export class ListTruckComponent implements OnInit {
     'Max Battery',
     'Tare',
     'Charging Time',
+    'Active',
+    'Actions',
   ];
 
   // @ts-ignore
@@ -136,4 +138,47 @@ export class ListTruckComponent implements OnInit {
   goBack() {
     window.history.back();
   }
+
+  deactivateTruck(truck : any) {
+    this.errorMessage = '';
+    this.error = false;
+
+      this.getTrucksService.softDeleteTruckPlate(truck.truckPlate).then(
+        (data: any) => {
+          this.getTrucksService.getTrucks().then(
+            (data: any) => {
+              this.trucks.data = data;
+            },
+            //transforms into a http error
+            (error: any) => {
+              this.error = true;
+              if (error.status == 400) {
+                this.errorMessage = error.error;
+              } else {
+                if (error.status == 500) {
+                  this.errorMessage = error.error.errors.message;
+                } else {
+                  this.errorMessage = 'Unknown error!';
+                }
+              }
+            }
+          );
+        },
+        //transforms into a http error
+        (error: any) => {
+          this.error = true;
+          if (error.status == 400) {
+            this.errorMessage = error.error;
+          } else {
+            if (error.status == 500) {
+              this.errorMessage = error.error.errors.message;
+            } else {
+              this.errorMessage = 'Unknown error!';
+            }
+          }
+        }
+      );
+      this.trucks.paginator = this.paginator;
+  }
+
 }

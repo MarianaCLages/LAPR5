@@ -36,7 +36,8 @@ export class AddTruckComponent implements OnInit {
       weightCapacity: this.weightCapacity,
       totalBatCharge: this.totalBatCharge,
       cargaMax: this.cargaMax,
-      chargingTime: this.chargingTime
+      chargingTime: this.chargingTime,
+      activeTruck: true
     };
 
     this.res = this.addTruckService.addTruck(truck);
