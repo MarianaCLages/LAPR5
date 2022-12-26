@@ -11,7 +11,8 @@ describe('Truck', () => {
             weightCapacity: 1,
             cargaMax: 1,
             totalBatCharge: 1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);
@@ -23,29 +24,31 @@ describe('Truck', () => {
         const truckDTO = {
             domainId: 'domainId',
             caractTruck: '',
-            truckPlate: 'truckPlate',
+            truckPlate: 'AA-56-BB',
             tare: 1,
             weightCapacity: 1,
             cargaMax: 1,
             totalBatCharge: 1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);
 
-        expect(truck.isSuccess).to.be.false;
+        expect(truck.isSuccess).to.be.true;
     });
 
     it('should not create a new Truck with invalid truckPlate', () => {
         const truckDTO = {
             domainId: 'domainId',
             caractTruck: 'caractTruck',
-            truckPlate: '19-19-19',
+            truckPlate: 'ZzZzZzZzZzZ',
             tare: 1,
             weightCapacity: 1,
             cargaMax: 1,
             totalBatCharge: 1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);
@@ -54,7 +57,7 @@ describe('Truck', () => {
     });
 
     it('should not create a new Truck with invalid tare', () => {
-        const truckDTO = {
+       const truckDTO = {
             domainId: 'domainId',
             caractTruck: 'caractTruck',
             truckPlate: 'AA-56-BB',
@@ -62,7 +65,8 @@ describe('Truck', () => {
             weightCapacity: 1,
             cargaMax: 1,
             totalBatCharge: 1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);
@@ -79,7 +83,8 @@ describe('Truck', () => {
             weightCapacity: -1,
             cargaMax: 1,
             totalBatCharge: 1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);
@@ -96,7 +101,8 @@ describe('Truck', () => {
             weightCapacity: 1,
             cargaMax: -1,
             totalBatCharge: 1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);
@@ -113,7 +119,8 @@ describe('Truck', () => {
             weightCapacity: 1,
             cargaMax: 1,
             totalBatCharge: -1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);
@@ -130,7 +137,8 @@ describe('Truck', () => {
             weightCapacity: 1,
             cargaMax: 1,
             totalBatCharge: 1,
-            chargingTime: -1
+            chargingTime: -1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);
@@ -147,9 +155,9 @@ describe('Truck', () => {
             weightCapacity: 1,
             cargaMax: 1,
             totalBatCharge: 1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
-
         const truck = Truck.create(truckDTO);
 
         expect(truck.isSuccess).to.be.true;
@@ -165,7 +173,8 @@ describe('Truck', () => {
             weightCapacity: 1,
             cargaMax: 1,
             totalBatCharge: 1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);
@@ -183,7 +192,8 @@ describe('Truck', () => {
             weightCapacity: 1,
             cargaMax: 1,
             totalBatCharge: 1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);
@@ -201,7 +211,8 @@ describe('Truck', () => {
             weightCapacity: 1,
             cargaMax: 1,
             totalBatCharge: 1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);
@@ -219,7 +230,8 @@ describe('Truck', () => {
             weightCapacity: 1,
             cargaMax: 1,
             totalBatCharge: 1,
-            chargingTime: 1
+            chargingTime: 1,
+            activeTruck: true
         };
 
         const truck = Truck.create(truckDTO);

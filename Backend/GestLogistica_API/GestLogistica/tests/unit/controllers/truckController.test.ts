@@ -36,7 +36,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -74,7 +75,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -100,7 +102,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       })))
     };
 
@@ -116,7 +119,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -135,7 +139,8 @@ describe("TruckController Test", () => {
       weightCapacity: 123,
       cargaMax: 123,
       totalBatCharge: 123,
-      chargingTime: 123
+      chargingTime: 123,
+      activeTruck: true
     });
 
   });
@@ -159,7 +164,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -204,7 +210,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -241,7 +248,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -271,7 +279,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       })))
     };
 
@@ -287,7 +296,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -307,7 +317,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       });
 
     } catch (E) {
@@ -335,7 +346,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -380,7 +392,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -418,7 +431,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -447,7 +461,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       })))
     };
 
@@ -463,7 +478,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -503,7 +519,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -552,7 +569,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -590,7 +608,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -621,7 +640,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       })))
     };
 
@@ -637,7 +657,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -677,7 +698,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -780,7 +802,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       })))
     };
 
@@ -829,7 +852,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {
@@ -932,7 +956,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       })))
     };
 
@@ -981,7 +1006,8 @@ describe("TruckController Test", () => {
         weightCapacity: 123,
         cargaMax: 123,
         totalBatCharge: 123,
-        chargingTime: 123
+        chargingTime: 123,
+        activeTruck: true
       }
     };
     const res = {

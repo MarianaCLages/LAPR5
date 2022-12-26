@@ -18,7 +18,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -27,7 +28,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -37,7 +39,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -46,7 +49,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -55,7 +59,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -64,7 +69,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
@@ -97,7 +103,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -106,7 +113,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -116,7 +124,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -125,7 +134,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -134,7 +144,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -143,10 +154,12 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
+
     const truckService = require('../../../src/services/truckService');
     const truckServiceInstance = new truckService.default(truckRepo);
 
@@ -331,7 +344,7 @@ describe('Truck Service Test',() => {
 
   it('should return a valid result when succeeding getting a truck by Caract', async function() {
     //mocks truckRepository
-    const truckRepo = {
+       const truckRepo = {
       save: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
         truckPlate: "AA-BB-DD",
@@ -339,7 +352,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -348,7 +362,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -358,7 +373,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -367,7 +383,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -376,7 +393,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -385,7 +403,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
@@ -417,7 +436,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -426,7 +446,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -436,7 +457,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -445,7 +467,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -454,7 +477,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -463,7 +487,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
@@ -496,7 +521,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -505,7 +531,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -515,7 +542,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -524,7 +552,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -533,7 +562,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -542,7 +572,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
@@ -573,7 +604,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -582,7 +614,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -592,7 +625,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -601,7 +635,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -610,7 +645,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -619,7 +655,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
@@ -652,7 +689,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -661,7 +699,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -671,7 +710,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -680,7 +720,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -689,7 +730,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -698,7 +740,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
@@ -728,7 +771,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -737,7 +781,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -747,7 +792,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -756,7 +802,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -765,7 +812,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -774,7 +822,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
@@ -806,7 +855,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -815,7 +865,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -825,7 +876,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -834,7 +886,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -843,7 +896,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -852,7 +906,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
@@ -889,7 +944,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -898,7 +954,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -908,7 +965,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -917,7 +975,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -926,7 +985,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -935,7 +995,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
@@ -974,7 +1035,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -983,7 +1045,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -993,7 +1056,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -1002,7 +1066,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -1011,7 +1076,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -1020,7 +1086,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
@@ -1051,7 +1118,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       findByDomainId: sinon.stub().returns(Promise.resolve(Truck.create({
         caractTruck: "E1234",
@@ -1060,7 +1128,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))),
       update: sinon.stub().returns(Promise.resolve(Result.ok<Truck>())),
       findByCaractTruck: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
@@ -1070,7 +1139,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getAllTrucks: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -1079,7 +1149,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByCaractAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -1088,7 +1159,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       getByPlateAsync: sinon.stub().returns(Promise.resolve(new Array((Truck.create({
         caractTruck: "E1234",
@@ -1097,7 +1169,8 @@ describe('Truck Service Test',() => {
         cargaMax: 1000,
         totalBatCharge: 1000,
         tare: 1000,
-        chargingTime: 1
+        chargingTime: 1,
+        activeTruck: true
       }))))),
       deleteTruck: sinon.stub().returns(Promise.resolve(true))
     }
