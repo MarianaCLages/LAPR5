@@ -14,4 +14,6 @@ export default interface ITruckController  {
     getTruckByPlateParam(req: Request, res: Response, next: NextFunction);
     getTruckByCaractParam(req: Request, res: Response, next: NextFunction);
     getBestPathForEachTruck(req: Request, res: Response, next: NextFunction);
+    deleteTruckSoftCaract(req: Request, res: Response, next: NextFunction);
+    deleteTruckSoftPlate(req: Request, res: Response, next: NextFunction);
 }

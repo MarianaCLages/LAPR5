@@ -274,4 +274,48 @@ export default class truckController
         return res.status(200).json("FUNFOU");
     }
 
+    public async deleteTruckSoftPlate(req: Request, res: Response, next: NextFunction) {
+        try {
+
+            const plate : string = req.params.plate;
+            const dto : ITruckPlateDTO = {
+                truckPlate: plate
+            }
+
+            const truckOrError = await this.truckServiceInstance.deleteTruckSoftPlate(dto);
+
+            if (truckOrError.isFailure) {
+                return res.status(400).json(truckOrError.error).send();
+            }
+
+            const truckDTO = truckOrError.getValue();
+            return res.status(200).json(truckDTO).send();
+
+        } catch (e) {
+            return next(e);
+        }
+    }
+
+    public async deleteTruckSoftCaract(req: Request, res: Response, next: NextFunction) {
+        try {
+
+            const caract : string = req.params.caractTruck;
+            const dto : ITruckCaractDTO = {
+                caractTruck: caract
+            }
+
+            const truckOrError = await this.truckServiceInstance.deleteTruckSoftCaract(dto);
+
+            if (truckOrError.isFailure) {
+                return res.status(400).json(truckOrError.error).send();
+            }
+
+            const truckDTO = truckOrError.getValue();
+            return res.status(200).json(truckDTO).send();
+
+        } catch (e) {
+            return next(e);
+        }
+    }
+
 }
