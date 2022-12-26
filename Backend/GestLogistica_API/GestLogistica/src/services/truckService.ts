@@ -16,6 +16,7 @@ import {ChargingTime} from "../domain/truck/chargingTime";
 import ITruckCaractDTO from "../dto/truck/ITruckCaractDTO";
 import ITruckPlateDTO from "../dto/truck/ITruckPlateDTO";
 import { WeightCapacity } from "../domain/truck/weightCapacity";
+import { ActiveTruck } from "../domain/truck/truckActive";
 
 @Service()
 export default class TruckService implements ITruckService {
@@ -91,6 +92,7 @@ export default class TruckService implements ITruckService {
         truck.truckPlate = TruckPlate.create(truckDTO.truckPlate).getValue();
         truck.tare = Tare.create(truckDTO.tare).getValue();
         truck.chargingTime = ChargingTime.create(truckDTO.chargingTime).getValue();
+        truck.activeTruck = ActiveTruck.create(truckDTO.activeTruck).getValue();
 
         const truckUpdateError = await this.truckRepo.update(truck);
         const truckDTOResult = TruckMap.toDTO(truckUpdateError.getValue());
@@ -116,5 +118,58 @@ export default class TruckService implements ITruckService {
             throw e;
         }
     }
+
+    public async deleteTruckSoftPlate(plate: ITruckPlateDTO): Promise<Result<ITruckDTO>> {
+        try {
+            const truck = await this.truckRepo.getByPlateAsync(plate.truckPlate);
+
+            if (truck === null) {
+                return Result.fail<ITruckDTO>("Truck does not exist");
+            }
+
+            var realTruck = truck.getValue()[0];
+
+            var boolValue = true;
+            if(realTruck.activeTruck.value == true){
+                boolValue = false;
+            }
+            
+            realTruck.activeTruck = ActiveTruck.create(boolValue).getValue();
+
+            await this.truckRepo.update(realTruck);
+            const truckDTOResult = TruckMap.toDTO(realTruck) as ITruckDTO;
+
+            return Result.ok<ITruckDTO>(truckDTOResult);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    public async deleteTruckSoftCaract(caract: ITruckCaractDTO): Promise<Result<ITruckDTO>> {
+        try {
+            const truck = await this.truckRepo.getByCaractAsync(caract.caractTruck);
+
+            if (truck === null) {
+                return Result.fail<ITruckDTO>("Truck does not exist");
+            }
+
+            var realTruck = truck.getValue()[0];
+
+            var boolValue = true;
+            if(realTruck.activeTruck.value == true){
+                boolValue = false;
+            }
+            
+            realTruck.activeTruck = ActiveTruck.create(boolValue).getValue();
+
+            await this.truckRepo.update(realTruck);
+            const truckDTOResult = TruckMap.toDTO(realTruck) as ITruckDTO;
+
+            return Result.ok<ITruckDTO>(truckDTOResult);
+        } catch (e) {
+            throw e;
+        }
+    }
+
 
 }

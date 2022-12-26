@@ -12,4 +12,6 @@ export default interface ITruckService {
     getByCaract(caract: ITruckCaractDTO): Promise<Result<Array<ITruckDTO>>>;
     getByPlate(plate: ITruckPlateDTO): Promise<Result<Array<ITruckDTO>>>;
     deleteTruck(truckId: ITruckDTO): Promise<Result<ITruckDTO>>;
+    deleteTruckSoftCaract(caract: ITruckCaractDTO): Promise<Result<ITruckDTO>>;
+    deleteTruckSoftPlate(plate: ITruckPlateDTO): Promise<Result<ITruckDTO>>;
 }
