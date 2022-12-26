@@ -19,8 +19,10 @@ import { ListPathsComponent } from './log-manager/components/list-paths/list-pat
 import { ListOrdersComponent } from './warehouse-manager/components/list-orders/list-orders.component';
 import { ListTruckComponent } from './log-manager/components/list-truck/list-truck.component';
 import {ActivationWarehouseComponentComponent} from "./warehouse-manager/components/activation-warehouse/activation-warehouse-component/activation-warehouse-component.component";
+import { SoftDeleteTruckComponent } from './log-manager/components/soft-delete-truck/soft-delete-truck.component';
 
 const routes: Routes = [
+  // Login
   { path: '', component: LoginPageComponent },
 
   // Warehouse Manager
@@ -29,6 +31,7 @@ const routes: Routes = [
   {path: 'WarehouseManager/createOrder', component: CreateOrderComponent},
   {path: 'WarehouseManager/listOrders', component: ListOrdersComponent},
   {path: 'WarehouseManager/activationWarehouse', component: ActivationWarehouseComponentComponent},
+
   // Fleet Manager
   {path: 'FleetManager', component: FleetManagerComponent},
   {path: 'FleetManager/addTruck', component: AddTruckComponent},
@@ -45,6 +48,9 @@ const routes: Routes = [
   {path: 'LogisticManager/listPath', component: ListPathsComponent},
   {path: 'LogisticManager/listTrucks', component: ListTruckComponent},
   {path: 'LogisticManager/getHeuristic',component:GetHeuristicComponent},
+  {path: 'LogisticManager/softDeleteTruck', component: SoftDeleteTruckComponent},
+
+  // Error Page
   {path: '**', component: ErrorPageComponent},
 ];
 
