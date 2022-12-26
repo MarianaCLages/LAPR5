@@ -10,7 +10,8 @@ const TruckSchema = new mongoose.Schema(
         weightCapacity: Number,
         cargaMax: Number,
         totalBatCharge: Number,
-        chargingTime: Number
+        chargingTime: Number,
+        activeTruck: {type: Boolean, required: true}
 
     },
 );

@@ -92,6 +92,7 @@ export default class truckRepo implements ITruckRepo {
                 truckDocument.maxLoadAutonomy = truck.cargaMax.value;
                 truckDocument.tare = truck.tare.value;
                 truckDocument.chargingTime = truck.chargingTime.value;
+                truckDocument.activeTruck = truck.activeTruck.value;
 
                 await truckDocument.save();
 

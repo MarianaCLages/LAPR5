@@ -7,4 +7,5 @@ export interface ITruckPersistence {
     totalBatCharge : number;
     tare : number;
     chargingTime : number;
+    activeTruck : boolean;
 }
