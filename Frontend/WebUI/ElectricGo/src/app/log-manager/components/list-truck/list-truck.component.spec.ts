@@ -21,6 +21,7 @@ describe('ListTruckComponent', () => {
           "totalBatCharge": 100,
           "tare": 1500,
           "chargingTime": 50,
+          "activeTruck" : true
         },
         {
           "caractTruck": "T02",
@@ -30,6 +31,7 @@ describe('ListTruckComponent', () => {
           "totalBatCharge": 100,
           "tare": 1000,
           "chargingTime": 30,
+          "activeTruck" : true
         }
       ]
     ));
@@ -66,6 +68,7 @@ describe('ListTruckComponent', () => {
             "totalBatCharge": 100,
             "tare": 1500,
             "chargingTime": 50,
+            "activeTruck" : true
           },
           {
             "caractTruck": "T02",
@@ -75,6 +78,7 @@ describe('ListTruckComponent', () => {
             "totalBatCharge": 100,
             "tare": 1000,
             "chargingTime": 30,
+            "activeTruck" : true
           }
         ];
         return Promise.resolve(trucks);
