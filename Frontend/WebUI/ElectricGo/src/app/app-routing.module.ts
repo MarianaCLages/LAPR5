@@ -20,6 +20,9 @@ import { ListOrdersComponent } from './warehouse-manager/components/list-orders/
 import { ListTruckComponent } from './log-manager/components/list-truck/list-truck.component';
 import {ActivationWarehouseComponentComponent} from "./warehouse-manager/components/activation-warehouse/activation-warehouse-component/activation-warehouse-component.component";
 import { SoftDeleteTruckComponent } from './log-manager/components/soft-delete-truck/soft-delete-truck.component';
+import {RegisterUserComponent} from "./admin/components/register-user/register-user.component";
+import {AdminComponent} from "./admin/admin.component";
+import {ListUsersComponent} from "./admin/components/list-users/list-users.component";
 
 const routes: Routes = [
   // Login
@@ -36,6 +39,11 @@ const routes: Routes = [
   {path: 'FleetManager', component: FleetManagerComponent},
   {path: 'FleetManager/addTruck', component: AddTruckComponent},
 
+
+  //Admin
+  {path: 'Admin',component: AdminComponent},
+  {path: 'Admin/registerUser', component: RegisterUserComponent},
+  {path: 'Admin/listUser',component : ListUsersComponent},
 
   // Logistic Manager
   {path: 'LogisticManager', component: LogManagerComponent},

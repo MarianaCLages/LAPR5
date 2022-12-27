@@ -48,6 +48,10 @@ import { ListTruckComponent } from './log-manager/components/list-truck/list-tru
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ActivationWarehouseComponentComponent } from './warehouse-manager/components/activation-warehouse/activation-warehouse-component/activation-warehouse-component.component';
 import { SoftDeleteTruckComponent } from './log-manager/components/soft-delete-truck/soft-delete-truck.component';
+import {RegisterUserComponent} from "./admin/components/register-user/register-user.component";
+import {AdminComponent} from "./admin/admin.component";
+import {AdminSideBarComponent} from "./admin/components/admin-side-bar.component/admin-side-bar.component";
+import {ListUsersComponent} from "./admin/components/list-users/list-users.component";
 
 
 @NgModule({
@@ -68,6 +72,8 @@ import { SoftDeleteTruckComponent } from './log-manager/components/soft-delete-t
     ListPackagingComponent,
     ViewRoadMapNetworkComponent,
     CreateOrderComponent,
+    ListUsersComponent,
+    AdminSideBarComponent,
     WarehouseSideBarComponent,
     GetAllWarehousesComponent,
     GetWarehouseComponent,
@@ -76,7 +82,9 @@ import { SoftDeleteTruckComponent } from './log-manager/components/soft-delete-t
     ListOrdersComponent,
     ListTruckComponent,
     ActivationWarehouseComponentComponent,
-    SoftDeleteTruckComponent
+    SoftDeleteTruckComponent,
+    RegisterUserComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

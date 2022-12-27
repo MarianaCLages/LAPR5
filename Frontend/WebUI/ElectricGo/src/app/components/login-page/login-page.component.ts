@@ -27,4 +27,6 @@ export class LoginPageComponent implements OnInit {
     this.router.navigate([url]).then(r => console.log(r));
   }
 
+
+
 }
