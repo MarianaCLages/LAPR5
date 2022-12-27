@@ -9,6 +9,7 @@ import IPathDTO from 'src/app/shared/pathDTO';
 import { IPathViewRepresentation } from 'src/app/shared/pathViewRepresentation';
 import { IWarehouseViewRepresentation } from 'src/app/shared/warehouseViewRepresentation';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import {PlatformLocation} from "@angular/common";
 
 @Component({
   selector: 'app-view-road-map-network',
@@ -30,6 +31,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private info: any;
   private truck: any;
   private truck2: any;
+  private gui = new GUI();
 
   //ANIMATION
   @ViewChild('canvas')
@@ -53,6 +55,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   async ngAfterViewInit() {
@@ -67,6 +70,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         this.saveConfFile(this.warehouses, this.paths);
         this.createScene();
         this.startRenderingLoop();
+
 
 
       });
@@ -538,7 +542,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     return this.canvas.clientWidth / this.canvas.clientHeight;
   }
 
-  private startRenderingLoop() {
+  private startRenderingLoop( ) {
     //Renderer
     //Use canvas element in template
     this.render = new THREE.WebGLRenderer({ canvas: this.canvas });
@@ -556,17 +560,22 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     let component: ViewRoadMapNetworkComponent = this;
 
 
+
+
+    window.addEventListener('popstate', event => this.destroyGUI())
+
+
     var params = {
 
       truckMovement : 'Manual'
     };
 
-    var gui = new GUI();
-    gui.width = 300;
 
-    gui.add(params,'truckMovement',['Manual','Automatic']);
+    this.gui.width = 300;
 
-    gui.open();
+    this.gui.add(params,'truckMovement',['Manual','Automatic']);
+
+    this.gui.open();
 
 
     (function render() {
@@ -602,7 +611,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   private updateTruckPosition() {
 
-    var event2 : KeyboardEvent;
+
     document.addEventListener("keydown",event => this.myFunc(event));
   }
 
@@ -631,24 +640,15 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
 
   goBack() {
+    this.gui.destroy()
     window.history.back();
+
   }
 
-  private forward(){
-    this.truck.position.x += 0.001;
+  destroyGUI(){
+    this.gui.destroy()
   }
 
-  private backward(){
-    this.truck.position.x -= 0.001;
-  }
-
-  private left(){
-    this.truck.position.y -= 0.001;
-  }
-
-  private right(){
-    this.truck.position.y += 0.001;
-  }
 
 }
 

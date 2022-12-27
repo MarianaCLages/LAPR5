@@ -2,7 +2,7 @@ import {Component,  OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import { Location } from '@angular/common';
 import { AddPackagingService } from '../services/add-packaging.service';
-
+import {GUI} from 'dat.gui';
 
 @Component({
   selector: 'app-log-manager',
@@ -13,9 +13,11 @@ import { AddPackagingService } from '../services/add-packaging.service';
 export class LogManagerComponent implements OnInit {
 
 
+
   constructor(private router: Router, private location: Location) { }
 
   ngOnInit(): void {
+
   }
 
   addPackaging() {
