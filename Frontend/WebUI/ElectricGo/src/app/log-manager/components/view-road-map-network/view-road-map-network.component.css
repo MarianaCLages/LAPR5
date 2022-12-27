@@ -13,9 +13,9 @@ overflow: hidden
 .backBtn {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   margin: 10px;
-  margin-right: 20px;
+  margin-left: 900px;
   border-style: solid;
   border-color: white;
 }

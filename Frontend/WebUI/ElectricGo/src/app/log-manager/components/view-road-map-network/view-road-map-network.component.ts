@@ -558,12 +558,13 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
     var params = {
 
-      truckMovement: 0
+      truckMovement : 'Manual'
     };
 
     var gui = new GUI();
+    gui.width = 300;
 
-    gui.add(params,'truckMovement',[0,1]);
+    gui.add(params,'truckMovement',['Manual','Automatic']);
 
     gui.open();
 
@@ -574,10 +575,10 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       requestAnimationFrame(render);
       component.controls.update();
 
-      if (params.truckMovement == 1) {
+      if (params.truckMovement == 'Automatic') {
         component.updateTruckPosition()
       }
-      else if (params.truckMovement == 0){
+      else if (params.truckMovement == 'Manual'){
         component.updateAutomaticPosition();
       }
 
