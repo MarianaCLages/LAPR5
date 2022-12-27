@@ -23,6 +23,7 @@ import { SoftDeleteTruckComponent } from './log-manager/components/soft-delete-t
 import {RegisterUserComponent} from "./admin/components/register-user/register-user.component";
 import {AdminComponent} from "./admin/admin.component";
 import {ListUsersComponent} from "./admin/components/list-users/list-users.component";
+import {UserInfoComponent} from "./log-manager/components/user-info/user-info.component";
 
 const routes: Routes = [
   // Login
@@ -45,6 +46,7 @@ const routes: Routes = [
   {path: 'Admin/registerUser', component: RegisterUserComponent},
   {path: 'Admin/listUser',component : ListUsersComponent},
 
+
   // Logistic Manager
   {path: 'LogisticManager', component: LogManagerComponent},
   {path: 'LogisticManager/addPackaging', component: AddPackagingComponent},
@@ -57,6 +59,7 @@ const routes: Routes = [
   {path: 'LogisticManager/listTrucks', component: ListTruckComponent},
   {path: 'LogisticManager/getHeuristic',component:GetHeuristicComponent},
   {path: 'LogisticManager/softDeleteTruck', component: SoftDeleteTruckComponent},
+  {path: 'LogisticManager/userInfo',component : UserInfoComponent},
 
   // Error Page
   {path: '**', component: ErrorPageComponent},

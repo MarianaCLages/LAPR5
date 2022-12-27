@@ -52,6 +52,7 @@ import {RegisterUserComponent} from "./admin/components/register-user/register-u
 import {AdminComponent} from "./admin/admin.component";
 import {AdminSideBarComponent} from "./admin/components/admin-side-bar.component/admin-side-bar.component";
 import {ListUsersComponent} from "./admin/components/list-users/list-users.component";
+import {UserInfoComponent} from "./log-manager/components/user-info/user-info.component";
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import {ListUsersComponent} from "./admin/components/list-users/list-users.compo
     ViewRoadMapNetworkComponent,
     CreateOrderComponent,
     ListUsersComponent,
+    UserInfoComponent,
     AdminSideBarComponent,
     WarehouseSideBarComponent,
     GetAllWarehousesComponent,
