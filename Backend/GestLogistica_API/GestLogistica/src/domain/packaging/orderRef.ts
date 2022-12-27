@@ -1,6 +1,5 @@
 import {ValueObject} from "../../core/domain/ValueObject";
 import {Result} from "../../core/logic/Result";
-import config from "../../../config";
 
 interface orderRef {
   value: string;
