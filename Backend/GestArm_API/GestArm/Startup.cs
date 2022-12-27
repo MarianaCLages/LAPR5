@@ -3,6 +3,7 @@ using GestArm.Domain.Categories;
 using GestArm.Domain.Orders;
 using GestArm.Domain.Families;
 using GestArm.Domain.Products;
+using GestArm.Domain.Users;
 using GestArm.Domain.Shared;
 using GestArm.Infrastructure;
 using GestArm.Infrastructure.Warehouses;
@@ -11,6 +12,7 @@ using GestArm.Infrastructure.Orders;
 using GestArm.Infrastructure.Families;
 using GestArm.Infrastructure.Products;
 using GestArm.Infrastructure.Shared;
+using GestArm.Infrastructure.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -90,5 +92,9 @@ public class Startup
 
         services.AddTransient<IOrdersRepository, OrdersRepository>();
         services.AddTransient<IOrdersService, OrdersService>();
+
+        services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<IUserService, UserService>();
+
     }
 }
