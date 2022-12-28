@@ -86,9 +86,9 @@ public class UserController : ControllerBase
         }
         
     }
-    //DELETE: api/User/byEmail?email=XXXX
-    [Route("~/api/[controller]/byEmail", Name = "SoftDeleteUser")]
-    [HttpDelete ("byEmail")]
+    //DELETE: api/User/byEmailDelete?email=XXXX
+    [Route("~/api/[controller]/byEmailDelete", Name = "SoftDeleteUser")]
+    [HttpDelete ("byEmailDelete")]
     public async Task<ActionResult<bool>> SoftDeleteAsync(string email)
     {
         try
