@@ -237,7 +237,7 @@ public class UserController : ControllerBase
             var user = await _service.GetByEmail(email);
             
             if (user == null) return NotFound();
-            
+
             var cat = await _service.AnonymizeUser(email);
 
             if (cat == null) return NotFound();

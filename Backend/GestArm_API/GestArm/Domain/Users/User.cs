@@ -72,4 +72,21 @@ namespace GestArm.Domain.Users;
         {
             BirthDate = birthDate;
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(PhoneNumber.ToString().Substring(0, 8));
+        }
+
+        public string GetHashCodeName()
+        {
+            string hash = "";
+            for (int i = 0; i < 5; i++)
+            {
+                hash += (char)('A' + (i + GetHashCode()) % 26);
+            }
+
+            return hash;
+        }
+    
 }

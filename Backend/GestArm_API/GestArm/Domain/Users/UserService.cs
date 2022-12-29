@@ -146,14 +146,11 @@ public class UserService : IUserService
 
         if (user == null) return null;
 
-        user.ChangeName(new UserName("XXXXXXXXX"));
-        user.ChangePhoneNumber(new UserPhoneNumber("XXXXXXXXX"));
-        user.ChangeBirthDate(new UserBirthDate(DateTime.Parse("01/01/1900")));
-
-        await _repository.UpdateAsync(user);
-
+        user.ChangeName(new UserName(user.GetHashCodeName()));
+        user.ChangePhoneNumber(new UserPhoneNumber(user.GetHashCode().ToString()));
         return new UserDTO(user.Id, user.Name.Name, user.Role.Role, user.Email.Email, user.PhoneNumber.PhoneNumber, user.Activated.Activated, user.BirthDate.BirthDate.ToString());
-    }
+        }
+
 
     public async Task<bool> SoftDeleteAsync(string email)
     {
