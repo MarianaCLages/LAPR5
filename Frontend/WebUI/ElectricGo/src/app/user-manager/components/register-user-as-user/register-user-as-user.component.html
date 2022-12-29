@@ -22,18 +22,14 @@
 
   <mat-form-field>
     <mat-label>Email</mat-label>
-    <input matInput type="text" [(ngModel)]="email">
+    <input matInput type="text" [(ngModel)]="email" readonly>
   </mat-form-field>
 
   <br>
 
   <mat-form-field>
     <mat-label>Role</mat-label>
-    <mat-select [(value)]="role">
-      <mat-option *ngFor="let roles of ['Admin','WarehouseManager','LogisticManager','FleetManager']" [value]="roles">
-        {{roles.toString()}}
-      </mat-option>
-    </mat-select>
+    <input matInput type="text" [(ngModel)]="role" readonly>
   </mat-form-field>
 
   <br>

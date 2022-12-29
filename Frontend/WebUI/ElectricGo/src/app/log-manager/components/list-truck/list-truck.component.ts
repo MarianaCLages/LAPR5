@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ITruckDTO } from '../../../shared/truckDTO';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
 
 @Component({
   selector: 'app-list-truck',
@@ -37,6 +38,8 @@ export class ListTruckComponent implements OnInit {
     'Actions',
   ];
 
+  private validRoles: string[] = ['LogisticManager', 'Admin'];
+
   // @ts-ignore
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   // @ts-ignore
@@ -45,7 +48,8 @@ export class ListTruckComponent implements OnInit {
   allComplete: boolean = false;
 
   constructor(
-    private getTrucksService: GetTrucksService
+    private getTrucksService: GetTrucksService,
+    private service: GoogleApiCommunicationService,
   ) {}
 
   ngAfterViewInit() {
@@ -54,6 +58,13 @@ export class ListTruckComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
+    //Verify if the user is authenticated
+    let boolValue = this.service.isAuthenticated(this.validRoles);
+    if(!boolValue){
+      this.goBack();
+    }
+
     this.getTrucksService.getTrucks().then((data: any) => {
       this.trucks.data = data;
     });

@@ -2,37 +2,52 @@
 
 import {Component, OnInit} from "@angular/core";
 import {ICreateUserDTO} from "../../../shared/createUserDTO";
-import {RegisterUserService} from "../../services/register-user.service";
+import {RegisterUserService} from "../../../admin/services/register-user.service";
+import { GoogleApiCommunicationService } from "src/app/services/google-api-communication.service";
 
 @Component({
-  selector: 'app-register-user',
-  templateUrl: './register-user.component.html',
-  styleUrls: ['./register-user.component.css']
+  selector: 'app-register-user-as-user',
+  templateUrl: './register-user-as-user.component.html',
+  styleUrls: ['./register-user-as-user.component.css']
 })
 
-export class RegisterUserComponent implements OnInit{
+export class RegisterUserAsUserComponent implements OnInit{
 
   userName : any;
   email : any;
   phoneNumber : any;
   birthDate : any;
-  role : any;
   errorMessage: any;
   successMessage: any;
   error: boolean = false;
   success: any;
+  role : any;
+
+  private validRoles: string[] = ['User', 'Admin'];
 
   constructor(
-    private registerUserService: RegisterUserService
+    private registerUserService: RegisterUserService,
+    private service: GoogleApiCommunicationService
   ) {}
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    let boolValue = this.service.isAuthenticated(this.validRoles);
+
+    let user = await this.service.newUserInfos();
+
+    this.email = user.email;
+    this.userName = user.userName;
+    this.role = user.role;
+
+    if(!boolValue){
+      this.goBack();
+    }
   }
 
   createUser(){
 
     let userDTO: ICreateUserDTO = {
       userName : this.userName,
-      role : this.role,
+      role : "User",
       email : this.email,
       phoneNumber : this.phoneNumber,
       birthDate : this.birthDate
@@ -63,10 +78,6 @@ export class RegisterUserComponent implements OnInit{
         }
       });
   }
-
-
-
-
 
   goBack() {
     window.history.back();

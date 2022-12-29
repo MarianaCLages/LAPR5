@@ -1,7 +1,8 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, NgZone, OnInit} from "@angular/core";
 import {MatTableDataSource} from "@angular/material/table";
 import {ICreateUserDTO} from "../../../shared/createUserDTO";
 import {GetUserService} from "./get-user.service";
+import { GoogleApiCommunicationService } from "src/app/services/google-api-communication.service";
 
 
 @Component({
@@ -31,7 +32,9 @@ export class UserUserInfoComponent implements OnInit {
     'birthDate',
   ];
 
-  public constructor(private listUserService : GetUserService) {
+  public constructor(private listUserService : GetUserService,
+    private service: GoogleApiCommunicationService,
+    private _ngZone: NgZone) {
   }
 
   ngOnInit(): void {
@@ -45,15 +48,18 @@ export class UserUserInfoComponent implements OnInit {
     this.errorMessage = '';
     this.error = false;
 
-    this.listUserService.listUser().then(
-      (data: any) => {
-        console.log(data)
-        let users2 = new MatTableDataSource<ICreateUserDTO>()
-        users2.data.push(data);
-        this.users.data = users2.data;
-        console.log(this.users.data)
+    this.service.getProfileInfo().then((res: any) => {
+      this._ngZone.run(
+        () => {
+          let users2 = new MatTableDataSource<ICreateUserDTO>()
+          users2.data.push(res);
+          this.users.data = users2.data;
         },
-    )
+        (err: any) => {
+          console.log("Invalid token! Please login again!");
+        }
+      );
+    });
 
   }
 
