@@ -35,7 +35,7 @@ export class RegisterUserAsUserComponent implements OnInit{
     let user = await this.service.newUserInfos();
 
     this.email = user.email;
-    this.userName = user.userName;
+    this.userName = user.userName.trim();
     this.role = user.role;
 
     if(!boolValue){
@@ -47,7 +47,7 @@ export class RegisterUserAsUserComponent implements OnInit{
 
     let userDTO: ICreateUserDTO = {
       userName : this.userName,
-      role : "User",
+      role : this.role,
       email : this.email,
       phoneNumber : this.phoneNumber,
       birthDate : this.birthDate
@@ -59,9 +59,6 @@ export class RegisterUserAsUserComponent implements OnInit{
     let errorOrSuccess: any = this.registerUserService.registerUser(userDTO);
 
     errorOrSuccess.subscribe((data: any) => {
-        console.log(data);
-        this.success = true;
-        this.successMessage = "User Created Successfully!";
         this.goBack();
       }, //transforms into a http error
       (error: any) => {
@@ -70,7 +67,6 @@ export class RegisterUserAsUserComponent implements OnInit{
           this.errorMessage = error.error;
         } else {
           if (error.status == 500) {
-
             this.errorMessage = error.error.errors.message;
           } else {
             this.errorMessage = "An unknown error has ocurred";
