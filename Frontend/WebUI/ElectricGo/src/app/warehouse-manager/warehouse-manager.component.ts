@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import { Location } from '@angular/common';
 import { AddWarehouseService } from '../services/add-warehouse.service'
 import { CreateOrderService } from '../services/create-order.service';
 import { GetOrdersService } from '../services/get-orders.service';
+import { GoogleApiCommunicationService } from '../services/google-api-communication.service';
 
 @Component({
   selector: 'app-warehouse-manager',
@@ -12,10 +13,20 @@ import { GetOrdersService } from '../services/get-orders.service';
   providers: [AddWarehouseService, CreateOrderService, GetOrdersService]
 })
 export class WarehouseManagerComponent implements OnInit {
-  
-  constructor(private router: Router, private location: Location) { }
+
+  private validRoles: string[] = ['WarehouseManager', 'Admin'];
+
+  constructor(private router: Router, private location: Location,
+    private service: GoogleApiCommunicationService,
+    private _ngZone: NgZone) { }
 
   ngOnInit(): void {
+
+    let boolValue = this.service.isAuthenticated(this.validRoles);
+
+    if(!boolValue){
+      this.logout();
+    }
   }
 
   addWarehouse(){
@@ -47,7 +58,12 @@ export class WarehouseManagerComponent implements OnInit {
     this.router.navigate([destination]).then(r => console.log(r));
   }
 
-  logout() {
-    this.location.back();
+  public logout() {
+    this.service.signOutExternal();
+    this.service.cleanCookies();
+    this._ngZone.run(() => {
+      this.router.navigate(['/']).then((r) => window.location.reload());
+    });
   }
+
 }

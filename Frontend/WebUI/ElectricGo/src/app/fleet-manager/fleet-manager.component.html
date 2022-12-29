@@ -1,3 +1,6 @@
 <app-fleet-side-bar (menuSelected)="goTo($event)"></app-fleet-side-bar>
 
       <router-outlet></router-outlet>
+
+<!-- button to go back to the previous page -->
+<button mat-raised-button color="primary" class="backBtn" (click)="logout()">Logout</button>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import { Location } from '@angular/common';
+import { GoogleApiCommunicationService } from '../services/google-api-communication.service';
 
 @Component({
   selector: 'app-fleet-manager',
@@ -9,9 +10,20 @@ import { Location } from '@angular/common';
 })
 export class FleetManagerComponent implements OnInit {
 
-  constructor(private router: Router, private location: Location) { }
+  private validRoles: string[] = ['FleetManager', 'Admin'];
+
+  constructor(private router: Router,
+     private location: Location,
+     private service: GoogleApiCommunicationService,
+      private _ngZone: NgZone,
+     ) { }
 
   ngOnInit(): void {
+    let boolValue = this.service.isAuthenticated(this.validRoles);
+
+    if(!boolValue){
+     this.logout();
+    }
   }
 
   addTruck() {
@@ -21,8 +33,12 @@ export class FleetManagerComponent implements OnInit {
     this.router.navigate([url]).then(r => console.log(r));
   }
 
-  logout() {
-    this.location.back();
+  public logout() {
+    this.service.signOutExternal();
+    this.service.cleanCookies();
+    this._ngZone.run(() => {
+      this.router.navigate(['/']).then((r) => window.location.reload());
+    });
   }
 
   goTo(destination: any) {

@@ -1,8 +1,9 @@
-import {Component,  OnInit} from '@angular/core';
+import {Component,  NgZone,  OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import { Location } from '@angular/common';
 import { AddPackagingService } from '../services/add-packaging.service';
 import {GUI} from 'dat.gui';
+import { GoogleApiCommunicationService } from '../services/google-api-communication.service';
 
 @Component({
   selector: 'app-log-manager',
@@ -12,13 +13,29 @@ import {GUI} from 'dat.gui';
 })
 export class LogManagerComponent implements OnInit {
 
+  private validRoles: string[] = ['LogisticManager', 'Admin'];
+  public showPage : boolean = false;
 
+  constructor(private router: Router,
+     private location: Location,
+     private service: GoogleApiCommunicationService,
+     private _ngZone: NgZone
+     ) { }
 
-  constructor(private router: Router, private location: Location) { }
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
 
-  ngOnInit(): void {
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
 
+    if(!boolValue){
+      console.log("Not authenticated")
+      this.logout();
+    } else {
+      this.showPage = true;
+    }
   }
+
+
 
   addPackaging() {
     //route to add packaging menu
@@ -46,8 +63,12 @@ export class LogManagerComponent implements OnInit {
     this.router.navigate([url]).then(r => console.log(r));
   }
 
-  logout() {
-    this.location.back();
+  public logout() {
+    this.service.signOutExternal();
+    this.service.cleanCookies();
+    this._ngZone.run(() => {
+      this.router.navigate(['/']).then((r) => window.location.reload());
+    });
   }
 
   goTo(destination: any) {

@@ -1,29 +1,10 @@
+<div class="container" *ngIf="showPage">
+  <app-log-side-bar (menuSelected)="goTo($event)"></app-log-side-bar>
 
-<app-log-side-bar (menuSelected)="goTo($event)"></app-log-side-bar>
+  <router-outlet></router-outlet>
 
-
-
-<router-outlet></router-outlet>
-
-<!-- Mensagem a mostrar qual é o user e algum texto-->
-
-
-<!--<br>
-<h1>Logistic Manager Front Page</h1>
-<br>
-<div class="form">
-  <div class="btn-group">
-    <div class="column">
-      <button mat-raised-button color="primary" (click)="addPackaging()">Add Packaging</button>
-      <br>
-      <button mat-raised-button color="primary" (click)="listPackagings()">List Packagings</button>
-      <br>
-      <button mat-raised-button color="primary" (click)="updatePackaging()">Update Packaging</button>
-      <br>
-      <br>
-      <br>
-      <br>
-      <button mat-raised-button color="primary" (click)="logout()">Logout</button>
-    </div>
-  </div>
-</div>-->
+  <!-- button to go back to the previous page -->
+  <button mat-raised-button color="primary" class="backBtn" (click)="logout()">
+    Logout
+  </button>
+</div>

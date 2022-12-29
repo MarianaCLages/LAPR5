@@ -158,9 +158,6 @@ jobs:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - dotnet-packages-v1-{{ checksum "Backend/GestArm_API/GestArm/DDDNetCore.csproj" }}
       - run:
           working_directory: Backend/GestArm_API/GestArm/
           name: Install project dependencies
