@@ -39,10 +39,12 @@ const routes: Routes = [
   {path: 'WarehouseManager/createOrder', component: CreateOrderComponent},
   {path: 'WarehouseManager/listOrders', component: ListOrdersComponent},
   {path: 'WarehouseManager/activationWarehouse', component: ActivationWarehouseComponentComponent},
+  {path: 'WarehouseManager/profile',component : UserInfoComponent},
 
   // Fleet Manager
   {path: 'FleetManager', component: FleetManagerComponent},
   {path: 'FleetManager/addTruck', component: AddTruckComponent},
+  {path: 'FleetManager/profile',component : UserInfoComponent},
 
   //User
   {path: 'User',component: UserComponent},
@@ -55,6 +57,7 @@ const routes: Routes = [
   {path: 'Admin/registerUser', component: RegisterUserComponent},
   {path: 'Admin/listUser',component : ListUsersComponent},
   {path: 'Admin/changeUserRole',component : ChangeUserRoleComponent},
+  {path: 'Admin/profile',component : UserInfoComponent},
 
 
   // Logistic Manager
@@ -69,10 +72,11 @@ const routes: Routes = [
   {path: 'LogisticManager/listTrucks', component: ListTruckComponent},
   {path: 'LogisticManager/getHeuristic',component:GetHeuristicComponent},
   {path: 'LogisticManager/softDeleteTruck', component: SoftDeleteTruckComponent},
-  {path: 'LogisticManager/userInfo',component : UserInfoComponent},
+  {path: 'LogisticManager/profile',component : UserInfoComponent},
 
   // Error Page
   {path: '**', component: ErrorPageComponent},
+  //{path: 'permissonDenied', component: PermissionDeniedComponent}
 ];
 
 @NgModule({

@@ -89,8 +89,14 @@ export class LoginPageComponent implements OnInit {
         localStorage.setItem('token', credentialResponse.credential);
         this._ngZone.run(
           () => {
-            const url = '/' + res.role;
-            this.router.navigate([url]).then((r) => window.location.reload());
+            if(res.newUser == true){
+              const url = '/' + res.role + '/register';
+              this.router.navigate([url]).then((r) => window.location.reload());
+
+            } else {
+              const url = '/' + res.role;
+              this.router.navigate([url]).then((r) => window.location.reload());
+            }
           },
           (err: any) => {
             console.log("Invalid token! Please login again!");
