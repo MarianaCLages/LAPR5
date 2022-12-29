@@ -140,6 +140,21 @@ public class UserService : IUserService
         return new UserDTO(user.Id, user.Name.Name, user.Role.Role, user.Email.Email, user.PhoneNumber.PhoneNumber, user.Activated.Activated, user.BirthDate.BirthDate.ToString());
     }
 
+    public async Task<UserDTO> AnonymizeUser(string email)
+    {
+        var user = await _repository.GetByEmailAsync(new UserEmail(email));
+
+        if (user == null) return null;
+
+        user.ChangeName(new UserName("XXXXXXXXX"));
+        user.ChangePhoneNumber(new UserPhoneNumber("XXXXXXXXX"));
+        user.ChangeBirthDate(new UserBirthDate(DateTime.Parse("01/01/1900")));
+
+        await _repository.UpdateAsync(user);
+
+        return new UserDTO(user.Id, user.Name.Name, user.Role.Role, user.Email.Email, user.PhoneNumber.PhoneNumber, user.Activated.Activated, user.BirthDate.BirthDate.ToString());
+    }
+
     public async Task<bool> SoftDeleteAsync(string email)
     {
         var user = await _repository.GetByEmailAsync(new UserEmail(email));
@@ -183,7 +198,5 @@ public class UserService : IUserService
 
         return true;
     }
-
-
 
 }

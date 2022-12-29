@@ -200,33 +200,6 @@ public class UserController : ControllerBase
         }
     }
 
-    // PUT: api/Order/id
-    [Route("~/api/[controller]/changeByEmail", Name = "UpdateUser")]
-    [HttpPut("changeByEmail")]
-    public async Task<ActionResult<UserDTO>> UpdateAsync(string email, UserDTO userReceived)
-    {
-        try
-        {
-            var user = await _service.GetByEmail(email);
-
-            if (user == null) return NotFound();
-
-            var cat = await _service.UpdateAsync(userReceived, email);
-
-            if (cat == null) return NotFound();
-
-            return Ok(cat);
-        }
-        catch (BusinessRuleValidationException ex)
-        {
-            return BadRequest(new { ex.Message });
-        }
-        catch (Exception)
-        {
-            return NotFound("Error on updating the user! (Please specify a valid date!)");
-        }
-    }
-
     // PUT: api/Order/byEmail?email=XXXX (body: UserDTO)
     [Route("~/api/[controller]/adminByEmail", Name = "AdminUpdateUser")]
     [HttpPut("byEmail")]
@@ -251,6 +224,33 @@ public class UserController : ControllerBase
         catch (Exception)
         {
             return NotFound("Error on updating the user! (Please specify a valid date!)");
+        }
+    }
+
+    // PUT: api/User/anonymize?email=XXXX
+    [Route("~/api/[controller]/anonymize", Name = "AnonymizeUser")]
+    [HttpPut ("anonymize")]
+    public async Task<ActionResult<UserDTO>> AnonymizeAsync(string email)
+    {
+        try
+        {
+            var user = await _service.GetByEmail(email);
+            
+            if (user == null) return NotFound();
+            
+            var cat = await _service.AnonymizeUser(email);
+
+            if (cat == null) return NotFound();
+            
+            return Ok(cat);
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Error on updating the user! (Please specify a valid email!)");
         }
     }
 
@@ -372,4 +372,5 @@ public class UserController : ControllerBase
             return NotFound("An error occured while looking for the order! (No user was found!)");
         }
     }
+
 }
