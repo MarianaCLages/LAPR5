@@ -96,6 +96,11 @@ public class UserService : IUserService
             user.ChangePhoneNumber(new UserPhoneNumber(dto.PhoneNumber));
         }
 
+        if (dto.Role != null)
+        {
+            user.ChangeRole(new UserRole(dto.Role));
+        }
+
         await _repository.UpdateAsync(user);
 
         return new UserDTO(user.Id, user.Name.Name, user.Role.Role, user.Email.Email, user.PhoneNumber.PhoneNumber, user.Activated.Activated, user.BirthDate.BirthDate.ToString());

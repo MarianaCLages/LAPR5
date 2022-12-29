@@ -53,6 +53,10 @@ import {AdminComponent} from "./admin/admin.component";
 import {AdminSideBarComponent} from "./admin/components/admin-side-bar.component/admin-side-bar.component";
 import {ListUsersComponent} from "./admin/components/list-users/list-users.component";
 import {UserInfoComponent} from "./log-manager/components/user-info/user-info.component";
+import {ChangeUserRoleComponent} from "./admin/components/change-user-role/change-user-role.component";
+import {UserSideBarComponent} from "./user-manager/components/user-side-bar.component/user-side-bar.component";
+import {UserComponent} from "./user-manager/user.component";
+import {UserUserInfoComponent} from "./user-manager/components/user-info/user-user-info.component";
 
 
 @NgModule({
@@ -78,6 +82,10 @@ import {UserInfoComponent} from "./log-manager/components/user-info/user-info.co
     AdminSideBarComponent,
     WarehouseSideBarComponent,
     GetAllWarehousesComponent,
+    ChangeUserRoleComponent,
+    UserSideBarComponent,
+    UserUserInfoComponent,
+    UserComponent,
     GetWarehouseComponent,
     GetHeuristicComponent,
     ListPathsComponent,

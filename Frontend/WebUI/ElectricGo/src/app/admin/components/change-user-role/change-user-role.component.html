@@ -1,0 +1,34 @@
+<div class="container" matAutocompleteOrigin>
+
+  <div>
+    <mat-error *ngIf="error" class="alert alert-warning">
+      <strong>Error</strong> {{errorMessage | json | slice:0:100}}
+    </mat-error>
+  </div>
+  <br>
+
+  <h1>User</h1>
+  <h2>Change User Role</h2>
+
+
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput type="text" [(ngModel)]="email">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>Role</mat-label>
+    <mat-select [(value)]="role">
+      <mat-option *ngFor="let roles of ['Admin','WarehouseManager','LogisticManager','FleetManager']" [value]="roles">
+        {{roles.toString()}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+  <button mat-raised-button color="primary" (click)="changeUserRole()">Register</button>
+
+</div>

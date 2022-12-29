@@ -24,6 +24,9 @@ import {RegisterUserComponent} from "./admin/components/register-user/register-u
 import {AdminComponent} from "./admin/admin.component";
 import {ListUsersComponent} from "./admin/components/list-users/list-users.component";
 import {UserInfoComponent} from "./log-manager/components/user-info/user-info.component";
+import {ChangeUserRoleComponent} from "./admin/components/change-user-role/change-user-role.component";
+import {UserComponent} from "./user-manager/user.component";
+import {UserUserInfoComponent} from "./user-manager/components/user-info/user-user-info.component";
 
 const routes: Routes = [
   // Login
@@ -40,11 +43,16 @@ const routes: Routes = [
   {path: 'FleetManager', component: FleetManagerComponent},
   {path: 'FleetManager/addTruck', component: AddTruckComponent},
 
+  //User
+  {path: 'User',component: UserComponent},
+  {path: 'User/profile',component : UserUserInfoComponent},
+
 
   //Admin
   {path: 'Admin',component: AdminComponent},
   {path: 'Admin/registerUser', component: RegisterUserComponent},
   {path: 'Admin/listUser',component : ListUsersComponent},
+  {path: 'Admin/changeUserRole',component : ChangeUserRoleComponent},
 
 
   // Logistic Manager

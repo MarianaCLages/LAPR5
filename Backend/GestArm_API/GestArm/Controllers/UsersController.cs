@@ -60,8 +60,8 @@ public class UserController : ControllerBase
     }
 
     // PUT: api/Order/id
-    [Route("~/api/[controller]/byEmail", Name = "UpdateUser")]
-    [HttpPut ("byEmail")]
+    [Route("~/api/[controller]/changeByEmail", Name = "UpdateUser")]
+    [HttpPut ("changeByEmail")]
     public async Task<ActionResult<UserDTO>> UpdateAsync(string email, UserDTO userReceived)
     {
         try
