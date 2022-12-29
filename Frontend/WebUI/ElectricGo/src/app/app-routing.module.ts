@@ -27,6 +27,7 @@ import {UserInfoComponent} from "./log-manager/components/user-info/user-info.co
 import {ChangeUserRoleComponent} from "./admin/components/change-user-role/change-user-role.component";
 import {UserComponent} from "./user-manager/user.component";
 import {UserUserInfoComponent} from "./user-manager/components/user-info/user-user-info.component";
+import { RegisterUserAsUserComponent } from './user-manager/components/register-user-as-user/register-user-as-user.component';
 
 const routes: Routes = [
   // Login
@@ -46,6 +47,7 @@ const routes: Routes = [
   //User
   {path: 'User',component: UserComponent},
   {path: 'User/profile',component : UserUserInfoComponent},
+  {path: 'User/register', component: RegisterUserAsUserComponent},
 
 
   //Admin

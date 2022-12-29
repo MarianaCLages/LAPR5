@@ -57,6 +57,7 @@ import {ChangeUserRoleComponent} from "./admin/components/change-user-role/chang
 import {UserSideBarComponent} from "./user-manager/components/user-side-bar.component/user-side-bar.component";
 import {UserComponent} from "./user-manager/user.component";
 import {UserUserInfoComponent} from "./user-manager/components/user-info/user-user-info.component";
+import { RegisterUserAsUserComponent } from './user-manager/components/register-user-as-user/register-user-as-user.component';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import {UserUserInfoComponent} from "./user-manager/components/user-info/user-us
     ActivationWarehouseComponentComponent,
     SoftDeleteTruckComponent,
     RegisterUserComponent,
-    AdminComponent
+    AdminComponent,
+    RegisterUserAsUserComponent
   ],
   imports: [
     BrowserModule,
