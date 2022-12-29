@@ -146,10 +146,14 @@ public class UserService : IUserService
 
         if (user == null) return null;
 
-        user.ChangeName(new UserName(user.GetHashCodeName()));
+        user.ChangeName(new UserName(user.GetHashCodeName().ToString()));
         user.ChangePhoneNumber(new UserPhoneNumber(user.GetHashCode().ToString()));
+        user.ChangeBirthDate(new UserBirthDate(DateTime.Now));
+
+        await _repository.UpdateAsync(user);
+
         return new UserDTO(user.Id, user.Name.Name, user.Role.Role, user.Email.Email, user.PhoneNumber.PhoneNumber, user.Activated.Activated, user.BirthDate.BirthDate.ToString());
-        }
+    }
 
 
     public async Task<bool> SoftDeleteAsync(string email)
