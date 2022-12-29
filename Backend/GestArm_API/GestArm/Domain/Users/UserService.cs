@@ -73,6 +73,40 @@ public class UserService : IUserService
         return new UserDTO(user.Id, user.Name.Name, user.Role.Role, user.Email.Email, user.PhoneNumber.PhoneNumber, user.Activated.Activated, user.BirthDate.BirthDate.ToString());
     }
 
+     public async Task<UserDTO> AdminUpdateAsync(UserDTO dto, string email)
+    {
+        var user = await _repository.GetByEmailAsync(new UserEmail(email));
+
+        if (user == null) return null;
+
+        if (dto.BirthDate != null)
+        {
+            user.ChangeBirthDate(new UserBirthDate(DateTime.Parse(dto.BirthDate)));
+        }
+        if (dto.Email != null)
+        {
+            user.ChangeEmail(new UserEmail(dto.Email));
+        }
+        if (dto.Name != null)
+        {
+            user.ChangeName(new UserName(dto.Name));
+        }
+        if (dto.PhoneNumber != null)
+        {
+            user.ChangePhoneNumber(new UserPhoneNumber(dto.PhoneNumber));
+        }
+
+        if(dto.Role != null)
+        {
+            user.ChangeRole(new UserRole(dto.Role));
+        }
+
+        await _repository.UpdateAsync(user);
+
+        return new UserDTO(user.Id, user.Name.Name, user.Role.Role, user.Email.Email, user.PhoneNumber.PhoneNumber, user.Activated.Activated, user.BirthDate.BirthDate.ToString());
+    }
+
+
     public async Task<UserDTO> UpdateAsync(UserDTO dto, string email)
     {
         var user = await _repository.GetByEmailAsync(new UserEmail(email));

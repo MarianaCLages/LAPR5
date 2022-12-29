@@ -16,6 +16,8 @@ public interface IUserService
 
     Task<UserDTO> UpdateAsync(UserDTO dto,string email);
 
+    Task<UserDTO> AdminUpdateAsync(UserDTO dto,string email);
+
     Task<bool> SoftDeleteAsync(string email);
 
     Task<bool> UpdateUserRole(string userRole, string userEmail);

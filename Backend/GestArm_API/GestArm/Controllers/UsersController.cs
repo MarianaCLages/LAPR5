@@ -2,6 +2,11 @@ using System.Data;
 using GestArm.Domain.Users;
 using GestArm.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Google.Apis.Auth;
 
 namespace GestArm.Controllers;
 
@@ -10,11 +15,147 @@ namespace GestArm.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _service;
-    
-    public UserController(IUserService service)
+
+    private IConfiguration Configuration { get; }
+
+    public UserController(IUserService service, IConfiguration configuration)
     {
         _service = service;
+        Configuration = configuration;
     }
+
+
+    // GET: api/User/loginWithGoogle
+    [HttpPost("loginWithGoogle")]
+    public async Task<ActionResult<UserCredentialDTO>> LoginWithGoogle([FromBody] string credential)
+    {
+        try
+        {
+            var settings = new GoogleJsonWebSignature.ValidationSettings
+            {
+                Audience = new List<string> { Configuration.GetConnectionString("Client_ID") }
+            };
+
+            var payload = await GoogleJsonWebSignature.ValidateAsync(credential, settings);
+
+            if (payload.Name == null || payload.Email == null)
+            {
+                return BadRequest(new { message = "Invalid Google Token!" });
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(Configuration.GetConnectionString("Client_Secret"));
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, payload.Name),
+                    new Claim(ClaimTypes.Email, payload.Email),
+                }),
+
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha512Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var encrypterToken = tokenHandler.WriteToken(token);
+
+            var newUser = false;
+            var role = "User";
+
+            var user = await _service.GetByEmail(payload.Email);
+
+            if (user == null)
+            {
+                newUser = true;
+            }
+            else
+            {
+                role = user.Role;
+            }
+
+            return new UserCredentialDTO(encrypterToken, payload.Name, payload.Email, newUser, role);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new { message = e.Message });
+        }
+    }
+
+    // Post: api/User/getUserRole
+    [HttpPost("getUserRole")]
+    public async Task<ActionResult<UserCredentialDTO>> GetUserRole([FromBody] string credential)
+    {
+        try
+        {
+            var settings = new GoogleJsonWebSignature.ValidationSettings
+            {
+                Audience = new List<string> { Configuration.GetConnectionString("Client_ID") }
+            };
+
+            var payload = await GoogleJsonWebSignature.ValidateAsync(credential, settings);
+
+            if (payload.Name == null || payload.Email == null)
+            {
+                return BadRequest(new { message = "Invalid Google Token!" });
+            }
+
+            var newUser = false;
+            var role = "User";
+
+            var user = await _service.GetByEmail(payload.Email);
+
+            if (user == null)
+            {
+                newUser = true;
+            }
+            else
+            {
+                role = user.Role;
+            }
+
+            return new UserCredentialDTO(credential, payload.Name, payload.Email, newUser, role);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new { message = e.Message });
+        }
+    }
+    
+    // Post: api/User/getProfileInfo
+    [HttpPost("getProfileInfo")]
+    public async Task<ActionResult<UserDTO>> GetProfileInfo([FromBody] string credential)
+    {
+        try
+        {
+            var settings = new GoogleJsonWebSignature.ValidationSettings
+            {
+                Audience = new List<string> { Configuration.GetConnectionString("Client_ID") }
+            };
+
+            var payload = await GoogleJsonWebSignature.ValidateAsync(credential, settings);
+
+            if (payload.Name == null || payload.Email == null)
+            {
+                return BadRequest(new { message = "Invalid Google Token!" });
+            }
+            
+            var user = await _service.GetByEmail(payload.Email);
+
+            if (user != null)
+            {
+                return user;
+            }
+            return BadRequest(new { message = "No user with that email was found!" });
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new { message = e.Message });
+        }
+    }
+
 
     // GET: api/User/byId?id=XXXX
     [HttpGet("byId")]
@@ -61,19 +202,19 @@ public class UserController : ControllerBase
 
     // PUT: api/Order/id
     [Route("~/api/[controller]/changeByEmail", Name = "UpdateUser")]
-    [HttpPut ("changeByEmail")]
+    [HttpPut("changeByEmail")]
     public async Task<ActionResult<UserDTO>> UpdateAsync(string email, UserDTO userReceived)
     {
         try
         {
             var user = await _service.GetByEmail(email);
-            
+
             if (user == null) return NotFound();
-            
+
             var cat = await _service.UpdateAsync(userReceived, email);
 
             if (cat == null) return NotFound();
-            
+
             return Ok(cat);
         }
         catch (BusinessRuleValidationException ex)
@@ -84,17 +225,44 @@ public class UserController : ControllerBase
         {
             return NotFound("Error on updating the user! (Please specify a valid date!)");
         }
-        
     }
+
+    // PUT: api/Order/byEmail?email=XXXX (body: UserDTO)
+    [Route("~/api/[controller]/adminByEmail", Name = "AdminUpdateUser")]
+    [HttpPut("byEmail")]
+    public async Task<ActionResult<UserDTO>> AdminUpdateAsync(string email, UserDTO userReceived)
+    {
+        try
+        {
+            var user = await _service.GetByEmail(email);
+
+            if (user == null) return NotFound();
+
+            var cat = await _service.AdminUpdateAsync(userReceived, email);
+
+            if (cat == null) return NotFound();
+
+            return Ok(cat);
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+        catch (Exception)
+        {
+            return NotFound("Error on updating the user! (Please specify a valid date!)");
+        }
+    }
+
     //DELETE: api/User/byEmailDelete?email=XXXX
     [Route("~/api/[controller]/byEmailDelete", Name = "SoftDeleteUser")]
-    [HttpDelete ("byEmailDelete")]
+    [HttpDelete("byEmailDelete")]
     public async Task<ActionResult<bool>> SoftDeleteAsync(string email)
     {
         try
         {
             var order = await _service.SoftDeleteAsync(email);
-            
+
             if (order == false)
                 throw new BusinessRuleValidationException("No user with that email was found!");
 
@@ -118,7 +286,7 @@ public class UserController : ControllerBase
         {
             var users = await _service.GetAllAsync();
 
-            if(users.Count() == 0)
+            if (users.Count() == 0)
                 throw new BusinessRuleValidationException("No users were found!");
 
             return users.ToList();
@@ -143,7 +311,7 @@ public class UserController : ControllerBase
             var user = await _service.GetByEmail(email);
 
             if (user == null)
-              return NotFound("No user with that email was found!");
+                return NotFound("No user with that email was found!");
 
             return user;
         }
@@ -167,7 +335,7 @@ public class UserController : ControllerBase
             var user = await _service.GetByPhoneNumber(phoneNumber);
 
             if (user == null)
-              return NotFound("No user with that phoneNumber was found!");
+                return NotFound("No user with that phoneNumber was found!");
 
             return user;
         }
@@ -181,7 +349,7 @@ public class UserController : ControllerBase
         }
     }
 
-     // GET: api/User/byUserName?userName=XXXX
+    // GET: api/User/byUserName?userName=XXXX
     [Route("~/api/[controller]/byUserName", Name = "GetUserByUserName")]
     [HttpGet("byUserName")]
     public async Task<ActionResult<IEnumerable<UserDTO>>> GetByUserName(string userName)
@@ -190,7 +358,7 @@ public class UserController : ControllerBase
         {
             var users = await _service.GetByUserName(userName);
 
-             if(users.Count() == 0)
+            if (users.Count() == 0)
                 throw new BusinessRuleValidationException("No users were found!");
 
             return users.ToList();
@@ -204,6 +372,4 @@ public class UserController : ControllerBase
             return NotFound("An error occured while looking for the order! (No user was found!)");
         }
     }
-    
-
 }

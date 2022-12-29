@@ -47,10 +47,11 @@ public class Startup
                 builder =>
                 {
                     builder.WithOrigins("http://localhost:4200")
-                        .AllowAnyOrigin()
+                        //.AllowAnyOrigin()
                         .AllowAnyHeader()
+                        .AllowCredentials()
                         .AllowAnyMethod();
-                    //.AllowCredentials();
+                        //.AllowCredentials();
                 });
         });
     }
