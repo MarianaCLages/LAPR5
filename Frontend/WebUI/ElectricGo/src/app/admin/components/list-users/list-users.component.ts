@@ -1,9 +1,10 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {GetTrucksService} from "../../../services/get-trucks.service";
 import {ListUserService} from "../../services/list-user.service";
 import {MatLabel} from "@angular/material/form-field";
 import {MatTableDataSource} from "@angular/material/table";
 import {ICreateUserDTO} from "../../../shared/createUserDTO";
+import {MatPaginator} from "@angular/material/paginator";
 
 
 @Component({
@@ -38,7 +39,8 @@ export class ListUsersComponent implements OnInit{
     private listUserSerive: ListUserService
   ) {}
 
-
+  // @ts-ignore
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
     this.listUsers();
@@ -74,7 +76,24 @@ export class ListUsersComponent implements OnInit{
 
     let errorOrSuccess = this.listUserSerive.desactivateUser(user.email);
     errorOrSuccess.subscribe((data: any) => {
-        console.log(data);
+        this.listUserSerive.listUser().then(
+          (data: any) => {
+            this.users.data = data
+          },
+        (error: any) => {
+          this.error = true;
+          if (error.status == 400) {
+            this.errorMessage = error.error;
+          } else {
+            if (error.status == 500) {
+              this.errorMessage = error.error.errors.message;
+            } else {
+              this.errorMessage = 'Unknown error!';
+            }
+          }
+        }
+        )
+
 
       }, //transforms into a http error
       (error: any) => {
@@ -90,6 +109,8 @@ export class ListUsersComponent implements OnInit{
           }
         }
       });
+
+    this.users.paginator = this.paginator
   }
 
 

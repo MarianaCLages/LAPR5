@@ -49,12 +49,12 @@
       <ng-container matColumnDef="Actions">
         <th mat-header-cell *matHeaderCellDef> Actions</th>
         <td mat-cell *matCellDef="let user">
-          <div *ngIf="user.ChangeActivated === false; then activateTruck else deactiveTruck"></div>
+          <div *ngIf="user.activated === false; then activateTruck else deactiveTruck"></div>
           <ng-template #activateTruck>
             <button mat-raised-button color="primary" class="ActivateTruck" (click)="desactivateUser(user)">Activate</button>
           </ng-template>
           <ng-template #deactiveTruck>
-            <button mat-raised-button color="primary" class="DeactiveTruck" (click)="desactivateUser(user)">Activate/Desactivate</button>
+            <button mat-raised-button color="primary" class="DeactiveTruck" (click)="desactivateUser(user)">Deactivate</button>
           </ng-template>
         </td>
       </ng-container>

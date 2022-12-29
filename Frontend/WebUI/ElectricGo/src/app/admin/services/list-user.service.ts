@@ -37,7 +37,7 @@ export class ListUserService{
 
 
     let deleteURL = 'http://localhost:5000/api/User/byEmailDelete?email=' + email;
-    return this.http.delete<ICreateUserDTO>(deleteURL,options).toPromise();
+    return this.http.delete<ICreateUserDTO>(deleteURL,options);
   }
 
 
