@@ -58,10 +58,10 @@ import {UserSideBarComponent} from "./user-manager/components/user-side-bar.comp
 import {UserComponent} from "./user-manager/user.component";
 import {UserUserInfoComponent} from "./user-manager/components/user-info/user-user-info.component";
 import { RegisterUserAsUserComponent } from './user-manager/components/register-user-as-user/register-user-as-user.component';
-import {
-  DialogContentExampleDialog,
-  TermsAndConditionsComponent
-} from './components/terms-and-conditions/terms-and-conditions.component';
+import { ForbiddenPageComponent } from './components/forbidden-page/forbidden-page.component';
+import { UserLockedComponent } from './components/user-locked/user-locked.component';
+
+import { DialogContentExampleDialog, TermsAndConditionsComponent} from './components/terms-and-conditions/terms-and-conditions.component';
 import {MatDialogModule} from "@angular/material/dialog";
 
 
@@ -103,7 +103,9 @@ import {MatDialogModule} from "@angular/material/dialog";
     AdminComponent,
     RegisterUserAsUserComponent,
     TermsAndConditionsComponent,
-    DialogContentExampleDialog
+    DialogContentExampleDialog,
+    ForbiddenPageComponent,
+    UserLockedComponent
   ],
   imports: [
     BrowserModule,

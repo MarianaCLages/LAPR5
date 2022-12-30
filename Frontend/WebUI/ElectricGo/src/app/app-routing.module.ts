@@ -28,6 +28,8 @@ import {ChangeUserRoleComponent} from "./admin/components/change-user-role/chang
 import {UserComponent} from "./user-manager/user.component";
 import {UserUserInfoComponent} from "./user-manager/components/user-info/user-user-info.component";
 import { RegisterUserAsUserComponent } from './user-manager/components/register-user-as-user/register-user-as-user.component';
+import { ForbiddenPageComponent } from './components/forbidden-page/forbidden-page.component';
+import { UserLockedComponent } from './components/user-locked/user-locked.component';
 
 const routes: Routes = [
   // Login
@@ -39,12 +41,12 @@ const routes: Routes = [
   {path: 'WarehouseManager/createOrder', component: CreateOrderComponent},
   {path: 'WarehouseManager/listOrders', component: ListOrdersComponent},
   {path: 'WarehouseManager/activationWarehouse', component: ActivationWarehouseComponentComponent},
-  {path: 'WarehouseManager/profile',component : UserInfoComponent},
+  {path: 'WarehouseManager/profile',component : UserUserInfoComponent},
 
   // Fleet Manager
   {path: 'FleetManager', component: FleetManagerComponent},
   {path: 'FleetManager/addTruck', component: AddTruckComponent},
-  {path: 'FleetManager/profile',component : UserInfoComponent},
+  {path: 'FleetManager/profile',component : UserUserInfoComponent},
 
   //User
   {path: 'User',component: UserComponent},
@@ -57,7 +59,7 @@ const routes: Routes = [
   {path: 'Admin/registerUser', component: RegisterUserComponent},
   {path: 'Admin/listUser',component : ListUsersComponent},
   {path: 'Admin/changeUserRole',component : ChangeUserRoleComponent},
-  {path: 'Admin/profile',component : UserInfoComponent},
+  {path: 'Admin/profile',component : UserUserInfoComponent},
 
 
   // Logistic Manager
@@ -72,15 +74,20 @@ const routes: Routes = [
   {path: 'LogisticManager/listTrucks', component: ListTruckComponent},
   {path: 'LogisticManager/getHeuristic',component:GetHeuristicComponent},
   {path: 'LogisticManager/softDeleteTruck', component: SoftDeleteTruckComponent},
-  {path: 'LogisticManager/profile',component : UserInfoComponent},
+  {path: 'LogisticManager/profile',component : UserUserInfoComponent},
+
+  // Forbidden Page
+  {path: 'forbidden', component: ForbiddenPageComponent},
+
+  // User locked
+  {path: 'locked', component: UserLockedComponent},
 
   // Error Page
   {path: '**', component: ErrorPageComponent},
-  //{path: 'permissonDenied', component: PermissionDeniedComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes), RouterModule.forRoot(routes, { useHash: true })],
   declarations: [],
   exports: [RouterModule],
 })

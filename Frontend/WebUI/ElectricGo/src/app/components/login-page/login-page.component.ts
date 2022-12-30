@@ -98,7 +98,7 @@ export class LoginPageComponent implements OnInit {
               this.router.navigate([url]).then((r) => window.location.reload());
             }
           },
-          (err: any) => {
+          (error: any) => {
             console.log("Invalid token! Please login again!");
           }
         );
