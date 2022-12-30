@@ -37,20 +37,6 @@ export class RegisterUserAsUserComponent implements OnInit{
   async ngOnInit(): Promise<void> {
 
     this.showPage = false;
-    let boolValue = await this.service.isAuthenticated(this.validRoles);
-
-    if (!boolValue.exists) {
-      //redirect to forbidden page
-      this.redirect.forbiddenPage();
-    }
-
-    if (!boolValue.valid) {
-      this.redirect.lockedPage();
-    }
-
-    if(!boolValue.exists && !boolValue.valid){
-      this.redirect.logout();
-    }
 
     let user = await this.service.newUserInfos();
 
@@ -59,6 +45,10 @@ export class RegisterUserAsUserComponent implements OnInit{
     this.role = user.role;
 
     if(this.email == null || this.email == "" || this.userName == null || this.userName == "" || this.role == null || this.role == ""){
+      this.redirect.forbiddenPage()
+    }
+
+    if(this.role != "User"){
       this.redirect.forbiddenPage()
     }
 

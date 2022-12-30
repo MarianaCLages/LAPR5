@@ -15,7 +15,7 @@ export class ErrorPageComponent implements OnInit {
     private service: GoogleApiCommunicationService,) { }
 
   async ngOnInit(): Promise<void> {
-    this.role = (await this.service.newUserInfos()).role;
+    this.role = (await this.service.getRole()).role;
   }
 
   public homeButton() {

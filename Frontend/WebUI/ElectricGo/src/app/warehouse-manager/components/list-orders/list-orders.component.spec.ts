@@ -4,6 +4,8 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ListOrdersComponent } from './list-orders.component';
 import { GetOrdersService } from 'src/app/services/get-orders.service';
 import IOrderDTO from 'src/app/shared/orderDTO';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 describe('ListOrdersComponent', () => {
   let component: ListOrdersComponent;
@@ -11,6 +13,8 @@ describe('ListOrdersComponent', () => {
 
   beforeEach(async () => {
     const listOrderServiceFake = jasmine.createSpyObj('GetOrdersService', ['getOrders']);
+    let fakeGoogleApiService =  jasmine.createSpyObj('GoogleApiCommunicationService',['']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService',['']);
     listOrderServiceFake.getOrders.and.returnValue(Promise.resolve(
       [
         {
@@ -31,13 +35,15 @@ describe('ListOrdersComponent', () => {
         }
       ]
     ));
-    
+
     await TestBed.configureTestingModule({
       declarations: [ ListOrdersComponent ],
       providers: [
         HttpClient,
         HttpHandler,
-        { provide: 'GetOrdersService', useValue: listOrderServiceFake }
+        { provide: 'GetOrdersService', useValue: listOrderServiceFake },
+        { provide: 'GoogleApiCommunicationService', useValue: fakeGoogleApiService },
+        { provide: 'RedirectPagesService', useValue: fakeRedirectService },
       ]
     })
     .compileComponents();
@@ -52,6 +58,8 @@ describe('ListOrdersComponent', () => {
   });
 
   it('should exist an array of orders after init', () => {
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
     let serviceFake = {
       getOrders: () => {
         //create an IOrderDTO array
@@ -77,7 +85,7 @@ describe('ListOrdersComponent', () => {
       }
     } as GetOrdersService;
 
-    component = new ListOrdersComponent(serviceFake);
+    component = new ListOrdersComponent(serviceFake, fakeGoogleApiService, fakeRedirectService);
 
     component.ngOnInit();
 

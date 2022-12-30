@@ -32,27 +32,55 @@ export class LoginPageComponent implements OnInit {
 
   private isAuth() {
     if (this.service.getJWT() === '') {
-      console.log("No token found! Please login again!");
+      console.log('No token found! Please login again!');
       return;
     }
 
-     this.service.LoginWithGoogle(this.service.getJWT()).subscribe((res: any) => {
-      this._ngZone.run(
-        () => {
-          if(res.newUser == true){
-            const url = '/' + res.role + '/register';
-            this.router.navigate([url]).then((r) => window.location.reload());
-
-          } else {
-            const url = '/' + res.role;
-            this.router.navigate([url]).then((r) => window.location.reload());
+    try {
+      this.service.getRole().then((res: any) => {
+        this._ngZone.run(
+          () => {
+            if (res.newUser == true) {
+              const url = '/' + res.role + '/register';
+              this.router.navigate([url]).then((r) => window.location.reload());
+            } else {
+              const url = '/' + res.role;
+              this.router.navigate([url]).then((r) => window.location.reload());
+            }
+          },
+          (err: any) => {
+            console.log('Invalid token! Please login again!');
           }
-        },
-        (err: any) => {
-          console.log("Invalid token! Please login again!");
-        }
-      );
-    });
+        );
+      });
+    } catch (e) {}
+
+    try {
+      this.service
+        .LoginWithGoogle(this.service.getJWT())
+        .subscribe((res: any) => {
+          this._ngZone.run(
+            () => {
+              if (res.newUser == true) {
+                const url = '/' + res.role + '/register';
+                this.router
+                  .navigate([url])
+                  .then((r) => window.location.reload());
+              } else {
+                const url = '/' + res.role;
+                this.router
+                  .navigate([url])
+                  .then((r) => window.location.reload());
+              }
+            },
+            (err: any) => {
+              console.log('Invalid token! Please login again!');
+            }
+          );
+        });
+    } catch (e) {
+      this.service.cleanCookies();
+    }
 
     return;
   }
@@ -82,27 +110,35 @@ export class LoginPageComponent implements OnInit {
   }
 
   async handleCredentialResponse(credentialResponse: CredentialResponse) {
-    await this.service
-      .LoginWithGoogle(credentialResponse.credential)
-      .subscribe((res: any) => {
-        document.cookie = "jwt=" + credentialResponse.credential; + ";path=/";
-        localStorage.setItem('token', credentialResponse.credential);
-        this._ngZone.run(
-          () => {
-            if(res.newUser == true){
-              const url = '/' + res.role + '/register';
-              this.router.navigate([url]).then((r) => window.location.reload());
-
-            } else {
-              const url = '/' + res.role;
-              this.router.navigate([url]).then((r) => window.location.reload());
+    try {
+      await this.service
+        .LoginWithGoogle(credentialResponse.credential)
+        .subscribe((res: any) => {
+          document.cookie = 'jwt=' + res.token;
+          +';path=/';
+          localStorage.setItem('token', res.token);
+          this._ngZone.run(
+            () => {
+              if (res.newUser == true) {
+                document.cookie = 'jwt=' + credentialResponse.credential;
+                +';path=/';
+                const url = '/' + res.role + '/register';
+                this.router
+                  .navigate([url])
+                  .then((r) => window.location.reload());
+              } else {
+                const url = '/' + res.role;
+                this.router
+                  .navigate([url])
+                  .then((r) => window.location.reload());
+              }
+            },
+            (error: any) => {
+              console.log('Invalid token! Please login again!');
             }
-          },
-          (error: any) => {
-            console.log("Invalid token! Please login again!");
-          }
-        );
-      });
+          );
+        });
+    } catch {}
   }
 
   public logout() {
@@ -112,5 +148,4 @@ export class LoginPageComponent implements OnInit {
       this.router.navigate(['/']).then((r) => window.location.reload());
     });
   }
-
 }

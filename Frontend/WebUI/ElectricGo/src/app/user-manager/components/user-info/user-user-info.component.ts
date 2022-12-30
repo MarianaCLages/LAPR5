@@ -27,7 +27,7 @@ export class UserUserInfoComponent implements OnInit {
 
   public showPage: boolean = false;
 
-  public validRoles: string[] = ['Admin'];
+  public validRoles: string[] = ['User', 'Admin', 'FleetManager', 'WarehouseManager', 'LogisticManager'];
 
   displayedColumns: string[] = [
     'name',

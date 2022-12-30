@@ -79,8 +79,12 @@ export class ListTruckComponent implements OnInit {
       this.redirect.logout();
     }
 
+    this.showPage = true;
+
     this.getTrucksService.getTrucks().then((data: any) => {
       this.trucks.data = data;
+      this.trucks.paginator = this.paginator;
+      this.trucks.sort = this.sort;
     });
   }
 
@@ -205,5 +209,7 @@ export class ListTruckComponent implements OnInit {
       );
       this.trucks.paginator = this.paginator;
   }
+
+
 
 }

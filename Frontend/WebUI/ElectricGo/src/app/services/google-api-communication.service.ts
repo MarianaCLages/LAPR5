@@ -11,6 +11,7 @@ export class GoogleApiCommunicationService {
   private path = 'http://localhost:5000/api/User/loginWithGoogle';
   private getRolePath = 'http://localhost:5000/api/User/getUserRole';
   private getProfilePath = 'http://localhost:5000/api/User/getProfileInfo';
+  private newUserInfoPath = "http://localhost:5000/api/User/newUser";
 
   constructor(private httpClient: HttpClient) {}
 
@@ -45,6 +46,15 @@ export class GoogleApiCommunicationService {
     const header = new HttpHeaders().set('Content-Type', 'application/json');
     return this.httpClient
       .post(this.getRolePath, JSON.stringify(this.getJWT()), {
+        headers: header,
+      })
+      .toPromise();
+  }
+
+  public newUserInfo(): any {
+    const header = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.httpClient
+      .post(this.newUserInfoPath, JSON.stringify(this.getJWT()), {
         headers: header,
       })
       .toPromise();
@@ -112,9 +122,11 @@ export class GoogleApiCommunicationService {
       return user;
     }
 
-    await this.getRole().then((res: any) => {
+    await this.newUserInfo().then((res: any) => {
       if (res !== null) {
-        user.userName = res.userName;
+        this.cleanCookies();
+        document.cookie = "jwt=" + res.token; + ";path=/";
+        user.userName = res.name;
         user.role = res.role;
         user.email = res.email;
       }

@@ -77,6 +77,9 @@ export class ListPathsComponent implements OnInit {
         });
     }
 
+    this.paths.paginator = this.paginator;
+    this.paths.sort = this.sort;
+
   }
 
   chooseFilter() {
@@ -93,6 +96,7 @@ export class ListPathsComponent implements OnInit {
   ngAfterViewInit() {
     // @ts-ignore
     this.paths.paginator = this.paginator;
+    this.paths.sort = this.sort;
   }
 
   async ngOnInit(): Promise<void> {
@@ -117,6 +121,9 @@ export class ListPathsComponent implements OnInit {
       this.paths.data = data;
     }
     );
+
+    this.paths.paginator = this.paginator;
+    this.paths.sort = this.sort;
   }
 
   goBack() {
