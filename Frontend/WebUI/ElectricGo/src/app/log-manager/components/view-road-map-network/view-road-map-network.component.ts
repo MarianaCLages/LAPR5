@@ -30,7 +30,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private paths: any;
   private info: any;
   private truck: any;
-  private truck2: any;
+  private matosinhosX: any;
+  private matosinhosY: any;
+  private matosinhosZ: any;
   private gui = new GUI();
 
   //ANIMATION
@@ -444,24 +446,21 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
       }
 
-      this.loadModel(warehousePos[0], warehousePos[1], warehousePos[2]);
+      if(element.id == "C05") {
+        this.matosinhosX = element.x;
+        this.matosinhosY = element.y;
+        this.matosinhosZ = element.z;
+      }
 
+      this.loadWarehouseModel(warehousePos[0], warehousePos[1], warehousePos[2]);
     }
 
-    //creates an truck model and animates it
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-    this.truck = new THREE.Mesh(geometry, material);
-
-
-
-
-    this.scene.add(this.truck);
-
+    //creates a truck model and animates it
+    this.loadTruckModel(this.matosinhosX, this.matosinhosY, this.matosinhosZ);
 
   }
 
-  private loadModel(posX: number, posY: number, posZ: number) {
+  private loadWarehouseModel(posX: number, posY: number, posZ: number) {
     const glftLoader = new GLTFLoader();
     glftLoader.load(
       'assets/warehouse_building/scene.gltf',
@@ -469,6 +468,21 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         gltf.scene.scale.set(0.1, 0.1, 0.1);
         gltf.scene.position.set(posX, posY, posZ);
         gltf.scene.rotation.x = Math.PI / 2.0;
+        this.roadMap.add(gltf.scene);
+      }
+    );
+  }
+
+  private loadTruckModel(posX: number, posY: number, posZ: number) {
+    const glftLoader = new GLTFLoader();
+    glftLoader.load(
+      'assets/truck/scene.gltf',
+      (gltf) => {
+        this.truck = gltf.scene;
+        gltf.scene.scale.set(0.003, 0.003, 0.003);
+        gltf.scene.position.set(posX, posY, posZ + 0.4);
+        gltf.scene.rotation.x = Math.PI / 2.0;
+        gltf.scene.rotation.y = Math.PI / 2.0;
         this.roadMap.add(gltf.scene);
       }
     );
@@ -579,8 +593,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
 
     (function render() {
-
-      console.log(params.truckMovement);
       requestAnimationFrame(render);
       component.controls.update();
 

@@ -56,8 +56,6 @@ export class ListOrdersComponent {
   // @ts-ignore
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  allComplete: boolean = false;
-
   constructor(
       private getOrdersService: GetOrdersService
   ) {}
@@ -67,6 +65,7 @@ export class ListOrdersComponent {
       this.orders.paginator = this.paginator;
       this.orders.sort = this.sort;
   }
+  
   async ngOnInit(): Promise<void> {
     //calls the service to get the orders
     this.getOrdersService.getOrders().then((data: any) => {
