@@ -5,6 +5,8 @@ import {ICreateUserDTO} from "../../../shared/createUserDTO";
 import {ChangeUserRoleService} from "../../services/change-user-role.service";
 import {ActivatedWarehouseDTO} from "../../../shared/ActivatedWarehouseDTO";
 import {DatePipe, formatDate} from '@angular/common'
+import { GoogleApiCommunicationService } from "src/app/services/google-api-communication.service";
+import { RedirectPagesService } from "src/app/services/redirect-pages.service";
 
 @Component({
   selector: 'app-change-user-roles',
@@ -23,6 +25,10 @@ export class ChangeUserRoleComponent implements OnInit{
   datePipe : any;
   user = new MatTableDataSource<ICreateUserDTO>()
 
+  public showPage: boolean = false;
+
+  public validRoles: string[] = ['Admin'];
+
   displayedColumns: string[] = [
     'email',
     'role'
@@ -30,12 +36,31 @@ export class ChangeUserRoleComponent implements OnInit{
   ];
 
   constructor(
-    private changeUserRoleService : ChangeUserRoleService
+    private changeUserRoleService : ChangeUserRoleService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService
   ) {}
 
 
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
+      this.redirect.logout();
+    }
+
+    this.showPage = true;
   }
 
   changeUserRole() : any{

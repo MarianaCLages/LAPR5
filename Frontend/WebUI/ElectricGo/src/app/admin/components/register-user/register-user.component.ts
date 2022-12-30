@@ -1,6 +1,8 @@
 
 
 import {Component, OnInit} from "@angular/core";
+import { GoogleApiCommunicationService } from "src/app/services/google-api-communication.service";
+import { RedirectPagesService } from "src/app/services/redirect-pages.service";
 import {ICreateUserDTO} from "../../../shared/createUserDTO";
 import {RegisterUserService} from "../../services/register-user.service";
 
@@ -22,10 +24,34 @@ export class RegisterUserComponent implements OnInit{
   error: boolean = false;
   success: any;
 
+  public showPage: boolean = false;
+
+  public validRoles: string[] = ['Admin'];
+
   constructor(
-    private registerUserService: RegisterUserService
+    private registerUserService: RegisterUserService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService,
   ) {}
-  ngOnInit(): void {
+
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
+      this.redirect.logout();
+    }
+
+    this.showPage = true;
   }
 
   createUser(){
