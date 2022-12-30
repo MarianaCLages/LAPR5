@@ -3,6 +3,7 @@ h1 {
   color: darkblue;
   text-align: center;
 }
+
 .form {
   width: 100%;
   height: 100%;
@@ -18,7 +19,13 @@ mat-card {
   text-align: center;
 }
 
-set-form-field{
+set-form-field {
   display: block;
 }
 
+app-terms-and-conditions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}

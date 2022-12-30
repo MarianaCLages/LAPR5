@@ -5290,3 +5290,8 @@ Frontend/WebUI/ElectricGo/cypress/videos/paths.cy.ts.mp4
 Frontend/WebUI/ElectricGo/cypress/videos/spec.cy.ts.mp4
 Frontend/WebUI/ElectricGo/cypress/screenshots/
 Frontend/WebUI/ElectricGo/package-lock.json
+Backend/GestArm_API/GestArm/appsettings.json
+.gitignore
+Frontend/WebUI/ElectricGo/package-lock.json
+Frontend/WebUI/ElectricGo/package-lock.json
+Backend/GestLogistica_API/GestLogistica/config.js

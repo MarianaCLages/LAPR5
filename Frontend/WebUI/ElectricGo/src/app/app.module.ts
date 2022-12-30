@@ -58,6 +58,11 @@ import {UserSideBarComponent} from "./user-manager/components/user-side-bar.comp
 import {UserComponent} from "./user-manager/user.component";
 import {UserUserInfoComponent} from "./user-manager/components/user-info/user-user-info.component";
 import { RegisterUserAsUserComponent } from './user-manager/components/register-user-as-user/register-user-as-user.component';
+import {
+  DialogContentExampleDialog,
+  TermsAndConditionsComponent
+} from './components/terms-and-conditions/terms-and-conditions.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -96,7 +101,9 @@ import { RegisterUserAsUserComponent } from './user-manager/components/register-
     SoftDeleteTruckComponent,
     RegisterUserComponent,
     AdminComponent,
-    RegisterUserAsUserComponent
+    RegisterUserAsUserComponent,
+    TermsAndConditionsComponent,
+    DialogContentExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -125,6 +132,7 @@ import { RegisterUserAsUserComponent } from './user-manager/components/register-
     MatSortModule,
     MatCheckboxModule,
     MatPaginatorModule,
+    MatDialogModule,
   ],
   providers: [HttpClientModule, AddPackagingService,{
     provide: APP_INITIALIZER,
