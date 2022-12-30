@@ -1,10 +1,10 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import { Location } from '@angular/common';
 import { AddWarehouseService } from '../services/add-warehouse.service'
 import { CreateOrderService } from '../services/create-order.service';
 import { GetOrdersService } from '../services/get-orders.service';
 import { GoogleApiCommunicationService } from '../services/google-api-communication.service';
+import { RedirectPagesService } from '../services/redirect-pages.service';
 
 @Component({
   selector: 'app-warehouse-manager',
@@ -16,41 +16,31 @@ export class WarehouseManagerComponent implements OnInit {
 
   private validRoles: string[] = ['WarehouseManager', 'Admin'];
 
-  constructor(private router: Router, private location: Location,
+  public showPage : boolean = false;
+
+  constructor(private router: Router,
     private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService,
     private _ngZone: NgZone) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
 
-    let boolValue = this.service.isAuthenticated(this.validRoles);
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
 
-    if(!boolValue){
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
       this.logout();
     }
-  }
 
-  addWarehouse(){
-    //route to add packaging menu
-    let opt = 'addWarehouse';
-    //this.redirectEvent.emit(opt);
-    const url = 'WarehouseManager/' + opt;
-    this.router.navigate([url]).then(r => console.log(r));
-  }
-
-  createOrder(){
-    //route to add order menu
-    let opt = 'createOrder';
-    //this.redirectEvent.emit(opt);
-    const url = 'WarehouseManager/' + opt;
-    this.router.navigate([url]).then(r => console.log(r));
-  }
-
-  listOrders(){
-    //route to list orders menu
-    let opt = 'listOrders';
-    //this.redirectEvent.emit(opt);
-    const url = 'WarehouseManager/' + opt;
-    this.router.navigate([url]).then(r => console.log(r));
+    this.showPage = true;
   }
 
   goTo(destination: any) {

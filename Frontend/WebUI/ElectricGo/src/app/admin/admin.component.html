@@ -1,5 +1,10 @@
-<app-admin-side-bar (menuSelected)="goTo($event)"></app-admin-side-bar>
+<div *ngIf="showPage">
+  <app-admin-side-bar (menuSelected)="goTo($event)"></app-admin-side-bar>
 
+  <router-outlet></router-outlet>
 
-
-<router-outlet></router-outlet>
+  <!-- button to go back to the previous page -->
+  <button mat-raised-button color="primary" class="backBtn" (click)="logout()">
+    Logout
+  </button>
+</div>

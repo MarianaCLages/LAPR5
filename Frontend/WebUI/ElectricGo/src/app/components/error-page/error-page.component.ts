@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 @Component({
   selector: 'app-error-page',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorPageComponent implements OnInit {
 
-  constructor() { }
+  private role : string = '';
 
-  ngOnInit(): void {
+  constructor(private redirect: RedirectPagesService,
+    private service: GoogleApiCommunicationService,) { }
+
+  async ngOnInit(): Promise<void> {
+    this.role = (await this.service.newUserInfos()).role;
+  }
+
+  public homeButton() {
+    this.redirect.homePage(this.role);
   }
 
 }
