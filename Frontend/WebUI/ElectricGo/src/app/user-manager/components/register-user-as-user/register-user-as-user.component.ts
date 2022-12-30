@@ -4,6 +4,7 @@ import {Component, OnInit} from "@angular/core";
 import {ICreateUserDTO} from "../../../shared/createUserDTO";
 import {RegisterUserService} from "../../../admin/services/register-user.service";
 import { GoogleApiCommunicationService } from "src/app/services/google-api-communication.service";
+import { RedirectPagesService } from "src/app/services/redirect-pages.service";
 
 @Component({
   selector: 'app-register-user-as-user',
@@ -23,14 +24,33 @@ export class RegisterUserAsUserComponent implements OnInit{
   success: any;
   role : any;
 
-  private validRoles: string[] = ['User', 'Admin'];
+  private validRoles: string[] = ['User'];
+
+  public showPage: boolean = false;
 
   constructor(
     private registerUserService: RegisterUserService,
-    private service: GoogleApiCommunicationService
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService,
   ) {}
+
   async ngOnInit(): Promise<void> {
-    let boolValue = this.service.isAuthenticated(this.validRoles);
+
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
+      this.redirect.logout();
+    }
 
     let user = await this.service.newUserInfos();
 
@@ -38,9 +58,11 @@ export class RegisterUserAsUserComponent implements OnInit{
     this.userName = user.userName.trim();
     this.role = user.role;
 
-    if(!boolValue){
-      this.goBack();
+    if(this.email == null || this.email == "" || this.userName == null || this.userName == "" || this.role == null || this.role == ""){
+      this.redirect.forbiddenPage()
     }
+
+    this.showPage = true;
   }
 
   createUser(){

@@ -1,8 +1,8 @@
+<div *ngIf = "showPage">
 
 <br>
 <div class = "titles">
-
-  <h2>User Info</h2>
+  <h2>Profile Info</h2>
 </div>
 
 <div>
@@ -10,9 +10,6 @@
     <strong>Error</strong> {{errorMessage |json | slice:0:100}}
   </mat-error>
 </div>
-
-
-
 
 <div class="mat-elevation-z8" >
   <table mat-table [dataSource]="users">
@@ -51,3 +48,5 @@
 
 <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
 
+
+</div>
