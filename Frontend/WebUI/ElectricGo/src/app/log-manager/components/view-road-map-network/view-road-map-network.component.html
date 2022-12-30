@@ -1,3 +1,5 @@
-<button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
+<div *ngIf = "showPage">
+  <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
 
-<canvas #canvas id = "canvas"> </canvas>
+  <canvas #canvas id = "canvas"> </canvas>
+</div>

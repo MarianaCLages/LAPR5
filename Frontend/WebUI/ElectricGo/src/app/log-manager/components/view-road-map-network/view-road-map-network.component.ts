@@ -10,6 +10,8 @@ import { IPathViewRepresentation } from 'src/app/shared/pathViewRepresentation';
 import { IWarehouseViewRepresentation } from 'src/app/shared/warehouseViewRepresentation';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import {PlatformLocation} from "@angular/common";
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 @Component({
   selector: 'app-view-road-map-network',
@@ -46,9 +48,15 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private roadMap!: THREE.Group;
   private controls!: OrbitControls;
 
+  public showPage: boolean = false;
+
+  private validRoles: string[] = ['LogisticManager', 'Admin'];
+
   constructor(
     private getWarehouseService: GetWarehouseServiceService,
-    private getPathService: GetPathsService
+    private getPathService: GetPathsService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService
   ) {
   }
 
@@ -56,7 +64,22 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     return this.canvasRef.nativeElement;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
+      this.redirect.logout();
+    }
 
   }
 

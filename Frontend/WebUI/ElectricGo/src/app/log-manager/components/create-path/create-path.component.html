@@ -1,65 +1,72 @@
-<div class="container" matAutocompleteOrigin>
+<div *ngIf = "showPage">
+  <div class="container" matAutocompleteOrigin>
 
-  <div>
-    <mat-error *ngIf="error" class="alert alert-warning">
-      <strong>Error</strong> {{errorMessage |json | slice:0:100}}
-    </mat-error>
-  </div>
+    <div>
+      <mat-error *ngIf="error" class="alert alert-warning">
+        <strong>Error</strong> {{errorMessage |json | slice:0:100}}
+      </mat-error>
+    </div>
 
-  <h1>Create Path</h1>
+    <br>
+    <div class = "titles">
+      <h1>Logistic Manager</h1>
+      <h1>Create Path</h1>
+    </div>
 
-  <mat-form-field>
-    <mat-label>Departure Warehouse</mat-label>
-    <mat-select [(value)]="initialWarehouse">
-      <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse">
-        {{warehouse.alphaNumId}}
-        {{warehouse.designation}}
-      </mat-option>
-    </mat-select>
+    <mat-form-field>
+      <mat-label>Departure Warehouse</mat-label>
+      <mat-select [(value)]="initialWarehouse">
+        <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse">
+          {{warehouse.alphaNumId}}
+          {{warehouse.designation}}
+        </mat-option>
+      </mat-select>
 
-  </mat-form-field>
-  <br>
+    </mat-form-field>
+    <br>
 
-  <mat-form-field>
-    <mat-label>Destination Warehouse</mat-label>
-    <mat-select [(value)]="destinationWarehouse">
-      <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse">
-        {{warehouse.alphaNumId}}
-        {{warehouse.designation}}
-      </mat-option>
-    </mat-select>
+    <mat-form-field>
+      <mat-label>Destination Warehouse</mat-label>
+      <mat-select [(value)]="destinationWarehouse">
+        <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse">
+          {{warehouse.alphaNumId}}
+          {{warehouse.designation}}
+        </mat-option>
+      </mat-select>
 
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Energy Needed</mat-label>
-    <input matInput type="number" [(ngModel)]="energyNeeded">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Total Distance</mat-label>
-    <input matInput type="number" [(ngModel)]="distance">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Total Time</mat-label>
-    <input matInput type="number" [(ngModel)]="time">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-label>Time to charge</mat-label>
-    <input matInput type="number" [(ngModel)]="timeToCharge">
-  </mat-form-field>
-  <br>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Energy Needed</mat-label>
+      <input matInput type="number" [(ngModel)]="energyNeeded">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Total Distance</mat-label>
+      <input matInput type="number" [(ngModel)]="distance">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Total Time</mat-label>
+      <input matInput type="number" [(ngModel)]="time">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Time to charge</mat-label>
+      <input matInput type="number" [(ngModel)]="timeToCharge">
+    </mat-form-field>
+    <br>
 
-  <button mat-raised-button color="primary" (click)="createTruck()">Create</button>
-
-
-  <div *ngIf="success" class="alert alert-success">
-    <strong>Success!</strong> {{successMessage}}
-
-  </div>
+    <button mat-raised-button color="primary" (click)="createTruck()">Create</button>
 
 
- <!-- button to go back to the previous page -->
-  <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
+    <div *ngIf="success" class="alert alert-success">
+      <strong>Success!</strong> {{successMessage}}
+
+    </div>
+
+
+   <!-- button to go back to the previous page -->
+    <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
+
+</div>

@@ -1,5 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {MatTableDataSource} from "@angular/material/table";
+import { GoogleApiCommunicationService } from "src/app/services/google-api-communication.service";
+import { RedirectPagesService } from "src/app/services/redirect-pages.service";
 import {ICreateUserDTO} from "../../../shared/createUserDTO";
 import {GetUserService} from "./get-user.service";
 
@@ -21,6 +23,10 @@ export class UserInfoComponent implements OnInit {
   errorMessage: any;
   error: boolean = false;
 
+  public showPage: boolean = false;
+
+  public validRoles: string[] = ['Admin', 'User', 'LogisticManager', 'WarehouseManager', 'FleetManager'];
+
   users = new MatTableDataSource<ICreateUserDTO>()
 
   displayedColumns: string[] = [
@@ -31,10 +37,28 @@ export class UserInfoComponent implements OnInit {
     'birthDate',
   ];
 
-  public constructor(private listUserService : GetUserService) {
+  public constructor(private listUserService : GetUserService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
+      this.redirect.logout();
+    }
+
     this.listUser();
   }
 

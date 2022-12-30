@@ -3,6 +3,8 @@ import { AddPackagingService } from 'src/app/services/add-packaging.service';
 import { IPackagingDTO } from 'src/app/shared/packagingDTO';
 import { GetTrucksService } from 'src/app/services/get-trucks.service';
 import { GetOrdersService } from 'src/app/services/get-orders.service';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 @Component({
   selector: 'app-add-packaging',
@@ -25,13 +27,37 @@ export class AddPackagingComponent implements OnInit {
   success: any;
   successMessage: any;
 
+  public showPage: boolean = false;
+
+  public validRoles: string[] = ['Admin', 'LogisticManager'];
+
   constructor(
     private addPackagingService: AddPackagingService,
     private getTrucksService: GetTrucksService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService,
     private getOrdersService: GetOrdersService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
+      this.redirect.logout();
+    }
+
+    this.showPage = true;
+
     //gets the orders from the backend
     this.getOrdersService.getOrders().then((data: any) => {
       this.orders = data;

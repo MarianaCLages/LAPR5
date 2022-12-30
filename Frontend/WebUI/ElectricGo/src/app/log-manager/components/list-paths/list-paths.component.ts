@@ -5,6 +5,8 @@ import IPathDTO from "../../../shared/pathDTO";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 @Component({
   selector: 'app-list-paths',
@@ -14,6 +16,8 @@ import { MatTableDataSource } from "@angular/material/table";
 export class ListPathsComponent implements OnInit {
   endWare: any;
   benWare: any;
+
+  private validRoles: string[] = ['LogisticManager', 'Admin'];
 
   options: string[] = [
     'Path by Beginning Warehouse',
@@ -32,8 +36,13 @@ export class ListPathsComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   filterOption: any;
 
+  public showPage: boolean = false;
+
+
   constructor(
-    private getPathsService: GetPathsService
+    private getPathsService: GetPathsService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService
   ) {
   }
 
@@ -87,6 +96,23 @@ export class ListPathsComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
+      this.redirect.logout();
+    }
+
+    this.showPage = true;
     this.getPathsService.getPaths().then((data: IPathDTO[]) => {
       this.paths.data = data;
     }

@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 import { AddTruckService } from '../../services/add-truck.service';
 
 @Component({
@@ -21,11 +23,34 @@ export class AddTruckComponent implements OnInit {
   @Output()
   redirectEvent = new EventEmitter<string>();
 
+  public showPage: boolean = false;
+
+  public validRoles: string[] = ['FleetManager', 'Admin'];
+
   constructor(
-    private addTruckService: AddTruckService
+    private addTruckService: AddTruckService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
+      this.redirect.logout();
+    }
+
+    this.showPage = true;
   }
 
   addTruck() {

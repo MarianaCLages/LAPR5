@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 import { CreatePathServiceService } from "../../../services/create-path-service.service";
 import { GetWarehouseServiceService } from "../../../services/get-warehouse-service.service";
@@ -22,11 +24,36 @@ export class CreatePathComponent implements OnInit {
   success: any;
   successMessage: any;
 
+  public showPage: boolean = false;
 
-  constructor(private createPathService: CreatePathServiceService, private getWarehouseService: GetWarehouseServiceService) {
+  private validRoles: string[] = ['LogisticManager', 'Admin'];
+
+
+  constructor(private createPathService: CreatePathServiceService,
+    private getWarehouseService: GetWarehouseServiceService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
+      this.redirect.logout();
+    }
+
+    this.showPage = true;
+
     //gets the warehouses from the backend
     this.getWarehouseService.getWarehouses().then((data: any) => {
       this.warehouses = data;

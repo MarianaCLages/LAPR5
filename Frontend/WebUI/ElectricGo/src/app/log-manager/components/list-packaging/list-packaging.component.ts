@@ -5,6 +5,8 @@ import { ListPackagingService } from '../../services/list-packaging.service';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from '@angular/material/table';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 @Component({
   selector: 'app-list-packaging',
@@ -34,8 +36,14 @@ export class ListPackagingComponent implements OnInit {
   // @ts-ignore
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+  public showPage: boolean = false;
+
+  public validRoles: string[] = ["LogisticManager", 'Admin'];
+
   constructor(
-    private listPackagingService: ListPackagingService
+    private listPackagingService: ListPackagingService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService
   ) { }
 
   ngAfterViewInit() {
@@ -44,6 +52,25 @@ export class ListPackagingComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
+      this.redirect.logout();
+    }
+
+    this.showPage = true;
+
+
     //calls the service to get the packagigns
     this.listPackagingService.getPackaging().then((data: IPackagingDTO[]) => {
       this.packagings.data = data;

@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ITruckDTO } from '../../../shared/truckDTO';
 import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 @Component({
   selector: 'app-list-truck',
@@ -47,9 +48,12 @@ export class ListTruckComponent implements OnInit {
 
   allComplete: boolean = false;
 
+  public showPage: boolean = false;
+
   constructor(
     private getTrucksService: GetTrucksService,
     private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService
   ) {}
 
   ngAfterViewInit() {
@@ -59,10 +63,20 @@ export class ListTruckComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
-    //Verify if the user is authenticated
-    let boolValue = this.service.isAuthenticated(this.validRoles);
-    if(!boolValue){
-      this.goBack();
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      //redirect to forbidden page
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if(!boolValue.exists && !boolValue.valid){
+      this.redirect.logout();
     }
 
     this.getTrucksService.getTrucks().then((data: any) => {
