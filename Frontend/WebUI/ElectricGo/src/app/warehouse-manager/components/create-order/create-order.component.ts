@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateOrderService } from 'src/app/services/create-order.service';
 import { GetWarehouseServiceService } from 'src/app/services/get-warehouse-service.service';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 import IOrderDTO from 'src/app/shared/orderDTO';
 
 @Component({
@@ -22,12 +24,35 @@ export class CreateOrderComponent implements OnInit {
   success: any;
   successMessage: any;
 
+  public showPage: boolean = false;
+
+  private validRoles: string[] = ['WarehouseManager', 'Admin'];
+
   constructor(
     private createOrderService: CreateOrderService,
-    private getWarehouseService: GetWarehouseServiceService
+    private getWarehouseService: GetWarehouseServiceService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if (!boolValue.exists && !boolValue.valid) {
+      this.redirect.logout();
+    }
+
+    this.showPage = true;
+
     this.getWarehouseService.getWarehouses().then((data: any) => {
       this.warehouses = data;
     });

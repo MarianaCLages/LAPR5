@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 import {ActivationWarehouseService} from "../../../../services/activation-warehouse.service";
 import {AddWarehouseService} from "../../../../services/add-warehouse.service";
 
@@ -20,11 +22,33 @@ export class ActivationWarehouseComponentComponent {
   @Output()
   redirectEvent = new EventEmitter<string>();
 
+  public showPage: boolean = false;
+
+  public validRoles: string[] = ['WarehouseManager', 'Admin'];
+
   constructor(
-    private activationWarehouseService: ActivationWarehouseService
+    private activationWarehouseService: ActivationWarehouseService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if (!boolValue.exists && !boolValue.valid) {
+      this.redirect.logout();
+    }
+
+    this.showPage = true;
   }
 
   desactivateWarehouse() {

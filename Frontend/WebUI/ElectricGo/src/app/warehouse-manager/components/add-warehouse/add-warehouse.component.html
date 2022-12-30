@@ -1,8 +1,11 @@
-<br>
-<h1>Warehouse Manager: Create Warehouse</h1>
-<br>
+<div *ngIf = "showPage">
+  <br>
+<div class = "titles">
+  <h1>Warehouse Manager</h1>
+  <h2>Create Warehouse</h2>
+</div>
 <div class="form">
-  <div class="btn-group">
+  <div class="container">
     <mat-form-field>
       <mat-label>Alpha Numeric</mat-label>
       <input matInput type="text" [(ngModel)]="alphaNumericId"/>
@@ -60,6 +63,7 @@
       <input matInput type="text" [(ngModel)]="country"/>
     </mat-form-field>
     <br>
+    <br>
     <button mat-raised-button color="primary" (click)="addWarehouse()">Add Warehouse</button>
 
     <div *ngIf="success" class="alert alert-success">
@@ -71,4 +75,11 @@
     <!-- button to go back to the previous page -->
     <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
 
+    <br>
+    <br>
+    <br>
+    <br>
+
   </div></div>
+
+</div>

@@ -1,4 +1,5 @@
-<!--Table with all the orders from the array.-->
+<div *ngIf="showPage">
+  <!--Table with all the orders from the array.-->
 <div class="mat-elevation-z8">
   <br>
   <div class = "titles">
@@ -84,3 +85,5 @@
   </div>
 
   <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
+
+</div>

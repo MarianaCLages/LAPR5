@@ -7,6 +7,8 @@ import {MatSort} from "@angular/material/sort";
 import IPathDTO from "../../../shared/pathDTO";
 import {ICreateWarehouseDTO} from "../../../shared/createWarehouseDTO";
 import {ActivatedWarehouseDTO} from "../../../shared/ActivatedWarehouseDTO";
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 @Component({
   selector: 'app-get-all-warehouses',
@@ -34,8 +36,13 @@ export class GetAllWarehousesComponent implements OnInit {
   errorMessage: any;
   error: boolean = false;
 
+  public showPage: boolean = false;
+  public validRoles: string[] = ["WarehouseManager", 'Admin'];
+
   constructor(
-    private getAllWarehouseService: GetAllWarehouseService
+    private getAllWarehouseService: GetAllWarehouseService,
+    private service: GoogleApiCommunicationService,
+    private redirect: RedirectPagesService
   ) { }
 
   ngAfterViewInit() {
@@ -44,6 +51,23 @@ export class GetAllWarehousesComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if (!boolValue.exists && !boolValue.valid) {
+      this.redirect.logout();
+    }
+
+    this.showPage = true;
+
     let dataWarehouse = await this.getAllWarehouseService.getAllWarehouse();
 
 

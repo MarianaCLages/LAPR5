@@ -4,6 +4,8 @@ import { AddWarehouseService } from 'src/app/services/add-warehouse.service';
 import { ICreateWarehouseDTO } from 'src/app/shared/createWarehouseDTO';
 import {CreatePathServiceService} from "../../../services/create-path-service.service";
 import {GetWarehouseServiceService} from "../../../services/get-warehouse-service.service";
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 @Component({
   selector: 'app-add-warehouse',
@@ -36,12 +38,33 @@ export class  AddWarehouseComponent implements  OnInit{
   @Output()
   redirectEvent = new EventEmitter<string>();
 
+  public showPage: boolean = false;
+  private validRoles: string[] = ['WarehouseManager', 'Admin'];
 
   constructor(
-      private addWarehouseService: AddWarehouseService
+      private addWarehouseService: AddWarehouseService,
+      private service: GoogleApiCommunicationService,
+      private redirect: RedirectPagesService
   ) {}
 
-  ngOnInit(): void {}
+  async ngOnInit(): Promise<void> {
+    this.showPage = false;
+    let boolValue = await this.service.isAuthenticated(this.validRoles);
+
+    if (!boolValue.exists) {
+      this.redirect.forbiddenPage();
+    }
+
+    if (!boolValue.valid) {
+      this.redirect.lockedPage();
+    }
+
+    if (!boolValue.exists && !boolValue.valid) {
+      this.redirect.logout();
+    }
+
+    this.showPage = true;
+  }
 
 
   addWarehouse(){

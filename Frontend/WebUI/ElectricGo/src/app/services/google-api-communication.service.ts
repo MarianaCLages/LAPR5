@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUserCredentialsDTO } from '../shared/userCredentialsDTO';
+import { IUserInfoDTO } from '../shared/userInfoDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -40,46 +41,71 @@ export class GoogleApiCommunicationService {
     });
   }
 
-  public getRole(): any{
+  public getRole(): any {
     const header = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.post(this.getRolePath,JSON.stringify(this.getJWT()), { headers: header, } ).toPromise();
+    return this.httpClient
+      .post(this.getRolePath, JSON.stringify(this.getJWT()), {
+        headers: header,
+      })
+      .toPromise();
   }
 
   public getProfileInfo(): any {
     const header = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.post(this.getProfilePath,JSON.stringify(this.getJWT()), { headers: header, } ).toPromise();
+    return this.httpClient
+      .post(this.getProfilePath, JSON.stringify(this.getJWT()), {
+        headers: header,
+      })
+      .toPromise();
   }
 
-  public async isAuthenticated(validRoles: string[]): Promise<boolean> {
+  public async isAuthenticated(validRoles: string[]): Promise<IUserInfoDTO> {
     const jwt = this.getJWT();
 
-    var exists = false;
+    let userInfo: IUserInfoDTO = {
+      exists: false,
+      valid: false,
+      role: '',
+    };
 
     if (jwt === '') {
-      return false;
+      return userInfo;
     }
 
-    await this.getRole().then((res: any) => {
-      if (res !== null) {
-        if (validRoles.includes(res.role)) {
-          exists = true;
-        }
-      }
-    }),
-      (err: any) => {
-        exists = false;
-      };
+    try {
+      await this.getRole().then((res: any) => {
+        if (res !== null) {
+          if (validRoles.includes(res.role)) {
+            userInfo.exists = true;
+          }
 
-    return exists;
+          if (res.activated == true) {
+            userInfo.valid = true;
+          }
+        }
+        userInfo.role = res.role;
+      }),
+        (error: any) => {
+          userInfo.exists = false;
+          userInfo.valid = false;
+          userInfo.role = '';
+        };
+    } catch (error) {
+      userInfo.exists = false;
+      userInfo.valid = false;
+      userInfo.role = '';
+    }
+
+    return userInfo;
   }
 
   public async newUserInfos(): Promise<IUserCredentialsDTO> {
     const jwt = this.getJWT();
 
-    var user : IUserCredentialsDTO = {
-      userName: "",
-      role: "",
-      email: "",
+    var user: IUserCredentialsDTO = {
+      userName: '',
+      role: '',
+      email: '',
     };
 
     if (jwt === '') {
@@ -99,7 +125,6 @@ export class GoogleApiCommunicationService {
 
     return user;
   }
-
 
   public cleanCookies() {
     //Clear all cookies in the browser
