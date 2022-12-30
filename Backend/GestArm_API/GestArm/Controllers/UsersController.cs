@@ -76,7 +76,7 @@ public class UserController : ControllerBase
                 role = user.Role;
             }
 
-            return new UserCredentialDTO(encrypterToken, payload.Name, payload.Email, newUser, role);
+            return new UserCredentialDTO(encrypterToken, payload.Name, payload.Email, newUser, role, user.Activated);
         }
         catch (Exception e)
         {
@@ -116,7 +116,7 @@ public class UserController : ControllerBase
                 role = user.Role;
             }
 
-            return new UserCredentialDTO(credential, payload.Name, payload.Email, newUser, role);
+            return new UserCredentialDTO(credential, payload.Name, payload.Email, newUser, role, user.Activated);
         }
         catch (Exception e)
         {
