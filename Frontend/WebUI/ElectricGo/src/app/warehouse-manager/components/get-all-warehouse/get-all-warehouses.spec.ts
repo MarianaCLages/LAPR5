@@ -6,6 +6,8 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {GetAllWarehouseService} from "../../../services/get-all-warehouse.service";
 import {AddWarehouseService} from "../../../services/add-warehouse.service";
 import {AddWarehouseComponent} from "../add-warehouse/add-warehouse.component";
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 describe('GetAllWarehouseComponent', () => {
   let component: GetAllWarehousesComponent;
@@ -14,6 +16,8 @@ describe('GetAllWarehouseComponent', () => {
   beforeEach(async () => {
 
     const getallWarehouseServiceSpy = jasmine.createSpyObj('GetAllWarehouseService', ['getAllWarehouse']);
+    let fakeGoogleApiService =  jasmine.createSpyObj('GoogleApiCommunicationService',['']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService',['']);
     getallWarehouseServiceSpy.getAllWarehouse.and.returnValue(Observable.create(
     ));
 
@@ -25,6 +29,8 @@ describe('GetAllWarehouseComponent', () => {
         provide: GetAllWarehouseService,
         useValue: getallWarehouseServiceSpy
       },
+      { provide: 'GoogleApiCommunicationService', useValue: fakeGoogleApiService },
+      { provide: 'RedirectPagesService', useValue: fakeRedirectService },
       ]
     })
       .compileComponents();
@@ -40,8 +46,10 @@ describe('GetAllWarehouseComponent', () => {
 
   it('should call the service get all Warehouse', () => {
     let fakeGetAllWarehouseService = TestBed.inject(GetAllWarehouseService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
 
-    component = new GetAllWarehousesComponent(fakeGetAllWarehouseService);
+    component = new GetAllWarehousesComponent(fakeGetAllWarehouseService, fakeGoogleApiService, fakeRedirectService);
 
     component.ngOnInit();
 

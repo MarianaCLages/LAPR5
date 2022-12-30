@@ -11,6 +11,8 @@ describe('AddTruckComponent', () => {
 
   beforeEach(async () => {
     const addTruckServiceSpy = jasmine.createSpyObj('AddTruckService', ['addTruck']);
+    let fakeGoogleApiService =  jasmine.createSpyObj('GoogleApiCommunicationService',['']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService',['']);
     addTruckServiceSpy.addTruck.and.returnValue(Promise.resolve(Observable.create([{
       "caractTruck": "eTruck05",
       "truckPlate": "AB-22-CD",
@@ -26,7 +28,9 @@ describe('AddTruckComponent', () => {
       providers: [{
         provide: AddTruckService,
         useValue: addTruckServiceSpy
-      } ]
+      },
+      { provide: 'GoogleApiCommunicationService', useValue: fakeGoogleApiService },
+        { provide: 'RedirectPagesService', useValue: fakeRedirectService }, ]
 
     })
     .compileComponents();
@@ -40,12 +44,14 @@ describe('AddTruckComponent', () => {
 
   it('should send an error message if an error occurs', function () {
     let fakeAddTruckService = jasmine.createSpyObj('AddTruckService', ['addTruck']);
+    let fakeGoogleApiService = jasmine.createSpyObj('GoogleApiCommunicationService', ['addTruck']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService', ['addTruck']);
     fakeAddTruckService.addTruck.and.returnValue(Observable.create(
       {
       error: "error"
   }
   ));
-  component = new AddTruckComponent(fakeAddTruckService);
+  component = new AddTruckComponent(fakeAddTruckService, fakeGoogleApiService, fakeRedirectService);
 
   component.caractTruck = "eTruck05";
   component.truckPlate = "AA-22-CD";
@@ -63,6 +69,8 @@ describe('AddTruckComponent', () => {
 
   it('should send the correct error message if an error occurs', function () {
     let fakeAddTruckService = jasmine.createSpyObj('AddTruckService', ['addTruck']);
+    let fakeGoogleApiService = jasmine.createSpyObj('GoogleApiCommunicationService', ['addTruck']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService', ['addTruck']);
     fakeAddTruckService.addTruck.and.returnValue(Observable.create(
       {
         data: {
@@ -75,7 +83,7 @@ describe('AddTruckComponent', () => {
       }
     ));
 
-    component = new AddTruckComponent(fakeAddTruckService);
+    component = new AddTruckComponent(fakeAddTruckService, fakeGoogleApiService, fakeRedirectService);
 
     component.caractTruck = "eTruck06";
     component.truckPlate = "AB-35-DD";

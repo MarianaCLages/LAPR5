@@ -4,6 +4,8 @@ import { CreateOrderComponent } from './create-order.component';
 import { CreateOrderService } from 'src/app/services/create-order.service';
 import { GetWarehouseServiceService } from 'src/app/services/get-warehouse-service.service';
 import {Observable} from "rxjs";
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 describe('CreateOrderComponent', () => {
   let component: CreateOrderComponent;
@@ -11,6 +13,8 @@ describe('CreateOrderComponent', () => {
 
   beforeEach(async () => {
     const createOrderServiceSpy = jasmine.createSpyObj('CreateOrderService',['createOrder']);
+    let fakeGoogleApiService =  jasmine.createSpyObj('GoogleApiCommunicationService',['']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService',['']);
     createOrderServiceSpy.createOrder.and.returnValue(Observable.create(
       /*
       "orderDate": "2021-05-20",
@@ -43,7 +47,9 @@ describe('CreateOrderComponent', () => {
         provide: CreateOrderService,
         useValue: createOrderServiceSpy
       },
-      { provide: GetWarehouseServiceService, useValue: getWarehouseServiceSpy }]
+      { provide: GetWarehouseServiceService, useValue: getWarehouseServiceSpy },
+      { provide: 'GoogleApiCommunicationService', useValue: fakeGoogleApiService },
+      { provide: 'RedirectPagesService', useValue: fakeRedirectService },]
     })
     .compileComponents();
 
@@ -58,7 +64,9 @@ describe('CreateOrderComponent', () => {
   it('should call the service on init', function () {
     let fakeCreateOrderService = TestBed.inject(CreateOrderService);
     let fakeWarehouseService = TestBed.inject(GetWarehouseServiceService);
-    component = new CreateOrderComponent(fakeCreateOrderService, fakeWarehouseService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
+    component = new CreateOrderComponent(fakeCreateOrderService, fakeWarehouseService, fakeGoogleApiService, fakeRedirectService);
 
     component.ngOnInit();
 
@@ -68,7 +76,9 @@ describe('CreateOrderComponent', () => {
   it('should call the service on createOrder', function () {
     let fakeCreateOrderService = TestBed.inject(CreateOrderService);
     let fakeWarehouseService = TestBed.inject(GetWarehouseServiceService);
-    component = new CreateOrderComponent(fakeCreateOrderService, fakeWarehouseService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
+    component = new CreateOrderComponent(fakeCreateOrderService, fakeWarehouseService, fakeGoogleApiService, fakeRedirectService);
 
     component.orderDate = new Date("2023-01-10");
     component.orderMass = 80;
@@ -98,6 +108,8 @@ describe('CreateOrderComponent', () => {
   it('should send an error message if an error occurs', function () {
     let fakeCreateOrderService = jasmine.createSpyObj('CreateOrderService',['createOrder']);
     let fakeWarehouseService = TestBed.inject(GetWarehouseServiceService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
     //fake CreateOrderService returns an error
     fakeCreateOrderService.createOrder.and.returnValue(Observable.create(
       {
@@ -105,7 +117,7 @@ describe('CreateOrderComponent', () => {
       }
     ));
 
-    component = new CreateOrderComponent(fakeCreateOrderService, fakeWarehouseService);
+    component = new CreateOrderComponent(fakeCreateOrderService, fakeWarehouseService, fakeGoogleApiService, fakeRedirectService);
 
     //set all required fields
     component.orderDate = new Date("2023-01-10");
@@ -138,6 +150,8 @@ describe('CreateOrderComponent', () => {
     //fake CreateOrderService returns a 404 error
     let fakeCreateOrderService = jasmine.createSpyObj('CreateOrderService',['createOrder']);
     let fakeWarehouseService = TestBed.inject(GetWarehouseServiceService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
 
     fakeCreateOrderService.createOrder.and.returnValue(Observable.create(
       {
@@ -151,7 +165,7 @@ describe('CreateOrderComponent', () => {
       }
     ));
 
-    component = new CreateOrderComponent(fakeCreateOrderService, fakeWarehouseService);
+    component = new CreateOrderComponent(fakeCreateOrderService, fakeWarehouseService, fakeGoogleApiService, fakeRedirectService);
 
     //set all required fields
     component.orderDate = new Date("2023-01-10");

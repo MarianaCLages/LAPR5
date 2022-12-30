@@ -6,6 +6,8 @@ import {HttpClient} from "@angular/common/http";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {CreatePathComponent} from "../../../log-manager/components/create-path/create-path.component";
 import {GetWarehouseServiceService} from "../../../services/get-warehouse-service.service";
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 
 
@@ -16,6 +18,8 @@ describe('AddWarehouseComponent', () => {
   beforeEach(async () => {
 
     const addWarehouseServiceSpy = jasmine.createSpyObj('AddWarehouseService', ['addWarehouse']);
+    let fakeGoogleApiService =  jasmine.createSpyObj('GoogleApiCommunicationService',['']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService',['']);
     addWarehouseServiceSpy.addWarehouse.and.returnValue(Observable.create(
     ));
 
@@ -26,6 +30,8 @@ describe('AddWarehouseComponent', () => {
         provide: AddWarehouseService,
         useValue: addWarehouseServiceSpy
       },
+      { provide: 'GoogleApiCommunicationService', useValue: fakeGoogleApiService },
+      { provide: 'RedirectPagesService', useValue: fakeRedirectService },
     ]
     })
       .compileComponents();
@@ -45,7 +51,10 @@ describe('AddWarehouseComponent', () => {
 
 
     let fakeAddWarehouseService = TestBed.inject(AddWarehouseService);
-    component = new AddWarehouseComponent(fakeAddWarehouseService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
+
+    component = new AddWarehouseComponent(fakeAddWarehouseService, fakeGoogleApiService, fakeRedirectService);
 
     //sets the values
     component.alphaNumericId = "C99";
@@ -72,6 +81,8 @@ describe('AddWarehouseComponent', () => {
 
 
     let fakeAddWarehouseService1 = jasmine.createSpyObj('AddWarehouseService', ['addWarehouse']);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
     //fake CreatePathServiceService returns an error
     fakeAddWarehouseService1.addWarehouse.and.returnValue(Observable.create(
       {
@@ -79,7 +90,7 @@ describe('AddWarehouseComponent', () => {
       }
     ));
 
-    component = new AddWarehouseComponent(fakeAddWarehouseService1);
+    component = new AddWarehouseComponent(fakeAddWarehouseService1, fakeGoogleApiService, fakeRedirectService);
 
     //sets the values
     component.alphaNumericId = "C99";
@@ -106,6 +117,8 @@ describe('AddWarehouseComponent', () => {
 
 
     let fakeAddWarehouseService1 = jasmine.createSpyObj('AddWarehouseService', ['addWarehouse']);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
     //fake CreatePathServiceService returns an error
     fakeAddWarehouseService1.addWarehouse.and.returnValue(Observable.create(
       {
@@ -119,7 +132,7 @@ describe('AddWarehouseComponent', () => {
       }
     ));
 
-    component = new AddWarehouseComponent(fakeAddWarehouseService1);
+    component = new AddWarehouseComponent(fakeAddWarehouseService1, fakeGoogleApiService, fakeRedirectService);
 
 
 

@@ -1,3 +1,4 @@
+/*
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ForbiddenPageComponent } from './forbidden-page.component';
@@ -21,3 +22,4 @@ describe('ForbiddenPageComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+*/

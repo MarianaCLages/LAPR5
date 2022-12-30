@@ -5,6 +5,8 @@ import { AddPackagingService } from 'src/app/services/add-packaging.service';
 import { GetOrdersService } from 'src/app/services/get-orders.service';
 import { GetTrucksService } from 'src/app/services/get-trucks.service';
 import { Observable } from 'rxjs';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 describe('AddPackagingComponent', () => {
   let component: AddPackagingComponent;
@@ -12,6 +14,8 @@ describe('AddPackagingComponent', () => {
 
   beforeEach(async () => {
     const addPackagingServiceSpy = jasmine.createSpyObj('AddPackagingService', ['addPackaging']);
+    let fakeGoogleApiService =  jasmine.createSpyObj('GoogleApiCommunicationService',['']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService',['']);
     addPackagingServiceSpy.addPackaging.and.returnValue(Observable.create(
     ));
 
@@ -44,7 +48,9 @@ describe('AddPackagingComponent', () => {
         useValue: addPackagingServiceSpy
       },
       { provide: GetTrucksService, useValue: getTruckServiceSpy },
-      { provide: GetOrdersService, useValue: getOrderServiceSpy }]
+      { provide: GetOrdersService, useValue: getOrderServiceSpy },
+      { provide: 'GoogleApiCommunicationService', useValue: fakeGoogleApiService },
+      { provide: 'RedirectPagesService', useValue: fakeRedirectService },]
     })
     .compileComponents();
 
@@ -57,7 +63,9 @@ describe('AddPackagingComponent', () => {
     let fakeAddPackagingService = TestBed.inject(AddPackagingService);
     let fakeGetTruckService = TestBed.inject(GetTrucksService);
     let fakeGetOrderService = TestBed.inject(GetOrdersService);
-    component = new AddPackagingComponent(fakeAddPackagingService, fakeGetTruckService, fakeGetOrderService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
+    component = new AddPackagingComponent(fakeAddPackagingService, fakeGetTruckService, fakeGoogleApiService, fakeRedirectService, fakeGetOrderService);
 
     component.ngOnInit();
 
@@ -69,7 +77,9 @@ describe('AddPackagingComponent', () => {
     let fakeAddPackagingService = TestBed.inject(AddPackagingService);
     let fakeGetTruckService = TestBed.inject(GetTrucksService);
     let fakeGetOrderService = TestBed.inject(GetOrdersService);
-    component = new AddPackagingComponent(fakeAddPackagingService, fakeGetTruckService, fakeGetOrderService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
+    component = new AddPackagingComponent(fakeAddPackagingService, fakeGetTruckService, fakeGoogleApiService, fakeRedirectService, fakeGetOrderService);
 
     //sets the values
     component.truckRef = "T01";
@@ -87,6 +97,8 @@ describe('AddPackagingComponent', () => {
     let fakeAddPackagingService = jasmine.createSpyObj('AddPackagingService', ['addPackaging']);
     let fakeGetTruckService = TestBed.inject(GetTrucksService);
     let fakeGetOrderService = TestBed.inject(GetOrdersService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
     //fake AddPackagingService returns an error
     fakeAddPackagingService.addPackaging.and.returnValue(Observable.create(
       {
@@ -94,7 +106,7 @@ describe('AddPackagingComponent', () => {
       }
     ));
 
-    component = new AddPackagingComponent(fakeAddPackagingService, fakeGetTruckService, fakeGetOrderService);
+    component = new AddPackagingComponent(fakeAddPackagingService, fakeGetTruckService, fakeGoogleApiService, fakeRedirectService, fakeGetOrderService);
 
     //sets the values
     component.truckRef = "T01";
@@ -114,6 +126,9 @@ describe('AddPackagingComponent', () => {
     let fakeAddPackagingService = jasmine.createSpyObj('AddPackagingService', ['addPackaging']);
     let fakeGetTruckService = TestBed.inject(GetTrucksService);
     let fakeGetOrderService = TestBed.inject(GetOrdersService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
+
 
     fakeAddPackagingService.addPackaging.and.returnValue(Observable.create(
       {
@@ -127,7 +142,7 @@ describe('AddPackagingComponent', () => {
       }
     ));
 
-    component = new AddPackagingComponent(fakeAddPackagingService, fakeGetTruckService, fakeGetOrderService);
+    component = new AddPackagingComponent(fakeAddPackagingService, fakeGetTruckService, fakeGoogleApiService, fakeRedirectService, fakeGetOrderService);
 
     //sets the values
     component.truckRef = "T01";

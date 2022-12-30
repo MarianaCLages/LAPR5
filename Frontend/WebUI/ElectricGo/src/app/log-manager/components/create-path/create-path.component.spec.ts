@@ -4,6 +4,8 @@ import { CreatePathComponent } from './create-path.component';
 import { CreatePathServiceService } from "../../../services/create-path-service.service";
 import { GetWarehouseServiceService } from "../../../services/get-warehouse-service.service";
 import { Observable } from "rxjs";
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 describe('CreatePathComponent', () => {
   let component: CreatePathComponent;
@@ -11,6 +13,8 @@ describe('CreatePathComponent', () => {
 
 
   beforeEach(async () => {
+    let fakeGoogleApiService =  jasmine.createSpyObj('GoogleApiCommunicationService',['']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService',['']);
     const createPathServiceSpy = jasmine.createSpyObj('CreatePathServiceService', ['createPath']);
     createPathServiceSpy.createPath.and.returnValue(Observable.create(
       /*{
@@ -43,7 +47,10 @@ describe('CreatePathComponent', () => {
         provide: CreatePathServiceService,
         useValue: createPathServiceSpy
       },
-      { provide: GetWarehouseServiceService, useValue: getWarehouseServiceSpy }]
+      { provide: GetWarehouseServiceService, useValue: getWarehouseServiceSpy },
+      { provide: 'GoogleApiCommunicationService', useValue: fakeGoogleApiService },
+      { provide: 'RedirectPagesService', useValue: fakeRedirectService },
+      ]
     })
       .compileComponents();
 
@@ -61,7 +68,9 @@ describe('CreatePathComponent', () => {
 
     let fakeWarehouseService = TestBed.inject(GetWarehouseServiceService);
     let fakeCreatePathService = TestBed.inject(CreatePathServiceService);
-    component = new CreatePathComponent(fakeCreatePathService, fakeWarehouseService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
+    component = new CreatePathComponent(fakeCreatePathService, fakeWarehouseService, fakeGoogleApiService, fakeRedirectService);
 
 
     component.ngOnInit();
@@ -74,7 +83,9 @@ describe('CreatePathComponent', () => {
 
     let fakeWarehouseService = TestBed.inject(GetWarehouseServiceService);
     let fakeCreatePathService = TestBed.inject(CreatePathServiceService);
-    component = new CreatePathComponent(fakeCreatePathService, fakeWarehouseService);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
+    component = new CreatePathComponent(fakeCreatePathService, fakeWarehouseService, fakeGoogleApiService, fakeRedirectService);
 
     //sets the values
     component.initialWarehouse = {
@@ -122,6 +133,8 @@ describe('CreatePathComponent', () => {
 
     let fakeWarehouseService = TestBed.inject(GetWarehouseServiceService);
     let fakeCreatePathService = jasmine.createSpyObj('CreatePathServiceService', ['createPath']);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
     //fake CreatePathServiceService returns an error
     fakeCreatePathService.createPath.and.returnValue(Observable.create(
       {
@@ -129,7 +142,7 @@ describe('CreatePathComponent', () => {
       }
     ));
 
-    component = new CreatePathComponent(fakeCreatePathService, fakeWarehouseService);
+    component = new CreatePathComponent(fakeCreatePathService, fakeWarehouseService, fakeGoogleApiService, fakeRedirectService);
 
     //sets the values
     component.initialWarehouse = {
@@ -178,6 +191,8 @@ describe('CreatePathComponent', () => {
     let fakeWarehouseService = TestBed.inject(GetWarehouseServiceService);
     // fake create path return an 404 error
     let fakeCreatePathService = jasmine.createSpyObj('CreatePathServiceService', ['createPath']);
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
     fakeCreatePathService.createPath.and.returnValue(Observable.create(
       {
         data: {
@@ -190,7 +205,7 @@ describe('CreatePathComponent', () => {
       }
     ));
 
-    component = new CreatePathComponent(fakeCreatePathService, fakeWarehouseService);
+    component = new CreatePathComponent(fakeCreatePathService, fakeWarehouseService, fakeGoogleApiService, fakeRedirectService);
 
     //sets the values
     component.initialWarehouse = {

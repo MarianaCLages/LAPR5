@@ -4,6 +4,8 @@ import { HttpClient, HttpHandler } from "@angular/common/http";
 import { GetPathsService } from 'src/app/services/get-paths.service';
 import IPathDTO from 'src/app/shared/pathDTO';
 import { ListPathsComponent } from './list-paths.component';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 describe('ListPathsComponent', () => {
   let component: ListPathsComponent;
@@ -12,6 +14,8 @@ describe('ListPathsComponent', () => {
   beforeEach(async () => {
 
     const listPathServiceFake = jasmine.createSpyObj('ListPathService', ['getPaths']);
+    let fakeGoogleApiService =  jasmine.createSpyObj('GoogleApiCommunicationService',['']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService',['']);
     listPathServiceFake.getPaths.and.returnValue(Promise.resolve(
       [
         {
@@ -35,7 +39,9 @@ describe('ListPathsComponent', () => {
       providers: [
         HttpClient,
         HttpHandler,
-        { provide: 'GetPathsService', useValue: listPathServiceFake }
+        { provide: 'GetPathsService', useValue: listPathServiceFake },
+        { provide: 'GoogleApiCommunicationService', useValue: fakeGoogleApiService },
+        { provide: 'RedirectPagesService', useValue: fakeRedirectService },
       ]
     })
       .compileComponents();
@@ -51,6 +57,8 @@ describe('ListPathsComponent', () => {
 
 
   it('should exist an array of paths after init', () => {
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
     let serviceFake = {
       getPaths: () => {
         //create an IPathDTO array
@@ -77,7 +85,7 @@ describe('ListPathsComponent', () => {
 
 
     } as GetPathsService;
-    component = new ListPathsComponent(serviceFake);
+    component = new ListPathsComponent(serviceFake, fakeGoogleApiService, fakeRedirectService);
 
     component.ngOnInit();
 

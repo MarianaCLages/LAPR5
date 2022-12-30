@@ -4,6 +4,8 @@ import { ListTruckComponent } from './list-truck.component';
 import {HttpClient, HttpHandler} from "@angular/common/http";
 import { GetTrucksService } from 'src/app/services/get-trucks.service';
 import { ITruckDTO } from 'src/app/shared/truckDTO';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 describe('ListTruckComponent', () => {
   let component: ListTruckComponent;
@@ -11,6 +13,8 @@ describe('ListTruckComponent', () => {
 
   beforeEach(async () => {
     const listTruckServiceFake = jasmine.createSpyObj('GetTrucksService', ['getTrucks']);
+    let fakeGoogleApiService =  jasmine.createSpyObj('GoogleApiCommunicationService',['']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService',['']);
     listTruckServiceFake.getTrucks.and.returnValue(Promise.resolve(
       [
         {
@@ -41,7 +45,9 @@ describe('ListTruckComponent', () => {
       providers: [
         HttpClient,
         HttpHandler,
-        { provide: 'GetTrucksService', useValue: listTruckServiceFake }
+        { provide: 'GetTrucksService', useValue: listTruckServiceFake },
+        { provide: 'GoogleApiCommunicationService', useValue: fakeGoogleApiService },
+        { provide: 'RedirectPagesService', useValue: fakeRedirectService },
       ]
     })
     .compileComponents();
@@ -56,6 +62,8 @@ describe('ListTruckComponent', () => {
   });
 
   it('should exist an array of trucks after init', () => {
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
     let serviceFake = {
       getTrucks: () => {
         //create an ITruckDTO array
@@ -85,7 +93,7 @@ describe('ListTruckComponent', () => {
       }
     } as GetTrucksService;
 
-    component = new ListTruckComponent(serviceFake);
+    component = new ListTruckComponent(serviceFake, fakeGoogleApiService, fakeRedirectService);
 
     component.ngOnInit();
 

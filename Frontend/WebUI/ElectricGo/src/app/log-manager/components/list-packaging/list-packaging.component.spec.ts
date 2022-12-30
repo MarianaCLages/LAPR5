@@ -4,6 +4,8 @@ import { ListPackagingComponent } from './list-packaging.component';
 import {HttpClient, HttpHandler} from "@angular/common/http";
 import { IPackagingDTO } from 'src/app/shared/packagingDTO';
 import { ListPackagingService } from '../../services/list-packaging.service';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
+import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 describe('ListPackagingComponent', () => {
   let component: ListPackagingComponent;
@@ -12,6 +14,8 @@ describe('ListPackagingComponent', () => {
   beforeEach(async () => {
 
     const listPackagingServiceFake = jasmine.createSpyObj('ListPackagingService', ['getPackaging']);
+    let fakeGoogleApiService =  jasmine.createSpyObj('GoogleApiCommunicationService',['']);
+    let fakeRedirectService = jasmine.createSpyObj('RedirectPagesService',['']);
     listPackagingServiceFake.getPackaging.and.returnValue(Promise.resolve(
       [
         {
@@ -28,7 +32,9 @@ describe('ListPackagingComponent', () => {
       providers: [
         HttpClient,
         HttpHandler,
-        { provide: 'GetPackagingService', useValue: listPackagingServiceFake }
+        { provide: 'GetPackagingService', useValue: listPackagingServiceFake },
+        { provide: 'GoogleApiCommunicationService', useValue: fakeGoogleApiService },
+        { provide: 'RedirectPagesService', useValue: fakeRedirectService },
       ]
     })
       .compileComponents();
@@ -39,6 +45,8 @@ describe('ListPackagingComponent', () => {
   });
 
   it('should exist an array of packaging after init', () => {
+    let fakeGoogleApiService = TestBed.inject(GoogleApiCommunicationService);
+    let fakeRedirectService = TestBed.inject(RedirectPagesService);
     let serviceFake = {
       getPackaging: () => {
         //create an IPathDTO array
@@ -55,7 +63,7 @@ describe('ListPackagingComponent', () => {
       }
 
     } as ListPackagingService;
-    component = new ListPackagingComponent(serviceFake);
+    component = new ListPackagingComponent(serviceFake, fakeGoogleApiService, fakeRedirectService);
     component.ngOnInit();
 
     fixture.whenStable().then(() => {
