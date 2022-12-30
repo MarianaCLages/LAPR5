@@ -24,6 +24,108 @@ public class UserController : ControllerBase
         Configuration = configuration;
     }
 
+    private async Task<UserDTO> ValidateJWTToken(string token)
+    {
+        if (token == null)
+            return null;
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(Configuration.GetConnectionString("Client_Secret"));
+
+        try
+        {
+            tokenHandler.ValidateToken(token, new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            }, out SecurityToken validatedToken);
+
+            var jwtToken = (JwtSecurityToken)validatedToken;
+            var email = jwtToken.Claims.First(x => x.Type == "email").Value;
+
+            var user = await _service.GetByEmail(email);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return user;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    [HttpPost("newUser")]
+    public async Task<ActionResult<UserCredentialDTO>> NewUserInformation([FromBody] string credential)
+    {
+        try
+        {
+            var settings = new GoogleJsonWebSignature.ValidationSettings
+            {
+                Audience = new List<string> { Configuration.GetConnectionString("Client_ID") }
+            };
+
+            var payload = await GoogleJsonWebSignature.ValidateAsync(credential, settings);
+
+            if (payload.Name == null || payload.Email == null)
+            {
+                return BadRequest(new { message = "Invalid Google Token!" });
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(Configuration.GetConnectionString("Client_Secret"));
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, payload.Name),
+                    new Claim(ClaimTypes.Email, payload.Email),
+                }),
+
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            var encrypterToken = tokenHandler.WriteToken(token);
+
+            var newUser = false;
+            var role = "User";
+
+            var activated = false;
+
+            var user = await _service.GetByEmail(payload.Email);
+
+            if (user == null)
+            {
+                newUser = true;
+                activated = true;
+
+            }
+            else
+            {
+                role = user.Role;
+                activated = user.Activated;
+            }
+
+            return new UserCredentialDTO(encrypterToken, payload.Name, payload.Email, newUser, role, activated);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new { message = e.Message });
+        }
+              
+    }
+
 
     // GET: api/User/loginWithGoogle
     [HttpPost("loginWithGoogle")]
@@ -55,28 +157,33 @@ public class UserController : ControllerBase
                 }),
 
                 Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha512Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
+
             var encrypterToken = tokenHandler.WriteToken(token);
 
             var newUser = false;
             var role = "User";
+
+            var activated = false;
 
             var user = await _service.GetByEmail(payload.Email);
 
             if (user == null)
             {
                 newUser = true;
+                activated = true;
+
             }
             else
             {
                 role = user.Role;
+                activated = user.Activated;
             }
 
-            return new UserCredentialDTO(encrypterToken, payload.Name, payload.Email, newUser, role, user.Activated);
+            return new UserCredentialDTO(encrypterToken, payload.Name, payload.Email, newUser, role, activated);
         }
         catch (Exception e)
         {
@@ -90,63 +197,54 @@ public class UserController : ControllerBase
     {
         try
         {
-            var settings = new GoogleJsonWebSignature.ValidationSettings
-            {
-                Audience = new List<string> { Configuration.GetConnectionString("Client_ID") }
-            };
-
-            var payload = await GoogleJsonWebSignature.ValidateAsync(credential, settings);
-
-            if (payload.Name == null || payload.Email == null)
-            {
-                return BadRequest(new { message = "Invalid Google Token!" });
-            }
+            var userDTO = await (ValidateJWTToken(credential));
 
             var newUser = false;
             var role = "User";
+            var email = "";
+            var name = "";
 
-            var user = await _service.GetByEmail(payload.Email);
+            var activated = false;
 
-            if (user == null)
+            if (userDTO == null)
             {
                 newUser = true;
+                activated = true;
+
+                var userTemp = LoginWithGoogle(credential);
+                
+                email = userTemp.Result.Value.Email;
+                name = userTemp.Result.Value.Name;
+                role = userTemp.Result.Value.Role;
+
             }
             else
             {
-                role = user.Role;
+                email = userDTO.Email;
+                name = userDTO.Name;
+                role = userDTO.Role;
+                activated = userDTO.Activated;
             }
 
-            return new UserCredentialDTO(credential, payload.Name, payload.Email, newUser, role, user.Activated);
+            return new UserCredentialDTO(credential, name, email, newUser, role, activated);
         }
         catch (Exception e)
         {
             return BadRequest(new { message = e.Message });
         }
     }
-    
+
     // Post: api/User/getProfileInfo
     [HttpPost("getProfileInfo")]
     public async Task<ActionResult<UserDTO>> GetProfileInfo([FromBody] string credential)
     {
         try
         {
-            var settings = new GoogleJsonWebSignature.ValidationSettings
-            {
-                Audience = new List<string> { Configuration.GetConnectionString("Client_ID") }
-            };
+            var userDTO = await (ValidateJWTToken(credential));
 
-            var payload = await GoogleJsonWebSignature.ValidateAsync(credential, settings);
-
-            if (payload.Name == null || payload.Email == null)
+            if (userDTO != null)
             {
-                return BadRequest(new { message = "Invalid Google Token!" });
-            }
-            
-            var user = await _service.GetByEmail(payload.Email);
-
-            if (user != null)
-            {
-                return user;
+                return userDTO;
             }
             return BadRequest(new { message = "No user with that email was found!" });
         }
@@ -229,19 +327,19 @@ public class UserController : ControllerBase
 
     // PUT: api/User/anonymize?email=XXXX
     [Route("~/api/[controller]/anonymize", Name = "AnonymizeUser")]
-    [HttpPut ("anonymize")]
+    [HttpPut("anonymize")]
     public async Task<ActionResult<UserDTO>> AnonymizeAsync(string email)
     {
         try
         {
             var user = await _service.GetByEmail(email);
-            
+
             if (user == null) return NotFound();
 
             var cat = await _service.AnonymizeUser(email);
 
             if (cat == null) return NotFound();
-            
+
             return Ok(cat);
         }
         catch (BusinessRuleValidationException ex)

@@ -21,9 +21,6 @@ public class UserName : ValueObject
 
         if (name.Length > 50)
             throw new BusinessRuleValidationException("Name needs to be lower than 50 characters");
-
-        if (name.Contains(" "))
-            throw new BusinessRuleValidationException("Name cannot contain spaces");
     }
 
     public string Name { get; }
