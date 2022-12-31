@@ -1,12 +1,7 @@
-using System.Data;
 using GestArm.Domain.Users;
 using GestArm.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using Google.Apis.Auth;
+using System.Web.Http;
 
 namespace GestArm.Controllers;
 
@@ -16,50 +11,16 @@ public class UserController : ControllerBase
 {
     private readonly IUserService _service;
 
+    private readonly IVerifyTokenService _serviceJWT;
+
     private IConfiguration Configuration { get; }
 
-    public UserController(IUserService service, IConfiguration configuration)
+    public UserController(IUserService service, IConfiguration configuration, IVerifyTokenService verifyTokenService)
     {
         _service = service;
         Configuration = configuration;
-    }
+        _serviceJWT = verifyTokenService;
 
-    private async Task<UserDTO> ValidateJWTToken(string token)
-    {
-        if (token == null)
-            return null;
-
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(Configuration.GetConnectionString("Client_Secret"));
-
-        try
-        {
-            tokenHandler.ValidateToken(token, new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateLifetime = true,
-                ClockSkew = TimeSpan.Zero
-            }, out SecurityToken validatedToken);
-
-            var jwtToken = (JwtSecurityToken)validatedToken;
-            var email = jwtToken.Claims.First(x => x.Type == "email").Value;
-
-            var user = await _service.GetByEmail(email);
-
-            if (user == null)
-            {
-                return null;
-            }
-
-            return user;
-        }
-        catch
-        {
-            return null;
-        }
     }
 
     [HttpPost("newUser")]
@@ -67,65 +28,20 @@ public class UserController : ControllerBase
     {
         try
         {
-            var settings = new GoogleJsonWebSignature.ValidationSettings
-            {
-                Audience = new List<string> { Configuration.GetConnectionString("Client_ID") }
-            };
+            var userCredentials = await _serviceJWT.VerifyGoogleTokenAndGenerateUserCredentials(credential);
 
-            var payload = await GoogleJsonWebSignature.ValidateAsync(credential, settings);
-
-            if (payload.Name == null || payload.Email == null)
+            if (userCredentials == null)
             {
                 return BadRequest(new { message = "Invalid Google Token!" });
             }
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(Configuration.GetConnectionString("Client_Secret"));
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, payload.Name),
-                    new Claim(ClaimTypes.Email, payload.Email),
-                }),
-
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            var encrypterToken = tokenHandler.WriteToken(token);
-
-            var newUser = false;
-            var role = "User";
-
-            var activated = false;
-
-            var user = await _service.GetByEmail(payload.Email);
-
-            if (user == null)
-            {
-                newUser = true;
-                activated = true;
-
-            }
-            else
-            {
-                role = user.Role;
-                activated = user.Activated;
-            }
-
-            return new UserCredentialDTO(encrypterToken, payload.Name, payload.Email, newUser, role, activated);
+            return userCredentials;
         }
         catch (Exception e)
         {
             return BadRequest(new { message = e.Message });
         }
-              
     }
-
 
     // GET: api/User/loginWithGoogle
     [HttpPost("loginWithGoogle")]
@@ -133,57 +49,14 @@ public class UserController : ControllerBase
     {
         try
         {
-            var settings = new GoogleJsonWebSignature.ValidationSettings
-            {
-                Audience = new List<string> { Configuration.GetConnectionString("Client_ID") }
-            };
+            var userCredentials = await _serviceJWT.VerifyGoogleTokenAndGenerateUserCredentials(credential);
 
-            var payload = await GoogleJsonWebSignature.ValidateAsync(credential, settings);
-
-            if (payload.Name == null || payload.Email == null)
+            if (userCredentials == null)
             {
                 return BadRequest(new { message = "Invalid Google Token!" });
             }
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(Configuration.GetConnectionString("Client_Secret"));
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, payload.Name),
-                    new Claim(ClaimTypes.Email, payload.Email),
-                }),
-
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            var encrypterToken = tokenHandler.WriteToken(token);
-
-            var newUser = false;
-            var role = "User";
-
-            var activated = false;
-
-            var user = await _service.GetByEmail(payload.Email);
-
-            if (user == null)
-            {
-                newUser = true;
-                activated = true;
-
-            }
-            else
-            {
-                role = user.Role;
-                activated = user.Activated;
-            }
-
-            return new UserCredentialDTO(encrypterToken, payload.Name, payload.Email, newUser, role, activated);
+            return userCredentials;
         }
         catch (Exception e)
         {
@@ -197,7 +70,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            var userDTO = await (ValidateJWTToken(credential));
+            var userDTO = await _serviceJWT.VerifyJWTToken(credential);
 
             var newUser = false;
             var role = "User";
@@ -208,14 +81,13 @@ public class UserController : ControllerBase
 
             if (userDTO == null)
             {
+                var userTemp = await _serviceJWT.VerifyGoogleTokenAndGenerateUserCredentials(credential);
+
                 newUser = true;
                 activated = true;
-
-                var userTemp = LoginWithGoogle(credential);
-                
-                email = userTemp.Result.Value.Email;
-                name = userTemp.Result.Value.Name;
-                role = userTemp.Result.Value.Role;
+                email = userTemp.Email;
+                name = userTemp.Name;
+                role = userTemp.Role;
 
             }
             else
@@ -240,7 +112,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            var userDTO = await (ValidateJWTToken(credential));
+            var userDTO = await (_serviceJWT.VerifyJWTToken(credential));
 
             if (userDTO != null)
             {
@@ -319,6 +191,10 @@ public class UserController : ControllerBase
         {
             return BadRequest(new { ex.Message });
         }
+        // catch (HttpResponseException e)
+        // {
+        //     return Forbid(e.Message);
+        // }
         catch (Exception)
         {
             return NotFound("Error on updating the user! (Please specify a valid date!)");

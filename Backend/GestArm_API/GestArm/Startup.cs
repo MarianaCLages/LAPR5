@@ -97,5 +97,7 @@ public class Startup
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IUserService, UserService>();
 
+        services.AddTransient<IVerifyTokenRepository, VerifyTokenRepository>();
+        services.AddTransient<IVerifyTokenService, VerifyTokenService>();
     }
 }
