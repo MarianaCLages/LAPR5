@@ -1,20 +1,31 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
-import { Observable, catchError, of } from "rxjs";
-
 import { ICreateWarehouseDTO } from '../shared/createWarehouseDTO';
 import { Injectable } from '@angular/core';
+import { AppConfigServiceService } from "./app-config-service.service";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AddWarehouseService{
-  baseURL = "https://localhost:5001/api/Warehouse";
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private appConfigService: AppConfigServiceService) {}
 
   addWarehouse(createWarehouse: ICreateWarehouseDTO){
-    return this.http.post<HttpResponse<any>>(this.baseURL, createWarehouse);
+    //set the http headers
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    //set the http options
+    const options = {
+      headers: headers
+    };
+
+    const createPathURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getAllWarehouses();
+
+    return this.http.post<HttpResponse<any>>(createPathURL, createWarehouse, options);
   }
 
 }

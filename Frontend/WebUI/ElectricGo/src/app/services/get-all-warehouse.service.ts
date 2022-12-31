@@ -1,47 +1,45 @@
 import { HttpClient } from '@angular/common/http';
-import {ICreateWarehouseDTO} from "../shared/createWarehouseDTO";
 import {ActivatedWarehouseDTO} from "../shared/ActivatedWarehouseDTO";
 import { Injectable } from '@angular/core';
-import IPathDTO from "../shared/pathDTO";
+import { AppConfigServiceService } from './app-config-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetAllWarehouseService {
-
-  baseURL = "http://localhost:5000/api/Warehouse";
-  designationURL = "http://localhost:5000/api/Warehouse/designation?designation=";
-
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient,  private appConfigService: AppConfigServiceService,) {}
 
   async getAllWarehouse(): Promise<any>{
+    const getAllWarehouseURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getAllWarehouses();
 
-
-    const data = await fetch(this.baseURL,{
+    const data = await fetch(getAllWarehouseURL,{
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Accept': 'application/json',
       }
     })
 
     const result = (await data.json());
 
-   return result;
+    return result;
   }
 
   getPathsByEndingWarehouse(designation: any): any {
     //set the http headers
-    const headers = {};
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
 
     //set the http options
     const options = {
       headers: headers
     };
 
-    return this.http.get<ActivatedWarehouseDTO[]>(this.designationURL + designation, options).toPromise();
+    const getPathsByEndindWarehouseURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getPathsWByEndingW();
+
+    return this.http.get<ActivatedWarehouseDTO[]>(getPathsByEndindWarehouseURL + designation, options).toPromise();
   }
 
 

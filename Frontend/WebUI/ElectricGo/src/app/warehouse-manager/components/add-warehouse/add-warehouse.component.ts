@@ -96,7 +96,6 @@ export class  AddWarehouseComponent implements  OnInit{
 
     let errorOrSuccess: any = this.addWarehouseService.addWarehouse(warehouseDTO);
     errorOrSuccess.subscribe((data: any) => {
-        console.log(data);
         this.success = true;
         this.successMessage = "Warehouse Created Successfully!";
         this.goBack();

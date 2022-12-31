@@ -1,20 +1,29 @@
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import { ICreateWarehouseDTO } from "../shared/createWarehouseDTO";
+import {HttpClient} from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from "rxjs";
 import {AppConfigServiceService} from "./app-config-service.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetWarehouseAlphaService {
-
-  baseURL= 'http://localhost:5000/api/Warehouse/byAlphaId?warehouseId=';
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,  private appConfigService: AppConfigServiceService ) {}
 
   getWarehouses(alphaId : any){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
 
-    return this.http.get<HttpResponse<any>>(this.baseURL + alphaId);
+    //set the http options
+    const options = {
+      headers: headers
+    };
+
+    const getAllWarehousesURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getWarehouseByAlphaId();
+
+
+    //return the http get request and fill the array with the data
+    return this.http.get<any>(getAllWarehousesURL + alphaId, options).toPromise();
+
   }
 }

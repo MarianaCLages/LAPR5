@@ -19,6 +19,8 @@ export class GetOrdersService {
   getOrders() : any {
     //set the http headers
     const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     };
 
     //set the http options
@@ -28,14 +30,14 @@ export class GetOrdersService {
 
     //get the orders from the backend
     this.orderAllURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getAllOrdersURL();
-
-    console.log(this.orderAllURL);
     return this.http.get<IOrderDTO>(this.orderAllURL, options).toPromise();
   }
 
   getOrdersByID(id: string) : any {
     //set the http headers
     const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     };
 
     //set the http options
@@ -43,7 +45,6 @@ export class GetOrdersService {
       headers: headers
     };
 
-    console.log(id);
     const strArr = id.split("/");
 
     //get the orders from the backend
@@ -54,6 +55,8 @@ export class GetOrdersService {
   getOrdersByDate(date: any) : any {
     //set the http headers
     const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     };
 
     //set the http options
@@ -68,13 +71,14 @@ export class GetOrdersService {
 
     //get the orders from the backend
     this.orderParamURL = this.appConfigService.getWarehouseURL() + "Order/byDate?data=" + correctDate;
-    console.log(this.orderParamURL);
     return this.http.get<IOrderDTO>(this.orderParamURL, options).toPromise();
   }
 
   getOrdersByWarehouseID(warehouseID: string) : any {
     //set the http headers
     const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     };
 
     //set the http options
@@ -83,14 +87,15 @@ export class GetOrdersService {
     };
 
     //get the orders from the backend
-    this.orderParamURL = this.appConfigService.getWarehouseURL() +  "Order/byWarehouseID?warehouseId=" + warehouseID;;
-    console.log(this.orderParamURL);
+    this.orderParamURL = this.appConfigService.getWarehouseURL() +  "Order/byWarehouseID?warehouseId=" + warehouseID;
     return this.http.get<IOrderDTO>(this.orderParamURL, options).toPromise();
   }
 
   getOrdersByDateAndWarehouseID(orderFilterDate : string,warehouseID: string) : any {
     //set the http headers
     const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     };
 
     //set the http options
@@ -108,7 +113,6 @@ export class GetOrdersService {
 
     //get the orders from the backend
     this.orderParamURL = this.appConfigService.getWarehouseURL() +  "Order/Filtering?warehouseId=" + warehouseID + "&data=" + correctDate;
-    console.log(this.orderParamURL);
     return this.http.get<IOrderDTO>(this.orderParamURL, options).toPromise();
   }
 }

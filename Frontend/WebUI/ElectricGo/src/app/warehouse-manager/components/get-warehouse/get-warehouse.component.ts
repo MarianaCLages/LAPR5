@@ -83,7 +83,7 @@ export class GetWarehouseComponent implements OnInit {
 
     let errorOrSuccess: any = this.getWarehouseServiceService.getWarehouses(this.alphaId);
 
-    errorOrSuccess.subscribe((data: any) => {
+    errorOrSuccess.then((data: any) => {
         this.success = true;
         this.successMessage = "Get Warehouse Successful!";
 
@@ -95,7 +95,6 @@ export class GetWarehouseComponent implements OnInit {
         this.warehouse.data = warehouseArray;
         this.warehouse.sort = this.sort;
         this.warehouse.paginator = this.paginator;
-        console.log(warehouseDTO);
 
       }, //transforms into a http error
       (error: any) => {

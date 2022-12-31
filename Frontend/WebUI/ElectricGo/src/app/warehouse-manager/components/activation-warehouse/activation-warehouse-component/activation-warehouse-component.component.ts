@@ -63,7 +63,6 @@ export class ActivationWarehouseComponentComponent {
 
     let errorOrSuccess = this.activationWarehouseService.desactivateWarehouse(this.alphaNumericId);
     errorOrSuccess.subscribe((data: any) => {
-        console.log(data);
         this.success = true;
         this.successMessage = "Warehouse Desactivated Successfully!";
         this.goBack();
@@ -95,7 +94,6 @@ export class ActivationWarehouseComponentComponent {
 
     let errorOrSuccess = this.activationWarehouseService.activateWarehouse(this.alphaNumericId);
     errorOrSuccess.subscribe((data: any) => {
-        console.log(data);
         this.success = true;
         this.successMessage = "Warehouse Activated Successfully!";
         this.goBack();

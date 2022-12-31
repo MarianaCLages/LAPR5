@@ -1,24 +1,47 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
-import { Observable, catchError, of } from "rxjs";
-
-import { ICreateWarehouseDTO } from '../shared/createWarehouseDTO';
 import { Injectable } from '@angular/core';
+import { AppConfigServiceService } from "./app-config-service.service";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ActivationWarehouseService{
-  desactivationBaseURL = "http://localhost:5000/api/Warehouse/delete?delete=";
-  activationBaseURL = "http://localhost:5000/api/Warehouse/activate?activate="
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private appConfigService: AppConfigServiceService) {}
 
   desactivateWarehouse(id: any){
-    return this.http.put<HttpResponse<any>>(this.desactivationBaseURL + id,null);
+     //set the http headers
+     const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    //set the http options
+    const options = {
+      headers: headers
+    };
+
+    const desactivateWarehousePath = this.appConfigService.getWarehouseURL() + this.appConfigService.getDesactivationWarehouse();
+
+    return this.http.put<HttpResponse<any>>(desactivateWarehousePath + id, options);
   }
 
   activateWarehouse(id: any){
-    return this.http.put<HttpResponse<any>>(this.activationBaseURL + id,null);
+
+     //set the http headers
+     const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    //set the http options
+    const options = {
+      headers: headers
+    };
+
+    const activateWarehousePath = this.appConfigService.getWarehouseURL() + this.appConfigService.getActivationWarehouse();
+
+    return this.http.put<HttpResponse<any>>(activateWarehousePath + id, options);
   }
 }

@@ -1,49 +1,56 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GetAllWarehouseService } from '../../../services/get-all-warehouse.service';
-import {MatTableDataSource} from "@angular/material/table";
-import IPackagingDTO from "../../../shared/pathDTO";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
-import IPathDTO from "../../../shared/pathDTO";
-import {ICreateWarehouseDTO} from "../../../shared/createWarehouseDTO";
-import {ActivatedWarehouseDTO} from "../../../shared/ActivatedWarehouseDTO";
+import { MatTableDataSource } from '@angular/material/table';
+import IPackagingDTO from '../../../shared/pathDTO';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import IPathDTO from '../../../shared/pathDTO';
+import { ICreateWarehouseDTO } from '../../../shared/createWarehouseDTO';
+import { ActivatedWarehouseDTO } from '../../../shared/ActivatedWarehouseDTO';
 import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
 import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
 @Component({
   selector: 'app-get-all-warehouses',
   templateUrl: './get-all-warehouses.component.html',
-  styleUrls: ['./get-all-warehouses.component.css']
+  styleUrls: ['./get-all-warehouses.component.css'],
 })
 export class GetAllWarehousesComponent implements OnInit {
-
-
   warehouses = new MatTableDataSource<ActivatedWarehouseDTO>();
   designation: any;
 
-  displayedColumns: string[] = ['alphaNumId', 'designation', 'street','postalCode','latitudeDegree','latitudeMinute','latitudeSecond','longitudeDregree','longitudeMinute','longitudeSecond','activated'];
-  options: string[] = [
-    'Warehouse by Designation',
-    'All Warehouses',
+  displayedColumns: string[] = [
+    'alphaNumId',
+    'designation',
+    'street',
+    'postalCode',
+    'latitudeDegree',
+    'latitudeMinute',
+    'latitudeSecond',
+    'longitudeDregree',
+    'longitudeMinute',
+    'longitudeSecond',
+    'activated',
   ];
+  options: string[] = ['Warehouse by Designation', 'All Warehouses'];
   filterOption: any;
   // @ts-ignore
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator ;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   // @ts-ignore
-  @ViewChild(MatSort, {static: true}) sort: MatSort ;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   //warehouses: any [] = [];
   warehousesAsString: any;
   errorMessage: any;
   error: boolean = false;
 
   public showPage: boolean = false;
-  public validRoles: string[] = ["WarehouseManager", 'Admin'];
+  public validRoles: string[] = ['WarehouseManager', 'Admin'];
 
   constructor(
     private getAllWarehouseService: GetAllWarehouseService,
     private service: GoogleApiCommunicationService,
     private redirect: RedirectPagesService
-  ) { }
+  ) {}
 
   ngAfterViewInit() {
     // @ts-ignore
@@ -70,43 +77,40 @@ export class GetAllWarehousesComponent implements OnInit {
 
     let dataWarehouse = await this.getAllWarehouseService.getAllWarehouse();
 
-
     this.warehouses.data = dataWarehouse;
     this.warehouses.sort = this.sort;
     this.warehouses.paginator = this.paginator;
-
-    console.log(dataWarehouse);
-      }
+  }
 
   async chooseFilter() {
     //clear the form
     console.log(this.filterOption);
     this.designation = null;
-    if (this.filterOption == "All Warehouses") {
+    if (this.filterOption == 'All Warehouses') {
       let dataWarehouse = await this.getAllWarehouseService.getAllWarehouse();
-
 
       this.warehouses.data = dataWarehouse;
       this.warehouses.sort = this.sort;
       this.warehouses.paginator = this.paginator;
 
-
-      console.log(dataWarehouse);}
+      console.log(dataWarehouse);
     }
+  }
 
   async getWarehouseByFiltrer() {
-
-    if (this.filterOption == "Warehouse by Designation") {
-      this.getAllWarehouseService.getPathsByEndingWarehouse(this.designation).then((data: ActivatedWarehouseDTO[]) => {
-          this.warehouses.data = data;
-        },
-        (error: any) => {
-          alert(error.error);
-        });
-    }
-    else if (this.filterOption == "All Warehouses") {
+    if (this.filterOption == 'Warehouse by Designation') {
+      this.getAllWarehouseService
+        .getPathsByEndingWarehouse(this.designation)
+        .then(
+          (data: ActivatedWarehouseDTO[]) => {
+            this.warehouses.data = data;
+          },
+          (error: any) => {
+            alert(error.error);
+          }
+        );
+    } else if (this.filterOption == 'All Warehouses') {
       let dataWarehouse = await this.getAllWarehouseService.getAllWarehouse();
-
 
       this.warehouses.data = dataWarehouse;
       this.warehouses.sort = this.sort;
@@ -117,5 +121,4 @@ export class GetAllWarehousesComponent implements OnInit {
   goBack() {
     window.history.back();
   }
-
 }
