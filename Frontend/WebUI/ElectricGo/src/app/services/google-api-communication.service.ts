@@ -3,17 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUserCredentialsDTO } from '../shared/userCredentialsDTO';
 import { IUserInfoDTO } from '../shared/userInfoDTO';
+import { AppConfigServiceService } from './app-config-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GoogleApiCommunicationService {
-  private path = 'http://localhost:5000/api/User/loginWithGoogle';
-  private getRolePath = 'http://localhost:5000/api/User/getUserRole';
-  private getProfilePath = 'http://localhost:5000/api/User/getProfileInfo';
-  private newUserInfoPath = "http://localhost:5000/api/User/newUser";
-
-  constructor(private httpClient: HttpClient) {}
+  
+  constructor(private httpClient: HttpClient,
+     private appConfigService: AppConfigServiceService) {}
 
   public signOutExternal = () => {
     localStorage.removeItem('token');
@@ -37,15 +35,21 @@ export class GoogleApiCommunicationService {
 
   LoginWithGoogle(credential: string): Observable<any> {
     const header = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.httpClient.post(this.path, JSON.stringify(credential), {
+
+    const loginUserWithGoogleURL = this.appConfigService.getWarehouseURL() + this.appConfigService.loginUserWithGoogle();
+
+    return this.httpClient.post(loginUserWithGoogleURL, JSON.stringify(credential), {
       headers: header,
     });
   }
 
   public getRole(): any {
     const header = new HttpHeaders().set('Content-Type', 'application/json');
+
+    const getUserRoleURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getUserByRole();
+
     return this.httpClient
-      .post(this.getRolePath, JSON.stringify(this.getJWT()), {
+      .post(getUserRoleURL, JSON.stringify(this.getJWT()), {
         headers: header,
       })
       .toPromise();
@@ -53,8 +57,11 @@ export class GoogleApiCommunicationService {
 
   public newUserInfo(): any {
     const header = new HttpHeaders().set('Content-Type', 'application/json');
+
+    const newUserInfoURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getNewUserInfo();
+
     return this.httpClient
-      .post(this.newUserInfoPath, JSON.stringify(this.getJWT()), {
+      .post(newUserInfoURL, JSON.stringify(this.getJWT()), {
         headers: header,
       })
       .toPromise();
@@ -62,8 +69,11 @@ export class GoogleApiCommunicationService {
 
   public getProfileInfo(): any {
     const header = new HttpHeaders().set('Content-Type', 'application/json');
+
+    const getProfileInfoURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getUserProfileInfo();
+
     return this.httpClient
-      .post(this.getProfilePath, JSON.stringify(this.getJWT()), {
+      .post(getProfileInfoURL, JSON.stringify(this.getJWT()), {
         headers: header,
       })
       .toPromise();

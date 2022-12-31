@@ -14,7 +14,10 @@ export class GetTrucksService {
 
   getTrucks() : any {
     //set the http headers
-    const headers = {};
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
 
     //set the http options
     const options = {
@@ -29,7 +32,10 @@ export class GetTrucksService {
 
   getTrucksByPlate(plate: string) : any {
     //set the http headers
-    const headers = {};
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
 
     //set the http options
     const options = {
@@ -43,7 +49,10 @@ export class GetTrucksService {
 
   getTrucksByCaract(caract: string) : any {
     //set the http headers
-    const headers = {};
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
 
     //set the http options
     const options = {
@@ -60,7 +69,7 @@ export class GetTrucksService {
     //set the http headers
     const headers = {
       'Content-Type': 'application/json',
-      Accept: 'application/json',
+      'Accept': 'application/json',
     };
 
     //set the http options

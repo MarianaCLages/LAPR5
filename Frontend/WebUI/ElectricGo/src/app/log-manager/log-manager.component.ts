@@ -48,7 +48,7 @@ export class LogManagerComponent implements OnInit {
 
   goTo(destination: any) {
     //changes the route to the destination
-    this.router.navigate([destination]).then(r => console.log(r));
+    this.router.navigate([destination]).then();
   }
 
 }

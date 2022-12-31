@@ -15,44 +15,48 @@ export class ListPackagingService {
     private http: HttpClient,
     private appConfigService: AppConfigServiceService
     ) {
-    
+
    }
 
     getPackaging(): any {
       const headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       };
+
       const options = {
         headers: headers
       };
 
       this.packaging = this.appConfigService.getLogisticsURL() + this.appConfigService.getPackagingURL();
       return this.http.get<IPackagingDTO>(this.packaging, options).toPromise();
-
   }
 
   getPackagingByTruck(truckRef: string): any {
-    const headers = {
+     const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     };
+
     const options = {
       headers: headers
     };
 
     this.packagingByParamURL = this.appConfigService.getLogisticsURL() + this.appConfigService.getPackagingByParamURL() + "/truck/" + truckRef;
-    console.log(this.packagingByParamURL);
     return this.http.get<IPackagingDTO>(this.packagingByParamURL, options).toPromise();
   }
-  
+
   getPackagingByOrder(orderRef: string): any {
     const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     };
+
     const options = {
       headers: headers
     };
 
     this.packagingByParamURL = this.appConfigService.getLogisticsURL() + this.appConfigService.getPackagingByParamURL() + "/order/"+ orderRef;
-
-    console.log(this.packagingByParamURL);
-    console.log(orderRef)
     return this.http.get<IPackagingDTO>(this.packagingByParamURL, options).toPromise();
   }
 

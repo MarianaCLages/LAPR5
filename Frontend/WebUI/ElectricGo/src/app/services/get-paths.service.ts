@@ -17,7 +17,10 @@ export class GetPathsService {
   }
   getPathsByBeginningAndEndingWarehouse(benWare: any, endWare: any): any {
     //set the http headers
-    const headers = {};
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
 
     //set the http options
     const options = {
@@ -28,7 +31,10 @@ export class GetPathsService {
   }
   getPathsByEndingWarehouse(endWare: any): any {
     //set the http headers
-    const headers = {};
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
 
     //set the http options
     const options = {
@@ -39,7 +45,10 @@ export class GetPathsService {
   }
   getPathsByBeginningWarehouse(benWare: any): any {
     //set the http headers
-    const headers = {};
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
 
     //set the http options
     const options = {
@@ -51,7 +60,10 @@ export class GetPathsService {
 
   getPaths(): any {
     //set the http headers
-    const headers = {};
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
 
     //set the http options
     const options = {

@@ -81,6 +81,8 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       this.redirect.logout();
     }
 
+    this.showPage = true;
+
   }
 
   async ngAfterViewInit() {
@@ -90,7 +92,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       this.paths = data;
 
       this.getWarehouseService.getWarehouses().then((data: ICreateWarehouseDTO[]) => {
-
         this.warehouses = data;
         this.saveConfFile(this.warehouses, this.paths);
         this.createScene();

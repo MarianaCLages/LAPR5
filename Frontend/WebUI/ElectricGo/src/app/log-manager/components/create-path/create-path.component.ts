@@ -93,7 +93,6 @@ export class CreatePathComponent implements OnInit {
 
     let errorOrSuccess: any = this.createPathService.createPath(pathDTO);
     errorOrSuccess.subscribe((data: any) => {
-      console.log(data);
       this.success = true;
       this.successMessage = "Path created successfully";
       this.goBack();

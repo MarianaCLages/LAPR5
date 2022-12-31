@@ -7,12 +7,6 @@ import {AppConfigServiceService} from "../../services/app-config-service.service
 })
 
 export class GetHeuristicService {
-  private path: any;
-  baseURL= 'http://localhost:3000/api/trucks/send_info/';
-  baseURLWeight = 'http://localhost:3000/api/trucks/get_heuristic_weight/';
-  baseURLWeightTime = 'http://localhost:3000/api/trucks/get_heuristic_weight_time/';
-  warehouseURL = 'http://localhost:5000/api/Warehouse'
-
   constructor(
     private http: HttpClient,
     private appConfigService: AppConfigServiceService
@@ -21,27 +15,28 @@ export class GetHeuristicService {
 
   public async getHeuristics(alphaId: any, date: any): Promise<any> {
 
+    const baseUrl = this.appConfigService.getLogisticsURL() + this.appConfigService.getHeuristicBaseURL();
+    const warehouseURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getAllWarehouses();
+
     let dateArray = date.split('/');
     let sendDate = dateArray[0] + '_' + dateArray[1] + '_' + dateArray[2];
 
-    const data = await fetch(this.baseURL + alphaId + '/' + sendDate, {
+    const data = await fetch(baseUrl + alphaId + '/' + sendDate, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Accept': 'application/json',
       },
     });
 
     const result = (await data.json());
-    console.log(result);
     let warehouseIDs = result.split(',');
 
-    console.log(warehouseIDs);
-    const data2 = await fetch(this.warehouseURL, {
+    const data2 = await fetch(warehouseURL, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Accept': 'application/json',
       },
     });
 
@@ -49,15 +44,12 @@ export class GetHeuristicService {
     let warehouseArray = [];
     let id;
 
-    console.log(result2);
     for(let j = 0; j < warehouseIDs.length; j++){
 
       for(let i = 0; i < result2.length; i++){
 
         id = + result2[i].alphaNumId.substring(1);
-        console.log(id);
         if(id == + warehouseIDs[j]){
-          console.log('OLA');
           warehouseArray.push(result2[i]);
         }
 
@@ -65,7 +57,6 @@ export class GetHeuristicService {
 
     }
 
-    console.log(warehouseArray);
     return warehouseArray;
 
   }
@@ -75,24 +66,25 @@ export class GetHeuristicService {
     let dateArray = date.split('/');
     let sendDate = dateArray[0] + '_' + dateArray[1] + '_' + dateArray[2];
 
-    const  data = await fetch(this.baseURLWeight + alphaId + '/' + sendDate, {
+    const baseURLWeight = this.appConfigService.getLogisticsURL() + this.appConfigService.getHeuristicWeight();
+    const warehouseURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getAllWarehouses();
+
+    const  data = await fetch(baseURLWeight + alphaId + '/' + sendDate, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Accept': 'application/json',
       }
     })
 
     const result = (await data.json());
-    console.log(result);
     let warehouseIDs = result.split(',');
 
-    console.log(warehouseIDs);
-    const data2 = await fetch(this.warehouseURL, {
+    const data2 = await fetch(warehouseURL, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Accept': 'application/json',
       },
     });
 
@@ -100,15 +92,10 @@ export class GetHeuristicService {
     let warehouseArray = [];
     let id;
 
-    console.log(result2);
     for(let j = 0; j < warehouseIDs.length; j++){
-
       for(let i = 0; i < result2.length; i++){
-
         id = + result2[i].alphaNumId.substring(1);
-        console.log(id);
         if(id == + warehouseIDs[j]){
-          console.log('OLA');
           warehouseArray.push(result2[i]);
         }
 
@@ -116,9 +103,7 @@ export class GetHeuristicService {
 
     }
 
-    console.log(warehouseArray);
     return warehouseArray;
-
   }
 
   public async getHeuristicByWeightTime(alphaId: any,date: any):Promise<any>{
@@ -126,24 +111,26 @@ export class GetHeuristicService {
     let dateArray = date.split('/');
     let sendDate = dateArray[0] + '_' + dateArray[1] + '_' + dateArray[2];
 
-    const  data = await fetch(this.baseURLWeightTime + alphaId + '/' + sendDate, {
+    const heuristicWeightTime = this.appConfigService.getLogisticsURL() + this.appConfigService.getHeuristicWeightTime();
+    const warehouseURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getAllWarehouses();
+
+
+    const  data = await fetch(heuristicWeightTime + alphaId + '/' + sendDate, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Accept': 'application/json',
       }
     })
 
     const result = (await data.json());
-    console.log(result);
     let warehouseIDs = result.split(',');
 
-    console.log(warehouseIDs);
-    const data2 = await fetch(this.warehouseURL, {
+    const data2 = await fetch(warehouseURL, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Accept': 'application/json',
       },
     });
 
@@ -151,15 +138,11 @@ export class GetHeuristicService {
     let warehouseArray = [];
     let id;
 
-    console.log(result2);
     for(let j = 0; j < warehouseIDs.length; j++){
 
       for(let i = 0; i < result2.length; i++){
-
         id = + result2[i].alphaNumId.substring(1);
-        console.log(id);
         if(id == + warehouseIDs[j]){
-          console.log('OLA');
           warehouseArray.push(result2[i]);
         }
 
@@ -167,7 +150,6 @@ export class GetHeuristicService {
 
     }
 
-    console.log(warehouseArray);
     return warehouseArray;
 
   }

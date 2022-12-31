@@ -13,7 +13,6 @@ export class AppConfigServiceService {
   }
 
   loadAppConfig() {
-    console.log("loadAppConfig");
     //loads the json file
     return this.http.get<any>('./assets/config.json').toPromise()
       .then(data => {
@@ -21,22 +20,48 @@ export class AppConfigServiceService {
       });
   }
 
+  // Warehouse API base URL
+
   getWarehouseURL() {
     return this.appConfig.warehouseURI;
   }
 
+  // Logistics API base URL
 
   getLogisticsURL() {
     return this.appConfig.logisticsURI;
   }
 
+  // Warehouses
+
+  getAllWarehouses() {
+    return this.appConfig.getAllWarehousesPath;
+  }
+
+  getWarehouseByAlphaId() {
+    return this.appConfig.getWarehouseByAlphaId;
+  }
+
+  getPathsWByEndingW() {
+    return this.appConfig.getPathsWByEndingW;
+  }
+
+  getDesactivationWarehouse() {
+    return this.appConfig.desactivationWarehouse;
+  }
+
+  getActivationWarehouse() {
+    return this.appConfig.activationWarehouse;
+  }
+
+  // Paths
+
   getPathURL() {
     return this.appConfig.getPathPath;
   }
 
+  // Packagings
 
-
-  // Packaging
   getPackagingURL() {
     return this.appConfig.getPackagingPath;
   }
@@ -44,6 +69,8 @@ export class AppConfigServiceService {
   getPackagingByParamURL() {
     return this.appConfig.getPackagingByParamPath;
   }
+
+  // Trucks
 
   getTruckByParamURL() {
     return this.appConfig.getTruckByParamPath;
@@ -53,8 +80,8 @@ export class AppConfigServiceService {
     return this.appConfig.getAllTrucks;
   }
 
-
   // Orders
+
   getOrderByParamURL() {
     return this.appConfig.getOrderByParamPath;
   }
@@ -63,6 +90,52 @@ export class AppConfigServiceService {
     return this.appConfig.getAllOrdersPath;
   }
 
+  // Users
 
+  getAllUsersURL() {
+    return this.appConfig.getAllUsersPath;
+  }
+
+  getUserByEmail() {
+    return this.appConfig.getUserByEmailPath;
+  }
+
+  getUserByRole() {
+    return this.appConfig.getUserByRolePath;
+  }
+
+  loginUserWithGoogle() {
+    return this.appConfig.loginUserWithGooglePath;
+  }
+
+  getNewUserInfo() {
+    return this.appConfig.getNewUserInfoPath;
+  }
+
+  getUserProfileInfo() {
+    return this.appConfig.getUserProfileInfoPath;
+  }
+
+  changeUserByEmail() {
+    return this.appConfig.changeUserByEmailPath;
+  }
+
+  softDeleteUserByEmail() {
+    return this.appConfig.softDeleteUserByEmail;
+  }
+
+  // Heuristics
+
+  getHeuristicBaseURL() {
+    return this.appConfig.heuristicBaseURL;
+  }
+
+  getHeuristicWeightTime() {
+    return this.appConfig.heuristicWeightTimeURL;
+  }
+
+  getHeuristicWeight() {
+    return this.appConfig.heuristicWeightURL;
+  }
 
 }

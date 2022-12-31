@@ -1,27 +1,30 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
-
 import { ICreatePackagingDTO } from '../shared/createPackagingDTO';
 import { Injectable } from '@angular/core';
+import { AppConfigServiceService } from './app-config-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddPackagingService {
-  baseUrl = 'http://localhost:3000/api/packagings';
-
-  constructor(private http: HttpClient) {}
+  
+  constructor(private http: HttpClient, private appConfigService: AppConfigServiceService) {}
 
   addPackaging(createPackage: ICreatePackagingDTO) {
-    const headers = { 'content-type': 'application/json' };
 
-    const body = JSON.stringify(createPackage);
+     //set the http headers
+     const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
 
-    const data = this.http.post<ICreatePackagingDTO>(this.baseUrl, body, {
-      headers: headers,
-      observe: 'response',
-    });
+    //set the http options
+    const options = {
+      headers: headers
+    };
 
-    return data;
+    const createPackagePath = this.appConfigService.getLogisticsURL() + this.appConfigService.getPackagingByParamURL();
+
+    return this.http.post<HttpResponse<any>>(createPackagePath, createPackage, options);
   }
 }

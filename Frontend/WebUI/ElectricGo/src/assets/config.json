@@ -1,10 +1,35 @@
 {
   "warehouseURI": "http://localhost:5000/api/",
   "logisticsURI": "http://localhost:3000/api/",
+
+  "getAllWarehousesPath": "Warehouse",
+  "getWarehouseByAlphaId": "Warehouse/byAlphaId?warehouseId=",
+  "getPathsWByEndingW": "Warehouse/designation?designation=",
+  "desactivationWarehouse": "Warehouse/delete?delete=",
+  "activationWarehouse": "Warehouse/activate?activate=",
+
   "getPathPath": "paths",
+
   "getPackagingPath": "packagings/all",
   "getPackagingByParamPath": "packagings",
+
   "getTruckByParamPath" : "trucks",
   "getAllTrucks" : "trucks/all",
-  "getAllOrdersPath" : "Order"
+
+  "getAllOrdersPath" : "Order",
+
+  "heuristicBaseURL": "/trucks/send_info/",
+  "heuristicWeightURL": "trucks/get_heuristic_weight/",
+  "heuristicWeightTimeURL": "trucks/get_heuristic_weight_time/",
+
+  "getUserByEmailPath": "User/byEmail?email=",
+  "changeUserByEmailPath": "User/adminByEmail?email=",
+  "getAllUsersPath": "User",
+  "getUserByRolePath": "User/getUserRole",
+  "loginUserWithGooglePath": "User/loginWithGoogle",
+  "getNewUserInfoPath": "User/newUser",
+  "getUserProfileInfoPath": "User/getProfileInfo",
+  "softDeleteUserByEmail": "User/byEmailDelete?email="
+
+
 }
