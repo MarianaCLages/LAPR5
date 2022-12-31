@@ -38,16 +38,9 @@ export class FleetManagerComponent implements OnInit {
     this.showPage = true;
   }
 
-  addTruck() {
-    //route to add truck menu
-    let opt = 'addTruck';
-    const url = 'FleetManager/' + opt;
-    this.router.navigate([url]).then((r) => console.log(r));
-  }
-
   goTo(destination: any) {
     //changes the route to the destination
-    this.router.navigate([destination]).then((r) => console.log(r));
+    this.router.navigate([destination]).then();
   }
 
   public logout() {

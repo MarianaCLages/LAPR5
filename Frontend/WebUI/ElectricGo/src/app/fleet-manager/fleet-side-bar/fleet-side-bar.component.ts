@@ -17,8 +17,6 @@ export class FleetSideBarComponent implements OnInit {
   }
 
   goToMenu(selection: string) {
-    console.log(selection);
-
     this.menuSelected.emit(selection);
   }
 }

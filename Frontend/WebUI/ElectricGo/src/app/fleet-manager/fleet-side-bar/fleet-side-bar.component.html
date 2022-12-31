@@ -1,24 +1,3 @@
-<!--<mat-sidenav-container
-  class="example-container" (backdropClick)="close('backdrop')">
-  <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
-    <p>
-      <button mat-button (click)="close('toggle button')">Toggle</button>
-    </p>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-    <p>
-      <button mat-button (click)="sidenav.open()">Open</button>
-    </p>
-    <p>Closed due to: {{reason}}</p>
-  </mat-sidenav-content>
-</mat-sidenav-container>-->
-
-<!--<mat-sidenav-container class="example-container" >
-  <mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>
-  <mat-sidenav-content>Main content</mat-sidenav-content>
-</mat-sidenav-container>-->
-
 <div class="example-container">
   <mat-toolbar color="primary" class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()">
@@ -30,18 +9,14 @@
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav>
       <mat-nav-list>
-        <button  (click)="goToMenu('FleetManager/addTruck')">Create a Truck</button>
+        <button mat-button (click)="goToMenu('FleetManager/addTruck')">Create a Truck</button>
+        <br>
+        <button mat-button (click)="goToMenu('FleetManager/profile')">My Profile</button>
       </mat-nav-list>
-      <mat-nav-list>
-        <button  (click)="goToMenu('FleetManager/getHeuristic')">Get Heuristic</button>
-      </mat-nav-list>
-      <mat-nav-list>
-        <button  (click)="goToMenu('FleetManager/getHeuristic')">Get Heuristic</button>
-      </mat-nav-list>
-      <br>
-      <button mat-button (click)="goToMenu('LogisticManager/profile')">Profile</button>
     </mat-sidenav>
-
+    <h1>Fleet Manager Menu</h1>
+    <br>
 
   </mat-sidenav-container>
+
 </div>
