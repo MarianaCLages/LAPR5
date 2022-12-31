@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpResponse} from "@angular/common/http";
-import {ITruckDTO} from "../../shared/truckDTO";
 import {ICreateUserDTO} from "../../shared/createUserDTO";
+import { AppConfigServiceService } from "src/app/services/app-config-service.service";
 
 
 @Injectable({
@@ -11,19 +11,37 @@ import {ICreateUserDTO} from "../../shared/createUserDTO";
 
 
 export class ChangeUserRoleService{
-
-  getUrl = 'http://localhost:5000/api/User/byEmail?email=';
-  changeUrl = 'http://localhost:5000/api/User/changeByEmail?email='
-
-  constructor(private http: HttpClient) {}
-
+  constructor(private http: HttpClient,
+    private appConfigService: AppConfigServiceService) {}
 
   checkUser(email : string){
-    return this.http.get<HttpResponse<any>>(this.getUrl + email);
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    const options = {
+      headers: headers
+    };
+
+    const checkUserPath = this.appConfigService.getWarehouseURL() + this.appConfigService.getUserByEmail();
+    return this.http.get<HttpResponse<any>>(checkUserPath + email, options);
+
   }
 
   changeUser(email : string,registerUser : ICreateUserDTO){
-    return this.http.put<HttpResponse<any>>(this.changeUrl + email, registerUser);
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    const options = {
+      headers: headers
+    };
+
+    const checkUserPath = this.appConfigService.getWarehouseURL() + this.appConfigService.changeUserByEmail();
+
+    return this.http.put<HttpResponse<any>>(checkUserPath + email, registerUser, options);
   }
 
 }

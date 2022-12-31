@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpResponse} from "@angular/common/http";
-import {ITruckDTO} from "../../shared/truckDTO";
 import {ICreateUserDTO} from "../../shared/createUserDTO";
+import { AppConfigServiceService } from "src/app/services/app-config-service.service";
 
 
 @Injectable({
@@ -10,34 +10,36 @@ import {ICreateUserDTO} from "../../shared/createUserDTO";
 
 export class ListUserService{
 
-  url = 'http://localhost:5000/api/User';
-
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private appConfigService: AppConfigServiceService) {}
 
   listUser(){
-    return this.http.get<HttpResponse<any>>(this.url).toPromise();
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    const options = {
+      headers: headers
+    };
+
+    const getAllUsersURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getAllUsersURL();
+    return this.http.get<HttpResponse<any>>(getAllUsersURL, options).toPromise();
   }
 
   desactivateUser(email: string) : any {
-    //set the http headers
     const headers = {
       'Content-Type': 'application/json',
-      Accept: 'application/json',
-
+      'Accept': 'application/json',
     };
 
-    //set the http options
     const options = {
-      headers: headers,
+      headers: headers
     };
 
-    //get the trucks from the backend
+    const softDeletePath = this.appConfigService.getWarehouseURL() + this.appConfigService.softDeleteUserByEmail();
 
-
-
-    let deleteURL = 'http://localhost:5000/api/User/byEmailDelete?email=' + email;
-    return this.http.delete<ICreateUserDTO>(deleteURL,options);
+    return this.http.delete<ICreateUserDTO>(softDeletePath + email ,options);
   }
 
 

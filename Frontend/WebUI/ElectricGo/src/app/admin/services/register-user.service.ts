@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {ICreateUserDTO} from "../../shared/createUserDTO";
+import { AppConfigServiceService } from "src/app/services/app-config-service.service";
 
 
 @Injectable({
@@ -8,12 +9,22 @@ import {ICreateUserDTO} from "../../shared/createUserDTO";
 })
 
 export class RegisterUserService {
-
-  url = 'http://localhost:5000/api/User';
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private appConfigService: AppConfigServiceService) {}
 
   registerUser(registerUser : ICreateUserDTO){
-    return this.http.post<HttpResponse<any>>(this.url, registerUser);
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    const options = {
+      headers: headers
+    };
+
+    const registerUserURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getAllUsersURL();
+
+    return this.http.post<HttpResponse<any>>(registerUserURL, registerUser, options);
   }
 }

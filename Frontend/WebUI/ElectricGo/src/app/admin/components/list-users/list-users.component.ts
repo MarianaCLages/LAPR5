@@ -75,7 +75,6 @@ export class ListUsersComponent implements OnInit {
     this.error = false;
 
     this.listUserSerive.listUser().then((data: any) => {
-      console.log(data);
       this.users.data = data;
     });
     this.users.paginator = this.paginator;

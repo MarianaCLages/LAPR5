@@ -70,7 +70,6 @@ export class RegisterUserComponent implements OnInit{
     let errorOrSuccess: any = this.registerUserService.registerUser(userDTO);
 
     errorOrSuccess.subscribe((data: any) => {
-        console.log(data);
         this.success = true;
         this.successMessage = "User Created Successfully!";
         this.goBack();

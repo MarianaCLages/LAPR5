@@ -1,10 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {ListUserService} from "../../services/list-user.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {ICreateUserDTO} from "../../../shared/createUserDTO";
 import {ChangeUserRoleService} from "../../services/change-user-role.service";
-import {ActivatedWarehouseDTO} from "../../../shared/ActivatedWarehouseDTO";
-import {DatePipe, formatDate} from '@angular/common'
 import { GoogleApiCommunicationService } from "src/app/services/google-api-communication.service";
 import { RedirectPagesService } from "src/app/services/redirect-pages.service";
 
@@ -15,8 +12,6 @@ import { RedirectPagesService } from "src/app/services/redirect-pages.service";
 })
 
 export class ChangeUserRoleComponent implements OnInit{
-
-
   email : any;
   role : any;
   error: boolean = false;
@@ -32,7 +27,6 @@ export class ChangeUserRoleComponent implements OnInit{
   displayedColumns: string[] = [
     'email',
     'role'
-
   ];
 
   constructor(
@@ -40,8 +34,6 @@ export class ChangeUserRoleComponent implements OnInit{
     private service: GoogleApiCommunicationService,
     private redirect: RedirectPagesService
   ) {}
-
-
 
   async ngOnInit(): Promise<void> {
     this.showPage = false;
@@ -64,13 +56,10 @@ export class ChangeUserRoleComponent implements OnInit{
   }
 
   changeUserRole() : any{
-
-
     let userDTO : any;
 
     let errorOrSuccess: any = this.changeUserRoleService.checkUser(this.email);
     errorOrSuccess.subscribe((data : any) =>{
-
         let date = data.birthDate.split(' ')
 
         userDTO = {
@@ -81,12 +70,9 @@ export class ChangeUserRoleComponent implements OnInit{
           birthDate : date[0]
       }
 
-      console.log(userDTO)
       let errorOrSuccess2: any = this.changeUserRoleService.changeUser(userDTO.email,userDTO);
       errorOrSuccess2.subscribe((data2: any) => {
-
-
-
+        this.goBack();
         }, //transforms into a http error
         (error: any) => {
           this.error = true;
@@ -105,18 +91,10 @@ export class ChangeUserRoleComponent implements OnInit{
 
     })
 
-
-
-
   }
 
   goBack() {
     window.history.back();
   }
-
-
-
-
-
 
 }
