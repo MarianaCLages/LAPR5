@@ -1,4 +1,7 @@
 namespace GestArm.Domain.Users;
+
+using System.Net;
+using System.Web.Http;
 using GestArm.Domain.Shared;
 
 public class UserService : IUserService
@@ -73,37 +76,52 @@ public class UserService : IUserService
         return new UserDTO(user.Id, user.Name.Name, user.Role.Role, user.Email.Email, user.PhoneNumber.PhoneNumber, user.Activated.Activated, user.BirthDate.BirthDate.ToString());
     }
 
-     public async Task<UserDTO> AdminUpdateAsync(UserDTO dto, string email)
+    public async Task<UserDTO> AdminUpdateAsync(UserDTO dto, string email)
     {
         var user = await _repository.GetByEmailAsync(new UserEmail(email));
 
-        if (user == null) return null;
+        // if (user.Role.Role != "Admin")
+        // {
+        //     var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = "You don't have permisson to access this resource!" };
+        //     throw new HttpResponseException(msg);   
+        // }
+        // else
+        // {
+            if (user == null) return null;
 
-        if (dto.BirthDate != null)
-        {
-            user.ChangeBirthDate(new UserBirthDate(DateTime.Parse(dto.BirthDate)));
-        }
-        if (dto.Email != null)
-        {
-            user.ChangeEmail(new UserEmail(dto.Email));
-        }
-        if (dto.Name != null)
-        {
-            user.ChangeName(new UserName(dto.Name));
-        }
-        if (dto.PhoneNumber != null)
-        {
-            user.ChangePhoneNumber(new UserPhoneNumber(dto.PhoneNumber));
-        }
+            if (dto.BirthDate != null)
+            {
+                user.ChangeBirthDate(new UserBirthDate(DateTime.Parse(dto.BirthDate)));
+            }
+            if (dto.Email != null)
+            {
+                user.ChangeEmail(new UserEmail(dto.Email));
+            }
+            if (dto.Name != null)
+            {
+                user.ChangeName(new UserName(dto.Name));
+            }
+            if (dto.PhoneNumber != null)
+            {
+                user.ChangePhoneNumber(new UserPhoneNumber(dto.PhoneNumber));
+            }
 
-        if(dto.Role != null)
-        {
-            user.ChangeRole(new UserRole(dto.Role));
-        }
+            if (dto.Role != null)
+            {
+                user.ChangeRole(new UserRole(dto.Role));
+            }
 
-        await _repository.UpdateAsync(user);
+            if (dto.Activated != user.Activated.Activated)
+            {
+                user.ChangeActivated(new UserActivate(dto.Activated));
+            }
 
-        return new UserDTO(user.Id, user.Name.Name, user.Role.Role, user.Email.Email, user.PhoneNumber.PhoneNumber, user.Activated.Activated, user.BirthDate.BirthDate.ToString());
+            await _repository.UpdateAsync(user);
+
+            return new UserDTO(user.Id, user.Name.Name, user.Role.Role, user.Email.Email, user.PhoneNumber.PhoneNumber, user.Activated.Activated, user.BirthDate.BirthDate.ToString());
+
+        // }
+
     }
 
 
