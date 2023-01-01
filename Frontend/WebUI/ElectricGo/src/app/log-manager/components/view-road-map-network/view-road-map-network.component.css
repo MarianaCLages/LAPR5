@@ -13,9 +13,18 @@ overflow: hidden
 .backBtn {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 300px;
   margin: 10px;
-  margin-left: 900px;
+  margin-right: 20px;
   border-style: solid;
   border-color: white;
+}
+
+#truck_movement_type{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 300px;
+  margin: 10px;
+  margin-right: 20px;
 }

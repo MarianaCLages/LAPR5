@@ -9,7 +9,6 @@ import IPathDTO from 'src/app/shared/pathDTO';
 import { IPathViewRepresentation } from 'src/app/shared/pathViewRepresentation';
 import { IWarehouseViewRepresentation } from 'src/app/shared/warehouseViewRepresentation';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import {PlatformLocation} from "@angular/common";
 import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
 import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
@@ -47,6 +46,13 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private scene!: THREE.Scene;
   private roadMap!: THREE.Group;
   private controls!: OrbitControls;
+
+  //Audio
+  private listener = new THREE.AudioListener();
+  private audioLoader = new THREE.AudioLoader();
+  private sound = new THREE.Audio( this.listener );
+
+  private soundVolume = 0.5;
 
   public showPage: boolean = false;
 
@@ -96,9 +102,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         this.saveConfFile(this.warehouses, this.paths);
         this.createScene();
         this.startRenderingLoop();
-
-
-
       });
     });
   }
@@ -328,7 +331,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         pathsMap.set(end.id, element.thickness);
       }
 
-
       //WAREHOUSE LOCATIONS
 
       let incomingEdgeEndXW = end.x - 0.1 * difX;
@@ -338,7 +340,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       let incomingEdgeStartXW = start.x + 0.1 * difX;
       let incomingEdgeStartYW = start.y + 0.1 * difY;
       let incomingEdgeStartZW = start.z;
-
 
       if (arrPos.has(start.id)) {
         for (const key of arrPos.keys()) {
@@ -549,7 +550,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     this.scene.background = texture;
     this.createMap();
 
-    // lights
+    // Lights
+
+    //Directional Light
     const dirLight1 = new THREE.DirectionalLight(0xffffff);
     dirLight1.position.set(this.fieldOfView, this.nearClippingPlane, this.farClippingPlane);
     this.scene.add(dirLight1);
@@ -557,7 +560,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     const dirLight2 = new THREE.DirectionalLight(0x002288);
     dirLight2.position.set(-this.fieldOfView, -this.nearClippingPlane, -this.farClippingPlane);
     this.scene.add(dirLight2);
-    const ambientLight = new THREE.AmbientLight(0x404040, 2);
+
+    //Ambient Light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2);
     this.scene.add(ambientLight);
 
     //Rotate the scene to a correct angle
@@ -594,36 +599,65 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     this.controls.enableDamping = true;
 
     this.moovSpeed = 0.001
-    var changeMovement = 0;
     let component: ViewRoadMapNetworkComponent = this;
-
-
-
 
     window.addEventListener('popstate', event => this.destroyGUI())
 
-
+    //Starting movement of the truck type
     var params = {
+      truckMovement : 'Manual',
+      Choose_Truck: [this.truck],
+      Number_Of_Trucks: 1,
+      Music: false,
+      Music_Volume: 50
 
-      truckMovement : 'Manual'
     };
 
-
+    // var customContainer = $('.moveGUI').append($(this.gui.domElement));
+    this.gui.domElement.id = 'truck_movement_type';
     this.gui.width = 300;
 
-    this.gui.add(params,'truckMovement',['Manual','Automatic']);
+    // GUI controls
+    const truckFolder = this.gui.addFolder('Truck Information');
+    truckFolder.add(params,'truckMovement',['Manual','Automatic']);
+    truckFolder.open();
 
+    const manualTruckMovementFolder = this.gui.addFolder('Manual Truck Movement');
+    manualTruckMovementFolder.add(params,'Choose_Truck', [this.truck]);
+    manualTruckMovementFolder.open();
+
+    const automaticTruckMovementFolder = this.gui.addFolder('Automatic Truck Movement');
+    automaticTruckMovementFolder.add(params,'Choose_Truck', [this.truck]);
+    automaticTruckMovementFolder.add(params,'Number_Of_Trucks').min(0).max(10).step(1);
+    automaticTruckMovementFolder.open();
+
+    const geralFolder = this.gui.addFolder('Geral');
+    geralFolder.add(params, 'Music').onChange(function(value) {
+      if (value) {
+        component.startBackgroundMusic(component.soundVolume);
+      }
+      else {
+        component.stopBackgroundMusic();
+      }
+    });
+
+    geralFolder.add(params,'Music_Volume').min(0).max(100).step(1).onChange(function(value) {
+      component.sound.setVolume(value * 0.01);
+    });
+
+    geralFolder.open();
     this.gui.open();
 
+    //this.startBackgroundMusic();
 
     (function render() {
       requestAnimationFrame(render);
       component.controls.update();
 
-      if (params.truckMovement == 'Automatic') {
-        component.updateTruckPosition()
+      if (params.truckMovement == 'Manual') {
+        component.updateTruckPosition();
       }
-      else if (params.truckMovement == 'Manual'){
+      else if (params.truckMovement == 'Automatic'){
         component.updateAutomaticPosition();
       }
 
@@ -637,22 +671,39 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   }
 
+  private startBackgroundMusic(soundVolume : number) {
+    let soundV = this.sound;
 
+    this.audioLoader.load( '../../../../assets/roadMap_music/Lil Nas X, Jack Harlow - INDUSTRY BABY (Official Video).mp3', function( buffer ) {
+      soundV.setBuffer( buffer );
+      soundV.setLoop( true );
+      soundV.setVolume(soundVolume);
+      soundV.play();
+    });
+
+  }
+
+  private stopBackgroundMusic() {
+    this.sound.stop();
+  }
+
+  private changeMusicVolume(volume: number) {
+    this.sound.setVolume(volume);
+  }
 
   private updateAutomaticPosition(){
-
     const x = this.truck.position.x;
     this.truck.position.x = x + this.moovSpeed;
   }
 
   private updateTruckPosition() {
-
-
     document.addEventListener("keydown",event => this.myFunc(event));
+
+    //Atualizar para mais tarde a camera frontal estar dentro do camião e fazer 1º pessoa e 3º pessoa
+    //this.camera.position.set(this.matosinhosX, this.matosinhosY, this.matosinhosZ);
   }
 
   private myFunc(evt : KeyboardEvent){
-
     if(evt.which == 87){
       this.truck.position.y += 0.0001;
     }
@@ -666,6 +717,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       this.truck.position.x += 0.0001;
     }
   }
+
   private transformToCartesian(latitude: any, longitude: any) {
     let x = 6371 * Math.cos(latitude) * Math.cos(longitude);
     let y = 6371 * Math.sin(latitude) * Math.cos(longitude);
@@ -674,22 +726,13 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     return [x, y, z];
   }
 
-
   goBack() {
     this.gui.destroy()
     window.history.back();
-
   }
 
   destroyGUI(){
     this.gui.destroy()
   }
 
-
 }
-
-
-
-
-
-
