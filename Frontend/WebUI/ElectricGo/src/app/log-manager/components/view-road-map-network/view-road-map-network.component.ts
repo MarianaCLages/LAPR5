@@ -11,6 +11,8 @@ import { IWarehouseViewRepresentation } from 'src/app/shared/warehouseViewRepres
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
 import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
+import { GetTrucksService } from 'src/app/services/get-trucks.service';
+import { ITruckViewRepresentation } from 'src/app/shared/truckViewRepresentation';
 
 @Component({
   selector: 'app-view-road-map-network',
@@ -29,6 +31,8 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   private warehouses: any;
   private paths: any;
+  private trucks: any;
+
   private info: any;
   private truck: any;
   private matosinhosX: any;
@@ -55,6 +59,12 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private soundVolume = 0.5;
 
   public showPage: boolean = false;
+  private trucksInfo: any[] = [];
+
+  private availableTrucks : any[] = [];
+
+  //Number of trucks
+  private truckNumber : number = 1;
 
   private validRoles: string[] = ['LogisticManager', 'Admin'];
 
@@ -62,7 +72,8 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     private getWarehouseService: GetWarehouseServiceService,
     private getPathService: GetPathsService,
     private service: GoogleApiCommunicationService,
-    private redirect: RedirectPagesService
+    private redirect: RedirectPagesService,
+    private getTrucksService: GetTrucksService,
   ) {
   }
 
@@ -98,15 +109,22 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       this.paths = data;
 
       this.getWarehouseService.getWarehouses().then((data: ICreateWarehouseDTO[]) => {
+
         this.warehouses = data;
-        this.saveConfFile(this.warehouses, this.paths);
-        this.createScene();
-        this.startRenderingLoop();
+
+        this.getTrucksService.getTrucks().then((data: any) => {
+
+          this.trucks = data;
+
+          this.saveConfFile(this.warehouses, this.paths, this.trucks);
+          this.createScene();
+          this.startRenderingLoop();
+        });
       });
     });
   }
 
-  private saveConfFile(warehouses: ICreateWarehouseDTO[], paths: any) {
+  private saveConfFile(warehouses: ICreateWarehouseDTO[], paths: any, trucks: any) {
     //transform warehouse to warehouseViewRepresentation
     let warehouseViewRepresentation: IWarehouseViewRepresentation[] = [];
 
@@ -154,11 +172,26 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       pathRepresentation.push(pathRepresentationAux);
     });
 
+    let truckRepresentation: ITruckViewRepresentation[] = [];
+
+    trucks.forEach((truck: any) => {
+      //create the truckRepresentation
+      let truckRepresentationAux: ITruckViewRepresentation = {
+        truckCaract: truck.caractTruck,
+        truckPlate: truck.truckPlate,
+        truckActive: truck.activeTruck
+      };
+
+      truckRepresentation.push(truckRepresentationAux);
+    });
+
     //create an example json file
     this.info = {
       warehouses: warehouseViewRepresentation,
       paths: pathRepresentation,
+      trucks: truckRepresentation
     };
+
   }
 
   private convertDMSToDD(latitudeDegrees: number, latitudeMinutes: number, latitudeSeconds: number) {
@@ -421,7 +454,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
         this.roadMap.add(incomingRoad);
 
-
       } else {
 
         let differenceDistance = Math.sqrt(
@@ -471,6 +503,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
       }
 
+      //Get Matosinhos Coordinates
       if(element.id == "C05") {
         this.matosinhosX = element.x;
         this.matosinhosY = element.y;
@@ -508,6 +541,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         gltf.scene.position.set(posX, posY, posZ + 0.4);
         gltf.scene.rotation.x = Math.PI / 2.0;
         gltf.scene.rotation.y = Math.PI / 2.0;
+        gltf.scene.name = this.trucksInfo[0];
         this.roadMap.add(gltf.scene);
       }
     );
@@ -548,6 +582,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     );
 
     this.scene.background = texture;
+    this.generateTruckInfoArr();
     this.createMap();
 
     // Lights
@@ -604,31 +639,65 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     window.addEventListener('popstate', event => this.destroyGUI())
 
     //Starting movement of the truck type
+
+    //Get the first truck into the array
+    this.availableTrucks.push(this.trucksInfo[0])
+
     var params = {
       truckMovement : 'Manual',
-      Choose_Truck: [this.truck],
+      Choose_Truck: this.availableTrucks,
       Number_Of_Trucks: 1,
       Music: false,
       Music_Volume: 50
-
     };
 
-    // var customContainer = $('.moveGUI').append($(this.gui.domElement));
     this.gui.domElement.id = 'truck_movement_type';
     this.gui.width = 300;
 
     // GUI controls
     const truckFolder = this.gui.addFolder('Truck Information');
     truckFolder.add(params,'truckMovement',['Manual','Automatic']);
+    truckFolder.add(params,'Choose_Truck', this.trucksInfo).onChange(function(value) {
+
+      for(var i : number = 0 ; i < component.trucksInfo.length ; i++) {
+        if(component.trucksInfo[i] == value) {
+           component.truck = component.scene.getObjectByName(component.trucksInfo[i]);
+        }
+      }
+
+    });
+
     truckFolder.open();
 
-    const manualTruckMovementFolder = this.gui.addFolder('Manual Truck Movement');
-    manualTruckMovementFolder.add(params,'Choose_Truck', [this.truck]);
-    manualTruckMovementFolder.open();
+    // const manualTruckMovementFolder = this.gui.addFolder('Manual Truck Movement');
+    // manualTruckMovementFolder.add(params,'Choose_Truck', params.Choose_Truck);
+    // manualTruckMovementFolder.open();
 
     const automaticTruckMovementFolder = this.gui.addFolder('Automatic Truck Movement');
-    automaticTruckMovementFolder.add(params,'Choose_Truck', [this.truck]);
-    automaticTruckMovementFolder.add(params,'Number_Of_Trucks').min(0).max(10).step(1);
+
+    let selectedObject : any;
+
+    automaticTruckMovementFolder.add(params,'Number_Of_Trucks').min(1).max(component.trucksInfo.length).step(1).onChange(function(value) {
+      if(value > component.truckNumber) {
+        for(var i = component.truckNumber ; i < value; i++) {
+          const truckClone = component.truck.clone();
+          truckClone.position.set(component.matosinhosX, component.matosinhosY, component.matosinhosZ + 0.01);
+          truckClone.name = component.trucksInfo[i];
+          component.scene.add(truckClone);
+        }
+      }
+
+       if(value < component.truckNumber) {
+        for(var i : number = value ; i < component.truckNumber ; i++) {
+          selectedObject = component.scene.getObjectByName(component.trucksInfo[i]);
+          component.scene.remove( selectedObject );
+        }
+      }
+
+      component.truckNumber = value;
+
+    });
+
     automaticTruckMovementFolder.open();
 
     const geralFolder = this.gui.addFolder('Geral');
@@ -647,8 +716,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
     geralFolder.open();
     this.gui.open();
-
-    //this.startBackgroundMusic();
 
     (function render() {
       requestAnimationFrame(render);
@@ -669,6 +736,17 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       );
     })();
 
+  }
+
+  private generateTruckInfoArr() {
+    let trucksInfoAux: any[] = [];
+
+    this.info.trucks.forEach(function (truck: any) {
+      let truckCaractString = truck.truckCaract;
+      trucksInfoAux.push(truckCaractString);
+    });
+
+    this.trucksInfo = trucksInfoAux;
   }
 
   private startBackgroundMusic(soundVolume : number) {
@@ -727,7 +805,14 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   }
 
   goBack() {
-    this.gui.destroy()
+    this.gui.destroy();
+
+    try{
+      this.stopBackgroundMusic();
+    } catch (e) {
+      //EMPTY
+    }
+
     window.history.back();
   }
 
