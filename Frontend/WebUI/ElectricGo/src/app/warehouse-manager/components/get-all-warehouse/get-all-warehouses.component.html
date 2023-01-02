@@ -84,16 +84,27 @@
       <td mat-cell *matCellDef="let warehouse"> {{warehouse.activated}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="Actions">
+      <th mat-header-cell *matHeaderCellDef> Actions</th>
+      <td mat-cell *matCellDef="let warehouse">
+        <div *ngIf="warehouse.activated === false; then activateTruck else deactiveTruck"></div>
+        <ng-template #activateTruck>
+          <button mat-raised-button color="primary" class="ActivateTruck" (click)="desactivateUser(warehouse)">Activate</button>
+        </ng-template>
+        <ng-template #deactiveTruck>
+          <button mat-raised-button color="primary" class="DeactiveTruck" (click)="desactivateUser(warehouse)">Deactivate</button>
+        </ng-template>
+      </td>
+    </ng-container>
 
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
+  </div>
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Page navigation"></mat-paginator>
 
-</div>
+
 
 <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
 
