@@ -7,7 +7,6 @@ entrega(4443, 20221205, 120, 8, 6, 8).
 entrega(4449, 20221205, 300, 11, 15, 20).
 :-dynamic entrega_armazens/1.
 :-dynamic entregas/1.
-:-dynamic cam/2.
 :-dynamic less_time/1.
 :-dynamic less_ind/1.
 cam(eTruck01,100).
@@ -473,8 +472,6 @@ gera:-
     Temp = 9999,
     Less = [1,2,3],
     BestInd = [2,3,1]*1000,
-    retractall(less_time(_)),
-    retractall(less_ind(_)),
     assertz(best_ind(BestInd)),
     assertz(less_time(Temp)),
     assertz(less_ind(Less)),
@@ -508,8 +505,24 @@ gera:-
     write('\n\nMELHOR INDIVIDUO:  '),
     write(Ind),
     write('\nTEMPO: '),
-    write(Time).
+    write(Time),
 
+
+    retractall(less_time(_)),
+    retractall(less_ind(_)),
+    retractall(old_pop(_)),
+    retractall(num_ind(_)),
+    retractall(geracoes(_)),
+    retractall(populacao(_)),
+    retractall(melhor_entrega(_)),
+    retractall(best_ind(_)),
+    retractall(prob_cruzamento(_)),
+    retractall(prob_mutacao(_)),
+    retractall(current_order(_)),
+    retractall(num_orders(_)),
+    retractall(tempo(_)),
+    retractall(massa(_)),
+    retractall(massatempo(_)).
 
 count_seq_orders([],0).
 count_seq_orders([_|Cam],Count):- count_seq_orders(Cam,Count2), Count is Count2 + 1.
