@@ -28,19 +28,46 @@ export default class AuthRepo implements IAuthRepo {
     });
   }
 
-  verifyRole(user: IUserAuthDTO): Promise<Result<string>> {
-    return new Promise(async (resolve, reject) => {
-      await fetch(config.userRepoAPIAddress + user.email,
-        {
-          method: "get",
-          agent: this.httpsAgent
-        }).then(response => {
-        if (response.status === 200) {
-          resolve(Result.ok(response.json()));
-        } else {
-          resolve(Result.fail(response.statusText));
-        }
-      })
-    });
+  async verifyRole(user: IUserAuthDTO): Promise<Result<string>> {
+    const role = await fetch(config.userRepoAPIAddress + user.email,
+      {
+        method: "get",
+        agent: this.httpsAgent
+      });
+    console.log(role);
+    if (role.status === 200) {
+      const json = await role.json();
+      console.log(json);
+      return Result.ok(json.role);
+    } else {
+      return Result.fail(role.body);
+    }
+    /*
+    return await fetch(config.userRepoAPIAddress + user.email,
+      {
+        method: "get",
+        agent: this.httpsAgent
+      }).then(response => {
+      response.json();
+    }).then(json => {
+      console.log(JSON.stringify(json));
+      return Result.ok(json);
+    }).catch(err => {
+      console.log(err);
+      return Result.fail(err);
+    });*/
   }
+
 }
+/*
+return await fetch(config.userRepoAPIAddress + user.email,
+  {
+    method: "get",
+    agent: this.httpsAgent
+  }).then(response => {
+  if (response.status === 200) {
+    return (Result.ok(response.json()));
+  } else {
+    return (Result.fail(response.statusText));
+  }
+});*/

@@ -423,7 +423,7 @@ export default class truckController
   }
 
   private async authentication(token: string): Promise<Result<any>> {
-    const acceptOrNot = await this.authService.VerifyUserJWT(token, "FleetManager");
+    const acceptOrNot = await this.authService.VerifyUserJWT(token, ["FleetManager", "Admin"]);
 
     if (!token) {
       return Result.fail({

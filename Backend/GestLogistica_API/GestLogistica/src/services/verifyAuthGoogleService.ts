@@ -13,17 +13,19 @@ export default class VerifyAuthGoogleService implements IVerifyAuthService {
   ) {
   }
 
-  async VerifyUserJWT(token: string, roleExpected: string): Promise<Result<IUserAuthDTO>> {
+  async VerifyUserJWT(token: string, roleExpected: string[]): Promise<Result<IUserAuthDTO>> {
     try {
       if (token.startsWith("Bearer ")) {
         token = token.substring(7, token.length);
       }
       const user: Result<IUserAuthDTO> = await this.authRepo.verifyAuth(token);
+      console.log(user);
       const role: Result<string> = await this.authRepo.verifyRole(user.getValue());
+      console.log(role.getValue());
       if (!role.isSuccess) {
         return Result.fail("The user does not exist");
       } else {
-        if (role.getValue() === roleExpected) {
+        if (roleExpected.includes(role.getValue())) {
           return Result.ok();
         } else {
           return Result.fail("The user is not authorized");
