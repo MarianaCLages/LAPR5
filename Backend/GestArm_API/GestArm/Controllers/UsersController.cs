@@ -287,6 +287,7 @@ public class UserController : ControllerBase
             if (user == null)
                 return NotFound("No user with that email was found!");
 
+            Console.WriteLine("User: " + user.Id + " " + user.Email + " " + user.Role);
             return user;
         }
         catch (BusinessRuleValidationException ex)
