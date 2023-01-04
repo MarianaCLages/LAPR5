@@ -191,11 +191,11 @@ export default class truckController
       return res.status(trucks.errorValue().code).json(trucks.errorValue().error).send();
     }
 
-    var fileService = new SendInfoToPlanningService();
+    let fileService = new SendInfoToPlanningService();
     this.fileService.generateFiles();
-    this.fileService.sendPaths();
-    this.fileService.sendWarehouse();
-    this.fileService.sendTrucks();
+    await this.fileService.sendPaths();
+    await this.fileService.sendWarehouse();
+    await this.fileService.sendTrucks();
 
 
     return res.status(200).json("Info sent successfully!");
@@ -210,18 +210,18 @@ export default class truckController
       return res.status(trucks.errorValue().code).json(trucks.errorValue().error).send();
     }
 
-    var fileService = new SendInfoToPlanningService();
+    let fileService = new SendInfoToPlanningService();
     let idTruck = req.params.idTruck;
     let stringTest: string;
 
     try {
       this.fileService.generateFiles();
-      this.fileService.sendPaths();
+      await this.fileService.sendPaths();
       await this.fileService.sendWarehouse();
-      this.fileService.sendTrucks();
+      await this.fileService.sendTrucks();
 
       await this.fileService.getTruck(idTruck);
-      this.fileService.sendOrdersToPlanning(idTruck, req.params.date);
+      await this.fileService.sendOrdersToPlanning(idTruck, req.params.date);
 
 
       stringTest = await fileService.getHeuristic();
@@ -271,11 +271,11 @@ export default class truckController
 
     let stringTest: string;
     this.fileService.generateFiles();
-    this.fileService.sendPaths();
-    this.fileService.sendWarehouse();
-    this.fileService.sendTrucks();
+    await this.fileService.sendPaths();
+    await this.fileService.sendWarehouse();
+    await this.fileService.sendTrucks();
 
-    this.fileService.sendOrdersToPlanning(idTruck, req.params.date);
+    await this.fileService.sendOrdersToPlanning(idTruck, req.params.date);
 
     stringTest = await this.fileService.getHeuristicByWeightTime();
 

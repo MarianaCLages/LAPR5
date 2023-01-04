@@ -127,5 +127,6 @@ export default {
   armazenIDNumberOfCharacters: 3,
   errorNotFoundWarehouse: "A warehouse with that ID was not found!",
   errorNotFoundOrder: "Não foi encontrado nenhuma order!",
-  userRepoAPIAddress: "https://localhost:5001/api/User/byEmail?email="
+  userRepoAPIAddress: "https://localhost:5001/api/User/byEmail?email=",
+  planingAlgorithm: "AL1" //AL1 is the mock algorithm AL2 is the actual algorithm
 };

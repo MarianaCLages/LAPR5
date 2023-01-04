@@ -36,19 +36,19 @@ export default class SendOrdersToPlanning implements IOrderRepo{
         })
 
         const result = (await response.json());
-        var orderTruck = [];
+        let orderTruck = [];
 
-        for(var i = 0; i < result.length;i++){
+        for(const element of result) {
 
-            let string = result[i].truckRef.toString();
+            let string = element.truckRef.toString();
 
-            if(string.includes(truckId)){
-                orderTruck.push(result[i].orderRef.toString());
+            if (string.includes(truckId)) {
+                orderTruck.push(element.orderRef.toString());
             }
         }
 
-        this.getOrders(orderTruck);
-        this.sendOrdersToProlog();
+        await this.getOrders(orderTruck);
+        await this.sendOrdersToProlog();
 
     }
 

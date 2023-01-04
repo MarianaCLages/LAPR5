@@ -1,26 +1,22 @@
-import 'reflect-metadata'; // We need this in order to use @Decorators
-
-import File from "./core/infra/WritePathIntoFile";
-import Logger from './loaders/logger';
-import Test from "./core/infra/SendOrdersToPlanning";
-import config from '../config';
-import express from 'express';
+import "reflect-metadata"; // We need this in order to use @Decorators
+import Logger from "./loaders/logger";
+import config from "../config";
+import express from "express";
 
 async function startServer() {
   const app = express();
 
 
-
-  const cors = require('cors');
+  const cors = require("cors");
   app.use(cors(
     {
-      origin: '*',
-      methods: ['GET', 'POST', 'PUT', 'DELETE'],
-      allowedHeaders: ['Content-Type', 'Authorization']
+      origin: "*",
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      allowedHeaders: ["Content-Type", "Authorization"]
     }
   ));
 
-  await require('./loaders').default({ expressApp: app });
+  await require("./loaders").default({ expressApp: app });
 
   app.listen(config.port, () => {
 
@@ -32,11 +28,10 @@ async function startServer() {
       ################################################
     `);
   })
-    .on('error', (err) => {
+    .on("error", (err) => {
       Logger.error(err);
       process.exit(1);
-      return;
-  });
+    });
 
 
   //file.files();
@@ -47,5 +42,7 @@ async function startServer() {
   //  file.createWarehousesFile();
 }
 
-startServer();
-
+startServer()
+  .then(() => {
+    console.log("Server started");
+  });
