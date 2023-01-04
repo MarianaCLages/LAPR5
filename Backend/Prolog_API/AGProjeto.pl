@@ -471,22 +471,22 @@ gera:-
     assertz(num_ind(6)),
     Temp = 9999,
     Less = [1,2,3],
-    BestInd = [2,3,1]*1000,
+    BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparação
     assertz(best_ind(BestInd)),
     assertz(less_time(Temp)),
     assertz(less_ind(Less)),
-    bfs_tempo_entrega(_,_,OrdList),
+    bfs_tempo_entrega(_,_,OrdList), %gerar 3 individuos com as 3 heuristicas
     bfs_massa(_,OrdList2),
     bfs_massa_tempo(_,OrdList3),
     %OrdList4 = [OrdList,OrdList2,OrdList3],
     %write('\n\nORDER LIST4:  '),write(OrdList4),
-    count_seq_orders(OrdList,Count),
+    count_seq_orders(OrdList,Count), %contar o numero de orders
     assertz(num_orders(Count)),
     %gera_populacao(OrdList,Pop),
-    gera_first_populacao(OrdList,Pop2),
+    gera_first_populacao(OrdList,Pop2), % a gera_first_população tem em conta que 3 individuos já foram previemente criados (as das heuristicas), ou seja este só vai gerar +3 individuo
     append(Pop2,[OrdList],Pop3),
     append(Pop3,[OrdList2],Pop4),
-    append(Pop4,[OrdList3],Pop5),
+    append(Pop4,[OrdList3],Pop5), %estes appends servem para adicionar os individuos da heuristica á População inicial
     retractall(old_pop(_)),
     assertz(old_pop(Pop5)),
     write('\n\nPOPULACAO 5 TESTE:'),write(Pop5),
@@ -498,7 +498,8 @@ gera:-
     ordena_populacao(PopAv,PopOrd),
     write('\n\nOrdena Pop:\n\n'),
     write(PopOrd),
-    NG is 6,
+    num_ind(NG),
+    %NG is 6,
     gera_geracao(0,NG,PopOrd),
     less_ind(Ind),
     less_time(Time),
@@ -532,8 +533,9 @@ count_seq_orders([_|Cam],Count):- count_seq_orders(Cam,Count2), Count is Count2 
 % Gera População
 
 gera_first_populacao(Cam,Pop):-
+    num_ind(X),
     num_orders(NumT),
-    TamPop = 6 -3,
+    TamPop = X -3,
     gera_populacao(TamPop,Cam,NumT,Pop).
 
 gera_populacao(Cam,Pop):-
@@ -602,7 +604,7 @@ avalia_cam(Ind,T):-
     get_cam_arm(Ind,Arm),
     reverse(Arm,Arm2),
     reverse(Arm2,Arm3),
-    bestPath(Arm3,eTruck01,_,_,T2),
+    bestPath(Arm3,eTruck01,_,_,T2), %chamamos um predicado do Sprint anterior, que dado um caminho calcula o tempo do mesmo.
     T is T2,
     less_time(X),
     (   (T2 < X,!,retract(less_time(_)),assertz(less_time(T)),retract(less_ind(_)),assertz(less_ind(Ind)));!).
@@ -652,20 +654,20 @@ write('\n\nGeração '), write(G), write(':'), nl, write(Pop), nl.
 
 gera_geracao(N,G,Pop):-
 write('\n\nGeração '), write(N), write(':'), nl, write(Pop), nl,
-random_permutation(Pop,Pop2),
+random_permutation(Pop,Pop2), %desorganizamos os individuos
 cruzamento(Pop2,NPop1), %Pop é a lista que temos Npop1 é a nova lista que será feita com o cruzamento.
 mutacao(NPop1,NPop), % Com a nova geração (NPop1) faz-se a mutação dela.
 old_pop(OldPop),
-stop_elite(OldPop,NPop,NPop2), %TRABALHA AQUI TIAGO
+stop_elite(OldPop,NPop,NPop2), % NPop2 vai ser uma lista com os elementos da população antiga e os gerados por mutação e cruzamentos onde lhes vão ser atribuido um valor N*X (N sendo um valor random e X o tempo deles)
 ordena_elite(NPop2,NPop3),
-reverse(NPop3,NPop4),
+reverse(NPop3,NPop4), % a lista vai tar ao contrario por isso damos reverse
 num_ind(I),
 anti_elitist_pop(NPop4,NPop5,I),
 retractall(old_pop(_)),
 assertz(old_pop(NPop)),
 avalia_populacao(NPop5,NPopAv),
 switch_for_the_best(NPopAv,NPopAv2),
-ordena_populacao(NPopAv2,NPopOrd),
+ordena_populacao(NPopAv2,NPopOrd), % ordena a população
 N1 is N+1,
 gera_geracao(N1,G,NPopOrd).
 
@@ -696,13 +698,13 @@ btroca2([X*VX,Y*VY|L1],[Y*VY|L2]):-
 btroca2([X|L1],[X|L2]):-btroca(L1,L2).
 
 anti_elitist_pop(_,_,0).
-anti_elitist_pop([X*_|OldPop],[X|AntiPop],N):-N2 is N - 1,write(N2),anti_elitist_pop(OldPop,AntiPop,N2).
+anti_elitist_pop([X*_|OldPop],[X|AntiPop],N):-N2 is N - 1,anti_elitist_pop(OldPop,AntiPop,N2).
 
 
 %-------------------------------
 
 %Include the last gen best Ind
-switch_for_the_best([_|NPopAv],NPopAv2):-best_ind(Ind), NPopAv2 = [Ind|NPopAv].
+switch_for_the_best([_|NPopAv],NPopAv2):-best_ind(Ind), NPopAv2 = [Ind|NPopAv]. %adiciona o melhor da geração anterior
 
 gerar_pontos_cruzamento(P1,P2):- gerar_pontos_cruzamento1(P1,P2).
 
