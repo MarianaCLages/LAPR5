@@ -1,8 +1,6 @@
 import { Inject, Service } from "typedi";
 import config from "../../config";
 import { Result } from "../core/logic/Result";
-import IWarehouseRepo from "./IRepos/IWarehouseRepo";
-import https = require("https");
 import IPackagingService from "./IServices/IPackagingService";
 import IPackagingRepo from "../repos/packagingRepo";
 import ICreatePackagingDTO from "../dto/packaging/ICreatePackagingDTO";
@@ -14,11 +12,9 @@ import { TruckRef } from "../domain/packaging/truckRef";
 import IPackagingIdDTO from "../dto/packaging/IPackagingIdDTO";
 import IOrderRepo from "./IRepos/IOrderRepo";
 import ITruckRepo from "./IRepos/ITruckRepo";
-import truckRepo from "../repos/truckRepo";
-import { CaractTruck } from "../domain/truck/caractTruck";
-import IPathIdDto from "../dto/path/IPathIdDto";
 import IPackagingOrderDTO from "../dto/packaging/IPackagingOrderDTO";
 import IPackagingTruckDTO from "../dto/packaging/IPackagingTruckDTO";
+import https = require("https");
 
 
 @Service()
@@ -96,7 +92,7 @@ export default class PackagingService implements IPackagingService {
         p => (p.pos3DX.value === packagingDTO.pos3DX.valueOf()) && (p.pos3DY.value === packagingDTO.pos3DY.valueOf()) && (p.pos3DZ.value === packagingDTO.pos3DZ.valueOf())
       );
 
-      if(value){
+      if (value) {
         return Result.fail<IPackagingDTO>("There already exists a packaging with those positions inside the specified truck!");
       }
 
@@ -104,7 +100,7 @@ export default class PackagingService implements IPackagingService {
 
       const listOfAllPackagingsOfThatOrder = await this.packagingRepo.getByOrderAsync(packagingDTO.orderRef);
 
-      if(listOfAllPackagingsOfThatOrder.getValue().length > 0) {
+      if (listOfAllPackagingsOfThatOrder.getValue().length > 0) {
         return Result.fail<IPackagingDTO>("You can't create another packaging for an order that already has a package associated!");
       }
 
