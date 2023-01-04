@@ -31,6 +31,7 @@ export class GetAllWarehousesComponent implements OnInit {
     'longitudeMinute',
     'longitudeSecond',
     'activated',
+    'Actions',
   ];
   options: string[] = ['Warehouse by Designation', 'All Warehouses'];
   filterOption: any;
@@ -120,5 +121,55 @@ export class GetAllWarehousesComponent implements OnInit {
 
   goBack() {
     window.history.back();
+  }
+
+
+  desactivateUser(warehouse: any) {
+    this.errorMessage = '';
+    this.error = false;
+    var errorOrSuccess;
+
+    if(warehouse.activated == 1) {
+      errorOrSuccess = this.getAllWarehouseService.desactivateWarehouse(warehouse.alphaNumId);
+      }
+    else{
+      errorOrSuccess = this.getAllWarehouseService.activateWarehouse(warehouse.alphaNumId);
+    }
+
+    errorOrSuccess.subscribe(
+      (data: any) => {
+        this.getAllWarehouseService.getAllWarehouse().then(
+          (data: any) => {
+            this.warehouses.data = data;
+          },
+          (error: any) => {
+            this.error = true;
+            if (error.status == 400) {
+              this.errorMessage = error.error;
+            } else {
+              if (error.status == 500) {
+                this.errorMessage = error.error.errors.message;
+              } else {
+                this.errorMessage = 'Unknown error!';
+              }
+            }
+          }
+        );
+      }, //transforms into a http error
+      (error: any) => {
+        this.error = true;
+        if (error.status == 400) {
+          this.errorMessage = error.error;
+        } else {
+          if (error.status == 500) {
+            this.errorMessage = error.error.errors.message;
+          } else {
+            this.errorMessage = 'An unknown error has ocurred';
+          }
+        }
+      }
+    );
+
+    this.warehouses.paginator = this.paginator;
   }
 }

@@ -33,6 +33,7 @@
     "rxjs": "~7.5.0",
     "three": "^0.146.0",
     "tslib": "^2.4.1",
+    "yuka": "^0.7.8",
     "zone.js": "^0.11.8"
   },
   "devDependencies": {
@@ -42,6 +43,7 @@
     "@types/dat.gui": "^0.7.7",
     "@types/jasmine": "~4.0.0",
     "@types/three": "^0.146.0",
+    "@types/yuka": "^0.7.1",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",

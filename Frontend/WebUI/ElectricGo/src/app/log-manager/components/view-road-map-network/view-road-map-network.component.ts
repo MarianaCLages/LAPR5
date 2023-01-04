@@ -13,6 +13,10 @@ import { GoogleApiCommunicationService } from 'src/app/services/google-api-commu
 import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 import { GetTrucksService } from 'src/app/services/get-trucks.service';
 import { ITruckViewRepresentation } from 'src/app/shared/truckViewRepresentation';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
+
+import * as YUKA from 'yuka';
+import { EntityManager } from 'yuka';
 
 @Component({
   selector: 'app-view-road-map-network',
@@ -67,6 +71,13 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private truckNumber : number = 1;
 
   private validRoles: string[] = ['LogisticManager', 'Admin'];
+
+  private timeGlobal : any;
+  private entityManagerGlobal : any;
+
+  private warehousesAndEdges = new Map<string, number[]>();
+
+  private pathsIncomingEdges = new Map<string, number[]>();
 
   constructor(
     private getWarehouseService: GetWarehouseServiceService,
@@ -220,8 +231,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     //MAP THE PATHS
     let pathsMap = new Map<string, number>();
 
-    //Position of the warehouse
-    let arrPos = new Map<string, number[]>();
 
     // PATHS
     for (const element of this.info.paths) {
@@ -374,33 +383,51 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       let incomingEdgeStartYW = start.y + 0.1 * difY;
       let incomingEdgeStartZW = start.z;
 
-      if (arrPos.has(start.id)) {
-        for (const key of arrPos.keys()) {
+      if (this.warehousesAndEdges.has(start.id)) {
+        for (const key of this.warehousesAndEdges.keys()) {
           if (key === start.id) {
-            arrPos.set(key, [incomingEdgeStartXW, incomingEdgeStartYW, incomingEdgeStartZW]);
+            this.warehousesAndEdges.set(key, [incomingEdgeStartXW, incomingEdgeStartYW, incomingEdgeStartZW, incomingEdgeStartX, incomingEdgeStartY, incomingEdgeStartZ]);
           }
         }
       } else {
-        arrPos.set(start.id, [incomingEdgeStartXW, incomingEdgeStartYW, incomingEdgeStartZW]);
+        this.warehousesAndEdges.set(start.id, [incomingEdgeStartXW, incomingEdgeStartYW, incomingEdgeStartZW, incomingEdgeStartX, incomingEdgeStartY, incomingEdgeStartZ]);
       }
 
-      if (arrPos.has(end.id)) {
-        for (const key of arrPos.keys()) {
+      if (this.warehousesAndEdges.has(end.id)) {
+        for (const key of this.warehousesAndEdges.keys()) {
           if (key === end.id) {
-            arrPos.set(key, [incomingEdgeEndXW, incomingEdgeEndYW, incomingEdgeEndZW]);
+            this.warehousesAndEdges.set(key, [incomingEdgeEndXW, incomingEdgeEndYW, incomingEdgeEndZW, incomingEdgeEndX, incomingEdgeEndY, incomingEdgeEndZ]);
           }
         }
       } else {
-        arrPos.set(end.id, [incomingEdgeEndXW, incomingEdgeEndYW, incomingEdgeEndZW]);
+        this.warehousesAndEdges.set(end.id, [incomingEdgeEndXW, incomingEdgeEndYW, incomingEdgeEndZW, incomingEdgeEndX, incomingEdgeEndY, incomingEdgeEndZ]);
       }
+
+
+      const path = start.id + end.id;
+      if(this.pathsIncomingEdges.has(path)) {
+        for (const key of this.pathsIncomingEdges.keys()) {
+          if (key === path) {
+            this.pathsIncomingEdges.set(key, [incomingEdgeStartX, incomingEdgeStartY, incomingEdgeStartZ, incomingEdgeEndX, incomingEdgeEndY, incomingEdgeEndZ]);
+          }
+        }
+      } else {
+        this.pathsIncomingEdges.set(path, [incomingEdgeStartX, incomingEdgeStartY, incomingEdgeStartZ, incomingEdgeEndX, incomingEdgeEndY, incomingEdgeEndZ]);
+      }
+
 
     }
+
+    console.log("AAAAAAAAAAAAAASDASDASDAS");
+    console.log(this.pathsIncomingEdges);
+
+
 
     // ROUNDABOUTS
     for (const element of this.info.warehouses) {
       let roundaboutWidth = pathsMap.get(element.id);
 
-      let warehousePos = arrPos.get(element.id)!;
+      let warehousePos = this.warehousesAndEdges.get(element.id)!;
 
       let roundabout = this.createRoundAbout(roundaboutWidth);
       roundabout.position.set(element.x, element.y, element.z + 0.08);
@@ -503,6 +530,24 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
       }
 
+
+      //Update warehousesAndEdges values with the new warehouse position
+
+      if (this.warehousesAndEdges.has(element.id)) {
+        for (const key of this.warehousesAndEdges.keys()) {
+          if (key === element.id) {
+            const el = this.warehousesAndEdges.get(key)!;
+
+            el[0] = warehousePos[0];
+            el[1] = warehousePos[1];
+            el[2] = warehousePos[2];
+
+            this.warehousesAndEdges.set(key, el);
+
+          }
+        }
+      }
+
       //Get Matosinhos Coordinates
       if(element.id == "C05") {
         this.matosinhosX = element.x;
@@ -510,11 +555,13 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         this.matosinhosZ = element.z;
       }
 
+      console.log("Warehouse: " + element.id);
+      console.log("Coordinates: " + warehousePos[0] + ", " + warehousePos[1] + ", " + warehousePos[2]);
+
       this.loadWarehouseModel(warehousePos[0], warehousePos[1], warehousePos[2]);
     }
 
-    //creates a truck model and animates it
-    this.loadTruckModel(this.matosinhosX, this.matosinhosY, this.matosinhosZ);
+    this.generateTruck();
 
   }
 
@@ -531,17 +578,17 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     );
   }
 
-  private loadTruckModel(posX: number, posY: number, posZ: number) {
+  private loadTruckModel(name : string) {
     const glftLoader = new GLTFLoader();
     glftLoader.load(
       'assets/truck/scene.gltf',
       (gltf) => {
         this.truck = gltf.scene;
         gltf.scene.scale.set(0.003, 0.003, 0.003);
-        gltf.scene.position.set(posX, posY, posZ + 0.4);
+        gltf.scene.position.set(this.matosinhosX, this.matosinhosY, this.matosinhosZ + 0.4);
         gltf.scene.rotation.x = Math.PI / 2.0;
         gltf.scene.rotation.y = Math.PI / 2.0;
-        gltf.scene.name = this.trucksInfo[0];
+        gltf.scene.name = name;
         this.roadMap.add(gltf.scene);
       }
     );
@@ -648,7 +695,8 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       Choose_Truck: this.availableTrucks,
       Number_Of_Trucks: 1,
       Music: false,
-      Music_Volume: 50
+      Music_Volume: 50,
+      Camera: "Default"
     };
 
     this.gui.domElement.id = 'truck_movement_type';
@@ -656,7 +704,19 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
     // GUI controls
     const truckFolder = this.gui.addFolder('Truck Information');
-    truckFolder.add(params,'truckMovement',['Manual','Automatic']);
+    truckFolder.add(params,'truckMovement',['Manual','Automatic']).onChange(function(value) {
+      if(value == 'Automatic') {
+        component.stopManualMovement();
+        component.startAutomaticMovement();
+      }
+
+      else {
+        component.stopAutomaticMovement();
+        component.startManualMovement();
+      }
+
+    });
+
     truckFolder.add(params,'Choose_Truck', this.trucksInfo).onChange(function(value) {
 
       for(var i : number = 0 ; i < component.trucksInfo.length ; i++) {
@@ -680,10 +740,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     automaticTruckMovementFolder.add(params,'Number_Of_Trucks').min(1).max(component.trucksInfo.length).step(1).onChange(function(value) {
       if(value > component.truckNumber) {
         for(var i = component.truckNumber ; i < value; i++) {
-          const truckClone = component.truck.clone();
-          truckClone.position.set(component.matosinhosX, component.matosinhosY, component.matosinhosZ + 0.01);
-          truckClone.name = component.trucksInfo[i];
-          component.scene.add(truckClone);
+          component.loadTruckModel(component.trucksInfo[i]);
         }
       }
 
@@ -714,6 +771,41 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       component.sound.setVolume(value * 0.01);
     });
 
+    geralFolder.add(params,'Camera',['Default','First Person', 'Third Person']).onChange(function(value) {
+
+    // const controls = new PointerLockControls(component.camera, document.body);
+
+    // // add event listener to show/hide a UI (e.g. the game's menu)
+
+    // controls.addEventListener( 'lock', function () {
+    // });
+
+    // controls.addEventListener( 'unlock', function () {
+    // });
+
+      // if(value == 'First Person') {
+      //   component.camera.position.set(0, 0, 0);
+      //   component.camera.position.z = component.cameraZ;
+      //   component.camera.position.y = component.cameraY;
+      //   component.camera.position.x = component.cameraX;
+      //   component.camera.lookAt(0, 0, 0);
+      // }
+      // else if(value == 'Third Person') {
+      //   component.camera.position.set(0, 0, 0);
+      //   component.camera.position.z = component.cameraZ;
+      //   component.camera.position.y = component.cameraY;
+      //   component.camera.position.x = component.cameraX;
+      //   component.camera.lookAt(0, 0, 0);
+      // }
+      // else {
+      //   component.camera.position.set(0, 0, 0);
+      //   component.camera.position.z = component.cameraZ;
+      //   component.camera.position.y = component.cameraY;
+      //   component.camera.position.x = component.cameraX;
+      //   component.camera.lookAt(0, 0, 0);
+      // }
+    });
+
     geralFolder.open();
     this.gui.open();
 
@@ -724,9 +816,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       if (params.truckMovement == 'Manual') {
         component.updateTruckPosition();
       }
-      else if (params.truckMovement == 'Automatic'){
-        component.updateAutomaticPosition();
-      }
+
+      const delta = component.timeGlobal.update().getDelta();
+      component.entityManagerGlobal.update(delta);
 
       component.render.render(component.scene, component.camera);
       component.render.setPixelRatio(devicePixelRatio);
@@ -736,6 +828,10 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       );
     })();
 
+  }
+
+  private sync(entity : any, renderComponent : any) {
+    renderComponent.matrix.copy(entity.worldMatrix);
   }
 
   private generateTruckInfoArr() {
@@ -818,6 +914,128 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   destroyGUI(){
     this.gui.destroy()
+  }
+
+  private generateTruck(){
+    const vehicle = new YUKA.Vehicle();
+
+    //HARD CODED NEEDS UPDATE
+    const vehiclePath = ["C05","C55"];
+    const path = new YUKA.Path();
+    let flag : boolean = false;
+    let positions : any[] = [];
+
+    console.log(this.warehousesAndEdges);
+    console.log("AHHAHAHAHA")
+    console.log(vehiclePath[0] + vehiclePath[1])
+
+    for(let i : number = 0; i < vehiclePath.length; i++){
+      for (const key of this.warehousesAndEdges.keys()) {
+        if (key === vehiclePath[i]) {
+          if(flag == false){
+             const value = this.warehousesAndEdges.get(key)!;
+             path.add(new YUKA.Vector3(value[0], value[1], value[2]));
+
+             const incomingEdgesFromSpecificPath = this.pathsIncomingEdges.get(vehiclePath[0] + vehiclePath[1])!;
+
+             console.log(incomingEdgesFromSpecificPath);
+
+             path.add(new YUKA.Vector3(incomingEdgesFromSpecificPath[0], incomingEdgesFromSpecificPath[1], incomingEdgesFromSpecificPath[2]));
+             path.add(new YUKA.Vector3(incomingEdgesFromSpecificPath[3], incomingEdgesFromSpecificPath[4], incomingEdgesFromSpecificPath[5]));
+
+             positions.push(new YUKA.Vector3(value[0], value[1], value[2]));
+             positions.push(new YUKA.Vector3(incomingEdgesFromSpecificPath[0], incomingEdgesFromSpecificPath[1], incomingEdgesFromSpecificPath[2]));
+             positions.push(new YUKA.Vector3(incomingEdgesFromSpecificPath[3], incomingEdgesFromSpecificPath[4], incomingEdgesFromSpecificPath[5]));
+
+             flag = true;
+
+          } else {
+            const value = this.warehousesAndEdges.get(key)!;
+            path.add(new YUKA.Vector3(value[0], value[1], value[2]));
+            flag = false;
+
+          }
+
+        }
+      }
+
+    }
+
+
+
+    console.log(path);
+
+    path.loop = true;
+
+    vehicle.position.copy(path.current());
+
+    const followPathBehavior = new YUKA.FollowPathBehavior(path, 0.2);
+    vehicle.steering.add(followPathBehavior);
+
+    const onPathBehavior = new YUKA.OnPathBehavior(path);
+    //onPathBehavior.radius = 0.01;
+    vehicle.steering.add(onPathBehavior);
+
+    vehicle.maxSpeed = 1.5;
+
+    const entityManager = new YUKA.EntityManager();
+    entityManager.add(vehicle);
+
+    const glftLoader = new GLTFLoader();
+     glftLoader.load(
+    'assets/truck/scene.gltf',
+    (gltf) => {
+      this.truck = gltf.scene;
+      //gltf.scene.scale.set(0.003, 0.003, 0.003);
+      gltf.scene.position.set(this.matosinhosX, this.matosinhosY, this.matosinhosZ + 0.4);
+      gltf.scene.name = this.trucksInfo[0];
+      this.roadMap.add(gltf.scene);
+
+
+      gltf.scene.matrixAutoUpdate = false;
+      vehicle.scale = new YUKA.Vector3(0.003, 0.003, 0.003);
+
+      vehicle.setRenderComponent(gltf.scene, this.sync);
+    }
+  );
+
+
+    // vehicleM.matrixAutoUpdate = false;
+
+    // for(let i = 0 ; i < p.length ; i++) {
+    //   const waypoint = path._waypoints[i];
+    //   position.push(waypoint.x, waypoint.y, waypoint.z);
+    // }
+
+     const lineGeomety = new THREE.BufferGeometry();
+     lineGeomety.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+
+     const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
+     const lines = new THREE.LineLoop(lineGeomety, lineMaterial);
+     this.scene.add(lines);
+
+     const time = new YUKA.Time();
+
+    this.timeGlobal = time;
+    this.entityManagerGlobal = entityManager;
+  }
+
+  private startAutomaticMovement(){
+    this.generateTruck();
+  }
+
+  private stopAutomaticMovement(){
+    this.entityManagerGlobal.clear();
+    this.timeGlobal.stop();
+  }
+
+  private stopManualMovement(){
+    this.entityManagerGlobal.clear();
+    this.timeGlobal.stop();
+  }
+
+  private startManualMovement(){
+
   }
 
 }

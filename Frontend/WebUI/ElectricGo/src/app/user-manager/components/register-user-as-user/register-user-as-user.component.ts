@@ -5,6 +5,7 @@ import {ICreateUserDTO} from "../../../shared/createUserDTO";
 import {RegisterUserService} from "../../../admin/services/register-user.service";
 import { GoogleApiCommunicationService } from "src/app/services/google-api-communication.service";
 import { RedirectPagesService } from "src/app/services/redirect-pages.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-register-user-as-user',
@@ -32,6 +33,7 @@ export class RegisterUserAsUserComponent implements OnInit{
     private registerUserService: RegisterUserService,
     private service: GoogleApiCommunicationService,
     private redirect: RedirectPagesService,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -71,7 +73,7 @@ export class RegisterUserAsUserComponent implements OnInit{
     let errorOrSuccess: any = this.registerUserService.registerUser(userDTO);
 
     errorOrSuccess.subscribe((data: any) => {
-        this.goBack();
+      this.router.navigate(['/' + this.role]);
       }, //transforms into a http error
       (error: any) => {
         this.error = true;
