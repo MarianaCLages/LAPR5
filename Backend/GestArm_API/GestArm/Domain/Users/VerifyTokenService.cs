@@ -118,24 +118,17 @@ public class VerifyTokenService : IVerifyTokenService
         return encrypterToken;
     }
 
-    // public async Task<UserDTO> VerifyGoogleTokenAndGenerateUserCredentials(string token)
-    // {
-    //     var payload = await this._repositoryToken.GetPayloadFromGoogle(token);
+    public async Task<bool> VerifyUserAccess(string token, string[] roles)
+    {
+        var user = await VerifyJWTToken(token);
 
-    //     if (payload == null)
-    //         return null;
+        if (user == null)
+            return false;
 
-    //     var encrypterToken = await GenerateJWTToken(payload);
+        if (roles.Contains(user.Role))
+            return true;
 
-    //     var user = await _repository.GetByEmailAsync(new UserEmail(payload.Email));
-
-    //     if (user == null)
-    //     {
-    //         return null;
-    //     }
-    //     return new UserDTO(user.Id, user.Name.Name, user.Role.Role, user.Email.Email, user.PhoneNumber.PhoneNumber, user.Activated.Activated, user.BirthDate.BirthDate.ToString());
-    // }
-
-
+        return false;
+    }
 
 }
