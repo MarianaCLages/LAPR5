@@ -1,9 +1,10 @@
-import { Service } from "typedi";
-import IAuthRepo from "../services/IRepos/IAuthRepo";
-import config from "../../config";
-import { Result } from "../core/logic/Result";
-import IUserAuthDTO from "../dto/IUserAuthDTO";
 import * as https from "https";
+
+import IAuthRepo from "../services/IRepos/IAuthRepo";
+import IUserAuthDTO from "../dto/IUserAuthDTO";
+import { Result } from "../core/logic/Result";
+import { Service } from "typedi";
+import config from "../../config";
 
 const jwt = require("jsonwebtoken");
 const fetch = require("node-fetch");
@@ -32,7 +33,10 @@ export default class AuthRepo implements IAuthRepo {
     const role = await fetch(config.userRepoAPIAddress + user.email,
       {
         method: "get",
-        agent: this.httpsAgent
+        agent: this.httpsAgent,
+        headers: {
+          authentication: "Beaver " + config.jwtTokenClient
+        }
       });
     if (role.status === 200) {
       const json = await role.json();

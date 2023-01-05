@@ -1,9 +1,12 @@
-import {Service} from "typedi";
-import IWarehouseRepo from "../services/IRepos/IWarehouseRepo";
 import * as https from "https";
-import config from "../../config";
-import fetch = require('node-fetch');
+
 import IOrderRepo from "../services/IRepos/IOrderRepo";
+import IWarehouseRepo from "../services/IRepos/IWarehouseRepo";
+import { Service } from "typedi";
+import config from "../../config";
+
+import fetch = require('node-fetch');
+
 
 
 @Service()
@@ -22,6 +25,9 @@ export default class OrderAPIGetter implements IOrderRepo {
     const responseChegada = await fetch(url, {
       method: 'GET',
       agent: this.httpsAgent,
+      headers: {
+        authentication: "Beaver " + config.jwtTokenClient
+      }
     });
     const valid = responseChegada.status === 200;
 

@@ -1,7 +1,9 @@
-import {Service} from "typedi";
-import IWarehouseRepo from "../services/IRepos/IWarehouseRepo";
 import * as https from "https";
+
+import IWarehouseRepo from "../services/IRepos/IWarehouseRepo";
+import { Service } from "typedi";
 import config from "../../config";
+
 import fetch = require('node-fetch');
 
 
@@ -19,6 +21,9 @@ export default class WarehouseAPIGetter implements IWarehouseRepo {
             const responseChegada = await fetch(url, {
                 method: 'GET',
                 agent: this.httpsAgent,
+                headers: {
+                    authentication: "Beaver " + config.jwtTokenClient
+                }
             });
 
             const valid = responseChegada.status === 200;

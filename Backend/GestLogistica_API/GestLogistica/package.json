@@ -66,8 +66,6 @@
     "nodemon": "^2.0.20",
     "pac-proxy-agent": "^5.0.0",
     "pac-resolver": "^5.0.1",
-    "passport": "^0.6.0",
-    "passport-google-oauth2": "^0.2.0",
     "proxy-agent": "^5.0.0",
     "reflect-metadata": "^0.1.13",
     "shallow-equal-object": "^1.1.1",

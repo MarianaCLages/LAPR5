@@ -1,4 +1,5 @@
 import "reflect-metadata"; // We need this in order to use @Decorators
+
 import Logger from "./loaders/logger";
 import config from "../config";
 import express from "express";
@@ -11,7 +12,7 @@ async function startServer() {
   app.use(cors(
     {
       origin: "*",
-      methods: ["GET", "POST", "PUT", "DELETE"],
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
       allowedHeaders: ["Content-Type", "Authorization"]
     }
   ));
