@@ -1,6 +1,8 @@
 using GestArm.Domain.Warehouses;
 using GestArm.Domain.Shared;
+using GestArm.Domain.Users;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace DDDNetCore.Controllers;
 
@@ -10,15 +12,26 @@ public class WarehouseController : ControllerBase
 {
     private readonly IWarehouseService _service;
 
-    public WarehouseController(IWarehouseService service)
+    private readonly IVerifyTokenService _serviceJWT;
+
+    public WarehouseController(IWarehouseService service, IVerifyTokenService verifyTokenService)
     {
         _service = service;
+        _serviceJWT = verifyTokenService;
     }
 
     // GET: api/Warehouse/id?id=X
     [HttpGet("id")]
     public async Task<ActionResult<ActivatedWarehouseDTO>> GetById(Guid id)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var warehouse = await _service.GetByIdAsync(new WarehouseId(id));
@@ -42,6 +55,14 @@ public class WarehouseController : ControllerBase
     [HttpGet("designation")]
     public async Task<ActionResult<IEnumerable<ActivatedWarehouseDTO>>> GetByDesignation(string designation)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var warehouse = await _service.GetByDesignationAsync(designation);
@@ -64,6 +85,14 @@ public class WarehouseController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ActivatedWarehouseDTO>>> GetAll()
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var warehouses = await _service.GetAllAsync();
@@ -86,6 +115,14 @@ public class WarehouseController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<WarehouseDTO>> AddAsync(CreatingWarehouseDto dto)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var warehouseCheck = await _service.GetByWarehouseIdAsync(dto.AlphaNumId);
@@ -113,6 +150,14 @@ public class WarehouseController : ControllerBase
     [Route("~/api/[controller]/search/{warehouseId}", Name = "GetWarehousePorIDEspecifico")]
     public async Task<ActionResult<ActivatedWarehouseDTO>> GetByWarehouseIdAsync(string warehouseId)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var warehouse = await _service.GetByWarehouseIdAsync(warehouseId);
@@ -134,6 +179,14 @@ public class WarehouseController : ControllerBase
     [HttpGet ("byAlphaId")]
     public async Task<ActionResult<ActivatedWarehouseDTO>> GetByWarehouseIdQueryAsync(string warehouseId)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var warehouse = await _service.GetByWarehouseIdAsync(warehouseId);
@@ -157,6 +210,14 @@ public class WarehouseController : ControllerBase
     [HttpPut]
     public async Task<ActionResult<WarehouseDTO>> UpdateAsync(WarehouseDTO dto)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var warehouseCheck = await _service.GetByWarehouseIdAsync(dto.AlphaNumId);
@@ -184,6 +245,14 @@ public class WarehouseController : ControllerBase
     [HttpDelete]
     public async Task<ActionResult<bool>> DeleteAsync(Guid id)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var arm = await _service.DeleteAsync(new WarehouseId(id));
@@ -207,7 +276,14 @@ public class WarehouseController : ControllerBase
     [HttpPut("delete")]
     public async Task<ActionResult<bool>> DesactivateAsync(string delete)
     {
-        
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         var warehouseCheck = await _service.GetByWarehouseIdAsync(delete);
 
         if (warehouseCheck == null) return NotFound("No warehouse with that AlphaNumericID was found!");
@@ -222,6 +298,13 @@ public class WarehouseController : ControllerBase
     [HttpPut("activate")]
     public async Task<ActionResult<bool>> ActivateAsync(string activate)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
         
         var warehouseCheck = await _service.GetByWarehouseIdAsync(activate);
 
@@ -231,4 +314,33 @@ public class WarehouseController : ControllerBase
 
         return boolean;
     }
+
+    private async Task<HttpResponseMessage> VerifyUserAccess() {
+        var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+        if(token == null) {
+            return new HttpResponseMessage(HttpStatusCode.Unauthorized)
+            {
+                Content = new StringContent("No Authorization header is present")
+            };
+        } 
+
+        string[] role = {"Admin", "LogisticManager", "FleetManager" , "WarehouseManager"};
+
+        if(await this._serviceJWT.VerifyUserAccess(token, role)) {
+             return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("User is authorized")
+            };
+        }
+
+        else {
+            return new HttpResponseMessage(HttpStatusCode.Forbidden)
+            {
+                Content = new StringContent("User is not authorized")
+            };
+        }
+
+    }
+
 }

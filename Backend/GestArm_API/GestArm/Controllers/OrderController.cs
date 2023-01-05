@@ -1,4 +1,5 @@
-using System.Data;
+using GestArm.Domain.Users;
+using System.Net;
 using GestArm.Domain.Orders;
 using GestArm.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
@@ -10,17 +11,26 @@ namespace GestArm.Controllers;
 public class OrderController : ControllerBase
 {
     private readonly IOrdersService _service;
-    //private ILogger<Order> _loggerOrders;
+   private readonly IVerifyTokenService _serviceJWT;
 
-    public OrderController(IOrdersService service)
+    public OrderController(IOrdersService service, IVerifyTokenService verifyTokenService)
     {
         _service = service;
+        _serviceJWT = verifyTokenService;
     }
 
     // GET: api/Order/id
     [HttpGet("porId")]
     public async Task<ActionResult<OrderDto>> GetById(Guid id)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var order = await _service.GetByIdAsync(new OrderId(id));
@@ -44,6 +54,14 @@ public class OrderController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<OrderDto>> AddAsync(CreatingOrderDto dto)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var order = await _service.AddAsync(dto);
@@ -65,6 +83,14 @@ public class OrderController : ControllerBase
     [HttpPut]
     public async Task<ActionResult<OrderDto>> Update(Guid id, CreatingOrderDto dto)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var order = await _service.GetByIdAsync(new OrderId(id));
@@ -92,6 +118,14 @@ public class OrderController : ControllerBase
     [HttpDelete]
     public async Task<ActionResult<bool>> DeleteAsync(Guid id)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var order = await _service.RemoveAsync(new OrderId(id));
@@ -115,6 +149,15 @@ public class OrderController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<OrderDto>>> GetAllAsync()
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
+
         try
         {
             var orders = await _service.GetAllAsync();
@@ -136,6 +179,14 @@ public class OrderController : ControllerBase
     [HttpGet("byDate")]
     public async Task<ActionResult<IEnumerable<OrderDto>>> GetByDataDeOrderAysnc(string data)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var orders = await _service.GetByOrderDateAysnc(DateTime.Parse(data));
@@ -161,6 +212,14 @@ public class OrderController : ControllerBase
     [HttpGet("Filtering")]
     public async Task<ActionResult<IEnumerable<OrderDto>>> GetByFiltering(string warehouseId, string data)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var orders = await _service.GetByFiltering(warehouseId, DateTime.Parse(data));
@@ -189,6 +248,14 @@ public class OrderController : ControllerBase
     [Route("~/api/[controller]/search/{orderId}", Name = "GetOrderByWarehouse")]
     public async Task<ActionResult<OrderDto>> GetByWarehouseIdAsync(string orderId)
     {
+         var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var warehouse = await _service.GetByIdAsync(new OrderId(orderId));
@@ -214,6 +281,14 @@ public class OrderController : ControllerBase
     [HttpGet("search")]
     public async Task<ActionResult<IEnumerable<OrderDto>>> GetByOrderDomainIDAsync(string data, string nextID)
     {
+         var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var warehouse = await _service.GetOrderByDomainIdAsync(nextID, data);
@@ -237,6 +312,14 @@ public class OrderController : ControllerBase
     [HttpGet("{filter}")]
     public async Task<ActionResult<IEnumerable<OrderDto>>> GetByFilterQuery(string warehouseId, DateTime data)
     {
+         var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var orders = await _service.GetByFiltering(warehouseId, data);
@@ -263,6 +346,14 @@ public class OrderController : ControllerBase
     [HttpGet("{byWarehouseID}")]
     public async Task<ActionResult<IEnumerable<OrderDto>>> GetByWarehouseIdAysnc(string warehouseId)
     {
+         var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var orders = await _service.GetByWarehouseIdAsync(warehouseId);
@@ -281,6 +372,34 @@ public class OrderController : ControllerBase
             return NotFound("An error has occured while looking for the order!");
         }
         
+    }
+
+     private async Task<HttpResponseMessage> VerifyUserAccess() {
+        var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+        if(token == null) {
+            return new HttpResponseMessage(HttpStatusCode.Unauthorized)
+            {
+                Content = new StringContent("No Authorization header is present")
+            };
+        } 
+
+        string[] role = {"Admin", "LogisticManager", "FleetManager" , "WarehouseManager"};
+
+        if(await this._serviceJWT.VerifyUserAccess(token, role)) {
+             return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("User is authorized")
+            };
+        }
+
+        else {
+            return new HttpResponseMessage(HttpStatusCode.Forbidden)
+            {
+                Content = new StringContent("User is not authorized")
+            };
+        }
+
     }
 
 }
