@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { IPackagingDTO } from 'src/app/shared/packagingDTO';
 import { Injectable } from '@angular/core';
 import { AppConfigServiceService } from 'src/app/services/app-config-service.service';
+import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class ListPackagingService {
 
   constructor(
     private http: HttpClient,
-    private appConfigService: AppConfigServiceService
+    private appConfigService: AppConfigServiceService,
+    private google: GoogleApiCommunicationService
     ) {
 
    }
@@ -22,6 +24,7 @@ export class ListPackagingService {
       const headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'authorization' : "Bearer "+ this.google.getJWT(),
       };
 
       const options = {
@@ -36,6 +39,7 @@ export class ListPackagingService {
      const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
     const options = {
@@ -50,6 +54,7 @@ export class ListPackagingService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
     const options = {

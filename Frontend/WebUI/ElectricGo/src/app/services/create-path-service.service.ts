@@ -3,13 +3,15 @@ import { HttpClient, HttpResponse } from "@angular/common/http";
 import IPathDTO from "../shared/pathDTO";
 import { Injectable } from '@angular/core';
 import { AppConfigServiceService } from "./app-config-service.service";
+import { GoogleApiCommunicationService } from "./google-api-communication.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreatePathServiceService {
   constructor(private http: HttpClient,
-    private appConfigService: AppConfigServiceService) {
+    private appConfigService: AppConfigServiceService,
+    private google: GoogleApiCommunicationService,) {
 
   }
 
@@ -18,6 +20,7 @@ export class CreatePathServiceService {
      const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
     //set the http options

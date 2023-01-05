@@ -20,7 +20,7 @@ export class GetTrucksService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'authorization' : this.google.getJWT(),
+      'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
     //set the http options
@@ -38,7 +38,7 @@ export class GetTrucksService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'authorization' : this.google.getJWT(),
+      'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
     //set the http options
@@ -56,7 +56,7 @@ export class GetTrucksService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'authorization' : this.google.getJWT(),
+      'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
     //set the http options
@@ -75,7 +75,7 @@ export class GetTrucksService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'authorization' : this.google.getJWT(),
+      'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
     //set the http options
@@ -87,7 +87,5 @@ export class GetTrucksService {
     this.truckParamURL = this.appConfigService.getLogisticsURL() + this.appConfigService.getTruckByParamURL() + "/plate/" + plate;
     return this.http.delete<any>(this.truckParamURL, options).toPromise();
   }
-
-
 
 }

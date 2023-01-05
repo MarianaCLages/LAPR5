@@ -30,14 +30,18 @@ export default class AuthRepo implements IAuthRepo {
   }
 
   async verifyRole(user: IUserAuthDTO): Promise<Result<string>> {
+
+    var token =  await config.jwtTokenClient;
+
     const role = await fetch(config.userRepoAPIAddress + user.email,
       {
         method: "get",
         agent: this.httpsAgent,
         headers: {
-          authentication: "Beaver " + config.jwtTokenClient
+          'Authorization': token,
         }
       });
+
     if (role.status === 200) {
       const json = await role.json();
       return Result.ok(json.role);

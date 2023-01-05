@@ -2,6 +2,7 @@ import { AppConfigServiceService } from './app-config-service.service';
 import { HttpClient } from '@angular/common/http';
 import IPathDTO from '../shared/pathDTO';
 import { Injectable } from '@angular/core';
+import { GoogleApiCommunicationService } from './google-api-communication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class GetPathsService {
 
   constructor(
     private http: HttpClient,
-    private appConfigService: AppConfigServiceService
+    private appConfigService: AppConfigServiceService,
+    private google: GoogleApiCommunicationService,
   ) {
   }
   getPathsByBeginningAndEndingWarehouse(benWare: any, endWare: any): any {
@@ -20,6 +22,7 @@ export class GetPathsService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
     //set the http options
@@ -34,6 +37,7 @@ export class GetPathsService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
     //set the http options
@@ -48,6 +52,7 @@ export class GetPathsService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
     //set the http options
@@ -63,6 +68,7 @@ export class GetPathsService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
     //set the http options

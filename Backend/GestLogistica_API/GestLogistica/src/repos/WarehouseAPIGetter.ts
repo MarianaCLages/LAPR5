@@ -17,12 +17,13 @@ export default class WarehouseAPIGetter implements IWarehouseRepo {
     async exists(warehouseId: string): Promise<boolean> {
         const address = config.warehouseAPIAdress;
         const url = address + warehouseId;
+        var token =  await config.jwtTokenClient;
         try {
             const responseChegada = await fetch(url, {
                 method: 'GET',
                 agent: this.httpsAgent,
                 headers: {
-                    authentication: "Beaver " + config.jwtTokenClient
+                    'Authorization': token,
                 }
             });
 

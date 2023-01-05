@@ -22,11 +22,14 @@ export default class OrderAPIGetter implements IOrderRepo {
     const splitArr = orderId.split("/");
 
     const url = address + "nextId=" + splitArr[0] + "&data=" + splitArr[1];
+
+    var token =  await config.jwtTokenClient;
+
     const responseChegada = await fetch(url, {
       method: 'GET',
       agent: this.httpsAgent,
       headers: {
-        authentication: "Beaver " + config.jwtTokenClient
+        'Authorization': token,
       }
     });
     const valid = responseChegada.status === 200;

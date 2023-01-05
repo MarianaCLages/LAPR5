@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {AppConfigServiceService} from "../../services/app-config-service.service";
+import { GoogleApiCommunicationService } from "src/app/services/google-api-communication.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import {AppConfigServiceService} from "../../services/app-config-service.service
 export class GetHeuristicService {
   constructor(
     private http: HttpClient,
-    private appConfigService: AppConfigServiceService
+    private appConfigService: AppConfigServiceService,
+    private google: GoogleApiCommunicationService
   ) {
   }
 
@@ -26,6 +28,7 @@ export class GetHeuristicService {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'authorization' : "Bearer "+ this.google.getJWT(),
       },
     });
 
@@ -37,6 +40,7 @@ export class GetHeuristicService {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'Authorization': this.google.getJWT(),
       },
     });
 
@@ -74,6 +78,7 @@ export class GetHeuristicService {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'authorization' : "Bearer "+ this.google.getJWT(),
       }
     })
 
@@ -85,6 +90,7 @@ export class GetHeuristicService {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'Authorization': this.google.getJWT(),
       },
     });
 
@@ -120,6 +126,7 @@ export class GetHeuristicService {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'authorization' : "Bearer "+ this.google.getJWT(),
       }
     })
 
@@ -131,6 +138,7 @@ export class GetHeuristicService {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'Authorization': this.google.getJWT(),
       },
     });
 
