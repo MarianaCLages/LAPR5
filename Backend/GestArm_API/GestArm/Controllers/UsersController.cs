@@ -270,6 +270,7 @@ public class UserController : ControllerBase
         try
         {
             var order = await _service.SoftDeleteAsync(email);
+            var anon = await _service.AnonymizeUser(email);
 
             if (order == false)
                 throw new BusinessRuleValidationException("No user with that email was found!");
