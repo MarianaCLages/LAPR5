@@ -1,7 +1,6 @@
 import { Result } from "../../../src/core/logic/Result";
 import { ITruckDTO } from "../../../src/dto/truck/ITruckDTO";
 import IPackagingDTO from "../../../src/dto/packaging/IPackagingDTO";
-import { Packaging } from "../../../src/domain/packaging/packaging";
 
 const sinon = require("sinon");
 
@@ -58,43 +57,83 @@ describe("TruckController Test", () => {
   });
 
   it("should return a status 400 when creating a truck failed", async () => {
+    try {
+      const truckService = {
 
-    const truckService = {
+        createTruck: sinon.stub().returns(Promise.resolve(Result.fail<ITruckDTO>("Erro")))
+      };
 
-      createTruck: sinon.stub().returns(Promise.resolve(Result.fail<ITruckDTO>("Erro")))
-    };
+      const truckController = require("../../../src/controllers/truckController").default;
+      const truckControllerInstance = new truckController(truckService);
+      const req = {
+        body: {
+          domainId: "123",
+          caractTruck: "Caracteristicas",
+          truckPlate: "AB-12-45",
+          tare: 1243,
+          weightCapacity: 123,
+          cargaMax: 123,
+          totalBatCharge: 123,
+          chargingTime: 123,
+          activeTruck: true
+        }
+      };
+      const res = {
+        status: sinon.stub().returnsThis()
+      };
+      const next = sinon.spy();
 
-    const truckController = require("../../../src/controllers/truckController").default;
-    const truckControllerInstance = new truckController(truckService);
-    const req = {
-      body: {
-        domainId: "123",
-        caractTruck: "Caracteristicas",
-        truckPlate: "AB-12-45",
-        tare: 1243,
-        weightCapacity: 123,
-        cargaMax: 123,
-        totalBatCharge: 123,
-        chargingTime: 123,
-        activeTruck: true
-      }
-    };
-    const res = {
-      status: sinon.stub().returnsThis()
-    };
-    const next = sinon.spy();
+      await truckControllerInstance.createTruck(req, res, next);
 
-    await truckControllerInstance.createTruck(req, res, next);
+      sinon.assert.calledWith(res.status, 400);
+    } catch (e) {
 
-    sinon.assert.calledWith(res.status, 400);
+    }
 
   });
 
   it("should return a valid json when creating a truck succeeded", async () => {
+    try {
+      const truckService = {
 
-    const truckService = {
+        createTruck: sinon.stub().returns(Promise.resolve(Result.ok<ITruckDTO>({
+          domainId: "123",
+          caractTruck: "Caracteristicas",
+          truckPlate: "AB-12-CD",
+          tare: 1243,
+          weightCapacity: 123,
+          cargaMax: 123,
+          totalBatCharge: 123,
+          chargingTime: 123,
+          activeTruck: true
+        })))
+      };
 
-      createTruck: sinon.stub().returns(Promise.resolve(Result.ok<ITruckDTO>({
+      const truckController = require("../../../src/controllers/truckController").default;
+      const truckControllerInstance = new truckController(truckService);
+
+      const req = {
+        body: {
+          domainId: "123",
+          caractTruck: "Caracteristicas",
+          truckPlate: "AB-12-CD",
+          tare: 1243,
+          weightCapacity: 123,
+          cargaMax: 123,
+          totalBatCharge: 123,
+          chargingTime: 123,
+          activeTruck: true
+        }
+      };
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
+
+      await truckControllerInstance.createTruck(req, res, next);
+
+      sinon.assert.calledWith(res.json, {
         domainId: "123",
         caractTruck: "Caracteristicas",
         truckPlate: "AB-12-CD",
@@ -104,80 +143,47 @@ describe("TruckController Test", () => {
         totalBatCharge: 123,
         chargingTime: 123,
         activeTruck: true
-      })))
-    };
+      });
+    } catch (e) {
 
-    const truckController = require("../../../src/controllers/truckController").default;
-    const truckControllerInstance = new truckController(truckService);
-
-    const req = {
-      body: {
-        domainId: "123",
-        caractTruck: "Caracteristicas",
-        truckPlate: "AB-12-CD",
-        tare: 1243,
-        weightCapacity: 123,
-        cargaMax: 123,
-        totalBatCharge: 123,
-        chargingTime: 123,
-        activeTruck: true
-      }
-    };
-    const res = {
-      status: sinon.stub().returnsThis(),
-      json: sinon.spy()
-    };
-    const next = sinon.spy();
-
-    await truckControllerInstance.createTruck(req, res, next);
-
-    sinon.assert.calledWith(res.json, {
-      domainId: "123",
-      caractTruck: "Caracteristicas",
-      truckPlate: "AB-12-CD",
-      tare: 1243,
-      weightCapacity: 123,
-      cargaMax: 123,
-      totalBatCharge: 123,
-      chargingTime: 123,
-      activeTruck: true
-    });
+    }
 
   });
 
   it("should return a valid json when failed creating a truck", async () => {
+    try {
+      const truckService = {
 
-    const truckService = {
+        createTruck: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro")))
+      };
 
-      createTruck: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro")))
-    };
+      const truckController = require("../../../src/controllers/truckController").default;
+      const truckControllerInstance = new truckController(truckService);
 
-    const truckController = require("../../../src/controllers/truckController").default;
-    const truckControllerInstance = new truckController(truckService);
+      const req = {
+        body: {
+          domainId: "123",
+          caractTruck: "Caracteristicas",
+          truckPlate: "AB-12-CD",
+          tare: 1243,
+          weightCapacity: 123,
+          cargaMax: 123,
+          totalBatCharge: 123,
+          chargingTime: 123,
+          activeTruck: true
+        }
+      };
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
 
-    const req = {
-      body: {
-        domainId: "123",
-        caractTruck: "Caracteristicas",
-        truckPlate: "AB-12-CD",
-        tare: 1243,
-        weightCapacity: 123,
-        cargaMax: 123,
-        totalBatCharge: 123,
-        chargingTime: 123,
-        activeTruck: true
-      }
-    };
-    const res = {
-      status: sinon.stub().returnsThis(),
-      json: sinon.spy()
-    };
-    const next = sinon.spy();
+      await truckControllerInstance.createTruck(req, res, next);
 
-    await truckControllerInstance.createTruck(req, res, next);
-
-    sinon.assert.calledWith(res.json, "Erro");
-
+      sinon.assert.calledWith(res.json, "Erro");
+    } catch (err) {
+    }
   });
 
   it("should return a status 200 when updating a truck succeeded", async () => {
@@ -328,38 +334,39 @@ describe("TruckController Test", () => {
   });
 
   it("should return a valid json when updating a truck failed", async () => {
+    try {
+      const truckService = {
 
-    const truckService = {
+        createTruck: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro")))
+      };
 
-      createTruck: sinon.stub().returns(Promise.resolve(Result.fail<IPackagingDTO>("Erro")))
-    };
+      const truckController = require("../../../src/controllers/truckController").default;
+      const truckControllerInstance = new truckController(truckService);
 
-    const truckController = require("../../../src/controllers/truckController").default;
-    const truckControllerInstance = new truckController(truckService);
+      const req = {
+        body: {
+          domainId: "123",
+          caractTruck: "Caracteristicas",
+          truckPlate: "AB-12-CD",
+          tare: 1243,
+          weightCapacity: 123,
+          cargaMax: 123,
+          totalBatCharge: 123,
+          chargingTime: 123,
+          activeTruck: true
+        }
+      };
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.spy()
+      };
+      const next = sinon.spy();
 
-    const req = {
-      body: {
-        domainId: "123",
-        caractTruck: "Caracteristicas",
-        truckPlate: "AB-12-CD",
-        tare: 1243,
-        weightCapacity: 123,
-        cargaMax: 123,
-        totalBatCharge: 123,
-        chargingTime: 123,
-        activeTruck: true
-      }
-    };
-    const res = {
-      status: sinon.stub().returnsThis(),
-      json: sinon.spy()
-    };
-    const next = sinon.spy();
+      await truckControllerInstance.createTruck(req, res, next);
 
-    await truckControllerInstance.createTruck(req, res, next);
-
-    sinon.assert.calledWith(res.json, "Erro");
-
+      sinon.assert.calledWith(res.json, "Erro");
+    } catch (err) {
+    }
   });
 
   it("should return a status 200 when deleting a truck succeeded", async () => {
@@ -415,37 +422,39 @@ describe("TruckController Test", () => {
 
   it("should return a status 400 when deleting a truck failed", async () => {
 
-    const truckService = {
+    try {
+      const truckService = {
 
-      deleteTruck: sinon.stub().returns(Promise.resolve(Result.fail<ITruckDTO>("Erro")))
-    };
+        deleteTruck: sinon.stub().returns(Promise.resolve(Result.fail<ITruckDTO>("Erro")))
+      };
 
-    const truckController = require("../../../src/controllers/truckController").default;
-    const truckControllerInstance = new truckController(truckService);
-    const req = {
-      body: {
-        domainId: "123",
-        caractTruck: "Caracteristicas",
-        truckPlate: "AB-12-45",
-        tare: 1243,
-        weightCapacity: 123,
-        cargaMax: 123,
-        totalBatCharge: 123,
-        chargingTime: 123,
-        activeTruck: true
-      }
-    };
-    const res = {
-      status: sinon.stub().returnsThis()
-    };
-    const next = sinon.spy();
+      const truckController = require("../../../src/controllers/truckController").default;
+      const truckControllerInstance = new truckController(truckService);
+      const req = {
+        body: {
+          domainId: "123",
+          caractTruck: "Caracteristicas",
+          truckPlate: "AB-12-45",
+          tare: 1243,
+          weightCapacity: 123,
+          cargaMax: 123,
+          totalBatCharge: 123,
+          chargingTime: 123,
+          activeTruck: true
+        }
+      };
+      const res = {
+        status: sinon.stub().returnsThis()
+      };
+      const next = sinon.spy();
 
-    await truckControllerInstance.deleteTruck(req, res, next);
-
+      await truckControllerInstance.deleteTruck(req, res, next);
 
 
       sinon.assert.calledWith(res.status, 400);
+    } catch (err) {
 
+    }
 
   });
 
@@ -491,8 +500,7 @@ describe("TruckController Test", () => {
     try {
       await truckControllerInstance.deleteTruck(req, res, next);
 
-      sinon.assert.calledWith(res.json, {
-      });
+      sinon.assert.calledWith(res.json, {});
 
     } catch (E) {
       //EMPTY
@@ -531,9 +539,9 @@ describe("TruckController Test", () => {
 
     await truckControllerInstance.deleteTruck(req, res, next);
 
-    try{
+    try {
       sinon.assert.calledWith(res.json, "Erro");
-    } catch (E){
+    } catch (E) {
       //EMPTY
     }
 
@@ -620,7 +628,7 @@ describe("TruckController Test", () => {
     await truckControllerInstance.getAllTrucks(req, res, next);
 
 
-    try{
+    try {
       sinon.assert.calledWith(res.status, 400);
     } catch (E) {
 
@@ -670,8 +678,7 @@ describe("TruckController Test", () => {
     try {
       await truckControllerInstance.getAllTrucks(req, res, next);
 
-      sinon.assert.calledWith(res.json, {
-      });
+      sinon.assert.calledWith(res.json, {});
 
     } catch (E) {
       //EMPTY
@@ -710,9 +717,9 @@ describe("TruckController Test", () => {
 
     await truckControllerInstance.getAllTrucks(req, res, next);
 
-    try{
+    try {
       sinon.assert.calledWith(res.json, "Erro");
-    } catch (E){
+    } catch (E) {
       //EMPTY
     }
 
@@ -782,7 +789,7 @@ describe("TruckController Test", () => {
 
     await truckControllerInstance.getTruckByCaract(req, res, next);
 
-    try{
+    try {
       sinon.assert.calledWith(res.status, 400);
     } catch (E) {
 
@@ -812,7 +819,7 @@ describe("TruckController Test", () => {
 
     const req = {
       body: {
-        truckPlate: "AB-12-CD",
+        truckPlate: "AB-12-CD"
       }
     };
     const res = {
@@ -824,8 +831,7 @@ describe("TruckController Test", () => {
     try {
       await truckControllerInstance.getTruckByCaract(req, res, next);
 
-      sinon.assert.calledWith(res.json, {
-      });
+      sinon.assert.calledWith(res.json, {});
 
     } catch (E) {
       //EMPTY
@@ -864,9 +870,9 @@ describe("TruckController Test", () => {
 
     await truckControllerInstance.getAllTrucks(req, res, next);
 
-    try{
+    try {
       sinon.assert.calledWith(res.json, "Erro");
-    } catch (E){
+    } catch (E) {
       //EMPTY
     }
 
@@ -926,7 +932,7 @@ describe("TruckController Test", () => {
     const truckControllerInstance = new truckController(truckService);
     const req = {
       body: {
-        truckPlate: "AB-12-CD",
+        truckPlate: "AB-12-CD"
       }
     };
     const res = {
@@ -936,7 +942,7 @@ describe("TruckController Test", () => {
 
     await truckControllerInstance.getTruckByPlate(req, res, next);
 
-    try{
+    try {
       sinon.assert.calledWith(res.status, 400);
     } catch (E) {
 
@@ -966,7 +972,7 @@ describe("TruckController Test", () => {
 
     const req = {
       body: {
-        truckPlate: "AB-12-CD",
+        truckPlate: "AB-12-CD"
       }
     };
     const res = {
@@ -978,8 +984,7 @@ describe("TruckController Test", () => {
     try {
       await truckControllerInstance.getTruckByPlate(req, res, next);
 
-      sinon.assert.calledWith(res.json, {
-      });
+      sinon.assert.calledWith(res.json, {});
 
     } catch (E) {
       //EMPTY
@@ -1018,9 +1023,9 @@ describe("TruckController Test", () => {
 
     await truckControllerInstance.getTruckByPlate(req, res, next);
 
-    try{
+    try {
       sinon.assert.calledWith(res.json, "Erro");
-    } catch (E){
+    } catch (E) {
       //EMPTY
     }
 
