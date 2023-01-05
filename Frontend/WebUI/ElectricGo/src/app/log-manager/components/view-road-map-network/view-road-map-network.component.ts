@@ -79,6 +79,13 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   private pathsIncomingEdges = new Map<string, number[]>();
 
+  private reserveTrucksFromTrips : any[] = [];
+
+  private availableTrucksArr : any[] = []
+
+
+  private arrTrucks : any[] = [];
+
   constructor(
     private getWarehouseService: GetWarehouseServiceService,
     private getPathService: GetPathsService,
@@ -583,13 +590,16 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     glftLoader.load(
       'assets/truck/scene.gltf',
       (gltf) => {
-        this.truck = gltf.scene;
         gltf.scene.scale.set(0.003, 0.003, 0.003);
         gltf.scene.position.set(this.matosinhosX, this.matosinhosY, this.matosinhosZ + 0.4);
         gltf.scene.rotation.x = Math.PI / 2.0;
         gltf.scene.rotation.y = Math.PI / 2.0;
         gltf.scene.name = name;
-        this.roadMap.add(gltf.scene);
+        this.scene.add(gltf.scene);
+        this.truck = gltf.scene;
+
+        this.arrTrucks.push(this.truck);
+        console.log(this.truck.uuid)
       }
     );
   }
@@ -692,10 +702,10 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
     var params = {
       truckMovement : 'Manual',
-      Choose_Truck: this.availableTrucks,
-      Number_Of_Trucks: 1,
-      Music: false,
-      Music_Volume: 50,
+      'Choose truck': '',
+      'Number of trucks': 0,
+       Music: false,
+      'Music volume': 50,
       Camera: "Default"
     };
 
@@ -703,50 +713,53 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     this.gui.width = 300;
 
     // GUI controls
-    const truckFolder = this.gui.addFolder('Truck Information');
-    truckFolder.add(params,'truckMovement',['Manual','Automatic']).onChange(function(value) {
-      if(value == 'Automatic') {
-        component.stopManualMovement();
-        component.startAutomaticMovement();
-      }
+    const truckFolder = this.gui.addFolder('Manual Truck Information');
 
-      else {
-        component.stopAutomaticMovement();
-        component.startManualMovement();
-      }
+    // truckFolder.add(params,'truckMovement',['Manual','Automatic']).onChange(function(value) {
+    //   if(value == 'Automatic') {
+    //     component.stopManualMovement();
+    //     component.startAutomaticMovement();
+    //   }
 
-    });
+    //   else {
+    //     component.stopAutomaticMovement();
+    //     //Manual movement
+    //     component.updateTruckPosition();
+    //   }
 
-    truckFolder.add(params,'Choose_Truck', this.trucksInfo).onChange(function(value) {
+    // });
 
-      for(var i : number = 0 ; i < component.trucksInfo.length ; i++) {
-        if(component.trucksInfo[i] == value) {
-           component.truck = component.scene.getObjectByName(component.trucksInfo[i]);
+    console.log(this.trucksInfo)
+
+    truckFolder.add(params,'Choose truck', this.trucksInfo).onChange((value) => {
+
+      for(var i : number = 0 ; i < this.trucksInfo.length ; i++) {
+        if(this.trucksInfo[i] == value) {
+           this.truck = this.arrTrucks[i];
+           console.log(this.truck)
         }
       }
 
     });
 
-    truckFolder.open();
-
     // const manualTruckMovementFolder = this.gui.addFolder('Manual Truck Movement');
     // manualTruckMovementFolder.add(params,'Choose_Truck', params.Choose_Truck);
     // manualTruckMovementFolder.open();
 
-    const automaticTruckMovementFolder = this.gui.addFolder('Automatic Truck Movement');
-
     let selectedObject : any;
 
-    automaticTruckMovementFolder.add(params,'Number_Of_Trucks').min(1).max(component.trucksInfo.length).step(1).onChange(function(value) {
+    truckFolder.add(params,'Number of trucks').min(0).max(component.trucksInfo.length).step(1).onChange(function(value) {
       if(value > component.truckNumber) {
         for(var i = component.truckNumber ; i < value; i++) {
           component.loadTruckModel(component.trucksInfo[i]);
+          console.log(component.trucksInfo[i])
         }
       }
 
        if(value < component.truckNumber) {
         for(var i : number = value ; i < component.truckNumber ; i++) {
           selectedObject = component.scene.getObjectByName(component.trucksInfo[i]);
+          console.log(selectedObject)
           component.scene.remove( selectedObject );
         }
       }
@@ -755,7 +768,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
     });
 
-    automaticTruckMovementFolder.open();
+    truckFolder.open();
 
     const geralFolder = this.gui.addFolder('Geral');
     geralFolder.add(params, 'Music').onChange(function(value) {
@@ -767,7 +780,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       }
     });
 
-    geralFolder.add(params,'Music_Volume').min(0).max(100).step(1).onChange(function(value) {
+    geralFolder.add(params,'Music volume').min(0).max(100).step(1).onChange(function(value) {
       component.sound.setVolume(value * 0.01);
     });
 
@@ -813,12 +826,12 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       requestAnimationFrame(render);
       component.controls.update();
 
-      if (params.truckMovement == 'Manual') {
-        component.updateTruckPosition();
-      }
-
       const delta = component.timeGlobal.update().getDelta();
       component.entityManagerGlobal.update(delta);
+
+      if(params.truckMovement == 'Manual') {
+        component.updateTruckPosition();
+      }
 
       component.render.render(component.scene, component.camera);
       component.render.setPixelRatio(devicePixelRatio);
@@ -872,9 +885,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   private updateTruckPosition() {
     document.addEventListener("keydown",event => this.myFunc(event));
-
-    //Atualizar para mais tarde a camera frontal estar dentro do camião e fazer 1º pessoa e 3º pessoa
-    //this.camera.position.set(this.matosinhosX, this.matosinhosY, this.matosinhosZ);
   }
 
   private myFunc(evt : KeyboardEvent){
@@ -921,6 +931,10 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
     //HARD CODED NEEDS UPDATE
     const vehiclePath = ["C05","C55"];
+
+    this.reserveTrucks();
+    this.preparePossibleTrucksToChoose();
+
     const path = new YUKA.Path();
     let flag : boolean = false;
     let positions : any[] = [];
@@ -961,8 +975,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
     }
 
-
-
     console.log(path);
 
     path.loop = true;
@@ -999,22 +1011,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     }
   );
 
-
-    // vehicleM.matrixAutoUpdate = false;
-
-    // for(let i = 0 ; i < p.length ; i++) {
-    //   const waypoint = path._waypoints[i];
-    //   position.push(waypoint.x, waypoint.y, waypoint.z);
-    // }
-
-     const lineGeomety = new THREE.BufferGeometry();
-     lineGeomety.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-
-     const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
-     const lines = new THREE.LineLoop(lineGeomety, lineMaterial);
-     this.scene.add(lines);
-
-     const time = new YUKA.Time();
+    const time = new YUKA.Time();
 
     this.timeGlobal = time;
     this.entityManagerGlobal = entityManager;
@@ -1025,16 +1022,32 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   }
 
   private stopAutomaticMovement(){
-    this.entityManagerGlobal.clear();
-    this.timeGlobal.stop();
+    const selectedObject = this.scene.getObjectByName('T10')!;
+    this.scene.remove( selectedObject );
   }
 
   private stopManualMovement(){
-    this.entityManagerGlobal.clear();
-    this.timeGlobal.stop();
+    document.removeEventListener("keydown",event => this.myFunc(event));
   }
 
   private startManualMovement(){
+  }
+
+  private reserveTrucks() {
+    this.reserveTrucksFromTrips.push('T10');
+  }
+
+  public preparePossibleTrucksToChoose() {
+
+    let trucksAux : string[] = [];
+
+    for(let i : number = 0; i < this.trucksInfo.length; i++){
+      if(!this.reserveTrucksFromTrips.includes(this.trucksInfo[i])){
+        trucksAux.push(this.trucksInfo[i]);
+      }
+    }
+
+    this.trucksInfo = trucksAux;
 
   }
 
