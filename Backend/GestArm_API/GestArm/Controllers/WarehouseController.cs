@@ -276,14 +276,6 @@ public class WarehouseController : ControllerBase
     [HttpPut("delete")]
     public async Task<ActionResult<bool>> DesactivateAsync(string delete)
     {
-        var auth = await VerifyUserAccess();
-
-        if(auth.StatusCode == HttpStatusCode.Unauthorized)
-            return Unauthorized(auth.ReasonPhrase.ToString());
-
-        else if (auth.StatusCode == HttpStatusCode.Forbidden)
-            return Forbid(auth.ReasonPhrase?.ToString());
-
         var warehouseCheck = await _service.GetByWarehouseIdAsync(delete);
 
         if (warehouseCheck == null) return NotFound("No warehouse with that AlphaNumericID was found!");
@@ -298,14 +290,6 @@ public class WarehouseController : ControllerBase
     [HttpPut("activate")]
     public async Task<ActionResult<bool>> ActivateAsync(string activate)
     {
-        var auth = await VerifyUserAccess();
-
-        if(auth.StatusCode == HttpStatusCode.Unauthorized)
-            return Unauthorized(auth.ReasonPhrase.ToString());
-
-        else if (auth.StatusCode == HttpStatusCode.Forbidden)
-            return Forbid(auth.ReasonPhrase?.ToString());
-        
         var warehouseCheck = await _service.GetByWarehouseIdAsync(activate);
 
         if (warehouseCheck == null) return NotFound("No warehouse with that AlphaNumericID was found!");

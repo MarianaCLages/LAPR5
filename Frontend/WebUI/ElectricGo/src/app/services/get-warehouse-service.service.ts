@@ -3,6 +3,7 @@ import {ICreateWarehouseDTO} from "../shared/createWarehouseDTO";
 import {Injectable} from '@angular/core';
 import {firstValueFrom} from "rxjs";
 import { AppConfigServiceService } from "./app-config-service.service";
+import { GoogleApiCommunicationService } from "./google-api-communication.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class GetWarehouseServiceService {
 
   constructor(
     private http: HttpClient,
+    private service: GoogleApiCommunicationService,
     private appConfigService: AppConfigServiceService
   ) {
   }
@@ -20,6 +22,7 @@ export class GetWarehouseServiceService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Authorization': this.service.getJWT()
     };
 
     //set the http options

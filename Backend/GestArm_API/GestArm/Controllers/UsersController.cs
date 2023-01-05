@@ -163,14 +163,6 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<UserDTO>> AddAsync(CreateUserDTO dto)
     {
-        var auth = await VerifyUserAccess();
-
-        if(auth.StatusCode == HttpStatusCode.Unauthorized)
-            return Unauthorized(auth.ReasonPhrase.ToString());
-
-        else if (auth.StatusCode == HttpStatusCode.Forbidden)
-            return Forbid(auth.ReasonPhrase?.ToString());
-        
         try
         {
             var user = await _service.AddAsync(dto);
@@ -430,8 +422,8 @@ public class UserController : ControllerBase
             {
                 Content = new StringContent("No Authorization header is present")
             };
-        } 
-
+        }
+        
         string[] role = {"Admin"};
 
         if(await this._serviceJWT.VerifyUserAccess(token, role)) {

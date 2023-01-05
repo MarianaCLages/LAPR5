@@ -2,12 +2,14 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {ActivatedWarehouseDTO} from "../shared/ActivatedWarehouseDTO";
 import { Injectable } from '@angular/core';
 import { AppConfigServiceService } from './app-config-service.service';
+import { GoogleApiCommunicationService } from './google-api-communication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetAllWarehouseService {
-  constructor(private http: HttpClient,  private appConfigService: AppConfigServiceService,) {}
+  constructor(private http: HttpClient,  private appConfigService: AppConfigServiceService,
+    private service: GoogleApiCommunicationService) {}
 
   async getAllWarehouse(): Promise<any>{
     const getAllWarehouseURL = this.appConfigService.getWarehouseURL() + this.appConfigService.getAllWarehouses();
@@ -17,6 +19,7 @@ export class GetAllWarehouseService {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'Authorization': this.service.getJWT(),
       }
     })
 
@@ -30,6 +33,7 @@ export class GetAllWarehouseService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Authorization': this.service.getJWT()
     };
 
     //set the http options
@@ -48,6 +52,7 @@ export class GetAllWarehouseService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Authorization': this.service.getJWT()
     };
 
     //set the http options
@@ -66,6 +71,7 @@ export class GetAllWarehouseService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Authorization': this.service.getJWT()
     };
 
     //set the http options

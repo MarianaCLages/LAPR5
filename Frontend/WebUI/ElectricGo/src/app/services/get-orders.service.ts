@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import IOrderDTO from '../shared/orderDTO';
 import { AppConfigServiceService } from './app-config-service.service';
+import { GoogleApiCommunicationService } from './google-api-communication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class GetOrdersService {
   constructor(
     private http: HttpClient,
     private appConfigService: AppConfigServiceService,
+    private service: GoogleApiCommunicationService,
   ) {}
 
   private orderAllURL : any;
@@ -21,6 +23,7 @@ export class GetOrdersService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Authorization': this.service.getJWT()
     };
 
     //set the http options
@@ -38,6 +41,7 @@ export class GetOrdersService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Authorization': this.service.getJWT()
     };
 
     //set the http options
@@ -57,6 +61,7 @@ export class GetOrdersService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Authorization': this.service.getJWT()
     };
 
     //set the http options
@@ -79,6 +84,7 @@ export class GetOrdersService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Authorization': this.service.getJWT()
     };
 
     //set the http options
@@ -96,6 +102,7 @@ export class GetOrdersService {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Authorization': this.service.getJWT()
     };
 
     //set the http options
