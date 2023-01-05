@@ -2,6 +2,7 @@ using GestArm.Domain.Users;
 using GestArm.Domain.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http;
+using System.Net;
 
 namespace GestArm.Controllers;
 
@@ -131,6 +132,14 @@ public class UserController : ControllerBase
     [HttpGet("byId")]
     public async Task<ActionResult<UserDTO>> GetById(Guid id)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+        
         try
         {
             var user = await _service.GetByIdAsync(new UserID(id));
@@ -154,6 +163,14 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<UserDTO>> AddAsync(CreateUserDTO dto)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+        
         try
         {
             var user = await _service.AddAsync(dto);
@@ -175,6 +192,14 @@ public class UserController : ControllerBase
     [HttpPut("byEmail")]
     public async Task<ActionResult<UserDTO>> AdminUpdateAsync(string email, UserDTO userReceived)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+        
         try
         {
             var user = await _service.GetByEmail(email);
@@ -206,6 +231,15 @@ public class UserController : ControllerBase
     [HttpPut("anonymize")]
     public async Task<ActionResult<UserDTO>> AnonymizeAsync(string email)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+        
+        //Depois podes tirar este if Ines
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+        
         try
         {
             var user = await _service.GetByEmail(email);
@@ -233,6 +267,14 @@ public class UserController : ControllerBase
     [HttpDelete("byEmailDelete")]
     public async Task<ActionResult<bool>> SoftDeleteAsync(string email)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+        
         try
         {
             var order = await _service.SoftDeleteAsync(email);
@@ -256,6 +298,14 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllAsync()
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+        
         try
         {
             var users = await _service.GetAllAsync();
@@ -280,6 +330,14 @@ public class UserController : ControllerBase
     [HttpGet("byEmail")]
     public async Task<ActionResult<UserDTO>> GetByEmailAsync(string email)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+        
         try
         {
             var user = await _service.GetByEmail(email);
@@ -305,6 +363,14 @@ public class UserController : ControllerBase
     [HttpGet("byPhoneNumber")]
     public async Task<ActionResult<UserDTO>> GetByPhoneNumber(string phoneNumber)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+        
         try
         {
             var user = await _service.GetByPhoneNumber(phoneNumber);
@@ -329,6 +395,14 @@ public class UserController : ControllerBase
     [HttpGet("byUserName")]
     public async Task<ActionResult<IEnumerable<UserDTO>>> GetByUserName(string userName)
     {
+        var auth = await VerifyUserAccess();
+
+        if(auth.StatusCode == HttpStatusCode.Unauthorized)
+            return Unauthorized(auth.ReasonPhrase.ToString());
+
+        else if (auth.StatusCode == HttpStatusCode.Forbidden)
+            return Forbid(auth.ReasonPhrase?.ToString());
+
         try
         {
             var users = await _service.GetByUserName(userName);
@@ -346,6 +420,34 @@ public class UserController : ControllerBase
         {
             return NotFound("An error occured while looking for the order! (No user was found!)");
         }
+    }
+
+    private async Task<HttpResponseMessage> VerifyUserAccess() {
+        var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+        if(token == null) {
+            return new HttpResponseMessage(HttpStatusCode.Unauthorized)
+            {
+                Content = new StringContent("No Authorization header is present")
+            };
+        } 
+
+        string[] role = {"Admin"};
+
+        if(await this._serviceJWT.VerifyUserAccess(token, role)) {
+             return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("User is authorized")
+            };
+        }
+
+        else {
+            return new HttpResponseMessage(HttpStatusCode.Forbidden)
+            {
+                Content = new StringContent("User is not authorized")
+            };
+        }
+
     }
 
 }
