@@ -923,7 +923,7 @@ resto([],[]).
 resto([X|Entregas], [X|L2]):- resto(Entregas, L2).
 
 maisCamioes(_, [], _).
-maisCamioes([X|Camioes], [Y|Entregas], [X*Y|Atribuicoes]) :- maisCamioes(Camioes, Entregas, Atribuicoes).
+maisCamioes([X|Camioes],[Y|Entregas], [X*Y|Atribuicoes]) :- maisCamioes(Camioes, Entregas, Atribuicoes).
 
 %-------------------------BEST PATH-------------------------
 
