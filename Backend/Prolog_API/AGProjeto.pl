@@ -1,16 +1,16 @@
 %entrega(<idEntrega>,<data>,<massaEntrefa>,<armazemEntrega>,<tempoColoc>,<tempoRet>)
 entrega(4439, 20221205, 200, 1, 8, 10).
-entrega(4499, 20221205, 55, 5, 0, 0).
 entrega(4438, 20221205, 150, 9, 7, 9).
 entrega(4445, 20221205, 100, 3, 5, 7).
 entrega(4443, 20221205, 120, 8, 6, 8).
 entrega(4449, 20221205, 300, 11, 15, 20).
+entrega(4420, 20221205, 300, 16, 15, 20).
 :-dynamic entrega_armazens/1.
 :-dynamic entregas/1.
 :-dynamic less_time/1.
 :-dynamic less_ind/1.
 cam(eTruck01,100).
-entrega_armazens([1,5,9,3,8,11]).
+entrega_armazens([1,9,3,8,11,16]).
 
 entregas([4439,4499,4438,4445,4443,4449]).
 %carateristicasCam(<nome_camiao>,<tara>,<capacidade_carga>,<carga_total_baterias>,<autonomia>,<t_recarr_bat_20a80>).
@@ -468,7 +468,9 @@ massa_tempo_act(Act,[[A|_]|Novos],X):-
 
 gera:-
     %retract(num_ind(_)),
-    assertz(num_ind(6)),
+    entrega_armazens(A),
+    length(A,NA),
+    assertz(num_ind(NA)),
     Temp = 9999,
     Less = [1,2,3],
     BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparação
