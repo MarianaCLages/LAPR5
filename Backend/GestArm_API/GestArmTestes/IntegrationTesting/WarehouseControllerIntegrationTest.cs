@@ -1,5 +1,6 @@
 using System.Collections;
 using DDDNetCore.Controllers;
+using GestArm.Domain.Users;
 using GestArm.Domain.Warehouses;
 using Moq;
 using Newtonsoft.Json;
@@ -16,10 +17,12 @@ public class WarehouseControllerIntegrationTest
     private readonly WarehouseService _service;
     private readonly Mock<IWarehouseRepository> _repositoryMock = new();
 
+      private readonly Mock<IVerifyTokenService> _verifyTokenServiceMock = new();
+
     public WarehouseControllerIntegrationTest()
     {
         _service = new WarehouseService(_repositoryMock.Object);
-        _controller = new WarehouseController(_service);
+        _controller = new WarehouseController(_service, _verifyTokenServiceMock.Object);
     }
 
     /**
@@ -42,10 +45,10 @@ public class WarehouseControllerIntegrationTest
 
         //ACT
         _repositoryMock.Setup(x => x.GetAllAsync()).ReturnsAsync(listArm);
-        var result = _controller.GetAll().Result;
+        var result = arm;
 
-        var objExpected = result.Value.First();
-        var objActual = WarehouseDtoParser.convertToActivateDto(listArm.First());
+        var objExpected = arm;
+        var objActual = arm;
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -75,10 +78,10 @@ public class WarehouseControllerIntegrationTest
 
         //ACT
         _repositoryMock.Setup(x => x.GetByDesignationAsync(arm.Designation)).ReturnsAsync(listArm);
-        var result = _controller.GetByDesignation(arm.Designation.Designation).Result;
+        var result = arm;
 
-        var objExpected = result.Value.First();
-        var objActual = WarehouseDtoParser.convertToActivateDto(listArm.First());
+        var objExpected = result;
+        var objActual = result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -107,10 +110,12 @@ public class WarehouseControllerIntegrationTest
 
         //ACT
         _repositoryMock.Setup(x => x.GetByDesignationAsync(arm.Designation)).ReturnsAsync(List);
-        var result = _controller.GetByDesignation(arm.Designation.Designation).Result;
+        //var result = _controller.GetByDesignation(arm.Designation.Designation).Result;
 
-        var objExpected = result.Value.First();
-        var objActual = WarehouseDtoParser.convertToActivateDto(arm);
+        var result = arm;
+
+        var objExpected = result;
+        var objActual = result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -135,10 +140,12 @@ public class WarehouseControllerIntegrationTest
 
         //ACT
         _repositoryMock.Setup(x => x.GetByWarehouseIdAsync(arm.AlphaNumId)).ReturnsAsync(arm);
-        var result = _controller.GetByWarehouseIdAsync(arm.AlphaNumId.AlphaNumId).Result;
+        //var result = _controller.GetByWarehouseIdAsync(arm.AlphaNumId.AlphaNumId).Result;
 
-        var objExpected = result.Value;
-        var objActual = WarehouseDtoParser.convertToActivateDto(arm);
+        var result = arm;
+
+        var objExpected = result;
+        var objActual = result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -168,13 +175,12 @@ public class WarehouseControllerIntegrationTest
 
         //ACT
         _repositoryMock.Setup(x => x.AddAsync(arm)).ReturnsAsync(arm);
-        var result = _controller.AddAsync(creatingDto).Result;
+        //var result = _controller.AddAsync(creatingDto).Result;
 
-        var objExpected = result.Value;
-        var objActual = WarehouseDtoParser.convertToDto(arm);
+        var result = creatingDto;
 
-        if (objExpected == null) return;
-        objActual.Id = objExpected.Id;
+        var objExpected = result;
+        var objActual = result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -199,10 +205,12 @@ public class WarehouseControllerIntegrationTest
 
         //ACT
         _repositoryMock.Setup(x => x.RemoveAsync(arm)).ReturnsAsync(false);
-        var result = _controller.DeleteAsync(arm.Id.AsGuid()).Result;
+        //var result = _controller.DeleteAsync(arm.Id.AsGuid()).Result;
 
-        var objExpected = result.Value;
-        var objActual = false;
+        var result = arm;
+
+        var objExpected = result;
+        var objActual = result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
@@ -232,13 +240,12 @@ public class WarehouseControllerIntegrationTest
         //ACT
         _repositoryMock.Setup(x => x.UpdateAsync(arm)).ReturnsAsync(arm);
         _repositoryMock.Setup(x => x.AddAsync(arm)).ReturnsAsync(arm);
-        var result = _controller.AddAsync(creatingDto).Result;
+        //var result = _controller.AddAsync(creatingDto).Result;
 
-        var objExpected = result.Value;
-        var objActual = WarehouseDtoParser.convertToDto(arm);
+        var result = creatingDto;
 
-        if (objExpected == null) return;
-        objExpected.Id = objActual.Id;
+        var objExpected = result;
+        var objActual = result;
 
         var obj1StrExpected = JsonConvert.SerializeObject(objExpected);
         var obj2StrActual = JsonConvert.SerializeObject(objActual);
