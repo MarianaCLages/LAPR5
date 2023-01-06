@@ -1,10 +1,10 @@
 export class ICreateTripDTO{
+
     tripIdentifier: string;
     tripTruck: string;
     tripDay: string;
     tripWarehouses: string[];
     tripOrders: string[];
-
 
     constructor(tripIdentifier : string, tripTruck : string, tripDay : string, tripWarehouses : string[], tripOrders : string[]) {
 

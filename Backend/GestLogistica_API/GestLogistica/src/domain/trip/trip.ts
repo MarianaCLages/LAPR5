@@ -47,7 +47,7 @@ export class Trip extends AggregateRoot<tripProps>{
     return this.props.tripDay;
   }
 
-  public static create(tripDTO: ICreateTripDTO) : Result<Trip>{
+  public static create(tripDTO: ICreateTripDTO, id?: UniqueEntityID) : Result<Trip>{
     const guardProps = [
       {argument: tripDTO.tripIdentifier, argumentName: 'tripIdentifier'},
       {argument: tripDTO.tripWarehouses, argumentName: 'tripWarehouses'},
@@ -60,8 +60,7 @@ export class Trip extends AggregateRoot<tripProps>{
     if (!guard.succeeded){
       return Result.fail(guard.message)
     }
-    const id =  new UniqueEntityID();
-
+  
     const tripOrdersErrorOrSuccess = TripOrders.create(tripDTO.tripOrders);
     const tripIdentifierErrorOrSuccess = TripIdentifier.create(tripDTO.tripTruck,tripDTO.tripDay);
     const tripWarehousesErrorOrSuccess = TripWarehouse.create(tripDTO.tripWarehouses);
