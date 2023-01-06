@@ -138,4 +138,16 @@ export class AppConfigServiceService {
     return this.appConfig.heuristicWeightURL;
   }
 
+  //AG
+
+  getTripByAG(){
+    return this.appConfig.getTripByAG;
+  }
+
+  //Trips
+
+  getAllTripsInADay() {
+    return this.appConfig.getAllTripsInADay;
+  }
+
 }

@@ -38,18 +38,17 @@ export class BestPathForFleetComponent implements OnInit {
   ngOnInit(): void {
     }
 
+  //Falta aqui o sort e paginator tiago
   generateTrips(date : any){
-    console.log(date);
     this.bestPathForFleetService.bestPathForFleetService(date).then((data: any) => {
-      console.log(data);
       this.trips = data;
     });
 
 
   }
 
-
   goBack() {
     window.history.back();
   }
+
 }

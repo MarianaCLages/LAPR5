@@ -4,7 +4,6 @@ import {GoogleApiCommunicationService} from "../../services/google-api-communica
 import {Injectable} from "@angular/core";
 import {ICreateTripDTO} from "../../shared/ICreateTripDTO";
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,13 +17,30 @@ export class BestPathForFleetService{
 
   }
 
-
-
   public async bestPathForFleetService(date : any){
 
-    let baseUrl = 'http://localhost:3000/api/trucks/get_best_path/';
+    let url = this.appConfigService.getLogisticsURL() + this.appConfigService.getTripByAG();
+
     let dateArray = date.split('-');
     let sendDate = dateArray[2] + '_' + dateArray[1] + '_' + dateArray[0];
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'authorization' : "Bearer "+ this.google.getJWT(),
+    };
+
+    console.log(url + sendDate);
+
+    const options = {
+      headers: headers
+    };
+
+    return this.http.get<HttpResponse<ICreateTripDTO>>(url + sendDate,options).toPromise();
+  }
+
+  public async getAllTripsInAGivenDay(date : any){
+    let url = this.appConfigService.getLogisticsURL() + this.appConfigService.getAllTripsInADay();
 
     const headers = {
       'Content-Type': 'application/json',
@@ -36,10 +52,8 @@ export class BestPathForFleetService{
       headers: headers
     };
 
-    console.log(sendDate);
-    console.log(baseUrl+sendDate);
-    return this.http.get<HttpResponse<ICreateTripDTO>>(baseUrl + sendDate,options).toPromise();
-  }
+    return this.http.get<HttpResponse<ICreateTripDTO>>(url + date,options).toPromise();
 
+  }
 
 }
