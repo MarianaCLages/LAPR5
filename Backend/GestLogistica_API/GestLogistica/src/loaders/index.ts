@@ -33,6 +33,11 @@ export default async ({ expressApp }) => {
     schema: "../persistence/schemas/truckSchema"
   };
 
+  const tripSchema = {
+    name: "tripSchema",
+    schema: "../persistence/schemas/tripSchema"
+  }
+
   const packagingSchema = {
     // compare with the approach followed in repos and services
     name: "packagingSchema",
@@ -77,6 +82,11 @@ export default async ({ expressApp }) => {
   const truckRepo = {
     name: config.repos.truck.name,
     path: config.repos.truck.path
+  };
+
+  const tripRepo = {
+    name: config.repos.trip.name,
+    path: config.repos.trip.path
   };
 
   const packagingRepo = {
@@ -127,7 +137,8 @@ export default async ({ expressApp }) => {
       roleSchema,
       pathSchema,
       truckSchema,
-      packagingSchema
+      packagingSchema,
+      tripSchema
     ],
     controllers: [
       roleController,
@@ -142,7 +153,8 @@ export default async ({ expressApp }) => {
       warehouseRepo,
       truckRepo,
       packagingRepo,
-      orderRepo
+      orderRepo,
+      tripRepo
     ],
     services: [
       roleService,

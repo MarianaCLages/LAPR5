@@ -1,14 +1,11 @@
 :-dynamic entrega_armazens/1.
 :-dynamic entregas/1.
-:-dynamic cam/2.
 :-dynamic less_time/1.
 :-dynamic less_ind/1.
-
-
 :-dynamic tempo/1.
 :-dynamic massa/1.
 :-dynamic massatempo/1.
-%dynamic variables
+:-dynamic cam/2.
 :-dynamic geracoes/1.
 :-dynamic populacao/1.
 :-dynamic prob_cruzamento/1.
@@ -19,41 +16,47 @@
 :-dynamic old_pop/1.
 :-dynamic num_ind/1.
 :-dynamic melhor_entrega/1.
+cam(eTruck01,100).
+
+
+
 %tarefa(Id,TempoProcessamento,TempConc,PesoPenalizacao).
+
 
 %HEURISTICA A DEVOLVER AS ENTREGAS
 
-bfsAG_tempo_entrega(Cam,T,OrdList):-
+
+bfs_tempo_entrega(Cam,T,OrdList):-
     retractall(tempo(_)),
     retractall(current_order(_)),
     assertz(tempo(10000)),
     assertz(current_order(5555)),
     entrega_armazens(Ent),
     delete(Ent,5,Ent2),
-    bfs2AG_tempo_entrega(Ent2,[5],Cam,T,[],OrdList).
+    bfs2_tempo_entrega(Ent2,[5],Cam,T,[],OrdList).
 
-bfs2AG_tempo_entrega([],[Final|LA],Cam,T,TempList,OrdList):-
+bfs2_tempo_entrega([],[Final|LA],Cam,T,TempList,OrdList):-
     !,reverse([5,Final|LA],Cam),
     reverse(TempList,OrdList),
     dadosCam_t_e_ta(_,Final,5,T,_,_).
 
-bfs2AG_tempo_entrega(Ent,[Act|LA],Cam,T,TempList,OrdList):-
+bfs2_tempo_entrega(Ent,[Act|LA],Cam,T,TempList,OrdList):-
     findall([X|LA],
             (   dadosCam_t_e_ta(_,Act,X,_,_,_),member(X,Ent)),Novos),
-    tempoAG_act_x13(Act,Novos,P),
+    tempo_act_x13(Act,Novos,P),
     delete(Ent,P,Ent2),
     tempo(TempoMin),
     current_order(Order),
-    appendAG_inicio14(P,[Act|LA],Todos),
+    append_inicio14(P,[Act|LA],Todos),
     TempList2 = [Order|TempList],
-    bfs2AG_tempo_entrega(Ent2,Todos,Cam,T2,TempList2,OrdList),
+    bfs2_tempo_entrega(Ent2,Todos,Cam,T2,TempList2,OrdList),
     T is TempoMin+T2.
 
-appendAG_inicio14(P,L,[P|L]).
+append_inicio14(P,L,[P|L]).
 
-tempoAG_act_x13(_,[],0):-retract(tempo(_)),assertz(tempo(10000)).
-tempoAG_act_x13(Act,[[A|_]|Novos],X):-
-    tempoAG_act_x13(Act,Novos,X2),
+tempo_act_x13(_,[],0):-retract(tempo(_)),assertz(tempo(10000)).
+tempo_act_x13(Act,[[A|_]|Novos],X):-
+    tempo_act_x13(Act,Novos,X2),
     dadosCam_t_e_ta(_,Act,A,T,E,_),
     entrega(Order,_,_,A,COLO,_),
     tempo(TempoMin),
@@ -64,64 +67,64 @@ tempoAG_act_x13(Act,[[A|_]|Novos],X):-
 
 
 
-bfsAG_massa(Cam,OrdList):-
+bfs_massa(Cam,OrdList):-
     retractall(massa(_)),
     retractall(current_order(_)),
     assertz(massa(0)),
     assertz(current_order(5555)),
     entrega_armazens(Ent),
     delete(Ent,5,Ent2),
-    bfsAG_massa2(Ent2,[5],Cam,[],OrdList).
+    bfs_massa2(Ent2,[5],Cam,[],OrdList).
 
-bfsAG_massa2([],LA,Cam,TempList,OrdList):-
+bfs_massa2([],LA,Cam,TempList,OrdList):-
     !,reverse([5|LA],Cam),reverse(TempList,OrdList).
 
-bfsAG_massa2(Ent,[Act|LA],Cam,TempList,OrdList):-
+bfs_massa2(Ent,[Act|LA],Cam,TempList,OrdList):-
     findall([X|LA],
             (dadosCam_t_e_ta(_,Act,X,_,_,_),member(X,Ent)),Novos),
-    massaAG_act(Act,Novos,P),
+    massa_act(Act,Novos,P),
     delete(Ent,P,Ent2),
     current_order(Order),
-    appendAG_inicio3(P,[Act|LA],Todos),
+    append_inicio3(P,[Act|LA],Todos),
     TempList2 = [Order|TempList],
-    bfsAG_massa2(Ent2,Todos,Cam,TempList2,OrdList).
+    bfs_massa2(Ent2,Todos,Cam,TempList2,OrdList).
 
-appendAG_inicio3(P,L,[P|L]).
+append_inicio3(P,L,[P|L]).
 
-massaAG_act(_,[],0):-retract(massa(_)),assertz(massa(0)).
-massaAG_act(Act,[[A|_]|Novos],X):-
-    massaAG_act(Act,Novos,X2),
+massa_act(_,[],0):-retract(massa(_)),assertz(massa(0)).
+massa_act(Act,[[A|_]|Novos],X):-
+    massa_act(Act,Novos,X2),
     entrega(Order,_,M,A,_,_),
     massa(Massa),
     (   (Massa<M,!,retract(massa(_)),assertz(massa(M)),retract(current_order(_)),assertz(current_order(Order)),X=A);X=X2).
 
 
-bfsAG_massa_tempo(Cam,OrdList):-
+bfs_massa_tempo(Cam,OrdList):-
     retractall(massa(_)),
     retractall(current_order(_)),
     assertz(massatempo(0)),
     assertz(current_order(5555)),
     entrega_armazens(Ent),
     delete(Ent,5,Ent2),
-    bfsAG_massa_tempo2(Ent2,[5],Cam,[],OrdList).
+    bfs_massa_tempo2(Ent2,[5],Cam,[],OrdList).
 
-bfsAG_massa_tempo2([],LA,Cam,TempList,OrdList):-
+bfs_massa_tempo2([],LA,Cam,TempList,OrdList):-
     !,reverse([5|LA],Cam),reverse(TempList,OrdList).
 
-bfsAG_massa_tempo2(Ent,[Act|LA],Cam,TempList,OrdList):-
+bfs_massa_tempo2(Ent,[Act|LA],Cam,TempList,OrdList):-
     findall([X|LA],(dadosCam_t_e_ta(_,Act,X,_,_,_),member(X,Ent)),Novos),
-    massaAG_tempo_act(Act,Novos,P),
+    massa_tempo_act(Act,Novos,P),
     delete(Ent,P,Ent2),
     current_order(Order),
-    appendAG_inicio4(P,[Act|LA],Todos),
+    append_inicio4(P,[Act|LA],Todos),
     TempList2 = [Order|TempList],
-    bfsAG_massa_tempo2(Ent2,Todos,Cam,TempList2,OrdList).
+    bfs_massa_tempo2(Ent2,Todos,Cam,TempList2,OrdList).
 
-appendAG_inicio4(P,L,[P|L]).
+append_inicio4(P,L,[P|L]).
 
-massaAG_tempo_act(_,[],0):-retract(massatempo(_)),assertz(massatempo(0)).
-massaAG_tempo_act(Act,[[A|_]|Novos],X):-
-    massaAG_tempo_act(Act,Novos,X2),
+massa_tempo_act(_,[],0):-retract(massatempo(_)),assertz(massatempo(0)).
+massa_tempo_act(Act,[[A|_]|Novos],X):-
+    massa_tempo_act(Act,Novos,X2),
     entrega(Order,_,M,A,_,RET),
     dadosCam_t_e_ta(_,Act,A,T,E,_),
     massatempo(MassaTempo),
@@ -133,39 +136,62 @@ massaAG_tempo_act(Act,[[A|_]|Novos],X):-
 
 
 
+
+
+
 %-------------------------------AG------------------------%
 
-gera:-
-    %retract(num_ind(_)),
-    assertz(num_ind(6)),
+geraAG(Ind):-
+    entrega_armazens(A),
+    length(A,NA),
+    assertz(num_ind(NA)),
     Temp = 9999,
     Less = [1,2,3],
-    BestInd = [2,3,1]*1000,
-    retractall(less_time(_)),
-    retractall(less_ind(_)),
+    BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparação
     assertz(best_ind(BestInd)),
     assertz(less_time(Temp)),
     assertz(less_ind(Less)),
-    bfsAG_tempo_entrega(_,_,OrdList),
-    bfsAG_massa(_,OrdList2),
-    bfsAG_massa_tempo(_,OrdList3),
+    %bfs_tempo_entrega(_,_,OrdList), %gerar 3 individuos com as 3 heuristicas
+    %bfs_massa(_,OrdList2),
+    %bfs_massa_tempo(_,OrdList3),
     %OrdList4 = [OrdList,OrdList2,OrdList3],
     %write('\n\nORDER LIST4:  '),write(OrdList4),
-    count_seq_orders(OrdList,Count),
+    findall(N, entrega(N,_,_,_,_,_), OrdList),
+    length(OrdList,Count), %contar o numero de orders
     assertz(num_orders(Count)),
     %gera_populacao(OrdList,Pop),
-    gera_first_populacao(OrdList,Pop2),
-    append(Pop2,[OrdList],Pop3),
-    append(Pop3,[OrdList2],Pop4),
-    append(Pop4,[OrdList3],Pop5),
+
+    gera_first_populacao(OrdList,Pop2), % a gera_first_população tem em conta que 3 individuos já foram previemente criados (as das heuristicas), ou seja este só vai gerar +3 individuo
     retractall(old_pop(_)),
-    assertz(old_pop(Pop5)),
-    avalia_populacao(Pop5,PopAv),
+    assertz(old_pop(Pop2)),
+    avalia_populacao(Pop2,PopAv),
     ordena_populacao(PopAv,PopOrd),
-    NG is 6,
+    num_ind(NG),
+    %NG is 6,
     gera_geracao(0,NG,PopOrd),
     less_ind(Ind),
-    formatList(Ind).
+
+
+    retractall(less_time(_)),
+    retractall(less_ind(_)),
+    retractall(old_pop(_)),
+    retractall(num_ind(_)),
+    retractall(geracoes(_)),
+    retractall(populacao(_)),
+    retractall(melhor_entrega(_)),
+    retractall(best_ind(_)),
+    retractall(prob_cruzamento(_)),
+    retractall(prob_mutacao(_)),
+    retractall(current_order(_)),
+    retractall(num_orders(_)),
+    retractall(tempo(_)),
+    retractall(massa(_)),
+    retractall(massatempo(_)).
+
+
+
+
+
 
 formatList([A]):-format(A).
 formatList([X|L]):-format(X),format(','),formatList(L).
@@ -179,7 +205,9 @@ count_seq_orders([_|Cam],Count):- count_seq_orders(Cam,Count2), Count is Count2 
 
 gera_first_populacao(Cam,Pop):-
     num_orders(NumT),
-    TamPop = 6 -3,
+
+    num_ind(NA),
+    TamPop = NA,
     gera_populacao(TamPop,Cam,NumT,Pop).
 
 gera_populacao(Cam,Pop):-
@@ -203,7 +231,7 @@ gera_populacao(TamPop,ListaTarefas,NumT,L).
 
 gera_individuo([G],1,[G]):-!.
 
-gera_individuo(ListaTarefas,NumT,[G|Resto]):-
+gera_individuo(ListaTarefas,NumT,[G|Resto]):- %NUMT tá a dar 0
 NumTemp is NumT + 1, % para usar com random,
 random(1,NumTemp,N), %vai buscar uma tarefa aleatoria
 retira(N,ListaTarefas,G,NovaLista), %retira a tarefa
@@ -226,9 +254,9 @@ retira(N1,Resto,G,Resto1).
 %
 avalia_populacao([],[]).
 
-avalia_populacao([Ind|Resto],[Ind*V|Resto1]):-
-    avalia_cam(Ind,V),
-    avalia_populacao(Resto,Resto1).
+avalia_populacao([Ind|Resto],[Ind*V|Resto1]):-avalia_populacao(Resto,Resto1),
+    avalia_cam(Ind,V).
+    %avalia_populacao(Resto,Resto1).
 
 %avalia(Seq,V):- avalia(Seq,0,V).
 
@@ -244,11 +272,10 @@ avalia_populacao([Ind|Resto],[Ind*V|Resto1]):-
 %V is VT+VResto.
 
 avalia_cam(Ind,T):-
-
-    get_cam_arm(Ind,Arm),
-    reverse(Arm,Arm2),
-    reverse(Arm2,Arm3),
-    bestPath(Arm3,'T01',_,_,T2),
+    num_orders(C),
+    A is C * 40,
+    B is C * 80,
+    random(A,B,T2),
     T is T2,
     less_time(X),
     (   (T2 < X,!,retract(less_time(_)),assertz(less_time(T)),retract(less_ind(_)),assertz(less_ind(Ind)));!).
@@ -626,3 +653,40 @@ getAGChargingTime(CE,CT) :- cam(Tr,_),
 % <X - result>).
 
 ruleAGOfThree(X,Y,Z,R) :- R is ((Z * Y) / X).
+
+
+
+% PREDICADO DA MARIANA
+
+
+getAllCamioes(R) :- findall(NomeCamiao, carateristicasCam(NomeCamiao,_,_,_,_,_), R).
+
+atribui(Atribuicoes) :- geraAG(Entregas),
+             getAllCamioes(Camioes),
+             length(Entregas, NE),
+             length(Camioes, NC),
+             T is round(NE/NC - 0.1),
+            ((T is 0, !, maisCamioes(Camioes, Entregas, Atribuicoes));(maisEntregas(Entregas, Camioes, Atribuicoes, NE, T))).
+
+
+maisEntregas(_,_,[],0,_).
+maisEntregas(Entregas, [X], [L1*X|Atr], NE, T) :- tiraEntregas(Entregas, L1, L2, NE),
+                                                  NE2 is 0,
+                                                  maisEntregas(L2, [], Atr, NE2, T).
+
+maisEntregas(Entregas, [X|Camioes], [L1*X|Atr], NE, T) :- ((NE < T, !, tiraEntregas(Entregas, L1, L2, NE), NE2 is 0);
+                                                          (tiraEntregas(Entregas, L1, L2, T), NE2 is NE - T)),
+                                                           maisEntregas(L2, Camioes, Atr, NE2, T).
+
+tiraEntregas(Entregas, [], L2, 0) :- resto(Entregas, L2).
+tiraEntregas([Ent|Entregas], [Ent|L1], L2, T) :- T2 is T - 1,
+                                                 tiraEntregas(Entregas, L1, L2, T2).
+
+resto([],[]).
+resto([X|Entregas], [X|L2]):- resto(Entregas, L2).
+
+maisCamioes(_, [], _).
+maisCamioes([X|Camioes], [Y|Entregas], [X*Y|Atribuicoes]) :- maisCamioes(Camioes, Entregas, Atribuicoes).
+
+
+

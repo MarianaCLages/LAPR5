@@ -2,12 +2,7 @@ import { ValueObject } from "../../core/domain/ValueObject";
 import { Result } from "../../core/logic/Result";
 
 interface tripOrders {
-  ordersWarehouses: Array<OrderWarehouse>;
-}
-
-export interface OrderWarehouse {
-  order: string[],
-  warehouse: string
+  value: Array<string>;
 }
 
 export class TripOrders extends ValueObject<tripOrders> {
@@ -16,16 +11,18 @@ export class TripOrders extends ValueObject<tripOrders> {
     super(props);
   }
 
-  get value(): Array<OrderWarehouse> {
-    return this.props.ordersWarehouses;
+  get value(): Array<string> {
+    return this.props.value;
   }
 
-  public static create(orders: OrderWarehouse[]) {
+  public static create(orders: string[]) {
     if (orders.length === 0) {
-      return Result.fail("The list of orders must not be empty");
+      return Result.fail<TripOrders>("The list of orders must not be empty");
     }
 
-    return Result.ok(new TripOrders({ ordersWarehouses: Array.from(orders) }));
+    const array = Array.from(orders);
+
+    return Result.ok(new TripOrders({ value: array }));
   }
 
 }

@@ -346,20 +346,23 @@ export default class truckController
   }
 
   public async getBestPathForEachTruck(req: Request, res: Response, next: NextFunction) {
-
+/*
     //get the jwt token from the request
     const token = req.headers.authorization;
     const trucks = await this.authentication(token);
     if (!trucks.isSuccess) {
       return res.status(trucks.errorValue().code).json(trucks.errorValue().error).send();
-    }
+    }*/
 
     this.bestPathServiceInstance.generateFiles();
     this.bestPathServiceInstance.sendPaths();
     this.bestPathServiceInstance.sendTrucks();
     this.bestPathServiceInstance.sendWarehouse();
+    this.bestPathServiceInstance.sendOrders(req.params.date);
+    let stringTest = await this.bestPathServiceInstance.createTripsFromPlanning();
+    let tripArray = await this.bestPathServiceInstance.convertStringIntoTrips(stringTest,req.params.date);
 
-    return res.status(200).json("FUNFOU");
+    return res.status(200).json(tripArray);
   }
 
   public async deleteTruckSoftPlate(req: Request, res: Response, next: NextFunction) {

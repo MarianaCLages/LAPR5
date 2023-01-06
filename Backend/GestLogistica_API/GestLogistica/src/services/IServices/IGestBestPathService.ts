@@ -11,4 +11,7 @@ export default interface IGestBestPathService {
     sendPaths();
     sendTrucks();
     sendWarehouse();
+    sendOrders(date:string);
+    createTripsFromPlanning();
+    convertStringIntoTrips(outputString : string,date : string);
 }

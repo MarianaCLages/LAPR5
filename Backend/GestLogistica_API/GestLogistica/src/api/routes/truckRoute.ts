@@ -95,6 +95,6 @@ export default (app: Router) => {
   route.get("/get_heuristic_weight_time/:idTruck/:date",
     (req, res, next) => ctrl.getHeuristicByTimeWeight(req, res, next));
 
-  route.get("/get_best_path",
+  route.get("/get_best_path/:date",
     (req, res, next) => ctrl.getBestPathForEachTruck(req, res, next));
 }

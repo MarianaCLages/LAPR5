@@ -52,6 +52,10 @@ export default {
       name: "RoleController",
       path: "../controllers/roleController",
     },
+    trip: {
+      name: "TripController",
+      path: "../controllers/tripController",
+    },
     path: {
       name: "PathController",
       path: "../controllers/pathController",
@@ -70,6 +74,10 @@ export default {
     role: {
       name: "RoleRepo",
       path: "../repos/roleRepo",
+    },
+    trip: {
+      name: "TripRepo",
+      path: "../repos/tripRepo",
     },
     user: {
       name: "UserRepo",
@@ -109,6 +117,10 @@ export default {
     role: {
       name: "RoleService",
       path: "../services/roleService",
+    },
+    trip: {
+      name: "TripService",
+      path: "../services/tripServices",
     },
     path: {
       name: "PathService",

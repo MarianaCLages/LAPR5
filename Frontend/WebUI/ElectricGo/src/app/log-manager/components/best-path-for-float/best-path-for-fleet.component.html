@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div *ngIf = "showPage">
+
+  <br>
+  <div class = "titles">
+    <h1>Admin</h1>
+    <h2>Paths for the Fleet</h2>
+  </div>
+  <br>
+
+  <mat-form-field>
+    <mat-label>Date</mat-label>
+    <input matInput type="date" [(ngModel)]="date">
+  </mat-form-field>
+  <br>
+
+  <button mat-raised-button color="primary" (click)="generateTrips(date)">Generate Trip</button>
+
+  <div>
+    <mat-error *ngIf="error" class="alert alert-warning">
+      <strong>Error</strong> {{errorMessage |json | slice:0:100}}
+    </mat-error>
+  </div>
+
+  <div class="mat-elevation-z8" >
+    <table mat-table [dataSource]="trips">
+      <ng-container matColumnDef="trip">
+        <th mat-header-cell *matHeaderCellDef> Trip</th>
+        <td mat-cell *matCellDef="let trip"> {{trip.tripIdentifier}} </td>
+      </ng-container>
+      <ng-container matColumnDef="truck">
+        <th mat-header-cell *matHeaderCellDef> Truck</th>
+        <td mat-cell *matCellDef="let trip"> {{trip.tripTruck}} </td>
+      </ng-container>
+      <ng-container matColumnDef="tripday">
+        <th mat-header-cell *matHeaderCellDef> Trip Day</th>
+        <td mat-cell *matCellDef="let trip"> {{"C05," + trip.tripWarehouses + ",C05"}} </td>
+      </ng-container>
+      <ng-container matColumnDef="orders">
+        <th mat-header-cell *matHeaderCellDef>Orders to be delivered</th>
+        <td mat-cell *matCellDef="let trip"> {{trip.tripOrders}} </td>
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Page navigation"></mat-paginator>
+
+  <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
+
+
+</div>

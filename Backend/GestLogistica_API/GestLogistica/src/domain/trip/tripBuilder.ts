@@ -1,9 +1,11 @@
-import { OrderWarehouse, TripOrders } from "./tripOrders";
+/*
+
+import { TripOrders } from "./tripOrders";
 import { TripDay } from "./tripDay";
 import { TripTruck } from "./tripTruck";
 import { TripWarehouse } from "./tripWarehouses";
 import { Result } from "../../core/logic/Result";
-import { Trip, tripProps } from "./trip";
+import { Trip } from "./trip";
 import { TripIdentifier } from "./tripIdentifier";
 
 export class TripBuilder {
@@ -11,8 +13,7 @@ export class TripBuilder {
   private truck: TripTruck;
   private orders: TripOrders;
   private warehouse: TripWarehouse;
-  private orderMap: Map<string, string[]> = new Map<string, string[]>();
-  private ordersList: Array<OrderWarehouse> = new Array<OrderWarehouse>();
+
   private warehouseList: Array<string> = new Array<string>();
 
 
@@ -62,7 +63,7 @@ export class TripBuilder {
     }
     return Result.fail("")
   }
-
-
-
 }
+
+
+*/
