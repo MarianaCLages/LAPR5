@@ -6,6 +6,7 @@ import ITripRepo from '../services/IRepos/ITripRepo';
 import {Trip} from "../domain/trip/trip";
 import {ITripPersistence} from "../dataschema/ITripPersistence";
 import {TripTruck} from "../domain/trip/tripTruck";
+import { Result } from '../core/logic/Result';
 
 @Service()
 export default class TripRepo implements ITripRepo{
@@ -30,7 +31,6 @@ export default class TripRepo implements ITripRepo{
         throw new Error('Method not implemented.');
     }
 
-
     public async save(trip: Trip): Promise<Trip> {
         const query = { id: trip.id.toString() };
         const truckDocument = await this.tripSchema.findOne(query);
@@ -48,5 +48,25 @@ export default class TripRepo implements ITripRepo{
         }
     }
 
+    public async getAllTrips(): Promise<Result<Array<Trip>>> {
+
+        var lista = new Array<Trip>;
+
+        (await this.tripSchema.find({})).forEach(
+            cam => { 
+                cam.tripIdentifier = cam.tripTruck + cam.tripDay; 
+                console.log("\n" + cam);
+                lista.push(TripMap.toDomain(cam)) 
+            }
+        );
+
+        console.log(lista);
+
+        if (lista != null) {
+            return Result.ok(lista);
+        } else {
+            return null;
+        }
+    }
 
 }

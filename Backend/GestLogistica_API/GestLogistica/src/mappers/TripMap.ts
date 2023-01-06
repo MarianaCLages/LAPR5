@@ -6,6 +6,7 @@ import {Document, Model} from "mongoose";
 import {Trip} from "../domain/trip/trip";
 import ITripDTO from "../dto/ITripDTO";
 import {ITripPersistence} from "../dataschema/ITripPersistence";
+import { UniqueEntityID } from "../core/domain/UniqueEntityID";
 
 export class TripMap extends Mapper<Trip> {
     public static toDTO(trip: Trip): ITripDTO {
@@ -23,7 +24,7 @@ export class TripMap extends Mapper<Trip> {
         trip: any | Model<ITripPersistence & Document>
     ): Trip {
         try {
-            const roleOrError = Trip.create(trip);
+            const roleOrError = Trip.create(trip, new UniqueEntityID(trip.id));
 
             roleOrError.isFailure ? console.log(roleOrError.error) : "";
             return roleOrError.isSuccess ? roleOrError.getValue() : null;

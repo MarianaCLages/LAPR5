@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 
 const TripSchema = new mongoose.Schema({
     id: {type: String, required: true, index: true},
+    tripIdentifier: {type: String, required: true, index: true},
     tripTruck: {type: String, required: true, index: true},
     tripDay: {type: String, required: true, index: true},
     tripWarehouses:[{type: String, required: true, index: true}],
