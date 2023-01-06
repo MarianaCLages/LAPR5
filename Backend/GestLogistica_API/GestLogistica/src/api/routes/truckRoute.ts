@@ -97,4 +97,8 @@ export default (app: Router) => {
 
   route.get("/get_best_path/:date",
     (req, res, next) => ctrl.getBestPathForEachTruck(req, res, next));
+
+  route.get("/trips/:date",
+    (req, res, next) => ctrl.getTrips(req, res, next));
+  
 }

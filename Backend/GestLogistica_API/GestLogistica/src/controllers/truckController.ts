@@ -68,7 +68,7 @@ export default class truckController
       }
 
       if (truckOrError.getValue().length == 0) {
-        return res.status(400).json("No truck was found!").send();
+        return res.status(404).json("No truck was found!").send();
       }
 
       const trucksDTO = truckOrError.getValue();
@@ -415,6 +415,35 @@ export default class truckController
 
       const truckDTO = truckOrError.getValue();
       return res.status(200).json(truckDTO).send();
+
+    } catch (e) {
+      return next(e);
+    }
+  }
+
+  public async getTrips(req: Request, res: Response, next: NextFunction) {
+    try {
+      //get the jwt token from the request
+      const token = req.headers.authorization;
+      const trucks = await this.authentication(token);
+      if (!trucks.isSuccess) {
+        return res.status(trucks.errorValue().code).json(trucks.errorValue().error).send();
+      }
+
+      const date: string = req.params.date;
+      
+      const truckOrError = await this.bestPathServiceInstance.getAllTrips(date);
+
+      if (truckOrError.isFailure) {
+        return res.status(400).json(truckOrError.error).send();
+      }
+
+      if (truckOrError.getValue().length == 0) {
+        return res.status(404).json("No truck was found!").send();
+      }
+
+      const tripDTO = truckOrError.getValue();
+      return res.status(200).json(tripDTO).send();
 
     } catch (e) {
       return next(e);
