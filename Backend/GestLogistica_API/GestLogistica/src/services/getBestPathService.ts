@@ -23,6 +23,7 @@ import {TripMap} from "../mappers/TripMap";
 import ITripDTO from "../dto/ITripDTO";
 import {result} from "lodash";
 import {Result} from "../core/logic/Result";
+import e from "express";
 
 @Service()
 export default class GetBestPathService implements IGestBestPathService {
@@ -40,7 +41,6 @@ export default class GetBestPathService implements IGestBestPathService {
   key = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1pZ3VlbCBKb3JkYW8iLCJlbWFpbCI6Im1pZ3VlbDk4am9yZGFvMTNAZ21haWwuY29tIiwibmJmIjoxNjcyOTE4MTY2LCJleHAiOjE2NzM1MjI5NjYsImlhdCI6MTY3MjkxODE2Nn0.-453uZKLu6wHV2g_jikmT7xmrXS1C_91-QkXYiU45LM";
 
   constructor(
-    @Inject(config.repos.packaging.name) private packagingRepo: IPackagingRepo,
     @Inject(config.repos.truck.name) private truckRepo: ITruckRepo,
     @Inject(config.repos.path.name) private pathRepo: IPathRepo,
     @Inject(config.repos.trip.name) private tripRepo: ITripRepo,
@@ -422,4 +422,42 @@ export default class GetBestPathService implements IGestBestPathService {
 
 
   }
+
+
+  public async getAllTrips(date: string): Promise<Result<Array<ITripDTO>>>{
+
+    console.log("\n\nOla " + date);
+
+    //Substitue the '-' for '/'
+    let dateArray = date.split('-');
+    date = dateArray[0] + '/' + dateArray[1] + '/' + dateArray[2];
+
+    var list = await this.tripRepo.getAllTrips();
+
+    console.log(list.getValue());
+    
+    if(list.isFailure) {
+      return Result.fail("No trips were found!");
+
+    } else {
+      var listAux = new Array<Trip>;
+
+      list.getValue().forEach(element => {
+        if(element.tripDay.value == date){
+          listAux.push(element);
+        }
+      });
+
+      var listDTO = listAux.map(element => TripMap.toDTO(element));
+
+      if(listDTO.length == 0){
+        return Result.fail("No trips were found for that day!");
+      } else {
+        return Result.ok<ITripDTO[]>(listDTO);
+      }
+
+    }
+
+  }
+
 }
