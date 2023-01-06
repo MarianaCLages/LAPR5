@@ -348,6 +348,8 @@ idArmazem('Vila Nova de Gaia',17).
 :-dynamic old_pop/1.
 :-dynamic num_ind/1.
 :-dynamic melhor_entrega/1.
+:-dynamic num_best_n/1.
+:-dynamic old_best_n/1.
 %tarefa(Id,TempoProcessamento,TempConc,PesoPenalizacao).
 tarefa(t1,2,5,1).
 tarefa(t2,4,7,6).
@@ -474,11 +476,13 @@ massa_tempo_act(Act,[[A|_]|Novos],X):-
 gera:-
     %retract(num_ind(_)),
     entrega_armazens(A),
+    assertz(num_best_n(2)),
+    assertz(old_best_n(1)),
     length(A,NA),
     assertz(num_ind(NA)),
     Temp = 9999,
     Less = [1,2,3],
-    BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparação
+    BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparaï¿½ï¿½o
     assertz(best_ind(BestInd)),
     assertz(less_time(Temp)),
     assertz(less_ind(Less)),
@@ -490,13 +494,12 @@ gera:-
     count_seq_orders(OrdList,Count), %contar o numero de orders
     assertz(num_orders(Count)),
     %gera_populacao(OrdList,Pop),
-    gera_first_populacao(OrdList,Pop2), % a gera_first_população tem em conta que 3 individuos já foram previemente criados (as das heuristicas), ou seja este só vai gerar +3 individuo
+    gera_first_populacao(OrdList,Pop2), % a gera_first_populaï¿½ï¿½o tem em conta que 3 individuos jï¿½ foram previemente criados (as das heuristicas), ou seja este sï¿½ vai gerar +3 individuo
     append(Pop2,[OrdList],Pop3),
     append(Pop3,[OrdList2],Pop4),
-    append(Pop4,[OrdList3],Pop5), %estes appends servem para adicionar os individuos da heuristica á População inicial
+    append(Pop4,[OrdList3],Pop5), %estes appends servem para adicionar os individuos da heuristica ï¿½ Populaï¿½ï¿½o inicial
     retractall(old_pop(_)),
     assertz(old_pop(Pop5)),
-    write('\n\nPOPULACAO 5 TESTE:'),write(Pop5),
     write('\n\nPopulação gerada:\n\n'),
     write(Pop5),
     avalia_populacao(Pop5,PopAv),
@@ -507,14 +510,13 @@ gera:-
     write(PopOrd),
     num_ind(NG),
     %NG is 6,
-    gera_geracao(0,NG,PopOrd),
+    gera_geracao(0,NG,PopOrd,0),
     less_ind(Ind),
     less_time(Time),
-    write('\n\nMELHOR INDIVIDUO:  '),
+    write('\n\nMELHOR INDIVÍDUO:  '),
     write(Ind),
     write('\nTEMPO: '),
     write(Time),
-
 
     retractall(less_time(_)),
     retractall(less_ind(_)),
@@ -530,14 +532,18 @@ gera:-
     retractall(num_orders(_)),
     retractall(tempo(_)),
     retractall(massa(_)),
-    retractall(massatempo(_)).
+    retractall(massatempo(_)),
+    retractall(num_best_n(_)),
+    retractall(old_best_n(_)).
 
 gera2(Ind):-
     %retract(num_ind(_)),
     assertz(num_ind(6)),
+    assertz(num_best_n(2)),
+    assertz(old_best_n(1)),
     Temp = 9999,
     Less = [1,2,3],
-    BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparação
+    BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparaï¿½ï¿½o
     assertz(best_ind(BestInd)),
     assertz(less_time(Temp)),
     assertz(less_ind(Less)),
@@ -549,17 +555,17 @@ gera2(Ind):-
     count_seq_orders(OrdList,Count), %contar o numero de orders
     assertz(num_orders(Count)),
     %gera_populacao(OrdList,Pop),
-    gera_first_populacao(OrdList,Pop2), % a gera_first_população tem em conta que 3 individuos já foram previemente criados (as das heuristicas), ou seja este só vai gerar +3 individuo
+    gera_first_populacao(OrdList,Pop2), % a gera_first_populaï¿½ï¿½o tem em conta que 3 individuos jï¿½ foram previemente criados (as das heuristicas), ou seja este sï¿½ vai gerar +3 individuo
     append(Pop2,[OrdList],Pop3),
     append(Pop3,[OrdList2],Pop4),
-    append(Pop4,[OrdList3],Pop5), %estes appends servem para adicionar os individuos da heuristica á População inicial
+    append(Pop4,[OrdList3],Pop5), %estes appends servem para adicionar os individuos da heuristica ï¿½ Populaï¿½ï¿½o inicial
     retractall(old_pop(_)),
     assertz(old_pop(Pop5)),
     avalia_populacao(Pop5,PopAv),
     ordena_populacao(PopAv,PopOrd),
     num_ind(NG),
     %NG is 6,
-    gera_geracao(0,NG,PopOrd),
+    gera_geracao(0,NG,PopOrd,0),
     less_ind(Ind),
     write('\n\nMelhor Indivíduo: '),
     write(Ind),
@@ -578,14 +584,14 @@ gera2(Ind):-
     retractall(num_orders(_)),
     retractall(tempo(_)),
     retractall(massa(_)),
-    retractall(massatempo(_)).
+    retractall(massatempo(_)),
+    retractall(num_best_n(_)),
+    retractall(old_best_n(_)).
 
 count_seq_orders([],0).
 count_seq_orders([_|Cam],Count):- count_seq_orders(Cam,Count2), Count is Count2 + 1.
 
-
-
-% Gera População
+% Gera Populaï¿½ï¿½o
 
 gera_first_populacao(Cam,Pop):-
     num_ind(X),
@@ -603,8 +609,8 @@ gera_populacao(0,_,_,[]):-!.
 gera_populacao(TamPop,ListaTarefas,NumT,[Ind|Resto]):-
 TamPop1 is TamPop-1,
 gera_populacao(TamPop1,ListaTarefas,NumT,Resto),
-gera_individuo(ListaTarefas,NumT,Ind), %o Ind está vazio e vai ser atribuido uma sequencia da Lista de Tarefas
-not(member(Ind,Resto)). % não pode ser repetido...por isso se tal acontecer repete-se a operação
+gera_individuo(ListaTarefas,NumT,Ind), %o Ind estï¿½ vazio e vai ser atribuido uma sequencia da Lista de Tarefas
+not(member(Ind,Resto)). % nï¿½o pode ser repetido...por isso se tal acontecer repete-se a operaï¿½ï¿½o
 
 gera_populacao(TamPop,ListaTarefas,NumT,L):-
 gera_populacao(TamPop,ListaTarefas,NumT,L).
@@ -628,11 +634,11 @@ retira(N,[G1|Resto],G,[G1|Resto1]):- N1 is N-1,
 retira(N1,Resto,G,Resto1).
 
 
-%AVALIA POPULAÇÃO
+%AVALIA POPULAï¿½ï¿½O
 %
-% avalia a população fornecida no gera população, vai buscar cada
+% avalia a populaï¿½ï¿½o fornecida no gera populaï¿½ï¿½o, vai buscar cada
 % invidividuo nela e converte no formato individuo*avaliacao, sendo a
-% avaliação a soma do atraso
+% avaliaï¿½ï¿½o a soma do atraso
 %
 %
 avalia_populacao([],[]).
@@ -667,22 +673,30 @@ avalia_cam(Ind,T):-
 get_cam_arm([],_).
 get_cam_arm([X|L],[Y|L2]):-entrega(X,_,_,Y,_,_),get_cam_arm(L,L2).
 
-
-
-
 ordena_populacao(PopAv,PopAvOrd):-
 %retractall(best_ind(_)),
     bsort(PopAv,PopAvOrd),
     getBest(PopAvOrd).
 
 
-getBest([X|_]):-retractall(best_ind(_)),assertz(best_ind(X)).
+getBest(X) :-
+    num_best_n(N),
+    getBestWithN(X, N, R),
+    best_ind(Old_Value),
+    assertz(old_best_n(Old_Value)),
+    retractall(best_ind(_)),
+    assertz(best_ind(R)).
 
-bsort([X],[X]):-!. %Paragem quando Xs tiver só um elemento e esse elemento fica dentro da Nova Ordem.
+getBestWithN(_, 0, []) :- !.
+getBestWithN([X|Pop], N, [X|R]) :-
+    N1 is N-1,
+    getBestWithN(Pop, N1, R).
+
+bsort([X],[X]):-!. %Paragem quando Xs tiver sï¿½ um elemento e esse elemento fica dentro da Nova Ordem.
 
 bsort([X|Xs],Ys):-
-bsort(Xs,Zs), %Vai correr a recursividade toda, quando volta atrás o Zs só tem um elemento sendo o X.
-btroca([X|Zs],Ys).% Assumindo que isto é a primeira vez que chama este predicado, o Zs começa com 2 elementos
+bsort(Xs,Zs), %Vai correr a recursividade toda, quando volta atrï¿½s o Zs sï¿½ tem um elemento sendo o X.
+btroca([X|Zs],Ys).% Assumindo que isto ï¿½ a primeira vez que chama este predicado, o Zs comeï¿½a com 2 elementos
 
 btroca([X],[X]):-!.
 
@@ -691,40 +705,110 @@ btroca([X*VX,Y*VY|L1],[Y*VY|L2]):-
 
 btroca([X|L1],[X|L2]):-btroca(L1,L2).
 
+same([], []).
 
-%Gera Geração
+same([H1|R1], [H2|R2]):-
+    H1 = H2,
+    same(R1, R2).
+
+%Gera Geraï¿½ï¿½o
 %
-% é aqui que são criadas as novas gerações da população após os
-% cruzamentos, mutações e avaliação dos novos indivíduos de cada
-% população
+% ï¿½ aqui que sï¿½o criadas as novas geraï¿½ï¿½es da populaï¿½ï¿½o apï¿½s os
+% cruzamentos, mutaï¿½ï¿½es e avaliaï¿½ï¿½o dos novos indivï¿½duos de cada
+% populaï¿½ï¿½o
 
-% o primeiro parametro é o inicio da geração, o segundo é a ultima
-% geração e a PopOrd é a população criada e ordenada.
+% o primeiro parametro ï¿½ o inicio da geraï¿½ï¿½o, o segundo ï¿½ a ultima
+% geraï¿½ï¿½o e a PopOrd ï¿½ a populaï¿½ï¿½o criada e ordenada.
 %
 
-% A Paragem acontece obviamente quando o atual nr da geração é igual á
-% geração final.
-gera_geracao(G,G,Pop):-!,
+% A Paragem acontece obviamente quando o atual nr da geraï¿½ï¿½o ï¿½ igual ï¿½
+% geraï¿½ï¿½o final.
+
+gera_geracao(_,_,_,40):-!.
+
+gera_geracao(G,G,Pop,_):-!,
 write('\n\nGeração '), write(G), write(':'), nl, write(Pop), nl.
 
-gera_geracao(N,G,Pop):-
+gera_geracao(N,G,Pop,NS):-
+
+% IF THEN ELSE, comparar o valor de 2 gerações atrás com o da geração
+% atrás e somar o valor para fazer a condição de paragem de estagnar,
+% por completo, o melhor indivíduo
+
+old_best_n(OldValue),
+best_ind(NewValue),
+
+((same(NewValue,OldValue),!,(NVal is NS+1);(NVal is 0))),
+
+retractall(old_best_n(_)),
+
 write('\n\nGeração '), write(N), write(':'), nl, write(Pop), nl,
+
+%condiÃ§Ã£o de paragem qnd a geraÃ§Ã£o estagnou
+
 random_permutation(Pop,Pop2), %desorganizamos os individuos
-cruzamento(Pop2,NPop1), %Pop é a lista que temos Npop1 é a nova lista que será feita com o cruzamento.
-mutacao(NPop1,NPop), % Com a nova geração (NPop1) faz-se a mutação dela.
+cruzamento(Pop2,NPop1), %Pop ï¿½ a lista que temos Npop1 ï¿½ a nova lista que serï¿½ feita com o cruzamento.
+mutacao(NPop1,NPop), % Com a nova geraï¿½ï¿½o (NPop1) faz-se a mutaï¿½ï¿½o dela.
+
 old_pop(OldPop),
-stop_elite(OldPop,NPop,NPop2), % NPop2 vai ser uma lista com os elementos da população antiga e os gerados por mutação e cruzamentos onde lhes vão ser atribuido um valor N*X (N sendo um valor random e X o tempo deles)
+%FAZER AQUI A JUNÇÃO DA LISTA APOS MUTAÇÃO E ANTIGA
+append(NPop,OldPop,NewList),
+
+%ORDENAR A POPULAÇÃO APÓS A JUNÇÃO
+%GET BEST DOS MELHORES DESTA LISTA
+
+%Avalia população
+avalia_populacao(NewList, NewListAV),
+
+%Organiza nova população gerada
+bsort(NewListAV,AvSortedList),
+
+%Guarda os dois melhores
+%getBest(AvSortedList),
+
+stop_elite(OldPop,NPop,NPop2), % NPop2 vai ser uma lista com os elementos da populaï¿½ï¿½o antiga e os gerados por mutaï¿½ï¿½o e cruzamentos onde lhes vï¿½o ser atribuido um valor N*X (N sendo um valor random e X o tempo deles)
 ordena_elite(NPop2,NPop3),
 reverse(NPop3,NPop4), % a lista vai tar ao contrario por isso damos reverse
 num_ind(I),
 anti_elitist_pop(NPop4,NPop5,I),
 retractall(old_pop(_)),
 assertz(old_pop(NPop)),
-avalia_populacao(NPop5,NPopAv),
-switch_for_the_best(NPopAv,NPopAv2),
-ordena_populacao(NPopAv2,NPopOrd), % ordena a população
+arranja_Populacao(NPop5, NewPopAV),
+
+append(NewPopAV,AvSortedList,NL),
+bsort(NL,NFSorted),
+getBest(NFSorted),
+
+%avalia_populacao(NNewPopAv,NPopAv),
+%acrescentar os 2 melhores do best_ind a lista dps do stop_elitism
+%bsort da lista dps da adiÃ§Ã£o
+%remove dos 2 piores
+%ordena_populacao(NPopAv2,NPopOrd), % ordena a populaï¿½ï¿½o
 N1 is N+1,
-gera_geracao(N1,G,NPopOrd).
+gera_geracao(N1,G,NewPopAV, NVal).
+
+
+% Append best elements, sort and remove the worst elements------------
+
+arranja_Populacao(List,NewList):-
+    best_ind(L),
+    length(L,N),
+    avalia_populacao(List,ListAV),
+    append(L,ListAV,ListAp),
+    bsort(ListAp,ListSAP),
+    remove_last_n(ListSAP,N,NewList).
+
+% Remove_last_n(L, N, R) is true if R is the list L with the last N
+% elements removed.
+remove_last_n(L, N, R) :-
+    % find the length of the list
+    length(L, Length),
+    % subtract N from the length to get the index of the element you want to keep
+    Index is Length - N,
+    % use the append predicate to reconstruct the list
+    append(R, _, L),
+    % the first Index elements of L will be unified with R
+    length(R, Index).
 
 %Stopping algorithm elitism-------------------------
 
@@ -739,11 +823,11 @@ ordena_elite(PopAv,PopAvOrd):-
     bsort2(PopAv,PopAvOrd).
 
 
-bsort2([X],[X]):-!. %Paragem quando Xs tiver só um elemento e esse elemento fica dentro da Nova Ordem.
+bsort2([X],[X]):-!. %Paragem quando Xs tiver sï¿½ um elemento e esse elemento fica dentro da Nova Ordem.
 
 bsort2([X|Xs],Ys):-
-bsort2(Xs,Zs), %Vai correr a recursividade toda, quando volta atrás o Zs só tem um elemento sendo o X.
-btroca2([X|Zs],Ys).% Assumindo que isto é a primeira vez que chama este predicado, o Zs começa com 2 elementos
+bsort2(Xs,Zs), %Vai correr a recursividade toda, quando volta atrï¿½s o Zs sï¿½ tem um elemento sendo o X.
+btroca2([X|Zs],Ys).% Assumindo que isto ï¿½ a primeira vez que chama este predicado, o Zs comeï¿½a com 2 elementos
 
 btroca2([X],[X]):-!.
 
@@ -759,7 +843,9 @@ anti_elitist_pop([X*_|OldPop],[X|AntiPop],N):-N2 is N - 1,anti_elitist_pop(OldPo
 %-------------------------------
 
 %Include the last gen best Ind
-switch_for_the_best([_|NPopAv],NPopAv2):-best_ind(Ind), NPopAv2 = [Ind|NPopAv]. %adiciona o melhor da geração anterior
+switch_for_the_best([_|NPopAv],NPopAv2):-
+    best_ind(Ind),
+    NPopAv2 = [Ind|NPopAv]. %adiciona o melhor da geraï¿½ï¿½o anterior
 
 gerar_pontos_cruzamento(P1,P2):- gerar_pontos_cruzamento1(P1,P2).
 
@@ -768,9 +854,9 @@ num_orders(N),
 NTemp is N+1,
 random(1,NTemp,P11), % gerar aleatoriamente os pontos de cruzamento
 random(1,NTemp,P21),
-P11\==P21,!, % Os pontos não podem ser iguais
-((P11<P21,!,P1=P11,P2=P21);P1=P21,P2=P11). % se P21>P11 então o P1 terá o valor de P21
-gerar_pontos_cruzamento1(P1,P2):- %Se os pontos forem iguais irá ser tentado de novo.
+P11\==P21,!, % Os pontos nï¿½o podem ser iguais
+((P11<P21,!,P1=P11,P2=P21);P1=P21,P2=P11). % se P21>P11 entï¿½o o P1 terï¿½ o valor de P21
+gerar_pontos_cruzamento1(P1,P2):- %Se os pontos forem iguais irï¿½ ser tentado de novo.
 gerar_pontos_cruzamento1(P1,P2).
 
 
@@ -790,7 +876,7 @@ cruzar(Ind2,Ind1,P1,P2,NInd2))
 cruzamento(Resto,Resto1).
 
 
-%Predicados auxiliares para fazer o cruzamento order crossover, que é o adequado para o
+%Predicados auxiliares para fazer o cruzamento order crossover, que ï¿½ o adequado para o
 %sequenciamento de tarefas
 
 preencheh([ ],[ ]).
@@ -801,7 +887,7 @@ sublista1(L1,I1,I2,L).
 
 sublista(L1,I1,I2,L):-sublista1(L1,I2,I1,L).
 
-sublista1([X|R1],1,1,[X|H]):-!, preencheh(R1,H). %quando os 2 pontos são igual a 1.
+sublista1([X|R1],1,1,[X|H]):-!, preencheh(R1,H). %quando os 2 pontos sï¿½o igual a 1.
 
 sublista1([X|R1],1,N2,[X|R2]):-!,N3 is N2 - 1, % se o P1 = 1, decrementa-se P2 e adiciona-se elementos do Ind ao novo Ind.
 sublista1(R1,1,N3,R2).
@@ -845,11 +931,11 @@ insere1(X,N1,L,L1).
 
 % 2 individuos, os seus 2 pontos de corte.
 cruzar(Ind1,Ind2,P1,P2,NInd11):-
-sublista(Ind1,P1,P2,Sub1), %Sub1 será o Ind com os elementos entre o intervalo de pontos e resto terá Hs.Exe Sub1: HHH1234HH
+sublista(Ind1,P1,P2,Sub1), %Sub1 serï¿½ o Ind com os elementos entre o intervalo de pontos e resto terï¿½ Hs.Exe Sub1: HHH1234HH
 num_orders(NumT), % Buscar o nr de tarefas
 R is NumT-P2, % R = Numero de Tarefas - o Ponto 2.
-rotate_right(Ind2,R,Ind21), % vai rodar para a direita R vezes. Exe se R=2 então e Ind2=123456789 então Ind21=891234567
-elimina(Ind21,Sub1,Sub2), % Elimina os elementos que Sub1 já tem ou seja, Sub2=89XXXX567
+rotate_right(Ind2,R,Ind21), % vai rodar para a direita R vezes. Exe se R=2 entï¿½o e Ind2=123456789 entï¿½o Ind21=891234567
+elimina(Ind21,Sub1,Sub2), % Elimina os elementos que Sub1 jï¿½ tem ou seja, Sub2=89XXXX567
 P3 is P2 + 1,
 insere(Sub2,Sub1,P3,NInd1), %vai inserir no Sub1 os elementos do Sub2 formando o NInd1
 eliminah(NInd1,NInd11). % Elimina Hs que estejam a mais no NInd1
@@ -863,17 +949,17 @@ eliminah([X|R1],[X|R2]):-
 eliminah(R1,R2).
 
 
-% A mutação é tentada sobre cada indivíduo da populaçãoPara saber se se
-% realiza a mutação gera-se um nº aleatório entre 0 e 1 e compara-se com
-% a probabilidade de mutação parametrizada, se for inferior faz-se a
-% mutação
+% A mutaï¿½ï¿½o ï¿½ tentada sobre cada indivï¿½duo da populaï¿½ï¿½oPara saber se se
+% realiza a mutaï¿½ï¿½o gera-se um nï¿½ aleatï¿½rio entre 0 e 1 e compara-se com
+% a probabilidade de mutaï¿½ï¿½o parametrizada, se for inferior faz-se a
+% mutaï¿½ï¿½o
 
 mutacao([],[]).
 
 mutacao([Ind|Rest],[NInd|Rest1]):-
 Pmut = 50,
 random(0.0,1.0,Pm),
-((Pm < Pmut,!,mutacao1(Ind,NInd));NInd = Ind), %se Pm < Pmut a mutação do individuo acontece (mutacao1)
+((Pm < Pmut,!,mutacao1(Ind,NInd));NInd = Ind), %se Pm < Pmut a mutaï¿½ï¿½o do individuo acontece (mutacao1)
 mutacao(Rest,Rest1).
 
 mutacao1(Ind,NInd):-
@@ -888,7 +974,7 @@ mutacao22([G|Ind],P1,P2,[G|NInd]):- %Se P1 nem P2 forem 1 decrementa-se 1 e cham
 P11 is P1-1, P21 is P2-1,
 mutacao22(Ind,P11,P21,NInd).
 
-mutacao23(G1,1,[G2|Ind],G2,[G1|Ind]):-!. % quando P for 1, o primeiro elemento que Ind tiver será o que vai ser adicionado ao NInd
+mutacao23(G1,1,[G2|Ind],G2,[G1|Ind]):-!. % quando P for 1, o primeiro elemento que Ind tiver serï¿½ o que vai ser adicionado ao NInd
 
 mutacao23(G1,P,[G|Ind],G2,[G|NInd]):- %vai apercorrer o Ind, P vezes.
 P1 is P-1,
@@ -904,7 +990,7 @@ atribui() :- gera2(Entregas),
              length(Camioes, NC),
              T is round(NE/NC - 0.1),
             ((T is 0, !, maisCamioes(Camioes, Entregas, Atribuicoes));(maisEntregas(Entregas, Camioes, Atribuicoes, NE, T))),
-             write('\nAtribuições: '), write(Atribuicoes).
+             write('\nAtribuiï¿½ï¿½es: '), write(Atribuicoes).
 
 maisEntregas(_,_,[],0,_).
 maisEntregas(Entregas, [X], [L1*X|Atr], NE, T) :- tiraEntregas(Entregas, L1, L2, NE),
@@ -1062,7 +1148,7 @@ getChargingTime(CE,CT) :- cam(Tr,_),
                           ruleOfThree(60,RechargeTime,(60 - R),CT).
 
 
-% Calculates the rule of three (regra de três simples).
+% Calculates the rule of three (regra de trï¿½s simples).
 % ruleOfThree/4 (<A - first term>, <B - second term>, <C - third term>,
 % <X - result>).
 
