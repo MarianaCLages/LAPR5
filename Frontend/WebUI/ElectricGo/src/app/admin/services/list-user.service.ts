@@ -30,7 +30,7 @@ export class ListUserService{
     return this.http.get<HttpResponse<any>>(getAllUsersURL, options).toPromise();
   }
 
-  desactivateUser(email: string) : any {
+  desactivateUser(email: string) {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -43,8 +43,25 @@ export class ListUserService{
 
     const softDeletePath = this.appConfigService.getWarehouseURL() + this.appConfigService.softDeleteUserByEmail();
 
-    return this.http.delete<ICreateUserDTO>(softDeletePath + email ,options);
+    return this.http.patch<HttpResponse<any>>(softDeletePath + email ,options).toPromise();
   }
+
+  anonymize(email: string) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': this.service.getJWT(),
+    };
+
+    const options = {
+      headers: headers
+    };
+
+    const softDeletePath = this.appConfigService.getWarehouseURL() + this.appConfigService.anonimyzeUserByEmail();
+
+    return this.http.patch<HttpResponse<any>>(softDeletePath + email ,options).toPromise();
+  }
+
 
 
 }

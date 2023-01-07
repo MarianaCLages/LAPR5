@@ -33,7 +33,8 @@
   "loginUserWithGooglePath": "User/loginWithGoogle",
   "getNewUserInfoPath": "User/newUser",
   "getUserProfileInfoPath": "User/getProfileInfo",
-  "softDeleteUserByEmail": "User/byEmailDelete?email="
+  "softDeleteUserByEmail": "User/byEmailDelete?email=",
+  "anonymizeUserByEmail": "User/anonymizeUser?email="
 
 
 }

@@ -124,6 +124,10 @@ export class AppConfigServiceService {
     return this.appConfig.softDeleteUserByEmail;
   }
 
+  anonimyzeUserByEmail() {
+    return this.appConfig.anonymizeUserByEmail;
+  }
+
   // Heuristics
 
   getHeuristicBaseURL() {

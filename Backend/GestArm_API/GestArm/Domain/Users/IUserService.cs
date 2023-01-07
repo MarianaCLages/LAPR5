@@ -23,5 +23,6 @@ public interface IUserService
     Task<bool> SoftDeleteAsync(string email);
 
     Task<bool> UpdateUserRole(string userRole, string userEmail);
+    Task<bool> SpecialSoftDeleteAsync(string email);
 
 }

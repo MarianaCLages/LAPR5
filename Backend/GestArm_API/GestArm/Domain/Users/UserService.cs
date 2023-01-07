@@ -163,9 +163,8 @@ public class UserService : IUserService
         var user = await _repository.GetByEmailAsync(new UserEmail(email));
 
         if (user == null) return null;
-
         user.ChangeName(new UserName(user.GetHashCodeName().ToString()));
-        user.ChangePhoneNumber(new UserPhoneNumber(user.GetHashCode().ToString()));
+        user.ChangePhoneNumber(new UserPhoneNumber(user.GetHashCode().ToString().PadRight(9).Substring(0, 9)));
         user.ChangeBirthDate(new UserBirthDate(DateTime.Now));
 
         await _repository.UpdateAsync(user);
@@ -185,6 +184,19 @@ public class UserService : IUserService
         else
             user.ActivateUser();
 
+        await _repository.UpdateAsync(user);
+
+        return true;
+    }
+    
+    public async Task<bool> SpecialSoftDeleteAsync(string email)
+    {
+        var user = await _repository.GetByEmailAsync(new UserEmail(email));
+
+        if (user == null) return false;
+
+        if (user.Activated.Activated) user.DesactivateUser();
+        
         await _repository.UpdateAsync(user);
 
         return true;

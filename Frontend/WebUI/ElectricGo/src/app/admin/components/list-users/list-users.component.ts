@@ -37,6 +37,7 @@ export class ListUsersComponent implements OnInit {
     'birthDate',
     'activated',
     'Actions',
+    'Anonymize'
   ];
 
   constructor(private listUserSerive: ListUserService,
@@ -72,13 +73,13 @@ export class ListUsersComponent implements OnInit {
     this.listUsers();
   }
 
-  listUsers(): any {
+   listUsers()  {
     //RESET THE VALUES
 
     this.errorMessage = '';
     this.error = false;
 
-    this.listUserSerive.listUser().then((data: any) => {
+     this.listUserSerive.listUser().then((data: any) => {
       this.users.data = data;
       this.users.paginator = this.paginator;
       this.users.sort = this.sort;
@@ -89,18 +90,57 @@ export class ListUsersComponent implements OnInit {
     window.history.back();
   }
 
-  desactivateUser(user: any) {
+   desactivateUser(user: any) {
     this.errorMessage = '';
     this.error = false;
 
-    this.listUserSerive.desactivateUser(user.email);
+     this.listUserSerive.desactivateUser(user.email).then((data: any) => {
+      this.listUserSerive.listUser().then(
+        (data: any) => {
+          this.users.data = data;
+          this.users.paginator = this.paginator;
+          this.users.sort = this.sort;
+        },
+        (error: any) => {
+          this.error = true;
+          if (error.status == 400) {
+            this.errorMessage = error.error;
+          } else {
+            if (error.status == 500) {
+              this.errorMessage = error.error.errors.message;
+            } else {
+              this.errorMessage = 'Unknown error!';
+            }
+          }
+        }
+      );
+    },
+    (error: any) => {
+      this.error = true;
+      if (error.status == 400) {
+        this.errorMessage = error.error;
+      } else {
+        if (error.status == 500) {
+          this.errorMessage = error.error.errors.message;
+        } else {
+          this.errorMessage = 'Unknown error!';
+        }
+      }
+    }
+    );
+  }
 
-    let errorOrSuccess = this.listUserSerive.desactivateUser(user.email);
-    errorOrSuccess.subscribe(
+   anonymizeUser(user : any) {
+    this.errorMessage = '';
+    this.error = false;
+
+     this.listUserSerive.anonymize(user.email).then(
       (data: any) => {
         this.listUserSerive.listUser().then(
           (data: any) => {
             this.users.data = data;
+            this.users.paginator = this.paginator;
+            this.users.sort = this.sort;
           },
           (error: any) => {
             this.error = true;
@@ -115,22 +155,11 @@ export class ListUsersComponent implements OnInit {
             }
           }
         );
-      }, //transforms into a http error
-      (error: any) => {
-        this.error = true;
-        if (error.status == 400) {
-          this.errorMessage = error.error;
-        } else {
-          if (error.status == 500) {
-            this.errorMessage = error.error.errors.message;
-          } else {
-            this.errorMessage = 'An unknown error has ocurred';
-          }
-        }
-      }
+      },
     );
 
     this.users.paginator = this.paginator;
     this.users.sort = this.sort;
   }
+
 }

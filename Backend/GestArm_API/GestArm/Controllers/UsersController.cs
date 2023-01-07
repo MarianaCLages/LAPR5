@@ -208,30 +208,17 @@ public class UserController : ControllerBase
         {
             return BadRequest(new { ex.Message });
         }
-        // catch (HttpResponseException e)
-        // {
-        //     return Forbid(e.Message);
-        // }
         catch (Exception)
         {
             return NotFound("Error on updating the user! (Please specify a valid date!)");
         }
     }
 
-    // PUT: api/User/anonymize?email=XXXX
-    [Route("~/api/[controller]/anonymize", Name = "AnonymizeUser")]
-    [HttpPut("anonymize")]
+    // PUT: api/User/anonymizeUser?email=XXXX
+    [Route("~/api/[controller]/anonymizeUser", Name = "AnonymizeUser")]
+    [HttpPatch("anonymize")]
     public async Task<ActionResult<UserDTO>> AnonymizeAsync(string email)
     {
-        var auth = await VerifyUserAccess();
-
-        if(auth.StatusCode == HttpStatusCode.Unauthorized)
-            return Unauthorized(auth.ReasonPhrase.ToString());
-        
-        //Depois podes tirar este if Ines
-        else if (auth.StatusCode == HttpStatusCode.Forbidden)
-            return Forbid(auth.ReasonPhrase?.ToString());
-        
         try
         {
             var user = await _service.GetByEmail(email);
@@ -241,6 +228,8 @@ public class UserController : ControllerBase
             var cat = await _service.AnonymizeUser(email);
 
             if (cat == null) return NotFound();
+
+            await _service.SpecialSoftDeleteAsync(email);
 
             return Ok(cat);
         }
@@ -254,24 +243,15 @@ public class UserController : ControllerBase
         }
     }
 
-    //DELETE: api/User/byEmailDelete?email=XXXX
+    //PATCH: api/User/byEmailDelete?email=XXXX
     [Route("~/api/[controller]/byEmailDelete", Name = "SoftDeleteUser")]
-    [HttpDelete("byEmailDelete")]
+    [HttpPatch("byEmailDelete")]
     public async Task<ActionResult<bool>> SoftDeleteAsync(string email)
     {
-        var auth = await VerifyUserAccess();
-
-        if(auth.StatusCode == HttpStatusCode.Unauthorized)
-            return Unauthorized(auth.ReasonPhrase.ToString());
-
-        else if (auth.StatusCode == HttpStatusCode.Forbidden)
-            return Forbid(auth.ReasonPhrase?.ToString());
-        
         try
         {
             var order = await _service.SoftDeleteAsync(email);
-            var anon = await _service.AnonymizeUser(email);
-
+            
             if (order == false)
                 throw new BusinessRuleValidationException("No user with that email was found!");
 
@@ -286,7 +266,7 @@ public class UserController : ControllerBase
             return NotFound("An error occured while looking for the user! (No user with that email was found!)");
         }
     }
-
+    
     //GET: api/User
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllAsync()
