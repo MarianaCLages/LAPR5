@@ -13,6 +13,9 @@ import { GoogleApiCommunicationService } from 'src/app/services/google-api-commu
 import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 import { GetTrucksService } from 'src/app/services/get-trucks.service';
 import { ITruckViewRepresentation } from 'src/app/shared/truckViewRepresentation';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
+import { Line, Line3, LineBasicMaterial, Mesh, Object3D, Raycaster, Vector2 } from 'three';
+
 import * as YUKA from 'yuka';
 import { BestPathForFleetService } from '../../services/best-path-for-fleet.service';
 
@@ -54,6 +57,10 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private roadMap!: THREE.Group;
   private controls!: OrbitControls;
 
+  // Collision
+  private mouse = new Vector2();
+  private raycaster = new Raycaster();
+
   //Audio
   private listener = new THREE.AudioListener();
   private audioLoader = new THREE.AudioLoader();
@@ -79,6 +86,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   private pathsIncomingEdges = new Map<string, number[]>();
 
   private reserveTrucksFromTrips : any[] = [];
+
+  private availableTrucksArr : any[] = []
+
 
   private arrTrucks : any[] = [];
 
@@ -366,7 +376,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         new THREE.Vector3(1, 0, 0),
         Math.atan2(incomingEdgeEndZ - incomingEdgeStartZ, angle)
       );
-
       this.roadMap.add(road);
 
       //PATHS MAP
@@ -461,6 +470,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
           Math.pow(warehousePos[1] - element.y, 2) +
           Math.pow(warehousePos[2] - element.z, 2)
         );
+        
 
         //VECTORIAL DIFFERENCE
         const difX = element.x - warehousePos[0];
@@ -646,6 +656,21 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   }
 
+  // method addCollision
+  private addCollision() {
+    if (this.truck) {
+      var raycastPosition = new THREE.Vector3(this.truck.position.x, this.truck.position.y, this.truck.position.z);
+      this.raycaster.set(raycastPosition, new THREE.Vector3(0, 0, -1));
+      this.raycaster.far = 1;
+      const intersects = this.raycaster.intersectObjects(this.roadMap.children);
+      if (intersects.length != 0) {
+        var aux = intersects[0];
+        var distance = aux.point.z - this.truck.position.z;
+        this.truck.position.z += distance;
+      }
+    };
+  }
+
   //CREATE THE SCENE
   private createScene() {
     //SCENE
@@ -722,15 +747,15 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     this.controls.enableZoom = true;
     this.controls.enablePan = true;
     this.controls.enableDamping = true;
-
+    
     this.moovSpeed = 0.001
     let component: ViewRoadMapNetworkComponent = this;
 
     window.addEventListener('popstate', event => this.destroyGUI())
 
     //Starting movement of the truck type
-    //Get the first truck into the array
 
+    //Get the first truck into the array
     this.availableTrucks.push(this.trucksInfo[0])
 
     var params = {
@@ -895,6 +920,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   private updateTruckPosition() {
     document.addEventListener("keydown",event => this.myFunc(event));
+    this.addCollision();
+    //Atualizar para mais tarde a camera frontal estar dentro do camião e fazer 1º pessoa e 3º pessoa
+    //this.camera.position.set(this.matosinhosX, this.matosinhosY, this.matosinhosZ);
   }
 
   private myFunc(evt : KeyboardEvent){
@@ -1038,3 +1066,4 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   }
 
 }
+
