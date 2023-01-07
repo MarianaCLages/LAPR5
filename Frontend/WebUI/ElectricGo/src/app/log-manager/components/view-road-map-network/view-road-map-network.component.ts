@@ -92,6 +92,8 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   private arrTrucks : any[] = [];
 
+  private truckAux : any;
+
   constructor(
     private getWarehouseService: GetWarehouseServiceService,
     private getPathService: GetPathsService,
@@ -190,6 +192,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         x: coordinates[0] / 300,
         y: coordinates[1] / 300,
         z: coordinates[2] / 300,
+        active : warehouse.activated
       };
 
       //add the warehouseViewRepresentation to the array
@@ -305,6 +308,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         new THREE.Vector3(1, 0, 0),
         Math.atan2(incomingEdgeStartZ - start.z, angleIncoming)
       );
+
+      incomingRoad.receiveShadow = true;
+      incomingRoad.castShadow = true;
 
       this.roadMap.add(incomingRoad);
 
@@ -449,7 +455,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         this.pathsIncomingEdges.set(path, [incomingEdgeStartX, incomingEdgeStartY, incomingEdgeStartZ, incomingEdgeEndX, incomingEdgeEndY, incomingEdgeEndZ]);
       }
 
-
     }
 
     // ROUNDABOUTS
@@ -459,7 +464,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       let warehousePos = this.warehousesAndEdges.get(element.id)!;
 
       let roundabout = this.createRoundAbout(roundaboutWidth);
-      roundabout.position.set(element.x, element.y, element.z + 0.08);
+      roundabout.position.set(element.x, element.y, element.z + 0.1);
       this.roadMap.add(roundabout);
 
       if (warehousePos == undefined) {
@@ -470,7 +475,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
           Math.pow(warehousePos[1] - element.y, 2) +
           Math.pow(warehousePos[2] - element.z, 2)
         );
-        
+
 
         //VECTORIAL DIFFERENCE
         const difX = element.x - warehousePos[0];
@@ -554,6 +559,9 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
         incomingRoad.rotation.z = Math.atan2(warehouseY - element.y, warehouseX - element.x) - Math.PI / 2;
 
+        incomingRoad.receiveShadow = true;
+        incomingRoad.castShadow = true;
+
         incomingRoad.rotateOnAxis(
           new THREE.Vector3(1, 0, 0),
           Math.atan2(warehouseZ - element.z, angleIncoming)
@@ -562,7 +570,6 @@ export class ViewRoadMapNetworkComponent implements OnInit {
         this.roadMap.add(incomingRoad);
 
       }
-
 
       //Update warehousesAndEdges values with the new warehouse position
 
@@ -589,6 +596,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       }
 
       this.loadWarehouseModel(warehousePos[0], warehousePos[1], warehousePos[2]);
+      this.verifyWarehouse(element.active, warehousePos[0], warehousePos[1], warehousePos[2]);
     }
 
     this.generateTruck();
@@ -613,24 +621,48 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     );
   }
 
+  private verifyWarehouse(active: boolean, posX : number, posY : number, posZ : number) {
+    if (!active) {
+
+      const glftLoader = new GLTFLoader();
+      glftLoader.load(
+      'assets/stop/stop.glb',
+      (gltf) => {
+        gltf.scene.scale.set(0.006, 0.006, 0.006);
+        gltf.scene.position.set(posX, posY, posZ + 2);
+
+        gltf.scene.traverse(function (node) {
+          node.castShadow = true;
+        })
+
+        this.roadMap.add(gltf.scene);
+      }
+    );
+
+    }
+ }
+
   private loadTruckModel(name : string) {
     const glftLoader = new GLTFLoader();
     glftLoader.load(
       'assets/truck_model/light_commercial_truck_07-_low_poly_model.glb',
       (gltf) => {
         gltf.scene.scale.set(0.003, 0.003, 0.003);
-        gltf.scene.position.set(this.matosinhosX, this.matosinhosY, this.matosinhosZ + 0.4);
+        gltf.scene.position.set(this.matosinhosX, this.matosinhosY, this.matosinhosZ + 0.15);
         gltf.scene.rotation.x = Math.PI / 2.0;
         gltf.scene.rotation.y = Math.PI / 2.0;
         gltf.scene.name = name;
         this.scene.add(gltf.scene);
-        this.truck = gltf.scene;
 
         gltf.scene.traverse(function (node) {
           node.castShadow = true;
         })
 
-        this.arrTrucks.push(this.truck);
+        this.arrTrucks.push(gltf.scene);
+
+        if(name == "T01") {
+          this.truckAux = gltf.scene;
+        }
       }
     );
   }
@@ -641,12 +673,15 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       width = 1;
     }
 
+    const texture = new THREE.TextureLoader().load("../../../../assets/roundabout/Roundabout_texture.png");
+
     const geometry = new THREE.CircleGeometry(width, 32);
     const material = new THREE.MeshStandardMaterial({
-      side: THREE.DoubleSide
+      side: THREE.DoubleSide,
+      map: texture
     });
 
-    material.color.set(0x000000);
+    //material.color.set(0x000000);
     let roundabout = new THREE.Mesh(geometry, material);
 
     roundabout.castShadow = true;
@@ -747,7 +782,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     this.controls.enableZoom = true;
     this.controls.enablePan = true;
     this.controls.enableDamping = true;
-    
+
     this.moovSpeed = 0.001
     let component: ViewRoadMapNetworkComponent = this;
 
@@ -794,7 +829,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
        if(value < component.truckNumber) {
         for(var i : number = value ; i < component.truckNumber ; i++) {
-          selectedObject = component.scene.getObjectByName(component.trucksInfo[i]);
+          selectedObject = component.arrTrucks[i];
           component.scene.remove( selectedObject );
         }
       }

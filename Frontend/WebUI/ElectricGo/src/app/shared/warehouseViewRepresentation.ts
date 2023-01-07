@@ -3,4 +3,5 @@ export interface IWarehouseViewRepresentation {
   x: number;
   y: number;
   z: number;
+  active: boolean;
 }
