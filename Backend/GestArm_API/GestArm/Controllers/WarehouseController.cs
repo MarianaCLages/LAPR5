@@ -272,8 +272,8 @@ public class WarehouseController : ControllerBase
     }
     
     //delete=id do armazem
-    // GET: api/Warehouse/delete?delete=delete
-    [HttpPut("delete")]
+    // Patch: api/Warehouse/delete?delete=delete
+    [HttpPatch("delete")]
     public async Task<ActionResult<bool>> DesactivateAsync(string delete)
     {
         var warehouseCheck = await _service.GetByWarehouseIdAsync(delete);
@@ -286,8 +286,8 @@ public class WarehouseController : ControllerBase
     }
     
     //activate= id do armazem
-    // GET: api/Warehouse/activate?activate=activate
-    [HttpPut("activate")]
+    // Patch: api/Warehouse/activate?activate=activate
+    [HttpPatch("activate")]
     public async Task<ActionResult<bool>> ActivateAsync(string activate)
     {
         var warehouseCheck = await _service.GetByWarehouseIdAsync(activate);

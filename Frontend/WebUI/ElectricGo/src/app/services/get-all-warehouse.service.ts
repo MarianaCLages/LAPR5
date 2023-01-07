@@ -63,7 +63,7 @@ export class GetAllWarehouseService {
 
     const activateWarehousePath = this.appConfigService.getWarehouseURL() + this.appConfigService.getActivationWarehouse();
 
-    return this.http.put<HttpResponse<any>>(activateWarehousePath + id, options);
+    return this.http.patch<HttpResponse<any>>(activateWarehousePath + id, options);
   }
 
   desactivateWarehouse(id: any){
@@ -81,7 +81,7 @@ export class GetAllWarehouseService {
 
     const desactivateWarehousePath = this.appConfigService.getWarehouseURL() + this.appConfigService.getDesactivationWarehouse();
 
-    return this.http.put<HttpResponse<any>>(desactivateWarehousePath + id, options);
+    return this.http.patch<HttpResponse<any>>(desactivateWarehousePath + id, options);
   }
 
 
