@@ -17,16 +17,15 @@ import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 export class GetWarehouseComponent implements OnInit {
 
 
-
+  // @ts-ignore
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  // @ts-ignore
+  @ViewChild(MatSort) sort: MatSort;
 
   warehouse = new MatTableDataSource<ActivatedWarehouseDTO >();
 
   displayedColumns: string[] = ['alphaNumId', 'designation', 'street','postalCode','latitudeDegree','latitudeMinute','latitudeSecond','longitudeDregree','longitudeMinute','longitudeSecond','activated'];
 
-  // @ts-ignore
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator ;
-  // @ts-ignore
-  @ViewChild(MatSort, {static: true}) sort: MatSort ;
   //warehouses: any [] = [];
   warehousesAsString: any;
   errorMessage: any;

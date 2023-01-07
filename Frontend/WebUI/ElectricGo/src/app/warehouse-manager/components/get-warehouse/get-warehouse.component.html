@@ -2,13 +2,11 @@
 
   <div class="mat-elevation-z8">
 
-
     <br>
     <mat-label>Warehouse Alpha Numeric ID:  </mat-label>
     <input matInput type="any" [(ngModel)]="alphaId"/>
     <button mat-raised-button color="primary" (click)="getWarehouse()">List</button>
 
-    <br>
     <br>
 
     <table mat-table [dataSource]="warehouse">
@@ -77,8 +75,9 @@
 
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
   </div>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Page navigation"></mat-paginator>
 
   <button mat-raised-button color="primary" class="backBtn" (click)="goBack()">Back</button>
 

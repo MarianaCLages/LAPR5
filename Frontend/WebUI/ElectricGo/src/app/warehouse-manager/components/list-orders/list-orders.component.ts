@@ -53,9 +53,9 @@ export class ListOrdersComponent {
     'Warehouse ID',
   ];
   // @ts-ignore
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   allComplete: boolean = false;
 
@@ -95,6 +95,8 @@ export class ListOrdersComponent {
     //calls the service to get the orders
     this.getOrdersService.getOrders().then((data: any) => {
       this.orders.data = data;
+      this.orders.paginator = this.paginator;
+      this.orders.sort = this.sort;
     });
   }
 
@@ -223,6 +225,7 @@ export class ListOrdersComponent {
         );
     }
     this.orders.paginator = this.paginator;
+    this.orders.sort = this.sort;
   }
 
   goBack() {

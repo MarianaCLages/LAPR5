@@ -32,9 +32,9 @@ export class ListPackagingComponent implements OnInit {
 
   displayedColumns: string[] = ['OrderRef', 'TruckRef', 'xPos', 'yPos', 'zPos'];
   // @ts-ignore
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   public showPage: boolean = false;
 
@@ -49,6 +49,7 @@ export class ListPackagingComponent implements OnInit {
   ngAfterViewInit() {
     // @ts-ignore
     this.packagings.paginator = this.paginator;
+    this.packagings.sort = this.sort;
   }
 
   async ngOnInit(): Promise<void> {
@@ -74,6 +75,8 @@ export class ListPackagingComponent implements OnInit {
     //calls the service to get the packagigns
     this.listPackagingService.getPackaging().then((data: IPackagingDTO[]) => {
       this.packagings.data = data;
+      this.packagings.paginator = this.paginator;
+      this.packagings.sort = this.sort;
     });
   }
 
@@ -97,6 +100,8 @@ export class ListPackagingComponent implements OnInit {
     if (this.filterOption == 'Packaging Order') {
       this.listPackagingService.getPackagingByOrder(this.orderRef).then((data: any) => {
         this.packagings = data;
+        this.packagings.paginator = this.paginator;
+        this.packagings.sort = this.sort;
       },
         (error: any) => {
           this.error = true;
@@ -114,6 +119,8 @@ export class ListPackagingComponent implements OnInit {
     } else if (this.filterOption == 'Packaging Truck') {
       this.listPackagingService.getPackagingByTruck(this.truckRef).then((data: any) => {
         this.packagings = data;
+        this.packagings.paginator = this.paginator;
+        this.packagings.sort = this.sort;
       },
         (error: any) => {
           this.error = true;
@@ -131,6 +138,8 @@ export class ListPackagingComponent implements OnInit {
     } else if (this.filterOption == 'AllPackagings') {
       this.listPackagingService.getPackaging().then((data: IPackagingDTO[]) => {
         this.packagings.data = data;
+        this.packagings.paginator = this.paginator;
+        this.packagings.sort = this.sort;
       },
         (error: any) => {
           this.error = true;

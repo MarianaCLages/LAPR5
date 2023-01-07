@@ -1,8 +1,10 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {MatTableDataSource} from "@angular/material/table";
 
 import {ICreateTripDTO} from "../../../shared/ICreateTripDTO";
 import {BestPathForFleetService} from "../../services/best-path-for-fleet.service";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-best-path-for-fleet',
@@ -31,6 +33,12 @@ export class BestPathForFleetComponent implements OnInit {
     'tripday',
     'orders'
   ];
+
+  // @ts-ignore
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  // @ts-ignore
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(
     private bestPathForFleetService: BestPathForFleetService
   ) {}
@@ -42,6 +50,8 @@ export class BestPathForFleetComponent implements OnInit {
   generateTrips(date : any){
     this.bestPathForFleetService.bestPathForFleetService(date).then((data: any) => {
       this.trips = data;
+      this.trips.paginator = this.paginator;
+      this.trips.sort = this.sort;
     });
 
 

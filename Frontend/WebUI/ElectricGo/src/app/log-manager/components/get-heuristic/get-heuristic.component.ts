@@ -19,9 +19,9 @@ export class GetHeuristicComponent implements OnInit {
   warehouses = new MatTableDataSource<IPackagingDTO>();
 
   // @ts-ignore
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator ;
+  @ViewChild(MatPaginator) paginator: MatPaginator ;
   // @ts-ignore
-  @ViewChild(MatSort, {static: true}) sort: MatSort ;
+  @ViewChild(MatSort) sort: MatSort ;
   caractId : any;
   heuristic : any;
   date : any;

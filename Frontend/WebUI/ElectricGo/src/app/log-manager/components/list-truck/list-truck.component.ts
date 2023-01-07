@@ -42,9 +42,9 @@ export class ListTruckComponent implements OnInit {
   private validRoles: string[] = ['LogisticManager', 'Admin'];
 
   // @ts-ignore
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   allComplete: boolean = false;
 
@@ -59,6 +59,7 @@ export class ListTruckComponent implements OnInit {
   ngAfterViewInit() {
     // @ts-ignore
     this.trucks.paginator = this.paginator;
+    this.trucks.sort = this.sort;
   }
 
   async ngOnInit(): Promise<void> {
@@ -162,6 +163,7 @@ export class ListTruckComponent implements OnInit {
       );
     }
     this.trucks.paginator = this.paginator;
+    this.trucks.sort = this.sort;
   }
 
   goBack() {
@@ -208,6 +210,7 @@ export class ListTruckComponent implements OnInit {
         }
       );
       this.trucks.paginator = this.paginator;
+      this.trucks.sort = this.sort;
   }
 
 

@@ -1,6 +1,11 @@
 <div *ngIf = "showPage">
   <div class="container" matAutocompleteOrigin>
-    <h1>Create Truck</h1>
+
+    <br>
+    <br>
+
+    <h1>Fleet Manager</h1>
+    <h2>Create Truck</h2>
 
     <div>
         <mat-error *ngIf="error" class="alert alert-warning">
@@ -8,12 +13,12 @@
         </mat-error>
       </div>
 
+    <br>
+
     <mat-form-field>
         <mat-label> Truck Characteristic</mat-label>
         <input matInput type = "text" [(ngModel)]="caractTruck"/>
     </mat-form-field>
-
-    <br>
 
     <mat-form-field>
         <mat-label> Truck Plate Number </mat-label>

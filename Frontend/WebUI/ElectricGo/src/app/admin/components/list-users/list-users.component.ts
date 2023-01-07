@@ -7,6 +7,7 @@ import { ICreateUserDTO } from '../../../shared/createUserDTO';
 import { MatPaginator } from '@angular/material/paginator';
 import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
 import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-list-users',
@@ -43,7 +44,10 @@ export class ListUsersComponent implements OnInit {
     private redirect: RedirectPagesService) {}
 
   // @ts-ignore
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  // @ts-ignore
+  @ViewChild(MatSort) sort: MatSort;
 
   async ngOnInit(): Promise<void> {
     this.showPage = false;
@@ -76,8 +80,9 @@ export class ListUsersComponent implements OnInit {
 
     this.listUserSerive.listUser().then((data: any) => {
       this.users.data = data;
+      this.users.paginator = this.paginator;
+      this.users.sort = this.sort;
     });
-    this.users.paginator = this.paginator;
   }
 
   goBack() {
@@ -126,5 +131,6 @@ export class ListUsersComponent implements OnInit {
     );
 
     this.users.paginator = this.paginator;
+    this.users.sort = this.sort;
   }
 }

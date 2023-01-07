@@ -36,9 +36,9 @@ export class GetAllWarehousesComponent implements OnInit {
   options: string[] = ['Warehouse by Designation', 'All Warehouses'];
   filterOption: any;
   // @ts-ignore
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
   //warehouses: any [] = [];
   warehousesAsString: any;
   errorMessage: any;
@@ -85,7 +85,6 @@ export class GetAllWarehousesComponent implements OnInit {
 
   async chooseFilter() {
     //clear the form
-    console.log(this.filterOption);
     this.designation = null;
     if (this.filterOption == 'All Warehouses') {
       let dataWarehouse = await this.getAllWarehouseService.getAllWarehouse();
@@ -94,7 +93,6 @@ export class GetAllWarehousesComponent implements OnInit {
       this.warehouses.sort = this.sort;
       this.warehouses.paginator = this.paginator;
 
-      console.log(dataWarehouse);
     }
   }
 
@@ -105,6 +103,8 @@ export class GetAllWarehousesComponent implements OnInit {
         .then(
           (data: ActivatedWarehouseDTO[]) => {
             this.warehouses.data = data;
+            this.warehouses.sort = this.sort;
+            this.warehouses.paginator = this.paginator;
           },
           (error: any) => {
             alert(error.error);

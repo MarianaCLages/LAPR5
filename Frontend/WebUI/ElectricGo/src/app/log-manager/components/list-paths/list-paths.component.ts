@@ -31,9 +31,9 @@ export class ListPathsComponent implements OnInit {
   paths = new MatTableDataSource<IPathDTO>();
   displayedColumns: string[] = ['Beginning Warehouse', 'Ending Warehouse', 'energy', 'distance', 'time', 'chargingTime'];
   // @ts-ignore
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
   filterOption: any;
 
   public showPage: boolean = false;
@@ -89,6 +89,8 @@ export class ListPathsComponent implements OnInit {
     if (this.filterOption == "All Paths") {
       this.getPathsService.getPaths().then((data: IPathDTO[]) => {
         this.paths.data = data;
+        this.paths.paginator = this.paginator;
+        this.paths.sort = this.sort;
       });
     }
   }
@@ -119,11 +121,11 @@ export class ListPathsComponent implements OnInit {
     this.showPage = true;
     this.getPathsService.getPaths().then((data: IPathDTO[]) => {
       this.paths.data = data;
+      this.paths.paginator = this.paginator;
+      this.paths.sort = this.sort;
     }
     );
 
-    this.paths.paginator = this.paginator;
-    this.paths.sort = this.sort;
   }
 
   goBack() {
