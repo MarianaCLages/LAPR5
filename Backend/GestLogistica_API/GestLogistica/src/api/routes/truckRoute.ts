@@ -80,10 +80,10 @@ export default (app: Router) => {
   route.get("/plate/:plate",
     (req, res, next) => ctrl.getTruckByPlateParam(req, res, next));
 
-  route.delete("/caract/:caractTruck",
+  route.patch("/caract/:caractTruck",
     (req, res, next) => ctrl.deleteTruckSoftCaract(req, res, next));
 
-  route.delete("/plate/:plate",
+  route.patch("/plate/:plate",
     (req, res, next) => ctrl.deleteTruckSoftPlate(req, res, next));
 
   route.get("/send_info/:idTruck/:date",

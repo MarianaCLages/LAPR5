@@ -31,7 +31,7 @@ export default {
 
   jwtTokenClient:
     process.env.JWT_TOKEN_CLIENT ||
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1pZ3VlbCBKb3JkYW8iLCJlbWFpbCI6Im1pZ3VlbDk4am9yZGFvMTNAZ21haWwuY29tIiwibmJmIjoxNjcyOTE4MTY2LCJleHAiOjE2NzM1MjI5NjYsImlhdCI6MTY3MjkxODE2Nn0.-453uZKLu6wHV2g_jikmT7xmrXS1C_91-QkXYiU45LM",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1hcmlhbmEgTGFnZXMiLCJlbWFpbCI6Im1hcmlhbmFsYWdlczIwMDJAZ21haWwuY29tIiwibmJmIjoxNjcyNjg2OTg3LCJleHAiOjE2NzMyOTE3ODcsImlhdCI6MTY3MjY4Njk4N30.bJN6YhU-Lr2BN7_t9cpzJKjmPZ4lM14E6fLhFWrsZFY",
 
   /**
    * Used by winston logger

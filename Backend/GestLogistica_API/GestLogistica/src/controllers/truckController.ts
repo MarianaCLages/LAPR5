@@ -368,11 +368,11 @@ export default class truckController
   public async deleteTruckSoftPlate(req: Request, res: Response, next: NextFunction) {
     try {
       //get the jwt token from the request
-      const token = req.headers.authorization;
-      const trucks = await this.authentication(token);
-      if (!trucks.isSuccess) {
-        return res.status(trucks.errorValue().code).json(trucks.errorValue().error).send();
-      }
+      // const token = req.headers.authorization;
+      // const trucks = await this.authentication(token);
+      // if (!trucks.isSuccess) {
+      //   return res.status(trucks.errorValue().code).json(trucks.errorValue().error).send();
+      // }
 
       const plate: string = req.params.plate;
       const dto: ITruckPlateDTO = {

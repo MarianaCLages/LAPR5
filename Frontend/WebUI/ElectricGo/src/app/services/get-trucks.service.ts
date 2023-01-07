@@ -85,7 +85,7 @@ export class GetTrucksService {
 
     //get the trucks from the backend
     this.truckParamURL = this.appConfigService.getLogisticsURL() + this.appConfigService.getTruckByParamURL() + "/plate/" + plate;
-    return this.http.delete<any>(this.truckParamURL, options).toPromise();
+    return this.http.patch<any>(this.truckParamURL, options).toPromise();
   }
 
 }
