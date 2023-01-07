@@ -56,7 +56,7 @@ export default class PackagingController
       if (!trucks.isSuccess) {
         return res.status(trucks.errorValue().code).json(trucks.errorValue().error).send();
       }
-      console.log(req.body);
+    
       const pathOrError = await this.packagingServiceInstance.getByOrderS(req.body as IPackagingOrderDTO);
 
       if (pathOrError.isFailure) {

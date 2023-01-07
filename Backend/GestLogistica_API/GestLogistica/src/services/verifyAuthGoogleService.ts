@@ -19,9 +19,8 @@ export default class VerifyAuthGoogleService implements IVerifyAuthService {
         token = token.substring(7, token.length);
       }
       const user: Result<IUserAuthDTO> = await this.authRepo.verifyAuth(token);
-      console.log(user);
       const role: Result<string> = await this.authRepo.verifyRole(user.getValue());
-      console.log(role.getValue());
+
       if (!role.isSuccess) {
         return Result.fail("The user does not exist");
       } else {
@@ -32,7 +31,6 @@ export default class VerifyAuthGoogleService implements IVerifyAuthService {
         }
       }
     } catch (error) {
-      console.log(error);
       return Result.fail("Not authorized");
     }
   }

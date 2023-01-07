@@ -173,7 +173,6 @@ export default class pathController
   }
 
   public async getByBeginningAndEndingWarehouseId(req: Request, res: Response, next: NextFunction) {
-    console.log("req");
 
     try {
       //get the jwt token from the request
