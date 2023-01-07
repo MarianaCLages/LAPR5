@@ -9,17 +9,17 @@ import { Guard } from "../../core/logic/Guard";
 import { Result } from "../../core/logic/Result";
 import {ICreateTripDTO} from "../../dto/trip/ICreateTripDTO";
 
-interface tripProps{
-  tripIdentifier: TripIdentifier;
-  tripTruck: TripTruck;
-  tripDay: TripDay;
-  tripWarehouses: TripWarehouse;
-  tripOrders: TripOrders;
+export interface tripProps{
+    tripIdentifier: TripIdentifier,
+    tripTruck: TripTruck,
+    tripDay: TripDay,
+    tripWarehouses: TripWarehouse,
+    tripOrders: TripOrders
 }
 
 export class Trip extends AggregateRoot<tripProps>{
 
-  private constructor(props: tripProps, id?: UniqueEntityID) {
+  private constructor(props: tripProps, id: UniqueEntityID) {
     super(props, id);
   }
 
@@ -47,36 +47,23 @@ export class Trip extends AggregateRoot<tripProps>{
     return this.props.tripDay;
   }
 
-  public static create(tripDTO: ICreateTripDTO, id?: UniqueEntityID) : Result<Trip>{
+  public static create(tripProps: tripProps) : Result<Trip>{
     const guardProps = [
-      {argument: tripDTO.tripIdentifier, argumentName: 'tripIdentifier'},
-      {argument: tripDTO.tripWarehouses, argumentName: 'tripWarehouses'},
-      {argument: tripDTO.tripTruck, argumentName: 'tripTruck'},
-      {argument: tripDTO.tripDay, argumentName: 'tripDay'},
-      {argument: tripDTO.tripOrders, argumentName: 'tripOrders'},
+      {argument: tripProps.tripOrders, argumentName: 'tripOrders'},
+      {argument: tripProps.tripIdentifier, argumentName: 'tripIdentifier'},
+      {argument: tripProps.tripWarehouses, argumentName: 'tripWarehouses'},
+      {argument: tripProps.tripTruck, argumentName: 'tripTruck'},
+      {argument: tripProps.tripDay, argumentName: 'tripDay'},
     ]
     const guard =  Guard.againstNullOrUndefinedBulk(guardProps)
 
     if (!guard.succeeded){
       return Result.fail(guard.message)
     }
-  
-    const tripOrdersErrorOrSuccess = TripOrders.create(tripDTO.tripOrders);
-    const tripIdentifierErrorOrSuccess = TripIdentifier.create(tripDTO.tripTruck,tripDTO.tripDay);
-    const tripWarehousesErrorOrSuccess = TripWarehouse.create(tripDTO.tripWarehouses);
-    const tripTruckErrorOrSuccess = TripTruck.create(tripDTO.tripTruck);
-    const TripDayErrorOrSuccess = TripDay.create(tripDTO.tripDay);
 
-    const trip = new Trip({
-      tripIdentifier: tripIdentifierErrorOrSuccess.getValue(),
-      tripTruck: tripTruckErrorOrSuccess.getValue(),
-      tripDay: TripDayErrorOrSuccess.getValue(),
-      tripWarehouses: tripWarehousesErrorOrSuccess.getValue(),
-      tripOrders: tripOrdersErrorOrSuccess.getValue()
-    },id);
+    const id =  new UniqueEntityID();
 
-
-    return Result.ok<Trip>(trip)
+    return Result.ok(new Trip(tripProps,id));
   }
 
 }

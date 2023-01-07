@@ -1,17 +1,9 @@
 export class ICreateTripDTO{
-  tripIdentifier: string;
-  tripTruck: string;
-  tripDay: string;
-  tripWarehouses: string;
-  tripOrders: string;
+  truck: string[];
+  date: string
 
-
-  constructor(tripIdentifier : string, tripTruck : string, tripDay : string, tripWarehouses : string, tripOrders : string) {
-
-    this.tripIdentifier = tripIdentifier;
-    this.tripTruck = tripTruck;
-    this.tripDay = tripDay;
-    this.tripWarehouses = tripWarehouses;
-    this.tripOrders = tripOrders;
+  constructor(truck: string[],date: string) {
+    this.truck= truck;
+    this.date = date;
   }
 }

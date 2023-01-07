@@ -27,6 +27,16 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createTruck(req, res, next));
 
+  route.post("/addtrips",
+      celebrate({
+        body: Joi.object({
+            truck: Joi.array().items(Joi.string()).required(),
+            date: Joi.string().required(),
+        })
+      }),
+      (req,res,next) => ctrl.getBestPathForEachTruck(req,res,next));
+
+
   route.put("",
     celebrate({
       body: Joi.object({
@@ -94,9 +104,6 @@ export default (app: Router) => {
 
   route.get("/get_heuristic_weight_time/:idTruck/:date",
     (req, res, next) => ctrl.getHeuristicByTimeWeight(req, res, next));
-
-  route.get("/get_best_path/:date",
-    (req, res, next) => ctrl.getBestPathForEachTruck(req, res, next));
 
   route.get("/trips/:date",
     (req, res, next) => ctrl.getTrips(req, res, next));

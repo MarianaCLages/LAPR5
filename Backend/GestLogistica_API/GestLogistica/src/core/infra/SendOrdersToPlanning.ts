@@ -1,4 +1,4 @@
-import {Service} from "typedi";
+/*import {Service} from "typedi";
 import fetch from 'node-fetch';
 import IOrderRepo from "../../services/IRepos/IOrderRepo";
 import * as https from "https";
@@ -133,3 +133,5 @@ export default class SendOrdersToPlanning implements IOrderRepo{
         return Promise.resolve(undefined);
     }
 }
+
+ */

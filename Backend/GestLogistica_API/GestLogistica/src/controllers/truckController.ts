@@ -15,6 +15,8 @@ import IGestBestPathService from "../services/IServices/IGestBestPathService";
 import IVerifyAuthService from "../services/IServices/IVerifyAuthService";
 import verifyAuthGoogleService from "../services/verifyAuthGoogleService";
 import AuthRepo from "../repos/AuthRepo";
+import IPathRepo from "../services/IRepos/IPathRepo";
+import IOrderRepo from "../services/IRepos/IOrderRepo";
 
 @Service()
 export default class truckController
@@ -25,7 +27,8 @@ export default class truckController
 
   constructor(
     @Inject(config.services.truck.name) private truckServiceInstance: ITruckService,
-    @Inject(config.services.bestpath.name) private bestPathServiceInstance: IGestBestPathService
+    @Inject(config.services.bestpath.name) private bestPathServiceInstance: IGestBestPathService,
+    @Inject(config.repos.order.name) private pathRepo: IOrderRepo
   ) {
     super();
 
@@ -354,15 +357,23 @@ export default class truckController
       return res.status(trucks.errorValue().code).json(trucks.errorValue().error).send();
     }*/
 
-    this.bestPathServiceInstance.generateFiles();
-    this.bestPathServiceInstance.sendPaths();
-    this.bestPathServiceInstance.sendTrucks();
-    this.bestPathServiceInstance.sendWarehouse();
-    this.bestPathServiceInstance.sendOrders(req.params.date);
-    let stringTest = await this.bestPathServiceInstance.createTripsFromPlanning();
-    let tripArray = await this.bestPathServiceInstance.convertStringIntoTrips(stringTest,req.params.date);
+    const ordersDTO = await this.pathRepo.getOrders(req.body.date);
+    const truckArray = req.body.truck;
 
-    return res.status(200).json(tripArray);
+    let truckDTO = [];
+    for(let i = 0; i < truckArray.length; i++ ){
+
+      let itruckdto: ITruckCaractDTO = { caractTruck: truckArray[i]};
+
+      let dto = await this.truckServiceInstance.getByCaract(itruckdto);
+      truckDTO.push( dto.getValue()[0])
+    }
+
+    //let stringTest = await this.bestPathServiceInstance.createTripsFromPlanning();
+    //let tripArray = await this.bestPathServiceInstance.convertStringIntoTrips(stringTest,req.params.date);
+    let tripsArray = await  this.bestPathServiceInstance.getTrip(truckDTO,ordersDTO.getValue());
+
+    return res.status(200).json(tripsArray);
   }
 
   public async deleteTruckSoftPlate(req: Request, res: Response, next: NextFunction) {

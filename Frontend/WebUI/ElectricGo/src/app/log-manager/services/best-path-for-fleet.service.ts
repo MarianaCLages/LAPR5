@@ -17,12 +17,8 @@ export class BestPathForFleetService{
 
   }
 
-  public async bestPathForFleetService(date : any){
-
+  public async bestPathForFleetService(tripDTO: ICreateTripDTO): Promise<any>{
     let url = this.appConfigService.getLogisticsURL() + this.appConfigService.getTripByAG();
-
-    let dateArray = date.split('-');
-    let sendDate = dateArray[2] + '_' + dateArray[1] + '_' + dateArray[0];
 
     const headers = {
       'Content-Type': 'application/json',
@@ -30,13 +26,11 @@ export class BestPathForFleetService{
       'authorization' : "Bearer "+ this.google.getJWT(),
     };
 
-    console.log(url + sendDate);
-
     const options = {
       headers: headers
     };
 
-    return this.http.get<HttpResponse<ICreateTripDTO>>(url + sendDate,options).toPromise();
+    return this.http.post<HttpResponse<any>>(url,tripDTO,options).toPromise();
   }
 
   public async getAllTripsInAGivenDay(date : any){

@@ -4,5 +4,8 @@ export interface ITripPersistence {
     tripTruck : string;
     tripDay : string;
     tripWarehouses : string[];
-    tripOrders : string[];
+    tripOrders: [{
+        warehouse: string,
+        order: string[]
+    }]
 }

@@ -5,8 +5,9 @@ import ITripDTO from "../dto/ITripDTO";
 import { ITruckDTO } from "../dto/truck/ITruckDTO";
 
 export default class TruckOrderPlan implements ITripGetter {
-  getTrip(trucks: Array<ITruckDTO>, orders: Array<IOrderDTO>): Promise<Result<ITripDTO>> {
-    return Promise.resolve(undefined);
-  }
+    getTrip(trucks: Array<ITruckDTO>, orders: Array<IOrderDTO>): Promise<Result<ITripDTO[]>> {
+        return Promise.resolve(undefined);
+    }
+
 
 }

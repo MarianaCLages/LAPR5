@@ -13,7 +13,14 @@
   </mat-form-field>
   <br>
 
-  <button mat-raised-button color="primary" (click)="generateTrips(date)">Generate Trip</button>
+  <mat-form-field appearance="fill">
+    <mat-label>Trucks</mat-label>
+    <mat-select [formControl]="controlTruck" multiple>
+      <mat-option *ngFor="let truck of allTrucks" [value]="truck">{{truck.caractTruck}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="generateTrips()">Generate Trip</button>
 
   <br>
   <br>
@@ -36,14 +43,19 @@
       </ng-container>
       <ng-container matColumnDef="tripday">
         <th mat-header-cell *matHeaderCellDef> Trip Day</th>
-        <td mat-cell *matCellDef="let trip"> {{"C05," + trip.tripWarehouses + ",C05"}} </td>
+        <td mat-cell *matCellDef="let trip"> {{trip.tripDay }} </td>
       </ng-container>
       <ng-container matColumnDef="orders">
         <th mat-header-cell *matHeaderCellDef>Orders to be delivered</th>
-        <td mat-cell *matCellDef="let trip"> {{trip.tripOrders}} </td>
+        <td mat-cell *matCellDef="let trip">
+          <span *ngFor="let trip of trip.tripOrders">{{trip.warehouse}}:{{trip.order}}<br></span>
+        </td>
       </ng-container>
 
-
+      <ng-container matColumnDef="warehouses">
+        <th mat-header-cell *matHeaderCellDef>Path</th>
+        <td mat-cell *matCellDef="let trip"> {{"C05," + trip.tripWarehouses + ",C05"}} </td>
+      </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

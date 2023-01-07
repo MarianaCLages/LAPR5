@@ -22,7 +22,7 @@
   "heuristicWeightURL": "trucks/get_heuristic_weight/",
   "heuristicWeightTimeURL": "trucks/get_heuristic_weight_time/",
 
-  "getTripByAG": "/trucks/get_best_path/",
+  "getTripByAG": "/trucks/addtrips/",
 
   "getAllTripsInADay" : "/trucks/trips/",
 
