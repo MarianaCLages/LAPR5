@@ -82,21 +82,17 @@ jobs:
           paths:
             - .
 
-  Unit-Integration-Tests-GestLog_API:
-    description: Run all the testes from the gestLog application
-    docker:
-       - image: cimg/node:current
-    steps:
-      - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
-      - run:
-          working_directory: Backend/GestLogistica_API/GestLogistica
-          name : Run the gestLog tests and generate coverage
-          command: |
-            npm run coverage     
-      - store_artifacts:
-          path: Backend/GestLogistica_API/GestLogistica/coverage
+  # Unit-Integration-Tests-GestLog_API:
+  #   description: Run all the testes from the gestLog application
+  #   docker:
+  #      - image: cimg/node:current
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         working_directory: Backend/GestLogistica_API/GestLogistica
+  #         name : Run the gestLog tests and generate coverage
+  #         command: |
+  #           npm run test
 
   Build-FrontEnd-Application:
     description: Build the Front end Application

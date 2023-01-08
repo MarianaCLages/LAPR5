@@ -42,10 +42,10 @@ export class LoginPageComponent implements OnInit {
           () => {
             if (res.newUser == true) {
               const url = '/' + res.role + '/register';
-              this.router.navigate([url]).then((r) => window.location.reload());
+              this.router.navigate([url]);
             } else {
               const url = '/' + res.role;
-              this.router.navigate([url]).then((r) => window.location.reload());
+              this.router.navigate([url]);
             }
           },
           (err: any) => {
@@ -65,12 +65,10 @@ export class LoginPageComponent implements OnInit {
                 const url = '/' + res.role + '/register';
                 this.router
                   .navigate([url])
-                  .then((r) => window.location.reload());
               } else {
                 const url = '/' + res.role;
                 this.router
                   .navigate([url])
-                  .then((r) => window.location.reload());
               }
             },
             (err: any) => {
@@ -125,12 +123,10 @@ export class LoginPageComponent implements OnInit {
                 const url = '/' + res.role + '/register';
                 this.router
                   .navigate([url])
-                  .then((r) => window.location.reload());
               } else {
                 const url = '/' + res.role;
                 this.router
                   .navigate([url])
-                  .then((r) => window.location.reload());
               }
             },
             (error: any) => {
@@ -145,7 +141,7 @@ export class LoginPageComponent implements OnInit {
     this.service.signOutExternal();
     this.service.cleanCookies();
     this._ngZone.run(() => {
-      this.router.navigate(['/']).then((r) => window.location.reload());
+      this.router.navigate(['/']);
     });
   }
 }

@@ -389,6 +389,8 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
     let dateArray = date.split("-");
     date = dateArray[0] + "/" + dateArray[1] + "/" + dateArray[2];
 
+    console.log("\n\nOla " + date);
+
     let list = await this.tripRepo.getAllTrips();
 
 
@@ -399,7 +401,8 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
       var listAux = new Array<Trip>;
 
       list.getValue().forEach(element => {
-        if (element.tripDay.value == date) {
+        console.log(element);
+        if (element.tripDay.value.trim() == date) {
           listAux.push(element);
         }
       });

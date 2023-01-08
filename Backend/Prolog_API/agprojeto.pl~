@@ -488,13 +488,13 @@ massa_tempo_act(Act,[[A|_]|Novos],X):-
 
 %-------------------------------AG------------------------%
 
-gera:-
+gera(B,I,G):-
     %retract(num_ind(_)),
     entrega_armazens(A),
-    assertz(num_best_n(2)),
+    assertz(num_best_n(B)),
     assertz(old_best_n(1)),
-    length(A,NA),
-    assertz(num_ind(NA)),
+    length(A,_),
+    assertz(num_ind(I)),
     Temp = 9999,
     Less = [1,2,3],
     BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparaï¿½ï¿½o
@@ -523,9 +523,9 @@ gera:-
     ordena_populacao(PopAv,PopOrd),
     write('\n\nOrdena Pop:\n\n'),
     write(PopOrd),
-    num_ind(NG),
+    %num_ind(G),
     %NG is 6,
-    gera_geracao(0,NG,PopOrd,0),
+    gera_geracao(0,G,PopOrd,0),
     less_ind(Ind),
     less_time(Time),
     write('\n\nMELHOR INDIVÍDUO:  '),
@@ -995,29 +995,30 @@ mutacao23(G1,P,[G|Ind],G2,[G|NInd]):- %vai apercorrer o Ind, P vezes.
 P1 is P-1,
 mutacao23(G1,P1,Ind,G2,NInd).
 
-%----------------------------------------------------------
+% ---------------------ATRIBUI ENTREGAS----------------------
 
 % Gets all the trucks.
 % getAllCamioes/1 (<Truck list>)
 getAllCamioes(R) :- findall(NomeCamiao, carateristicasCam(NomeCamiao,_,_,_,_,_), R).
 
-% Assigns the orders to the trucks and returns the biggest time
+% Calls the GA and returns the assignments and the biggest travel time
 % atribui/0
-atribui() :- gera2(Entregas),
-             getAllCamioes(Camioes),
-             length(Entregas, NE),
-             length(Camioes, NC),
-             T is round(NE/NC - 0.1),
-             Verifica is NE - NC,
-            ((Verifica < 0, !, maisCamioes(Camioes, Entregas, Atribuicoes));(maisEntregas(Entregas, Camioes, Atribuicoes, NE, T))),
-             write('\nAtribuicoes: '), write(Atribuicoes),
-             maiorTempo(Atribuicoes, MaiorTempo),
-             write('\nMaior tempo: '), write(MaiorTempo).
+atribuiEntregas() :- gera2(Entregas),
+                     getAllCamioes(Camioes),
+                     length(Entregas, NE),
+                     length(Camioes, NC),
+                     T is round(NE/NC - 0.1),
+                     Diff is NE - NC,
+                    ((Diff =< 0, !, maisCamioes(Camioes, Entregas, Atribuicoes));
+                                   (maisEntregas(Entregas, Camioes, Atribuicoes, NE, T))),
+                     write('\nAtribuicoes: '), write(Atribuicoes),
+                     maiorTempo(Atribuicoes, MaiorTempo),
+                     write('\nMaior tempo: '), write(MaiorTempo).
 
 % Case where there are more orders than trucks
 % maisEntregas/5 (<Orders>, <Trucks>, <Assignments (and time)>, <Number
 % of orders>, <Number of orders for each truck>
-maisEntregas(_,_,[],0,_).
+maisEntregas([],_,[],0,_).
 
 % When there is only 1 truck left
 maisEntregas(Entregas, [X], [L1*X*Tempo2|Atr], NE, T) :- tiraEntregas(Entregas, L1, L2, NE),
@@ -1025,6 +1026,7 @@ maisEntregas(Entregas, [X], [L1*X*Tempo2|Atr], NE, T) :- tiraEntregas(Entregas, 
                                                          maisEntregas(L2, [], Atr, NE2, T),
                                                          getArmazensByEntregas(L1,Armazens),
                                                          append([5|Armazens],[5], Armazens2),
+                                                         % predicate from previous sprint that returns the travel time
                                                          checkBattery(Armazens2,X,_,Tempo),
                                                          truncate(Tempo,0,Tempo2).
 
@@ -1033,6 +1035,7 @@ maisEntregas(Entregas, [X|Camioes], [L1*X*Tempo2|Atr], NE, T) :- ((NE < T, !, ti
                                                                    maisEntregas(L2, Camioes, Atr, NE2, T),
                                                                    getArmazensByEntregas(L1, Armazens),
                                                                    append([5|Armazens],[5], Armazens2),
+                                                                   % predicate from previous sprint that returns the travel time
                                                                    checkBattery(Armazens2, X, _, Tempo),
                                                                    truncate(Tempo, 0, Tempo2).
 
@@ -1055,7 +1058,8 @@ maisCamioes([X|Camioes], [Y|Entregas], [X*Y*Tempo2|Atribuicoes]) :- maisCamioes(
                                                                     getArmazensByEntregas(Y, Armazens),
                                                                     append([5|Armazens],[5], Armazens2),
                                                                     % predicate from previous sprint that returns the travel time
-                                                                    checkBattery(Armazens2, X, _, Tempo),                                                                                                                 truncate(Tempo, 0, Tempo2).
+                                                                    checkBattery(Armazens2, X, _, Tempo),
+                                                                    truncate(Tempo, 0, Tempo2).
 
 % Gets the warehouse list associated with a orders list.
 % getArmazensByEntregas/2 (<Orders>, <Warehouses>)
@@ -1075,8 +1079,8 @@ truncate(X,N,Result) :- X >= 0, Result is floor(10^N*X)/10^N, !.
 % Gets the biggest time.
 % maiorTempo/2 (<Assignments (and time)>, <Biggest time>)
 maiorTempo([],0) :- !.
-maiorTempo([_*_*Tempo|T1], Maior) :- maiorTempo(T1, Maior2),
-                                     ((Tempo > Maior2, Maior is Tempo);(Maior is Maior2)),!.
+maiorTempo([_*_*Tempo|T2], Maior) :- maiorTempo(T2, Maior2),
+                                    ((Tempo > Maior2, Maior is Tempo);(Maior is Maior2)).
 
 %-------------------------BEST PATH-------------------------
 
@@ -1220,3 +1224,300 @@ getChargingTime(CE,CT) :- cam(Tr,_),
 % <X - result>).
 
 ruleOfThree(X,Y,Z,R) :- R is ((Z * Y) / X).
+
+%----------------------
+%
+
+gera_alt(B,I,G):-
+    %retract(num_ind(_)),
+    entrega_armazens(A),
+    assertz(num_best_n(B)),
+    assertz(old_best_n(1)),
+    length(A,_),
+    assertz(num_ind(I)),
+    Temp = 9999,
+    Less = [1,2,3],
+    BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparaï¿½ï¿½o
+    assertz(best_ind(BestInd)),
+    assertz(less_time(Temp)),
+    assertz(less_ind(Less)),
+    bfs_tempo_entrega(_,_,OrdList), %gerar 3 individuos com as 3 heuristicas
+    bfs_massa(_,OrdList2),
+    bfs_massa_tempo(_,OrdList3),
+    %OrdList4 = [OrdList,OrdList2,OrdList3],
+    %write('\n\nORDER LIST4:  '),write(OrdList4),
+    count_seq_orders(OrdList,Count), %contar o numero de orders
+    assertz(num_orders(Count)),
+    %gera_populacao(OrdList,Pop),
+    gera_first_populacao(OrdList,Pop2), % a gera_first_populaï¿½ï¿½o tem em conta que 3 individuos jï¿½ foram previemente criados (as das heuristicas), ou seja este sï¿½ vai gerar +3 individuo
+    append(Pop2,[OrdList],Pop3),
+    append(Pop3,[OrdList2],Pop4),
+    append(Pop4,[OrdList3],Pop5),
+    retractall(old_pop(_)),
+    assertz(old_pop(Pop5)),
+    write('\n\nPopulação gerada:\n\n'),
+    write(Pop5),
+    avalia_populacao(Pop5,PopAv),
+    write('\n\nPopulação Avaliada:\n\n'),
+    write(PopAv),
+    ordena_populacao(PopAv,PopOrd),
+    write('\n\nOrdena Pop:\n\n'),
+    write(PopOrd),
+    %num_ind(G),
+    %NG is 6,
+    gera_geracao(0,G,PopOrd,0),
+    less_ind(Ind),
+    less_time(Time),
+    write('\n\nMELHOR INDIVÍDUO:  '),
+    write(Ind),
+    write('\nTEMPO: '),
+    write(Time),
+    write('\n\nCorrer AG novamente com as opções:\nRemover entrega: 1 \nAdicionar entrega: 2\nAlterar peso de entrega: 3\n'),
+    read(Val),
+
+    retractall(less_time(_)),
+    retractall(old_pop(_)),
+    retractall(num_ind(_)),
+    retractall(geracoes(_)),
+    retractall(populacao(_)),
+    retractall(melhor_entrega(_)),
+    retractall(best_ind(_)),
+    retractall(prob_cruzamento(_)),
+    retractall(prob_mutacao(_)),
+    retractall(current_order(_)),
+    retractall(num_orders(_)),
+    retractall(tempo(_)),
+    retractall(massa(_)),
+    retractall(massatempo(_)),
+    retractall(num_best_n(_)),
+    retractall(old_best_n(_)),
+
+    ((Val=1,!,(gera_removerEntrega(B,I,G));((Val=2, !, (gera_adicionarEntrega(B,I,G));(gera_alterarEntrega(B,I,G)))))).
+
+gera_removerEntrega(B,I,G):-
+    write('\n\nAG Removendo Entrega\n'),
+
+    write('\n\nEntrega a remover (selecione o ID)'),
+    read(OrderID),
+    less_ind(L),
+    delete_all(OrderID,L,V),
+    write('\n\nV'),
+    retractall(less_ind(_)),
+
+    assertz(num_best_n(B)),
+    assertz(old_best_n(1)),
+    assertz(num_ind(I)),
+
+    Temp = 9999,
+    Less = [1,2,3],
+    BestInd = [2,3,1]*1000,
+    assertz(best_ind(BestInd)),
+    assertz(less_time(Temp)),
+    assertz(less_ind(Less)),
+    retractall(old_pop(_)),
+    assertz(old_pop(V)),
+    write('\n\nPopulação gerada:\n\n'),
+    write(V),
+
+    length(V,X),
+    bfs_tempo_entrega(_,_,OrdList),
+    getFirst(OrdList,El),
+
+    ((X=5,!,(append([El],V,Val));(Val is V))),
+    write(Val),
+
+    bfs_tempo_entrega(_,_,OrdList),
+    bfs_massa(_,OrdList2),
+    bfs_massa_tempo(_,OrdList3),
+    count_seq_orders(OrdList,Count),
+
+    assertz(num_orders(Count)),
+    gera_first_populacao(OrdList,Pop2),
+    append(Pop2,[OrdList],Pop3),
+    append(Pop3,[OrdList2],Pop4),
+    append(Pop4,[OrdList3],Pop5),
+
+    retractall(old_pop(_)),
+    assertz(old_pop(Pop5)),
+    write('\n\nPopulação gerada:\n\n'),
+    write(Pop5),
+    avalia_populacao(Pop5,PopAv),
+    write('\n\nPopulação Avaliada:\n\n'),
+    write(PopAv),
+    ordena_populacao(PopAv,PopOrd),
+    write('\n\nOrdena Pop:\n\n'),
+    write(PopOrd),
+    gera_geracao(0,G,PopOrd,0),
+    less_ind(Ind),
+    less_time(Time),
+    write('\n\nMELHOR INDIVÍDUO:  '),
+    write(Ind),
+    write('\nTEMPO: '),
+    write(Time),
+
+    retractall(less_time(_)),
+    retractall(less_ind(_)),
+    retractall(old_pop(_)),
+    retractall(num_ind(_)),
+    retractall(geracoes(_)),
+    retractall(populacao(_)),
+    retractall(melhor_entrega(_)),
+    retractall(best_ind(_)),
+    retractall(prob_cruzamento(_)),
+    retractall(prob_mutacao(_)),
+    retractall(current_order(_)),
+    retractall(num_orders(_)),
+    retractall(tempo(_)),
+    retractall(massa(_)),
+    retractall(massatempo(_)),
+    retractall(num_best_n(_)),
+    retractall(old_best_n(_)).
+
+gera_adicionarEntrega(B,I,G):-
+    write('\n\nAG Adicionando Entrega\n'),
+
+    write('\n\nEntrega a adicionawr (selecione o ID)'),
+    read(OrderID),
+    less_ind(L),
+    append([OrderID],L,Val),
+    length(Val, N),
+
+    ((N>5,!,(N1 is N-6,remove_last_n(Val,N1,V));(V is Val))),
+
+    write('\n\nV'),write(V),
+    retractall(less_ind(_)),
+
+    entrega_armazens(A),
+    assertz(num_best_n(B)),
+    assertz(old_best_n(1)),
+
+    length(A,_),
+    assertz(num_ind(I)),
+    Temp = 9999,
+    Less = [1,2,3],
+    BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparaï¿½ï¿½o
+    assertz(best_ind(BestInd)),
+    assertz(less_time(Temp)),
+    assertz(less_ind(Less)),
+    bfs_tempo_entrega(_,_,OrdList), %gerar 3 individuos com as 3 heuristicas
+    bfs_massa(_,OrdList2),
+    bfs_massa_tempo(_,OrdList3),
+    %OrdList4 = [OrdList,OrdList2,OrdList3],
+    %write('\n\nORDER LIST4:  '),write(OrdList4),
+    count_seq_orders(OrdList,Count), %contar o numero de orders
+    assertz(num_orders(Count)),
+    %gera_populacao(OrdList,Pop),
+    gera_first_populacao(OrdList,Pop2), % a gera_first_populaï¿½ï¿½o tem em conta que 3 individuos jï¿½ foram previemente criados (as das heuristicas), ou seja este sï¿½ vai gerar +3 individuo
+    append(Pop2,[OrdList],Pop3),
+    append(Pop3,[OrdList2],Pop4),
+    append(Pop4,[OrdList3],Pop5), %estes appends servem para adicionar os individuos da heuristica ï¿½ Populaï¿½ï¿½o inicial
+    retractall(old_pop(_)),
+    assertz(old_pop(Pop5)),
+    write('\n\nPopulação gerada:\n\n'),
+    write(Pop5),
+    avalia_populacao(Pop5,PopAv),
+    write('\n\nPopulação Avaliada:\n\n'),
+    write(PopAv),
+    ordena_populacao(PopAv,PopOrd),
+    write('\n\nOrdena Pop:\n\n'),
+    write(PopOrd),
+    %num_ind(G),
+    %NG is 6,
+    gera_geracao(0,G,PopOrd,0),
+    less_ind(Ind),
+    less_time(Time),
+    write('\n\nMELHOR INDIVÍDUO:  '),
+    write(Ind),
+    write('\nTEMPO: '),
+    write(Time),
+
+    retractall(less_time(_)),
+    retractall(less_ind(_)),
+    retractall(old_pop(_)),
+    retractall(num_ind(_)),
+    retractall(geracoes(_)),
+    retractall(populacao(_)),
+    retractall(melhor_entrega(_)),
+    retractall(best_ind(_)),
+    retractall(prob_cruzamento(_)),
+    retractall(prob_mutacao(_)),
+    retractall(current_order(_)),
+    retractall(num_orders(_)),
+    retractall(tempo(_)),
+    retractall(massa(_)),
+    retractall(massatempo(_)),
+    retractall(num_best_n(_)),
+    retractall(old_best_n(_)).
+
+
+gera_alterarEntrega(B,I,G):-
+    write('\n\nAG Alterar Entrega\n'),
+    entrega_armazens(A),
+    assertz(num_best_n(B)),
+    assertz(old_best_n(1)),
+    length(A,_),
+    assertz(num_ind(I)),
+    Temp = 9999,
+    Less = [1,2,3],
+    BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparaï¿½ï¿½o
+    assertz(best_ind(BestInd)),
+    assertz(less_time(Temp)),
+    assertz(less_ind(Less)),
+    bfs_tempo_entrega(_,_,OrdList), %gerar 3 individuos com as 3 heuristicas
+    bfs_massa(_,OrdList2),
+    bfs_massa_tempo(_,OrdList3),
+    %OrdList4 = [OrdList,OrdList2,OrdList3],
+    %write('\n\nORDER LIST4:  '),write(OrdList4),
+    count_seq_orders(OrdList,Count), %contar o numero de orders
+    assertz(num_orders(Count)),
+    %gera_populacao(OrdList,Pop),
+    gera_first_populacao(OrdList,Pop2), % a gera_first_populaï¿½ï¿½o tem em conta que 3 individuos jï¿½ foram previemente criados (as das heuristicas), ou seja este sï¿½ vai gerar +3 individuo
+    append(Pop2,[OrdList],Pop3),
+    append(Pop3,[OrdList2],Pop4),
+    append(Pop4,[OrdList3],Pop5), %estes appends servem para adicionar os individuos da heuristica ï¿½ Populaï¿½ï¿½o inicial
+    retractall(old_pop(_)),
+    assertz(old_pop(Pop5)),
+    write('\n\nPopulação gerada:\n\n'),
+    write(Pop5),
+    avalia_populacao(Pop5,PopAv),
+    write('\n\nPopulação Avaliada:\n\n'),
+    write(PopAv),
+    ordena_populacao(PopAv,PopOrd),
+    write('\n\nOrdena Pop:\n\n'),
+    write(PopOrd),
+    %num_ind(G),
+    %NG is 6,
+    gera_geracao(0,G,PopOrd,0),
+    less_ind(Ind),
+    less_time(Time),
+    write('\n\nMELHOR INDIVÍDUO:  '),
+    write(Ind),
+    write('\nTEMPO: '),
+    write(Time),
+
+    retractall(less_time(_)),
+    retractall(less_ind(_)),
+    retractall(old_pop(_)),
+    retractall(num_ind(_)),
+    retractall(geracoes(_)),
+    retractall(populacao(_)),
+    retractall(melhor_entrega(_)),
+    retractall(best_ind(_)),
+    retractall(prob_cruzamento(_)),
+    retractall(prob_mutacao(_)),
+    retractall(current_order(_)),
+    retractall(num_orders(_)),
+    retractall(tempo(_)),
+    retractall(massa(_)),
+    retractall(massatempo(_)),
+    retractall(num_best_n(_)),
+    retractall(old_best_n(_)).
+
+delete_all(_,[],[]).
+delete_all(X,[X|L],L1):-
+    delete_all(X,L,L1).
+delete_all(X,[H|L],[H|L1]):-
+    X\=H,
+    delete_all(X,L,L1).
+
+getFirst([X|_],V):- V = X.

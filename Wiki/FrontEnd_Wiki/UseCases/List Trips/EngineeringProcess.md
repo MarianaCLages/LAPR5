@@ -27,17 +27,14 @@ O utilizador deve estar autenticado como LogisticManager para listar as viagens.
 O Front-end deve enviar um request para o Back-end com os dados da listagem.
 O Back-end deve listar as viagens e retornar uma mensagem de sucesso/erro.
 
-Na barra de navegação, o utilizador pode clicar no botão de "List Trips". O sistema exibe uma lista de viagens. 
+Na barra de navegação, o utilizador pode clicar no botão de "List Trips". O sistema exibe uma lista de viagens. Pode aí clicar no botão "Trip By Truck" e inserir o ID do truck que quer listar.
 
-Em termos de Design, é apresentado nos diagramas a parte de Front-end apenas, uma vez que a parte de Back-end está já descrita em outras USs.
+Em termos de Design, os diagramas são em tudo semelhantes aos diagramas anteriores de listagem, visto que a listagem com filtros já era implementada no sprint anterior, por páginas.
+A US de listagem de viagens e a de ordenação de viagens são inseridas no mesmo diagrama de sequência, visto que a ordenação é feita na mesma página.
 
 ## Vistas
 
 ## Nível 1
-
-### Vista de cenários
-
-![N1_VC](./N1_VC.svg)
 
 ### Vista de processos
 
@@ -50,21 +47,9 @@ Em termos de Design, é apresentado nos diagramas a parte de Front-end apenas, u
 
 ![N2_VP](./N2_VP.svg)
 
-### Vista Física
-
-![N2_VF](./N2_VF.svg)
-
 
 ## Nível 3
 
 ### Vista de processos
 
 ![N3_VP](./N3_VP.svg)
-
-### Vista de implementação
-
-![N3_VI](./N3_VI.svg)
-
-### Vista Lógica
-
-![N3_VL](./N3_VL_Geral.svg)

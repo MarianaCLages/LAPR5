@@ -9,27 +9,25 @@ export class RedirectPagesService {
 
   public forbiddenPage() {
     this._ngZone.run(() => {
-      this.router
-        .navigate(['/forbidden'])
-        .then((r) => window.location.reload());
+      this.router.navigate(['/forbidden']) ;
     });
   }
 
   public lockedPage() {
     this._ngZone.run(() => {
-      this.router.navigate(['/locked']).then((r) => window.location.reload());
+      this.router.navigate(['/locked']);
     });
   }
 
   public logout() {
     this._ngZone.run(() => {
-      this.router.navigate(['/']).then((r) => window.location.reload());
+      this.router.navigate(['/']);
     });
   }
 
   public homePage(role: string) {
     this._ngZone.run(() => {
-      this.router.navigate(['/' + role]).then((r) => window.location.reload());
+      this.router.navigate(['/' + role]);
     });
   }
 }

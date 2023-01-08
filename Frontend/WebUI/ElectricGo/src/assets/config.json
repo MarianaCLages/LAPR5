@@ -24,7 +24,7 @@
 
   "getTripByAG": "/trucks/addtrips/",
 
-  "getAllTripsInADay" : "/trucks/trips/",
+  "getAllTripsInADay" : "trucks/trips/",
   "getAllTripsPath" : "trips/all",
   "getTripsByTruckPath" : "trucks/tripsTrucks/",
 
