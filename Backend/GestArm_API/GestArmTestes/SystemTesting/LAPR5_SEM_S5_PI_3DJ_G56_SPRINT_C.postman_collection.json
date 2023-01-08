@@ -1,0 +1,1053 @@
+{
+	"info": {
+		"_postman_id": "9d0c15f3-f4b3-4961-8aad-949567be9bd5",
+		"name": "LAPR5_SEM_S5_PI_3DJ_G56_SPRINT_C",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23425866"
+	},
+	"item": [
+		{
+			"name": "Gest_ARM",
+			"item": [
+				{
+					"name": "Users_Entity",
+					"item": [
+						{
+							"name": "Get_All_Users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 2000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/User",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"User"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Post_User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\": \"EduardoPowerPoint\",\r\n    \"role\": \"Admin\",\r\n    \"email\": \"eduardoapsoua@gmail.com\",\r\n    \"phoneNumber\": \"999000333\",\r\n    \"activated\": true,\r\n    \"birthDate\": \"25-12-2001\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/User",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"User"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get_User_By_ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/User/byId?id=52ae359d-45a9-4d90-96ff-52a8b84c437f",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"User",
+										"byId"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "52ae359d-45a9-4d90-96ff-52a8b84c437f"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get_User_By_Email",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/User/byEmail?email=tiaguito2@gmail.com",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"User",
+										"byEmail"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "tiaguito2@gmail.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get_User_By_PhoneNumber",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/User/byPhoneNumber?phoneNumber=969699699",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"User",
+										"byPhoneNumber"
+									],
+									"query": [
+										{
+											"key": "phoneNumber",
+											"value": "969699699"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get_User_By_UserName",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1pZ3VlbCBKb3JkYW8iLCJlbWFpbCI6Im1pZ3VlbDk4am9yZGFvMTNAZ21haWwuY29tIiwibmJmIjoxNjcyNzM5MjMxLCJleHAiOjE2NzMzNDQwMzEsImlhdCI6MTY3MjczOTIzMX0.wcF3XyCTL1fEQMLG_FvdbyYpl84u0h3QH8pd5Sx5qCA",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "Authorization",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/User/byUserName?userName=Tiago",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"User",
+										"byUserName"
+									],
+									"query": [
+										{
+											"key": "userName",
+											"value": "Tiago"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Soft_Delete_User",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/User/byEmailDelete?email=eduardoapsoua@gmail.com",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"User",
+										"byEmailDelete"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "eduardoapsoua@gmail.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update_User_Parcial_Or_Totally",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"role\": \"LogisticManager\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/User/byEmail?email=miguel98jordao13@gmail.com",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"User",
+										"byEmail"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "miguel98jordao13@gmail.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin_Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"role\": \"Admin\",\r\n  \"activated\" : true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/User/adminByEmail?email=testando0495@gmail.com",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"User",
+										"adminByEmail"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "testando0495@gmail.com"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Order_Entity",
+					"item": [
+						{
+							"name": "Post_Order",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"pm.collectionVariables.set(\"id\", responseJson.id.value);\r",
+											"pm.collectionVariables.set(\"identifier\", responseJson.identifier);\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 2000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Successful POST request\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Post With success (Verify body)\", function () {\r",
+											"    pm.response.to.have.body(\r",
+											"{\r",
+											"     \"id\": {\r",
+											"        \"value\": pm.collectionVariables.get(\"id\")\r",
+											"    },\r",
+											"    \"identificador\": pm.collectionVariables.get(\"identifier\"),\r",
+											"    \"dataEntrega\": \"02/13/2023 00:00:00\",\r",
+											"    \"massaEntrega\": 200.0,\r",
+											"    \"tempoCarga\": 5.0,\r",
+											"    \"tempoDescarga\": 5.0,\r",
+											"    \"armazemId\": \"C97\"\r",
+											"});\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"OrderDate\": \"13-02-2023\",\r\n    \"OrderMass\": 200,\r\n    \"ChargingTime\": 5,\r\n    \"UnloadingTime\": 5,\r\n    \"WarehouseId\": \"C97\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/Order",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get_All_Orders",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/Order",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 2000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"OrderDate\": \"13-02-2023\",\r\n    \"OrderMass\": 200,\r\n    \"ChargingTime\": 10,\r\n    \"UnloadingTime\": 5,\r\n    \"WarehouseId\": \"C97\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/Order/{{id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Order",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete_Order",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/Order/{{id}}",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"Order",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Warehouse_Entity",
+					"item": [
+						{
+							"name": "Post_Warehouse",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"pm.collectionVariables.set(\"id\", responseJson.id.value);\r",
+											"pm.collectionVariables.set(\"id_armazem_domain\", responseJson.alphaNumId);\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 2000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Successful POST request\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Post With success (Verify body)\", function () {\r",
+											"    pm.response.to.have.body(\r",
+											"{\r",
+											"    \"id\": pm.collectionVariables.get(\"id_armazem\"),\r",
+											"    \"latitudeGrau\": 5,\r",
+											"    \"latitudeSegundo\": 5,\r",
+											"    \"latitudeMinuto\": 5,\r",
+											"    \"longitudeGrau\": 5,\r",
+											"    \"longitudeSegundo\": 5,\r",
+											"    \"longitudeMinuto\": 5,\r",
+											"    \"designacao\": \"Ola\",\r",
+											"    \"alphaNumId\": pm.collectionVariables.get(\"id_armazem_domain\"),\r",
+											"    \"rua\": \"Rua dos Coiso\",\r",
+											"    \"numeroPorta\": 5,\r",
+											"    \"codigoPostal\": \"4000-999\",\r",
+											"    \"cidade\": \"Famalicão\",\r",
+											"    \"pais\": \"Portugal\"\r",
+											"});\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/Warehouse",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Warehouse"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get_All_Warehouses",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Put_Warehouse",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"AlphaNumId\" : \"C78\",\r\n    \"LatitudeDegree\" : \"5\",\r\n    \"LatitudeSecond\": \"5\",\r\n    \"LatitudeMinute\": \"5\",\r\n    \"LongitudeDregree\": \"5\",\r\n    \"LongitudeSecond\": \"5\",\r\n    \"LongitudeMinute\": \"5\",\r\n    \"Designation\": \"Ola\",\r\n    \"Street\": \"Rua dos Coiso\",\r\n    \"DoorNumber\": \"5\",\r\n    \"PostalCode\": \"4000-999\",\r\n    \"City\": \"Famalicão\",\r\n    \"Country\": \"Portugal\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/Warehouse/{{id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Warehouse",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete_Warehouse",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/api/Warehouse/{{id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Warehouse",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "key",
+						"value": "Authorization",
+						"type": "string"
+					},
+					{
+						"key": "value",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1hcmlhbmEgTGFnZXMiLCJlbWFpbCI6Im1hcmlhbmFsYWdlczIwMDJAZ21haWwuY29tIiwibmJmIjoxNjcyNjg2OTg3LCJleHAiOjE2NzMyOTE3ODcsImlhdCI6MTY3MjY4Njk4N30.bJN6YhU-Lr2BN7_t9cpzJKjmPZ4lM14E6fLhFWrsZFY",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Gest_LOG",
+			"item": [
+				{
+					"name": "Truck_Entity",
+					"item": [
+						{
+							"name": "Get_All_Trucks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 2000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/trucks/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"trucks",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add_Truck",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"domainId\", responseJson.domainId);\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 2000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"});\r",
+											"\r",
+											"pm.collectionVariables.set(\"id_armazem_domain\", responseJson.alphaNumId);\r",
+											"\r",
+											"pm.test(\"Post With success (Verify body)\", function () {\r",
+											"    pm.response.to.have.body(\r",
+											"{\r",
+											"   \"domainId\": responseJson.domainId,\r",
+											"    \"caractTruck\": \"T99\",\r",
+											"    \"truckPlate\": \"ZZ-00-ZZ\",\r",
+											"    \"tare\": 100,\r",
+											"    \"weightCapacity\": 100,\r",
+											"    \"cargaMax\": 100,\r",
+											"    \"totalBatCharge\": 100,\r",
+											"    \"chargingTime\": 100,\r",
+											"    \"activeTruck\": true\r",
+											"});\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"caractTruck\": \"T99\",\r\n    \"truckPlate\": \"ZZ-00-ZZ\",\r\n    \"weightCapacity\": 100,\r\n    \"cargaMax\": 100,\r\n    \"totalBatCharge\": 100,\r\n    \"tare\": 100,\r\n    \"chargingTime\": 100,\r\n    \"activeTruck\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/trucks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"trucks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete_Hard_Truck",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 2000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"domainId\": \"c349b534-ee7b-4e98-8908-6e32ae00ef97\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/trucks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"trucks"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Path_Entity",
+					"item": [
+						{
+							"name": "Post_Path",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"pm.collectionVariables.set(\"domainId\", responseJson.domainId);\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 2000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Post With success (Verify body)\", function () {\r",
+											"    pm.response.to.have.body(\r",
+											"{\r",
+											"   \"domainId\": responseJson.domainId,\r",
+											"    \"caractTruck\": \"T99\",\r",
+											"    \"truckPlate\": \"ZZ-00-ZZ\",\r",
+											"    \"tare\": 100,\r",
+											"    \"weightCapacity\": 100,\r",
+											"    \"cargaMax\": 100,\r",
+											"    \"totalBatCharge\": 100,\r",
+											"    \"chargingTime\": 100,\r",
+											"    \"activeTruck\": true\r",
+											"});\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"endingWarehouseId\": \"C55\",\r\n    \"beginningWarehouseId\": \"C97\",\r\n    \"distance\": 100,\r\n    \"energy\": 100,\r\n    \"time\": 100,\r\n    \"chargingTime\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/paths",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"paths"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get_All_Paths",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 2000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/paths/allPaths",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"paths",
+										"allPaths"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete_Hard_Path",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"domainId\": \"e3c51232-37e2-4f81-9791-6f701575c44f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/paths",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"paths"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Packagings_Entity",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1hcmlhbmEgTGFnZXMiLCJlbWFpbCI6Im1hcmlhbmFsYWdlczIwMDJAZ21haWwuY29tIiwibmJmIjoxNjcyNjg2OTg3LCJleHAiOjE2NzMyOTE3ODcsImlhdCI6MTY3MjY4Njk4N30.bJN6YhU-Lr2BN7_t9cpzJKjmPZ4lM14E6fLhFWrsZFY",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1hcmlhbmEgTGFnZXMiLCJlbWFpbCI6Im1hcmlhbmFsYWdlczIwMDJAZ21haWwuY29tIiwibmJmIjoxNjcyNjg2OTg3LCJleHAiOjE2NzMyOTE3ODcsImlhdCI6MTY3MjY4Njk4N30.bJN6YhU-Lr2BN7_t9cpzJKjmPZ4lM14E6fLhFWrsZFY",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domainId",
+			"value": ""
+		},
+		{
+			"key": "id_armazem_domain",
+			"value": ""
+		},
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "identifier",
+			"value": ""
+		}
+	]
+}

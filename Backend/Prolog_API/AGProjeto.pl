@@ -1,4 +1,5 @@
 %entrega(<idEntrega>,<data>,<massaEntrefa>,<armazemEntrega>,<tempoColoc>,<tempoRet>)
+:-dynamic entrega/6.
 entrega(4439, 20221205, 200, 1, 8, 10).
 entrega(4438, 20221205, 150, 9, 7, 9).
 entrega(4445, 20221205, 100, 3, 5, 7).
@@ -1292,7 +1293,7 @@ gera_alt(B,I,G):-
     retractall(num_best_n(_)),
     retractall(old_best_n(_)),
 
-    ((Val=1,!,(gera_removerEntrega(B,I,G));((Val=2, !, (gera_adicionarEntrega(B,I,G));(gera_alterarEntrega(B,I,G)))))).
+    ((Val=1,!,(gera_removerEntrega(B,I,G));((Val=2, !, (gera_adicionarEntrega(B,I,G));(!,gera_alterarEntrega(B,I,G)))))).
 
 gera_removerEntrega(B,I,G):-
     write('\n\nAG Removendo Entrega\n'),
@@ -1338,10 +1339,10 @@ gera_removerEntrega(B,I,G):-
     append(Pop4,[OrdList3],Pop5),
 
     retractall(old_pop(_)),
-    assertz(old_pop(Pop5)),
+    assertz(old_pop(V)),
     write('\n\nPopulação gerada:\n\n'),
     write(Pop5),
-    avalia_populacao(Pop5,PopAv),
+    avalia_populacao(Val,PopAv),
     write('\n\nPopulação Avaliada:\n\n'),
     write(PopAv),
     ordena_populacao(PopAv,PopOrd),
@@ -1376,7 +1377,7 @@ gera_removerEntrega(B,I,G):-
 gera_adicionarEntrega(B,I,G):-
     write('\n\nAG Adicionando Entrega\n'),
 
-    write('\n\nEntrega a adicionawr (selecione o ID)'),
+    write('\n\nEntrega a adicionar (selecione o ID)'),
     read(OrderID),
     less_ind(L),
     append([OrderID],L,Val),
@@ -1415,7 +1416,7 @@ gera_adicionarEntrega(B,I,G):-
     assertz(old_pop(Pop5)),
     write('\n\nPopulação gerada:\n\n'),
     write(Pop5),
-    avalia_populacao(Pop5,PopAv),
+    avalia_populacao(Val,PopAv),
     write('\n\nPopulação Avaliada:\n\n'),
     write(PopAv),
     ordena_populacao(PopAv,PopOrd),
@@ -1452,11 +1453,24 @@ gera_adicionarEntrega(B,I,G):-
 
 gera_alterarEntrega(B,I,G):-
     write('\n\nAG Alterar Entrega\n'),
+
+    write('\n\nEntrega a alterar (selecione o ID)'),
+    read(OrderID),
+
+    write('\nNovo valor para a massa (selecione o ID)'),
+    read(MassaVal),
+
+    entrega(OrderID,D,_,A,TT,T),
+    retract(entrega(OrderID,_,_,_,_,_)),
+    assertz(entrega(OrderID,D,MassaVal,A,TT,T)),
+    entrega(OrderID,_,M,_,_,_),
+    write('\nBOASBOASBOAS'),write(I),write(':'),write(M),
+
     entrega_armazens(A),
     assertz(num_best_n(B)),
     assertz(old_best_n(1)),
-    length(A,_),
-    assertz(num_ind(I)),
+    length(A,NA),
+    assertz(num_ind(NA)),
     Temp = 9999,
     Less = [1,2,3],
     BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparaï¿½ï¿½o
@@ -1512,6 +1526,8 @@ gera_alterarEntrega(B,I,G):-
     retractall(massatempo(_)),
     retractall(num_best_n(_)),
     retractall(old_best_n(_)).
+
+
 
 delete_all(_,[],[]).
 delete_all(X,[X|L],L1):-

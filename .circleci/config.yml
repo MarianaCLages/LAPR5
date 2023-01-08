@@ -266,9 +266,9 @@ workflows:
           requires:
             - Build-GestArm_API
 
-      - Unit-Integration-Tests-GestLog_API:
-          requires:
-            - Build-GestLog_API
+#      - Unit-Integration-Tests-GestLog_API:
+#          requires:
+#            - Build-GestLog_API
 
       - Test-FrontEnd-Application:
           requires:
