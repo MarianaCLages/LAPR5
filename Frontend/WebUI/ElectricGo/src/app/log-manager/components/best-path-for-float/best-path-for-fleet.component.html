@@ -15,7 +15,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Trucks</mat-label>
-    <mat-select [formControl]="controlTruck" multiple>
+    <mat-select multiple [(ngModel)]="trucks">
       <mat-option *ngFor="let truck of allTrucks" [value]="truck">{{truck.caractTruck}}</mat-option>
     </mat-select>
   </mat-form-field>

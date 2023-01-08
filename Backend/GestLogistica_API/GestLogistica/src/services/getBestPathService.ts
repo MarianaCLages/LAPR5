@@ -72,8 +72,6 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
 
     for (let i = 0; i < orders.length; i++) {
 
-      console.log(orders);
-
       //@ts-ignore
       var warehouseString = orders[i].warehouseId;
 
@@ -131,7 +129,6 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
   public async sendPaths() {
 
     const paths = await this.pathRepo.getAllPaths();
-    console.log(paths);
     const pathsDTO = paths.getValue().map(cam => PathMap.toDTO(cam));
 
     var pathArray = [];
@@ -181,15 +178,14 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
   public async sendTrucks(trucks: Array<ITruckDTO>) {
 
 
-    console.log(trucks);
 
     let stringFormat: string;
     var aspas = "'";
     var pathArray = [];
 
-    for (var i = 0; i < trucks.length; i++) {
+    for (const element of trucks) {
 
-      stringFormat = "carateristicasCam(" + aspas + trucks[i].caractTruck + aspas + "," + trucks[i].tare + "," + trucks[i].weightCapacity + "," + trucks[i].totalBatCharge + ",100," + trucks[i].chargingTime + ").";
+      stringFormat = "carateristicasCam(" + aspas + element.caractTruck + aspas + "," + element.tare + "," + element.weightCapacity + "," + element.totalBatCharge + ",100," + element.chargingTime + ").";
       pathArray.push(stringFormat);
     }
 
@@ -233,13 +229,13 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
         method: "GET",
         agent: this.httpAgent,
         headers: {
-          Accept: "application/json",
           authorization: this.key
         }
 
       });
     } catch (error) {
-      throw  TypeError("GestArm not connected!");
+      console.log(error);
+      return;
     }
 
     const result = (await response.json());
@@ -334,7 +330,6 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
     }
 
 
-    console.log(outputString);
 
     let stringArray = outputString.split(",");
     let tripArray = [];
@@ -344,11 +339,11 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
     // @ts-ignore
     let stringDate = orders[0].orderDate.toString().slice(0, 11);
 
-    for (let i = 0; i < stringArray.length; i++) {
+    for (const element of stringArray) {
 
-      if (stringArray[i].includes("T")) {
+      if (element.includes("T")) {
 
-        truck = stringArray[i];
+        truck = element;
 
 
         const builder: TripBuilder = new TripBuilder(stringDate, truck);
@@ -366,7 +361,6 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
           });
           // @ts-ignore
           builder.addOrder(orderArray[i], MINEORDER.warehouseId);
-          console.log(MINEORDER);
           // @ts-ignore
           warehouseArray.push(MINEORDER.warehouseId);
         }
@@ -380,7 +374,7 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
         orderArray.length = 0;
         warehouseArray.length = 0;
       } else {
-        orderArray.push(stringArray[i]);
+        orderArray.push(element);
       }
 
     }
@@ -390,6 +384,7 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
 
   public async getAllTrips(date: string): Promise<Result<Array<ITripDTO>>> {
 
+
     //Substitue the '-' for '/'
     let dateArray = date.split("-");
     date = dateArray[0] + "/" + dateArray[1] + "/" + dateArray[2];
@@ -397,6 +392,8 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
     console.log("\n\nOla " + date);
 
     let list = await this.tripRepo.getAllTrips();
+
+
     if (list.isFailure) {
       return Result.fail("No trips were found!");
 
@@ -446,7 +443,6 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
     const trip = builder.build();
     const tripOrBad = await this.tripRepo.save(trip.getValue());
 
-    console.log(tripOrBad);
 
 
     return Result.ok;
@@ -455,10 +451,10 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
   public async getTrip(trucks: Array<ITruckDTO>, orders: Array<IOrderDTO>): Promise<Result<ITripDTO[]>> {
     try {
       this.generateFiles();
-      this.sendPaths();
-      this.sendOrders(orders);
-      this.sendTrucks(trucks);
-      this.sendWarehouse();
+      await this.sendPaths();
+      await this.sendOrders(orders);
+      await this.sendTrucks(trucks);
+    //  await this.sendWarehouse();
 
       let string = await this.createTripsFromPlanning();
       let tripDtoArray = await this.convertStringIntoTrips(string, orders);

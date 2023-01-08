@@ -171,7 +171,8 @@ export default class SendInfoToPlanningService {
                 }
             })
         }catch (error){
-            throw  TypeError("GestArm not connected!");
+            console.log(error)
+            return;
         }
 
         const result = (await response.json());

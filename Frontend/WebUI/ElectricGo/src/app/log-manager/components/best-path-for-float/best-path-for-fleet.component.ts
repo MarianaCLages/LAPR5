@@ -1,18 +1,18 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {MatTableDataSource} from "@angular/material/table";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatTableDataSource } from "@angular/material/table";
 
-import {ICreateTripDTO} from "../../../shared/ICreateTripDTO";
-import {BestPathForFleetService} from "../../services/best-path-for-fleet.service";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort, Sort} from '@angular/material/sort';
-import {GetTrucksService} from "../../../services/get-trucks.service";
-import {FormControl} from "@angular/forms";
+import { ICreateTripDTO } from "../../../shared/ICreateTripDTO";
+import { BestPathForFleetService } from "../../services/best-path-for-fleet.service";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { GetTrucksService } from "../../../services/get-trucks.service";
+import { FormControl } from "@angular/forms";
 import ITripDTO from "../../../shared/tripDTO";
 
 @Component({
-  selector: 'app-best-path-for-fleet',
-  templateUrl: './best-path-for-fleet.component.html',
-  styleUrls: ['./best-path-for-fleet.component.css']
+  selector: "app-best-path-for-fleet",
+  templateUrl: "./best-path-for-fleet.component.html",
+  styleUrls: ["./best-path-for-fleet.component.css"]
 })
 
 export class BestPathForFleetComponent implements OnInit {
@@ -24,7 +24,7 @@ export class BestPathForFleetComponent implements OnInit {
 
   dataAlr: any;
 
-  controlTruck = new FormControl('');
+  controlTruck = new FormControl("");
   errorMessage: any;
   error: boolean = false;
   success: any;
@@ -36,14 +36,14 @@ export class BestPathForFleetComponent implements OnInit {
 
   public showPage: boolean = true;
 
-  options: string[] = ['Absolute Solution', 'Fast Solution'];
+  options: string[] = ["Absolute Solution", "Fast Solution"];
 
   displayedColumns: string[] = [
-    'trip',
-    'truck',
-    'tripday',
-    'orders',
-    'warehouses'
+    "trip",
+    "truck",
+    "tripday",
+    "orders",
+    "warehouses"
   ];
 
   // @ts-ignore
@@ -69,88 +69,96 @@ export class BestPathForFleetComponent implements OnInit {
   }
 
   async generateTrips(): Promise<any> {
+    const truckAr: any[] = [];
+    this.trucks.forEach((truck: any) => {
+      truckAr.push(truck.caractTruck);
+    });
     let tripDTO: ICreateTripDTO = {
-      truck: this.trucks,
+      truck: truckAr,
       date: this.date
-    }
+    };
+    console.log(tripDTO);
 
     this.bestPathForFleetService.bestPathForFleetService(tripDTO).then((data: any) => {
-      console.log(data);
-      /*      console.log(JSON.stringify(data._value));
+        console.log(data);
+        /*      console.log(JSON.stringify(data._value));
 
-            this.dataAlr = data._value;
-            console.log(data._value[0].tripOrders)
+              this.dataAlr = data._value;
+              console.log(data._value[0].tripOrders)
 
-            let dataAux : any[] = [];
+              let dataAux : any[] = [];
 
-            //warehouse arr
-            let warehouseArr : any[] = [];
+              //warehouse arr
+              let warehouseArr : any[] = [];
 
-            //warehouses string criada
-            let warehousesStr : any = "";
+              //warehouses string criada
+              let warehousesStr : any = "";
 
-            let i : number = 0;
-            this.dataAlr.forEach((info: any) => {
+              let i : number = 0;
+              this.dataAlr.forEach((info: any) => {
 
-              let tripWarehouses : string = "";
-              let tripOrders : string = "";
+                let tripWarehouses : string = "";
+                let tripOrders : string = "";
 
-              info.tripWarehouses[i].forEach((info: any) => {
-                warehousesStr += info;
-              });
+                info.tripWarehouses[i].forEach((info: any) => {
+                  warehousesStr += info;
+                });
 
-              warehouseArr.push(warehousesStr);
-              warehousesStr = "";
-
-
-              tripWarehouses += info.tripWarehouses[i];
-              tripOrders += info.tripOrders[i];
-              i++;
-
-              const auxVar : any = {tripIdentifier: info.tripIdentifier,
-                tripTruck: info.tripTruck,
-                tripDay: info.tripDay,
-                tripWarehouses: tripWarehouses,
-                tripOrders: tripOrders
-              }
-
-              dataAux.push(auxVar);
-
-              console.log(auxVar);
-
-            });*/
+                warehouseArr.push(warehousesStr);
+                warehousesStr = "";
 
 
-      /*   // @ts-ignore
-         let value: [{
-           warehouse: string,
-           order: string[]
-         }] = [];
+                tripWarehouses += info.tripWarehouses[i];
+                tripOrders += info.tripOrders[i];
+                i++;
 
-         warehouseOrders.forEach(
-           (warehouseOrders) => {
-             value.push({
-               warehouse: warehouseOrders.warehouse,
-               order: warehouseOrders.order
-             })
-           }
-         )
+                const auxVar : any = {tripIdentifier: info.tripIdentifier,
+                  tripTruck: info.tripTruck,
+                  tripDay: info.tripDay,
+                  tripWarehouses: tripWarehouses,
+                  tripOrders: tripOrders
+                }
+
+                dataAux.push(auxVar);
+
+                console.log(auxVar);
+
+              });*/
 
 
-         return {
-           tripIdentifier: trip.tripIdentifier.value,
-           tripTruck: trip.tripTruck.value,
-           tripDay: trip.tripDay.value,
-           tripWarehouses: trip.tripWarehouses.value,
-           tripOrders: value
-         };
-         */
+        /*   // @ts-ignore
+           let value: [{
+             warehouse: string,
+             order: string[]
+           }] = [];
 
-      this.trips.data = data._value;
-      console.log(this.trips.data);
-      this.trips.paginator = this.paginator;
-      this.trips.sort = this.sort;
-    });
+           warehouseOrders.forEach(
+             (warehouseOrders) => {
+               value.push({
+                 warehouse: warehouseOrders.warehouse,
+                 order: warehouseOrders.order
+               })
+             }
+           )
+
+
+           return {
+             tripIdentifier: trip.tripIdentifier.value,
+             tripTruck: trip.tripTruck.value,
+             tripDay: trip.tripDay.value,
+             tripWarehouses: trip.tripWarehouses.value,
+             tripOrders: value
+           };
+           */
+
+        this.trips.data = data._value;
+        console.log(this.trips.data);
+        this.trips.paginator = this.paginator;
+        this.trips.sort = this.sort;
+      },
+      (error: any) => {
+        alert(error.error);
+      });
 
   }
 
