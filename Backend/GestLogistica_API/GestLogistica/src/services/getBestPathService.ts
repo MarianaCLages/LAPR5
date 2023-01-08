@@ -286,6 +286,12 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
     console.log("Warehouses to Planning sent!");
 
   }
+           /*  list.getValue().forEach(element => {
+                let varAux = element.tripDay.value;
+                if (varAux.trim() == date.trim()) {
+                    listAux.push(element);
+                }
+            }); */
 
 
   public async createTripsFromPlanning(): Promise<string> {

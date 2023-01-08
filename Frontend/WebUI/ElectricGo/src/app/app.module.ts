@@ -64,6 +64,7 @@ import { UserLockedComponent } from './components/user-locked/user-locked.compon
 import { DialogContentExampleDialog, TermsAndConditionsComponent} from './components/terms-and-conditions/terms-and-conditions.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {BestPathForFleetComponent} from "./log-manager/components/best-path-for-float/best-path-for-fleet.component";
+import { ListTripsComponent } from './log-manager/components/list-trips/list-trips.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import {BestPathForFleetComponent} from "./log-manager/components/best-path-for-
     ListUsersComponent,
     UserInfoComponent,
     BestPathForFleetComponent,
+    ListTripsComponent,
     AdminSideBarComponent,
     WarehouseSideBarComponent,
     GetAllWarehousesComponent,

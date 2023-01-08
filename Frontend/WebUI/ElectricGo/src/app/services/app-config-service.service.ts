@@ -154,4 +154,12 @@ export class AppConfigServiceService {
     return this.appConfig.getAllTripsInADay;
   }
 
+  getAllTrips() {
+    return this.appConfig.getAllTripsPath;
+  }
+
+  getTripByTruck() {
+    return this.appConfig.getTripsByTruckPath;
+  }
+
 }

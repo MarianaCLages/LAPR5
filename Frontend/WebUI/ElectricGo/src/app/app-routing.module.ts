@@ -31,6 +31,7 @@ import { RegisterUserAsUserComponent } from './user-manager/components/register-
 import { ForbiddenPageComponent } from './components/forbidden-page/forbidden-page.component';
 import { UserLockedComponent } from './components/user-locked/user-locked.component';
 import {BestPathForFleetComponent} from "./log-manager/components/best-path-for-float/best-path-for-fleet.component";
+import { ListTripsComponent } from './log-manager/components/list-trips/list-trips.component';
 
 const routes: Routes = [
   // Login
@@ -77,6 +78,7 @@ const routes: Routes = [
   {path: 'LogisticManager/softDeleteTruck', component: SoftDeleteTruckComponent},
   {path: 'LogisticManager/profile',component : UserUserInfoComponent},
   {path: 'LogisticManager/bestPathForFleet',component: BestPathForFleetComponent},
+  {path: 'LogisticManager/listTrips',component: ListTripsComponent},
 
   // Forbidden Page
   {path: 'forbidden', component: ForbiddenPageComponent},
