@@ -92,9 +92,7 @@ jobs:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Run the gestLog tests and generate coverage
           command: |
-            npm run coverage     
-      - store_artifacts:
-          path: Backend/GestLogistica_API/GestLogistica/coverage
+            npm run test
 
   Build-FrontEnd-Application:
     description: Build the Front end Application
