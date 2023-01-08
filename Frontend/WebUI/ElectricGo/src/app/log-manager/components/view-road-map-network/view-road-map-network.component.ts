@@ -64,7 +64,10 @@ export class ViewRoadMapNetworkComponent implements OnInit {
   //Audio
   private listener = new THREE.AudioListener();
   private audioLoader = new THREE.AudioLoader();
+  private beepAudioLoader = new THREE.AudioLoader();
+
   private sound = new THREE.Audio( this.listener );
+  private soundBeep = new THREE.Audio( this.listener );
 
   private soundVolume = 0.5;
 
@@ -89,10 +92,11 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
   private availableTrucksArr : any[] = []
 
-
   private arrTrucks : any[] = [];
 
   private truckAux : any;
+
+  private readonly keyDown = new Set<string>()
 
   constructor(
     private getWarehouseService: GetWarehouseServiceService,
@@ -158,9 +162,10 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       ("00" + date.getDate()).slice(-2) + "-" +
       date.getFullYear();
 
-    dateStr = "13-02-2023";
+    dateStr = "02-13-2023";
 
     this.trips = this.bestPathForFleetService.getAllTripsInAGivenDay(dateStr).then((data: any) => {
+      console.log(data);
       this.trips = data;
     });
 
@@ -787,6 +792,8 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     let component: ViewRoadMapNetworkComponent = this;
 
     window.addEventListener('popstate', event => this.destroyGUI())
+    document.addEventListener('keydown', this.handleKeyDown)
+    document.addEventListener('keyup', this.handleKeyUp)
 
     //Starting movement of the truck type
 
@@ -900,7 +907,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
       component.entityManagerGlobal.update(delta);
 
       if(params.truckMovement == 'Manual') {
-        component.updateTruckPosition();
+        component.updateInput();
       }
 
       component.render.render(component.scene, component.camera);
@@ -1003,18 +1010,20 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     const vehicle = new YUKA.Vehicle();
 
     let vehiclePath = [""];
+    vehiclePath.push("C05");
 
-    this.trips[this.trips.length - 1].tripWarehouses.unshift("C05");
-    this.trips[this.trips.length - 1].tripWarehouses.push("C05");
-
-    vehiclePath = this.trips[this.trips.length - 1].tripWarehouses;
+    for(let i : number = 0; i < this.trips[this.trips.length - 1].tripWarehouses.length; i++){
+      vehiclePath.push(this.trips[this.trips.length - 1].tripWarehouses[i].warehouse);
+    }
 
     this.reserveTrucks();
     this.preparePossibleTrucksToChoose();
 
     const path = new YUKA.Path();
-    let flag : boolean = false;
-    let positions : any[] = [];
+
+    let value = this.warehousesAndEdges.get("C05")!;
+    path.add(new YUKA.Vector3(value[0], value[1], value[2]));
+    path.add(new YUKA.Vector3(value[3], value[4], value[5]));
 
     for(let i : number = 0; i < vehiclePath.length-1; i++){
       for (const key of this.warehousesAndEdges.keys()) {
@@ -1027,17 +1036,21 @@ export class ViewRoadMapNetworkComponent implements OnInit {
              path.add(new YUKA.Vector3(incomingEdgesFromSpecificPath[0], incomingEdgesFromSpecificPath[1], incomingEdgesFromSpecificPath[2]));
              path.add(new YUKA.Vector3(incomingEdgesFromSpecificPath[3], incomingEdgesFromSpecificPath[4], incomingEdgesFromSpecificPath[5]));
 
-             positions.push(new YUKA.Vector3(value[0], value[1], value[2]));
-             positions.push(new YUKA.Vector3(incomingEdgesFromSpecificPath[0], incomingEdgesFromSpecificPath[1], incomingEdgesFromSpecificPath[2]));
-             positions.push(new YUKA.Vector3(incomingEdgesFromSpecificPath[3], incomingEdgesFromSpecificPath[4], incomingEdgesFromSpecificPath[5]));
-
         }
       }
 
     }
 
-    const value = this.warehousesAndEdges.get("C05")!;
+    value = this.warehousesAndEdges.get(vehiclePath[vehiclePath.length - 1])!;
     path.add(new YUKA.Vector3(value[0], value[1], value[2]));
+
+    // const incomingEdgesFromSpecificPath = this.pathsIncomingEdges.get(vehiclePath[vehiclePath.length - 1] + "C05")!;
+
+    // path.add(new YUKA.Vector3(incomingEdgesFromSpecificPath[0], incomingEdgesFromSpecificPath[1], incomingEdgesFromSpecificPath[2]));
+    // path.add(new YUKA.Vector3(incomingEdgesFromSpecificPath[3], incomingEdgesFromSpecificPath[4], incomingEdgesFromSpecificPath[5]));
+
+
+    console.log(path);
 
     vehicle.position.copy(path.current());
 
@@ -1048,7 +1061,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     //onPathBehavior.radius = 0.01;
     vehicle.steering.add(onPathBehavior);
 
-    vehicle.maxSpeed = 1.5;
+    vehicle.maxSpeed = 3;
 
     const entityManager = new YUKA.EntityManager();
     entityManager.add(vehicle);
@@ -1098,6 +1111,60 @@ export class ViewRoadMapNetworkComponent implements OnInit {
 
     this.trucksInfo = trucksAux;
 
+  }
+
+  private updateInput() {
+    if (this.keyDown.has('a')) {
+
+      this.truck.rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), 0.1);
+
+    } else if (this.keyDown.has('d')) {
+
+      this.truck.rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), -0.1);
+
+    }
+
+    if (this.keyDown.has('x')) {
+
+      this.truck.rotateZ(Math.PI / 40);
+
+    }
+
+    else if (this.keyDown.has('z')) {
+
+      this.truck.rotateZ(-Math.PI / 40);
+
+    }
+
+    if (this.keyDown.has('w')) {
+
+      this.truck.translateOnAxis(new THREE.Vector3(-1, 0, 0), 0.01);
+
+    } else if (this.keyDown.has('s')) {
+
+      this.truck.translateOnAxis(new THREE.Vector3(-1, 0, 0), -0.01);
+
+    }
+
+    if (this.keyDown.has('e')) {
+      let soundV = this.soundBeep;
+      this.beepAudioLoader.load( '../../../../assets/beep/beep.mp3', function( buffer ) {
+        soundV.setBuffer( buffer );
+        soundV.setLoop( false );
+        soundV.setVolume(0.1);
+        soundV.play();
+      });
+
+    }
+
+  }
+
+  private handleKeyDown = (event: KeyboardEvent) => {
+    this.keyDown.add(event.key.toLowerCase())
+  }
+
+  private handleKeyUp = (event: KeyboardEvent) => {
+    this.keyDown.delete(event.key.toLowerCase())
   }
 
 }

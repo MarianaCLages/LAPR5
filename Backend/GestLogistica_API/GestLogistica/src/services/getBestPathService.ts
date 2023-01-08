@@ -401,7 +401,8 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
             var listAux = new Array<Trip>;
 
             list.getValue().forEach(element => {
-                if (element.tripDay.value == date) {
+                let varAux = element.tripDay.value;
+                if (varAux.trim() == date.trim()) {
                     listAux.push(element);
                 }
             });
