@@ -286,12 +286,13 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
     console.log("Warehouses to Planning sent!");
 
   }
-           /*  list.getValue().forEach(element => {
-                let varAux = element.tripDay.value;
-                if (varAux.trim() == date.trim()) {
-                    listAux.push(element);
-                }
-            }); */
+
+  /*  list.getValue().forEach(element => {
+       let varAux = element.tripDay.value;
+       if (varAux.trim() == date.trim()) {
+           listAux.push(element);
+       }
+   }); */
 
 
   public async createTripsFromPlanning(): Promise<string> {
@@ -308,7 +309,7 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
 
 
       return await rep.text();
-    }catch (e) {
+    } catch (e) {
       console.log(e);
       return null;
     }
@@ -395,7 +396,7 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
     let dateArray = date.split("-");
     date = dateArray[0] + "/" + dateArray[1] + "/" + dateArray[2];
 
-    var list = await this.tripRepo.getAllTrips();
+    let list = await this.tripRepo.getAllTrips();
 
     console.log(list.getValue());
 
@@ -421,6 +422,22 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
 
     }
 
+  }
+
+  public async getAllTripsAll(): Promise<Result<Array<ITripDTO>>> {
+    let list = await this.tripRepo.getAllTrips();
+
+    if (list.isFailure) {
+      return Result.fail("No trips were found!");
+    } else {
+      const auxList = [];
+      list.getValue().forEach(element => {
+        const aux = TripMap.toDTO(element);
+        auxList.push(aux);
+      });
+
+      return Result.ok<ITripDTO[]>(auxList);
+    }
   }
 
 

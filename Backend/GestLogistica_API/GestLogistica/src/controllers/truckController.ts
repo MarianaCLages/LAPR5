@@ -15,7 +15,6 @@ import IGestBestPathService from "../services/IServices/IGestBestPathService";
 import IVerifyAuthService from "../services/IServices/IVerifyAuthService";
 import verifyAuthGoogleService from "../services/verifyAuthGoogleService";
 import AuthRepo from "../repos/AuthRepo";
-import IPathRepo from "../services/IRepos/IPathRepo";
 import IOrderRepo from "../services/IRepos/IOrderRepo";
 
 @Service()
@@ -349,29 +348,30 @@ export default class truckController
   }
 
   public async getBestPathForEachTruck(req: Request, res: Response, next: NextFunction) {
-/*
-    //get the jwt token from the request
-    const token = req.headers.authorization;
-    const trucks = await this.authentication(token);
-    if (!trucks.isSuccess) {
-      return res.status(trucks.errorValue().code).json(trucks.errorValue().error).send();
-    }*/
+    /*
+        //get the jwt token from the request
+        const token = req.headers.authorization;
+        const trucks = await this.authentication(token);
+        if (!trucks.isSuccess) {
+          return res.status(trucks.errorValue().code).json(trucks.errorValue().error).send();
+        }*/
 
     const ordersDTO = await this.pathRepo.getOrders(req.body.date);
     const truckArray = req.body.truck;
 
     let truckDTO = [];
-    for(const element of truckArray) {
+    for (const element of truckArray) {
 
-      let itruckdto: ITruckCaractDTO = { caractTruck: element};
+      let itruckdto: ITruckCaractDTO = { caractTruck: element };
 
       let dto = await this.truckServiceInstance.getByCaract(itruckdto);
-      truckDTO.push( dto.getValue()[0])
+      truckDTO.push(dto.getValue()[0]);
     }
 
     //let stringTest = await this.bestPathServiceInstance.createTripsFromPlanning();
     //let tripArray = await this.bestPathServiceInstance.convertStringIntoTrips(stringTest,req.params.date);
-    if(ordersDTO.isSuccess) {
+
+    if (ordersDTO.isSuccess) {
       let tripsArray = await this.bestPathServiceInstance.getTrip(truckDTO, ordersDTO.getValue());
       return res.status(200).json(tripsArray);
     } else {
@@ -446,7 +446,7 @@ export default class truckController
       }
 
       const date: string = req.params.date;
-      
+
       const truckOrError = await this.bestPathServiceInstance.getAllTrips(date);
 
       if (truckOrError.isFailure) {
@@ -463,6 +463,27 @@ export default class truckController
     } catch (e) {
       return next(e);
     }
+  }
+
+  async getAllTrips(req: Request, res: Response, next: NextFunction) {
+    try {
+      //get the jwt token from the request
+      const token = req.headers.authorization;
+      const trucks = await this.authentication(token);
+      if (!trucks.isSuccess) {
+        return res.status(trucks.errorValue().code).json(trucks.errorValue().error).send();
+      }
+
+      const tripsOrError = await this.bestPathServiceInstance.getAllTripsAll();
+      if (tripsOrError.isFailure) {
+        return res.status(400).json(tripsOrError.error).send();
+      } else {
+        return res.status(200).json(tripsOrError.getValue()).send();
+      }
+    } catch (e) {
+
+    }
+
   }
 
   protected executeImpl(): Promise<any> {
@@ -504,5 +525,6 @@ export default class truckController
 
   }
 }
+
 
 

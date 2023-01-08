@@ -32,5 +32,6 @@ export default interface ITruckController {
   deleteTruckSoftPlate(req: Request, res: Response, next: NextFunction);
 
   getTrips(req: Request, res: Response, next: NextFunction);
-  
+
+  getAllTrips(req: Request, res: Response, next: NextFunction);
 }
