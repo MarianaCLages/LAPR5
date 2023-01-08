@@ -488,13 +488,13 @@ massa_tempo_act(Act,[[A|_]|Novos],X):-
 
 %-------------------------------AG------------------------%
 
-gera:-
+gera(B,I,G):-
     %retract(num_ind(_)),
     entrega_armazens(A),
-    assertz(num_best_n(2)),
+    assertz(num_best_n(B)),
     assertz(old_best_n(1)),
-    length(A,NA),
-    assertz(num_ind(NA)),
+    length(A,_),
+    assertz(num_ind(I)),
     Temp = 9999,
     Less = [1,2,3],
     BestInd = [2,3,1]*1000, %colocar um melhor individuo de comparaï¿½ï¿½o
@@ -523,9 +523,9 @@ gera:-
     ordena_populacao(PopAv,PopOrd),
     write('\n\nOrdena Pop:\n\n'),
     write(PopOrd),
-    num_ind(NG),
+    %num_ind(G),
     %NG is 6,
-    gera_geracao(0,NG,PopOrd,0),
+    gera_geracao(0,G,PopOrd,0),
     less_ind(Ind),
     less_time(Time),
     write('\n\nMELHOR INDIVÍDUO:  '),
