@@ -361,9 +361,9 @@ export default class truckController
     const truckArray = req.body.truck;
 
     let truckDTO = [];
-    for(let i = 0; i < truckArray.length; i++ ){
+    for(const element of truckArray) {
 
-      let itruckdto: ITruckCaractDTO = { caractTruck: truckArray[i]};
+      let itruckdto: ITruckCaractDTO = { caractTruck: element};
 
       let dto = await this.truckServiceInstance.getByCaract(itruckdto);
       truckDTO.push( dto.getValue()[0])
@@ -371,9 +371,13 @@ export default class truckController
 
     //let stringTest = await this.bestPathServiceInstance.createTripsFromPlanning();
     //let tripArray = await this.bestPathServiceInstance.convertStringIntoTrips(stringTest,req.params.date);
-    let tripsArray = await  this.bestPathServiceInstance.getTrip(truckDTO,ordersDTO.getValue());
+    if(ordersDTO.isSuccess) {
+      let tripsArray = await this.bestPathServiceInstance.getTrip(truckDTO, ordersDTO.getValue());
+      return res.status(200).json(tripsArray);
+    } else {
+      return res.status(400).json(ordersDTO.error).send();
+    }
 
-    return res.status(200).json(tripsArray);
   }
 
   public async deleteTruckSoftPlate(req: Request, res: Response, next: NextFunction) {

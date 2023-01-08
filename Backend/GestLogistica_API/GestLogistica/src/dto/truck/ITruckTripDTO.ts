@@ -1,11 +1,10 @@
-export interface ITruckDTO {
+export interface ITruckTripDTO {
   domainId: string;
   caractTruck: string;
   truckPlate: string;
   weightCapacity: number;
   cargaMax: number;
-  totalBatCharge: number;
   tare: number;
   chargingTime: number;
-  activeTruck: boolean;
+  remainingSpace: number;
 }

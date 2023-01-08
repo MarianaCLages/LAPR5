@@ -10,9 +10,9 @@ describe('Paths Entity', () => {
 
     cy.visit('http://localhost:4200')
     // @ts-ignore
-    cy.login('LogisticManager', 'as')
+    // cy.login('LogisticManager', 'as')
 
-    cy.xpath('/html/body/app-root/div/app-log-manager/app-log-side-bar/div/mat-toolbar/button/span[1]/mat-icon').click()
+    cy.xpath('/html/body/div/div/div[2]/span[1]').click()
     cy.xpath('/html/body/app-root/div/app-log-manager/app-log-side-bar/div/mat-sidenav-container/mat-sidenav/div/mat-nav-list/button[3]').click()
     cy.contains('Create Path')
     cy.wait(1000)

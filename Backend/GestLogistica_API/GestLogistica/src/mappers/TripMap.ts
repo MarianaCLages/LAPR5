@@ -7,7 +7,7 @@ import {Trip} from "../domain/trip/trip";
 import ITripDTO from "../dto/ITripDTO";
 import {ITripPersistence} from "../dataschema/ITripPersistence";
 import {UniqueEntityID} from "../core/domain/UniqueEntityID";
-import {TripBuilder} from "../../tests/unit/domain/trip/tripBuilder.test";
+import {TripBuilder} from "../../tests/unit/domain/trip/tripBuilder";
 
 export class TripMap extends Mapper<Trip> {
     public static toDTO(trip: Trip): ITripDTO {
