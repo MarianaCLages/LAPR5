@@ -374,7 +374,7 @@ export default class truckController extends BaseController
       }
       const plate: string = req.params.plate;
       const dto: ITruckPlateDTO = {
-        truckPlate: plate,
+        truckPlate: plate
       };
 
       const truckOrError = await this.truckServiceInstance.getByPlate(dto);
@@ -420,7 +420,7 @@ export default class truckController extends BaseController
       }
       const caract: string = req.params.caractTruck;
       const dto: ITruckCaractDTO = {
-        caractTruck: caract,
+        caractTruck: caract
       };
 
       const truckOrError = await this.truckServiceInstance.getByCaract(dto);
@@ -484,11 +484,12 @@ export default class truckController extends BaseController
       return res.status(200).json(tripsArray);
     } else {
       return res
-        .status(400)
-        .json(ordersDTO.error)
+        .status(404)
+        .json(ordersDTO.errorValue())
         .send();
     }
   }
+
 
   public async deleteTruckSoftPlate(
     req: Request,
@@ -505,7 +506,7 @@ export default class truckController extends BaseController
 
       const plate: string = req.params.plate;
       const dto: ITruckPlateDTO = {
-        truckPlate: plate,
+        truckPlate: plate
       };
 
       const truckOrError = await this.truckServiceInstance.deleteTruckSoftPlate(
@@ -547,7 +548,7 @@ export default class truckController extends BaseController
 
       const caract: string = req.params.caractTruck;
       const dto: ITruckCaractDTO = {
-        caractTruck: caract,
+        caractTruck: caract
       };
 
       const truckOrError = await this.truckServiceInstance.deleteTruckSoftCaract(
@@ -685,7 +686,8 @@ export default class truckController extends BaseController
           .json(tripsOrError.getValue())
           .send();
       }
-    } catch (e) {}
+    } catch (e) {
+    }
   }
 
   protected executeImpl(): Promise<any> {
@@ -695,14 +697,14 @@ export default class truckController extends BaseController
   private async authentication(token: string): Promise<Result<any>> {
     const acceptOrNot = await this.authService.VerifyUserJWT(token, [
       "FleetManager",
-      "Admin",
+      "Admin"
     ]);
 
     if (!token) {
       return Result.fail({
         code: 401,
         error: "Unauthorized",
-        description: "Unauthorized",
+        description: "Unauthorized"
       });
     }
 
@@ -710,18 +712,18 @@ export default class truckController extends BaseController
       if (acceptOrNot.error === "The user is not authorized") {
         return Result.fail({
           code: 403,
-          error: "The user is not authorized",
+          error: "The user is not authorized"
         });
       } else {
         if (acceptOrNot.error === "The user does not exist") {
           return Result.fail({
             code: 401,
-            error: "The user does not exist",
+            error: "The user does not exist"
           });
         } else {
           return Result.fail({
             code: 400,
-            error: acceptOrNot.error,
+            error: acceptOrNot.error
           });
         }
       }
