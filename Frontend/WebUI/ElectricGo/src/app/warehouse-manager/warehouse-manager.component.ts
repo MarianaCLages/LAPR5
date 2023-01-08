@@ -52,7 +52,7 @@ export class WarehouseManagerComponent implements OnInit {
     this.service.signOutExternal();
     this.service.cleanCookies();
     this._ngZone.run(() => {
-      this.router.navigate(['/']).then((r) => window.location.reload());
+      this.router.navigate(['/']);
     });
   }
 

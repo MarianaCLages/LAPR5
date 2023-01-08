@@ -25,7 +25,7 @@ export class ForbiddenPageComponent {
 
   public homePage() {
     this._ngZone.run(() => {
-      this.router.navigate(['/' + this.role]).then((r) => window.location.reload());
+      this.router.navigate(['/' + this.role]);
     });
   }
 }

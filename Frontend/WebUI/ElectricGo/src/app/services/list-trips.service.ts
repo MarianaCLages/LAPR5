@@ -44,7 +44,7 @@ export class ListTripsService {
     const options = {
       headers: headers
     };
-    this.trips = this.appConfigService.getLogisticsURL() + this.appConfigService.getTripURL() + "/truck/" + truckId;
+    //this.trips = this.appConfigService.getLogisticsURL() + this.appConfigService.getTripURL() + "/truck/" + truckId;
     return this.http.get(this.trips, options).toPromise();
   }
 

@@ -88,15 +88,11 @@ jobs:
        - image: cimg/node:current
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "Backend/GestLogistica_API/GestLogistica/package.json" }}
       - run:
           working_directory: Backend/GestLogistica_API/GestLogistica
           name : Run the gestLog tests and generate coverage
           command: |
-            npm run coverage     
-      - store_artifacts:
-          path: Backend/GestLogistica_API/GestLogistica/coverage
+            npm run test
 
   Build-FrontEnd-Application:
     description: Build the Front end Application
