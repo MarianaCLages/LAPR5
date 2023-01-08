@@ -16,21 +16,19 @@
     </mat-select>
   </mat-form-field>
 
-
   <mat-form-field appearance="fill" *ngIf="filterOption === 'Trip by Truck'">
     <mat-label>Truck</mat-label>
     <input matInput type="string" [(ngModel)]="truckId" (change)="getTripsByFilter()">
   </mat-form-field>
 
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="trips">
+    <table mat-table [dataSource]="trips" matSort (matSortChange)="sortChangeByActive($event)">
       <ng-container matColumnDef="Truck">
-        <th mat-header-cell *matHeaderCellDef>Truck</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Truck">Truck</th>
         <td mat-cell *matCellDef="let trip">{{ trip.tripTruck }}</td>
       </ng-container>
-
       <ng-container matColumnDef="Day">
-        <th mat-header-cell *matHeaderCellDef>Day</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Day">Day</th>
         <td mat-cell *matCellDef="let trip">{{ trip.tripDay }}</td>
       </ng-container>
 

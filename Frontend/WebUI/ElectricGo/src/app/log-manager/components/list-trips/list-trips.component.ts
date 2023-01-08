@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort, Sort } from '@angular/material/sort';
 
 import { BestPathForFleetService } from '../../services/best-path-for-fleet.service';
 import { GoogleApiCommunicationService } from 'src/app/services/google-api-communication.service';
 import IPathDTO from '../../../shared/pathDTO';
 import ITripDTO from 'src/app/shared/tripDTO';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RedirectPagesService } from 'src/app/services/redirect-pages.service';
 
@@ -82,6 +82,7 @@ export class ListTripsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    // @ts-ignore
     this.trips.paginator = this.paginator;
     this.trips.sort = this.sort;
   }
@@ -114,5 +115,75 @@ export class ListTripsComponent implements OnInit {
 
   goBack() {
     window.history.back();
+  }
+
+  sortChangeByActive(sortState: Sort) {
+
+  if (sortState.active == "Truck") {
+    if(sortState.direction == "asc"){
+      this.trips.data = this.trips.data.sort((a: any, b: any) => a.identifier > b.identifier ? -1 : 1);
+    }
+    else if (sortState.direction == "desc"){
+      this.trips.data = this.trips.data.sort((a: any, b: any) => a.identifier > b.identifier ? 1 : -1);
+    };
+  } else if (sortState.active == "Day") {
+    if(sortState.direction == "asc"){
+      this.trips.data = this.trips.data.sort((a: any, b: any) => {
+      var auxDateA = a.tripDay.split("/");
+      var auxA = auxDateA[0].split('/');
+      var auxDateB = b.tripDay.split("/");
+      var auxB = auxDateB[0].split('/');
+      if (auxA[2] > auxB[2]) {
+        return 1;
+      } else if (auxA[2] < auxB[2]) {
+        return -1;
+      }else {
+        if (auxA[1] > auxB[1]) {
+          return 1;
+        } else if (auxA[1] < auxB[1]) {
+          return -1;
+        } else {
+          if (auxA[0] > auxB[0]) {
+            return 1;
+          } else if (auxA[0] < auxB[0]) {
+            return -1;
+          } else {
+            return 0;
+          }
+        }
+      }
+    });
+  } else if (sortState.direction == "desc"){
+      this.trips.data = this.trips.data.sort((a: any, b: any) => {
+        var auxA1 = a.tripDay.split(' ');
+        var auxA = auxA1[0].split('/');
+
+        var auxB1 = b.tripDay.split(' ');
+        var auxB = auxB1[0].split('/');
+
+        if (auxA[2] > auxB[2]) {
+          return -1;
+        } else if (auxA[2] < auxB[2]) {
+          return 1;
+        } else {
+          if (auxA[1] > auxB[1]) {
+            return -1;
+          } else if (auxA[1] < auxB[1]) {
+            return 1;
+          } else {
+            if (auxA[0] > auxB[0]) {
+              return -1;
+            } else if (auxA[0] < auxB[0]) {
+              return 1;
+            } else {
+              return 0;
+            }
+          }
+        }
+      });
+    }
+    
+  }
+  
   }
 }
