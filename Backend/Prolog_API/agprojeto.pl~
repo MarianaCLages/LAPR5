@@ -1415,7 +1415,7 @@ gera_adicionarEntrega(B,I,G):-
     assertz(old_pop(Pop5)),
     write('\n\nPopulação gerada:\n\n'),
     write(Pop5),
-    avalia_populacao(Val,PopAv),
+    avalia_populacao(Pop5,PopAv),
     write('\n\nPopulação Avaliada:\n\n'),
     write(PopAv),
     ordena_populacao(PopAv,PopOrd),

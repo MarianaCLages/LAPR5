@@ -488,13 +488,13 @@ massa_tempo_act(Act,[[A|_]|Novos],X):-
 
 %-------------------------------AG------------------------%
 
-gera(B,I,G):-
+gera(B,G):-
     %retract(num_ind(_)),
     entrega_armazens(A),
     assertz(num_best_n(B)),
     assertz(old_best_n(1)),
-    length(A,_),
-    assertz(num_ind(I)),
+    length(A,NA),
+    assertz(num_ind(NA)),
     Temp = 9999,
     Less = [1,2,3],
     BestInd = [2,3,1]*1000, %colocar um melhor individuo de compara��o
