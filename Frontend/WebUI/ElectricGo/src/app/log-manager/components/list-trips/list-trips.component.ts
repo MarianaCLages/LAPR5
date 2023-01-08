@@ -31,9 +31,9 @@ export class ListTripsComponent implements OnInit {
     'Orders',
   ];
   // @ts-ignore
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   // @ts-ignore
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
   filterOption: any;
 
   public showPage: boolean = false;
@@ -49,6 +49,8 @@ export class ListTripsComponent implements OnInit {
       this.getTripsService.getAllTrips().then(
         (data: any) => {
           this.trips.data = data;
+          this.trips.paginator = this.paginator;
+          this.trips.sort = this.sort;
         },
         (error: any) => {
           alert(error.error);
@@ -58,6 +60,8 @@ export class ListTripsComponent implements OnInit {
       this.getTripsService.getTripByTruck(this.truckId).then(
         (data: any) => {
           this.trips.data = data;
+          this.trips.paginator = this.paginator;
+          this.trips.sort = this.sort;
         },
         (error: any) => {
           this.error = true;
@@ -78,7 +82,7 @@ export class ListTripsComponent implements OnInit {
   chooseFilter() {
     this.truckId = null;
     console.log(this.filterOption);
-    
+
   }
 
   ngAfterViewInit() {
@@ -182,8 +186,8 @@ export class ListTripsComponent implements OnInit {
         }
       });
     }
-    
+
   }
-  
+
   }
 }
