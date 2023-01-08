@@ -390,16 +390,13 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
 
   public async getAllTrips(date: string): Promise<Result<Array<ITripDTO>>> {
 
-    console.log("\n\nOla " + date);
-
     //Substitue the '-' for '/'
     let dateArray = date.split("-");
     date = dateArray[0] + "/" + dateArray[1] + "/" + dateArray[2];
 
+    console.log("\n\nOla " + date);
+
     let list = await this.tripRepo.getAllTrips();
-
-    console.log(list.getValue());
-
     if (list.isFailure) {
       return Result.fail("No trips were found!");
 
@@ -407,7 +404,8 @@ export default class GetBestPathService implements IGestBestPathService, ITripGe
       var listAux = new Array<Trip>;
 
       list.getValue().forEach(element => {
-        if (element.tripDay.value == date) {
+        console.log(element);
+        if (element.tripDay.value.trim() == date) {
           listAux.push(element);
         }
       });

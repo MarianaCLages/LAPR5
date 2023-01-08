@@ -1061,7 +1061,7 @@ export class ViewRoadMapNetworkComponent implements OnInit {
     //onPathBehavior.radius = 0.01;
     vehicle.steering.add(onPathBehavior);
 
-    vehicle.maxSpeed = 3;
+    vehicle.maxSpeed = 1.5;
 
     const entityManager = new YUKA.EntityManager();
     entityManager.add(vehicle);
