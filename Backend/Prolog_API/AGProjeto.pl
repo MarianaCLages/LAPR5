@@ -4,7 +4,20 @@ entrega(4438, 20221205, 150, 9, 7, 9).
 entrega(4445, 20221205, 100, 3, 5, 7).
 entrega(4443, 20221205, 120, 8, 6, 8).
 entrega(4449, 20221205, 300, 11, 15, 20).
-entrega(4420, 20221205, 300, 16, 15, 20).
+entrega(4398, 20221205, 310, 17, 16, 20).
+entrega(4432, 20221205, 270, 14, 14, 18).
+entrega(4437, 20221205, 180, 12, 9, 11).
+entrega(4451, 20221205, 220, 6, 9, 12).
+entrega(4452, 20221205, 390, 13, 21, 26).
+entrega(4444, 20221205, 380, 2, 20, 25).
+entrega(4455, 20221205, 280, 7, 14, 19).
+entrega(4399, 20221205, 260, 15, 13, 18).
+entrega(4454, 20221205, 350, 10, 18, 22).
+entrega(4446, 20221205, 260, 4, 14, 17).
+entrega(4456, 20221205, 330, 16, 17, 21).
+
+entrega(4999, 20221205, 0, 5, 0, 0).
+
 :-dynamic entrega_armazens/1.
 :-dynamic entregas/1.
 :-dynamic less_time/1.
@@ -12,14 +25,16 @@ entrega(4420, 20221205, 300, 16, 15, 20).
 cam(eTruck01,100).
 entrega_armazens([1,9,3,8,11,16]).
 
-entregas([4439,4499,4438,4445,4443,4449]).
+entregas([4439,4399,4438,4445,4443,4449]).
 %carateristicasCam(<nome_camiao>,<tara>,<capacidade_carga>,<carga_total_baterias>,<autonomia>,<t_recarr_bat_20a80>).
 carateristicasCam(eTruck01, 7500, 4300, 100, 100, 60).
-carateristicasCam(eTruck02, 6000, 4100, 85, 100, 60).
-carateristicasCam(eTruck03, 7800, 4500, 80, 100, 60).
-carateristicasCam(eTruck04, 6300, 4250, 85, 100, 60).
-carateristicasCam(eTruck05, 7150, 4300, 100, 100, 60).
-carateristicasCam(eTruck06, 6900, 4050, 90, 100, 60).
+carateristicasCam(eTruck01, 7500, 4300, 100, 100, 60).
+carateristicasCam(eTruck01, 7500, 4300, 100, 100, 60).
+%carateristicasCam(eTruck01, 7500, 4300, 100, 100, 60).
+%carateristicasCam(eTruck01, 7500, 4300, 100, 100, 60).
+%carateristicasCam(eTruck01, 7500, 4300, 100, 100, 60).
+%carateristicasCam(eTruck01, 7500, 4300, 100, 100, 60).
+%carateristicasCam(eTruck01, 7500, 4300, 100, 100, 60).
 
 %dadosCam_t_e_ta(<nome_camiao>,<cidade_origem>,<cidade_destino>,<tempo>,<energia>,<tempo_adicional>).
 dadosCam_t_e_ta(eTruck01,1,2,122,42,0).
@@ -567,7 +582,7 @@ gera2(Ind):-
     %NG is 6,
     gera_geracao(0,NG,PopOrd,0),
     less_ind(Ind),
-    write('\n\nMelhor Indivíduo: '),
+    write('\n\nMelhor indivíduo: '),
     write(Ind),
 
     retractall(less_time(_)),
@@ -591,7 +606,7 @@ gera2(Ind):-
 count_seq_orders([],0).
 count_seq_orders([_|Cam],Count):- count_seq_orders(Cam,Count2), Count is Count2 + 1.
 
-% Gera Populaï¿½ï¿½o
+% Gera Populacao
 
 gera_first_populacao(Cam,Pop):-
     num_ind(X),
@@ -610,7 +625,7 @@ gera_populacao(TamPop,ListaTarefas,NumT,[Ind|Resto]):-
 TamPop1 is TamPop-1,
 gera_populacao(TamPop1,ListaTarefas,NumT,Resto),
 gera_individuo(ListaTarefas,NumT,Ind), %o Ind estï¿½ vazio e vai ser atribuido uma sequencia da Lista de Tarefas
-not(member(Ind,Resto)). % nï¿½o pode ser repetido...por isso se tal acontecer repete-se a operaï¿½ï¿½o
+not(member(Ind,Resto)). % nao pode ser repetido...por isso se tal acontecer repete-se a operacao
 
 gera_populacao(TamPop,ListaTarefas,NumT,L):-
 gera_populacao(TamPop,ListaTarefas,NumT,L).
@@ -634,11 +649,11 @@ retira(N,[G1|Resto],G,[G1|Resto1]):- N1 is N-1,
 retira(N1,Resto,G,Resto1).
 
 
-%AVALIA POPULAï¿½ï¿½O
+%AVALIA POPULACAO
 %
-% avalia a populaï¿½ï¿½o fornecida no gera populaï¿½ï¿½o, vai buscar cada
+% avalia a populacao fornecida no gera populacao, vai buscar cada
 % invidividuo nela e converte no formato individuo*avaliacao, sendo a
-% avaliaï¿½ï¿½o a soma do atraso
+% avaliacao a soma do atraso
 %
 %
 avalia_populacao([],[]).
@@ -668,7 +683,7 @@ avalia_cam(Ind,T):-
     bestPath(Arm3,eTruck01,_,_,T2), %chamamos um predicado do Sprint anterior, que dado um caminho calcula o tempo do mesmo.
     T is T2,
     less_time(X),
-    (   (T2 < X,!,retract(less_time(_)),assertz(less_time(T)),retract(less_ind(_)),assertz(less_ind(Ind)));!).
+    ((T2 < X,!,retract(less_time(_)),assertz(less_time(T)),retract(less_ind(_)),assertz(less_ind(Ind)));!).
 
 get_cam_arm([],_).
 get_cam_arm([X|L],[Y|L2]):-entrega(X,_,_,Y,_,_),get_cam_arm(L,L2).
@@ -713,16 +728,16 @@ same([H1|R1], [H2|R2]):-
 
 %Gera Geraï¿½ï¿½o
 %
-% ï¿½ aqui que sï¿½o criadas as novas geraï¿½ï¿½es da populaï¿½ï¿½o apï¿½s os
-% cruzamentos, mutaï¿½ï¿½es e avaliaï¿½ï¿½o dos novos indivï¿½duos de cada
-% populaï¿½ï¿½o
+% ï¿½ aqui que sao criadas as novas geracoes da populaï¿½ï¿½o apï¿½s
+% os cruzamentos, mutaï¿½ï¿½es e avaliacao dos novos indivï¿½duos de
+% cada populacao
 
-% o primeiro parametro ï¿½ o inicio da geraï¿½ï¿½o, o segundo ï¿½ a ultima
-% geraï¿½ï¿½o e a PopOrd ï¿½ a populaï¿½ï¿½o criada e ordenada.
+% o primeiro parametro ï¿½ o inicio da geracao, o segundo ï¿½ a ultima
+% geracao e a PopOrd ï¿½ a populacao criada e ordenada.
 %
 
-% A Paragem acontece obviamente quando o atual nr da geraï¿½ï¿½o ï¿½ igual ï¿½
-% geraï¿½ï¿½o final.
+% A Paragem acontece obviamente quando o atual nr da geracao ï¿½ igual
+% ï¿½ geracao final.
 
 gera_geracao(_,_,_,40):-!.
 
@@ -826,7 +841,7 @@ ordena_elite(PopAv,PopAvOrd):-
 bsort2([X],[X]):-!. %Paragem quando Xs tiver sï¿½ um elemento e esse elemento fica dentro da Nova Ordem.
 
 bsort2([X|Xs],Ys):-
-bsort2(Xs,Zs), %Vai correr a recursividade toda, quando volta atrï¿½s o Zs sï¿½ tem um elemento sendo o X.
+bsort2(Xs,Zs), %Vai correr a recursividade toda, quando volta atras o Zs sï¿½ tem um elemento sendo o X.
 btroca2([X|Zs],Ys).% Assumindo que isto ï¿½ a primeira vez que chama este predicado, o Zs comeï¿½a com 2 elementos
 
 btroca2([X],[X]):-!.
@@ -845,7 +860,7 @@ anti_elitist_pop([X*_|OldPop],[X|AntiPop],N):-N2 is N - 1,anti_elitist_pop(OldPo
 %Include the last gen best Ind
 switch_for_the_best([_|NPopAv],NPopAv2):-
     best_ind(Ind),
-    NPopAv2 = [Ind|NPopAv]. %adiciona o melhor da geraï¿½ï¿½o anterior
+    NPopAv2 = [Ind|NPopAv]. %adiciona o melhor da geracao anterior
 
 gerar_pontos_cruzamento(P1,P2):- gerar_pontos_cruzamento1(P1,P2).
 
@@ -982,34 +997,86 @@ mutacao23(G1,P1,Ind,G2,NInd).
 
 %----------------------------------------------------------
 
+% Gets all the trucks.
+% getAllCamioes/1 (<Truck list>)
 getAllCamioes(R) :- findall(NomeCamiao, carateristicasCam(NomeCamiao,_,_,_,_,_), R).
 
-atribui() :- gera2(Entregas),
-             getAllCamioes(Camioes),
-             length(Entregas, NE),
-             length(Camioes, NC),
-             T is round(NE/NC - 0.1),
-            ((T is 0, !, maisCamioes(Camioes, Entregas, Atribuicoes));(maisEntregas(Entregas, Camioes, Atribuicoes, NE, T))),
-             write('\nAtribuiï¿½ï¿½es: '), write(Atribuicoes).
+% Assigns the orders to the trucks and returns the biggest time
+% atribui/0
+atribuiEntregas() :- gera2(Entregas),
+                     getAllCamioes(Camioes),
+                     length(Entregas, NE),
+                     length(Camioes, NC),
+                     T is round(NE/NC - 0.1),
+                     Diff is NE - NC,
+                    ((Diff < 0, !, maisCamioes(Camioes, Entregas, Atribuicoes));(maisEntregas(Entregas, Camioes, Atribuicoes, NE, T))),
+                     write('\nAtribuicoes: '), write(Atribuicoes),
+                     maiorTempo(Atribuicoes, MaiorTempo),
+                     write('\nMaior tempo: '), write(MaiorTempo).
 
+% Case where there are more orders than trucks
+% maisEntregas/5 (<Orders>, <Trucks>, <Assignments (and time)>, <Number
+% of orders>, <Number of orders for each truck>
 maisEntregas(_,_,[],0,_).
-maisEntregas(Entregas, [X], [L1*X|Atr], NE, T) :- tiraEntregas(Entregas, L1, L2, NE),
-                                                  NE2 is 0,
-                                                  maisEntregas(L2, [], Atr, NE2, T).
 
-maisEntregas(Entregas, [X|Camioes], [L1*X|Atr], NE, T) :- ((NE < T, !, tiraEntregas(Entregas, L1, L2, NE), NE2 is 0);
-                                                          (tiraEntregas(Entregas, L1, L2, T), NE2 is NE - T)),
-                                                           maisEntregas(L2, Camioes, Atr, NE2, T).
+% When there is only 1 truck left
+maisEntregas(Entregas, [X], [L1*X*Tempo2|Atr], NE, T) :- tiraEntregas(Entregas, L1, L2, NE),
+                                                         NE2 is 0,
+                                                         maisEntregas(L2, [], Atr, NE2, T),
+                                                         getArmazensByEntregas(L1,Armazens),
+                                                         append([5|Armazens],[5], Armazens2),
+                                                         checkBattery(Armazens2,X,_,Tempo),
+                                                         truncate(Tempo,0,Tempo2).
 
+maisEntregas(Entregas, [X|Camioes], [L1*X*Tempo2|Atr], NE, T) :- ((NE < T, !, tiraEntregas(Entregas, L1, L2, NE), NE2 is 0);
+                                                                  (tiraEntregas(Entregas, L1, L2, T), NE2 is NE - T)),
+                                                                   maisEntregas(L2, Camioes, Atr, NE2, T),
+                                                                   getArmazensByEntregas(L1, Armazens),
+                                                                   append([5|Armazens],[5], Armazens2),
+                                                                   checkBattery(Armazens2, X, _, Tempo),
+                                                                   truncate(Tempo, 0, Tempo2).
+
+% Updates the orders value and list.
+% tiraEntregas/4 (<All orders list>, <List of the orders assigned to
+% the truck>, <Remaining orders list>)
 tiraEntregas(Entregas, [], L2, 0) :- resto(Entregas, L2).
 tiraEntregas([Ent|Entregas], [Ent|L1], L2, T) :- T2 is T - 1,
                                                  tiraEntregas(Entregas, L1, L2, T2).
 
+% Gets the rest of the orders.
+% resto/2 (<All orders>, <Remaining orders list>)
 resto([],[]).
 resto([X|Entregas], [X|L2]):- resto(Entregas, L2).
 
-maisCamioes(_, [], _).
-maisCamioes([X|Camioes], [Y|Entregas], [X*Y|Atribuicoes]) :- maisCamioes(Camioes, Entregas, Atribuicoes).
+% Case where there are more trucks than orders.
+% maisCamioes/3 (<Trucks>, <Orders>, <Assignments (and time)>).
+maisCamioes(_,[],[]).
+maisCamioes([X|Camioes], [Y|Entregas], [X*Y*Tempo2|Atribuicoes]) :- maisCamioes(Camioes, Entregas, Atribuicoes),
+                                                                    getArmazensByEntregas(Y, Armazens),
+                                                                    append([5|Armazens],[5], Armazens2),
+                                                                    % predicate from previous sprint that returns the travel time
+                                                                    checkBattery(Armazens2, X, _, Tempo),                                                                                                                 truncate(Tempo, 0, Tempo2).
+
+% Gets the warehouse list associated with a orders list.
+% getArmazensByEntregas/2 (<Orders>, <Warehouses>)
+getArmazensByEntregas([],[]) :- !.
+
+% When there is only 1 order
+getArmazensByEntregas(Entrega,[Armazem]) :- entrega(Entrega,_,_,Armazem,_,_).
+
+% When there's a list of orders
+getArmazensByEntregas([Entrega|T],[Armazem|T1]) :- getArmazensByEntregas(T, T2),
+                                                   entrega(Entrega,_,_,Armazem,_,_),
+                                                   T1 = T2.
+
+% Predicate used to format time values.
+truncate(X,N,Result) :- X >= 0, Result is floor(10^N*X)/10^N, !.
+
+% Gets the biggest time.
+% maiorTempo/2 (<Assignments (and time)>, <Biggest time>)
+maiorTempo([],0) :- !.
+maiorTempo([_*_*Tempo|T1], Maior) :- maiorTempo(T1, Maior2),
+                                     ((Tempo > Maior2, Maior is Tempo);(Maior is Maior2)),!.
 
 %-------------------------BEST PATH-------------------------
 
