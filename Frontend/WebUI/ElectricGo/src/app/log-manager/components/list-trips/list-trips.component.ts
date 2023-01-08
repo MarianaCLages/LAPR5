@@ -55,7 +55,6 @@ export class ListTripsComponent implements OnInit {
         }
       );
     } else if (this.filterOption == 'Trip by Truck') {
-      console.log('entrou caralho', this.trips.data);
       this.getTripsService.getTripByTruck(this.truckId).then(
         (data: any) => {
           this.trips.data = data;
