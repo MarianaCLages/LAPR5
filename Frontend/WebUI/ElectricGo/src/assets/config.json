@@ -25,6 +25,8 @@
   "getTripByAG": "/trucks/addtrips/",
 
   "getAllTripsInADay" : "/trucks/trips/",
+  "getAllTripsPath" : "trips/all",
+  "getTripsByTruckPath" : "trucks/tripsTrucks/",
 
   "getUserByEmailPath": "User/byEmail?email=",
   "changeUserByEmailPath": "User/adminByEmail?email=",

@@ -5,6 +5,7 @@ import role from './routes/roleRoute';
 import path from './routes/pathRoute';
 import truck from './routes/truckRoute';
 import packaging from './routes/packagingRoute';
+import trip from './routes/tripRoute';
 
 export default () => {
 	const app = Router();
@@ -15,6 +16,7 @@ export default () => {
 	role(app);
 	path(app);
 	truck(app);
+	trip(app);
 	
 	return app
 }

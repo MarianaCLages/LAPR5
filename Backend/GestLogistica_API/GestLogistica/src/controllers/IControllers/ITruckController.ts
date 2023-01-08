@@ -34,4 +34,6 @@ export default interface ITruckController {
   getTrips(req: Request, res: Response, next: NextFunction);
 
   getAllTrips(req: Request, res: Response, next: NextFunction);
+
+  getTripsTrucks(req: Request, res: Response, next: NextFunction);
 }
