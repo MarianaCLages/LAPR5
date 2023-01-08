@@ -995,13 +995,13 @@ mutacao23(G1,P,[G|Ind],G2,[G|NInd]):- %vai apercorrer o Ind, P vezes.
 P1 is P-1,
 mutacao23(G1,P1,Ind,G2,NInd).
 
-%----------------------------------------------------------
+% ---------------------ATRIBUI ENTREGAS----------------------
 
 % Gets all the trucks.
 % getAllCamioes/1 (<Truck list>)
 getAllCamioes(R) :- findall(NomeCamiao, carateristicasCam(NomeCamiao,_,_,_,_,_), R).
 
-% Assigns the orders to the trucks and returns the biggest time
+% Calls the GA and returns the assignments and the biggest travel time
 % atribui/0
 atribuiEntregas() :- gera2(Entregas),
                      getAllCamioes(Camioes),
@@ -1009,7 +1009,8 @@ atribuiEntregas() :- gera2(Entregas),
                      length(Camioes, NC),
                      T is round(NE/NC - 0.1),
                      Diff is NE - NC,
-                    ((Diff < 0, !, maisCamioes(Camioes, Entregas, Atribuicoes));(maisEntregas(Entregas, Camioes, Atribuicoes, NE, T))),
+                    ((Diff =< 0, !, maisCamioes(Camioes, Entregas, Atribuicoes));
+                                   (maisEntregas(Entregas, Camioes, Atribuicoes, NE, T))),
                      write('\nAtribuicoes: '), write(Atribuicoes),
                      maiorTempo(Atribuicoes, MaiorTempo),
                      write('\nMaior tempo: '), write(MaiorTempo).
@@ -1017,7 +1018,7 @@ atribuiEntregas() :- gera2(Entregas),
 % Case where there are more orders than trucks
 % maisEntregas/5 (<Orders>, <Trucks>, <Assignments (and time)>, <Number
 % of orders>, <Number of orders for each truck>
-maisEntregas(_,_,[],0,_).
+maisEntregas([],_,[],0,_).
 
 % When there is only 1 truck left
 maisEntregas(Entregas, [X], [L1*X*Tempo2|Atr], NE, T) :- tiraEntregas(Entregas, L1, L2, NE),
@@ -1025,6 +1026,7 @@ maisEntregas(Entregas, [X], [L1*X*Tempo2|Atr], NE, T) :- tiraEntregas(Entregas, 
                                                          maisEntregas(L2, [], Atr, NE2, T),
                                                          getArmazensByEntregas(L1,Armazens),
                                                          append([5|Armazens],[5], Armazens2),
+                                                         % predicate from previous sprint that returns the travel time
                                                          checkBattery(Armazens2,X,_,Tempo),
                                                          truncate(Tempo,0,Tempo2).
 
@@ -1033,6 +1035,7 @@ maisEntregas(Entregas, [X|Camioes], [L1*X*Tempo2|Atr], NE, T) :- ((NE < T, !, ti
                                                                    maisEntregas(L2, Camioes, Atr, NE2, T),
                                                                    getArmazensByEntregas(L1, Armazens),
                                                                    append([5|Armazens],[5], Armazens2),
+                                                                   % predicate from previous sprint that returns the travel time
                                                                    checkBattery(Armazens2, X, _, Tempo),
                                                                    truncate(Tempo, 0, Tempo2).
 
@@ -1055,7 +1058,8 @@ maisCamioes([X|Camioes], [Y|Entregas], [X*Y*Tempo2|Atribuicoes]) :- maisCamioes(
                                                                     getArmazensByEntregas(Y, Armazens),
                                                                     append([5|Armazens],[5], Armazens2),
                                                                     % predicate from previous sprint that returns the travel time
-                                                                    checkBattery(Armazens2, X, _, Tempo),                                                                                                                 truncate(Tempo, 0, Tempo2).
+                                                                    checkBattery(Armazens2, X, _, Tempo),
+                                                                    truncate(Tempo, 0, Tempo2).
 
 % Gets the warehouse list associated with a orders list.
 % getArmazensByEntregas/2 (<Orders>, <Warehouses>)
@@ -1075,8 +1079,8 @@ truncate(X,N,Result) :- X >= 0, Result is floor(10^N*X)/10^N, !.
 % Gets the biggest time.
 % maiorTempo/2 (<Assignments (and time)>, <Biggest time>)
 maiorTempo([],0) :- !.
-maiorTempo([_*_*Tempo|T1], Maior) :- maiorTempo(T1, Maior2),
-                                     ((Tempo > Maior2, Maior is Tempo);(Maior is Maior2)),!.
+maiorTempo([_*_*Tempo|T2], Maior) :- maiorTempo(T2, Maior2),
+                                    ((Tempo > Maior2, Maior is Tempo);(Maior is Maior2)).
 
 %-------------------------BEST PATH-------------------------
 

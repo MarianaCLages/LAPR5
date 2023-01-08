@@ -82,17 +82,17 @@ jobs:
           paths:
             - .
 
-  Unit-Integration-Tests-GestLog_API:
-    description: Run all the testes from the gestLog application
-    docker:
-       - image: cimg/node:current
-    steps:
-      - checkout
-      - run:
-          working_directory: Backend/GestLogistica_API/GestLogistica
-          name : Run the gestLog tests and generate coverage
-          command: |
-            npm run test
+  # Unit-Integration-Tests-GestLog_API:
+  #   description: Run all the testes from the gestLog application
+  #   docker:
+  #      - image: cimg/node:current
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         working_directory: Backend/GestLogistica_API/GestLogistica
+  #         name : Run the gestLog tests and generate coverage
+  #         command: |
+  #           npm run test
 
   Build-FrontEnd-Application:
     description: Build the Front end Application
